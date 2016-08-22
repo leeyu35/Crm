@@ -23,7 +23,11 @@ class PublicController extends Controller
             $vo=$users->where("users='$u' and password='$p'")->find();
             if($vo)
             {
-                echo "有";
+                session("id",$vo['id']);  //用户ID
+                session("u_name",$vo['name']); //用户姓名
+                session("u_image",$vo['image']);//用户图片
+                session("u_groupid",$vo['groupid']); //用户组id
+                echo session("u_name");
             }else
             {
                 $this->error("用户名或密码错误");
