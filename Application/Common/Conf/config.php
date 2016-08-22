@@ -54,7 +54,6 @@ $config_1= array(
     'DEFAULT_AJAX_RETURN'   =>  'JSON',  // 默认AJAX 数据返回格式,可选JSON XML ...
     'DEFAULT_JSONP_HANDLER' =>  'jsonpReturn', // 默认JSONP格式返回的处理方法
     'DEFAULT_FILTER'        =>  'htmlspecialchars', // 默认参数过滤方法 用于I函数...
-    'HJD'                   =>  dirname(__FILE__).'/db.inc.php',
 );
 
 return $config_1;
