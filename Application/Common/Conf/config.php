@@ -54,6 +54,10 @@ $config_1= array(
     'DEFAULT_AJAX_RETURN'   =>  'JSON',  // 默认AJAX 数据返回格式,可选JSON XML ...
     'DEFAULT_JSONP_HANDLER' =>  'jsonpReturn', // 默认JSONP格式返回的处理方法
     'DEFAULT_FILTER'        =>  'htmlspecialchars', // 默认参数过滤方法 用于I函数...
+
+    /*我的设置*/
+    'Portrait'              => '/Uploads/portrait/wu.png', //默认头像地址
+
 );
 
 return $config_1;

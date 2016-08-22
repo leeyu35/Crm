@@ -12,67 +12,25 @@
 <table class="table table-hover">
 	<tr>
     	<th>#</th>
+        <th>头像</th>
     	<th>用户名</th>
     	<th>姓名</th>
         <th>所属职位</th>
-        <th>头像</th>
         <th>创建时间</th>
         <th>操作</th>	  
     </tr>
+    <volist id="list" name="list" key="k">
     <tr>
-    	<td><span class="glyphicon glyphicon-user"></span></td>
-    	<td>hjd</td>
-    	<td>侯建东</td>
-    	<td>PHP</td>
-    	<td><img src="#" /></td>
-    	<td>2016年8月15日</td>
-    	<td><a href="#">修改</a> <a href="#">删除</a></td>
+    	<td>{$k}</td>
+        <td><img src="{$list[image]}" width="50" height="50" class="img-circle"/></td>
+    	<td>{$list[users]}</td>
+    	<td>{$list[name]}</td>
+    	<td>{$list[groupid]}</td>
+    	<td>{$list[ctime]|date="Y-m-d",###}</td>
+    	<td><a href="{:U("updata?id=$list[id]")}">修改</a> <a href="{:U("delete?id=$list[id]")}">删除</a></td>
     </tr>
-    <tr>
-    	<td>1</td>
-    	<td>hjd</td>
-    	<td>侯建东</td>
-    	<td>PHP</td>
-    	<td><img src="#" /></td>
-    	<td>2016年8月15日</td>
-    	<td><a href="#">修改</a> <a href="#">删除</a></td>
-    </tr>
-    <tr>
-    	<td>1</td>
-    	<td>hjd</td>
-    	<td>侯建东</td>
-    	<td>PHP</td>
-    	<td><img src="#" /></td>
-    	<td>2016年8月15日</td>
-    	<td><a href="#">修改</a> <a href="#">删除</a></td>
-    </tr>
-    <tr>
-    	<td>1</td>
-    	<td>hjd</td>
-    	<td>侯建东</td>
-    	<td>PHP</td>
-    	<td><img src="#" /></td>
-    	<td>2016年8月15日</td>
-    	<td><a href="#">修改</a> <a href="#">删除</a></td>
-    </tr>
-    <tr>
-    	<td>1</td>
-    	<td>hjd</td>
-    	<td>侯建东</td>
-    	<td>PHP</td>
-    	<td><img src="#" /></td>
-    	<td>2016年8月15日</td>
-    	<td><a href="#">修改</a> <a href="#">删除</a></td>
-    </tr>
-    <tr>
-    	<td>1</td>
-    	<td>hjd</td>
-    	<td>侯建东</td>
-    	<td>PHP</td>
-    	<td><img src="#" /></td>
-    	<td>2016年8月15日</td>
-    	<td><a href="#">修改</a> <a href="#">删除</a></td>
-    </tr>
+    </volist>
+    
 </table>
 
 </div>

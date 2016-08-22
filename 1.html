@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="/Public/css/vali.css">
+<script src="/Public/js/jquery-3.1.0.min.js"></script>
+<script src="/Public/js/vali.min.js"></script>
+
+</head>
+
+<body>
+<form id="form">
+<div class="zhuce">
+    <label class="tit">邮箱<span class="fr s1">邮箱格式不对</span></label>
+    <input type="text" class="input" pe=".zhuce .s1"  email="t" vali
+
+    <div class="zhuce_btn">
+        <button type="submit" id="submit" class="button">提交</button>
+        <button type="button" id="btn" class="button">查看表单是否全对</button>
+    </div>
+</div>
+</form>
+<script type="text/javascript">
+    $("#form").vali({
+        "window_show":false,
+        "pe":true,
+        "custom":[{
+            "ele":"a",
+            "fun":function(e){
+                return e.val()=="LUKANG";
+            }
+        }]
+    });
+    $("#btn").click(function(){
+        //vali对象的form方法。
+        var i=$.vali.form("#form");
+        alert(i);
+    });
+</script>
+</body>
+</html>

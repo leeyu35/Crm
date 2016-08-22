@@ -10,35 +10,39 @@
 
 <body>
 <div class="container">
-<h3>添加用户<small>Add users</small></h3>
+<h3>修改用户信息<small>Updata</small></h3>
 <hr>
-<form action="<?php echo U("addru");?>" method="post" enctype="multipart/form-data" id="addusers">
+<form action="<?php echo U("upusers");?>" method="post" enctype="multipart/form-data" id="upusers">
+  <input type="hidden" name="id" value="<?php echo ($info[id]); ?>">
+  <input type="hidden" name="image" value="<?php echo ($info[image]); ?>">
   <div class="form-group">
     <label for="exampleInputEmail1">用户名</label>
-    <input type="text" class="form-control" id="users" name="users" placeholder="Users" required  >
+    <input name="users" type="text" disabled class="form-control" id="users" placeholder="Users" value="<?php echo ($info['users']); ?>"  >
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">密码</label>
-    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+    <input type="password" class="form-control" name="password" id="password1" placeholder="Password" >
+    <p class="help-block">如果不修改密码，密码和重复密码留空即可...</p>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">重复密码</label>
-    <input type="password" class="form-control" name="fpassword" id="fpassword" placeholder="Verify password" required>
+    <input type="password" class="form-control" name="fpassword" id="fpassword" placeholder="Verify password" >
   </div>
     <div class="form-group">
     <label for="exampleInputEmail1">姓名</label>
-    <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+    <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="<?php echo ($info['name']); ?>" required>
   </div>
 
   <div class="form-group">
     <label for="exampleInputFile">头像</label>
-    <input type="file" name="image" id="image">
-    <p class="help-block">如果不上传会生成一个默认头像..</p>
+    <input type="file" name="image2" id="image">
+    <p class="help-block"><br><img src="<?php echo ($info['image']); ?>" width="100" height="100"  class="img-circle" /></p>
   </div>
+  
   
    <div class="form-group">
     <label for="exampleInputFile">部门</label>
-	<select class="form-control" style="width:200px;">
+	<select class="form-control" style="width:200px;" <?php echo ($info[groupid]!=0?'disabled':''); ?>  >
 	  <option value="0">超级管理员</option>
 	  <option value="1">部门2</option>
 	  <option value="1">部门3</option>
