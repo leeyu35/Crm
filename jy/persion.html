@@ -12,25 +12,27 @@
         }
         .title{
             width: 100%;
-            height:8%;
+            /*height:8%;*/
             /*line-height: 5%;*/
-            display: -webkit-box;
+            height: 50px;
+            line-height: 50px;
+           /* display: -webkit-box;
             -webkit-box-orient: horizontal;
             -webkit-box-pack: inherit;
-            -webkit-box-align: center;
+            -webkit-box-align: center;*/
             background: #328dcc;
             color: #ffffff;
-            font-size: 16px;
+            font-size: 12px;
             overflow: hidden;
         }
         .xiaoxi{
             cursor: pointer;
-            margin-left:730px;
+            margin-left:45%;
             display: inline-block;
             border-left: 1px solid #3D83be;
             border-right:1px solid #3D83be ;
             /*height: 100%;*/
-            padding:20px 70px 20px;
+            padding:0px 70px 0px;
         }
         .shu{
             background:#fe4e4b;
@@ -44,19 +46,19 @@
             cursor: pointer;
             display: inline-block;
             border-right:1px solid #3D83be ;
-            padding:20px 70px 20px;
+            padding:0px 70px 0px;
         }
         .user{
             cursor: pointer;
             display: inline-block;
-            padding:20px 70px 20px;
+            padding:0px 70px 0px;
         }
         .left,.right{
             float: left;
         }
         .left{
             position: relative;
-            width: 12%;
+            width: 10%;
             height:100%;
             cursor: pointer;
             background: #3d3f46;
@@ -70,6 +72,7 @@
             
         }
         .fuwu-1{
+            font-size: 12px;
             text-align: center;
             padding-top: 20px;
             padding-bottom: 20px;
@@ -89,7 +92,7 @@
             text-align: center;
             padding-top: 20px;
             padding-bottom: 20px;
-            font-size: 16px;
+            font-size: 12px;
             color: #999999;
         }
         .client1{
@@ -105,7 +108,7 @@
             text-align: center;
             padding-top: 20px;
             padding-bottom: 20px;
-            font-size: 16px;
+            font-size: 12px;
             color: #999999;
         }
         .left li:hover{
@@ -181,7 +184,7 @@
         }
         .right{
             height: 100%;
-            width: 88%;
+            width:90%;
         }
         .people{
             margin-top: 20px;
@@ -232,8 +235,8 @@
             <img src="images/三个丨.png" alt="" style="vertical-align: middle;"/>
         </p>
         <p class="fuwu-1">
-            <img src="images/下三角.png" alt="" style="vertical-align: middle"/>
-            <span style="margin-left: 10px;margin-right: 20px;" class="yin">服务列表</span>
+            <img src="images/下三角.png" alt="" style="vertical-align: middle;"/>
+            <span style="margin-right: 20px;margin-left: 10px;" class="yin">服务列表</span>
             <img src="images/设置.png"  class="yin" alt="" style="vertical-align: middle"/>
         </p>
             <ul class="client">
@@ -276,8 +279,8 @@
 
 
         <p class="fuwu-1">
-            <img src="images/下三角.png" alt="" style="vertical-align: middle"/>
-            <span style="margin-left: 10px;margin-right: 20px;" class="yin">用户中心</span>
+            <img src="images/下三角.png" alt="" style="vertical-align: middle;"/>
+            <span style="margin-right: 20px;margin-left: 10px;" class="yin">用户中心</span>
             <img src="images/设置.png" alt=""  class="yin" style="vertical-align: middle"/>
         </p>
         <ul class="client1">
@@ -474,8 +477,8 @@ var suojin=1;
             $(".client1 span").hide();
             suojin=0;
         }else if(suojin==0){
-            $(".left").width("12%");
-            $(".right").width("88%");
+            $(".left").width("10%");
+            $(".right").width("90%");
             $(this).find("img").attr("src","images/三个丨.png")
             $(".yin").show();
             $(".client span").show();
