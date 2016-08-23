@@ -27,12 +27,15 @@
         }
         .xiaoxi{
             cursor: pointer;
-            margin-left:45%;
+            /*margin-left:45%;*/
             display: inline-block;
             border-left: 1px solid #3D83be;
             border-right:1px solid #3D83be ;
             /*height: 100%;*/
-            padding:0px 70px 0px;
+            padding:0px 60px 0px;
+        }
+        .xiaoxi:hover,.help:hover,.user:hover{
+            background: #3D83be;
         }
         .shu{
             background:#fe4e4b;
@@ -46,19 +49,20 @@
             cursor: pointer;
             display: inline-block;
             border-right:1px solid #3D83be ;
-            padding:0px 70px 0px;
+
+            padding:0px 60px 0px;
         }
         .user{
             cursor: pointer;
             display: inline-block;
-            padding:0px 70px 0px;
+            padding:0px 60px 0px;
         }
         .left,.right{
             float: left;
         }
         .left{
             position: relative;
-            width: 10%;
+            width: 12%;
             height:100%;
             cursor: pointer;
             background: #3d3f46;
@@ -90,8 +94,8 @@
             position: relative;
             width: 100%;
             text-align: center;
-            padding-top: 20px;
-            padding-bottom: 20px;
+            padding-top: 15px;
+            padding-bottom: 15px;
             font-size: 12px;
             color: #999999;
         }
@@ -106,8 +110,8 @@
             position: relative;
             width: 100%;
             text-align: center;
-            padding-top: 20px;
-            padding-bottom: 20px;
+            padding-top: 15px;
+            padding-bottom: 15px;
             font-size: 12px;
             color: #999999;
         }
@@ -148,43 +152,38 @@
         }
         .toc{
             display: none;
-            position: absolute;
-            left: 100%;
-            top:0;
-            /*width: 200px;*/
+            position: relative;
+            /*position: absolute;*/
+            /*left: 100%;*/
+            /*top:0;*/
+            float: left;
+            width: 10%;
+            height: 100%;
             color: #333333;
             text-align:left;
+            background: #e9ebf0;
         }
         .guanli{
             width: 100%;
-            padding-left: 50px;
-            padding-right: 50px;
-            height: 138px;
+            height: 98px;
             color: #333333;
-            line-height: 138px;
+            line-height: 98px;
             text-align: center;
             background: #d4dbe0;
         }
-        .newclient{
-            width: 100%;
-            padding-left: 50px;
-            padding-right: 50px;
-            color: #666666;
-            padding-top: 15px;
-            padding-bottom: 15px;
-            background: #ffffff;
-        }
+
         .liebiao{
             width: 100%;
-            padding-left: 50px;
-            padding-right: 50px;
+            text-align: center;
+            /*padding-left: 50px;*/
+            /*padding-right: 50px;*/
             padding-top: 15px;
             padding-bottom: 15px;
             background: #e9ebf0;
         }
         .right{
             height: 100%;
-            width:90%;
+            width:88%;
         }
         .people{
             margin-top: 20px;
@@ -197,39 +196,46 @@
         }
         .shou{
             position: absolute;
-            left: 170%;
+            right: 0%;
             top: 50%;
+        }
+        .li1{
+            width: 100%;
+            height: 100%;
         }
 
 
     </style>
 </head>
 <body>
-<div class="title">
-    <span style="margin-left: 30px;">
+<div class="title clear">
+    <div style="float: left">
+        <span style="margin-left: 30px;">
         CRM管理控制台
-    </span>
-    <span class="xiaoxi">
-        <img src="images/消息.png" alt="" style="vertical-align: middle;"/>
-        <span class="shu">
-            10
         </span>
-    </span>
-    <span class="help">
-        <img src="images/帮助.png" alt="" style="vertical-align: middle;"/>
-        <span class="help1">
-            帮助
+    </div>
+    <div style="float:right; margin-right: 10px;">
+        <span class="xiaoxi">
+                <img src="images/消息.png" alt="" style="vertical-align: middle;"/>
+                <span class="shu">
+                    10
+                </span>
+        </span><span class="help">
+            <img src="images/帮助.png" alt="" style="vertical-align: middle;"/>
+            <span class="help1">
+                帮助
+            </span>
+        </span><span class="user">
+            <img src="images/用户.png" alt="" style="vertical-align: middle;"/>
+            <span class="help1">
+               CRM系统
+            </span>
+            <img src="images/下三角.png" alt="" style="vertical-align: middle;"/>
         </span>
-    </span>
-    <span class="user">
-        <img src="images/用户.png" alt="" style="vertical-align: middle;"/>
-        <span class="help1">
-           CRM系统
-        </span>
-        <img src="images/下三角.png" alt="" style="vertical-align: middle;"/>
-    </span>
+    </div>
+    
 </div>
-<div class="clear" style="height: 92%;">
+<div class="clear" style="height: 95%;">
     <div class="left">
         <p class="suo">
             <img src="images/三个丨.png" alt="" style="vertical-align: middle;"/>
@@ -307,7 +313,11 @@
             </li>
         </ul>
 
-        <div class="toc">
+
+
+    </div>
+    <div class="toc">
+        <div class="li1">
             <img src="images/收起.png" alt="" class="shou"/>
             <div class="guanli">
                 客户管理
@@ -344,48 +354,85 @@
         $(this).css("color","#333333").css("background",'#e9ebf0')
     })
 
-    var flag= 1,flag1= 1,toc=1;
+    var flag= 1,flag1= 1,toc= 1,li1=1;
 
     $(".fuwu-1").eq(0).click(function(){
         if(flag==1){
+            $(this).find("img").eq(0).attr("src","images/右三角.png")
             $(".client").slideUp();
             flag=0;
         }else if(flag==0){
+            $(this).find("img").eq(0).attr("src","images/下三角.png")
             $(".client").slideDown();
             flag=1;
         }
     });
     $(".fuwu-1").eq(1).click(function(){
         if(flag1==1){
+            $(this).find("img").eq(0).attr("src","images/右三角.png")
             $(".client1").slideUp();
             flag1=0;
         }else if(flag1==0){
+            $(this).find("img").eq(0).attr("src","images/下三角.png")
             $(".client1").slideDown();
             flag1=1;
         }
     })
+    var xuan=1;
     $(".left li").eq(0).hover(function(){
-        $(this).find("img").attr("src",'images/客户管理1.png')
+        if(xuan==1){
+            $(this).find("img").attr("src",'images/客户管理1.png')
+            $(this).css("color","#ffffff").css('background','#0398cb')
+        }
+
         if(suojin==0){
             $(".biao").eq(0).show();
         }
     },function(){
-        $(this).find("img").attr("src",'images/客户管理.png')
+        if(xuan==1){
+            $(this).find("img").attr("src",'images/客户管理.png')
+            $(this).css("color","#999999").css('background','#3d3f46')
+        }
         if(suojin==0){
             $(".biao").eq(0).hide();
         }
     }).click(function(){
-        if(toc==1){
+        if(li1==1){
+//            $(this).unbind();
+//            $(this).unbind("mouseenter").unbind("mouseleave");
             $(".toc").show();
+            $(this).css("color","#ffffff").css('background','#0398cb')
+            $(this).find("img").attr("src",'images/客户管理1.png')
+            xuan=0;
             toc=0;
+            if(suojin==1){
+                $(".right").width("78%")
+            }else{
+                $(".right").width("85%")
+            }
+            li1=0
         }else{
             $(".toc").hide();
+            if(suojin==1){
+                $(".right").width("88%")
+            }else{
+                $(".right").width("95%")
+            }
+            $(this).css("color","#999999").css('background','#3d3f46')
+            $(this).find("img").attr("src",'images/客户管理.png')
+            xuan=1;
             toc=1;
+            li1=1;
+//            $(this).bind("hover");
         }
+
     });
     $(".shou").eq(0).click(function(){
+        $(".left li").eq(0).css("color","#999999").css('background','#3d3f46').find("img").attr("src",'images/客户管理.png')
+        xuan=1;
         $(".toc").hide();
         toc=1;
+        li1=1;
     })
 
     $(".left li").eq(1).hover(function(){
@@ -470,15 +517,26 @@ var suojin=1;
     $(".suo").click(function(){
         if(suojin==1){
             $(".left").width("5%");
-            $(".right").width("95%");
+            if(toc==0){
+                $(".right").width("85%");
+            }else{
+                $(".right").width("95%");
+            }
+
+
             $(this).find("img").attr("src","images/三个横.png")
             $(".yin").hide();
             $(".client span").hide();
             $(".client1 span").hide();
             suojin=0;
         }else if(suojin==0){
-            $(".left").width("10%");
-            $(".right").width("90%");
+            $(".left").width("12%");
+            if(toc==0){
+                $(".right").width("78%");
+            }else{
+                $(".right").width("88%");
+            }
+
             $(this).find("img").attr("src","images/三个丨.png")
             $(".yin").show();
             $(".client span").show();
