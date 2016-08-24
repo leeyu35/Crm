@@ -19,7 +19,7 @@
 <div class="container" >
 <h3>新增客户附件<small>Add Customer File</small></h3>
 <br>
-<form action="<?php echo U('addru');?>" method="post" class="form-horizontal" >
+<form action="#" method="post" class="form-horizontal" >
 
  
   <h4>上传附件</h4>
@@ -54,10 +54,11 @@
     </div>
    	
     <script type="text/javascript">
-    	var test_id=1;
+    	var test_id=<?php echo ($id); ?>
     </script>
+    
 	<script type="text/javascript" src="/Public/js/dist/upload.js"></script>
-
+	
 
 
    </div>
