@@ -48,8 +48,8 @@
     
   </div>
 
-
-  <button type="submit" class="btn btn-default">提交</button>
+	<hr>
+  <button type="submit" class="btn btn-primary" style="width:150px;">提交</button>
 </form>
 </div>
 

@@ -210,13 +210,12 @@ $(document).ready(function(e) {
 
 
    </div>
+   
    </div>
-  <br>
-   <hr>
 	<div class="form-group">
-  
    <div class="col-sm-2">
-   <button type="submit" class="btn btn-primary" style="width:150px;" >提交</button>
+   <br>
+   <button type="submit" class="btn btn-default">提交</button>
    </div>
    </div>
 

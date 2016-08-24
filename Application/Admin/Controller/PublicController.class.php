@@ -23,7 +23,7 @@ class PublicController extends Controller
             $vo=$users->where("users='$u' and password='$p'")->find();
             if($vo)
             {
-                session("id",$vo['id']);  //用户ID
+                session("u_id",$vo['id']);  //用户ID
                 session("u_name",$vo['name']); //用户姓名
                 session("u_image",$vo['image']);//用户图片
                 session("u_groupid",$vo['groupid']); //用户组id

@@ -151,7 +151,7 @@
             swf: '../../dist/Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-            server: '/Admin/Customer/addimg',
+            server: '/Admin/Customer/addimg/id/'+test_id,
             // runtimeOrder: 'flash',
 
              accept: {

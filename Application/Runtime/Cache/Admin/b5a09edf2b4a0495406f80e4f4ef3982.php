@@ -10,7 +10,7 @@
 
 <body>
 <div class="container">
-<h3>修改用户信息<small>Updata</small></h3>
+<h3>修改用户信息<small>Update</small></h3>
 <hr>
 <form action="<?php echo U("upusers");?>" method="post" enctype="multipart/form-data" id="upusers">
   <input type="hidden" name="id" value="<?php echo ($info[id]); ?>">
@@ -52,8 +52,8 @@
     
   </div>
 
-
-  <button type="submit" class="btn btn-default">提交</button>
+	<hr>
+  <button type="submit"  class="btn btn-primary" style="width:150px;">提交</button>
 </form>
 </div>
 
