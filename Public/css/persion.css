@@ -1,0 +1,231 @@
+/* CSS Document */
+
+<style>
+        html,body{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .title{
+            width: 100%;
+            /*height:8%;*/
+            /*line-height: 5%;*/
+            height: 50px;
+            line-height: 50px;
+           /* display: -webkit-box;
+            -webkit-box-orient: horizontal;
+            -webkit-box-pack: inherit;
+            -webkit-box-align: center;*/
+            background: #328dcc;
+            color: #ffffff;
+            font-size: 14px;
+            overflow: hidden;
+        }
+        .xiaoxi{
+            cursor: pointer;
+            /*margin-left:45%;*/
+            display: inline-block;
+            border-left: 1px solid #3D83be;
+            border-right:1px solid #3D83be ;
+            /*height: 100%;*/
+            padding:0px 60px 0px;
+        }
+        .xiaoxi:hover,.help:hover,.user:hover{
+            background: #3D83be;
+        }
+        .shu{
+            background:#fe4e4b;
+            border-radius: 100%;
+            font-size: 12px;
+            padding: 2px;
+            /*margin-right: 20px;*/
+
+        }
+        .help{
+            cursor: pointer;
+            display: inline-block;
+            border-right:1px solid #3D83be ;
+
+            padding:0px 60px 0px;
+        }
+        .user{
+            cursor: pointer;
+            display: inline-block;
+            padding:0px 60px 0px;
+        }
+        .left,.right{
+            float: left;
+        }
+        .left{
+            position: relative;
+            width: 12%;
+            height:100%;
+            cursor: pointer;
+            background: #3d3f46;
+
+        }
+        .suo{
+            text-align: center;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background: #202229;
+            
+        }
+        .fuwu-1{
+            font-size: 12px;
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            background: #2f2e34;
+            color: #ffffff;
+        }
+        .client{
+            /*display: none;*/
+            text-align: center;
+            /*padding-top: 20px;*/
+            /*padding-bottom: 20px;*/
+            color: #999999;
+        }
+        .client li{
+            position: relative;
+            width: 100%;
+            text-align: center;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            font-size: 12px;
+            color: #999999;
+        }
+        .client1{
+            /*display: none;*/
+            text-align: center;
+            /*padding-top: 20px;*/
+            /*padding-bottom: 20px;*/
+            color: #999999;
+        }
+        .client1 li{
+            position: relative;
+            width: 100%;
+            text-align: center;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            font-size: 12px;
+            color: #999999;
+        }
+        .left li:hover{
+            color: #ffffff;
+            background: #0398cb;
+        }
+        .biao{
+            z-index: 10;
+            display: none;
+            left:100%;
+            top: 5px;
+            position: absolute;
+            color: #ffffff;
+            padding-left: 5px;
+            width: 112px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            background: url(../images/admin/悬浮1.png) no-repeat;
+            background-size: 100% 100%;
+            -webkit-animation-name: slipUp;
+            animation-name: slipUp;
+            -webkit-animation-duration:1s;
+            animation-duration:1s;
+        }
+        @-webkit-keyframes slipUp{
+            0%{
+                background: url(../images/admin/悬浮2.png) no-repeat;
+                background-size: 100% 100%;
+            }
+
+            100%{
+                background: url(../images/admin/悬浮1.png) no-repeat;
+                background-size: 100% 100%;
+            }
+
+        }
+        .toc{
+            display: none;
+            position: relative;
+            /*position: absolute;*/
+            /*left: 100%;*/
+            /*top:0;*/
+            float: left;
+            width: 10%;
+            height: 100%;
+            color: #333333;
+            text-align:left;
+            background: #e9ebf0;
+        }
+        .guanli{
+            width: 100%;
+            height: 98px;
+            color: #333333;
+            line-height: 98px;
+            text-align: center;
+            background: #d4dbe0;
+        }
+
+        .liebiao{
+            width: 100%;
+            text-align: center;
+            /*padding-left: 50px;*/
+            /*padding-right: 50px;*/
+            padding-top: 15px;
+            padding-bottom: 15px;
+            background: #e9ebf0;
+			font-size:12px;
+			
+        }
+        .right{
+            height: 100%;
+            width:88%;
+        }
+        .people{
+            margin-top: 20px;
+            margin-left: 40px;
+            width: 90%;
+            height: 240px;
+            background: #f5f5f5;
+            /*border: 1px solid #999999;*/
+            box-shadow: 0px 2px 10px #999999;
+        }
+        .shou{
+            position: absolute;
+            right: 0%;
+            top: 50%;
+			width:15px;
+			height:30px;
+			cursor:pointer;
+			transition:all 0.2s;
+        }
+		.shou:hover{
+			
+			
+			width:21px;
+			height:30px;
+		}
+        .li1{
+            width: 100%;
+            height: 100%;
+        }
+        .touxiang,.dai{
+            float: left;
+        }
+        .touxiang{
+            margin-left: 50px;
+        }
+        .dai{
+            color: #333333;
+            font-size: 12px;
+            margin-left: 80px;
+            margin-top:30px;
+        }
+        .message{
+            color: #ff4e3e;
+        }
+
+
+    </style>

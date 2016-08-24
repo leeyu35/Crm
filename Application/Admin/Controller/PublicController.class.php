@@ -27,7 +27,7 @@ class PublicController extends Controller
                 session("u_name",$vo['name']); //用户姓名
                 session("u_image",$vo['image']);//用户图片
                 session("u_groupid",$vo['groupid']); //用户组id
-                $this->success('登录成功',U('index'));
+                $this->success('登录成功',U("/adminIndex"));
             }else
             {
                 $this->error("用户名或密码错误");
@@ -35,6 +35,7 @@ class PublicController extends Controller
         }
         //登录成功欢迎页面
         public  function index(){
-            
+            $this->web_title=C('WEB_NAME');
+            $this->display();
         }
 }

@@ -2,7 +2,7 @@
 $config_1= array(
 	//'配置项'=>'配置值'
     /*网站配置*/
-    'WEB_NAME'              =>'凌士CRM管理系统',
+    'WEB_NAME'              =>'CRM管理控制台 | 凌众& 谋士',
     'WEB_VERSION'           =>'Alpha 10.0.1',
 
     /* 数据库设置 */
@@ -30,7 +30,7 @@ $config_1= array(
     'URL_PATHINFO_DEPR'     =>  '/',	// PATHINFO模式下，各参数之间的分割符号
     'URL_PATHINFO_FETCH'    =>  'ORIG_PATH_INFO,REDIRECT_PATH_INFO,REDIRECT_URL', // 用于兼容判断PATH_INFO 参数的SERVER替代变量列表
     'URL_REQUEST_URI'       =>  'REQUEST_URI', // 获取当前页面地址的系统变量 默认为REQUEST_URI
-    'URL_HTML_SUFFIX'       =>  'shtml',  // URL伪静态后缀设置
+    'URL_HTML_SUFFIX'       =>  'html',  // URL伪静态后缀设置
     'URL_DENY_SUFFIX'       =>  'ico|png|gif|jpg', // URL禁止访问的后缀设置
     'URL_PARAMS_BIND'       =>  true, // URL变量绑定到Action方法参数
     'URL_PARAMS_BIND_TYPE'  =>  0, // URL变量绑定的类型 0 按变量名绑定 1 按变量顺序绑定
@@ -57,7 +57,14 @@ $config_1= array(
 
     /*我的设置*/
     'Portrait'              => '/Uploads/portrait/wu.png', //默认头像地址
-
+    // 开启路由
+    'URL_ROUTER_ON'   => true,
+    'URL_ROUTE_RULES'=>array(
+       // 'news/:year/:month/:day' => array('News/archive', 'status=1'),
+        'login'               => 'Public/login',
+        'adminIndex'               => 'Public/index',
+        //'news/read/:id'          => '/news/:1',
+    ),
 );
 
 return $config_1;

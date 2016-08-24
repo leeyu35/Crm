@@ -13,10 +13,17 @@ class CommonController extends Controller
     public function _initialize(){
      if(session("u_name")!='')
      {
+
+
+
      }else{
-         $this->error('您还没有登录',U("Public/login"));
+         $this->error('您还没有登录',U("/login"));
          exit;
      }
+     //默认设置
+
+        $this->web_title=C('WEB_NAME');
+
     }
 
 
