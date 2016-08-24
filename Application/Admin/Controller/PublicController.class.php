@@ -27,10 +27,14 @@ class PublicController extends Controller
                 session("u_name",$vo['name']); //用户姓名
                 session("u_image",$vo['image']);//用户图片
                 session("u_groupid",$vo['groupid']); //用户组id
-                echo session("u_name");
+                $this->success('登录成功',U('index'));
             }else
             {
                 $this->error("用户名或密码错误");
             }
+        }
+        //登录成功欢迎页面
+        public  function index(){
+            
         }
 }
