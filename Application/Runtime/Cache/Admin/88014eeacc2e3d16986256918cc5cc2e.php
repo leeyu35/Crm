@@ -6,8 +6,8 @@
 <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
 </head>
-<div class="container">
-<h3>合同列表<small>Contract list</small></h3>
+<div class="container"  style="width:100%;">
+<h3  class="bor-left-bull" >客户列表<small>Customer list</small></h3>
 
 <table class="table table-hover">
 	<tr>

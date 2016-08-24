@@ -3,9 +3,16 @@ namespace Admin\Controller;
 use Think\Controller;
 class IndexController extends Controller {
     public function index(){
+        //重定向到New模块的Category操作
+        $this->redirect('/login');
+
         $users=M("users");
         $info=$users->find(1);
         echo $info['name'];
+    }
+    public function usermessage(){
+
+        $this->display();
     }
     public function hjd(){
         echo "hjd";

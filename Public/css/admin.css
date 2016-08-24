@@ -2,7 +2,25 @@
 
 *{ font-family:"微软雅黑";}
 ul li{ list-style-type:none;}
+h1,h2,h3,h4,h5,h6{ 
+font-size:14px;
 
+}
+a{ blr:expression(this.onFocus=this.blur()); /* IE Opera */ outline:none; /* FF Opera */ } a:focus{ -moz-outline-style: none; /* FF */ } 
+
+a:focus {
+     outline:none;
+     -moz-outline:none;
+}
+a {blr:expression_r(this.onFocus=this.blur())} 
+
+.bor-left-bull{
+	border-left:2px solid #88B7E0;
+	padding-left:10px; 
+}
+.control-label{ font-size:12px; font-weight:normal;}
+.form-control{ font-size:12px; border-radius:0px;}
+.btn { border-radius:0px;}
 /* ------------ */
 #wrapper {
     width: 980px;

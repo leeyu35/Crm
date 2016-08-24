@@ -1,6 +1,5 @@
 /* CSS Document */
 
-<style>
         html,body{
             width: 100%;
             height: 100%;
@@ -113,7 +112,7 @@
         }
         .left li:hover{
             color: #ffffff;
-            background: #0398cb;
+            background: #394555;
         }
         .biao{
             z-index: 10;
@@ -225,7 +224,15 @@
         }
         .message{
             color: #ff4e3e;
+		}
+		 #frame{
+            width: 100%;
+            height: 100%;
         }
-
-
-    </style>
+		
+		.liebiao{ color:#333; background:#e9ebf0; cursor:pointer;}
+		.liebiao a{ display:block; color:#666; text-decoration:none;}
+		.liebiao:hover{ background:#f5f7f9;}
+		.xz{ background:#fff;}
+		.xz:hover{ background:#fff;}
+		.loaddd{ display:none; width:200px; height:200px; background:#999;}

@@ -5,6 +5,10 @@
     background: url(../images/admin/BG0.png) no-repeat;
     background-position: 100% 100%;
 }
+input,textarea {
+     outline:none;
+}
+
 
 body,html{
     height: 100%;

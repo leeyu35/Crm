@@ -40,8 +40,8 @@ $(document).ready(function(e) {
 </head>
 
 <body>
-<div class="container" >
-<h3>修改客户<small>update Customer</small></h3>
+<div class="container" style="width:100%;" >
+<h3 class="bor-left-bull" >修改客户<small>update Customer</small></h3>
 <br>
 <form action="<?php echo U('upru');?>" method="post" class="form-horizontal">
 <input type="hidden" name="id" value="<?php echo ($info[id]); ?>">
@@ -155,7 +155,7 @@ $(document).ready(function(e) {
     </div>
     
     <div class="col-sm-1">
-    	<label <?php echo ($k!='1'?'style="display:none;"':''); ?> class="control-label" style="color:#fff;">操作 </label>
+    	<label <?php echo ($k!='1'?'style="display:none;"':''); ?> class="control-label" style="color:#fff;">操作执行 </label>
     	<input type="button" value="删" id="<?php echo ($contact_list[id]); ?>" class="btn btn-danger de_contact">
     </div>
 
@@ -211,6 +211,8 @@ $(document).ready(function(e) {
 </form>
 
 </div>
+<br>
+<br>
 
 </body>
 </html>

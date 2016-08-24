@@ -16,7 +16,7 @@
 $(document).ready(function(e) {
     $("#new_contact").click(function(){
 		
-		$("#contactmain").append('<div class="form-group"><div class="col-sm-1"><input type="text" class="form-control" name="name[]" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="qq[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="weixin[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="email[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="position[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="tel[]" class="form-control" id="inputEmail3"></div></div>')})
+		$("#contactmain").append('<div class="form-group"><div class="col-sm-2"><input type="text" class="form-control" name="name[]" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="qq[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="weixin[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="email[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="position[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="tel[]" class="form-control" id="inputEmail3"></div></div>')})
 	
 	
 });
@@ -24,11 +24,10 @@ $(document).ready(function(e) {
 </head>
 
 <body>
-<div class="container" >
-<h3>新增客户<small>New Customer</small></h3>
-<br>
+<div class="container" style="width:100%;">
+<h3 class="bor-left-bull" >新增客户<small>New Customer</small></h3>
 <form action="{:U('addru')}" method="post" class="form-horizontal" >
-<h4>客户基本信息</h4>
+<!--<h4>客户基本信息</h4>-->
 <hr>
 
   <div class="form-group">
@@ -97,13 +96,13 @@ $(document).ready(function(e) {
   </div>
   
   
-  <h4>联系人<small>&nbsp;&nbsp;<a  id="new_contact" style="cursor:pointer;"><span class="glyphicon glyphicon-plus"></span>新增联系人</a></small></h4>
+  <h4  class="bor-left-bull" >联系人<small>&nbsp;&nbsp;<a  id="new_contact" style="cursor:pointer;"><span class="glyphicon glyphicon-plus"></span>新增联系人</a></small></h4>
   <hr>
   <div id="contactmain">
 	<div class="form-group">
   
     
-    <div class="col-sm-1">
+    <div class="col-sm-2">
     	<label for="inputEmail3" class="control-label">联系人</label>
       	<input type="text" class="form-control" name="name[]" id="inputEmail3">
     </div>
@@ -136,9 +135,11 @@ $(document).ready(function(e) {
       	<input type="text" class="form-control" name="tel[]" id="inputEmail3">
     </div>
 
+
+
   </div>
  </div>
-   <h4>开票资料</h4>
+   <h4  class="bor-left-bull" >开票资料</h4>
   <hr>
   <div class="form-group">
   
@@ -175,45 +176,9 @@ $(document).ready(function(e) {
     
 
 
-  </div>
- 
-  <h4>上传附件</h4>
-  <hr>
-  <div class="form-group">
-   <div class="col-sm-12" style="overflow:hidden;">      
-   
-   
-   
-<div id="wrapper">
-        <div id="container">
-            <!--头部，相册选择和格式选择-->
+  </div
 
-            <div id="uploader">
-                <div class="queueList">
-                    <div id="dndArea" class="placeholder">
-                        <div id="filePicker"></div>
-                        <p>或将照片拖到这里，单次最多可选300张</p>
-                    </div>
-                </div>
-                <div class="statusBar" style="display:none;">
-                    <div class="progress">
-                        <span class="text">0%</span>
-                        <span class="percentage"></span>
-                    </div><div class="info"></div>
-                    <div class="btns">
-                        <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-	<script type="text/javascript" src="/Public/js/dist/upload.js"></script>
-
-
-
-   </div>
-   </div>
-  <br>
+  ><br>
    <hr>
 	<div class="form-group">
   
@@ -225,6 +190,8 @@ $(document).ready(function(e) {
 </form>
 
 </div>
+<br>
+<br>
 
 </body>
 </html>
