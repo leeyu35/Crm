@@ -6,7 +6,15 @@
     <link rel="stylesheet" href="/Public/css/reset.css"/>
     <link rel="stylesheet" href="/Public/css/persion.css"/>
     <script src="/Public/js/jquery-3.1.0.min.js"></script>
+
     <title>{$web_title}</title>
+    <style>
+        .xiao{
+            color: #ffffff;
+            background: #0398cb;
+        }
+
+    </style>
     <script language="javascript">
 	$(document).ready(function(e) {
         $(".liebiao").click(function(){
@@ -17,6 +25,7 @@
 	})
 
     });
+
 </script>
 </head>
 <body>
@@ -190,7 +199,7 @@
         if(suojin==0){
             $(".biao").eq(0).show();
         }
-        this.onmousedown=function(){
+        l0.onmousedown=function(){
             if(xuan==1){
                 $(".toc").show();
                 $(this).css("color","#ffffff").css('background','#0398cb')
@@ -221,7 +230,7 @@
             if(suojin==0){
                 $(".biao").eq(0).hide();
             }
-            this.onmousedown=null;
+//            l0.onmousedown=null;
         }
     }
  /*   $(".left li").eq(0).hover(function(){
