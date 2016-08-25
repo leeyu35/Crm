@@ -153,10 +153,11 @@
             /!*top:0;*!/
             float: left;
             width: 10%;
-            height: 100%;
+
             color: #333333;
             text-align:left;
             background: #e9ebf0;*/
+            height: 100%;
         }
         .guanli{
             width: 100%;
