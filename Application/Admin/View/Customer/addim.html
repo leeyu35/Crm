@@ -16,8 +16,8 @@
 </head>
 
 <body>
-<div class="container" >
-<h3>新增客户附件<small>Add Customer File</small></h3>
+<div class="container" style="width:100%;">
+<h3 class="bor-left-bull">新增客户附件<small>Add Customer File</small></h3>
 <br>
 <form action="#" method="post" class="form-horizontal" >
 

@@ -543,3 +543,1232 @@ INFO: [ app_end ] --START--
 INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
 INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
 
+[ 2016-08-25T09:47:00+08:00 ] 192.168.199.111 /adminIndex.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-08-25T09:47:00+08:00 ] 192.168.199.111 /Admin/Public/usermessage.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T09:47:03+08:00 ] 192.168.199.111 /adminIndex.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-08-25T10:07:24+08:00 ] 192.168.199.158 /Admin/Public/loginrn.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `jd_users` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `jd_users` WHERE ( users='123456' and password='4297f44b13955235245b2497399d7a93' ) LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-08-25T10:07:25+08:00 ] 192.168.199.158 /adminIndex.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-08-25T10:07:25+08:00 ] 192.168.199.158 /Admin/Public/usermessage.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:07:30+08:00 ] 192.168.199.158 /Admin/Customer/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0040s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.018001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.018001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-08-25T10:07:31+08:00 ] 192.168.199.158 /Admin/Customer/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `jd_customer` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`advertiser`,`industry`,`website`,`product_line`,`ctime` FROM `jd_customer`  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `jd_contact_list` [ RunTime:0.0060s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0040s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` WHERE ( id in (1,2,3,4) )  [ RunTime:0.0010s ]
+NOTIC: [8] Undefined variable: string E:\php\crm\Application\Admin\Common\function.php 第 18 行.
+SQL: SELECT `name`,`tel` FROM `jd_contact_list` WHERE ( customer_id=10 ) LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 26 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 27 行.
+NOTIC: [8] Use of undefined constant industry - assumed 'industry' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 28 行.
+NOTIC: [8] Use of undefined constant website - assumed 'website' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 29 行.
+NOTIC: [8] Use of undefined constant contact - assumed 'contact' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 30 行.
+NOTIC: [8] Use of undefined constant tel - assumed 'tel' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 31 行.
+NOTIC: [8] Use of undefined constant product_lin - assumed 'product_lin' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 32 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 33 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+
+[ 2016-08-25T10:07:33+08:00 ] 192.168.199.158 /Admin/Customer/addim/id/10.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.131008s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.131008s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+
+[ 2016-08-25T10:07:35+08:00 ] 192.168.199.158 /Admin/Customer/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:07:36+08:00 ] 192.168.199.158 /Admin/Customer/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `jd_customer` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`advertiser`,`industry`,`website`,`product_line`,`ctime` FROM `jd_customer`  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `jd_contact_list` [ RunTime:0.0030s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` WHERE ( id in (1,2,3,4) )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: string E:\php\crm\Application\Admin\Common\function.php 第 18 行.
+SQL: SELECT `name`,`tel` FROM `jd_contact_list` WHERE ( customer_id=10 ) LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 26 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 27 行.
+NOTIC: [8] Use of undefined constant industry - assumed 'industry' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 28 行.
+NOTIC: [8] Use of undefined constant website - assumed 'website' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 29 行.
+NOTIC: [8] Use of undefined constant contact - assumed 'contact' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 30 行.
+NOTIC: [8] Use of undefined constant tel - assumed 'tel' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 31 行.
+NOTIC: [8] Use of undefined constant product_lin - assumed 'product_lin' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 32 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 33 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-08-25T10:07:37+08:00 ] 192.168.199.158 /Admin/Customer/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0040s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:07:37+08:00 ] 192.168.199.158 /Admin/Customer/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `jd_customer` [ RunTime:0.0150s ]
+SQL: SELECT `id`,`advertiser`,`industry`,`website`,`product_line`,`ctime` FROM `jd_customer`  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `jd_contact_list` [ RunTime:0.0020s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0020s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` WHERE ( id in (1,2,3,4) )  [ RunTime:0.0010s ]
+NOTIC: [8] Undefined variable: string E:\php\crm\Application\Admin\Common\function.php 第 18 行.
+SQL: SELECT `name`,`tel` FROM `jd_contact_list` WHERE ( customer_id=10 ) LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 26 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 27 行.
+NOTIC: [8] Use of undefined constant industry - assumed 'industry' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 28 行.
+NOTIC: [8] Use of undefined constant website - assumed 'website' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 29 行.
+NOTIC: [8] Use of undefined constant contact - assumed 'contact' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 30 行.
+NOTIC: [8] Use of undefined constant tel - assumed 'tel' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 31 行.
+NOTIC: [8] Use of undefined constant product_lin - assumed 'product_lin' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 32 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 33 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-08-25T10:07:38+08:00 ] 192.168.199.158 /Admin/Customer/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:07:39+08:00 ] 192.168.199.158 /Admin/Customer/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `jd_customer` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`advertiser`,`industry`,`website`,`product_line`,`ctime` FROM `jd_customer`  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `jd_contact_list` [ RunTime:0.0020s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0020s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` WHERE ( id in (1,2,3,4) )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: string E:\php\crm\Application\Admin\Common\function.php 第 18 行.
+SQL: SELECT `name`,`tel` FROM `jd_contact_list` WHERE ( customer_id=10 ) LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 26 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 27 行.
+NOTIC: [8] Use of undefined constant industry - assumed 'industry' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 28 行.
+NOTIC: [8] Use of undefined constant website - assumed 'website' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 29 行.
+NOTIC: [8] Use of undefined constant contact - assumed 'contact' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 30 行.
+NOTIC: [8] Use of undefined constant tel - assumed 'tel' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 31 行.
+NOTIC: [8] Use of undefined constant product_lin - assumed 'product_lin' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 32 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 33 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-08-25T10:08:16+08:00 ] 192.168.199.158 /Admin/Customer/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0040s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:08:16+08:00 ] 192.168.199.158 /Admin/Customer/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `jd_customer` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`advertiser`,`industry`,`website`,`product_line`,`ctime` FROM `jd_customer`  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `jd_contact_list` [ RunTime:0.0030s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` WHERE ( id in (1,2,3,4) )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: string E:\php\crm\Application\Admin\Common\function.php 第 18 行.
+SQL: SELECT `name`,`tel` FROM `jd_contact_list` WHERE ( customer_id=10 ) LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 26 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 27 行.
+NOTIC: [8] Use of undefined constant industry - assumed 'industry' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 28 行.
+NOTIC: [8] Use of undefined constant website - assumed 'website' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 29 行.
+NOTIC: [8] Use of undefined constant contact - assumed 'contact' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 30 行.
+NOTIC: [8] Use of undefined constant tel - assumed 'tel' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 31 行.
+NOTIC: [8] Use of undefined constant product_lin - assumed 'product_lin' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 32 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 33 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:08:17+08:00 ] 192.168.199.158 /Admin/Customer/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002001s ]
+
+[ 2016-08-25T10:08:20+08:00 ] 192.168.199.158 /Admin/Customer/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `jd_customer` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`advertiser`,`industry`,`website`,`product_line`,`ctime` FROM `jd_customer`  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `jd_contact_list` [ RunTime:0.0060s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` WHERE ( id in (1,2,3,4) )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: string E:\php\crm\Application\Admin\Common\function.php 第 18 行.
+SQL: SELECT `name`,`tel` FROM `jd_contact_list` WHERE ( customer_id=10 ) LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 26 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 27 行.
+NOTIC: [8] Use of undefined constant industry - assumed 'industry' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 28 行.
+NOTIC: [8] Use of undefined constant website - assumed 'website' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 29 行.
+NOTIC: [8] Use of undefined constant contact - assumed 'contact' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 30 行.
+NOTIC: [8] Use of undefined constant tel - assumed 'tel' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 31 行.
+NOTIC: [8] Use of undefined constant product_lin - assumed 'product_lin' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 32 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 33 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001001s ]
+
+[ 2016-08-25T10:08:21+08:00 ] 192.168.199.158 /Admin/Customer/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0020s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-08-25T10:08:29+08:00 ] 192.168.199.158 /Admin/Customer/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `jd_customer` [ RunTime:0.0040s ]
+SQL: SELECT `id`,`advertiser`,`industry`,`website`,`product_line`,`ctime` FROM `jd_customer`  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `jd_contact_list` [ RunTime:0.0030s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` WHERE ( id in (1,2,3,4) )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: string E:\php\crm\Application\Admin\Common\function.php 第 18 行.
+SQL: SELECT `name`,`tel` FROM `jd_contact_list` WHERE ( customer_id=10 ) LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 26 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 27 行.
+NOTIC: [8] Use of undefined constant industry - assumed 'industry' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 28 行.
+NOTIC: [8] Use of undefined constant website - assumed 'website' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 29 行.
+NOTIC: [8] Use of undefined constant contact - assumed 'contact' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 30 行.
+NOTIC: [8] Use of undefined constant tel - assumed 'tel' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 31 行.
+NOTIC: [8] Use of undefined constant product_lin - assumed 'product_lin' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 32 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 33 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:08:29+08:00 ] 192.168.199.158 /Admin/Customer/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:13:13+08:00 ] 192.168.199.158 /Admin/Customer/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `jd_customer` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`advertiser`,`industry`,`website`,`product_line`,`ctime` FROM `jd_customer`  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `jd_contact_list` [ RunTime:0.0020s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0020s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` WHERE ( id in (1,2,3,4) )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: string E:\php\crm\Application\Admin\Common\function.php 第 18 行.
+SQL: SELECT `name`,`tel` FROM `jd_contact_list` WHERE ( customer_id=10 ) LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 26 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 27 行.
+NOTIC: [8] Use of undefined constant industry - assumed 'industry' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 28 行.
+NOTIC: [8] Use of undefined constant website - assumed 'website' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 29 行.
+NOTIC: [8] Use of undefined constant contact - assumed 'contact' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 30 行.
+NOTIC: [8] Use of undefined constant tel - assumed 'tel' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 31 行.
+NOTIC: [8] Use of undefined constant product_lin - assumed 'product_lin' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 32 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 33 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.034001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.034001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:13:15+08:00 ] 192.168.199.158 /Admin/Customer/addim/id/10.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:13:58+08:00 ] 192.168.199.158 /Admin/Customer/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `jd_customer` [ RunTime:0.0040s ]
+SQL: SELECT `id`,`advertiser`,`industry`,`website`,`product_line`,`ctime` FROM `jd_customer`  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `jd_contact_list` [ RunTime:0.0030s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0040s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` WHERE ( id in (1,2,3,4) )  [ RunTime:0.0010s ]
+NOTIC: [8] Undefined variable: string E:\php\crm\Application\Admin\Common\function.php 第 18 行.
+SQL: SELECT `name`,`tel` FROM `jd_contact_list` WHERE ( customer_id=10 ) LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 26 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 27 行.
+NOTIC: [8] Use of undefined constant industry - assumed 'industry' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 28 行.
+NOTIC: [8] Use of undefined constant website - assumed 'website' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 29 行.
+NOTIC: [8] Use of undefined constant contact - assumed 'contact' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 30 行.
+NOTIC: [8] Use of undefined constant tel - assumed 'tel' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 31 行.
+NOTIC: [8] Use of undefined constant product_lin - assumed 'product_lin' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 32 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 33 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:13:59+08:00 ] 192.168.199.158 /Admin/Customer/addim/id/10.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:14:28+08:00 ] ::1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:14:28+08:00 ] ::1 /login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.022002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.022002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-08-25T10:14:31+08:00 ] ::1 /Admin/Public/loginrn.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `jd_users` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `jd_users` WHERE ( users='123456' and password='4297f44b13955235245b2497399d7a93' ) LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.035002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.035002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-08-25T10:14:32+08:00 ] ::1 /adminIndex.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-08-25T10:14:32+08:00 ] ::1 /Admin/Public/usermessage.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:14:36+08:00 ] ::1 /Admin/Customer/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `jd_customer` [ RunTime:0.0040s ]
+SQL: SELECT `id`,`advertiser`,`industry`,`website`,`product_line`,`ctime` FROM `jd_customer`  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `jd_contact_list` [ RunTime:0.0040s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` WHERE ( id in (1,2,3,4) )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: string E:\php\crm\Application\Admin\Common\function.php 第 18 行.
+SQL: SELECT `name`,`tel` FROM `jd_contact_list` WHERE ( customer_id=10 ) LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 26 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 27 行.
+NOTIC: [8] Use of undefined constant industry - assumed 'industry' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 28 行.
+NOTIC: [8] Use of undefined constant website - assumed 'website' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 29 行.
+NOTIC: [8] Use of undefined constant contact - assumed 'contact' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 30 行.
+NOTIC: [8] Use of undefined constant tel - assumed 'tel' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 31 行.
+NOTIC: [8] Use of undefined constant product_lin - assumed 'product_lin' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 32 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 33 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:14:38+08:00 ] ::1 /Admin/Customer/addim/id/10.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:14:47+08:00 ] ::1 /Admin/Customer/addimg/id/10
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given E:\php\crm\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2016-08-25T10:14:47+08:00 ] ::1 /Admin/Customer/addimg/id/10
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given E:\php\crm\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2016-08-25T10:14:47+08:00 ] ::1 /Admin/Customer/addimg/id/10
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given E:\php\crm\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2016-08-25T10:14:49+08:00 ] ::1 /Admin/Customer/addimg/id/10
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given E:\php\crm\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2016-08-25T10:14:56+08:00 ] ::1 /Admin/Customer/addimg/id/10
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given E:\php\crm\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2016-08-25T10:17:06+08:00 ] ::1 /adminIndex.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.021001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.021001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.006000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.006000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.007001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.008001s ]
+
+[ 2016-08-25T10:17:06+08:00 ] ::1 /Admin/Public/usermessage.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-08-25T10:17:09+08:00 ] ::1 /Admin/Customer/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `jd_customer` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`advertiser`,`industry`,`website`,`product_line`,`ctime` FROM `jd_customer`  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `jd_contact_list` [ RunTime:0.0030s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` WHERE ( id in (1,2,3,4) )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: string E:\php\crm\Application\Admin\Common\function.php 第 18 行.
+SQL: SELECT `name`,`tel` FROM `jd_contact_list` WHERE ( customer_id=10 ) LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 26 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 27 行.
+NOTIC: [8] Use of undefined constant industry - assumed 'industry' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 28 行.
+NOTIC: [8] Use of undefined constant website - assumed 'website' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 29 行.
+NOTIC: [8] Use of undefined constant contact - assumed 'contact' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 30 行.
+NOTIC: [8] Use of undefined constant tel - assumed 'tel' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 31 行.
+NOTIC: [8] Use of undefined constant product_lin - assumed 'product_lin' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 32 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 33 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:17:09+08:00 ] ::1 /Admin/Customer/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-08-25T10:17:10+08:00 ] ::1 /Admin/Customer/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `jd_customer` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`advertiser`,`industry`,`website`,`product_line`,`ctime` FROM `jd_customer`  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `jd_contact_list` [ RunTime:0.0030s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` WHERE ( id in (1,2,3,4) )  [ RunTime:0.0010s ]
+NOTIC: [8] Undefined variable: string E:\php\crm\Application\Admin\Common\function.php 第 18 行.
+SQL: SELECT `name`,`tel` FROM `jd_contact_list` WHERE ( customer_id=10 ) LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 26 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 27 行.
+NOTIC: [8] Use of undefined constant industry - assumed 'industry' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 28 行.
+NOTIC: [8] Use of undefined constant website - assumed 'website' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 29 行.
+NOTIC: [8] Use of undefined constant contact - assumed 'contact' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 30 行.
+NOTIC: [8] Use of undefined constant tel - assumed 'tel' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 31 行.
+NOTIC: [8] Use of undefined constant product_lin - assumed 'product_lin' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 32 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 33 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-08-25T10:17:12+08:00 ] ::1 /Admin/Customer/addim/id/10.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-08-25T10:18:28+08:00 ] ::1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-08-25T10:18:28+08:00 ] ::1 /login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.004000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.026001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.026001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:18:31+08:00 ] ::1 /Admin/Public/loginrn.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `jd_users` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `jd_users` WHERE ( users='123456' and password='4297f44b13955235245b2497399d7a93' ) LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.124007s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.124007s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:18:32+08:00 ] ::1 /adminIndex.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:18:32+08:00 ] ::1 /Admin/Public/usermessage.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:18:35+08:00 ] ::1 /Admin/Customer/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `jd_customer` [ RunTime:0.0050s ]
+SQL: SELECT `id`,`advertiser`,`industry`,`website`,`product_line`,`ctime` FROM `jd_customer`  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `jd_contact_list` [ RunTime:0.0030s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` WHERE ( id in (1,2,3,4) )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: string E:\php\crm\Application\Admin\Common\function.php 第 18 行.
+SQL: SELECT `name`,`tel` FROM `jd_contact_list` WHERE ( customer_id=10 ) LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 26 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 27 行.
+NOTIC: [8] Use of undefined constant industry - assumed 'industry' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 28 行.
+NOTIC: [8] Use of undefined constant website - assumed 'website' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 29 行.
+NOTIC: [8] Use of undefined constant contact - assumed 'contact' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 30 行.
+NOTIC: [8] Use of undefined constant tel - assumed 'tel' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 31 行.
+NOTIC: [8] Use of undefined constant product_lin - assumed 'product_lin' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 32 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\88014eeacc2e3d16986256918cc5cc2e.php 第 33 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-08-25T10:18:36+08:00 ] ::1 /Admin/Customer/addim/id/10.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:19:13+08:00 ] ::1 /Admin/Customer/addim/id/10.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:19:19+08:00 ] ::1 /Admin/Customer/addim/id/10.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.005001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-08-25T10:19:39+08:00 ] ::1 /Admin/Customer/addim/id/10.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-08-25T10:20:48+08:00 ] ::1 /Admin/Customer/addimg/id/10
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given E:\php\crm\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+

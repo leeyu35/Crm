@@ -3928,7 +3928,7 @@
     
                 if ( invalid && flag ) {
                     flag = false;
-                    this.trigger( 'error', 'Q_EXCEED_SIZE_LIMIT', max, file );
+                    this.trigger( 'error', '文件太大啦~', max, file );
                     setTimeout(function() {
                         flag = true;
                     }, 1 );

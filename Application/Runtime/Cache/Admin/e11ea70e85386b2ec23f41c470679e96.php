@@ -6,7 +6,15 @@
     <link rel="stylesheet" href="/Public/css/reset.css"/>
     <link rel="stylesheet" href="/Public/css/persion.css"/>
     <script src="/Public/js/jquery-3.1.0.min.js"></script>
+
     <title><?php echo ($web_title); ?></title>
+    <style>
+        .xiao{
+            color: #ffffff;
+            background: #0398cb;
+        }
+
+    </style>
     <script language="javascript">
 	$(document).ready(function(e) {
         $(".liebiao").click(function(){
@@ -17,6 +25,7 @@
 	})
 
     });
+
 </script>
 </head>
 <body>
@@ -181,50 +190,8 @@
             flag1=1;
         }
     })
-    var xuan=1;
-    var l0=document.getElementsByTagName("li")[0]
 
-    l0.onmouseover=function(){
-        $(this).find("img").attr("src",'/Public/images/admin/客户管理1.png')
-        $(this).css("color","#ffffff").css('background','#394555')
-        if(suojin==0){
-            $(".biao").eq(0).show();
-        }
-        this.onmousedown=function(){
-            if(xuan==1){
-                $(".toc").show();
-                $(this).css("color","#ffffff").css('background','#0398cb')
-                $(this).find("img").attr("src",'/Public/images/admin/客户管理1.png')
-                if(suojin==1){
-                    $(".right").width("78%")
-                }else{
-                    $(".right").width("85%")
-                }
-                xuan=0;
-            }else{
-                $(".toc").hide();
-                if(suojin==1){
-                    $(".right").width("88%")
-                }else{
-                    $(".right").width("95%")
-                }
-                $(this).css("color","#999999").css('background','#3d3f46')
-                $(this).find("img").attr("src",'/Public/images/admin/客户管理.png')
-                xuan=1;
-            }
-
-
-        }
-        this.onmouseout=function(){
-            $(this).find("img").attr("src",'/Public/images/admin/客户管理.png')
-            $(this).css("color","#999999").css('background','#3d3f46')
-            if(suojin==0){
-                $(".biao").eq(0).hide();
-            }
-            this.onmousedown=null;
-        }
-    }
- /*   $(".left li").eq(0).hover(function(){
+    $(".left li").eq(0).hover(function(){
         if(xuan==1){
             $(this).find("img").attr("src",'/Public/images/admin/客户管理1.png')
             $(this).css("color","#ffffff").css('background','#394555')
@@ -273,12 +240,17 @@
 
     });
     $(".shou").eq(0).click(function(){
-       // $(".left li").eq(0).css("color","#999999").css('background','#3d3f46').find("img").attr("src",'/Public/images/admin/客户管理.png')
-        //xuan=1;
+        $(".left li").eq(0).css("color","#999999").css('background','#3d3f46').find("img").attr("src",'/Public/images/admin/客户管理.png')
+        xuan=1;
         $(".toc").hide();
         toc=1;
         li1=1;
-		 $(".right").width("88%");
+        if(suojin==1){
+            $(".right").width("88%")
+        }else{
+            $(".right").width("95%")
+        }
+//		 $(".right").width("88%");
     })
 
     $(".left li").eq(1).hover(function(){
@@ -357,7 +329,7 @@
         if(suojin==0){
             $(".biao").eq(7).hide();
         }
-    })*/
+    })
 var suojin=1;
 
     $(".suo").click(function(){
