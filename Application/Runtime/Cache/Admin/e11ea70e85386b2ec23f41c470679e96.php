@@ -182,10 +182,52 @@
         }
     })
     var xuan=1;
-    $(".left li").eq(0).hover(function(){
+    var l0=document.getElementsByTagName("li")[0]
+
+    l0.onmouseover=function(){
+        $(this).find("img").attr("src",'/Public/images/admin/客户管理1.png')
+        $(this).css("color","#ffffff").css('background','#394555')
+        if(suojin==0){
+            $(".biao").eq(0).show();
+        }
+        this.onmousedown=function(){
+            if(xuan==1){
+                $(".toc").show();
+                $(this).css("color","#ffffff").css('background','#0398cb')
+                $(this).find("img").attr("src",'/Public/images/admin/客户管理1.png')
+                if(suojin==1){
+                    $(".right").width("78%")
+                }else{
+                    $(".right").width("85%")
+                }
+                xuan=0;
+            }else{
+                $(".toc").hide();
+                if(suojin==1){
+                    $(".right").width("88%")
+                }else{
+                    $(".right").width("95%")
+                }
+                $(this).css("color","#999999").css('background','#3d3f46')
+                $(this).find("img").attr("src",'/Public/images/admin/客户管理.png')
+                xuan=1;
+            }
+
+
+        }
+        this.onmouseout=function(){
+            $(this).find("img").attr("src",'/Public/images/admin/客户管理.png')
+            $(this).css("color","#999999").css('background','#3d3f46')
+            if(suojin==0){
+                $(".biao").eq(0).hide();
+            }
+            this.onmousedown=null;
+        }
+    }
+ /*   $(".left li").eq(0).hover(function(){
         if(xuan==1){
             $(this).find("img").attr("src",'/Public/images/admin/客户管理1.png')
-            $(this).css("color","#ffffff").css('background','#394555')//
+            $(this).css("color","#ffffff").css('background','#394555')
         }
 
         if(suojin==0){
@@ -315,7 +357,7 @@
         if(suojin==0){
             $(".biao").eq(7).hide();
         }
-    })
+    })*/
 var suojin=1;
 
     $(".suo").click(function(){
