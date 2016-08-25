@@ -163,7 +163,7 @@
             // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
             disableGlobalDnd: true,
             fileNumLimit: 300,
-            fileSizeLimit: 1 * 1024 * 1024,    // 200 M
+            fileSizeLimit: 2 * 1024 * 1024,    // 200 M
             fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M
         });
 
@@ -380,6 +380,7 @@
         }
 
         function updateTotalProgress() {
+			
             var loaded = 0,
                 total = 0,
                 spans = $progress.children(),
@@ -399,6 +400,7 @@
         }
 
         function updateStatus() {
+			
             var text = '', stats;
 
             if ( state === 'ready' ) {
@@ -422,7 +424,7 @@
                 }
             }
 
-            $info.html( text );
+            $("#info").html( text );
         }
 
         function setState( val ) {

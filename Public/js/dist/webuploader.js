@@ -3928,8 +3928,9 @@
     
                 if ( invalid && flag ) {
                     flag = false;
-                    this.trigger( 'error', '文件太大啦~', max, file );
-                    setTimeout(function() {
+                    //this.trigger( 'error', 'Q_EXCEED_SIZE_LIMIT111', max, file );
+                    this.trigger( 'error', '文件太大啦', max, file );
+					setTimeout(function() {
                         flag = true;
                     }, 1 );
                 }
@@ -4012,7 +4013,8 @@
     
                 // 已经重复了
                 if ( mapping[ hash ] ) {
-                    this.trigger( 'error', 'F_DUPLICATE', file );
+					//this.trigger( 'error', 'F_DUPLICATE', file );
+                    this.trigger( 'error', '图片重复了', file );
                     return false;
                 }
             });

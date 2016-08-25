@@ -58,7 +58,7 @@
     </script>
     
 	<script type="text/javascript" src="/Public/js/dist/upload.js"></script>
-	
+	<span id="info"></span>
 
 
    </div>
