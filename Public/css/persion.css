@@ -146,17 +146,17 @@
 
         }
         .toc{
-            display: none;
-            position: relative;
-            /*position: absolute;*/
-            /*left: 100%;*/
-            /*top:0;*/
+            /*display: none;*/
+            /*position: relative;
+            /!*position: absolute;*!/
+            /!*left: 100%;*!/
+            /!*top:0;*!/
             float: left;
             width: 10%;
             height: 100%;
             color: #333333;
             text-align:left;
-            background: #e9ebf0;
+            background: #e9ebf0;*/
         }
         .guanli{
             width: 100%;
