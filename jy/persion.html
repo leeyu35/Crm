@@ -234,6 +234,83 @@
             width: 100%;
             height: 100%;
         }
+        /*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+        .b6,.b1,.b2,.b3,.b4,.b5,.b7,.b8{
+            vertical-align: middle;
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+
+            background-size: 100% 100%;
+
+        }
+        .b1{
+            background: url(images/客户管理.png) no-repeat;
+        }
+        .b6{
+            background: url(images/账号管理.png) no-repeat;
+
+
+        }
+        .b2{
+            background: url(images/合同管理.png) no-repeat;
+
+        }
+        .b3{
+            background: url(images/财务管理.png) no-repeat;
+
+        }
+        .b4{
+            background: url(images/账户管理.png) no-repeat;
+
+        }
+        .b5{
+            background: url(images/盖章申请.png) no-repeat;
+
+        }
+        .b7{
+            background: url(images/消息中心.png) no-repeat;
+
+        }
+        .b8{
+            background: url(images/记事本.png) no-repeat;
+        }
+        .b11{
+            background: url(images/客户管理1.png) no-repeat !important;
+        }
+        .b61{
+            background: url(images/账号管理1.png) no-repeat !important;
+
+
+        }
+        .b21{
+            background: url(images/合同管理1.png) no-repeat !important;
+
+        }
+        .b31{
+            background: url(images/财务管理1.png) no-repeat !important;
+
+        }
+        .b41{
+            background: url(images/账户管理1.png) no-repeat !important;
+
+        }
+        .b51{
+            background: url(images/盖章申请1.png) no-repeat !important;
+
+        }
+        .b71{
+            background: url(images/消息中心1.png) no-repeat !important;
+
+        }
+        .b81{
+            background: url(images/记事本1.png) no-repeat !important;
+        }
+        .yang{
+            color: #ffffff !important;
+            background: #0398cb !important;
+        }
+
 
 
     </style>
@@ -278,35 +355,50 @@
         </p>
             <ul class="client">
                 <li>
-                    <img src="images/客户管理.png" alt="" style="vertical-align: middle"/>
+                    <span class="b1">
+
+                    </span>
+                    <!--<img src="" alt="" style="vertical-align: middle"/>-->
                     <span style="margin-left:10px;">客户管理</span>
                     <div class="biao">
                         产品与服务
                     </div>
                 </li>
                 <li>
-                    <img src="images/合同管理.png" alt="" style="vertical-align: middle"/>
+                    <span class="b2">
+
+                    </span>
+                    <!--<img src="images/合同管理.png" alt="" style="vertical-align: middle"/>-->
                     <span style="margin-left:10px;">合同管理</span>
                     <div class="biao">
                         合同管理
                     </div>
                 </li>
                 <li>
-                    <img src="images/财务管理.png" alt="" style="vertical-align: middle"/>
+                    <span class="b3">
+
+                    </span>
+                    <!--<img src="images/财务管理.png" alt="" style="vertical-align: middle"/>-->
                     <span style="margin-left:10px;">财务管理</span>
                     <div class="biao">
                         财务管理
                     </div>
                 </li>
                 <li>
-                    <img src="images/账户管理.png" alt="" style="vertical-align: middle"/>
+                    <span class="b4">
+
+                    </span>
+                    <!--<img src="images/账户管理.png" alt="" style="vertical-align: middle"/>-->
                     <span style="margin-left:10px;">账户管理</span>
                     <div class="biao">
                         账户管理
                     </div>
                 </li>
                 <li>
-                    <img src="images/盖章申请.png" alt="" style="vertical-align: middle"/>
+                    <span class="b5">
+
+                    </span>
+                    <!--<img src="images/盖章申请.png" alt="" style="vertical-align: middle"/>-->
                     <span style="margin-left:10px;">盖章管理</span>
                     <div class="biao">
                         盖章管理
@@ -322,21 +414,30 @@
         </p>
         <ul class="client1">
             <li>
-                <img src="images/账号管理.png" alt="" style="vertical-align: middle"/>
+                <span class="b6">
+
+                </span>
+                <!--<img src="images/账号管理.png" alt="" style="vertical-align: middle"/>-->
                 <span style="margin-left:10px;">账号管理</span>
                 <div class="biao">
                     账号管理
                 </div>
             </li>
             <li>
-                <img src="images/消息中心.png" alt="" style="vertical-align: middle"/>
+                <span class="b7">
+
+                </span>
+                <!--<img src="images/消息中心.png" alt="" style="vertical-align: middle"/>-->
                 <span style="margin-left:10px;">消息中心</span>
                 <div class="biao">
                     消息中心
                 </div>
             </li>
             <li>
-                <img src="images/记事本.png" alt="" style="vertical-align: middle"/>
+                <span class="b8">
+
+                </span>
+                <!--<img src="images/记事本.png" alt="" style="vertical-align: middle"/>-->
                 <span style="margin-left:10px;">记事本&nbsp;&nbsp;&nbsp;</span>
                 <div class="biao">
                     记事本
@@ -369,8 +470,93 @@
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
+   /* /!*
+     $(".liebiao").hover(function(){
+     $(this).css("color","#666666").css("background","#ffffff")
+     },function(){
+     $(this).css("color","#333333").css("background",'#e9ebf0')
+     })
+     *!/
+    var flag= 1,flag1= 1,toc= 1,li1=1;
 
-    $(".liebiao").hover(function(){
+    $(".fuwu-1").eq(0).click(function(){
+        if(flag==1){
+            $(this).find("img").eq(0).attr("src","./images/右三角.png")
+            $(".client").slideUp();
+            flag=0;
+        }else if(flag==0){
+            $(this).find("img").eq(0).attr("src","./images/下三角.png")
+            $(".client").slideDown();
+            flag=1;
+        }
+    });
+    $(".fuwu-1").eq(1).click(function(){
+        if(flag1==1){
+            $(this).find("img").eq(0).attr("src","./images/右三角.png")
+            $(".client1").slideUp();
+            flag1=0;
+        }else if(flag1==0){
+            $(this).find("img").eq(0).attr("src","./images/下三角.png")
+            $(".client1").slideDown();
+            flag1=1;
+        }
+    })
+    var xuan=1;
+    var l0=document.getElementsByTagName("li")[0]
+
+    l0.onmouseover=function(){
+        $(this).find("img").attr("src",'./images/客户管理1.png')
+        $(this).css("color","#ffffff").css('background','#394555')
+        if(suojin==0){
+            $(".biao").eq(0).show();
+        }
+        this.onmousedown=function(){
+
+            if(xuan==1){
+                $(".toc").show();
+                $(this).css("color","#ffffff").css('background','#0398cb')
+                $(this).find("img").attr("src",'./images/客户管理1.png')
+                if(suojin==1){
+                    $(".right").width("78%")
+                }else{
+                    $(".right").width("85%")
+                }
+                xuan=0;
+            }else{
+                $(".toc").hide();
+                if(suojin==1){
+                    $(".right").width("88%")
+                }else{
+                    $(".right").width("95%")
+                }
+                $(this).css("color","#999999").css('background','#3d3f46')
+                $(this).find("img").attr("src",'./images/客户管理.png')
+                xuan=1;
+            }
+            this.onmouseout=function(){
+                if(xuan==0){
+                    $(this).find("img").attr("src",'./images/客户管理.png')
+                    $(this).css("color","#999999").css('background','#3d3f46')
+                    if(suojin==0){
+                        $(".biao").eq(0).hide();
+                    }
+                }else{
+                    $(this).css("color","#ffffff").css('background','#0398cb')
+                    $(this).find("img").attr("src",'./images/客户管理1.png')
+                    if(suojin==0){
+                        $(".biao").eq(0).hide();
+                    }
+                }
+
+//            l0.onmouseout=null;
+            }
+
+        }
+
+    }
+*/
+
+   $(".liebiao").hover(function(){
         $(this).css("color","#666666").css("background","#ffffff")
     },function(){
         $(this).css("color","#333333").css("background",'#e9ebf0')
@@ -400,11 +586,60 @@
             flag1=1;
         }
     })
+   $(".left li").eq(0).hover(function(){
+//       if(xuan==1){
+           $(this).find(".b1").addClass("b11")
+//            $(this).css("color","#ffffff").css('background','#0398cb')
+//       }
+
+       if(suojin==0){
+           $(".biao").eq(0).show();
+       }
+   },function(){
+//       if(xuan==1){
+//            $(this).find("img").attr("src",'images/客户管理.png')
+           $(this).find(".b1").removeClass("b11")
+//            $(this).css("color","#999999").css('background','#3d3f46')
+//       }
+       if(suojin==0){
+           $(".biao").eq(0).hide();
+       }
+   }).click(function(){
+       if(li1==1){
+//            $(this).unbind();
+//            $(this).unbind("mouseenter").unbind("mouseleave");
+           $(".toc").show();
+           $(this).addClass("yang");
+           $(this).find(".b1").addClass("b11")
+         /*  xuan=0;
+           toc=0;*/
+           if(suojin==1){
+               $(".right").width("78%")
+           }else{
+               $(".right").width("85%")
+           }
+           li1=0
+       }else{
+           $(".toc").hide();
+           if(suojin==1){
+               $(".right").width("88%")
+           }else{
+               $(".right").width("95%")
+           }
+           $(this).removeClass("yang");
+           $(this).find(".b1").removeClass("b11")
+        /*   xuan=1;
+           toc=1;*/
+           li1=1;
+//            $(this).bind("hover");
+       }
+
+   });
     var xuan=1;
-    $(".left li").eq(0).hover(function(){
+   /* $(".left li").eq(0).hover(function(){
         if(xuan==1){
-            $(this).find("img").attr("src",'images/客户管理1.png')
-            $(this).css("color","#ffffff").css('background','#0398cb')
+            $(this).find(".b1").addClass("b11")
+//            $(this).css("color","#ffffff").css('background','#0398cb')
         }
 
         if(suojin==0){
@@ -412,8 +647,9 @@
         }
     },function(){
         if(xuan==1){
-            $(this).find("img").attr("src",'images/客户管理.png')
-            $(this).css("color","#999999").css('background','#3d3f46')
+//            $(this).find("img").attr("src",'images/客户管理.png')
+            $(this).find(".b1").removeClass("b11")
+//            $(this).css("color","#999999").css('background','#3d3f46')
         }
         if(suojin==0){
             $(".biao").eq(0).hide();
@@ -448,7 +684,7 @@
 //            $(this).bind("hover");
         }
 
-    });
+    });*/
     $(".shou").eq(0).click(function(){
         $(".left li").eq(0).css("color","#999999").css('background','#3d3f46').find("img").attr("src",'images/客户管理.png')
         xuan=1;
