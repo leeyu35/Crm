@@ -38,7 +38,7 @@ class UsersController extends CommonController
                if(!$info) {// 上传错误提示错误信息
                    $this->error($upload->getError());
                }else{// 上传成功
-                   $image='/Uploads'.$info['image']['savepath'].$info['image']['savename'];
+                   $image=C('Upload_path').$info['image']['savepath'].$info['image']['savename'];
                }
            }else
            {

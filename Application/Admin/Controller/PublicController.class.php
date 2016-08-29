@@ -38,4 +38,10 @@ class PublicController extends Controller
             $this->web_title=C('WEB_NAME');
             $this->display();
         }
+
+        public function usermessage(){
+
+            $this->sessionuid=session("u_id");
+            $this->display();
+        }
 }

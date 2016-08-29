@@ -2,6 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
     <link rel="stylesheet" href="/Public/css/reset.css"/>
     <link rel="stylesheet" href="/Public/css/persion.css"/>
@@ -15,6 +16,16 @@
         }
         .li1,.li2{
             display: none;
+            position: relative;
+            /*position: absolute;*/
+            /*left: 100%;*/
+            /*top:0;*/
+            float: left;
+            width: 10%;
+            height: 100%;
+            color: #333333;
+            text-align:left;
+            background: #e9ebf0;
         }
 
     </style>
@@ -98,7 +109,7 @@
                         账户管理
                     </div>
                 </li>
-                <li>
+                <li style="display: none;">
                     <img src="/Public/images/admin/盖章申请.png" alt="" style="vertical-align: middle"/>
                     <span style="margin-left:10px;">盖章管理</span>
                     <div class="biao">
@@ -158,11 +169,11 @@
             <div class="guanli">
                 合同管理
             </div>
-            <div class="liebiao" >
-                <a >新合同意向</a>
+            <div class="liebiao" id="<?php echo U('Contract/add');?>" >
+                <a>新合同意向</a>
             </div>
-            <div class="liebiao">
-                <a  >合同列表</a>
+            <div class="liebiao" id="<?php echo U('Contract/index');?>">
+                <a >合同列表</a>
             </div>
         </div>
         
@@ -180,7 +191,7 @@
         $(this).css("color","#333333").css("background",'#e9ebf0')
     })
 	*/
-    var flag= 1,flag1= 1,toc= 1,li1=1;
+    var flag= 1,flag1= 1,toc= 1,li1= 1;
 
     $(".fuwu-1").eq(0).click(function(){
         if(flag==1){
@@ -204,7 +215,7 @@
             flag1=1;
         }
     })
-
+    var xuan=1;
     $(".left li").eq(0).hover(function(){
         if(xuan==1){
             $(this).find("img").attr("src",'/Public/images/admin/客户管理1.png')
@@ -226,12 +237,21 @@
         if(li1==1){
 //            $(this).unbind();
 //            $(this).unbind("mouseenter").unbind("mouseleave");
-            $(".li1").show();
+            $(".li1").show().siblings().hide();
 //            $(".li1").show().siblings().hide();
-            $(this).css("color","#ffffff").css('background','#0398cb')
+            $(this).css("color","#ffffff").css('background','#0398cb').siblings().css("color","#999999").css('background','#3d3f46')
             $(this).find("img").attr("src",'/Public/images/admin/客户管理1.png')
 //            $(this).siblings().css("color","#999999").css('background','#3d3f46').find("img").attr("src",'/Public/images/admin/客户管理.png')
+            $(".left li").eq(1).find("img").attr("src",'/Public/images/admin/合同管理.png')
+            $(".left li").eq(2).find("img").attr("src",'/Public/images/admin/财务管理.png')
+            $(".left li").eq(3).find("img").attr("src",'/Public/images/admin/账户管理.png')
+            $(".left li").eq(4).find("img").attr("src",'/Public/images/admin/盖章申请.png')
+            $(".left li").eq(5).find("img").attr("src",'/Public/images/admin/账号管理.png')
+            $(".left li").eq(6).find("img").attr("src",'/Public/images/admin/消息中心.png')
+            $(".left li").eq(7).find("img").attr("src",'/Public/images/admin/记事本.png')
+
             xuan=0;
+
             toc=0;
             if(suojin==1){
                 $(".right").width("78%")
@@ -239,6 +259,9 @@
                 $(".right").width("85%")
             }
             li1=0
+            li2=1
+            xuan2=1
+
         }else{
             $(".li1").hide();
             if(suojin==1){
@@ -248,6 +271,7 @@
             }
             $(this).css("color","#999999").css('background','#3d3f46')
             $(this).find("img").attr("src",'/Public/images/admin/客户管理.png')
+
             xuan=1;
             toc=1;
             li1=1;
@@ -256,9 +280,9 @@
 
     });
     $(".shou").eq(0).click(function(){
-        $(".left li").eq(0).css("color","#999999").css('background','#3d3f46').find("img").attr("src",'/Public/images/admin/客户管理.png')
-        xuan=1;
-        $(".toc").hide();
+//        $(".left li").eq(0).css("color","#999999").css('background','#3d3f46').find("img").attr("src",'/Public/images/admin/客户管理.png')
+        xuan=0;
+        $(".li1").hide();
         toc=1;
         li1=1;
         if(suojin==1){
@@ -270,12 +294,20 @@
     })
         var li2= 1,xuan2=1;
     $(".left li").eq(1).hover(function(){
-        $(this).find("img").attr("src",'/Public/images/admin/合同管理1.png')
+        if(xuan2==1){
+            $(this).find("img").attr("src",'/Public/images/admin/合同管理1.png')
+            $(this).css("color","#ffffff").css('background','#394555')
+        }
+
         if(suojin==0){
             $(".biao").eq(1).show();
         }
     },function(){
-        $(this).find("img").attr("src",'/Public/images/admin/合同管理.png')
+        if(xuan2==1){
+            $(this).find("img").attr("src",'/Public/images/admin/合同管理.png')
+            $(this).css("color","#999999").css('background','#3d3f46')
+        }
+
         if(suojin==0){
             $(".biao").eq(1).hide();
         }
@@ -283,10 +315,18 @@
         if(li2==1){
 //            $(this).unbind();
 //            $(this).unbind("mouseenter").unbind("mouseleave");
-            $(".li2").show();
+            $(".li2").show().siblings().hide();
 //            $(".li1").show().siblings().hide();
-            $(this).css("color","#ffffff").css('background','#0398cb')
+            $(this).css("color","#ffffff").css('background','#0398cb').siblings().css("color","#999999").css('background','#3d3f46')
             $(this).find("img").attr("src",'/Public/images/admin/合同管理1.png')
+            $(".left li").eq(0).find("img").attr("src",'/Public/images/admin/客户管理.png')
+            $(".left li").eq(2).find("img").attr("src",'/Public/images/admin/财务管理.png')
+            $(".left li").eq(3).find("img").attr("src",'/Public/images/admin/账户管理.png')
+            $(".left li").eq(4).find("img").attr("src",'/Public/images/admin/盖章申请.png')
+            $(".left li").eq(5).find("img").attr("src",'/Public/images/admin/账号管理.png')
+            $(".left li").eq(6).find("img").attr("src",'/Public/images/admin/消息中心.png')
+            $(".left li").eq(7).find("img").attr("src",'/Public/images/admin/记事本.png')
+
 //            $(this).siblings().css("color","#999999").css('background','#3d3f46').find("img").attr("src",'/Public/images/admin/客户管理.png')
             xuan2=0;
             toc=0;
@@ -296,6 +336,8 @@
                 $(".right").width("85%")
             }
             li2=0
+            li1=1
+            xuan=1
         }else{
             $(".li2").hide();
             if(suojin==1){
@@ -311,6 +353,22 @@
 //            $(this).bind("hover");
         }
     })
+
+    $(".shou").eq(1).click(function(){
+//        $(".left li").eq(1).css("color","#999999").css('background','#3d3f46').find("img").attr("src",'/Public/images/admin/合同管理.png')
+        xuan2=0;
+        $(".li2").hide();
+        toc=1;
+
+        li2=1;
+        if(suojin==1){
+            $(".right").width("88%")
+        }else{
+            $(".right").width("95%")
+        }
+//		 $(".right").width("88%");
+    })
+
     $(".left li").eq(2).hover(function(){
         $(this).find("img").attr("src",'/Public/images/admin/财务管理1.png')
         if(suojin==0){

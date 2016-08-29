@@ -2,6 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
     <link rel="stylesheet" href="/Public/css/reset.css"/>
     
@@ -41,7 +42,7 @@
                 <img src="<?php echo (session('u_image')); ?>" width="80" height="80" class="img-circle" />
             </p>
             <p style="text-align: center;font-size: 12px;color: #333333;">
-               <?php echo (session('u_name')); ?>
+               <a href="<?php echo U("users/updata?id=$sessionuid");?>"><?php echo (session('u_name')); ?></a>
             </p>
         </div>
         <div class="dai">

@@ -158,6 +158,7 @@
             text-align:left;
             background: #e9ebf0;*/
             /*height: 100%;*/
+			height: 100%;
         }
         .guanli{
             width: 100%;
@@ -182,6 +183,9 @@
         .right{
             height: 100%;
             width:88%;
+			position: absolute;
+			right: 0px;
+			top: 50px;
         }
         .people{
             margin-top: 20px;

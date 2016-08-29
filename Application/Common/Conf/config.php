@@ -5,6 +5,7 @@ $config_1= array(
     'WEB_NAME'              =>'CRM管理控制台 | 凌众& 谋士',
     'WEB_VERSION'           =>'Alpha 10.0.1',
 
+
     /* 数据库设置 */
     'DB_TYPE'               =>  'mysql',     // 数据库类型
     'DB_HOST'               =>  'localhost', // 服务器地址
@@ -57,6 +58,7 @@ $config_1= array(
 
     /*我的设置*/
     'Portrait'              => '/Uploads/portrait/wu.png', //默认头像地址
+    'Upload_path'           =>'/Uploads',
     // 开启路由
     'URL_ROUTER_ON'   => true,
     'URL_ROUTE_RULES'=>array(

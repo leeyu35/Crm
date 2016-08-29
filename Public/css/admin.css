@@ -2,12 +2,21 @@
 
 *{ font-family:"微软雅黑";}
 ul li{ list-style-type:none;}
+*{ font-size:12px; border-radius:0px;}
 h1,h2,h3,h4,h5,h6{ 
 font-size:14px;
 
 }
-a{ blr:expression(this.onFocus=this.blur()); /* IE Opera */ outline:none; /* FF Opera */ } a:focus{ -moz-outline-style: none; /* FF */ } 
+tr,td{ font-size:12px;}
 
+.lin_pr{  margin-bottom:3px; display:block; text-align:center; background:#2a6496; color:#fff; font-size:11px; padding-top:1px; padding-bottom:1px;}
+a{ blr:expression(this.onFocus=this.blur()); /* IE Opera */ outline:none; /* FF Opera */ } a:focus{ -moz-outline-style: none; /* FF */ } 
+.label-primary1{color: #fff;
+border: 1px solid #328dcc;
+background-color: #328dcc;
+border-radius:0px;
+}
+.input-group-addon{ border-radius:0px;}
 a:focus {
      outline:none;
      -moz-outline:none;
@@ -385,3 +394,6 @@ a {blr:expression_r(this.onFocus=this.blur())}
     pointer-events: none;
     opacity: 0.6;
 }
+
+.table a{ color:#333;}
+.table a:hover{ color:#F30;}

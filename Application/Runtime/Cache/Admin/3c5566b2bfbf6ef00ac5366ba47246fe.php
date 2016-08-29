@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <link rel="stylesheet" href="/Public/css/reset.css"/>
     <link rel="stylesheet" href="/Public/css/login.css"/>
 <title>CRM管理平台</title>

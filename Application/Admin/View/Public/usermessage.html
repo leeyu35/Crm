@@ -42,7 +42,7 @@
                 <img src="{$Think.session.u_image}" width="80" height="80" class="img-circle" />
             </p>
             <p style="text-align: center;font-size: 12px;color: #333333;">
-               {$Think.session.u_name}
+               <a href="{:U("users/updata?id=$sessionuid")}">{$Think.session.u_name}</a>
             </p>
         </div>
         <div class="dai">

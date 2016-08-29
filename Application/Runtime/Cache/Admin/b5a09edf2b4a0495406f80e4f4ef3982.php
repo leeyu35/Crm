@@ -9,8 +9,8 @@
 </head>
 
 <body>
-<div class="container">
-<h3>修改用户信息<small>Update</small></h3>
+<div class="container"  style="width:100%;">
+<h3 class="bor-left-bull">修改用户信息<small>Update</small></h3>
 <hr>
 <form action="<?php echo U("upusers");?>" method="post" enctype="multipart/form-data" id="upusers">
   <input type="hidden" name="id" value="<?php echo ($info[id]); ?>">
@@ -56,6 +56,10 @@
   <button type="submit"  class="btn btn-primary" style="width:150px;">提交</button>
 </form>
 </div>
+<br>
+<br>
+<br>
+<br>
 
 </body>
 </html>

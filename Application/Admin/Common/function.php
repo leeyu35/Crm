@@ -15,9 +15,19 @@ function product_line($idstr){
     foreach ($list as $key=>$val)
     {
 
-        $string.=$val['name'].'<br>';
+        $string.='<span class="lin_pr">'.$val['name'].'</span>';
     }
     $string=substr($string,0,-1);
     return $string;
+
+}
+
+//根据客户ID 返回客户信息
+function kehu($id){
+    $kehu=M("Customer");
+    $info=$kehu->find(($id));
+
+    return $info;
+
 
 }

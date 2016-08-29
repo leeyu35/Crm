@@ -17,7 +17,7 @@
 
 <body>
 <div class="container" style="width:100%;">
-<h3 class="bor-left-bull">新增客户附件<small>Add Customer File</small></h3>
+<h3 class="bor-left-bull">新增客户附件<small>For</small><?php echo ($info[advertiser]); ?> <a class="label label-primary1" href="<?php echo U("index");?>">返回</a></h3>
 <br>
 <form action="#" method="post" class="form-horizontal" >
 
@@ -47,6 +47,7 @@
                     </div><div class="info"></div>
                     <div class="btns">
                         <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
+						<div></div><div class="uploadBtn">查看已上传</div>
                     </div>
                 </div>
             </div>
@@ -54,7 +55,8 @@
     </div>
    	
     <script type="text/javascript">
-    	var test_id=<?php echo ($id); ?>
+    	var test_id=<?php echo ($id); ?>;
+		var test_type=1;
     </script>
     
 	<script type="text/javascript" src="/Public/js/dist/upload.js"></script>

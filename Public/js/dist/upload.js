@@ -151,7 +151,7 @@
             swf: '../../dist/Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-            server: '/Admin/Customer/addimg/id/'+test_id,
+            server: '/Admin/Customer/addimg/id/'+test_id+'/type/'+test_type,
             // runtimeOrder: 'flash',
 
              accept: {
@@ -212,6 +212,7 @@
 
         // 当有文件添加进来时执行，负责view的创建
         function addFile( file ) {
+			
             var $li = $( '<li id="' + file.id + '">' +
                     '<p class="title">' + file.name + '</p>' +
                     '<p class="imgWrap"></p>'+
@@ -225,7 +226,7 @@
                 $prgress = $li.find('p.progress span'),
                 $wrap = $li.find( 'p.imgWrap' ),
                 $info = $('<p class="error"></p>'),
-
+				
                 showError = function( code ) {
                     switch( code ) {
                         case 'exceed_size':
@@ -409,7 +410,7 @@
             } else if ( state === 'confirm' ) {
                 stats = uploader.getStats();
                 if ( stats.uploadFailNum ) {
-                    text = '已成功上传' + stats.successNum+ '张照片至XX相册，'+
+                    text = '已成功上传' + stats.successNum+ '个张照片至XX相册，'+
                         stats.uploadFailNum + '张照片上传失败，<a class="retry" href="#">重新上传</a>失败图片或<a class="ignore" href="#">忽略</a>'
                 }
 
