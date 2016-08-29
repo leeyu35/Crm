@@ -1068,9 +1068,11 @@ var suojin=1;
     $(".user").click(function(){
         if(user1==1){
             $(".out").show()
+            $(".no").css('transition-duration','1s').css('transform','rotate(180deg)')
             user1=0;
         }else{
             $(".out").hide()
+            $(".no").css('transition-duration','1s').css('transform','rotate(0deg)')
             user1=1;
         }
     })
