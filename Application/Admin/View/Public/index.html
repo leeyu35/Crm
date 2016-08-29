@@ -68,6 +68,9 @@
             <img src="/Public/images/admin/下三角.png" alt="" style="vertical-align: middle;"/>
         </span>
     </div>
+    <div class="out">
+        <p>退出</p>
+    </div>
     
 </div>
 <div class="clear" style="height:95%;">
@@ -1059,6 +1062,17 @@ var suojin=1;
             suojin=1;
         }
 	
+    })
+
+    var user1=1;
+    $(".user").click(function(){
+        if(user1==1){
+            $(".out").show()
+            user1=0;
+        }else{
+            $(".out").hide()
+            user1=1;
+        }
     })
 </script>
 </body>
