@@ -251,7 +251,7 @@
             z-index: 10;
         }
         .out p{
-            margin-top: 10px;
+            /*margin-top: 10px;*/
         }
 		
 		.liebiao{ color:#333; background:#e9ebf0; cursor:pointer;}
