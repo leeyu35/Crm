@@ -246,9 +246,12 @@
             background: #ffffff;
             color: #999999;
             cursor: pointer;
-            font-size: 15px;
+            font-size: 12px;
             box-shadow: 0px 2px 4px #999999;
             z-index: 10;
+        }
+        .out p{
+            margin-top: 10px;
         }
 		
 		.liebiao{ color:#333; background:#e9ebf0; cursor:pointer;}
