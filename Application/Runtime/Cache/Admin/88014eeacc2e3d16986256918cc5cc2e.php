@@ -52,7 +52,7 @@
         <span style="width:40px; display:inline-block"><a href="<?php echo U("addim?id=$list[id]");?>" title="新增附件">新增</a></span>|&nbsp;&nbsp;<a href="" title="查看附件">查看</a><br>
         </td>
     	<td>
-        <a href="<?php echo U("updata?id=$list[id]");?>">修改</a> <!--<a href="#">删除</a>-->
+        <a href="<?php echo U("updata?id=$list[id]");?>">修改</a> <a href="<?php echo U("delete?id=$list[id]");?>">删除</a>
         </td>
     </tr><?php endforeach; endif; else: echo "" ;endif; ?>
 </table>

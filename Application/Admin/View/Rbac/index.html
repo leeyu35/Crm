@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+</head>
+
+<body>
+<div class="container" style="width:100%;">
+<h3 class="bor-left-bull">权限列表<small>power list</small></h3>
+<nav class="navbar navbar-default navbar-fixed-top text-left" role="navigation" style=" padding-left:20px; padding-top:10px;">
+ 
+   <table class="table" style="margin-top:9px;">
+       <tr>
+    	<th align="left">#</th>
+        <th align="left">模块/描述</th>
+    	<th align="left">一级审核权限</th>
+    	<th align="left">二级审核权限</th>
+        <th align="left">添加</th>
+        <th align="left">修改</th>
+        <th align="left">删除</th>
+        <th align="left">查看</th>
+        <th align="left">可查看他人</th>
+        <th align="left">操作</th>	  
+
+      </tr>
+    </table>
+
+  </nav>
+<table class="table table-hover">
+	<tr >
+    	<th>#</th>
+        <th>模块/描述</th>
+    	<th>一级审核权限</th>
+    	<th>二级审核权限</th>
+        <th>添加</th>
+        <th>修改</th>
+        <th>删除</th>
+        <th>查看</th>
+        <th>可查看他人</th>
+        <th>操作</th>	  
+    </tr>
+    <volist id="list" name="list" key="k">
+    <tr>
+    	<td>{$k}</td>
+        <td>{$list[module]}<br>({$list[title]})</td>
+        <td>{$list[audit_1]}</td>
+    	<td>{$list[audit_2]}</td>
+    	<td>{$list[add_]}</td>
+    	<td>{$list[update_]}</td>
+    	<td>{$list[delete_]}</td>
+    	<td>{$list[show_]}</td>
+    	<td>{$list[index_show]}</td>
+    	<td><a href="{:U("updata?id=$list[id]")}">修改</a> <a href="{:U("delete?id=$list[id]")}">删除</a></td>
+    </tr>
+    </volist>
+    
+</table>
+
+</div>
+<br>
+<br>
+
+</body>
+</html>

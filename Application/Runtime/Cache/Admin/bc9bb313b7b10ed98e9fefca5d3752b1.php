@@ -9,8 +9,8 @@
 </head>
 
 <body>
-<div class="container">
-<h3>添加用户<small>Add users</small></h3>
+<div class="container" style="width:100%;">
+<h3 class="bor-left-bull" >添加用户<small>Add users</small></h3>
 <hr>
 <form action="<?php echo U("addru");?>" method="post" enctype="multipart/form-data" id="addusers">
   <div class="form-group">
@@ -38,11 +38,8 @@
   
    <div class="form-group">
     <label for="exampleInputFile">部门</label>
-	<select class="form-control" style="width:200px;">
-	  <option value="0">超级管理员</option>
-	  <option value="1">部门2</option>
-	  <option value="1">部门3</option>
-	  <option value="1">部门4</option>
+	<select class="form-control" style="width:200px;" name="groupid">
+      <?php if(is_array($grouplist)): $i = 0; $__LIST__ = $grouplist;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$grouplist): $mod = ($i % 2 );++$i;?><option value="<?php echo ($grouplist[id]); ?>"><?php echo ($grouplist[group_name]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
     	
     </select>
     

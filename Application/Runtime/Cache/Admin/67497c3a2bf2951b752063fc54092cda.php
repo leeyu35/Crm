@@ -6,8 +6,8 @@
 <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
 </head>
-<div class="container">
-<h3>用户列表<small>Users list</small></h3>
+<div class="container" style="width:100%;">
+<h3 class="bor-left-bull">用户列表<small>Users list</small></h3>
 
 <table class="table table-hover">
 	<tr>
@@ -24,7 +24,7 @@
         <td><img src="<?php echo ($list[image]); ?>" width="50" height="50" class="img-circle"/></td>
     	<td><?php echo ($list[users]); ?></td>
     	<td><?php echo ($list[name]); ?></td>
-    	<td><?php echo ($list[groupid]); ?></td>
+    	<td><?php echo ($list[groupname]); ?></td>
     	<td><?php echo (date("Y-m-d",$list[ctime])); ?></td>
     	<td><a href="<?php echo U("updata?id=$list[id]");?>">修改</a> <a href="<?php echo U("delete?id=$list[id]");?>">删除</a></td>
     </tr><?php endforeach; endif; else: echo "" ;endif; ?>

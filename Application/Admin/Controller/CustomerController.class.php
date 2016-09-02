@@ -34,10 +34,13 @@ class CustomerController extends CommonController
             $this->ser_txt=I('get.search_text');
 
         }
-        $count      = $coustomer->where("submituser=".session('u_id')." $where")->count();// 查询满足要求的总记录数
+        //权限条件
+        $q_where=quan_where(__CONTROLLER__);
+
+        $count      = $coustomer->where("id!=0 and ".$q_where.$where)->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
-        $list=$coustomer->field('id,advertiser,industry,website,product_line,ctime,city')->where("submituser=".session('u_id')." $where")->limit($Page->firstRow.','.$Page->listRows)->select();
+        $list=$coustomer->field('id,advertiser,industry,website,product_line,ctime,city')->where("id!=0 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->select();
        //echo $coustomer->_sql();
         $contact=M('ContactList');
 
@@ -213,6 +216,16 @@ class CustomerController extends CommonController
         $this->id=$id;
         $this->display();
     }
-
+    public function delete(){
+        $id=I('get.id');
+        $group=M("Customer");
+        if($group->delete($id))
+        {
+            $this->success("删除成功",U('index'));
+        }else
+        {
+            $this->error("删除失败");
+        }
+    }
 
 }

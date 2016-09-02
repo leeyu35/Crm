@@ -319,8 +319,10 @@
 	
     <div class="form-group">
     
-       <div class="col-sm-2">
+       <div class="col-sm-12">
        <button type="submit" class="btn btn-primary">提交合同</button>
+       <a href="#" class="btn btn-primary">一级审核通过</a>
+       <a href="#" class="btn btn-primary">二级审核通过</a>  
        </div>
     </div>
 

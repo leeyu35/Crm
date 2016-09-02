@@ -166,9 +166,9 @@
     
     <label for="inputEmail3" class="col-sm-1 control-label">代理公司</label>
     <div class="col-sm-2">
-      <select  class="form-control" name="agent_company" id="agent_company">
-      	<option value="凌众时代" title="LZAD">凌众时代</option>
-      	<option value="谋士" title="MSWL">谋士</option>
+      <select  class="form-control" name="agent_company" id="agent_company">        
+        <?php if(is_array($agentcompany)): $k = 0; $__LIST__ = $agentcompany;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$agentcompany): $mod = ($k % 2 );++$k;?><option value="<?php echo ($agentcompany["id"]); ?>" title="<?php echo ($agentcompany["title"]); ?>"><?php echo ($agentcompany["companyname"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+
       </select>
     </div>
     

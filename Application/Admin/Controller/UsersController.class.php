@@ -11,12 +11,27 @@ class UsersController extends CommonController
 {
     public function index(){
         $users=M('Users');
-        $this->list=$users->field('id,name,users,image,groupid,ctime')->order('ctime desc')->select();
+        //权限条件
+        $q_where=quan_users_where(__CONTROLLER__);
+        $count      =$users->field('id,name,users,image,groupid,ctime')->order('ctime desc')->where("id !=0 and $q_where")->count();// 查询满足要求的总记录数
+        $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        $show       = $Page->show();// 分页显示输出
+        $list=$users->field('id,name,users,image,groupid,ctime')->order('ctime desc')->where("id !=0 and $q_where")->select();
+
+
+        foreach ($list as $key=>$val)
+        {
+            $list[$key]['groupname']=group_name($val[groupid]);
+        }
+        $this->list=$list;
+        $this->assign('page',$show);// 赋值分页输出
         $this->display();
     }
 
     public function add(){
-
+        $Groupl=M('Groupl');
+        $listgroup=$Groupl->field('id,group_name')->select();
+        $this->grouplist=$listgroup;
         $this->display();
     }
     //添加用户返回
@@ -77,6 +92,10 @@ class UsersController extends CommonController
 
     //修改用户
     public function updata(){
+        $Groupl=M('Groupl');
+        $listgroup=$Groupl->field('id,group_name')->select();
+        $this->grouplist=$listgroup;
+
         $id=I('get.id');
         $users=M("Users");
         $this->info=$users->find($id);
@@ -111,10 +130,12 @@ class UsersController extends CommonController
                 $image=I('post.image');
             }
             $users->image=$image;
-            if($users->password=='')
+            if(I('post.password')=='')
             {
-                unset($users->password);
+
+                $users->password=I('post.jpassword');
             }
+
             if($users->save())
             {
                 $this->success("修改成功",U('index'));

@@ -1,0 +1,355 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>修改合同</title>
+
+<link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+<script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
+<script src="/Public/js/jquery-3.1.0.min.js"></script>
+<script language="javascript">
+	$(document).ready(function(e) {
+				
+		//动态加载公司名称
+		$("#gongsi").keyup(function(){
+			//$("#hjd").html($("#hjd").html()+"1");
+			val=$(this).val();
+			$.post("{:U('keyup_adlist')}",{val:val},function(data){
+					$("#adlist").html(data);
+			})
+			$("#adlist").show();
+		})
+		
+		$("#adlist").on("click","a",function(){
+			
+			$("#advertiser").val($(this).attr("id"));
+			$("#submituser").val($(this).attr("title"));
+			$("#gongsi").val(($(this).html()));
+			$("#adlist").hide();
+			//$("#gongsi").html(data);
+		})
+		
+		
+		
+		//生成合同编号
+        $("#product_line").change(function(){
+			
+			bianhao();
+		})
+		$("#agent_company").change(function(){
+			bianhao();
+		})
+		
+		function bianhao(){
+			
+		gs=$("#agent_company option:selected").attr("title");
+			pr=$("#product_line option:selected").attr("title");
+			xhx="_";
+			var mydate = new Date();
+
+			 var str = "" + mydate.getFullYear();
+			 if(mydate.getMonth()+1 <10)
+			 {
+				  str += "0"+(mydate.getMonth()+1);
+			 }else
+			 {
+				  str += (mydate.getMonth()+1);
+			 }
+			  
+			   str += mydate.getDate();
+			//动态检查是第几个合同
+			advertiser=$("#advertiser").val();  //公司ID
+			prid=$("#product_line").val(); //产品线ID
+			$.get("{:U('Contract_num')}",{advertiser:advertiser,prid:prid},function(index){
+				num=index;	
+				$("#contract_no").val(gs+xhx+pr+xhx+str+num);
+			})
+			//alert(gs+xhx+pr+xhx+str+num);
+			//关联字符串
+			
+				
+			
+			
+		}
+		$("input[name='type']").change(function(){
+			if($(this).val()=='2')
+			{
+				$(".bzj").show(200);	
+			}else
+			{
+				$(".bzj").hide(100);	
+			}	
+		})
+				
+		$("#formid").submit(function(){
+	
+		if($("#gongsi").val()=="")
+		{
+			alert("请填写公司名称");
+			$("#gongsi").select();
+			return false;	
+		}	
+		if($("#contract_no").val()=="")
+		{
+			alert("合同编号生成失败!\n请按照公司名称->代理公司->产品线顺序添加，我们将自动生成合同编号！");
+			return false;	
+		}	
+		if($("#contract_money").val()=="")
+		{
+			alert("请填写合同金额");
+			$("#contract_money").select();
+			return false;	
+		}	
+		if($("#rebates_proportion").val()=="")
+		{
+			alert("请填写返点比例");
+			$("#rebates_proportion").select();
+			return false;	
+		}	
+		if($("#show_money").val()=="")
+		{
+			alert("请填写账户显示金额");
+			$("#show_money").select();
+			return false;	
+		}	
+		if($("#contract_start").val()=="")
+		{
+			alert("请选择合同开始时间");
+			return false;	
+		}	
+		if($("#contract_end").val()=="")
+		{
+			alert("请选择合同结束时间");
+			return false;	
+		}	
+		if($("#payment_time").val()=="")
+		{
+			alert("请选择付款日期");
+			return false;	
+		}	
+		if($("#fk_money").val()=="")
+		{
+			alert("请填写付款金额");
+			return false;	
+		}	
+				
+	})
+    });
+</script>
+<style type="text/css">
+	#adlist{ margin-left:15px;}
+	#adlist li a{ cursor:pointer;}
+	
+</style>
+
+<if condition="$info[type] lt 2">
+	<style type="text/css">.bzj{ display:none;}</style>
+</if>
+</head>
+
+<body>
+<span id="hjd"></span>
+<div class="container" style="width:100%;">
+<h3 class="bor-left-bull" >修改合同<small>Update contract</small></h3>
+<br>
+<form action="{:U('upru')}" method="post" class="form-horizontal" id="formid" >
+<input type="hidden" name="id" id="id" value="{$info[id]}">
+<input type="hidden" name="advertiser" id="advertiser" value="{$info[advertiser]}">
+<input type="hidden" name="submituser" id="submituser" value="{$info[submituser]}">
+<h4 class="bor-left-bull" >合同基本信息</h4>
+<hr>
+
+  <div class="form-group">
+  
+    <label for="inputEmail3" class="col-sm-2 control-label">广告主公司名称</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" autocomplete="off" name="gongsi" id="gongsi" value="{$gongsi}" placeholder="输入客户名称前几个字我们将自动匹配">
+    <ul class="dropdown-menu" id="adlist">
+
+    </ul>
+    </div>
+    
+    <label for="inputEmail3" class="col-sm-1 control-label">代理公司</label>
+    <div class="col-sm-2">
+	  <select  class="form-control" name="agent_company" id="agent_company">        
+        <volist id="agentcompany" name="agentcompany" key="k">
+       	<option value="{$agentcompany.id}" title="{$agentcompany.title}" {$info[agent_company]==$agentcompany[id]?'selected':''}>{$agentcompany.companyname}</option>
+       </volist>
+
+      </select>
+
+    </div>
+    
+  </div>
+  <div class="form-group">
+  
+    <label for="inputEmail3" class="col-sm-2 control-label">产品线</label>
+    <div class="col-sm-3">
+    <select  class="form-control" name="product_line" id="product_line">
+      	<option>请选择</option>
+      	<volist id="product_line_list" name="product_line_list" key="k">
+       	<option value="{$product_line_list.id}" title="{$product_line_list.title}" {$info[product_line]==$product_line_list[id]?'selected':''}>{$product_line_list.name}</option>
+       </volist>
+      </select>
+      
+    </div>
+    
+    <label for="inputEmail3" class="col-sm-1 control-label">合同编号</label>
+    <div class="col-sm-3">
+      <input name="contract_no" type="text" class="form-control" id="contract_no" value="{$info[contract_no]}" placeholder="自动生成，无需填写">
+    </div>
+    </div>
+    
+    <div class="form-group">
+  
+    <label for="inputEmail3" class="col-sm-2 control-label">合同类型</label>
+    <div class="col-sm-3">
+   	    <label class="radio-inline">
+   	      <input name="type" type="radio" id="type_0" value="1" {$info[type]=='1'?'checked':''} >
+   	      普通合同</label>
+   	    
+   	    <label class="radio-inline">
+   	      <input type="radio" name="type" value="2" id="type_1" {$info[type]=='2'?'checked':''}>
+   	      框架合同</label>
+   
+    </div>
+    
+    <label for="inputEmail3" class="col-sm-1 control-label bzj">保证金</label>
+    <div class="col-sm-3 bzj">
+      <div class="input-group">
+      <input name="margin" type="text" class="form-control" id="margin" value="{$info[margin]}">
+      <span class="input-group-addon">元</span>
+      </div>
+    </div>
+  
+    
+</div>
+
+<h4 class="bor-left-bull" >购买产品信息</h4>
+<hr>
+
+  <!--<div class="form-group">
+  
+    <label for="inputEmail3" class="col-sm-2 control-label">产品线</label>
+    <div class="col-sm-3">
+      <select  class="form-control">
+      	<option>凌众时代</option>
+      	<option>谋士</option>
+      </select>
+    </div>
+    
+    <label for="inputEmail3" class="col-sm-1 control-label">推广URL</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputEmail3">
+    </div> 
+
+  </div>-->
+  
+  <div class="form-group">
+  
+    <label for="contract_money" class="col-sm-2 control-label">合同金额</label>
+    <div class="col-sm-3">
+      	<div class="input-group">
+        <input type="text" class="form-control" name="contract_money" id="contract_money"  value="{$info[contract_money]}">
+    	<span class="input-group-addon">元</span>
+        </div>
+    </div>
+    
+    <label for="rebates_proportion" class="col-sm-1 control-label">返点比例</label>
+    <div class="col-sm-1">      
+    	<div class="input-group">
+		<input type="text" class="form-control" name="rebates_proportion" style=" width:105px;" id="rebates_proportion"  value="{$info[rebates_proportion]}">
+    	<span class="input-group-addon">%</span>
+        </div>
+    </div>
+    
+    <label for="show_money" class="col-sm-2 control-label">账户显示金额</label>
+    <div class="col-sm-2">      
+		<div class="input-group">
+        <input type="text" class="form-control" name="show_money" id="show_money" value="{$info[show_money]}">
+        <span class="input-group-addon">元</span>
+        </div>
+    </div>
+    
+  </div>
+  <div class="form-group">
+ 
+    <label for="inputEmail3" class="col-sm-2 control-label">合同有效期</label>
+    <div class="col-sm-2">
+    	<input id="contract_start" class="Wdate form-control" type="text" value="{$info[contract_start]|date='Y-m-d',###}" name="contract_start"  <literal>onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_start\')||\'2020-10-01\'}'})" </literal>/> 
+    </div>
+        <div class="col-sm-2">
+<input id="contract_end" class="Wdate form-control" type="text" value="{$info[contract_end]|date='Y-m-d',###}"  name="contract_end" <literal>onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_end\')}',maxDate:'2020-10-01'})"</literal> />
+    </div>
+
+   
+
+    
+  </div>
+  
+  <h4 class="bor-left-bull" >付款信息</h4>
+  <hr>
+	<div class="form-group">
+  
+    <label for="payment_type" class="col-sm-2 control-label">付款方式</label>
+    <div class="col-sm-3">
+      <select  class="form-control" name="payment_type" id="payment_type">
+      	<option value="1" {$info[payment_type]=='1'?'selected':''}>预付</option>
+      	<option value="2" {$info[payment_type]=='2'?'selected':''}>垫付</option>
+      </select>
+    </div>
+    
+    <label for="payment_time" class="col-sm-1 control-label">付款日期</label>
+    <div class="col-sm-2">      
+		<input type="text" name="payment_time" value="{$info[payment_time]|date='Y-m-d',###}" class="Wdate form-control" id="payment_time" onClick="WdatePicker()">
+    </div>
+    
+    <label for="inputEmail3" class="col-sm-1 control-label">付款金额</label>
+    <div class="col-sm-2"> 
+    	<div class="input-group">     
+		<input type="text" name="fk_money" class="form-control" value="{$info[fk_money]}" id="fk_money">
+        <span class="input-group-addon">元</span>
+        </div>
+    </div>
+    
+  </div>
+ 
+  <h4 class="bor-left-bull" >合同备注</h4>
+  <hr>
+  <div class="form-group">
+   <div class="col-sm-12">      
+		<textarea class="form-control" name="note" id="note" rows="4">{$info[note]}</textarea>
+   </div>
+
+   </div>
+  <h4 class="bor-left-bull" >审核状态</h4>
+  <hr>
+	 <div class="form-group">
+    
+       <div class="col-sm-12">
+       
+       {$info[audit_1]=='0'?'<span class="shno">一级审核未审核</span>':'<span class="shyes">一级审核已审核</span>'}
+       {$info[audit_2]=='0'?'<span class="shno">二级审核未审核</span>':'<span class="shyes">二级审核已审核</span>'}  
+       </div>
+    </div>
+
+    <div class="form-group">
+    
+       <div class="col-sm-12">
+       <button type="submit" class="btn btn-primary">提交合同</button>
+       
+    	<a href="{:U("shenhe?type=audit_1&id=$info[id]")}" class="btn btn-primary"  {$info[audit_1]!='0'?'style="display:none"':''} >一级审核通过</a>
+        <a href="{:U("shenhe?type=audit_2&id=$info[id]")}" class="btn btn-primary"  {$info[audit_2]!='0'?'style="display:none"':''}>二级审核通过</a>
+       </div>
+    </div>
+
+</form>
+
+</div>
+<br>
+<br>
+<br>
+
+</body>
+</html>

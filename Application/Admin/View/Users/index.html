@@ -6,8 +6,8 @@
 <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
 </head>
-<div class="container">
-<h3>用户列表<small>Users list</small></h3>
+<div class="container" style="width:100%;">
+<h3 class="bor-left-bull">用户列表<small>Users list</small></h3>
 
 <table class="table table-hover">
 	<tr>
@@ -25,7 +25,7 @@
         <td><img src="{$list[image]}" width="50" height="50" class="img-circle"/></td>
     	<td>{$list[users]}</td>
     	<td>{$list[name]}</td>
-    	<td>{$list[groupid]}</td>
+    	<td>{$list[groupname]}</td>
     	<td>{$list[ctime]|date="Y-m-d",###}</td>
     	<td><a href="{:U("updata?id=$list[id]")}">修改</a> <a href="{:U("delete?id=$list[id]")}">删除</a></td>
     </tr>

@@ -37,7 +37,11 @@
 		iformurl=$(this).attr("id");
 		$("#frame").attr("src",iformurl);	
 		$(this).addClass("xz");
-	})
+		})
+		$(".iform_ck").click(function(){
+			iformurl=$(this).attr("id");
+			$("#frame").attr("src",iformurl);		
+		})
 
     });
 
@@ -50,7 +54,7 @@
         CRM管理控制台
         </span>
     </div>
-    <div style="float:right; margin-right: 10px;">
+    <div style="float:right;">
         <span class="xiaoxi">
                 <img src="/Public/images/admin/消息.png" alt="" style="vertical-align: middle;margin-right: 5px;"/>消息
                 <span class="shu">
@@ -70,8 +74,8 @@
         </span>
     </div>
     <div class="out">
-        <p>修改个人信息</p>
-        <p>退出</p>
+        <p><a id="{:U("users/updata?id=$sessionuid")}" class="iform_ck" style=" width:auto; height:auto; text-align:left;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改个人信息</a></p>
+        <p><a href="{:U("Public/login_out")}"><span class="glyphicon glyphicon-off"></span>&nbsp;退出</a></p>
     </div>
     
 </div>
@@ -186,11 +190,17 @@
             <div class="guanli">
                 财务管理
             </div>
-            <div class="liebiao" >
-                <a >新财务意向</a>
+            <div class="liebiao" id="{:U("Diankuan/index")}">
+                <a>垫款管理</a>
             </div>
             <div class="liebiao">
-                <a  >财务列表</a>
+                <a>回款管理</a>
+            </div>
+            <div class="liebiao" id="{:U("Refund/index")}">
+                <a>退款管理</a>
+            </div>
+            <div class="liebiao">
+                <a>发票管理</a>
             </div>
         </div>
         <div class="li4">
@@ -222,11 +232,23 @@
             <div class="guanli">
                 账号管理
             </div>
-            <div class="liebiao" >
-                <a >新账号意向</a>
+            <div class="liebiao" id="{:U('Users/add')}" >
+                <a>新建账号</a>
             </div>
-            <div class="liebiao">
-                <a  >账号列表</a>
+            <div class="liebiao" id="{:U('Users/index')}" >
+                <a>账号列表</a>
+            </div>
+            <div class="liebiao" id="{:U('Groupl/add')}" >
+                <a>新建职位</a>
+            </div>
+            <div class="liebiao" id="{:U('Groupl/index')}" >
+                <a>职位列表</a>
+            </div>
+            <div class="liebiao" id="{:U('Rbac/add')}" >
+                <a>新建权限</a>
+            </div>
+            <div class="liebiao" id="{:U('Rbac/index')}" >
+                <a>权限列表</a>
             </div>
         </div>
         <div class="li7">
@@ -234,12 +256,13 @@
             <div class="guanli">
                 消息中心
             </div>
-            <div class="liebiao" >
-                <a >新消息意向</a>
-            </div>
             <div class="liebiao">
-                <a  >消息列表</a>
+                <a>消息列表</a>
             </div>
+			<div class="liebiao" id="{:U('Public/log')}">
+                <a>登录日志</a>
+            </div>
+
         </div>
         <div class="li8">
             <img src="/Public/images/admin/收起.png" alt="" class="shou"/>
@@ -1070,11 +1093,11 @@ var suojin=1;
     $(".user").click(function(){
         if(user1==1){
             $(".out").show()
-            $(".no").css('transition-duration','1s').css('transform','rotate(180deg)')
+            $(".no").css('transition-duration','0.3s').css('transform','rotate(180deg)')
             user1=0;
         }else{
             $(".out").hide()
-            $(".no").css('transition-duration','1s').css('transform','rotate(0deg)')
+            $(".no").css('transition-duration','0.3s').css('transform','rotate(0deg)')
             user1=1;
         }
     })

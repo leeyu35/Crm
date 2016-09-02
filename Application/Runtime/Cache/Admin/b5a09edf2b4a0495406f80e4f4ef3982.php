@@ -15,6 +15,7 @@
 <form action="<?php echo U("upusers");?>" method="post" enctype="multipart/form-data" id="upusers">
   <input type="hidden" name="id" value="<?php echo ($info[id]); ?>">
   <input type="hidden" name="image" value="<?php echo ($info[image]); ?>">
+  <input type="hidden" name="jpassword" value="<?php echo ($info[password]); ?>">
   <div class="form-group">
     <label for="exampleInputEmail1">用户名</label>
     <input name="users" type="text" disabled class="form-control" id="users" placeholder="Users" value="<?php echo ($info['users']); ?>"  >
@@ -40,13 +41,10 @@
   </div>
   
   
-   <div class="form-group">
+  <div class="form-group">
     <label for="exampleInputFile">部门</label>
-	<select class="form-control" style="width:200px;" <?php echo ($info[groupid]!=0?'disabled':''); ?>  >
-	  <option value="0">超级管理员</option>
-	  <option value="1">部门2</option>
-	  <option value="1">部门3</option>
-	  <option value="1">部门4</option>
+	<select class="form-control" style="width:200px;" name="groupid">
+      <?php if(is_array($grouplist)): $i = 0; $__LIST__ = $grouplist;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$grouplist): $mod = ($i % 2 );++$i;?><option value="<?php echo ($grouplist[id]); ?>" <?php echo ($info[groupid]==$grouplist[id]?'selected':''); ?> ><?php echo ($grouplist[group_name]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
     	
     </select>
     

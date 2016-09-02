@@ -397,3 +397,5 @@ a {blr:expression_r(this.onFocus=this.blur())}
 
 .table a{ color:#333;}
 .table a:hover{ color:#F30;}
+
+.htshow{ cursor:pointer;}

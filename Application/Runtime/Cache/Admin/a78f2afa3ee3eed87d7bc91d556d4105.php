@@ -1,4 +1,4 @@
-<!doctype html>
+<?php if (!defined('THINK_PATH')) exit();?><!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -15,7 +15,7 @@
 		$("#gongsi").keyup(function(){
 			//$("#hjd").html($("#hjd").html()+"1");
 			val=$(this).val();
-			$.post("{:U('keyup_adlist')}",{val:val},function(data){
+			$.post("<?php echo U('keyup_adlist');?>",{val:val},function(data){
 					$("#adlist").html(data);
 			})
 			$("#adlist").show();
@@ -61,7 +61,7 @@
 			//动态检查是第几个合同
 			advertiser=$("#advertiser").val();  //公司ID
 			prid=$("#product_line").val(); //产品线ID
-			$.get("{:U('Contract_num')}",{advertiser:advertiser,prid:prid},function(index){
+			$.get("<?php echo U('Contract_num');?>",{advertiser:advertiser,prid:prid},function(index){
 				num=index;	
 				$("#contract_no").val(gs+xhx+pr+xhx+str+num);
 			})
@@ -143,9 +143,7 @@
 	
 </style>
 
-<if condition="$info[type] lt 2">
-	<style type="text/css">.bzj{ display:none;}</style>
-</if>
+<?php if($info[type] < 2): ?><style type="text/css">.bzj{ display:none;}</style><?php endif; ?>
 </head>
 
 <body>
@@ -153,10 +151,10 @@
 <div class="container" style="width:100%;">
 <h3 class="bor-left-bull" >修改合同<small>Update contract</small></h3>
 <br>
-<form action="{:U('upru')}" method="post" class="form-horizontal" id="formid" >
-<input type="hidden" name="id" id="id" value="{$info[id]}">
-<input type="hidden" name="advertiser" id="advertiser" value="{$info[advertiser]}">
-<input type="hidden" name="submituser" id="submituser" value="{$info[submituser]}">
+<form action="<?php echo U('upru');?>" method="post" class="form-horizontal" id="formid" >
+<input type="hidden" name="id" id="id" value="<?php echo ($info[id]); ?>">
+<input type="hidden" name="advertiser" id="advertiser" value="<?php echo ($info[advertiser]); ?>">
+<input type="hidden" name="submituser" id="submituser" value="<?php echo ($info[submituser]); ?>">
 <h4 class="bor-left-bull" >合同基本信息</h4>
 <hr>
 
@@ -164,7 +162,7 @@
   
     <label for="inputEmail3" class="col-sm-2 control-label">广告主公司名称</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" autocomplete="off" name="gongsi" id="gongsi" value="{$gongsi}" placeholder="输入客户名称前几个字我们将自动匹配">
+      <input type="text" class="form-control" autocomplete="off" name="gongsi" id="gongsi" value="<?php echo ($gongsi); ?>" placeholder="输入客户名称前几个字我们将自动匹配">
     <ul class="dropdown-menu" id="adlist">
 
     </ul>
@@ -172,10 +170,11 @@
     
     <label for="inputEmail3" class="col-sm-1 control-label">代理公司</label>
     <div class="col-sm-2">
-      <select  class="form-control" name="agent_company" id="agent_company">
-      	<option value="凌众时代" title="LZAD" {$info[agent_company]=='凌众时代'?'selected':''}>凌众时代</option>
-      	<option value="谋士" title="MSWL"  {$info[agent_company]=='谋士'?'selected':''}>谋士</option>
+	  <select  class="form-control" name="agent_company" id="agent_company">        
+        <?php if(is_array($agentcompany)): $k = 0; $__LIST__ = $agentcompany;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$agentcompany): $mod = ($k % 2 );++$k;?><option value="<?php echo ($agentcompany["id"]); ?>" title="<?php echo ($agentcompany["title"]); ?>" <?php echo ($info[agent_company]==$agentcompany[id]?'selected':''); ?>><?php echo ($agentcompany["companyname"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+
       </select>
+
     </div>
     
   </div>
@@ -185,16 +184,14 @@
     <div class="col-sm-3">
     <select  class="form-control" name="product_line" id="product_line">
       	<option>请选择</option>
-      	<volist id="product_line_list" name="product_line_list" key="k">
-       	<option value="{$product_line_list.id}" title="{$product_line_list.title}" {$info[product_line]==$product_line_list[id]?'selected':''}>{$product_line_list.name}</option>
-       </volist>
+      	<?php if(is_array($product_line_list)): $k = 0; $__LIST__ = $product_line_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$product_line_list): $mod = ($k % 2 );++$k;?><option value="<?php echo ($product_line_list["id"]); ?>" title="<?php echo ($product_line_list["title"]); ?>" <?php echo ($info[product_line]==$product_line_list[id]?'selected':''); ?>><?php echo ($product_line_list["name"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
       </select>
       
     </div>
     
     <label for="inputEmail3" class="col-sm-1 control-label">合同编号</label>
     <div class="col-sm-3">
-      <input name="contract_no" type="text" class="form-control" id="contract_no" value="{$info[contract_no]}" placeholder="自动生成，无需填写">
+      <input name="contract_no" type="text" class="form-control" id="contract_no" value="<?php echo ($info[contract_no]); ?>" placeholder="自动生成，无需填写">
     </div>
     </div>
     
@@ -203,11 +200,11 @@
     <label for="inputEmail3" class="col-sm-2 control-label">合同类型</label>
     <div class="col-sm-3">
    	    <label class="radio-inline">
-   	      <input name="type" type="radio" id="type_0" value="1" {$info[type]=='1'?'checked':''} >
+   	      <input name="type" type="radio" id="type_0" value="1" <?php echo ($info[type]=='1'?'checked':''); ?> >
    	      普通合同</label>
    	    
    	    <label class="radio-inline">
-   	      <input type="radio" name="type" value="2" id="type_1" {$info[type]=='2'?'checked':''}>
+   	      <input type="radio" name="type" value="2" id="type_1" <?php echo ($info[type]=='2'?'checked':''); ?>>
    	      框架合同</label>
    
     </div>
@@ -215,7 +212,7 @@
     <label for="inputEmail3" class="col-sm-1 control-label bzj">保证金</label>
     <div class="col-sm-3 bzj">
       <div class="input-group">
-      <input name="margin" type="text" class="form-control" id="margin" value="{$info[margin]}">
+      <input name="margin" type="text" class="form-control" id="margin" value="<?php echo ($info[margin]); ?>">
       <span class="input-group-addon">元</span>
       </div>
     </div>
@@ -248,7 +245,7 @@
     <label for="contract_money" class="col-sm-2 control-label">合同金额</label>
     <div class="col-sm-3">
       	<div class="input-group">
-        <input type="text" class="form-control" name="contract_money" id="contract_money"  value="{$info[contract_money]}">
+        <input type="text" class="form-control" name="contract_money" id="contract_money"  value="<?php echo ($info[contract_money]); ?>">
     	<span class="input-group-addon">元</span>
         </div>
     </div>
@@ -256,7 +253,7 @@
     <label for="rebates_proportion" class="col-sm-1 control-label">返点比例</label>
     <div class="col-sm-1">      
     	<div class="input-group">
-		<input type="text" class="form-control" name="rebates_proportion" style=" width:105px;" id="rebates_proportion"  value="{$info[rebates_proportion]}">
+		<input type="text" class="form-control" name="rebates_proportion" style=" width:105px;" id="rebates_proportion"  value="<?php echo ($info[rebates_proportion]); ?>">
     	<span class="input-group-addon">%</span>
         </div>
     </div>
@@ -264,7 +261,7 @@
     <label for="show_money" class="col-sm-2 control-label">账户显示金额</label>
     <div class="col-sm-2">      
 		<div class="input-group">
-        <input type="text" class="form-control" name="show_money" id="show_money" value="{$info[show_money]}">
+        <input type="text" class="form-control" name="show_money" id="show_money" value="<?php echo ($info[show_money]); ?>">
         <span class="input-group-addon">元</span>
         </div>
     </div>
@@ -274,10 +271,10 @@
  
     <label for="inputEmail3" class="col-sm-2 control-label">合同有效期</label>
     <div class="col-sm-2">
-    	<input id="contract_start" class="Wdate form-control" type="text" value="{$info[contract_start]|date='Y-m-d',###}" name="contract_start"  <literal>onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_start\')||\'2020-10-01\'}'})" </literal>/> 
+    	<input id="contract_start" class="Wdate form-control" type="text" value="<?php echo (date('Y-m-d',$info[contract_start])); ?>" name="contract_start"  onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_start\')||\'2020-10-01\'}'})" /> 
     </div>
         <div class="col-sm-2">
-<input id="contract_end" class="Wdate form-control" type="text" value="{$info[contract_end]|date='Y-m-d',###}"  name="contract_end" <literal>onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_end\')}',maxDate:'2020-10-01'})"</literal> />
+<input id="contract_end" class="Wdate form-control" type="text" value="<?php echo (date('Y-m-d',$info[contract_end])); ?>"  name="contract_end" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_end\')}',maxDate:'2020-10-01'})" />
     </div>
 
    
@@ -292,20 +289,20 @@
     <label for="payment_type" class="col-sm-2 control-label">付款方式</label>
     <div class="col-sm-3">
       <select  class="form-control" name="payment_type" id="payment_type">
-      	<option value="1" {$info[payment_type]=='1'?'selected':''}>预付</option>
-      	<option value="2" {$info[payment_type]=='2'?'selected':''}>垫付</option>
+      	<option value="1" <?php echo ($info[payment_type]=='1'?'selected':''); ?>>预付</option>
+      	<option value="2" <?php echo ($info[payment_type]=='2'?'selected':''); ?>>垫付</option>
       </select>
     </div>
     
     <label for="payment_time" class="col-sm-1 control-label">付款日期</label>
     <div class="col-sm-2">      
-		<input type="text" name="payment_time" value="{$info[payment_time]|date='Y-m-d',###}" class="Wdate form-control" id="payment_time" onClick="WdatePicker()">
+		<input type="text" name="payment_time" value="<?php echo (date('Y-m-d',$info[payment_time])); ?>" class="Wdate form-control" id="payment_time" onClick="WdatePicker()">
     </div>
     
     <label for="inputEmail3" class="col-sm-1 control-label">付款金额</label>
     <div class="col-sm-2"> 
     	<div class="input-group">     
-		<input type="text" name="fk_money" class="form-control" value="{$info[fk_money]}" id="fk_money">
+		<input type="text" name="fk_money" class="form-control" value="<?php echo ($info[fk_money]); ?>" id="fk_money">
         <span class="input-group-addon">元</span>
         </div>
     </div>
@@ -316,15 +313,28 @@
   <hr>
   <div class="form-group">
    <div class="col-sm-12">      
-		<textarea class="form-control" name="note" id="note" rows="4">{$info[note]}</textarea>
+		<textarea class="form-control" name="note" id="note" rows="4"><?php echo ($info[note]); ?></textarea>
    </div>
 
    </div>
-	
+  <h4 class="bor-left-bull" >审核状态</h4>
+  <hr>
+	 <div class="form-group">
+    
+       <div class="col-sm-12">
+       
+       <?php echo ($info[audit_1]=='0'?'<span class="shno">一级审核未审核</span>':'<span class="shyes">一级审核已审核</span>'); ?>
+       <?php echo ($info[audit_2]=='0'?'<span class="shno">二级审核未审核</span>':'<span class="shyes">二级审核已审核</span>'); ?>  
+       </div>
+    </div>
+
     <div class="form-group">
     
-       <div class="col-sm-2">
+       <div class="col-sm-12">
        <button type="submit" class="btn btn-primary">提交合同</button>
+       
+    	<a href="<?php echo U("shenhe?type=audit_1&id=$info[id]");?>" class="btn btn-primary"  <?php echo ($info[audit_1]!='0'?'style="display:none"':''); ?> >一级审核通过</a>
+        <a href="<?php echo U("shenhe?type=audit_2&id=$info[id]");?>" class="btn btn-primary"  <?php echo ($info[audit_2]!='0'?'style="display:none"':''); ?>>二级审核通过</a>
        </div>
     </div>
 

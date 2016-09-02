@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+</head>
+<div class="container" style="width:100%;">
+<h3 class="bor-left-bull">用户列表<small>Users list</small></h3>
+
+<table class="table table-hover">
+	<tr>
+    	<th>#</th>
+        <th>头像</th>
+    	<th>登录IP</th>
+    	<th>姓名</th>
+        <th>职位</th>
+        <th>登录时间</th>
+        <th>地址</th>
+    </tr>
+    <volist id="list" name="list" key="k">
+    <tr>
+    	<td>{$k}</td>
+        <td><img src="{$list[image]}" width="50" height="50" class="img-circle"/></td>
+    	<td>{$list[ip]}</td>
+    	<td>{$list[name]}</td>
+    	<td>{$list[groupname]}</td>
+    	<td>{$list[time]|date="Y-m-d H:i:s",###}</td>
+        <td>{$list[dizhi]}</td>
+    </tr>
+    </volist>
+    
+</table>
+{$page}
+</div>
+<body>
+</body>
+</html>

@@ -38,11 +38,10 @@
   
    <div class="form-group">
     <label for="exampleInputFile">部门</label>
-	<select class="form-control" style="width:200px;">
-	  <option value="0">超级管理员</option>
-	  <option value="1">部门2</option>
-	  <option value="1">部门3</option>
-	  <option value="1">部门4</option>
+	<select class="form-control" style="width:200px;" name="groupid">
+      <volist id="grouplist" name="grouplist">
+      		<option value="{$grouplist[id]}">{$grouplist[group_name]}</option>
+      </volist>
     	
     </select>
     

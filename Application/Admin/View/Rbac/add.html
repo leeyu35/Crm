@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+<script src="/Public/js/jquery-3.1.0.min.js"></script>
+</head>
+
+<body>
+<div class="container" style="width:100%;">
+<h3 class="bor-left-bull" >添加模块权限<small>Add power</small></h3>
+<hr>
+<form action="{:U("addru")}" method="post" enctype="multipart/form-data" id="addru">
+  <div class="form-group">
+    <label for="exampleInputEmail1">模块名</label>
+    <input type="text" class="form-control" id="module" name="module" required  >
+  </div>
+  <div class="form-group">
+    <label for="title">描述</label>
+    <input type="text" class="form-control" id="title" name="title" required  >
+  </div>
+  <div class="form-group">
+    <label>一级权限审核人：</label>
+    <volist id="grouplist1" name="grouplist">
+    <label class="checkbox-inline">
+    	<input type="checkbox" id="inlineCheckbox1" name="audit_1[]" value="{$grouplist1.id}">{$grouplist1.group_name}
+    </label>
+    </volist>
+    
+  	 	
+  </div>
+  <div class="form-group">
+    <label>二级权限审核人：</label>
+    <volist id="grouplist2" name="grouplist">
+    <label class="checkbox-inline">
+    	<input type="checkbox" id="inlineCheckbox1" name="audit_2[]" value="{$grouplist2.id}">{$grouplist2.group_name}
+    </label>
+    </volist>
+
+  </div>
+  <div class="form-group">
+    <label>新增权限持有人：</label>
+    <volist id="grouplist3" name="grouplist">
+    <label class="checkbox-inline">
+    	<input type="checkbox" id="inlineCheckbox1" name="add_[]" value="{$grouplist3.id}">{$grouplist3.group_name}
+    </label>
+    </volist>
+  </div>
+  <div class="form-group">
+    <label>修改权限持有人：</label>
+    <volist id="grouplist4" name="grouplist">
+    <label class="checkbox-inline">
+    	<input type="checkbox" id="inlineCheckbox1" name="update_[]" value="{$grouplist4.id}">{$grouplist4.group_name}
+    </label>
+    </volist>
+
+  </div>
+  <div class="form-group">
+    <label>删除权限持有人：</label>
+    <volist id="grouplist5" name="grouplist">
+    <label class="checkbox-inline">
+    	<input type="checkbox" id="inlineCheckbox1" name="delete_[]" value="{$grouplist5.id}">{$grouplist5.group_name}
+    </label>
+    </volist>
+  </div>
+  <div class="form-group">
+    <label>查看权限持有人：</label>
+    <volist id="grouplist6" name="grouplist">
+    <label class="checkbox-inline">
+    	<input type="checkbox" id="inlineCheckbox1" name="show_[]" value="{$grouplist6.id}">{$grouplist6.group_name}
+    </label>
+    </volist>
+  </div>
+  <div class="form-group">
+    <label>是否可以看他人：</label>
+    <volist id="grouplist7" name="grouplist">
+    <label class="checkbox-inline">
+    	<input type="checkbox" id="inlineCheckbox1" name="index_show[]" value="{$grouplist7.id}">{$grouplist7.group_name}
+    </label>
+    </volist>
+    （不勾选的职位只能看到自己提交的信息，看不到他人提交的信息）
+  </div>
+
+	<hr>
+  <button type="submit" class="btn btn-primary" style="width:150px;">提交</button>
+</form>
+</div>
+
+</body>
+</html>

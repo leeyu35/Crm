@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+</head>
+<div class="container" style="width:100%;">
+<h3 class="bor-left-bull" >职位列表<small>Group list</small></h3>
+
+<table class="table table-hover">
+	<tr>
+    	<th>#</th>
+        
+    	<th>职位</th>
+    	
+        
+        <th>创建时间</th>
+        <th>操作</th>	  
+    </tr>
+    <volist id="list" name="list" key="k">
+    <tr>
+    	<td>{$k}</td>
+    	<td>{$list[group_name]}</td>
+
+    	<td>{$list[ctime]|date="Y-m-d",###}</td>
+    	<td><a href="{:U("updata?id=$list[id]")}">修改</a> <!--<a href="{:U("delete?id=$list[id]")}">删除</a>--></td>
+    </tr>
+    </volist>
+    
+</table>
+
+</div>
+<body>
+</body>
+</html>

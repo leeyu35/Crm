@@ -42,7 +42,7 @@
                 <img src="<?php echo (session('u_image')); ?>" width="80" height="80" class="img-circle" />
             </p>
             <p style="text-align: center;font-size: 12px;color: #333333;">
-               <a href="<?php echo U("users/updata?id=$sessionuid");?>"><?php echo (session('u_name')); ?></a>
+               <a href="<?php echo U("users/updata?id=$sessionuid");?>"><?php echo (session('u_name')); ?></a>【<?php echo ($group[group_name]); ?>】
             </p>
         </div>
         <div class="dai">
