@@ -1090,6 +1090,7 @@ var suojin=1;
     })
 
     var user1=1;
+
     $(".user").click(function(){
         if(user1==1){
             $(".out").show()
@@ -1100,6 +1101,10 @@ var suojin=1;
             $(".no").css('transition-duration','0.3s').css('transform','rotate(0deg)')
             user1=1;
         }
+    })
+    $(".out p").click(function(){
+        $(".out").hide();
+        user1=1;
     })
 </script>
 </body>
