@@ -1,6 +1,12 @@
 <?php
-header("Http/1.1 500 ");
-
+$newsfuid=$_GET['id'];
+if(is_numeric($newsfuid))
+{
+   echo '1';
+}else
+{
+   echo '2';
+}
 ?>
 <!doctype html>
 <html>

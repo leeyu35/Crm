@@ -66,7 +66,7 @@
                 帮助
             </span>
         </span><span class="user">
-            <img src="/Public/images/admin/用户.png" alt="" style="vertical-align: middle;margin-right: 5px;"/>
+            <img  src="<?php echo (session('u_image')); ?>" width="30" height="30" class="img-circle" alt="" style="vertical-align: middle;margin-right: 5px;"/>
             <span class="help1">
                <?php echo (session('u_name')); ?>
             </span>
@@ -193,13 +193,13 @@
             <div class="liebiao" id="<?php echo U("Diankuan/index");?>">
                 <a>垫款管理</a>
             </div>
-            <div class="liebiao">
+            <div class="liebiao" id="<?php echo U("Backmoney/index");?>">
                 <a>回款管理</a>
             </div>
             <div class="liebiao" id="<?php echo U("Refund/index");?>">
                 <a>退款管理</a>
             </div>
-            <div class="liebiao">
+            <div class="liebiao" id="<?php echo U("Invoice/index");?>">
                 <a>发票管理</a>
             </div>
         </div>

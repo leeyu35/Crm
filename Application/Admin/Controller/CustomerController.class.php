@@ -34,6 +34,18 @@ class CustomerController extends CommonController
             $this->ser_txt=I('get.search_text');
 
         }
+        //时间条件
+        $time_start=I('get.time_start');
+        $time_end=I('get.time_end');
+        if($time_start!="" and $time_end!="")
+        {
+            $time_start=strtotime($time_start);
+            $time_end=strtotime($time_end);
+
+            $where.=" and ctime > $time_start and ctime < $time_end";
+            $this->time_start=I('get.time_start');
+            $this->time_end=I('get.time_end');
+        }
         //权限条件
         $q_where=quan_where(__CONTROLLER__);
 
@@ -228,4 +240,31 @@ class CustomerController extends CommonController
         }
     }
 
+    //查看客户信息
+    public  function show(){
+        $id=I('get.id');
+        $Customer=M("Customer");
+        $this->info=$Customer->find($id);
+
+        //产品线
+        $product_line=M("ProductLine");
+        $this->product_line_list=$product_line->field("id,name")->order("id asc")->select();
+
+        //联系人列表
+        $contact=M('ContactList');
+        $this->contact_list=$contact->field('id,name,qq,weixin,email,position,tel')->where("customer_id=$id")->select();
+        $this->display();
+
+
+    }
+    //查看图片
+    public  function showim(){
+        $id=I('get.id');
+        //文件
+        $file=M("File");
+        $filelist=$file->where("type=1 and yid=$id")->select();
+        $this->filelist=$filelist;
+        $this->display();
+
+    }
 }

@@ -31,7 +31,7 @@ class PublicController extends Controller
                 $log=M("Log");
                 $data[ip]=$_SERVER["REMOTE_ADDR"];
                 $data[users]=$vo['id'];
-                $data[dizhi]=getIPLoc_QQ($_SERVER["REMOTE_ADDR"]);
+                $data[dizhi]=getIPLoc_QQ($_SERVER["REMOTE_ADDR"])?getIPLoc_QQ($_SERVER["REMOTE_ADDR"]):'暂无地址信息';
                 $data[time]=time();
                 $log->add($data);
 
@@ -53,6 +53,7 @@ class PublicController extends Controller
             $group=M("Groupl")->find(session("u_groupid"));
             $this->group=$group;
             $this->sessionuid=session("u_id");
+            $this->url=$_SERVER['SERVER_NAME'];
             $this->display();
         }
         //退出

@@ -5,6 +5,16 @@
 <title>无标题文档</title>
 <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+<script src="/Public/js/jquery-3.1.0.min.js"></script>
+<script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
+<script language="javascript">
+$(document).ready(function(e) {
+    $(".htshow").click(function(){
+		url=$(this).attr("id");
+		window.location.href=url;
+	})
+});
+</script>
 </head>
 <div class="container"  style="width:100%;">
 <h3  class="bor-left-bull" >客户列表<small>Customer list</small></h3>
@@ -19,10 +29,16 @@
   </div>
   <div class="form-group">
    
-    <input type="text" class="form-control" name="search_text" value="<?php echo ($ser_txt); ?>" id="exampleInputEmail2" >
+    <input type="text" class="form-control" name="search_text" value="<?php echo ($ser_txt); ?>" id="exampleInputEmail2" placeholder="输入关键字">
   </div>
+  <div class="form-group">
+    	<input id="contract_start" class="Wdate form-control" type="text" name="time_start" placeholder="开始时间" value="<?php echo ($time_start); ?>" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_end\')||\'2020-10-01\'}'})"/> 
+  </div>
+  <div class="form-group">
+<input id="contract_end" class="Wdate form-control" type="text" name="time_end"  placeholder="结束时间" value="<?php echo ($time_end); ?>"  onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_start\')}',maxDate:'2020-10-01'})"/>
+    </div>
   <button type="submit" class="btn btn-primary">搜索</button>
-  	<?php if($ser_txt != ''): ?><a class="btn btn-info" href="<?php echo U('index');?>">清除搜索条件</a><?php endif; ?>
+  	<?php if(($ser_txt != '') OR ($time_end != '')): ?><a class="btn btn-info" href="<?php echo U('index');?>">清除搜索条件</a><?php endif; ?>
 </form>
 </div>
 <table class="table table-hover">
@@ -39,17 +55,17 @@
         <th>操作</th>	  
     </tr>
     <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$list): $mod = ($i % 2 );++$i;?><tr>
-    	<td><?php echo ($list[id]); ?></td>
-    	<td><?php echo ($list[advertiser]); ?></td>
-        <td><?php echo ($list[industry]); ?></td>
-    	<td><?php echo ($list[website]); ?></td>
-    	<td><?php echo ($list[contact]); ?></td>
-    	<td><?php echo ($list[tel]); ?></td>
-    	<td><?php echo ($list[city]); ?></td>
-    	<td><?php echo (date("Y-m-d",$list[ctime])); ?></td>
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[id]); ?></td>
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[advertiser]); ?></td>
+        <td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[industry]); ?></td>
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[website]); ?></td>
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[contact]); ?></td>
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[tel]); ?></td>
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[city]); ?></td>
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo (date("Y-m-d",$list[ctime])); ?></td>
     	
         <td>
-        <span style="width:40px; display:inline-block"><a href="<?php echo U("addim?id=$list[id]");?>" title="新增附件">新增</a></span>|&nbsp;&nbsp;<a href="" title="查看附件">查看</a><br>
+        <span style="width:40px; display:inline-block"><a href="<?php echo U("addim?id=$list[id]");?>" title="新增附件">新增</a></span>|&nbsp;&nbsp;<a href="<?php echo U("showim?id=$list[id]");?>" title="查看附件">查看</a><br>
         </td>
     	<td>
         <a href="<?php echo U("updata?id=$list[id]");?>">修改</a> <a href="<?php echo U("delete?id=$list[id]");?>">删除</a>

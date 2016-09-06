@@ -42,10 +42,10 @@
       
     </div>
  
-    
   </div>
-  <div class="form-group">
   
+  
+  <div class="form-group">
     <label class="col-sm-2 control-label">广告主公司名称</label>
     <div class="col-sm-3">
     	<label  class="control-label"><strong><?php echo ($gongsi); ?></strong></label>
@@ -188,7 +188,7 @@
     <div class="form-group">
     
        <div class="col-sm-12">
-       <button type="submit" class="btn btn-primary">提交合同</button>
+       <button type="button" class="btn btn-primary" onClick="javascript:history.go(-1)">返回</button>
        
     	<a href="<?php echo U("shenhe?type=audit_1&id=$info[id]");?>" class="btn btn-primary"  <?php echo ($info[audit_1]!='0'?'style="display:none"':''); ?> >一级审核通过</a>
         <a href="<?php echo U("shenhe?type=audit_2&id=$info[id]");?>" class="btn btn-primary"  <?php echo ($info[audit_2]!='0'?'style="display:none"':''); ?>>二级审核通过</a>

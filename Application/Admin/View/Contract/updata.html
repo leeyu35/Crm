@@ -277,10 +277,10 @@
  
     <label for="inputEmail3" class="col-sm-2 control-label">合同有效期</label>
     <div class="col-sm-2">
-    	<input id="contract_start" class="Wdate form-control" type="text" value="{$info[contract_start]|date='Y-m-d',###}" name="contract_start"  <literal>onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_start\')||\'2020-10-01\'}'})" </literal>/> 
+    	<input id="contract_start" class="Wdate form-control" type="text" value="{$info[contract_start]|date='Y-m-d',###}" name="contract_start"  <literal>onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_end\')||\'2020-10-01\'}'})" </literal>/> 
     </div>
         <div class="col-sm-2">
-<input id="contract_end" class="Wdate form-control" type="text" value="{$info[contract_end]|date='Y-m-d',###}"  name="contract_end" <literal>onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_end\')}',maxDate:'2020-10-01'})"</literal> />
+<input id="contract_end" class="Wdate form-control" type="text" value="{$info[contract_end]|date='Y-m-d',###}"  name="contract_end" <literal>onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_start\')}',maxDate:'2020-10-01'})"</literal> />
     </div>
 
    

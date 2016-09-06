@@ -6,6 +6,8 @@
 <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
 </head>
+
+<body>
 <div class="container" style="width:100%;">
 <h3 class="bor-left-bull">用户列表<small>Users list</small></h3>
 
@@ -31,7 +33,9 @@
     
 </table>
 <?php echo ($page); ?>
-</div>
-<body>
+</div><br>
+<br>
+<br>
+
 </body>
 </html>

@@ -130,6 +130,7 @@ function hjd(){
 //获取ip
 function getIPLoc_QQ($queryIP){
     $url = 'http://ip.qq.com/cgi-bin/searchip?searchip1='.$queryIP;
+
     $ch = curl_init($url);
     curl_setopt($ch,CURLOPT_ENCODING ,'gb2312');
     curl_setopt($ch, CURLOPT_TIMEOUT, 10);

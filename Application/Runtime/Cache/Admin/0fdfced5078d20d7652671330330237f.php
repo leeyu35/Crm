@@ -241,9 +241,7 @@ $("#formid").submit(function(){
     
 
 
-  </div
-
-  ><br>
+  </div><br>
    <hr>
 	<div class="form-group">
   

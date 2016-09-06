@@ -5,7 +5,8 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
     <link rel="stylesheet" href="/Public/css/reset.css"/>
-    
+<link rel="stylesheet" type="text/css" href="../../../Public/css/stylesheets/simple-calendar.css">
+<script type="text/javascript" src="../../../Public/js/javascripts/simple-calendar.js"></script>
     <title></title>
     <style>
         .people{
@@ -35,7 +36,8 @@
     </style>
 </head>
 <body>
-<div class="people" style="overflow: hidden;">
+
+<div class="people" style="overflow:hidden;" >
     <div class="clear" style="margin-top:25px;">
         <div class="touxiang">
             <p>
@@ -65,6 +67,19 @@
                     待办
                 </span>
     </div>
+    
+    
+
 </div>
+
+    <div style="margin-bottom:50px;">
+    <div id='container' style="width:50%; margin-left:40px; margin-bottom:50px; clear:both; margin-top:50px;"></div>
+	<script>
+        var myCalendar = new SimpleCalendar('#container');
+    </script>
+    </div>
+    
+    <div style="clear:both; height:50px;"></div>
+
 </body>
 </html>

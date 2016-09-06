@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
+<script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
 <script language="javascript">
 $(document).ready(function(e) {
     $(".htshow").click(function(){
@@ -26,9 +27,14 @@ $(document).ready(function(e) {
      </select>
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" name="search_text" value="<?php echo ($ser_txt); ?>" id="exampleInputEmail2" >
+    <input type="text" class="form-control" name="search_text" value="<?php echo ($ser_txt); ?>" id="exampleInputEmail2" placeholder="输入关键字" >
   </div>
-  
+    <div class="form-group">
+    	<input id="contract_start" class="Wdate form-control" type="text" name="time_start" placeholder="开始时间" value="<?php echo ($time_start); ?>" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_end\')||\'2020-10-01\'}'})"/> 
+  </div>
+  <div class="form-group">
+<input id="contract_end" class="Wdate form-control" type="text" name="time_end"  placeholder="结束时间" value="<?php echo ($time_end); ?>"  onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_start\')}',maxDate:'2020-10-01'})"/>
+    </div>
   <select  class="form-control" name="shenhe">
      	<option value="k"   <?php echo ($type2=='k'?'selected':''); ?> >审核状态</option>
      	<option value="0"  <?php echo ($type2=='0'?'selected':''); ?>>未审核</option>
@@ -36,7 +42,7 @@ $(document).ready(function(e) {
   </select>
 
   <button type="submit" class="btn btn-primary">搜索</button>
-  	<?php if($ser_txt != ''): ?><a class="btn btn-info" href="<?php echo U("index?id=$info[id]");?>">清除搜索条件</a><?php endif; ?>
+  	<?php if(($ser_txt != '') OR ($time_end != '')): ?><a class="btn btn-info" href="<?php echo U("index?id=$info[id]");?>">清除搜索条件</a><?php endif; ?>
    <a class="btn btn-primary pull-right" href="<?php echo U("add?id=$info[id]");?>">添加退款</a>
 </form>
 </div>

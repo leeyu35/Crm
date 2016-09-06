@@ -29,7 +29,20 @@ class ContractController extends CommonController
             $this->type=$type;
             $this->ser_txt=I('get.search_text');
 
-        }//审核条件
+        }
+        //时间条件
+        $time_start=I('get.time_start');
+        $time_end=I('get.time_end');
+        if($time_start!="" and $time_end!="")
+        {
+            $time_start=strtotime($time_start);
+            $time_end=strtotime($time_end);
+
+            $where.=" and a.ctime > $time_start and a.ctime < $time_end";
+            $this->time_start=I('get.time_start');
+            $this->time_end=I('get.time_end');
+        }
+        //审核条件
         $type2=I('get.shenhe');
         if($type2!='')
         {
