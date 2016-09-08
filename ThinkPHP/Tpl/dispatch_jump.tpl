@@ -9,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>跳转提示</title>
  <link rel="stylesheet" href="/Public/css/reset.css"/>
+ <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
 <style type="text/css">
 *{ padding: 0; margin: 0; }
 body{ background: #fff; font-family: '微软雅黑'; color: #333; font-size: 16px; }
@@ -16,7 +17,7 @@ body{ background: #fff; font-family: '微软雅黑'; color: #333; font-size: 16p
 .system-message h1{ font-size: 100px; font-weight: normal; line-height: 120px; margin-bottom: 12px; }
 .system-message .jump{ padding-top: 10px}
 .system-message .jump a{ color: #333;}
-.system-message .success,.system-message .error{ line-height: 1.8em; font-size: 36px }
+.system-message .success,.system-message .error{ line-height: 1.8em; font-size: 22px }
 .system-message .detail{ font-size: 12px; line-height: 20px; margin-top: 12px; display:none}
 .people{
             margin-top: 5%;
@@ -30,6 +31,7 @@ body{ background: #fff; font-family: '微软雅黑'; color: #333; font-size: 16p
 			border-bottom:3px #328dcc solid;
 			padding-top:1%;
 			padding-bottom:5%;
+			
 			height:90%;
         }
         .touxiang,.dai{
@@ -53,11 +55,13 @@ body{ background: #fff; font-family: '微软雅黑'; color: #333; font-size: 16p
 <div class="people" style="overflow:hidden;" >
 <div class="system-message">
 <?php if(isset($message)) {?>
-<h1>:)</h1>
-<p class="success"><?php echo($message); ?></p>
+<!--<h1>:)</h1>-->
+<img src="/Public/images/images/y.gif" width="100" />
+<p class="success"><img src="/Public/images/images/1.png" />&nbsp;<?php echo($message); ?></p>
 <?php }else{?>
-<h1>:(</h1>
-<p class="error"><?php echo($error); ?></p>
+<!--<h1>:(</h1>-->
+<img src="/Public/images/images/n.gif" width="100" />
+<p class="error"><img src="/Public/images/images/0.png" alt="" />&nbsp;<?php echo($error); ?></p>
 <?php }?>
 <p class="detail"></p>
 <p class="jump">

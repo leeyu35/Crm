@@ -139,7 +139,7 @@
       </select>
     </div>
   
-    	<label for="inputEmail1" class="col-sm-1 control-label">开票类型</label>
+    	<label for="inputEmail1" class="col-sm-1 control-label">税目</label>
     <div class="col-sm-2">
       <select  class="form-control" name="type" id="type">        
         <option>--请先选择开票主体--</option>
@@ -169,7 +169,20 @@
    	      未回款</label>
     </div>
    </div>
+<div class="form-group">
+   	<label for="inputEmail3" class="col-sm-2 control-label">开票类型</label>
+    <div class="col-sm-3">
+    	<label class="radio-inline">
+   	      <input name="type2" type="radio" id="type_0" value="1" checked>
+   	      专票</label>
+   	    
+   	    <label class="radio-inline">
+   	      <input type="radio" name="type2" value="2" id="type_1">
+   	      普票</label>
+    </div>
+    
 
+   </div>
 
   
      <h4  class="bor-left-bull" >开票资料 </h4>

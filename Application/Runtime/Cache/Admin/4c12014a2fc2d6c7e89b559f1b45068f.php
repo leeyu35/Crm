@@ -244,7 +244,7 @@
   <div class="form-group">
  
     <label for="inputEmail3" class="col-sm-2 control-label">合同有效期</label>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
     	<input id="contract_start" class="Wdate form-control" type="text" value="<?php echo (date('Y-m-d',$info[contract_start])); ?>" name="contract_start"  onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_start\')||\'2020-10-01\'}'})" /> 
     </div>
         <div class="col-sm-2">
@@ -255,7 +255,21 @@
 
     
   </div>
+  <div class="form-group">
   
+    <label for="inputEmail3" class="col-sm-2 control-label">账户名称</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" autocomplete="off" name="account" id="account" value="<?php echo ($info[account]); ?>" >
+    </div>
+    
+    <label for="inputEmail3" class="col-sm-1 control-label">APP名称</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" autocomplete="off" name="appname" id="appname" value="<?php echo ($info[appname]); ?>" >
+
+
+    </div>
+    
+  </div>
   <h4 class="bor-left-bull" >付款信息</h4>
   <hr>
 	<div class="form-group">
@@ -305,7 +319,7 @@
     <div class="form-group">
     
        <div class="col-sm-12">
-       <button type="submit" class="btn btn-primary">提交合同</button>
+       <button type="submit" class="btn btn-primary">提交</button>
        
     	<a href="<?php echo U("shenhe?type=audit_1&id=$info[id]");?>" class="btn btn-primary"  <?php echo ($info[audit_1]!='0'?'style="display:none"':''); ?> >一级审核通过</a>
         <a href="<?php echo U("shenhe?type=audit_2&id=$info[id]");?>" class="btn btn-primary"  <?php echo ($info[audit_2]!='0'?'style="display:none"':''); ?>>二级审核通过</a>

@@ -65,10 +65,10 @@ $(document).ready(function(e) {
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo (date("Y-m-d",$list[ctime])); ?></td>
     	
         <td>
-        <span style="width:40px; display:inline-block"><a href="<?php echo U("addim?id=$list[id]");?>" title="新增附件">新增</a></span>|&nbsp;&nbsp;<a href="<?php echo U("showim?id=$list[id]");?>" title="查看附件">查看</a><br>
+        <span><a href="<?php echo U("addim?id=$list[id]");?>" title="新增附件"><span class="glyphicon glyphicon-plus"></span></a></span>&nbsp;|&nbsp;<a href="<?php echo U("showim?id=$list[id]");?>" title="查看附件"><span class="glyphicon glyphicon-zoom-in"></span></a><br>
         </td>
     	<td>
-        <a href="<?php echo U("updata?id=$list[id]");?>">修改</a> <a href="<?php echo U("delete?id=$list[id]");?>">删除</a>
+        <a href="<?php echo U("updata?id=$list[id]");?>" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<a href="<?php echo U("delete?id=$list[id]");?>" title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         </td>
     </tr><?php endforeach; endif; else: echo "" ;endif; ?>
 </table>

@@ -67,7 +67,7 @@ $(document).ready(function(e) {
         </td>-->
 
         <td>
-        <a href="<?php echo U("updata?id=$list[id]&yid=$info[id]");?>">修改</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="<?php echo U("delete?id=$list[id]&yid=$info[id]");?>">删除</a>
+        <a href="<?php echo U("updata?id=$list[id]&yid=$info[id]");?>" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<a href="<?php echo U("delete?id=$list[id]&yid=$info[id]");?>" title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         </td>
     </tr><?php endforeach; endif; else: echo "" ;endif; ?>
 </table>

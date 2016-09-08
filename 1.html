@@ -6,10 +6,41 @@
 <link rel="stylesheet" type="text/css" href="/Public/css/vali.css">
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
 <script src="/Public/js/vali.min.js"></script>
-
+<script>
+//进入全屏
+function requestFullScreen() {
+    var de = document.documentElement;
+    if (de.requestFullscreen) {
+        de.requestFullscreen();
+    } else if (de.mozRequestFullScreen) {
+        de.mozRequestFullScreen();
+    } else if (de.webkitRequestFullScreen) {
+        de.webkitRequestFullScreen();
+    }
+}
+//退出全屏
+function exitFullscreen() {
+    var de = document;
+    if (de.exitFullscreen) {
+        de.exitFullscreen();
+    } else if (de.mozCancelFullScreen) {
+        de.mozCancelFullScreen();
+    } else if (de.webkitCancelFullScreen) {
+        de.webkitCancelFullScreen();
+    }
+}
+document.body.addEventListener('click',function(){
+    requestFullScreen();
+    //5秒钟自动退出全屏
+    setTimeout(function(){
+        exitFullscreen();
+    },5000);
+},false);
+</script>
 </head>
 
 <body>
+<input type="BUTTON" name="FullScreen" value="全屏显示" onClick="window.open(document.location, 'big', 'fullscreen=yes')">
 
 </body>
 </html>

@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
+
 </head>
 
 <body>

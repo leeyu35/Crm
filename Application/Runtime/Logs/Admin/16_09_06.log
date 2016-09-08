@@ -9416,3 +9416,842 @@ INFO: [ app_end ] --START--
 INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
 INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
 
+[ 2016-09-06T17:51:31+08:00 ] ::1 /Admin/users/updata/id/10.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.035002s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.022001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.024001s ]
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.3700s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Users' ) LIMIT 1   [ RunTime:0.0220s ]
+SQL: SHOW COLUMNS FROM `jd_groupl` [ RunTime:0.0420s ]
+SQL: SELECT `id`,`group_name` FROM `jd_groupl`  [ RunTime:0.0020s ]
+SQL: SHOW COLUMNS FROM `jd_users` [ RunTime:0.0450s ]
+SQL: SELECT * FROM `jd_users` WHERE `id` = 10 LIMIT 1   [ RunTime:0.0120s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 16 行.
+NOTIC: [8] Use of undefined constant image - assumed 'image' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 17 行.
+NOTIC: [8] Use of undefined constant password - assumed 'password' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 18 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.230013s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.230013s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.016000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.016000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.015001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.015001s ]
+
+[ 2016-09-06T17:55:43+08:00 ] ::1 /Admin/users/updata/id/10.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0330s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Users' ) LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `jd_groupl` [ RunTime:0.0500s ]
+SQL: SELECT `id`,`group_name` FROM `jd_groupl`  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `jd_users` [ RunTime:0.0360s ]
+SQL: SELECT * FROM `jd_users` WHERE `id` = 10 LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 16 行.
+NOTIC: [8] Use of undefined constant image - assumed 'image' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 17 行.
+NOTIC: [8] Use of undefined constant password - assumed 'password' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 18 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.028002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.028002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+
+[ 2016-09-06T17:55:45+08:00 ] ::1 /adminIndex.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.004000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.005000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.052003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.053003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+
+[ 2016-09-06T17:55:49+08:00 ] ::1 /Admin/Public/usermessage.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `jd_groupl` [ RunTime:0.0320s ]
+SQL: SELECT * FROM `jd_groupl` WHERE `id` = 2 LIMIT 1   [ RunTime:0.0490s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\637b3659bdcf2d586a97bc2e902def8e.php 第 47 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.053003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.053003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.003001s ]
+
+[ 2016-09-06T17:55:53+08:00 ] ::1 /Admin/users/updata/id/10.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0540s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Users' ) LIMIT 1   [ RunTime:0.0020s ]
+SQL: SHOW COLUMNS FROM `jd_groupl` [ RunTime:0.0780s ]
+SQL: SELECT `id`,`group_name` FROM `jd_groupl`  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `jd_users` [ RunTime:0.1150s ]
+SQL: SELECT * FROM `jd_users` WHERE `id` = 10 LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 16 行.
+NOTIC: [8] Use of undefined constant image - assumed 'image' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 17 行.
+NOTIC: [8] Use of undefined constant password - assumed 'password' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 18 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.036002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.037003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+
+[ 2016-09-06T17:55:56+08:00 ] ::1 /Admin/users/updata/id/10.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0440s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Users' ) LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `jd_groupl` [ RunTime:0.0420s ]
+SQL: SELECT `id`,`group_name` FROM `jd_groupl`  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `jd_users` [ RunTime:0.0370s ]
+SQL: SELECT * FROM `jd_users` WHERE `id` = 10 LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 16 行.
+NOTIC: [8] Use of undefined constant image - assumed 'image' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 17 行.
+NOTIC: [8] Use of undefined constant password - assumed 'password' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 18 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.026001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.026001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-09-06T17:56:08+08:00 ] ::1 /Admin/Contract/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [2048] Declaration of Admin\Controller\ContractController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\ContractController.class.php 第 11 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0370s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Contract' ) LIMIT 1   [ RunTime:0.0020s ]
+SQL: SHOW COLUMNS FROM `jd_contract` [ RunTime:0.1780s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Contract' ) LIMIT 1   [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: where E:\php\crm\Application\Admin\Controller\ContractController.class.php 第 67 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` a left join jd_customer b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id  WHERE ( a.isxufei='0' and a.submituser=10 ) LIMIT 1   [ RunTime:0.0720s ]
+NOTIC: [8] Undefined variable: where E:\php\crm\Application\Admin\Controller\ContractController.class.php 第 70 行.
+SQL: SELECT a.id,a.advertiser,a.contract_no,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name FROM `jd_contract` a left join jd_customer b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id  WHERE ( a.isxufei='0' and a.submituser=10 ) ORDER BY ctime desc LIMIT 0,10   [ RunTime:0.0160s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: type E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 25 行.
+NOTIC: [8] Undefined variable: type E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 26 行.
+NOTIC: [8] Undefined variable: ser_txt E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 31 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 35 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 36 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 37 行.
+NOTIC: [8] Undefined variable: time_start E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 40 行.
+NOTIC: [8] Undefined variable: time_end E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 43 行.
+NOTIC: [8] Undefined variable: ser_txt E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 46 行.
+NOTIC: [8] Undefined variable: time_end E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 46 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 65 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 66 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 67 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 68 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 78 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 65 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 66 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 67 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 68 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 78 行.
+NOTIC: [8] Use of undefined constant audit_2 - assumed 'audit_2' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 78 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.119006s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.120007s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-09-06T17:56:17+08:00 ] ::1 /Admin/users/updata/id/10.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0400s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Users' ) LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `jd_groupl` [ RunTime:0.0260s ]
+SQL: SELECT `id`,`group_name` FROM `jd_groupl`  [ RunTime:0.0020s ]
+SQL: SHOW COLUMNS FROM `jd_users` [ RunTime:0.0180s ]
+SQL: SELECT * FROM `jd_users` WHERE `id` = 10 LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 16 行.
+NOTIC: [8] Use of undefined constant image - assumed 'image' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 17 行.
+NOTIC: [8] Use of undefined constant password - assumed 'password' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 18 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.016001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.016001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+
+[ 2016-09-06T17:56:44+08:00 ] ::1 /Admin/Refund/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [2048] Declaration of Admin\Controller\RefundController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\RefundController.class.php 第 13 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0350s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Refund' ) LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `jd_refund` [ RunTime:0.0470s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Refund' ) LIMIT 1   [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: where E:\php\crm\Application\Admin\Controller\RefundController.class.php 第 69 行.
+NOTIC: [8] Undefined variable: Page E:\php\crm\Application\Admin\Controller\RefundController.class.php 第 69 行.
+NOTIC: [8] Trying to get property of non-object E:\php\crm\Application\Admin\Controller\RefundController.class.php 第 69 行.
+NOTIC: [8] Undefined variable: Page E:\php\crm\Application\Admin\Controller\RefundController.class.php 第 69 行.
+NOTIC: [8] Trying to get property of non-object E:\php\crm\Application\Admin\Controller\RefundController.class.php 第 69 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_refund` a left join jd_customer b on a.advertiser = b.id   WHERE ( a.id!='0' and a.submituser=10 ) ORDER BY a.ctime desc LIMIT 1   [ RunTime:0.0710s ]
+NOTIC: [8] Undefined variable: where E:\php\crm\Application\Admin\Controller\RefundController.class.php 第 72 行.
+SQL: SELECT a.id,a.advertiser,a.contract_no,a.r_money,a.r_time,a.ctime,a.audit_1,a.audit_2,b.advertiser FROM `jd_refund` a left join jd_customer b on a.advertiser = b.id   WHERE ( a.id!='0' and a.submituser=10 ) ORDER BY a.ctime desc LIMIT 0,10   [ RunTime:0.0140s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined variable: type E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 25 行.
+NOTIC: [8] Undefined variable: type E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 26 行.
+NOTIC: [8] Undefined variable: ser_txt E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 30 行.
+NOTIC: [8] Undefined variable: time_start E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 33 行.
+NOTIC: [8] Undefined variable: time_end E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 36 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 39 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 40 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 41 行.
+NOTIC: [8] Undefined variable: ser_txt E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 45 行.
+NOTIC: [8] Undefined variable: time_end E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 45 行.
+NOTIC: [8] Undefined variable: info E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 46 行.
+NOTIC: [8] Undefined variable: info E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 64 行.
+NOTIC: [8] Undefined variable: info E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 65 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 65 行.
+NOTIC: [8] Undefined variable: info E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 66 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 66 行.
+NOTIC: [8] Undefined variable: info E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 67 行.
+NOTIC: [8] Use of undefined constant r_money - assumed 'r_money' E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 67 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 68 行.
+NOTIC: [8] Undefined index: show_money E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 68 行.
+NOTIC: [8] Undefined variable: info E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 70 行.
+NOTIC: [8] Use of undefined constant r_time - assumed 'r_time' E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 70 行.
+NOTIC: [8] Undefined variable: info E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 71 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 71 行.
+NOTIC: [8] Undefined variable: info E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 77 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 78 行.
+NOTIC: [8] Undefined variable: info E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 83 行.
+NOTIC: [8] Undefined variable: info E:\php\crm\Application\Runtime\Cache\Admin\850732295b784804cfbd54755cfe7928.php 第 83 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.059003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.059003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-09-06T17:56:46+08:00 ] ::1 /Admin/users/updata/id/10.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0310s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Users' ) LIMIT 1   [ RunTime:0.0020s ]
+SQL: SHOW COLUMNS FROM `jd_groupl` [ RunTime:0.0340s ]
+SQL: SELECT `id`,`group_name` FROM `jd_groupl`  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `jd_users` [ RunTime:0.1070s ]
+SQL: SELECT * FROM `jd_users` WHERE `id` = 10 LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 16 行.
+NOTIC: [8] Use of undefined constant image - assumed 'image' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 17 行.
+NOTIC: [8] Use of undefined constant password - assumed 'password' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 18 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.022001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.022001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-09-06T17:59:20+08:00 ] ::1 /adminIndex.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.008000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.008000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.051003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.051003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.004000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.004000s ]
+
+[ 2016-09-06T17:59:20+08:00 ] ::1 /Admin/Public/usermessage.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `jd_groupl` [ RunTime:0.0600s ]
+SQL: SELECT * FROM `jd_groupl` WHERE `id` = 2 LIMIT 1   [ RunTime:0.0030s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001001s ]
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\637b3659bdcf2d586a97bc2e902def8e.php 第 47 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.020001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.020001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-09-06T17:59:22+08:00 ] ::1 /Admin/users/updata/id/10.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0410s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Users' ) LIMIT 1   [ RunTime:0.0020s ]
+SQL: SHOW COLUMNS FROM `jd_groupl` [ RunTime:0.1030s ]
+SQL: SELECT `id`,`group_name` FROM `jd_groupl`  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `jd_users` [ RunTime:0.0460s ]
+SQL: SELECT * FROM `jd_users` WHERE `id` = 10 LIMIT 1   [ RunTime:0.0020s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 16 行.
+NOTIC: [8] Use of undefined constant image - assumed 'image' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 17 行.
+NOTIC: [8] Use of undefined constant password - assumed 'password' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 18 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 47 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.037002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.037002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+
+[ 2016-09-06T18:04:46+08:00 ] ::1 /adminIndex.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.033001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.034001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001001s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+
+[ 2016-09-06T18:04:46+08:00 ] ::1 /Admin/Public/usermessage.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `jd_groupl` [ RunTime:0.0890s ]
+SQL: SELECT * FROM `jd_groupl` WHERE `id` = 2 LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\637b3659bdcf2d586a97bc2e902def8e.php 第 47 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.028001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.028001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+
+[ 2016-09-06T18:04:55+08:00 ] ::1 /Admin/users/updata/id/10.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0830s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Users' ) LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `jd_groupl` [ RunTime:0.0360s ]
+SQL: SELECT `id`,`group_name` FROM `jd_groupl`  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `jd_users` [ RunTime:0.0570s ]
+SQL: SELECT * FROM `jd_users` WHERE `id` = 10 LIMIT 1   [ RunTime:0.0040s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 23 行.
+NOTIC: [8] Use of undefined constant image - assumed 'image' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 24 行.
+NOTIC: [8] Use of undefined constant password - assumed 'password' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 25 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.049003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.049003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+
+[ 2016-09-06T18:05:16+08:00 ] ::1 /adminIndex.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.026002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.026002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+
+[ 2016-09-06T18:05:18+08:00 ] ::1 /Admin/users/updata/id/10.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0230s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Users' ) LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `jd_groupl` [ RunTime:0.0200s ]
+SQL: SELECT `id`,`group_name` FROM `jd_groupl`  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `jd_users` [ RunTime:0.0600s ]
+SQL: SELECT * FROM `jd_users` WHERE `id` = 10 LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 23 行.
+NOTIC: [8] Use of undefined constant image - assumed 'image' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 24 行.
+NOTIC: [8] Use of undefined constant password - assumed 'password' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 25 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant groupid - assumed 'groupid' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\b5a09edf2b4a0495406f80e4f4ef3982.php 第 54 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.021001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.021001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-09-06T18:05:23+08:00 ] ::1 /Admin/Public/loginrn.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `jd_users` [ RunTime:0.0900s ]
+SQL: SELECT * FROM `jd_users` WHERE ( users='' and password='d41d8cd98f00b204e9800998ecf8427e' ) LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.085004s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.085004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.011001s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.011001s ]
+
+[ 2016-09-06T18:05:24+08:00 ] ::1 /adminIndex.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.034002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.034002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.004000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.004000s ]
+
+[ 2016-09-06T18:05:26+08:00 ] ::1 /Admin/Public/usermessage.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `jd_groupl` [ RunTime:0.0410s ]
+SQL: SELECT * FROM `jd_groupl` WHERE `id` = 2 LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\637b3659bdcf2d586a97bc2e902def8e.php 第 47 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.036002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.036002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+

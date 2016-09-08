@@ -80,9 +80,9 @@ $(document).ready(function(e) {
         	<span class="glyphicon glyphicon-hourglass"></span><span class="shno">待审核</span><?php endif; ?>
         </td>
         <td>
-        <a href="<?php echo U("Renew/index?id=$list[id]");?>">续费</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">发票</a><br>
-        <a href="#">开户</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">财务</a><br>
-        <a href="<?php echo U("updata?id=$list[id]");?>">修改</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="<?php echo U("delete?id=$list[id]");?>">删除</a>
+        <a href="<?php echo U("Renew/index?id=$list[id]");?>" title="续费"><span class="glyphicon glyphicon-transfer"></span></a>&nbsp;|&nbsp;<!--<a href="#">发票</a><br>
+        <a href="#">开户</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">财务</a><br>-->
+        <a href="<?php echo U("updata?id=$list[id]");?>" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<a href="<?php echo U("delete?id=$list[id]");?>" title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         </td>
     </tr><?php endforeach; endif; else: echo "" ;endif; ?>
 </table>

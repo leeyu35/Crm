@@ -70,7 +70,7 @@ $(document).ready(function(e) {
         </td>-->
 
         <td>
-        <a href="{:U("updata?id=$list[id]&yid=$info[id]")}">修改</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{:U("delete?id=$list[id]&yid=$info[id]")}">删除</a>
+        <a href="{:U("updata?id=$list[id]&yid=$info[id]")}" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<a href="{:U("delete?id=$list[id]&yid=$info[id]")}" title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         </td>
     </tr>
     </volist>

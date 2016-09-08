@@ -50,9 +50,9 @@ $(document).ready(function(e) {
     	<th>#</th>
     	<th>广告主公司名称</th>
     	<th>续费合同编号</th>
-        <th>合同金额</th>
-        <!--<th>账户显示金额</th>
-        <th>付款金额</th>-->
+        <th>金额</th>
+        <th>账户</th>
+        <!--<th>付款金额</th>-->
         <th>产品线</th>
         <th>创建时间</th>
         <th>状态</th>
@@ -64,8 +64,8 @@ $(document).ready(function(e) {
     	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid=$info[id]");?>"><?php echo ($list[advertiser]); ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid=$info[id]");?>"><?php echo ($list[contract_no]); ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid=$info[id]");?>"><?php echo ($list[contract_money]); ?></td>
-    	<!--<td><?php echo ($list[show_money]); ?></td>
-    	<td>2016年8月15日</td>-->
+    	<td><?php echo ($list[account]); ?></td>
+    	<!--<td>2016年8月15日</td>-->
     	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid=$info[id]");?>"><?php echo ($list[name]); ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid=$info[id]");?>"><?php echo (date("y-m-d",$list[ctime])); ?></td>
        <!-- <td>
@@ -79,8 +79,8 @@ $(document).ready(function(e) {
         	<span class="glyphicon glyphicon-hourglass"></span><span class="shno">待审核</span><?php endif; ?>
         </td>
         <td>
-        <a href="#">发票</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">财务</a><br>
-        <a href="<?php echo U("updata?id=$list[id]&yid=$info[id]");?>">修改</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="<?php echo U("delete?id=$list[id]&yid=$info[id]");?>">删除</a>
+        <!--<a href="#">发票</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">财务</a><br>-->
+        <a href="<?php echo U("updata?id=$list[id]&yid=$info[id]");?>" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="<?php echo U("delete?id=$list[id]&yid=$info[id]");?>" title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         </td>
     </tr><?php endforeach; endif; else: echo "" ;endif; ?>
 </table>

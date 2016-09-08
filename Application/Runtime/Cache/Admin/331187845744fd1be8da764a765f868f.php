@@ -153,7 +153,7 @@
 <input type="hidden" name="xf_hetonghao" id="xf_hetonghao" value="<?php echo ($info[contract_no]); ?>">
 <input type="hidden" name="htid" id="htid" value="<?php echo ($info[id]); ?>">
 <input type="hidden" name="isxufei" id="isxufei" value="1">
-<h4 class="bor-left-bull" >合同基本信息</h4>
+<h4 class="bor-left-bull" >续费基本信息</h4>
 <hr>
 
   <div class="form-group">
@@ -238,7 +238,7 @@
   
   <div class="form-group">
   
-    <label for="contract_money" class="col-sm-2 control-label">合同金额</label>
+    <label for="contract_money" class="col-sm-2 control-label">续费金额</label>
     <div class="col-sm-3">
       	<div class="input-group">
         <input type="text" class="form-control" name="contract_money" id="contract_money">
@@ -254,7 +254,7 @@
         </div>
     </div>
     
-    <label for="show_money" class="col-sm-2 control-label">账户显示金额</label>
+    <label for="show_money" class="col-sm-2 control-label">充值百度币</label>
     <div class="col-sm-2">      
 		<div class="input-group">
         <input type="text" class="form-control" name="show_money" id="show_money">
@@ -263,12 +263,15 @@
     </div>
     
   </div>
+  
+  
   <div class="form-group">
   
     <label for="inputEmail3" class="col-sm-2 control-label">合同有效期</label>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
     	<input id="contract_start" class="Wdate form-control" type="text" name="contract_start" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_start\')||\'2020-10-01\'}'})"/> 
     </div>
+    <label for="inputEmail3" class="col-sm-1 control-label">结束时间</label>
         <div class="col-sm-2">
 <input id="contract_end" class="Wdate form-control" type="text" name="contract_end" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_end\')}',maxDate:'2020-10-01'})"/>
     </div>
@@ -277,7 +280,21 @@
 
     
   </div>
+  <div class="form-group">
   
+    <label for="inputEmail3" class="col-sm-2 control-label">账户名称</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" autocomplete="off" name="account" id="account" value="<?php echo ($info[account]); ?>" >
+    </div>
+    
+    <label for="inputEmail3" class="col-sm-1 control-label">APP名称</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" autocomplete="off" name="appname" id="appname" value="<?php echo ($info[appname]); ?>" >
+
+
+    </div>
+    
+  </div>
   <h4 class="bor-left-bull" >付款信息</h4>
   <hr>
 	<div class="form-group">
@@ -305,7 +322,7 @@
     
   </div>
  
-  <h4 class="bor-left-bull" >合同备注</h4>
+  <h4 class="bor-left-bull" >续费备注</h4>
   <hr>
   <div class="form-group">
    <div class="col-sm-12">      
@@ -317,7 +334,7 @@
     <div class="form-group">
     
        <div class="col-sm-2">
-       <button type="submit" class="btn btn-primary">提交合同</button>
+       <button type="submit" class="btn btn-primary">提交续费</button>
        </div>
     </div>
 

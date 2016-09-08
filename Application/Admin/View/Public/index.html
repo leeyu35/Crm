@@ -33,14 +33,24 @@
     <script language="javascript">
 	$(document).ready(function(e) {
         $(".liebiao").click(function(){
-		$(".liebiao").removeClass("xz");
-		iformurl=$(this).attr("id");
-		$("#frame").attr("src",iformurl);	
-		$(this).addClass("xz");
+			$("#jiazai").show();
+			$(".liebiao").removeClass("xz");
+			iformurl=$(this).attr("id");
+			$("#frame").attr("src",iformurl);
+			$(this).addClass("xz");
+			$("#frame").on("load",this,function(){
+				$("#jiazai").hide();
+			})
 		})
 		$(".iform_ck").click(function(){
 			iformurl=$(this).attr("id");
-			$("#frame").attr("src",iformurl);		
+			$("#frame").attr("src",iformurl);
+			$("#frame").on("load",this,function(){
+				$(".out").hide()
+            	$(".no").css('transition-duration','0.3s').css('transform','rotate(0deg)')
+            	user1=1;
+				//alert('加载完成');	
+			})
 		})
 
     });
@@ -48,6 +58,7 @@
 </script>
 </head>
 <body>
+
 <div class="title clear">
     <div style="float: left">
         <span style="margin-left: 30px;">
@@ -202,17 +213,20 @@
             <div class="liebiao" id="{:U("Invoice/index")}">
                 <a>发票管理</a>
             </div>
+            <div class="liebiao" id="{:U("RefundInvoice/index")}">
+                <a>退票管理</a>
+            </div>
         </div>
         <div class="li4">
             <img src="/Public/images/admin/收起.png" alt="" class="shou"/>
             <div class="guanli">
                 账户管理
             </div>
-            <div class="liebiao" >
-                <a >新账户意向</a>
+            <div class="liebiao" id="{:U("Account/add")}">
+                <a>新账户意向</a>
             </div>
-            <div class="liebiao">
-                <a  >账户列表</a>
+            <div class="liebiao" id="{:U("Account/index")}">
+                <a>账户列表</a>
             </div>
         </div>
         <div class="li5">
@@ -280,6 +294,9 @@
 
     </div>
     <div class="right">
+    	<div id="jiazai"><img src="/Public/images/images/jiazai2.gif" ><br>
+		<h2>加载中...</h2>
+        </div>
         <iframe src="{:U('Public/usermessage')}" frameborder="0" id="frame"></iframe>
     </div>
 </div>
@@ -1102,10 +1119,10 @@ var suojin=1;
             user1=1;
         }
     })
-    $(".out p").click(function(){
+   /* $(".out p").click(function(){
         $(".out").hide();
         user1=1;
-    })
+    })*/
 </script>
 </body>
 </html>

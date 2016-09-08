@@ -104,7 +104,7 @@
 <?php echo ($hjd); ?>
 <span id="hjd"></span>
 <div class="container" style="width:100%;">
-<h3 class="bor-left-bull" >修改退款<small>Refund</small></h3>
+<h3 class="bor-left-bull" >修改发票<small>Refund</small></h3>
 <br>
 <form action="<?php echo U('upru');?>" method="post" class="form-horizontal" id="formid" >
 <input type="hidden" name="id" id="id" value="<?php echo ($info[id]); ?>">
@@ -234,7 +234,7 @@
     </div>
     
   </div>
-  <h4 class="bor-left-bull" >退款备注</h4>
+  <h4 class="bor-left-bull" >开票备注</h4>
   <hr>
   <div class="form-group">
    <div class="col-sm-12">      
