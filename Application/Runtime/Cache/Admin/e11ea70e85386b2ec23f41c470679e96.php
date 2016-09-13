@@ -66,12 +66,14 @@
         </span>
     </div>
     <div style="float:right;">
-        <span class="xiaoxi">
-                <img src="/Public/images/admin/消息.png" alt="" style="vertical-align: middle;margin-right: 5px;"/>消息
-                <span class="shu">
-                    10
+        <span class="xiaoxi iform_ck" id="<?php echo U('Public/usermessage');?>">
+                <img src="/Public/images/admin/消息.png" alt="" style="vertical-align: middle;margin-right: 5px;"/>待办
+                <span class="badge" style="background:#fe4e4b;">
+                    <?php echo ($daiban); ?>
                 </span>
-        </span><span class="help">
+        </span>
+        
+        <span class="help">
             <img src="/Public/images/admin/帮助.png" alt="" style="vertical-align: middle;margin-right: 5px;"/>
             <span class="help1">
                 帮助
@@ -194,6 +196,9 @@
             </div>
             <div class="liebiao" id="<?php echo U('Contract/index');?>">
                 <a >合同列表</a>
+            </div>
+            <div class="liebiao" id="<?php echo U('Contract/index?httype=2');?>">
+                <a >框架合同列表</a>
             </div>
         </div>
         <div class="li3">

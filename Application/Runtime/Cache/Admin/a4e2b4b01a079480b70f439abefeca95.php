@@ -194,7 +194,10 @@
    	      <input type="radio" name="type2" value="2" id="type_1" <?php echo ($info[type2]==2?'checked':''); ?>>
    	      普票</label>
     </div>
-    
+    <label for="inputEmail3" class="col-sm-1 control-label">APP名称</label>
+    <div class="col-sm-3">
+     	 <input type="text" class="form-control" name="appname" id="appname" value="<?php echo ($info[appname]); ?>">
+    </div>
 
    </div>
    

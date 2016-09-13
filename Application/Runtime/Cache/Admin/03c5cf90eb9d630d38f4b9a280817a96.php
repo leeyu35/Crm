@@ -36,6 +36,11 @@ $(document).ready(function(e) {
      	<option value="0"  <?php echo ($type2=='0'?'selected':''); ?>>未审核</option>
      	<option value="1"  <?php echo ($type2=='1'?'selected':''); ?>>已审核</option>
   </select>
+  <select  class="form-control" name="pr_line">
+  		
+     	<option value="">产品线</option>
+  		<?php if(is_array($product_line_list)): $i = 0; $__LIST__ = $product_line_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$product_line_list): $mod = ($i % 2 );++$i;?><option value="<?php echo ($product_line_list['id']); ?>" <?php echo ($product_line_list[id]==$type3?'selected':''); ?> ><?php echo ($product_line_list[name]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+  </select>
   <div class="form-group">
     	<input id="contract_start" class="Wdate form-control" type="text" name="time_start" placeholder="开始时间" value="<?php echo ($time_start); ?>" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_end\')||\'2020-10-01\'}'})"/> 
   </div>
@@ -43,7 +48,7 @@ $(document).ready(function(e) {
 <input id="contract_end" class="Wdate form-control" type="text" name="time_end"  placeholder="结束时间" value="<?php echo ($time_end); ?>"  onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_start\')}',maxDate:'2020-10-01'})"/>
     </div>
   <button type="submit" class="btn btn-primary">搜索</button>
-  	<?php if(($ser_txt != '') OR ($time_end != '')): ?><a class="btn btn-info" href="<?php echo U('index');?>">清除搜索条件</a><?php endif; ?>
+  	<?php if(($ser_txt != '') OR ($time_end != '')): ?><a class="btn btn-info" href="<?php echo U("Admin/Contract/index/httype/$httype?$httype:''");?>">清除搜索条件</a><?php endif; ?>
 </form>
 </div>
 <table class="table table-hover">
@@ -62,7 +67,7 @@ $(document).ready(function(e) {
     </tr>
     <?php if(is_array($list)): $k = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$list): $mod = ($k % 2 );++$k;?><tr >
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($k); ?></td>
-    	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[advertiser]); ?></a></td>
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><a href="<?php echo U("Customer/show?id=$list[aid]");?>"><?php echo ($list[advertiser]); ?></a></a></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[contract_no]); ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[contract_money]); ?></td>
     	<!--<td><?php echo ($list[show_money]); ?></td>

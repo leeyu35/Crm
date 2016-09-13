@@ -64,7 +64,7 @@ class RenewController extends  CommonController
             }
             if($type2=='0')
             {
-                $where.=" and a.audit_1=0 and a.audit_2=0";
+                $where.=" and (a.audit_1=0 or a.audit_2=0)";
             }
             if($type2=='1')
             {
@@ -79,13 +79,79 @@ class RenewController extends  CommonController
         $count      = $hetong->field('a.id,a.advertiser,a.contract_no,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.xf_hetonghao='$info[contract_no]' and ".$q_where.$where)->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
-        $list=$hetong->field('a.id,a.advertiser,a.contract_no,a.account,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.xf_hetonghao='$info[contract_no]'  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
-
+        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.account,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.xf_hetonghao='$info[contract_no]'  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
         $this->list=$list;
         $this->assign('page',$show);// 赋值分页输出
         $this->display();
     }
+    //属于某合同续费列表
+    public function index2(){
+        //检查该合同是否已经通过审核
+        $hetong=M("Contract");
 
+
+        //搜索条件
+        $type=I('get.searchtype');
+        if($type!='')
+        {
+            if($type=='advertiser')
+            {
+                $coustomer=M('Customer');
+                $zsql=$coustomer->field("id")->where(" advertiser like '%".I('get.search_text')."%'")->select(false);
+                $where.=" and  a.id!='hjd2' and a.advertiser in($zsql)";
+
+            }
+            if($type=='contract_no')
+            {
+                $where.=" and a.id!='hjd2' and a.contract_no like '%".I('get.search_text')."%'";
+            }
+            $this->type=$type;
+            $this->ser_txt=I('get.search_text');
+
+        }
+        //时间条件
+        $time_start=I('get.time_start');
+        $time_end=I('get.time_end');
+        if($time_start!="" and $time_end!="")
+        {
+            $time_start=strtotime($time_start);
+            $time_end=strtotime($time_end);
+
+            $where.=" and a.ctime > $time_start and a.ctime < $time_end";
+            $this->time_start=I('get.time_start');
+            $this->time_end=I('get.time_end');
+        }
+        //审核条件
+        $type2=I('get.shenhe');
+        if($type2!='')
+        {
+            if($type2=='k')
+            {
+                $where.=" and a.id!='hjd3' ";
+            }
+            if($type2=='0')
+            {
+                $where.=" and (a.audit_1=0 or a.audit_2=0)";
+            }
+            if($type2=='1')
+            {
+                $where.=" and a.audit_1=1 and a.audit_2=1";
+            }
+            $this->type2=$type2;
+            $this->ser_txt2=I('get.search_text');
+
+        }
+        //权限条件
+        $q_where=quan_where(__CONTROLLER__,"a");
+        $count      = $hetong->field('a.id,a.advertiser,a.contract_no,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei=1 and ".$q_where.$where)->count();// 查询满足要求的总记录数
+        $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        $show       = $Page->show();// 分页显示输出
+        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.account,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei=1  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
+        //echo $hetong->_sql();
+        $this->list=$list;
+        $this->assign('page',$show);// 赋值分页输出
+        $this->display();
+    }
     public function add(){
         //要续费合同信息
         $hetong=M("Contract");
@@ -193,6 +259,7 @@ class RenewController extends  CommonController
     public function shenhe(){
         $type=I('get.type');
         $id=I('get.id');
+        $yid=I('get.yid');
         //检查是否有权限执行审核操作
         $ispw=shenhe(__CONTROLLER__,$type);
         if($ispw!='200')
@@ -203,7 +270,7 @@ class RenewController extends  CommonController
             $table=M("Contract");
             if($table->where("id=$id")->setField($type,1))
             {
-                $this->success('审核成功',U('index'));
+                $this->success('审核成功',U("index?id=$yid"));
             }else
             {
                 $this->error('审核失败');
@@ -216,6 +283,7 @@ class RenewController extends  CommonController
         $hetong=M("Contract");
         $info=$hetong->find($id);
         $this->info=$info;
+        $this->yid=I('get.yid');
         //销售
         $submitusers=users_info($info[submituser]);
         $this->users_info=$submitusers['name'];

@@ -98,7 +98,16 @@
     <div class="col-sm-2">
          <label  class="control-label"><strong><?php echo (date("Y-m-d",$info[back_money_time])); ?></strong></label>
     </div>
-   
+
+  </div>
+    <div class="form-group">
+  
+    <label class="col-sm-2 control-label">是否回款</label>
+    <div class="col-sm-3">
+ 		<label  class="control-label"><strong><?php echo ($info[state]==0?'未回款':'已回款'); ?></strong></label>
+
+    </div>
+
 
 
     

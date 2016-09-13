@@ -181,7 +181,10 @@
    	      普票</label>
     </div>
     
-
+    <label for="inputEmail3" class="col-sm-1 control-label">APP名称</label>
+    <div class="col-sm-3">
+     	 <input type="text" class="form-control" name="appname" id="appname">
+    </div>
    </div>
 
   

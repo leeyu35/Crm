@@ -179,6 +179,23 @@
     
   </div>
   
+  <div class="form-group">
+  
+    <label class="col-sm-2 control-label">是否回款</label>
+    <div class="col-sm-3">
+		<label class="radio-inline">
+   	      <input name="state" type="radio" id="state_0" value="0" <?php echo ($info[state]==0?'checked':''); ?> >
+   	      未回款</label>
+   	    <label class="radio-inline">
+   	      <input type="radio" name="state" value="1" id="state_1" <?php echo ($info[state]==1?'checked':''); ?>>
+   	      已回款</label>
+    </div>
+
+
+
+    
+  </div>
+  
 <h4 class="bor-left-bull" >垫款客户确认文件</h4>
   <hr>
 	<div class="form-group">

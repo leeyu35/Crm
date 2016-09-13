@@ -10,6 +10,10 @@ use Think\Controller;
 class ContractController extends CommonController
 {
     public function index(){
+        //产品线
+        $product_line=M("ProductLine");
+        $this->product_line_list=$product_line->field("id,name,title")->order("id asc")->select();
+
         $hetong=M("Contract");
         //搜索条件
         $type=I('get.searchtype');
@@ -29,6 +33,13 @@ class ContractController extends CommonController
             $this->type=$type;
             $this->ser_txt=I('get.search_text');
 
+        }
+        //合同类型
+        $httype=I('get.httype');
+        if($httype!='')
+        {
+            $where.=" and a.type=2 ";
+            $this->httype=$httype;
         }
         //时间条件
         $time_start=I('get.time_start');
@@ -62,12 +73,19 @@ class ContractController extends CommonController
             $this->ser_txt2=I('get.search_text');
 
         }
+
+        $type3=I('get.pr_line');
+        if($type3!='')
+        {
+            $where.="and a.product_line =$type3";
+            $this->type3=$type3;
+        }
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
         $count      = $hetong->field('a.id,a.advertiser,a.contract_no,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei='0' and ".$q_where.$where)->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
-        $list=$hetong->field('a.id,a.advertiser,a.contract_no,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
+        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
 
         $this->list=$list;
         $this->assign('page',$show);// 赋值分页输出
