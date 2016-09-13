@@ -43,6 +43,7 @@
 			})
 		})
 		$(".iform_ck").click(function(){
+            move();
 			iformurl=$(this).attr("id");
 			$("#frame").attr("src",iformurl);
 			$("#frame").on("load",this,function(){
@@ -335,6 +336,42 @@
             flag1=1;
         }
     })
+
+    function move(){
+        xuan=1;
+        li1=1;
+        li2=1;
+        li3=1;
+        li4=1;
+        li5=1;
+        li6=1;
+        li7=1;
+        li8=1;
+        xuan2=1;
+        xuan3=1;
+        xuan4=1;
+        xuan5=1;
+        xuan6=1;
+        xuan7=1;
+        xuan8=1;
+        $(".li1").hide().siblings().hide();
+        $(".client1 li").css("color","#999999").css('background','#3d3f46')
+        $(".client li").css("color","#999999").css('background','#3d3f46');
+        $(".left li").eq(0).find("img").attr("src",'/Public/images/admin/客户管理.png')
+        $(".left li").eq(1).find("img").attr("src",'/Public/images/admin/合同管理.png')
+        $(".left li").eq(2).find("img").attr("src",'/Public/images/admin/财务管理.png')
+        $(".left li").eq(3).find("img").attr("src",'/Public/images/admin/账户管理.png')
+        $(".left li").eq(4).find("img").attr("src",'/Public/images/admin/盖章申请.png')
+        $(".left li").eq(5).find("img").attr("src",'/Public/images/admin/账号管理.png')
+        $(".left li").eq(6).find("img").attr("src",'/Public/images/admin/消息中心.png')
+        $(".left li").eq(7).find("img").attr("src",'/Public/images/admin/记事本.png')
+        if(suojin==1){
+            $(".right").width("88%")
+        }else{
+            $(".right").width("95%")
+        }
+
+    }
     var xuan=1;
     $(".left li").eq(0).hover(function(){
         if(xuan==1){
