@@ -23,7 +23,7 @@
         <th align="left" width="10%">删除</th>
         <th align="left" width="10%">查看</th>
         <th align="left" width="10%">可查看他人</th>
-        <th align="left" width="10%">操作</th>	  
+        <th align="left" width="10%">操作</th>	  	
       </tr>
     </table>
   </nav>

@@ -63,7 +63,7 @@ class ContractController extends CommonController
             }
             if($type2=='0')
             {
-                $where.=" and a.audit_1=0 and a.audit_2=0";
+                $where.=" and (a.audit_1=0 or a.audit_2=0)";
             }
             if($type2=='1')
             {

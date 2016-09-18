@@ -181,6 +181,21 @@ class PublicController extends Controller
 
             $this->sessionuid=session("u_id");
             $this->url=$_SERVER['SERVER_NAME'];
+            //随机励志语录
+            $lizhi=array('将来的你会感谢 现在勇敢拼搏的你',
+                '我自信，故我成功，我行，我一定能行。',
+                '静下来，铸我实力;拼上去，亮我风采。',
+                '会当凌绝顶 一览众山小','博观而约取，厚积而薄发。',
+                '满招损，谦受益。',
+                '笨鸟先飞早入林，笨人勤学早成材',
+                '良药苦于口而利于病，忠言逆于耳而利于行。',
+                '三人行，必有我师焉，择其善者而从之，其不善者而改之。',
+                '天行健，君子以自强不息'
+
+            );
+            $this->lizhi=$lizhi[rand(0,8)];
+            $this->messagecount =M("Email")->where("s_users=".session('u_id')." and state =0")->order("time desc")->count();// 查询满足要求的总记录数
+
             $this->display();
         }
         //退出

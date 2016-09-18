@@ -43,15 +43,18 @@
 			})
 		})
 		$(".iform_ck").click(function(){
-            move();
+            $("#jiazai").show();
 			iformurl=$(this).attr("id");
 			$("#frame").attr("src",iformurl);
+			
 			$("#frame").on("load",this,function(){
 				$(".out").hide()
             	$(".no").css('transition-duration','0.3s').css('transform','rotate(0deg)')
             	user1=1;
+				$("#jiazai").hide();
 				//alert('加载完成');	
 			})
+			move();
 		})
 
     });
@@ -72,7 +75,7 @@
                 <span class="badge" style="background:#fe4e4b;">
                     {$daiban}
                 </span>
-        </span><span class="help">
+        </span><span class="help iform_ck" id="{:U('Public/help')}">
             <img src="/Public/images/admin/帮助.png" alt="" style="vertical-align: middle;margin-right: 5px;"/>
             <span class="help1">
                 帮助
@@ -162,9 +165,9 @@
             </li>
             <li>
                 <img src="/Public/images/admin/记事本.png" alt="" style="vertical-align: middle"/>
-                <span style="margin-left:10px;">记事本&nbsp;&nbsp;&nbsp;</span>
+                <span style="margin-left:10px;">写消息&nbsp;&nbsp;&nbsp;</span>
                 <div class="biao">
-                    记事本
+                    写消息
                 </div>
             </li>
         </ul>
@@ -274,7 +277,7 @@
             <div class="guanli">
                 消息中心
             </div>
-            <div class="liebiao">
+            <div class="liebiao" id="{:U('Email/message')}">
                 <a>消息列表</a>
             </div>
 			<div class="liebiao" id="{:U('Public/log')}">
@@ -285,13 +288,13 @@
         <div class="li8">
             <img src="/Public/images/admin/收起.png" alt="" class="shou"/>
             <div class="guanli">
-                记事本
+                写信
             </div>
-            <div class="liebiao" >
-                <a >新记事本</a>
+            <div class="liebiao"  id="{:U('Email/add')}">
+                <a>新建消息</a>
             </div>
-            <div class="liebiao">
-                <a  >记事本列表</a>
+            <div class="liebiao" id="{:U('Email/index')}">
+                <a>已发送消息</a>
             </div>
         </div>
         

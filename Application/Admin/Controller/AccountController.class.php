@@ -128,7 +128,7 @@ class AccountController extends CommonController
 
     public function delete(){
         $id=I('get.id');
-        $Refund=M("Refund");
+        $Refund=M("Account");
         if($Refund->delete($id))
         {
             $this->success("删除成功",U('index'));

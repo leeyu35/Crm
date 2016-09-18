@@ -9,7 +9,7 @@
 
 <body>
 <div class="container" style="width:100%;">
-<h3 class="bor-left-bull">用户列表<small>Users list</small></h3>
+<h3 class="bor-left-bull">登录日志</h3>
 
 <table class="table table-hover">
 	<tr>

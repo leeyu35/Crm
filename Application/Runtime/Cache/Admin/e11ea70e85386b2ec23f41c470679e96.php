@@ -43,14 +43,18 @@
 			})
 		})
 		$(".iform_ck").click(function(){
+            $("#jiazai").show();
 			iformurl=$(this).attr("id");
 			$("#frame").attr("src",iformurl);
+			
 			$("#frame").on("load",this,function(){
 				$(".out").hide()
             	$(".no").css('transition-duration','0.3s').css('transform','rotate(0deg)')
             	user1=1;
+				$("#jiazai").hide();
 				//alert('加载完成');	
 			})
+			move();
 		})
 
     });
@@ -71,9 +75,7 @@
                 <span class="badge" style="background:#fe4e4b;">
                     <?php echo ($daiban); ?>
                 </span>
-        </span>
-        
-        <span class="help">
+        </span><span class="help iform_ck" id="<?php echo U('Public/help');?>">
             <img src="/Public/images/admin/帮助.png" alt="" style="vertical-align: middle;margin-right: 5px;"/>
             <span class="help1">
                 帮助
@@ -163,9 +165,9 @@
             </li>
             <li>
                 <img src="/Public/images/admin/记事本.png" alt="" style="vertical-align: middle"/>
-                <span style="margin-left:10px;">记事本&nbsp;&nbsp;&nbsp;</span>
+                <span style="margin-left:10px;">写消息&nbsp;&nbsp;&nbsp;</span>
                 <div class="biao">
-                    记事本
+                    写消息
                 </div>
             </li>
         </ul>
@@ -275,7 +277,7 @@
             <div class="guanli">
                 消息中心
             </div>
-            <div class="liebiao">
+            <div class="liebiao" id="<?php echo U('Email/message');?>">
                 <a>消息列表</a>
             </div>
 			<div class="liebiao" id="<?php echo U('Public/log');?>">
@@ -286,13 +288,13 @@
         <div class="li8">
             <img src="/Public/images/admin/收起.png" alt="" class="shou"/>
             <div class="guanli">
-                记事本
+                写信
             </div>
-            <div class="liebiao" >
-                <a >新记事本</a>
+            <div class="liebiao"  id="<?php echo U('Email/add');?>">
+                <a>新建消息</a>
             </div>
-            <div class="liebiao">
-                <a  >记事本列表</a>
+            <div class="liebiao" id="<?php echo U('Email/index');?>">
+                <a>已发送消息</a>
             </div>
         </div>
         
@@ -337,6 +339,42 @@
             flag1=1;
         }
     })
+
+    function move(){
+        xuan=1;
+        li1=1;
+        li2=1;
+        li3=1;
+        li4=1;
+        li5=1;
+        li6=1;
+        li7=1;
+        li8=1;
+        xuan2=1;
+        xuan3=1;
+        xuan4=1;
+        xuan5=1;
+        xuan6=1;
+        xuan7=1;
+        xuan8=1;
+        $(".li1").hide().siblings().hide();
+        $(".client1 li").css("color","#999999").css('background','#3d3f46')
+        $(".client li").css("color","#999999").css('background','#3d3f46');
+        $(".left li").eq(0).find("img").attr("src",'/Public/images/admin/客户管理.png')
+        $(".left li").eq(1).find("img").attr("src",'/Public/images/admin/合同管理.png')
+        $(".left li").eq(2).find("img").attr("src",'/Public/images/admin/财务管理.png')
+        $(".left li").eq(3).find("img").attr("src",'/Public/images/admin/账户管理.png')
+        $(".left li").eq(4).find("img").attr("src",'/Public/images/admin/盖章申请.png')
+        $(".left li").eq(5).find("img").attr("src",'/Public/images/admin/账号管理.png')
+        $(".left li").eq(6).find("img").attr("src",'/Public/images/admin/消息中心.png')
+        $(".left li").eq(7).find("img").attr("src",'/Public/images/admin/记事本.png')
+        if(suojin==1){
+            $(".right").width("88%")
+        }else{
+            $(".right").width("95%")
+        }
+
+    }
     var xuan=1;
     $(".left li").eq(0).hover(function(){
         if(xuan==1){

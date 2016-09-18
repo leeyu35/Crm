@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
     <link rel="stylesheet" href="/Public/css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+<link rel="stylesheet" type="text/css" href="/Public/css/animate.min.css">
     
 <link rel="stylesheet" type="text/css" href="../../../Public/css/stylesheets/simple-calendar.css">
 <script type="text/javascript" src="../../../Public/js/javascripts/simple-calendar.js"></script>
@@ -43,7 +44,8 @@
 			border-left:1px #ccc solid;
 			padding-left:20px;
 		}
-		.ring_2{width:36%; float:right;  margin-top:50px; margin-right:6.5%;  background: #f5f5f5; box-shadow: 0px 2px 10px #999999;}
+		.ring_2{width:36%; float:right;  margin-top:50px; margin-right:6.5%; }
+		.r2_t1{ background: #f5f5f5; box-shadow: 0px 2px 10px #999999; margin-bottom:20px; overflow:hidden;}
     </style>
 </head>
 <body>
@@ -52,18 +54,20 @@
     <div class="clear" style="margin-top:25px;">
         <div class="touxiang">
             <p>
-                <img src="{$Think.session.u_image}" width="100" height="100" class="img-circle" />
+                <img src="{$Think.session.u_image}" width="100" height="100" class="img-circle animated flipInY" />
             </p>
             <p style="text-align: center;font-size: 12px;color: #333333; padding-top:10px;">
                <a href="{:U("users/updata?id=$sessionuid")}">{$Think.session.u_name}</a>【{$group[group_name]}】
             </p>
+            <a href="{:U("Email/message")}">
             <span style="color: #999999;font-size: 12px; padding-top:10px; display:block;">
                     <img src="/Public/images/admin/我的消息.png" alt=""/>
                     我的消息(
-                    <span class="message">10</span>
+                    <span class="message">{$messagecount}</span>
                     )
 
                 </span>
+            </a>
         </div>
         <div class="index_right">
          	<span style=" color:#333333;font-size: 12px;">
@@ -99,7 +103,6 @@
 
           </span>
         </div>
-        
     </div>
     <div class="clear"></div>
     <div style="margin-left:40px;margin-top: 30px; ">
@@ -116,7 +119,12 @@
         var myCalendar = new SimpleCalendar('#container');
     </script>
     <div class="ring_2">
-    	<div style="padding:10px;"><h2>三人行必有我师焉</h2></div>
+    	
+    	<div class="r2_t1" style="padding:10px;">
+            <img src="/Public/images/admin/凌众logo.png" width="30%" style="float:left;" class="animated bounceInLeft ">
+        	<img src="/Public/images/admin/谋士LOGO.png" width="30%" style="float:right;" class="animated bounceInRight ">
+        </div>
+        <div class="r2_t1" style="padding:10px;"><h2>{$lizhi}</h2></div>
     </div>
     </div>
     
