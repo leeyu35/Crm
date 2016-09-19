@@ -40,8 +40,7 @@
     <input type="file" name="image2" id="image">
     <p class="help-block"><br><img src="{$info['image']}" width="100" height="100"  class="img-circle" /></p>
   </div>
-  
-  
+  <if  condition="$userszu[group_name] eq '超级管理员'">
   <div class="form-group">
     <label for="exampleInputFile">部门</label>
 	<select class="form-control" style="width:200px;" name="groupid">
@@ -52,7 +51,7 @@
     </select>
     
   </div>
-
+  </if>
 	<hr>
   <button type="submit"  class="btn btn-primary" style="width:150px;">提交</button>
 </form>

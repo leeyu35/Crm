@@ -96,9 +96,14 @@ class UsersController extends CommonController
         $listgroup=$Groupl->field('id,group_name')->select();
         $this->grouplist=$listgroup;
 
+
+
         $id=I('get.id');
         $users=M("Users");
-        $this->info=$users->find($id);
+        $info=$users->find($id);
+        $this->info=$info;
+        $this->userszu=$Groupl->find(session('u_groupid'));
+
         $this->display();
 
     }
