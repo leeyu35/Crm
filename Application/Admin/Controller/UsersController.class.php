@@ -127,7 +127,11 @@ class UsersController extends CommonController
                     $this->error($upload->getError());
                 }else{// 上传成功
                     //删除旧图
-                    unlink(".".I('post.image'));
+                    if(I('post.image')!='/Uploads/portrait/wu.png')
+                    {
+                        unlink(".".I('post.image'));
+                    }
+
                     $image='/Uploads'.$info['image2']['savepath'].$info['image2']['savename'];
                 }
             }else
