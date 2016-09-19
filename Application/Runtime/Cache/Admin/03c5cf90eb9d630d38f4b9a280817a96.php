@@ -67,7 +67,7 @@ $(document).ready(function(e) {
     </tr>
     <?php if(is_array($list)): $k = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$list): $mod = ($k % 2 );++$k;?><tr >
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($k); ?></td>
-    	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><a href="<?php echo U("Customer/show?id=$list[aid]");?>"><?php echo ($list[advertiser]); ?></a></a></td>
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><a href="<?php echo U("Customer/show?id=$list[aid]");?>"><?php echo ($list[advertiser]); ?></a> <?php if($list[isguidang] == 1): ?><span title="合同已归档" class="glyphicon glyphicon-folder-close"></span><?php endif; ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[contract_no]); ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[contract_money]); ?></td>
     	<!--<td><?php echo ($list[show_money]); ?></td>
@@ -87,7 +87,7 @@ $(document).ready(function(e) {
         <td>
         <a href="<?php echo U("Renew/index?id=$list[id]");?>" title="续费"><span class="glyphicon glyphicon-transfer"></span></a>&nbsp;|&nbsp;<!--<a href="#">发票</a><br>
         <a href="#">开户</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">财务</a><br>-->
-        <a href="<?php echo U("updata?id=$list[id]");?>" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<a href="<?php echo U("delete?id=$list[id]");?>" title="删除"><span class="glyphicon glyphicon-trash"></span></a>
+        <?php if($list[isguidang] == 0): ?><a href="<?php echo U("updata?id=$list[id]");?>" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<?php endif; ?><a href="<?php echo U("delete?id=$list[id]");?>" title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         </td>
     </tr><?php endforeach; endif; else: echo "" ;endif; ?>
 </table>

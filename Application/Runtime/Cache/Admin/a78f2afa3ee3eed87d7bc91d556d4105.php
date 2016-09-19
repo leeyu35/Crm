@@ -72,6 +72,13 @@
 			
 			
 		}
+		//自动换算百度币
+		$("#rebates_proportion").keyup(function(){
+			jr=$("#contract_money").val();	
+			bl=$("#rebates_proportion").val();
+			$("#show_money").val(jr*(1+(bl/100)));
+			
+		})
 		$("input[name='type']").change(function(){
 			if($(this).val()=='2')
 			{
@@ -219,6 +226,23 @@
   
     
 </div>
+<div class="form-group">
+  
+    <label for="inputEmail3" class="col-sm-2 control-label">是否归档</label>
+    <div class="col-sm-3">
+   	    <label class="radio-inline">
+   	      <input name="isguidang" type="radio" id="isguidang0" value="0" <?php echo ($info[isguidang]=='0'?'checked':''); ?> >
+   	      未归档</label>
+   	    
+   	    <label class="radio-inline">
+   	      <input type="radio" name="isguidang" value="1" id="isguidang1" <?php echo ($info[isguidang]=='1'?'checked':''); ?>>
+   	      已归档</label>
+   
+    </div>
+
+  
+    
+</div>
 
 <h4 class="bor-left-bull" >购买产品信息</h4>
 <hr>
@@ -258,7 +282,7 @@
         </div>
     </div>
     
-    <label for="show_money" class="col-sm-2 control-label">账户显示金额</label>
+    <label for="show_money" class="col-sm-2 control-label">充值百度币</label>
     <div class="col-sm-2">      
 		<div class="input-group">
         <input type="text" class="form-control" name="show_money" id="show_money" value="<?php echo ($info[show_money]); ?>">

@@ -82,7 +82,17 @@
   
     
 </div>
+<div class="form-group">
+  
+    <label for="inputEmail3" class="col-sm-2 control-label">是否归档</label>
+    <div class="col-sm-3">
+    <label  class="control-label"><strong> <?php echo ($info[isguidang1]=='0'?'未归档':'已归档'); ?></strong></label>
+   
+    </div>
 
+  
+    
+</div>
 <h4 class="bor-left-bull" >购买产品信息</h4>
 <hr>
 

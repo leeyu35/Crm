@@ -244,7 +244,12 @@ class CustomerController extends CommonController
     public  function show(){
         $id=I('get.id');
         $Customer=M("Customer");
-        $this->info=$Customer->find($id);
+        $info=$Customer->find($id);;
+        $this->info=$info;
+        //销售
+        $submitusers=users_info($info[submituser]);
+        $this->users_info=$submitusers['name'];
+
 
         //产品线
         $product_line=M("ProductLine");
