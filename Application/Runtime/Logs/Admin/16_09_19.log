@@ -1,0 +1,1317 @@
+[ 2016-09-19T11:00:52+08:00 ] ::1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000498s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000594s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000645s ]
+
+[ 2016-09-19T11:00:52+08:00 ] ::1 /login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000390s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000474s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000522s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000099s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000175s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007976s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008028s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000435s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000473s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000597s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000636s ]
+
+[ 2016-09-19T11:00:57+08:00 ] ::1 /Admin/Public/loginrn.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000639s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000857s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000951s ]
+SQL: SHOW COLUMNS FROM `jd_users` [ RunTime:0.0737s ]
+SQL: SELECT * FROM `jd_users` WHERE ( users='123456' and password='e10adc3949ba59abbe56e057f20f883e' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `jd_log` [ RunTime:0.0276s ]
+NOTIC: [8] Use of undefined constant ip - assumed 'ip' E:\php\crm\Application\Admin\Controller\PublicController.class.php 第 32 行.
+NOTIC: [8] Use of undefined constant users - assumed 'users' E:\php\crm\Application\Admin\Controller\PublicController.class.php 第 33 行.
+NOTIC: [8] Use of undefined constant dizhi - assumed 'dizhi' E:\php\crm\Application\Admin\Controller\PublicController.class.php 第 34 行.
+NOTIC: [8] Use of undefined constant time - assumed 'time' E:\php\crm\Application\Admin\Controller\PublicController.class.php 第 35 行.
+SQL: INSERT INTO `jd_log` (`ip`,`users`,`dizhi`,`time`) VALUES ('::1','6','目前暂时没有您的IP信息,&nbsp;&nbsp;期待您的分享','1474254057') [ RunTime:0.0549s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000053s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000127s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007314s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007404s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000479s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000544s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000764s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000837s ]
+
+[ 2016-09-19T11:00:59+08:00 ] ::1 /adminIndex.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000745s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000829s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000922s ]
+SQL: SHOW COLUMNS FROM `jd_groupl` [ RunTime:0.0999s ]
+SQL: SELECT * FROM `jd_groupl` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `jd_diankuan` [ RunTime:0.0348s ]
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0405s ]
+SQL: SHOW COLUMNS FROM `jd_contract` [ RunTime:0.0212s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module = '/Admin/Contract' ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` WHERE ( audit_1 =0 and isxufei=0 ) LIMIT 1   [ RunTime:0.0005s ]
+NOTIC: [8] Undefined variable: rest E:\php\crm\Application\Admin\Common\function.php 第 179 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` WHERE ( audit_2 =0  and isxufei=0 ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` WHERE ( audit_1 =0 and isxufei=1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` WHERE ( audit_2 =0  and isxufei=1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module = '/Admin/Diankuan' ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_diankuan` WHERE ( audit_1 =0  ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_diankuan` WHERE ( audit_2 =0  ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jd_refund` [ RunTime:0.0147s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module = '/Admin/Refund' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_refund` WHERE ( audit_1 =0  ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_refund` WHERE ( audit_2 =0  ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jd_invoice` [ RunTime:0.0310s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module = '/Admin/Invoice' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_invoice` WHERE ( audit_1 =0  ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_invoice` WHERE ( audit_2 =0  ) LIMIT 1   [ RunTime:0.0023s ]
+SQL: SHOW COLUMNS FROM `jd_refund_invoice` [ RunTime:0.0367s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module = '/Admin/RefundInvoice' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_refund_invoice` WHERE ( audit_1 =0  ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_refund_invoice` WHERE ( audit_2 =0  ) LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000288s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000360s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.016349s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.016421s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000349s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000387s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000838s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000919s ]
+
+[ 2016-09-19T11:01:00+08:00 ] ::1 /Admin/Public/usermessage.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000633s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000846s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000932s ]
+SQL: SHOW COLUMNS FROM `jd_groupl` [ RunTime:0.0467s ]
+SQL: SELECT * FROM `jd_groupl` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `jd_groupl` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jd_diankuan` [ RunTime:0.1447s ]
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.2213s ]
+SQL: SHOW COLUMNS FROM `jd_contract` [ RunTime:0.2134s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module = '/Admin/Contract' ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` WHERE ( audit_1 =0 and isxufei=0 ) LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: rest E:\php\crm\Application\Admin\Common\function.php 第 179 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` WHERE ( audit_2 =0  and isxufei=0 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` WHERE ( audit_1 =0 and isxufei=1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` WHERE ( audit_2 =0  and isxufei=1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module = '/Admin/Diankuan' ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_diankuan` WHERE ( audit_1 =0  ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_diankuan` WHERE ( audit_2 =0  ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jd_refund` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module = '/Admin/Refund' ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_refund` WHERE ( audit_1 =0  ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_refund` WHERE ( audit_2 =0  ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jd_invoice` [ RunTime:0.0056s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module = '/Admin/Invoice' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_invoice` WHERE ( audit_1 =0  ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_invoice` WHERE ( audit_2 =0  ) LIMIT 1   [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `jd_refund_invoice` [ RunTime:0.0085s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module = '/Admin/RefundInvoice' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_refund_invoice` WHERE ( audit_1 =0  ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_refund_invoice` WHERE ( audit_2 =0  ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module = '/Admin/Contract' ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` WHERE ( audit_1 =0 and isxufei=0 ) LIMIT 1   [ RunTime:0.0004s ]
+NOTIC: [8] Undefined variable: rest E:\php\crm\Application\Admin\Controller\PublicController.class.php 第 80 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` WHERE ( audit_2 =0  and isxufei=0 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` WHERE ( audit_1 =0 and isxufei=1 ) LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: rest2 E:\php\crm\Application\Admin\Controller\PublicController.class.php 第 98 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` WHERE ( audit_2 =0  and isxufei=1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module = '/Admin/Diankuan' ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_diankuan` WHERE ( audit_1 =0  ) LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: rest3 E:\php\crm\Application\Admin\Controller\PublicController.class.php 第 116 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_diankuan` WHERE ( audit_2 =0  ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module = '/Admin/Refund' ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_refund` WHERE ( audit_1 =0  ) LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: rest4 E:\php\crm\Application\Admin\Controller\PublicController.class.php 第 134 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_refund` WHERE ( audit_2 =0  ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module = '/Admin/Invoice' ) LIMIT 1   [ RunTime:0.0017s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_invoice` WHERE ( audit_1 =0  ) LIMIT 1   [ RunTime:0.0004s ]
+NOTIC: [8] Undefined variable: rest5 E:\php\crm\Application\Admin\Controller\PublicController.class.php 第 153 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_invoice` WHERE ( audit_2 =0  ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module = '/Admin/RefundInvoice' ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_refund_invoice` WHERE ( audit_1 =0  ) LIMIT 1   [ RunTime:0.0011s ]
+NOTIC: [8] Undefined variable: rest6 E:\php\crm\Application\Admin\Controller\PublicController.class.php 第 171 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_refund_invoice` WHERE ( audit_2 =0  ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `jd_email` [ RunTime:0.0620s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_email` WHERE ( s_users=6 and state =0 ) ORDER BY time desc LIMIT 1   [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000084s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000191s ]
+NOTIC: [8] Use of undefined constant group_name - assumed 'group_name' E:\php\crm\Application\Runtime\Cache\Admin\637b3659bdcf2d586a97bc2e902def8e.php 第 60 行.
+NOTIC: [8] Undefined variable: huikuan E:\php\crm\Application\Runtime\Cache\Admin\637b3659bdcf2d586a97bc2e902def8e.php 第 98 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009740s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009825s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000569s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000635s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000789s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000860s ]
+
+[ 2016-09-19T11:01:04+08:00 ] ::1 /Admin/Customer/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000590s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000732s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000807s ]
+NOTIC: [2048] Declaration of Admin\Controller\CustomerController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\CustomerController.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0058s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Customer' ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0646s ]
+SQL: SELECT `id`,`name` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000135s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000223s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012963s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013047s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000513s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000576s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000901s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000992s ]
+
+[ 2016-09-19T11:01:05+08:00 ] ::1 /Admin/Contract/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000394s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000537s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000592s ]
+NOTIC: [2048] Declaration of Admin\Controller\ContractController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\ContractController.class.php 第 11 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0063s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Contract' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0052s ]
+SQL: SELECT `id`,`name`,`title` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jd_agent_company` [ RunTime:0.0276s ]
+SQL: SELECT `id`,`companyname`,`title` FROM `jd_agent_company` ORDER BY id asc  [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000109s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000194s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011500s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011595s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000487s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000542s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000762s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000837s ]
+
+[ 2016-09-19T11:01:16+08:00 ] ::1 /Admin/Contract/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000591s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000690s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000767s ]
+NOTIC: [2048] Declaration of Admin\Controller\ContractController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\ContractController.class.php 第 11 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0037s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Contract' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0051s ]
+SQL: SELECT `id`,`name`,`title` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jd_contract` [ RunTime:0.0069s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Contract' ) LIMIT 1   [ RunTime:0.0004s ]
+NOTIC: [8] Undefined variable: where E:\php\crm\Application\Admin\Controller\ContractController.class.php 第 85 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` a left join jd_customer b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id  WHERE ( a.isxufei='0' and a.id!='hjd' ) LIMIT 1   [ RunTime:0.0381s ]
+NOTIC: [8] Undefined variable: where E:\php\crm\Application\Admin\Controller\ContractController.class.php 第 88 行.
+SQL: SELECT a.id,a.advertiser as aid,a.contract_no,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name FROM `jd_contract` a left join jd_customer b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id  WHERE ( a.isxufei='0' and a.id!='hjd' ) ORDER BY ctime desc LIMIT 0,10   [ RunTime:0.0014s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000095s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000172s ]
+NOTIC: [8] Undefined variable: type E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 25 行.
+NOTIC: [8] Undefined variable: type E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 26 行.
+NOTIC: [8] Undefined variable: ser_txt E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 31 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 35 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 36 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 37 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: time_start E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 45 行.
+NOTIC: [8] Undefined variable: time_end E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 48 行.
+NOTIC: [8] Undefined variable: ser_txt E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 51 行.
+NOTIC: [8] Undefined variable: time_end E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 51 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant audit_2 - assumed 'audit_2' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant audit_2 - assumed 'audit_2' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant audit_2 - assumed 'audit_2' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant audit_2 - assumed 'audit_2' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant audit_2 - assumed 'audit_2' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.018004s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.018071s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000378s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000435s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000766s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000832s ]
+
+[ 2016-09-19T11:01:19+08:00 ] ::1 /Admin/Renew/index/id/25.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000483s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000549s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000590s ]
+NOTIC: [2048] Declaration of Admin\Controller\RenewController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 13 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0034s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Renew' ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jd_contract` [ RunTime:0.0048s ]
+SQL: SELECT a.*,b.advertiser as gongsi,c.name FROM `jd_contract` a left join jd_customer b on a.advertiser=b.id left join jd_product_line c on a.product_line = c.id  WHERE ( a.id=25 ) LIMIT 1   [ RunTime:0.0008s ]
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 19 行.
+NOTIC: [8] Use of undefined constant audit_2 - assumed 'audit_2' E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 19 行.
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Renew' ) LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: where E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 79 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` a left join jd_customer b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id  WHERE ( a.xf_hetonghao='LZAD_SEM_2016091801' and a.id!='hjd' ) LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: where E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 82 行.
+SQL: SELECT a.id,a.advertiser as aid,a.contract_no,a.account,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name FROM `jd_contract` a left join jd_customer b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id  WHERE ( a.xf_hetonghao='LZAD_SEM_2016091801'  and a.id!='hjd' ) ORDER BY ctime desc LIMIT 0,10   [ RunTime:0.0007s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000047s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000091s ]
+NOTIC: [8] Use of undefined constant gongsi - assumed 'gongsi' E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 20 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 20 行.
+NOTIC: [8] Undefined variable: type E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 25 行.
+NOTIC: [8] Undefined variable: ser_txt E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 29 行.
+NOTIC: [8] Undefined variable: time_start E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 32 行.
+NOTIC: [8] Undefined variable: time_end E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 35 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 38 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 39 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 40 行.
+NOTIC: [8] Undefined variable: ser_txt E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 44 行.
+NOTIC: [8] Undefined variable: time_end E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 44 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 64 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 65 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 66 行.
+NOTIC: [8] Use of undefined constant account - assumed 'account' E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 67 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 69 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 70 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 77 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.086369s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.086424s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000356s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000389s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000450s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000483s ]
+
+[ 2016-09-19T11:01:30+08:00 ] ::1 /Admin/Renew/updata/id/26/yid/25.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000499s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000536s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000590s ]
+NOTIC: [2048] Declaration of Admin\Controller\RenewController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 13 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0083s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Renew' ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jd_contract` [ RunTime:0.0038s ]
+SQL: SELECT a.*,b.advertiser as gongsi,c.name FROM `jd_contract` a left join jd_customer b on a.advertiser=b.id left join jd_product_line c on a.product_line = c.id  WHERE ( a.id=26 ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0133s ]
+SQL: SELECT `id`,`name`,`title` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jd_agent_company` [ RunTime:0.0039s ]
+SQL: SELECT `id`,`companyname`,`title` FROM `jd_agent_company` ORDER BY id asc  [ RunTime:0.0003s ]
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 220 行.
+SQL: SHOW COLUMNS FROM `jd_customer` [ RunTime:0.0039s ]
+SQL: SELECT * FROM `jd_customer` WHERE `id` = 10 LIMIT 1   [ RunTime:0.0005s ]
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 221 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000095s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000146s ]
+NOTIC: [8] Use of undefined constant gongsi - assumed 'gongsi' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 125 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 125 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 128 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 129 行.
+NOTIC: [8] Use of undefined constant submituser - assumed 'submituser' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 130 行.
+NOTIC: [8] Use of undefined constant agent_company - assumed 'agent_company' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 131 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 132 行.
+NOTIC: [8] Use of undefined constant type - assumed 'type' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 133 行.
+NOTIC: [8] Use of undefined constant gongsi - assumed 'gongsi' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 142 行.
+NOTIC: [8] Use of undefined constant agent_company - assumed 'agent_company' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 149 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 149 行.
+NOTIC: [8] Use of undefined constant agent_company - assumed 'agent_company' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 149 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 149 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 161 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 168 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 222 行.
+NOTIC: [8] Use of undefined constant rebates_proportion - assumed 'rebates_proportion' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 230 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 238 行.
+NOTIC: [8] Use of undefined constant contract_start - assumed 'contract_start' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 248 行.
+NOTIC: [8] Use of undefined constant contract_end - assumed 'contract_end' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 251 行.
+NOTIC: [8] Use of undefined constant account - assumed 'account' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 262 行.
+NOTIC: [8] Use of undefined constant appname - assumed 'appname' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 267 行.
+NOTIC: [8] Use of undefined constant payment_type - assumed 'payment_type' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 280 行.
+NOTIC: [8] Use of undefined constant payment_type - assumed 'payment_type' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 281 行.
+NOTIC: [8] Use of undefined constant payment_time - assumed 'payment_time' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 287 行.
+NOTIC: [8] Use of undefined constant fk_money - assumed 'fk_money' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 293 行.
+NOTIC: [8] Use of undefined constant note - assumed 'note' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 304 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 314 行.
+NOTIC: [8] Use of undefined constant audit_2 - assumed 'audit_2' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 315 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 324 行.
+NOTIC: [8] Use of undefined constant audit_2 - assumed 'audit_2' E:\php\crm\Application\Runtime\Cache\Admin\4c12014a2fc2d6c7e89b559f1b45068f.php 第 325 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.069732s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.069771s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000388s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000420s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000548s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000596s ]
+
+[ 2016-09-19T11:02:03+08:00 ] ::1 /Admin/Renew/add/id/25.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000491s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000522s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000563s ]
+NOTIC: [2048] Declaration of Admin\Controller\RenewController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 13 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0038s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Renew' ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jd_contract` [ RunTime:0.0052s ]
+SQL: SELECT a.*,b.advertiser as gongsi,c.name FROM `jd_contract` a left join jd_customer b on a.advertiser=b.id left join jd_product_line c on a.product_line = c.id  WHERE ( a.id=25 ) LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0034s ]
+SQL: SELECT `id`,`name`,`title` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jd_agent_company` [ RunTime:0.0037s ]
+SQL: SELECT `id`,`companyname`,`title` FROM `jd_agent_company` ORDER BY id asc  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000098s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000140s ]
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 34 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 34 行.
+NOTIC: [8] Use of undefined constant gongsi - assumed 'gongsi' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 145 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 145 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 148 行.
+NOTIC: [8] Use of undefined constant submituser - assumed 'submituser' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 149 行.
+NOTIC: [8] Use of undefined constant agent_company - assumed 'agent_company' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 150 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 151 行.
+NOTIC: [8] Use of undefined constant type - assumed 'type' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 152 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 153 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 154 行.
+NOTIC: [8] Use of undefined constant gongsi - assumed 'gongsi' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 163 行.
+NOTIC: [8] Use of undefined constant agent_company - assumed 'agent_company' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 170 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 170 行.
+NOTIC: [8] Use of undefined constant agent_company - assumed 'agent_company' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 170 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 170 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant account - assumed 'account' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 287 行.
+NOTIC: [8] Use of undefined constant appname - assumed 'appname' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 292 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.044757s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.044800s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000358s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000389s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000596s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000643s ]
+
+[ 2016-09-19T11:02:03+08:00 ] ::1 /Admin/Renew/Contract_num.html?advertiser=10&on=LZAD_SEM_2016091801
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000712s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001075s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001230s ]
+NOTIC: [2048] Declaration of Admin\Controller\RenewController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 13 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0505s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Renew' ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jd_contract` [ RunTime:0.0043s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` WHERE ( advertiser=10 and xf_hetonghao='LZAD_SEM_2016091801' ) LIMIT 1   [ RunTime:0.0004s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000750s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000815s ]
+
+[ 2016-09-19T11:04:24+08:00 ] ::1 /Admin/Renew/add/id/25.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000493s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000597s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000644s ]
+NOTIC: [2048] Declaration of Admin\Controller\RenewController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 13 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0088s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Renew' ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `jd_contract` [ RunTime:0.0061s ]
+SQL: SELECT a.*,b.advertiser as gongsi,c.name FROM `jd_contract` a left join jd_customer b on a.advertiser=b.id left join jd_product_line c on a.product_line = c.id  WHERE ( a.id=25 ) LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0087s ]
+SQL: SELECT `id`,`name`,`title` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jd_agent_company` [ RunTime:0.0036s ]
+SQL: SELECT `id`,`companyname`,`title` FROM `jd_agent_company` ORDER BY id asc  [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000105s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000202s ]
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 34 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 34 行.
+NOTIC: [8] Use of undefined constant gongsi - assumed 'gongsi' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 145 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 145 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 148 行.
+NOTIC: [8] Use of undefined constant submituser - assumed 'submituser' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 149 行.
+NOTIC: [8] Use of undefined constant agent_company - assumed 'agent_company' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 150 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 151 行.
+NOTIC: [8] Use of undefined constant type - assumed 'type' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 152 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 153 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 154 行.
+NOTIC: [8] Use of undefined constant gongsi - assumed 'gongsi' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 163 行.
+NOTIC: [8] Use of undefined constant agent_company - assumed 'agent_company' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 170 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 170 行.
+NOTIC: [8] Use of undefined constant agent_company - assumed 'agent_company' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 170 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 170 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant account - assumed 'account' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 287 行.
+NOTIC: [8] Use of undefined constant appname - assumed 'appname' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 292 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012475s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012559s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000850s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000931s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001278s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001401s ]
+
+[ 2016-09-19T11:04:24+08:00 ] ::1 /Admin/Renew/Contract_num.html?advertiser=10&on=LZAD_SEM_2016091801
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000903s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000893s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000978s ]
+NOTIC: [2048] Declaration of Admin\Controller\RenewController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 13 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0869s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Renew' ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jd_contract` [ RunTime:0.0051s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` WHERE ( advertiser=10 and xf_hetonghao='LZAD_SEM_2016091801' ) LIMIT 1   [ RunTime:0.0004s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000690s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000744s ]
+
+[ 2016-09-19T11:15:40+08:00 ] ::1 /Admin/Contract/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000442s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000793s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000868s ]
+NOTIC: [2048] Declaration of Admin\Controller\ContractController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\ContractController.class.php 第 11 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0080s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Contract' ) LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0047s ]
+SQL: SELECT `id`,`name`,`title` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `jd_agent_company` [ RunTime:0.0100s ]
+SQL: SELECT `id`,`companyname`,`title` FROM `jd_agent_company` ORDER BY id asc  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000101s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000165s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011821s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011873s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000390s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000426s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000698s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000753s ]
+
+[ 2016-09-19T11:17:03+08:00 ] ::1 /Admin/Contract/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000632s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000562s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000606s ]
+NOTIC: [2048] Declaration of Admin\Controller\ContractController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\ContractController.class.php 第 11 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0074s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Contract' ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0039s ]
+SQL: SELECT `id`,`name`,`title` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jd_agent_company` [ RunTime:0.0127s ]
+SQL: SELECT `id`,`companyname`,`title` FROM `jd_agent_company` ORDER BY id asc  [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000075s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000118s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008892s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008940s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000404s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000440s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000526s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000573s ]
+
+[ 2016-09-19T11:22:16+08:00 ] ::1 /Admin/Contract/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000034s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001809s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000617s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000673s ]
+NOTIC: [2048] Declaration of Admin\Controller\ContractController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\ContractController.class.php 第 11 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0057s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Contract' ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0041s ]
+SQL: SELECT `id`,`name`,`title` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jd_contract` [ RunTime:0.0041s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Contract' ) LIMIT 1   [ RunTime:0.0004s ]
+NOTIC: [8] Undefined variable: where E:\php\crm\Application\Admin\Controller\ContractController.class.php 第 85 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` a left join jd_customer b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id  WHERE ( a.isxufei='0' and a.id!='hjd' ) LIMIT 1   [ RunTime:0.0004s ]
+NOTIC: [8] Undefined variable: where E:\php\crm\Application\Admin\Controller\ContractController.class.php 第 88 行.
+SQL: SELECT a.id,a.advertiser as aid,a.contract_no,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name FROM `jd_contract` a left join jd_customer b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id  WHERE ( a.isxufei='0' and a.id!='hjd' ) ORDER BY ctime desc LIMIT 0,10   [ RunTime:0.0006s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000053s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000094s ]
+NOTIC: [8] Undefined variable: type E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 25 行.
+NOTIC: [8] Undefined variable: type E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 26 行.
+NOTIC: [8] Undefined variable: ser_txt E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 31 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 35 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 36 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 37 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: time_start E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 45 行.
+NOTIC: [8] Undefined variable: time_end E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 48 行.
+NOTIC: [8] Undefined variable: ser_txt E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 51 行.
+NOTIC: [8] Undefined variable: time_end E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 51 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant audit_2 - assumed 'audit_2' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant audit_2 - assumed 'audit_2' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant audit_2 - assumed 'audit_2' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant audit_2 - assumed 'audit_2' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant audit_2 - assumed 'audit_2' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015724s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015764s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000469s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000501s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000745s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000793s ]
+
+[ 2016-09-19T11:22:17+08:00 ] ::1 /Admin/Contract/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000470s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000560s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000607s ]
+NOTIC: [2048] Declaration of Admin\Controller\ContractController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\ContractController.class.php 第 11 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0076s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Contract' ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0032s ]
+SQL: SELECT `id`,`name`,`title` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jd_agent_company` [ RunTime:0.0136s ]
+SQL: SELECT `id`,`companyname`,`title` FROM `jd_agent_company` ORDER BY id asc  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000077s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000125s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008827s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008879s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000407s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000463s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001859s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002097s ]
+
+[ 2016-09-19T11:22:18+08:00 ] ::1 /Admin/Contract/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000488s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000616s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000693s ]
+NOTIC: [2048] Declaration of Admin\Controller\ContractController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\ContractController.class.php 第 11 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0073s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Contract' ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0038s ]
+SQL: SELECT `id`,`name`,`title` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jd_contract` [ RunTime:0.0136s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Contract' ) LIMIT 1   [ RunTime:0.0004s ]
+NOTIC: [8] Undefined variable: where E:\php\crm\Application\Admin\Controller\ContractController.class.php 第 85 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` a left join jd_customer b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id  WHERE ( a.isxufei='0' and a.id!='hjd' ) LIMIT 1   [ RunTime:0.0004s ]
+NOTIC: [8] Undefined variable: where E:\php\crm\Application\Admin\Controller\ContractController.class.php 第 88 行.
+SQL: SELECT a.id,a.advertiser as aid,a.contract_no,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name FROM `jd_contract` a left join jd_customer b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id  WHERE ( a.isxufei='0' and a.id!='hjd' ) ORDER BY ctime desc LIMIT 0,10   [ RunTime:0.0012s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000052s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000103s ]
+NOTIC: [8] Undefined variable: type E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 25 行.
+NOTIC: [8] Undefined variable: type E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 26 行.
+NOTIC: [8] Undefined variable: ser_txt E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 31 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 35 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 36 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 37 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: type3 E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 42 行.
+NOTIC: [8] Undefined variable: time_start E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 45 行.
+NOTIC: [8] Undefined variable: time_end E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 48 行.
+NOTIC: [8] Undefined variable: ser_txt E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 51 行.
+NOTIC: [8] Undefined variable: time_end E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 51 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant audit_2 - assumed 'audit_2' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant audit_2 - assumed 'audit_2' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant audit_2 - assumed 'audit_2' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant audit_2 - assumed 'audit_2' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 70 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 71 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 72 行.
+NOTIC: [8] Use of undefined constant show_money - assumed 'show_money' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 73 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 75 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 76 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+NOTIC: [8] Use of undefined constant audit_2 - assumed 'audit_2' E:\php\crm\Application\Runtime\Cache\Admin\03c5cf90eb9d630d38f4b9a280817a96.php 第 83 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.018477s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.018530s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000509s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000549s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000620s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000683s ]
+
+[ 2016-09-19T11:22:20+08:00 ] ::1 /Admin/Renew/index/id/25.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000441s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000526s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000578s ]
+NOTIC: [2048] Declaration of Admin\Controller\RenewController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 13 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0037s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Renew' ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jd_contract` [ RunTime:0.0050s ]
+SQL: SELECT a.*,b.advertiser as gongsi,c.name FROM `jd_contract` a left join jd_customer b on a.advertiser=b.id left join jd_product_line c on a.product_line = c.id  WHERE ( a.id=25 ) LIMIT 1   [ RunTime:0.0006s ]
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 19 行.
+NOTIC: [8] Use of undefined constant audit_2 - assumed 'audit_2' E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 19 行.
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Renew' ) LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: where E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 79 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` a left join jd_customer b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id  WHERE ( a.xf_hetonghao='LZAD_SEM_2016091801' and a.id!='hjd' ) LIMIT 1   [ RunTime:0.0004s ]
+NOTIC: [8] Undefined variable: where E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 82 行.
+SQL: SELECT a.id,a.advertiser as aid,a.contract_no,a.account,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name FROM `jd_contract` a left join jd_customer b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id  WHERE ( a.xf_hetonghao='LZAD_SEM_2016091801'  and a.id!='hjd' ) ORDER BY ctime desc LIMIT 0,10   [ RunTime:0.0006s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000052s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000106s ]
+NOTIC: [8] Use of undefined constant gongsi - assumed 'gongsi' E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 20 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 20 行.
+NOTIC: [8] Undefined variable: type E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 25 行.
+NOTIC: [8] Undefined variable: ser_txt E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 29 行.
+NOTIC: [8] Undefined variable: time_start E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 32 行.
+NOTIC: [8] Undefined variable: time_end E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 35 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 38 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 39 行.
+NOTIC: [8] Undefined variable: type2 E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 40 行.
+NOTIC: [8] Undefined variable: ser_txt E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 44 行.
+NOTIC: [8] Undefined variable: time_end E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 44 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 64 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 65 行.
+NOTIC: [8] Use of undefined constant contract_money - assumed 'contract_money' E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 66 行.
+NOTIC: [8] Use of undefined constant account - assumed 'account' E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 67 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 69 行.
+NOTIC: [8] Use of undefined constant ctime - assumed 'ctime' E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 70 行.
+NOTIC: [8] Use of undefined constant audit_1 - assumed 'audit_1' E:\php\crm\Application\Runtime\Cache\Admin\ac63b9eb429867d96ffebfa761f166ea.php 第 77 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010119s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010166s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000396s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000428s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000522s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000555s ]
+
+[ 2016-09-19T11:22:22+08:00 ] ::1 /Admin/Renew/add/id/25.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000456s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000533s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000578s ]
+NOTIC: [2048] Declaration of Admin\Controller\RenewController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 13 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0052s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Renew' ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jd_contract` [ RunTime:0.0048s ]
+SQL: SELECT a.*,b.advertiser as gongsi,c.name FROM `jd_contract` a left join jd_customer b on a.advertiser=b.id left join jd_product_line c on a.product_line = c.id  WHERE ( a.id=25 ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0036s ]
+SQL: SELECT `id`,`name`,`title` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jd_agent_company` [ RunTime:0.0045s ]
+SQL: SELECT `id`,`companyname`,`title` FROM `jd_agent_company` ORDER BY id asc  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000075s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000120s ]
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 34 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 34 行.
+NOTIC: [8] Use of undefined constant gongsi - assumed 'gongsi' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 145 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 145 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 148 行.
+NOTIC: [8] Use of undefined constant submituser - assumed 'submituser' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 149 行.
+NOTIC: [8] Use of undefined constant agent_company - assumed 'agent_company' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 150 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 151 行.
+NOTIC: [8] Use of undefined constant type - assumed 'type' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 152 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 153 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 154 行.
+NOTIC: [8] Use of undefined constant gongsi - assumed 'gongsi' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 163 行.
+NOTIC: [8] Use of undefined constant agent_company - assumed 'agent_company' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 170 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 170 行.
+NOTIC: [8] Use of undefined constant agent_company - assumed 'agent_company' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 170 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 170 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 183 行.
+NOTIC: [8] Use of undefined constant account - assumed 'account' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 287 行.
+NOTIC: [8] Use of undefined constant appname - assumed 'appname' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 292 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010759s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010800s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000375s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000407s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000563s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000610s ]
+
+[ 2016-09-19T11:22:22+08:00 ] ::1 /Admin/Renew/Contract_num.html?advertiser=10&on=LZAD_SEM_2016091801
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000675s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000691s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000757s ]
+NOTIC: [2048] Declaration of Admin\Controller\RenewController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 13 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0047s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Renew' ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jd_contract` [ RunTime:0.0045s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` WHERE ( advertiser=10 and xf_hetonghao='LZAD_SEM_2016091801' ) LIMIT 1   [ RunTime:0.0004s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000746s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000805s ]
+
+[ 2016-09-19T11:25:01+08:00 ] ::1 /Admin/Renew/add/id/25.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000032s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001017s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000695s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000751s ]
+NOTIC: [2048] Declaration of Admin\Controller\RenewController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 13 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0076s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Renew' ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jd_contract` [ RunTime:0.0054s ]
+SQL: SELECT a.*,b.advertiser as gongsi,c.name FROM `jd_contract` a left join jd_customer b on a.advertiser=b.id left join jd_product_line c on a.product_line = c.id  WHERE ( a.id=25 ) LIMIT 1   [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `jd_product_line` [ RunTime:0.0101s ]
+SQL: SELECT `id`,`name`,`title` FROM `jd_product_line` ORDER BY id asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jd_agent_company` [ RunTime:0.0036s ]
+SQL: SELECT `id`,`companyname`,`title` FROM `jd_agent_company` ORDER BY id asc  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000161s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000237s ]
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 34 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 34 行.
+NOTIC: [8] Use of undefined constant gongsi - assumed 'gongsi' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 153 行.
+NOTIC: [8] Use of undefined constant name - assumed 'name' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 153 行.
+NOTIC: [8] Use of undefined constant advertiser - assumed 'advertiser' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 156 行.
+NOTIC: [8] Use of undefined constant submituser - assumed 'submituser' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 157 行.
+NOTIC: [8] Use of undefined constant agent_company - assumed 'agent_company' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 158 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 159 行.
+NOTIC: [8] Use of undefined constant type - assumed 'type' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 160 行.
+NOTIC: [8] Use of undefined constant contract_no - assumed 'contract_no' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 161 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 162 行.
+NOTIC: [8] Use of undefined constant gongsi - assumed 'gongsi' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 171 行.
+NOTIC: [8] Use of undefined constant agent_company - assumed 'agent_company' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 178 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 178 行.
+NOTIC: [8] Use of undefined constant agent_company - assumed 'agent_company' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 178 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 178 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant product_line - assumed 'product_line' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 191 行.
+NOTIC: [8] Use of undefined constant account - assumed 'account' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 295 行.
+NOTIC: [8] Use of undefined constant appname - assumed 'appname' E:\php\crm\Application\Runtime\Cache\Admin\331187845744fd1be8da764a765f868f.php 第 300 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011684s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011738s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000464s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000496s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000645s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000692s ]
+
+[ 2016-09-19T11:25:01+08:00 ] ::1 /Admin/Renew/Contract_num.html?advertiser=10&on=LZAD_SEM_2016091801
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000749s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001032s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001140s ]
+NOTIC: [2048] Declaration of Admin\Controller\RenewController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') E:\php\crm\Application\Admin\Controller\RenewController.class.php 第 13 行.
+SQL: SHOW COLUMNS FROM `jd_rbac` [ RunTime:0.0043s ]
+SQL: SELECT * FROM `jd_rbac` WHERE ( module='/Admin/Renew' ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jd_contract` [ RunTime:0.0064s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `jd_contract` WHERE ( advertiser=10 and xf_hetonghao='LZAD_SEM_2016091801' ) LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000841s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000912s ]
+

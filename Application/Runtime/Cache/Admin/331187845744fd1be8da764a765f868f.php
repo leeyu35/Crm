@@ -67,6 +67,14 @@
 			
 			
 		}
+		//自动换算百度币
+		$("#rebates_proportion").keyup(function(){
+			jr=$("#contract_money").val();	
+			bl=$("#rebates_proportion").val();
+			$("#show_money").val(jr*(1+(bl/100)));
+			
+		})
+		
 		$("input[name='type']").change(function(){
 			if($(this).val()=='2')
 			{
