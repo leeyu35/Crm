@@ -64,6 +64,9 @@ class CustomerController extends CommonController
             $contact_one=$contact->field('name,tel')->where("customer_id=$val[id]")->find();
             $list[$key]['contact']=$contact_one['name'];
             $list[$key]['tel']=$contact_one['tel'];
+            //提交人
+            $uindo=users_info($val['submituser']);
+            $list[$key]['submituser']=$uindo[name];
         }
         $this->list=$list;
         $this->assign('page',$show);// 赋值分页输出
@@ -213,7 +216,7 @@ class CustomerController extends CommonController
 
         if($Customer->where("id=$id")->save())
         {
-            
+
             $this->success('修改成功',U('index'));
         }else{
             $this->error('修改失败');
