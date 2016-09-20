@@ -43,7 +43,7 @@ class PublicController extends Controller
         }
         //登录成功欢迎页面
         public  function index(){
-            if(session("u_id")!='')
+            if(session("u_id")=='')
             {
                 $this->error('您还没有登录',U("/login"));
                 exit;
