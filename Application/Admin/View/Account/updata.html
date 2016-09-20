@@ -38,39 +38,15 @@
 
 				
 		$("#formid").submit(function(){
-	
-		if($("#gongsi").val()=="")
+		if($("#appname").val()=="")
 		{
-			alert("请填写公司名称");
-			$("#gongsi").select();
+			alert("请填写APP名称");
+			$("#appname").select();
 			return false;	
 		}	
-		if($("#contract_no").val()=="")
+		if($("#promote_url").val()=="")
 		{
-			alert("请选择合同编号");
-			return false;	
-		}	
-		if($("#r_money").val()=="")
-		{
-			alert("请填写退款金额");
-			$("#r_money").select();
-			return false;	
-		}	
-		if($("#r_open_account").val()=="")
-		{
-			alert("请填写退款开户行");
-			$("#r_open_account").select();
-			return false;	
-		}	
-		if($("#r_account").val()=="")
-		{
-			alert("请填写退款开户账户");
-			$("#show_money").select();
-			return false;	
-		}	
-		if($("#r_time").val()=="")
-		{
-			alert("请选择退款日期");
+			alert("请填写推广URL");
 			return false;	
 		}	
 
