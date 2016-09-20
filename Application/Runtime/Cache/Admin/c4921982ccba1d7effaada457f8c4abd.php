@@ -53,7 +53,7 @@ $(document).ready(function(e) {
         <th>返点</th>
         <th>账户用户名</th>
         <th>账户密码</th>
-        <th>创建时间</th>
+        <th>主手机号</th>
         <!--<th>财务管理</th>-->	  
         <th>操作</th>	  
     </tr>
@@ -68,7 +68,7 @@ $(document).ready(function(e) {
     	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid=$info[id]");?>"><?php echo ($list[fandian]); ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid=$info[id]");?>"><?php echo ($list[a_users]); ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid=$info[id]");?>"><?php echo ($list[a_password]); ?></td>
-    	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid=$info[id]");?>"><?php echo (date("y-m-d",$list[ctime])); ?></td>
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid=$info[id]");?>"><?php echo ($list[tel]); ?></td>
        <!-- <td>
         <span style="width:20px; display:inline-block"><a href="" title="垫款">垫</a></span>|&nbsp;&nbsp;<a href="" title="垫款列表">列</a><br>
         <span style="width:20px; display:inline-block"><a href="" title="回款">回</a></span>|&nbsp;&nbsp;<a href="" title="回款列表">列</a><br>
