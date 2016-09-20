@@ -49,12 +49,12 @@ $(document).ready(function(e) {
     	<th>广告主公司名称</th>
         <th>app名称</th>
     	<th>所属行业</th>
-        <th>提交人</th>
        
         <th>联系人</th>
         <th>联系人电话</th>
         <th>城市</th>
         <th>创建时间</th>
+        <th>提交人</th>
         <th>附件</th>	  
         <th>操作</th>	  
     </tr>
@@ -64,13 +64,12 @@ $(document).ready(function(e) {
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[advertiser]}</td>
         <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[appname]}</td>
         <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[industry]}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[submituser]}</td>
     	
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[contact]}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[tel]}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[city]}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[ctime]|date="Y-m-d",###}</td>
-    	
+    	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[submituser]}</td>
         <td>
         <span><a href="{:U("addim?id=$list[id]")}" title="新增附件"><span class="glyphicon glyphicon-plus"></span></a></span>&nbsp;|&nbsp;<a href="{:U("showim?id=$list[id]")}" title="查看附件"><span class="glyphicon glyphicon-zoom-in"></span></a><br>
         </td>
