@@ -85,10 +85,15 @@ $(document).ready(function(e) {
         <span style="width:20px; display:inline-block"><a href="" title="退款">退</a></span>|&nbsp;&nbsp;<a href="" title="退款列表">列</a><br>  
         </td>-->
     	<td class="htshow" id="{:U("show?id=$list[id]")}">
-        <if condition="($list[audit_1] eq 1) AND ($list[audit_2] eq 1) ">
-        	<span class="glyphicon glyphicon-ok"></span><span class="shyes">已审核</span>
+        <if condition="$list[audit_1] eq 1">
+        	<span title="一级审核已审核" class="glyphicon glyphicon-ok"></span><span class="shyes"></span>
         <else />
-        	<span class="glyphicon glyphicon-hourglass"></span><span class="shno">待审核</span>
+        	<span title="一级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
+        </if>
+        <if condition="$list[audit_2] eq 1">
+        	<span title="二级审核已审核"  class="glyphicon glyphicon-ok"></span><span class="shyes"></span>
+        <else />
+        	<span title="二级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
         </if>
         </td>
         <td>

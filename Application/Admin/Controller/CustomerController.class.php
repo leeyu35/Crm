@@ -272,4 +272,20 @@ class CustomerController extends CommonController
         $this->display();
 
     }
+
+    //删除图片
+    public function defile(){
+        $id=I('get.id');
+
+        $file=M("File");
+        $info=$file->find($id);
+        if($file->delete($id))
+        {
+            $this->success("删除图片成功");
+            unlink(".".$info["File"]);
+        }else
+        {
+            $this->error("删除失败");
+        }
+    }
 }
