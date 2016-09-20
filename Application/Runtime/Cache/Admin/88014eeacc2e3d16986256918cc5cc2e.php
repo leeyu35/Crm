@@ -47,6 +47,7 @@ $(document).ready(function(e) {
     	<th>广告主公司名称</th>
     	<th>所属行业</th>
         <th>公司官网</th>
+        <th>app名称</th>
         <th>联系人</th>
         <th>联系人电话</th>
         <th>城市</th>
@@ -59,6 +60,8 @@ $(document).ready(function(e) {
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[advertiser]); ?></td>
         <td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[industry]); ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[website]); ?></td>
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[appname]); ?></td>
+       
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[contact]); ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[tel]); ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[city]); ?></td>
