@@ -23,6 +23,7 @@ class PublicController extends Controller
             $vo=$users->where("users='$u' and password='$p'")->find();
             if($vo)
             {
+                session(array('name'=>'session_id','expire'=>3600*12*24));
                 session("u_id",$vo['id']);  //用户ID
                 session("u_name",$vo['name']); //用户姓名
                 session("u_image",$vo['image']);//用户图片
