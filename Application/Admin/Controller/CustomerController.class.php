@@ -213,6 +213,7 @@ class CustomerController extends CommonController
 
         if($Customer->where("id=$id")->save())
         {
+            
             $this->success('修改成功',U('index'));
         }else{
             $this->error('修改失败');

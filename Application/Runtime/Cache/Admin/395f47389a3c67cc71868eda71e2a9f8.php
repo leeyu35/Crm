@@ -88,8 +88,28 @@ $(document).ready(function(e) {
       <!--<input name="industry" type="text" class="form-control" id="inputEmail3">-->
       <select name="industry"  class="form-control"  id="inputEmail5">
       <option value="<?php echo ($info[industry]); ?>" selected><?php echo ($info[industry]); ?></option>
+      <option value="旅游出行">旅游出行</option>
+      <option value="金融理财">金融理财</option>
+      <option value="视频">视频</option>
+      <option value="购物">购物</option>
+      <option value="音乐">音乐</option>
+      <option value="图像">图像</option>
+      <option value="新闻阅读">新闻阅读</option>
+      <option value="生活实用工具">生活实用工具</option>
+      <option value="系统工具">系统工具</option>
+      <option value="美化手机">美化手机</option>
+      <option value="效率办公">效率办公</option>
+      <option value="聊天社交">聊天社交</option>
+      <option value="电话通讯">电话通讯</option>
+      <option value="交通导航">交通导航</option>
+      <option value="生活服务">生活服务</option>
+      <option value="运动健康">运动健康</option>
+      <option value="教育培训">教育培训</option>
+      <option value="丽人母婴">丽人母婴</option>
+      
       <OPTION  value=机械及行业设备>机械及行业设备</OPTION><OPTION value=普通机械制造>普通机械制造</OPTION><OPTION value=通用零部件>通用零部件</OPTION><OPTION value=五金配件>五金配件</OPTION><OPTION value=金属工具>金属工具</OPTION><OPTION value=电动工具>电动工具</OPTION><OPTION value=电子元件>电子元件</OPTION><OPTION value=电子器件>电子器件</OPTION><OPTION value=照明及照明器具>照明及照明器具</OPTION><OPTION value=安全防护设备>安全防护设备</OPTION><OPTION value=包装>包装</OPTION><OPTION value=造纸及纸制品>造纸及纸制品</OPTION><OPTION value=电机、电工电器>电机、电工电器</OPTION><OPTION value=电工器材>电工器材</OPTION><OPTION value=通用仪器仪表>通用仪器仪表</OPTION><OPTION value=专用仪器仪表>专用仪器仪表</OPTION><OPTION value=交通运输设备、零部件>交通运输设备、零部件</OPTION><OPTION value=办公、文教用品>办公、文教用品</OPTION><OPTION value=数码、电脑及网络配件>数码、电脑及网络配件</OPTION><OPTION value=日常家居用品>日常家居用品</OPTION><OPTION value=木材、木制品>木材、木制品</OPTION><OPTION value=家具>家具</OPTION><OPTION value=家用电器>家用电器</OPTION><OPTION value=礼品、工艺美术品>礼品、工艺美术品</OPTION><OPTION value=食品、饮料>食品、饮料</OPTION><OPTION value=通信产品>通信产品</OPTION><OPTION value=玩具>玩具</OPTION><OPTION value=印刷设备>印刷设备</OPTION><OPTION value=运动、休闲、保健用品>运动、休闲、保健用品</OPTION><OPTION value=鞋、帽>鞋、帽</OPTION><OPTION value=服装>服装</OPTION><OPTION value=日用化学品>日用化学品</OPTION><OPTION value=农用化学品>农用化学品</OPTION><OPTION value=胶粘剂>胶粘剂</OPTION><OPTION value=染料、颜料、涂料和油墨>染料、颜料、涂料和油墨</OPTION><OPTION value=催化剂和助剂>催化剂和助剂</OPTION><OPTION value=库存精细化学品>库存精细化学品</OPTION><OPTION value=食品和饲料添加剂>食品和饲料添加剂</OPTION><OPTION value=塑料>塑料</OPTION><OPTION value=橡胶制品>橡胶制品</OPTION><OPTION value=环保、环保设备>环保、环保设备</OPTION><OPTION value=建筑、建材>建筑、建材</OPTION><OPTION value=能源>能源</OPTION><OPTION value=粮油、农制品>粮油、农制品</OPTION><OPTION value=金属>金属</OPTION><OPTION value=医药、保健及医疗设备>医药、保健及医疗设备</OPTION><OPTION value=纺织>纺织</OPTION><OPTION value=皮革>皮革</OPTION><OPTION value=煤焦化产品>煤焦化产品</OPTION><OPTION value=日常服务>日常服务</OPTION><OPTION value=广告服务>广告服务</OPTION><OPTION value=教育培训>教育培训</OPTION><OPTION value=认证>认证</OPTION><OPTION value=创意设计>创意设计</OPTION><OPTION value=物流服务>物流服务</OPTION><OPTION value=进出口代理>进出口代理</OPTION><OPTION value=维修及安装服务>维修及安装服务</OPTION><OPTION value=广告、展览器材>广告、展览器材</OPTION><OPTION value=专业录音、放音设备>专业录音、放音设备</OPTION><OPTION value=光学摄影器材>光学摄影器材</OPTION><OPTION value=编辑制作设备>编辑制作设备</OPTION><OPTION value=播出、前端设备>播出、前端设备</OPTION><OPTION value=建筑、装饰业>建筑、装饰业</OPTION><OPTION value=房地产>房地产</OPTION><OPTION value=安装工程>安装工程</OPTION><OPTION value=邮电通信>邮电通信</OPTION><OPTION value=事务所、公证>事务所、公证</OPTION><OPTION value=卫生、体育、社会、福利>卫生、体育、社会、福利</OPTION><OPTION value=公共服务业>公共服务业</OPTION><OPTION value=金融、保险>金融、保险</OPTION><OPTION value=实业公司、商业贸易>实业公司、商业贸易</OPTION><OPTION value=高新技术开发区>高新技术开发区</OPTION><OPTION value=卡类市场>卡类市场</OPTION><OPTION value=其他>其他</OPTION>
- 		</select>   
+
+ 	</select>   
     </div>
     
     <label for="inputEmail3" class="col-sm-1 control-label">公司官网</label>

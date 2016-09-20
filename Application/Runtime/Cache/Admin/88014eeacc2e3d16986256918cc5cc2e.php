@@ -61,7 +61,6 @@ $(document).ready(function(e) {
         <td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[industry]); ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[website]); ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[appname]); ?></td>
-       
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[contact]); ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[tel]); ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[city]); ?></td>
