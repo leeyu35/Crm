@@ -69,8 +69,13 @@ class DiankuanController extends CommonController
             $count      = $Diankuan->field('a.id,a.advertiser,a.contract_no,a.d_money,a.d_time,a.back_money_time,a.ctime,a.audit_1,a.audit_2,b.advertiser')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->count();// 查询满足要求的总记录数
             $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
             $show       = $Page->show();// 分页显示输出
-            $list=$Diankuan->field('a.id,a.advertiser,a.contract_no,a.d_money,a.back_money_time,a.d_time,a.ctime,a.audit_1,a.audit_2,b.advertiser')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
-
+            $list=$Diankuan->field('a.id,a.users2,a.advertiser as aid,a.advertiser,a.contract_no,a.d_money,a.back_money_time,a.d_time,a.ctime,a.audit_1,a.audit_2,b.advertiser')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
+            foreach($list as $key => $val)
+            {
+                //提交人
+                $uindo=users_info($val['users2']);
+                $list[$key]['submituser']=$uindo[name];
+            }
             $this->list=$list;
             $this->assign('page',$show);// 赋值分页输出
             $this->display();
@@ -102,7 +107,7 @@ class DiankuanController extends CommonController
         $Diankuan->d_time=strtotime($Diankuan->d_time);
         $Diankuan->back_money_time=strtotime($Diankuan->back_money_time);
         $Diankuan->ctime=time();
-
+        $Diankuan->users2=session('u_id');
 
 
         if($insid=$Diankuan->add()){
@@ -180,7 +185,7 @@ class DiankuanController extends CommonController
         $Diankuan->d_time=strtotime($Diankuan->d_time);
         $Diankuan->back_money_time=strtotime($Diankuan->back_money_time);
         $Diankuan->ctime=I('post.time')+1;
-
+        $Diankuan->users2=session('u_id');
         if($Diankuan->where("id=$id")->save())
         {
 
@@ -258,7 +263,9 @@ class DiankuanController extends CommonController
         //销售
         $submitusers=users_info($info[submituser]);
         $this->users_info=$submitusers['name'];
-
+        //提交人
+        $submitusers2=users_info($info[users2]);
+        $this->users_info2=$submitusers2['name'];
         //代理公司
         $agentcompany=M("AgentCompany");
         $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();

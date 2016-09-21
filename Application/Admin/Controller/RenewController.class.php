@@ -79,7 +79,13 @@ class RenewController extends  CommonController
         $count      = $hetong->field('a.id,a.advertiser,a.contract_no,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.xf_hetonghao='$info[contract_no]' and ".$q_where.$where)->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
-        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.account,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.xf_hetonghao='$info[contract_no]'  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
+        $list=$hetong->field('a.id,a.advertiser as aid,a.users2,a.rebates_proportion,a.contract_no,a.account,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.xf_hetonghao='$info[contract_no]'  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
+        foreach($list as $key => $val)
+        {
+            //提交人
+            $uindo=users_info($val['users2']);
+            $list[$key]['submituser']=$uindo[name];
+        }
         $this->list=$list;
         $this->assign('page',$show);// 赋值分页输出
         $this->display();
@@ -146,9 +152,15 @@ class RenewController extends  CommonController
         $count      = $hetong->field('a.id,a.advertiser,a.contract_no,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei=1 and ".$q_where.$where)->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
-        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.account,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei=1  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
+        $list=$hetong->field('a.id,a.advertiser as aid,a.users2,a.xf_hetonghao,a.rebates_proportion,a.contract_no,a.account,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei=1  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
         //echo $hetong->_sql();
         $this->list=$list;
+        foreach($list as $key => $val)
+        {
+            //提交人
+            $uindo=users_info($val['users2']);
+            $list[$key]['submituser']=$uindo[name];
+        }
         $this->assign('page',$show);// 赋值分页输出
         $this->display();
     }
@@ -189,7 +201,7 @@ class RenewController extends  CommonController
         $hetong->contract_end=strtotime($hetong->contract_end);
         $hetong->payment_time=strtotime($hetong->payment_time);
         $hetong->ctime=time();
-
+        $hetong->users2=session('u_id');
 
         if($hetong->add()){
             $this->success("添加成功",U("index?id=".I('post.htid')));
@@ -232,6 +244,7 @@ class RenewController extends  CommonController
         $hetong->contract_start=strtotime($hetong->contract_start);
         $hetong->contract_end=strtotime($hetong->contract_end);
         $hetong->payment_time=strtotime($hetong->payment_time);
+        $hetong->users2=session('u_id');
         if($hetong->where("id=$id")->save())
         {
             $this->success('修改成功',U("index?id=".I('post.htid')));
@@ -287,11 +300,19 @@ class RenewController extends  CommonController
         //销售
         $submitusers=users_info($info[submituser]);
         $this->users_info=$submitusers['name'];
+        //提交人
+        $submitusers2=users_info($info[users2]);
+        $this->users_info2=$submitusers2['name'];
         //产品线
         $product_line=M("ProductLine");
         $this->product_line_list=$product_line->field("id,name,title")->order("id asc")->select();
         //原合同
         $this->yinfo=$hetong->find(I('get.yid'));
+
+        if(I('get.yid2')){
+            $this->yinfo=array("contract_no"=>I('get.yid2'));
+
+        }
         //代理公司
         $agentcompany=M("AgentCompany");
         $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();

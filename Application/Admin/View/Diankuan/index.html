@@ -60,12 +60,13 @@ $(document).ready(function(e) {
         <th>创建时间</th>
         <th>状态</th>
         <!--<th>财务管理</th>-->	  
+        <th>提交人</th>	  
         <th>操作</th>	  
     </tr>
     <volist id="list" name="list" key="k">
     <tr>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$k}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[advertiser]}</td>
+    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}"><a href="{:U("Customer/show?id=$list[aid]")}">{$list[advertiser]}</a></td>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[contract_no]}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[d_money]}</td>
     	<!--<td>{$list[show_money]}</td>-->
@@ -88,6 +89,8 @@ $(document).ready(function(e) {
         <else />
         	<span title="二级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
         </if>
+        </td>
+        <td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[submituser]}</td>
         <td>
         <a href="{:U("updata?id=$list[id]&yid=$info[id]")}" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{:U("delete?id=$list[id]&yid=$info[id]")}" title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         </td>

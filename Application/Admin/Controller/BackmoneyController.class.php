@@ -48,8 +48,13 @@ class BackmoneyController extends CommonController
             $count      = $Diankuan->field('a.id,a.advertiser,a.b_money,a.b_time,a.ctime,b.advertiser')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->count();// 查询满足要求的总记录数
             $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
             $show       = $Page->show();// 分页显示输出
-            $list=$Diankuan->field('a.id,a.advertiser,a.b_money,a.b_time,a.ctime,b.advertiser')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
-
+            $list=$Diankuan->field('a.id,a.advertiser as aid,a.advertiser,a.b_money,a.b_time,a.ctime,a.submituser,b.advertiser')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
+            foreach($list as $key => $val)
+            {
+                //提交人
+                $uindo=users_info($val['submituser']);
+                $list[$key]['submituser']=$uindo[name];
+            }
             $this->list=$list;
             $this->assign('page',$show);// 赋值分页输出
             $this->display();

@@ -69,8 +69,13 @@ class InvoiceController extends CommonController
             $count      = $Refund->field('a.id,a.invoice_head,a.contract_no,a.money,a.ctime,a.audit_1,a.audit_2,b.advertiser')->join("a left join __CUSTOMER__ b on a.invoice_head = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->count();// 查询满足要求的总记录数
             $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
             $show       = $Page->show();// 分页显示输出
-            $list=$Refund->field('a.id,a.invoice_head,a.contract_no,a.money,a.ctime,a.audit_1,a.audit_2,b.advertiser')->join("a left join __CUSTOMER__ b on a.invoice_head = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
-
+            $list=$Refund->field('a.id,a.invoice_head as aid,a.users2,a.invoice_head,a.contract_no,a.money,a.ctime,a.audit_1,a.audit_2,b.advertiser')->join("a left join __CUSTOMER__ b on a.invoice_head = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
+            foreach($list as $key => $val)
+            {
+                //提交人
+                $uindo=users_info($val['users2']);
+                $list[$key]['submituser']=$uindo[name];
+            }
             $this->list=$list;
             $this->assign('page',$show);// 赋值分页输出
             $this->display();
@@ -117,6 +122,7 @@ class InvoiceController extends CommonController
         $Refund=M("Invoice");
         $Refund->create();
         $Refund->ctime=time();
+        $Refund->users2=session('u_id');
         if($Refund->add()){
             $this->success("申请成功",U("index"));
 
@@ -167,6 +173,7 @@ class InvoiceController extends CommonController
         }
         $Refund->create();
         $Refund->kp_time=strtotime($Refund->kp_time);
+        $Refund->users2=session('u_id');
         if($Refund->where("id=$id")->save())
         {
             $this->success('修改成功',U('index'));
@@ -220,6 +227,9 @@ class InvoiceController extends CommonController
         //销售
         $submitusers=users_info($info[submituser]);
         $this->users_info=$submitusers['name'];
+        //提交人
+        $submitusers2=users_info($info[users2]);
+        $this->users_info2=$submitusers2['name'];
         //代理公司
         $agentcompany=M("AgentCompany");
         $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
