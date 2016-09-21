@@ -200,7 +200,7 @@ class PublicController extends Controller
 
             );
             $this->lizhi=$lizhi[rand(0,8)];
-            $this->messagecount =M("Email")->where("s_users=".session('u_id')." and state =0")->order("time desc")->count();// 查询满足要求的总记录数
+            $this->messagecount =M("Email")->where("s_users=".session('u_id')." and state =0 and s_show=0 ")->order("time desc")->count();// 查询满足要求的总记录数
 
             $this->display();
         }
