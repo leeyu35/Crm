@@ -217,15 +217,18 @@ class PublicController extends Controller
             $log=M("Log");
             $users=M('Users');
 
-            $count      = $log->field('a.id,a.ip,a.dizhi,a.time,b.name,b.image,b.groupid')->join("a left join jd_users b on a.users=b.id")->count();// 查询满足要求的总记录数
+            $count      = $log->field('a.id,a.ip,a.dizhi,a.time,b.name,b.image,b.groupid')->join("a left join jd_users b on a.users=b.id")->where("b.id !=''")->count();// 查询满足要求的总记录数
             $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
             $show       = $Page->show();// 分页显示输出
-            $list=$log->field('a.id,a.ip,a.dizhi,a.time,b.name,b.image,b.groupid')->join("a left join jd_users b on a.users=b.id")->limit($Page->firstRow.','.$Page->listRows)->order("a.time desc")->select();
+            $list=$log->field('a.id,a.ip,a.dizhi,a.time,b.name,b.image,b.groupid')->join("a left join jd_users b on a.users=b.id")->where("b.id !=''")->limit($Page->firstRow.','.$Page->listRows)->order("a.time desc")->select();
 
             foreach ($list as $key=>$val)
             {
-
-               $list[$key]['groupname']=group_name($val[groupid])?group_name($val[groupid]):'用户不存在';
+                if($val[groupid])
+                {
+                    $list[$key]['groupname']=group_name($val[groupid]);
+                }
+               //$list[$key]['groupname']=group_name($val[groupid])?group_name($val[groupid]):'用户不存在';
             }
             $this->list=$list;
             $this->assign('page',$show);// 赋值分页输出
