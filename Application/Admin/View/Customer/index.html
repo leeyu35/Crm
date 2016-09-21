@@ -74,7 +74,7 @@ $(document).ready(function(e) {
         <span><a href="{:U("addim?id=$list[id]")}" title="新增附件"><span class="glyphicon glyphicon-plus"></span></a></span>&nbsp;|&nbsp;<a href="{:U("showim?id=$list[id]")}" title="查看附件"><span class="glyphicon glyphicon-zoom-in"></span></a><br>
         </td>
     	<td>
-        <a href="{:U("updata?id=$list[id]")}" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<a href="{:U("delete?id=$list[id]")}" title="删除"><span class="glyphicon glyphicon-trash"></span></a>
+        <a href="{:U("updata?id=$list[id]")}" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<a href="{:U("delete?id=$list[id]")}" {$confirm} title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         </td>
     </tr>
     </volist>

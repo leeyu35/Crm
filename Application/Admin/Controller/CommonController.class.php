@@ -86,7 +86,7 @@ class CommonController extends Controller
      //默认设置
 
         $this->web_title=C('WEB_NAME');
-
+        $this->confirm='onClick="if(confirm(\'确定要删除吗\')){return true}else{return false}"';
     }
 
 

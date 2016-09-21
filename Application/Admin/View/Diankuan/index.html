@@ -92,7 +92,7 @@ $(document).ready(function(e) {
         </td>
         <td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[submituser]}</td>
         <td>
-        <a href="{:U("updata?id=$list[id]&yid=$info[id]")}" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{:U("delete?id=$list[id]&yid=$info[id]")}" title="删除"><span class="glyphicon glyphicon-trash"></span></a>
+        <a href="{:U("updata?id=$list[id]&yid=$info[id]")}" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{:U("delete?id=$list[id]&yid=$info[id]")}" {$confirm} title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         </td>
     </tr>
     </volist>

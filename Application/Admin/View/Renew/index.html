@@ -96,7 +96,7 @@ $(document).ready(function(e) {
 
         <td>
         <!--<a href="#">发票</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">财务</a><br>-->
-        <a href="{:U("updata?id=$list[id]&yid=$info[id]")}" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{:U("delete?id=$list[id]&yid=$info[id]")}" title="删除"><span class="glyphicon glyphicon-trash"></span></a>
+        <a href="{:U("updata?id=$list[id]&yid=$info[id]")}" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{:U("delete?id=$list[id]&yid=$info[id]")}" {$confirm} title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         </td>
     </tr>
     </volist>

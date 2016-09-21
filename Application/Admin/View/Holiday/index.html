@@ -85,7 +85,7 @@ $(document).ready(function(e) {
 
         </td>
         <td>
-        <a href="{:U("delete?id=$list[id]")}" title="删除"><span class="glyphicon glyphicon-trash"></span></a>
+        <a href="{:U("delete?id=$list[id]")}" {$confirm} title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         </td>
     </tr>
     </volist>

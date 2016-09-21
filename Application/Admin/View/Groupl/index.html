@@ -25,7 +25,7 @@
     	<td>{$list[group_name]}</td>
 
     	<td>{$list[ctime]|date="Y-m-d",###}</td>
-    	<td><a href="{:U("updata?id=$list[id]")}">修改</a> <!--<a href="{:U("delete?id=$list[id]")}">删除</a>--></td>
+    	<td><a href="{:U("updata?id=$list[id]")}" title="修改"><span class="glyphicon glyphicon-pencil"></span></a> <!--<a href="{:U("delete?id=$list[id]")}">删除</a>--></td>
     </tr>
     </volist>
     
