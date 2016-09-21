@@ -224,7 +224,7 @@ class PublicController extends Controller
 
             foreach ($list as $key=>$val)
             {
-                $list[$key]['groupname']=group_name($val[groupid]);
+                $list[$key]['groupname']=group_name($val[groupid])?group_name($val[groupid]):'';
             }
             $this->list=$list;
             $this->assign('page',$show);// 赋值分页输出

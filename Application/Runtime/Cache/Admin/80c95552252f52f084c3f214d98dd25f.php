@@ -24,11 +24,11 @@
     <?php if(is_array($list)): $k = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$list): $mod = ($k % 2 );++$k;?><tr>
     	<td><?php echo ($k); ?></td>
         <td><img src="<?php echo ($list[image]); ?>" width="50" height="50" class="img-circle"/></td>
-    	<td><?php echo ($list[ip]); ?></td>
+    	<td><a href="https://www.baidu.com/baidu?wd=<?php echo ($list[ip]); ?>&tn=monline_dg&ie=utf-8"><?php echo ($list[ip]); ?></a></td>
     	<td><?php echo ($list[name]); ?></td>
     	<td><?php echo ($list[groupname]); ?></td>
     	<td><?php echo (date("Y-m-d H:i:s",$list[time])); ?></td>
-        <td><?php echo ($list[dizhi]); ?></td>
+        <td><?php echo ($list[dizhi]?$list[dizhi]:'暂无地址信息'); ?></td>
     </tr><?php endforeach; endif; else: echo "" ;endif; ?>
     
 </table>
