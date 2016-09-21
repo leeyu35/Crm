@@ -12,6 +12,7 @@
 <div class="container" style="width:100%;">
 <h3 class="bor-left-bull" >添加用户<small>Add users</small></h3>
 <hr>
+<div style="width:300px; margin-left:30px;">
 <form action="<?php echo U("addru");?>" method="post" enctype="multipart/form-data" id="addusers">
   <div class="form-group">
     <label for="exampleInputEmail1">用户名</label>
@@ -48,6 +49,7 @@
 	<hr>
   <button type="submit" class="btn btn-primary" style="width:150px;">提交</button>
 </form>
+</div>
 </div>
 
 </body>
