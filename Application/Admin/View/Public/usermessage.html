@@ -77,22 +77,22 @@
                     </span>
                     待办<br><br>
                     <a href="{:U("Contract/index?shenhe=0")}" class="btn btn-success" style="background:#693; color:#fff;">
-                    待审核合同 <span class="badge">{$hetong?$hetong:'0'}</span>
+                    待审核合同 <if condition="$hetong neq 0"><span class="badge">{$hetong?$hetong:'0'}</span></if>
                     </a>
                     <a  href="{:U("Renew/index2?shenhe=0")}"  class="btn btn-primary" >
-                    待审核续费 <span class="badge">{$xufei?$xufei:'0'}</span>
+                    待审核续费 <if condition="$xufei neq 0"> <span class="badge">{$xufei?$xufei:'0'}</span></if>
                     </a>
                     <a  href="{:U("Diankuan/index?shenhe=0")}" class="btn btn-success">
-                    待审核垫款 <span class="badge">{$diankuan?$diankuan:'0'}</span>
+                    待审核垫款 <if condition="$diankuan neq 0"> <span class="badge">{$diankuan?$diankuan:'0'}</span></if>
                     </a><br><br>
                     <a  href="{:U("Refund/index?shenhe=0")}" class="btn btn-info">
-                    待审核退款 <span class="badge">{$tuikuan?$tuikuan:'0'}</span>
+                    待审核退款 <if condition="$tuikuan neq 0"> <span class="badge">{$tuikuan?$tuikuan:'0'}</span></if>
                     </a>
                     <a href="{:U("Invoice/index?shenhe=0")}" class="btn btn-warning">
-                    待审核发票 <span class="badge">{$fapiao?$fapiao:'0'}</span>
+                    待审核发票 <if condition="$fapiao neq 0"> <span class="badge">{$fapiao?$fapiao:'0'}</span></if>
                     </a>
                     <a  href="{:U("RefundInvoice/index?shenhe=0")}"  class="btn btn-danger">
-                    待审核退票 <span class="badge">{$tuipiao?$tuipiao:'0'}</span>
+                    待审核退票 <if condition="$tuipiao neq 0"> <span class="badge">{$tuipiao?$tuipiao:'0'}</span></if>
                     </a><br>
 <br>
 					<if condition="$huikuan neq ''">
