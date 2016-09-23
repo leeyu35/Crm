@@ -283,7 +283,14 @@ class RenewController extends  CommonController
             $table=M("Contract");
             if($table->where("id=$id")->setField($type,1))
             {
-                $this->success('审核成功',U("index?id=$yid"));
+                if($yid!='')
+                {
+                    $this->success('审核成功',U("index?id=$yid"));
+                }else
+                {
+                    $this->success('审核成功',U("index2?shenhe=0"));
+                }
+
             }else
             {
                 $this->error('审核失败');
