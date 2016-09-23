@@ -74,6 +74,21 @@ function quan_where($module,$join=""){
                 }
 
             }
+            //如果是二级审核 则一级审核通过才显示
+            $array_s2=explode(",",$one['audit_2']);
+
+            if(in_array(cookie('u_groupid'),$array_s2))
+            {
+                //echo '1';
+                if($join==""){
+                    $where.=" and audit_1=1 ";
+                }else
+                {
+                    $where.=" and ".$join.".audit_1=1 ";
+                }
+
+            }
+
     }
     return $where;
 }
@@ -182,7 +197,7 @@ function daiban(){
     $array1=explode(",",$raac_hetong['audit_2']);
     if(in_array(cookie('u_groupid'),$array1))
     {
-        $ht_s2=$hetong->where("audit_2 =0  and isxufei=0")->count();
+        $ht_s2=$hetong->where("audit_2 =0  and isxufei=0  and audit_1=1")->count();
         $rest+=$ht_s2;
     }
 
@@ -199,7 +214,7 @@ function daiban(){
 
     if(in_array(cookie('u_groupid'),$array1))
     {
-        $ht_s2=$hetong->where("audit_2 =0  and isxufei=1")->count();
+        $ht_s2=$hetong->where("audit_2 =0  and isxufei=1  and audit_1=1")->count();
         $rest+=$ht_s2;
     }
 
@@ -217,7 +232,7 @@ function daiban(){
     $array1=explode(",",$raac_hetong['audit_2']);
     if(in_array(cookie('u_groupid'),$array1))
     {
-        $ht_s2=$hetong->where("audit_2 =0 ")->count();
+        $ht_s2=$hetong->where("audit_2 =0  and audit_1=1")->count();
         $rest+=$ht_s2;
     }
 
@@ -235,7 +250,7 @@ function daiban(){
     $array1=explode(",",$raac_hetong['audit_2']);
     if(in_array(cookie('u_groupid'),$array1))
     {
-        $ht_s2=$hetong->where("audit_2 =0 ")->count();
+        $ht_s2=$hetong->where("audit_2 =0  and audit_1=1")->count();
         $rest+=$ht_s2;
     }
     //发票待审核
@@ -252,7 +267,7 @@ function daiban(){
     $array1=explode(",",$raac_hetong['audit_2']);
     if(in_array(cookie('u_groupid'),$array1))
     {
-        $ht_s2=$hetong->where("audit_2 =0 ")->count();
+        $ht_s2=$hetong->where("audit_2 =0  and audit_1=1")->count();
         $rest+=$ht_s2;
     }
 
@@ -270,7 +285,7 @@ function daiban(){
     $array1=explode(",",$raac_hetong['audit_2']);
     if(in_array(cookie('u_groupid'),$array1))
     {
-        $ht_s2=$hetong->where("audit_2 =0 ")->count();
+        $ht_s2=$hetong->where("audit_2 =0  and audit_1=1")->count();
         $rest+=$ht_s2;
     }
     if($rest==0 or $rest=='')

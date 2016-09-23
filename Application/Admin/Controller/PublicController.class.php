@@ -88,7 +88,7 @@ class PublicController extends Controller
             $array1=explode(",",$raac_hetong['audit_2']);
             if(in_array(cookie('u_groupid'),$array1))
             {
-                $ht_s2=$hetong->where("audit_2 =0  and isxufei=0")->count();
+                $ht_s2=$hetong->where("audit_2 =0  and isxufei=0 and audit_1=1")->count();
                 $rest+=$ht_s2;
             }
             $this->hetong=$rest;
@@ -106,7 +106,7 @@ class PublicController extends Controller
 
             if(in_array(cookie('u_groupid'),$array1))
             {
-                $ht_s2=$hetong->where("audit_2 =0  and isxufei=1")->count();
+                $ht_s2=$hetong->where("audit_2 =0  and isxufei=1 and audit_1=1")->count();
                 $rest2+=$ht_s2;
             }
             $this->xufei=$rest2;
@@ -124,7 +124,7 @@ class PublicController extends Controller
             $array1=explode(",",$raac_hetong['audit_2']);
             if(in_array(cookie('u_groupid'),$array1))
             {
-                $ht_s2=$hetong->where("audit_2 =0 ")->count();
+                $ht_s2=$hetong->where("audit_2 =0  and audit_1=1")->count();
                 $rest3+=$ht_s2;
             }
             $this->diankuan=$rest3;
@@ -142,7 +142,7 @@ class PublicController extends Controller
             $array1=explode(",",$raac_hetong['audit_2']);
             if(in_array(cookie('u_groupid'),$array1))
             {
-                $ht_s2=$hetong->where("audit_2 =0 ")->count();
+                $ht_s2=$hetong->where("audit_2 =0  and audit_1=1")->count();
                 $rest4+=$ht_s2;
             }
             $this->tuikuan=$rest4;
@@ -161,7 +161,7 @@ class PublicController extends Controller
             $array1=explode(",",$raac_hetong['audit_2']);
             if(in_array(cookie('u_groupid'),$array1))
             {
-                $ht_s2=$hetong->where("audit_2 =0 ")->count();
+                $ht_s2=$hetong->where("audit_2 =0  and audit_1=1")->count();
                 $rest5+=$ht_s2;
             }
             $this->fapiao=$rest5;
@@ -179,7 +179,7 @@ class PublicController extends Controller
             $array1=explode(",",$raac_hetong['audit_2']);
             if(in_array(cookie('u_groupid'),$array1))
             {
-                $ht_s2=$hetong->where("audit_2 =0 ")->count();
+                $ht_s2=$hetong->where("audit_2 =0  and audit_1=1")->count();
                 $rest6+=$ht_s2;
             }
             $this->tuipiao=$rest6;
