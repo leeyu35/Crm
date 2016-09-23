@@ -103,7 +103,7 @@ function quan_where($module,$join="",$setype=""){
                 }
             }
     }
-    
+
     return $where;
 }
 //用户管理权限
