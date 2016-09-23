@@ -136,7 +136,16 @@ class ContractController extends CommonController
         $val=I('post.val');
         $Customer=M("Customer");
         //权限条件
-        $q_where=quan_where(__CONTROLLER__);
+        $setype=I("post.setype");
+
+        if($setype=="")
+        {
+            $q_where=quan_where(__CONTROLLER__);
+        }else
+        {
+            $q_where=quan_where(__CONTROLLER__,$json='',$setype);
+        }
+
 
         $list=$Customer->field("id,advertiser,submituser")->where("id!=0 and advertiser like '%$val%' and ".$q_where)->select();
 

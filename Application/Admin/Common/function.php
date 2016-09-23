@@ -49,10 +49,11 @@ function group_name($idstr){
 /*传递模块名称，根据模块名称返回index方法 所包含的权限
  *
  * */
-function quan_where($module,$join=""){
+function quan_where($module,$join="",$setype=""){
 
     $rbac=M("Rbac");
     $one=$rbac->where("module='$module'")->find();
+
     if($one!="") {
             $array=explode(",",$one['index_show']);
             if(in_array(cookie('u_groupid'),$array))
@@ -74,29 +75,35 @@ function quan_where($module,$join=""){
                 }
 
             }
+            if($setype=='')
+            {
+
+
             //如果是二级审核 则一级审核通过才显示
             //组
             $group=M("Groupl")->find(cookie("u_groupid"));
-            $group=$group;
-            $group_name=$group['group_name'];
-            if($group_name!='超级管理员')
-            {
-                $array_s2=explode(",",$one['audit_2']);
+                $group=$group;
+                $group_name=$group['group_name'];
 
-                if(in_array(cookie('u_groupid'),$array_s2))
+                if($group_name!='超级管理员' )
                 {
-                    //echo '1';
-                    if($join==""){
-                        $where.=" and audit_1=1 ";
-                    }else
-                    {
-                        $where.=" and ".$join.".audit_1=1 ";
-                    }
+                    $array_s2=explode(",",$one['audit_2']);
 
+                    if(in_array(cookie('u_groupid'),$array_s2))
+                    {
+                        //echo '1';
+                        if($join==""){
+                            $where.=" and audit_1=1 ";
+                        }else
+                        {
+                            $where.=" and ".$join.".audit_1=1 ";
+                        }
+
+                    }
                 }
             }
-
     }
+    
     return $where;
 }
 //用户管理权限
