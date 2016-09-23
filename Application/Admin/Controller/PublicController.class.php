@@ -23,11 +23,10 @@ class PublicController extends Controller
             $vo=$users->where("users='$u' and password='$p'")->find();
             if($vo)
             {
-                session(array('name'=>'session_id','expire'=>3600*12*24));
-                session("u_id",$vo['id']);  //用户ID
-                session("u_name",$vo['name']); //用户姓名
-                session("u_image",$vo['image']);//用户图片
-                session("u_groupid",$vo['groupid']); //用户组id
+                cookie("u_id",$vo['id'],3600*24*365);  //用户ID
+                cookie("u_name",$vo['name'],3600*24*365); //用户姓名
+                cookie("u_image",$vo['image'],3600*24*365);//用户图片
+                cookie("u_groupid",$vo['groupid'],3600*24*365); //用户组id
                 //记录登录日志
                 $log=M("Log");
                 $data[ip]=$_SERVER["REMOTE_ADDR"];
@@ -44,20 +43,20 @@ class PublicController extends Controller
         }
         //登录成功欢迎页面
         public  function index(){
-            if(session("u_id")=='')
+            if(cookie("u_id")=='')
             {
                 $this->error('您还没有登录',U("/login"));
                 exit;
             }
             $this->web_title=C('WEB_NAME');
-            $this->sessionuid=session("u_id");
+            $this->sessionuid=cookie("u_id");
             $this->daiban=daiban();
             $this->display();
         }
 
         public function usermessage(){
             //组
-            $group=M("Groupl")->find(session("u_groupid"));
+            $group=M("Groupl")->find(cookie("u_groupid"));
             $this->group=$group;
             $group_name=$group['group_name'];
             $this->daiban=daiban();
@@ -80,14 +79,14 @@ class PublicController extends Controller
             $raac_hetong=$rbac->where("module = '/Admin/Contract'")->find();
             //一级审核
             $array=explode(",",$raac_hetong['audit_1']);
-            if(in_array(session('u_groupid'),$array))
+            if(in_array(cookie('u_groupid'),$array))
             {
                 $ht_s1=$hetong->where("audit_1 =0 and isxufei=0")->count();
                 $rest+=$ht_s1;
             }
             //二级审核
             $array1=explode(",",$raac_hetong['audit_2']);
-            if(in_array(session('u_groupid'),$array1))
+            if(in_array(cookie('u_groupid'),$array1))
             {
                 $ht_s2=$hetong->where("audit_2 =0  and isxufei=0")->count();
                 $rest+=$ht_s2;
@@ -98,14 +97,14 @@ class PublicController extends Controller
 
             //一级审核
             $array=explode(",",$raac_hetong['audit_1']);
-            if(in_array(session('u_groupid'),$array))
+            if(in_array(cookie('u_groupid'),$array))
             {
                 $ht_s1=$hetong->where("audit_1 =0 and isxufei=1")->count();
                 $rest2+=$ht_s1;
             }
             //二级审核
 
-            if(in_array(session('u_groupid'),$array1))
+            if(in_array(cookie('u_groupid'),$array1))
             {
                 $ht_s2=$hetong->where("audit_2 =0  and isxufei=1")->count();
                 $rest2+=$ht_s2;
@@ -116,14 +115,14 @@ class PublicController extends Controller
             $raac_hetong=$rbac->where("module = '/Admin/Diankuan'")->find();
             //一级审核
             $array=explode(",",$raac_hetong['audit_1']);
-            if(in_array(session('u_groupid'),$array))
+            if(in_array(cookie('u_groupid'),$array))
             {
                 $ht_s1=$hetong->where("audit_1 =0 ")->count();
                 $rest3+=$ht_s1;
             }
             //二级审核
             $array1=explode(",",$raac_hetong['audit_2']);
-            if(in_array(session('u_groupid'),$array1))
+            if(in_array(cookie('u_groupid'),$array1))
             {
                 $ht_s2=$hetong->where("audit_2 =0 ")->count();
                 $rest3+=$ht_s2;
@@ -134,14 +133,14 @@ class PublicController extends Controller
             $raac_hetong=$rbac->where("module = '/Admin/Refund'")->find();
             //一级审核
             $array=explode(",",$raac_hetong['audit_1']);
-            if(in_array(session('u_groupid'),$array))
+            if(in_array(cookie('u_groupid'),$array))
             {
                 $ht_s1=$hetong->where("audit_1 =0 ")->count();
                 $rest4+=$ht_s1;
             }
             //二级审核
             $array1=explode(",",$raac_hetong['audit_2']);
-            if(in_array(session('u_groupid'),$array1))
+            if(in_array(cookie('u_groupid'),$array1))
             {
                 $ht_s2=$hetong->where("audit_2 =0 ")->count();
                 $rest4+=$ht_s2;
@@ -153,14 +152,14 @@ class PublicController extends Controller
             $raac_hetong=$rbac->where("module = '/Admin/Invoice'")->find();
             //一级审核
             $array=explode(",",$raac_hetong['audit_1']);
-            if(in_array(session('u_groupid'),$array))
+            if(in_array(cookie('u_groupid'),$array))
             {
                 $ht_s1=$hetong->where("audit_1 =0 ")->count();
                 $rest5+=$ht_s1;
             }
             //二级审核
             $array1=explode(",",$raac_hetong['audit_2']);
-            if(in_array(session('u_groupid'),$array1))
+            if(in_array(cookie('u_groupid'),$array1))
             {
                 $ht_s2=$hetong->where("audit_2 =0 ")->count();
                 $rest5+=$ht_s2;
@@ -171,21 +170,21 @@ class PublicController extends Controller
             $raac_hetong=$rbac->where("module = '/Admin/RefundInvoice'")->find();
             //一级审核
             $array=explode(",",$raac_hetong['audit_1']);
-            if(in_array(session('u_groupid'),$array))
+            if(in_array(cookie('u_groupid'),$array))
             {
                 $ht_s1=$hetong->where("audit_1 =0 ")->count();
                 $rest6+=$ht_s1;
             }
             //二级审核
             $array1=explode(",",$raac_hetong['audit_2']);
-            if(in_array(session('u_groupid'),$array1))
+            if(in_array(cookie('u_groupid'),$array1))
             {
                 $ht_s2=$hetong->where("audit_2 =0 ")->count();
                 $rest6+=$ht_s2;
             }
             $this->tuipiao=$rest6;
 
-            $this->sessionuid=session("u_id");
+            $this->sessionuid=cookie("u_id");
             $this->url=$_SERVER['SERVER_NAME'];
             //随机励志语录
             $lizhi=array('将来的你会感谢 现在勇敢拼搏的你',
@@ -200,16 +199,16 @@ class PublicController extends Controller
 
             );
             $this->lizhi=$lizhi[rand(0,8)];
-            $this->messagecount =M("Email")->where("s_users=".session('u_id')." and state =0 and s_show=0 ")->order("time desc")->count();// 查询满足要求的总记录数
+            $this->messagecount =M("Email")->where("s_users=".cookie('u_id')." and state =0 and s_show=0 ")->order("time desc")->count();// 查询满足要求的总记录数
 
             $this->display();
         }
         //退出
         public function login_out(){
-            session("u_id",null);  //用户ID
-            session("u_name",null); //用户姓名
-            session("u_image",null);//用户图片
-            session("u_groupid",null); //用户组id
+            cookie("u_id",null);  //用户ID
+            cookie("u_name",null); //用户姓名
+            cookie("u_image",null);//用户图片
+            cookie("u_groupid",null); //用户组id
             $this->success('退出成功',U('/login'));
         }
         //日志

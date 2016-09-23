@@ -90,7 +90,7 @@ class CustomerController extends CommonController
         $Customer=D("Customer");
         if($Customer->create()) {
             //$Customer->product_line=$product_line;
-            $Customer->submituser=session('u_id');
+            $Customer->submituser=cookie('u_id');
             $Customer->ctime=time();
 
 

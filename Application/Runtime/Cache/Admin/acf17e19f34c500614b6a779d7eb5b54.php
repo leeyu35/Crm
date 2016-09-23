@@ -50,7 +50,7 @@
     	<td><?php echo ($list[delete_]); ?></td>
     	<td><?php echo ($list[show_]); ?></td>
     	<td><?php echo ($list[index_show]); ?></td>
-    	<td><a href="<?php echo U("updata?id=$list[id]");?>">修改</a> <a href="<?php echo U("delete?id=$list[id]");?>">删除</a></td>
+    	<td><a href="<?php echo U("updata?id=$list[id]");?>" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="<?php echo U("delete?id=$list[id]");?>" <?php echo ($confirm); ?> title="删除"><span class="glyphicon glyphicon-trash"></span></a></td>
     </tr><?php endforeach; endif; else: echo "" ;endif; ?>
     
 </table>

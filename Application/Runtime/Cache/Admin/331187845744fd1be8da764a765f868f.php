@@ -116,6 +116,7 @@
 			$("#show_money").select();
 			return false;	
 		}	
+		/*
 		if($("#contract_start").val()=="")
 		{
 			alert("请选择合同开始时间");
@@ -125,18 +126,18 @@
 		{
 			alert("请选择合同结束时间");
 			return false;	
-		}	
+		}
 		if($("#payment_time").val()=="")
 		{
 			alert("请选择付款日期");
 			return false;	
-		}	
+		}	*/	
 		if($("#fk_money").val()=="")
 		{
 			alert("请填写付款金额");
 			return false;	
 		}	
-				
+		
 	})
     });
 </script>

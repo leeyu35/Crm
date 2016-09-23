@@ -37,7 +37,7 @@ $(document).ready(function(e) {
         <img src="<?php echo ($list[f_images]); ?>" width="30" class="img-circle"><br><?php echo ($list[users]); ?></td>
         <td  class="htshow" id="<?php echo U("show2?id=$list[id]&yid=$info[id]");?>"><?php echo ($list[state]==0?'未读':'已读'); ?></td>
     	<td  class="htshow" id="<?php echo U("show2?id=$list[id]&yid=$info[id]");?>"><?php echo (date("Y-m-d H:i:s",$list[time])); ?></td>
-    	<td><a href="<?php echo U("delete?id=$list[id]&type=s_show");?>">删除</a></td>
+    	<td><a href="<?php echo U("delete?id=$list[id]&type=s_show");?>" <?php echo ($confirm); ?> title="删除"><span class="glyphicon glyphicon-trash"></span></a></td>
     </tr><?php endforeach; endif; else: echo "" ;endif; ?>
     
 </table>

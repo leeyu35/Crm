@@ -112,7 +112,7 @@ class ContractController extends CommonController
         $hetong->contract_end=strtotime($hetong->contract_end);
         $hetong->payment_time=strtotime($hetong->payment_time);
         $hetong->ctime=time();
-        $hetong->users2=session('u_id');
+        $hetong->users2=cookie('u_id');
         //检查是否有这个客户
         $Customer=M("Customer");
         $co=$Customer->where("advertiser='".I('post.gongsi')."'")->count();
@@ -200,7 +200,7 @@ class ContractController extends CommonController
         $hetong->contract_start=strtotime($hetong->contract_start);
         $hetong->contract_end=strtotime($hetong->contract_end);
         $hetong->payment_time=strtotime($hetong->payment_time);
-        $hetong->users2=session('u_id');
+        $hetong->users2=cookie('u_id');
         if($hetong->where("id=$id")->save())
         {
             $this->success('修改成功',U('index'));

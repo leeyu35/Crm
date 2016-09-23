@@ -37,7 +37,7 @@
 
 			})
 			$("#advertiser").val($(this).attr("id"));
-			
+			$("#submituser").val($(this).attr("title"));
 			$("#gongsi").val(($(this).html()));
 			$("#adlist").hide();
 			//$("#gongsi").html(data);
@@ -107,7 +107,7 @@
 <br>
 <form action="<?php echo U('addru');?>" method="post" class="form-horizontal" id="formid" >
 <input type="hidden" name="invoice_head" id="advertiser">
-<input type="hidden" name="submituser" id="submituser"  value="<?php echo (session('u_id')); ?>">
+<input type="hidden" name="submituser" id="submituser">
 <h4 class="bor-left-bull" >开票基本信息</h4>
 <hr>
 

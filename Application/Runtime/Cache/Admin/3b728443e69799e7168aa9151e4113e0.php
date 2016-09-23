@@ -39,7 +39,7 @@
     
     <label for="inputEmail3" class="col-sm-1 control-label">账户类型</label>
     <div class="col-sm-2">
-        <?php if(is_array($accounttype)): $k = 0; $__LIST__ = $accounttype;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$accounttype): $mod = ($k % 2 );++$k;?><label  class="control-label"><strong><?php echo ($info[fandian]==$accounttype[id]?$accounttype[name]:''); ?></strong></label><?php endforeach; endif; else: echo "" ;endif; ?>
+        <?php if(is_array($accounttype)): $k = 0; $__LIST__ = $accounttype;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$accounttype): $mod = ($k % 2 );++$k;?><label  class="control-label"><strong><?php echo ($info[type]==$accounttype[id]?$accounttype[name]:''); ?></strong></label><?php endforeach; endif; else: echo "" ;endif; ?>
     </div>
     
   </div>
@@ -72,6 +72,18 @@
 
     
   </div> 
+  
+     <div class="form-group">
+  
+    <label for="contract_money" class="col-sm-2 control-label">主手机号</label>
+    <div class="col-sm-3">
+       <label  class="control-label"><strong><?php echo ($info[tel]); ?></strong></label>
+    </div>
+    
+
+
+    
+  </div>
   
   <h4 class="bor-left-bull" >账户账号信息</h4>
   <hr>

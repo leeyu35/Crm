@@ -21,6 +21,16 @@
 <h4 class="bor-left-bull" >退票基本信息</h4>
 <hr>
 <div class="form-group">
+   	 <label class="col-sm-2 control-label">客户所属</label>
+     <div class="col-sm-3">
+    	<label  class="control-label"><strong><?php echo ($users_info); ?></strong></label>
+     </div>
+     <label class="col-sm-1 control-label">提交人</label>
+     <div class="col-sm-2">
+    	<label  class="control-label"><strong><?php echo ($users_info2); ?></strong></label>
+     </div>
+   </div>
+<div class="form-group">
   
     <label for="inputEmail3" class="col-sm-2 control-label">发票抬头</label>
     <div class="col-sm-3">
@@ -28,7 +38,7 @@
     	<label  class="control-label"><strong><?php echo ($gongsi); ?></strong></label>
     </div>
     
-    <label for="contract_money" class="col-sm-1 control-label">开票金额</label>
+    <label for="contract_money" class="col-sm-1 control-label">退票金额</label>
     <div class="col-sm-2">
         <label  class="control-label"><strong><?php echo ($info[money]); ?>元</strong></label>
     </div>

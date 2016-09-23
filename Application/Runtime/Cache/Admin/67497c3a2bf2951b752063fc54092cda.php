@@ -6,6 +6,8 @@
 <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
 </head>
+
+<body>
 <div class="container" style="width:100%;">
 <h3 class="bor-left-bull">用户列表<small>Users list</small></h3>
 
@@ -26,12 +28,14 @@
     	<td><?php echo ($list[name]); ?></td>
     	<td><?php echo ($list[groupname]); ?></td>
     	<td><?php echo (date("Y-m-d",$list[ctime])); ?></td>
-    	<td><a href="<?php echo U("updata?id=$list[id]");?>">修改</a> <a href="<?php echo U("delete?id=$list[id]");?>">删除</a></td>
+    	<td><a href="<?php echo U("updata?id=$list[id]");?>" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="<?php echo U("delete?id=$list[id]");?>"  <?php echo ($confirm); ?> title="删除"><span class="glyphicon glyphicon-trash"></span></a></td>
     </tr><?php endforeach; endif; else: echo "" ;endif; ?>
     
 </table>
-
+<?php echo ($page); ?>
 </div>
-<body>
+<br>
+<br>
+
 </body>
 </html>

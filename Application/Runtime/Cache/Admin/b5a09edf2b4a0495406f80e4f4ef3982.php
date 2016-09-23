@@ -10,9 +10,10 @@
 </head>
 
 <body>
-<div class="container"  style="width:100%;">
+<div class="container">
 <h3 class="bor-left-bull">修改用户信息<small>Update</small></h3>
 <hr>
+<div style="width:300px; margin-left:30px;">
 <form action="<?php echo U("upusers");?>" method="post" enctype="multipart/form-data" id="upusers">
   <input type="hidden" name="id" value="<?php echo ($info[id]); ?>">
   <input type="hidden" name="image" value="<?php echo ($info[image]); ?>">
@@ -40,20 +41,18 @@
     <input type="file" name="image2" id="image">
     <p class="help-block"><br><img src="<?php echo ($info['image']); ?>" width="100" height="100"  class="img-circle" /></p>
   </div>
-  
-  
-  <div class="form-group">
+  <?php if($userszu[group_name] == '超级管理员'): ?><div class="form-group">
     <label for="exampleInputFile">部门</label>
 	<select class="form-control" style="width:200px;" name="groupid">
       <?php if(is_array($grouplist)): $i = 0; $__LIST__ = $grouplist;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$grouplist): $mod = ($i % 2 );++$i;?><option value="<?php echo ($grouplist[id]); ?>" <?php echo ($info[groupid]==$grouplist[id]?'selected':''); ?> ><?php echo ($grouplist[group_name]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
     	
     </select>
     
-  </div>
-
+  </div><?php endif; ?>
 	<hr>
   <button type="submit"  class="btn btn-primary" style="width:150px;">提交</button>
 </form>
+</div>
 </div>
 <br>
 <br>

@@ -1,4 +1,4 @@
-<!doctype html>
+<?php if (!defined('THINK_PATH')) exit();?><!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -59,8 +59,8 @@
 <div class="container" style="width:100%;">
 <h3 class="bor-left-bull" >我要请假<small> I leave</small></h3>
 <br>
-<form action="{:U('addru')}" method="post" class="form-horizontal" id="formid" >
-<input type="hidden" name="submituser" id="submituser"  value="{$Think.cookie.u_id}">
+<form action="<?php echo U('addru');?>" method="post" class="form-horizontal" id="formid" >
+<input type="hidden" name="submituser" id="submituser"  value="<?php echo (cookie('u_id')); ?>">
 <h4 class="bor-left-bull" >请假信息</h4>
 <hr>
 
@@ -103,7 +103,7 @@
     </div>
 
     <div class="form-group">
-  <literal>
+  
     <label for="inputEmail3" class="col-sm-2 control-label">请假时间</label>
     <div class="col-sm-2">
     	<input id="contract_start" class="Wdate form-control" type="text" name="starttime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_end\')||\'2020-10-01\'}'})"/> 
@@ -112,7 +112,7 @@
 <input id="contract_end" class="Wdate form-control" type="text" name="endtime" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_start\')}',maxDate:'2020-10-01'})"/>
     </div>
 
-   </literal>
+   
 	    <label for="inputEmail3" class="col-sm-1 control-label">说明</label>
     <div class="col-sm-3">
       <input name="shuoming" type="text" class="form-control" id="shuoming" placeholder="如果是请半天请在此说明">

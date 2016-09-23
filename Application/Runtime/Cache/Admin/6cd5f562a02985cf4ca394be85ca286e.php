@@ -51,33 +51,40 @@ $(document).ready(function(e) {
     	<th>广告主公司名称</th>
     	<th>续费合同编号</th>
         <th>金额</th>
+        <th>返点</th>
         <th>账户</th>
         <!--<th>付款金额</th>-->
         <th>产品线</th>
         <th>创建时间</th>
         <th>状态</th>
         <!--<th>财务管理</th>-->	  
+        <th>提交人</th>
         <th>操作</th>	  
     </tr>
     <?php if(is_array($list)): $k = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$list): $mod = ($k % 2 );++$k;?><tr>
-    	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid=$info[id]");?>"><?php echo ($k); ?></td>
-    	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid=$info[id]");?>"><a href="<?php echo U("Customer/show?id=$list[aid]");?>"><?php echo ($list[advertiser]); ?></a></td>
-    	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid=$info[id]");?>"><?php echo ($list[contract_no]); ?></td>
-    	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid=$info[id]");?>"><?php echo ($list[contract_money]); ?></td>
-    	<td><?php echo ($list[account]); ?></td>
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid2=$list[xf_hetonghao]");?>"><?php echo ($k); ?></td>
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid2=$list[xf_hetonghao]");?>"><a href="<?php echo U("Customer/show?id=$list[aid]");?>"><?php echo ($list[advertiser]); ?></a></td>
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid2=$list[xf_hetonghao]");?>"><?php echo ($list[contract_no]); ?></td>
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid2=$list[xf_hetonghao]");?>"><?php echo ($list[contract_money]); ?></td>
+        <td class="htshow" id="<?php echo U("show?id=$list[id]&yid2=$list[xf_hetonghao]");?>"><?php echo ($list[rebates_proportion]); ?>%</td>
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid2=$list[xf_hetonghao]");?>"><?php echo ($list[account]); ?></td>
     	<!--<td>2016年8月15日</td>-->
-    	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid=$info[id]");?>"><?php echo ($list[name]); ?></td>
-    	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid=$info[id]");?>"><?php echo (date("y-m-d",$list[ctime])); ?></td>
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid2=$list[xf_hetonghao]");?>"><?php echo ($list[name]); ?></td>
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid2=$list[xf_hetonghao]");?>"><?php echo (date("y-m-d",$list[ctime])); ?></td>
        <!-- <td>
         <span style="width:20px; display:inline-block"><a href="" title="垫款">垫</a></span>|&nbsp;&nbsp;<a href="" title="垫款列表">列</a><br>
         <span style="width:20px; display:inline-block"><a href="" title="回款">回</a></span>|&nbsp;&nbsp;<a href="" title="回款列表">列</a><br>
         <span style="width:20px; display:inline-block"><a href="" title="退款">退</a></span>|&nbsp;&nbsp;<a href="" title="退款列表">列</a><br>  
         </td>-->
-    	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid=$info[id]");?>">
-        <?php if(($list[audit_1] == 1) AND ($list[audit_2] == 1) ): ?><span class="glyphicon glyphicon-ok"></span><span class="shyes">已审核</span>
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]&yid2=$list[xf_hetonghao]");?>">
+        <?php if($list[audit_1] == 1): ?><span title="一级审核已审核" class="glyphicon glyphicon-ok"></span><span class="shyes"></span>
         <?php else: ?>
-        	<span class="glyphicon glyphicon-hourglass"></span><span class="shno">待审核</span><?php endif; ?>
+        	<span title="一级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span><?php endif; ?>
+        <?php if($list[audit_2] == 1): ?><span title="二级审核已审核"  class="glyphicon glyphicon-ok"></span><span class="shyes"></span>
+        <?php else: ?>
+        	<span title="二级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span><?php endif; ?>
         </td>
+        <td class="htshow" id="<?php echo U("show?id=$list[id]&yid2=$list[xf_hetonghao]");?>"><?php echo ($list[submituser]); ?></td>
         <td>
         <!--<a href="#">发票</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">财务</a><br>-->
         <a href="<?php echo U("updata?id=$list[id]&yid=$info[id]");?>" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="<?php echo U("delete?id=$list[id]&yid=$info[id]");?>" title="删除"><span class="glyphicon glyphicon-trash"></span></a>

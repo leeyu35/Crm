@@ -119,7 +119,7 @@ class RefundController extends CommonController
         $Refund->create();
         $Refund->r_time=strtotime($Refund->r_time);
         $Refund->ctime=time();
-        $Refund->users2=session('u_id');
+        $Refund->users2=cookie('u_id');
         if($Refund->add()){
             $this->success("申请成功",U("index"));
 
@@ -163,7 +163,7 @@ class RefundController extends CommonController
         }
         $Refund->create();
         $Refund->r_time=strtotime($Refund->r_time);
-        $Refund->users2=session('u_id');
+        $Refund->users2=cookie('u_id');
         if($Refund->where("id=$id")->save())
         {
             $this->success('修改成功',U('index'));

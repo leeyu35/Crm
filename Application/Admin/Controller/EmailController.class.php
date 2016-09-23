@@ -12,10 +12,10 @@ class EmailController extends CommonController
     public function index(){
         $users=M('Email');
 
-        $count      =$users->field('id,title,users,s_users,time')->where('users='.session('u_id')." and f_show=0")->order('time desc')->count();// 查询满足要求的总记录数
+        $count      =$users->field('id,title,users,s_users,time')->where('users='.cookie('u_id')." and f_show=0")->order('time desc')->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
-        $list=$users->field('id,title,users,s_users,state,time')->where('users='.session('u_id')."  and f_show=0 ")->order('time desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+        $list=$users->field('id,title,users,s_users,state,time')->where('users='.cookie('u_id')."  and f_show=0 ")->order('time desc')->limit($Page->firstRow.','.$Page->listRows)->select();
         foreach ($list  as $key=>$val) {
             $info=users_info($val['s_users']);
             $list[$key]['s_users']=$info['name'];
@@ -31,7 +31,7 @@ class EmailController extends CommonController
         $Groupl=M('Groupl');
         $listgroup=$Groupl->field('id,group_name')->select();
 		$users=M('Users');
-		$this->list=$users->where(" id != ".session("u_id"))->field('id,name,image')->select();
+		$this->list=$users->where(" id != ".cookie("u_id"))->field('id,name,image')->select();
 		
         $this->grouplist=$listgroup;
         $this->display();
@@ -46,7 +46,7 @@ class EmailController extends CommonController
         {
             $users->create();
             $users->time=time();
-            $users->users=session('u_id');
+            $users->users=cookie('u_id');
 
 
             $users->s_users=$val;
@@ -107,12 +107,12 @@ class EmailController extends CommonController
 
     public  function message(){
         $email=M("Email");
-        $count      =$email->where("s_users=".session('u_id')."  and s_show=0 ")->order("time desc")->count();// 查询满足要求的总记录数
+        $count      =$email->where("s_users=".cookie('u_id')."  and s_show=0 ")->order("time desc")->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
 
 
-        $list=$email->where("s_users=".session('u_id')."  and s_show=0 ")->order("time desc")->limit($Page->firstRow.','.$Page->listRows)->select();
+        $list=$email->where("s_users=".cookie('u_id')."  and s_show=0 ")->order("time desc")->limit($Page->firstRow.','.$Page->listRows)->select();
         foreach ($list  as $key=>$val) {
             $info=users_info($val['users']);
             $list[$key]['users']=$info['name'];

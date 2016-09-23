@@ -91,6 +91,8 @@ $("#formid").submit(function(){
       <option value="购物">购物</option>
       <option value="音乐">音乐</option>
       <option value="图像">图像</option>
+      <option value="游戏">游戏</option>
+      <option value="直播">直播</option>
       <option value="新闻阅读">新闻阅读</option>
       <option value="生活实用工具">生活实用工具</option>
       <option value="系统工具">系统工具</option>
@@ -154,7 +156,7 @@ $("#formid").submit(function(){
 <option value="山东省">山东省</option>
 <option value="新疆维吾尔">新疆维吾尔</option> 
 <option value="江苏省">江苏省</option>
-<option value="江苏省">浙江省</option>
+<option value="浙江省">浙江省</option>
 <option value="江西省">江西省</option>
 <option value="湖北省">湖北省</option>
 <option value="广西壮族">广西壮族</option> 

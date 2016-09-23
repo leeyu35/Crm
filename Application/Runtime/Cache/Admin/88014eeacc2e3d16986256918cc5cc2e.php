@@ -45,32 +45,33 @@ $(document).ready(function(e) {
 	<tr>
     	<th>#</th>
     	<th>广告主公司名称</th>
-    	<th>所属行业</th>
-        <th>公司官网</th>
         <th>app名称</th>
+    	<th>所属行业</th>
+       
         <th>联系人</th>
         <th>联系人电话</th>
         <th>城市</th>
         <th>创建时间</th>
+        <th>提交人</th>
         <th>附件</th>	  
         <th>操作</th>	  
     </tr>
     <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$list): $mod = ($i % 2 );++$i;?><tr>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[id]); ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[advertiser]); ?></td>
+        <td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[appname]); ?></td>
         <td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[industry]); ?></td>
-    	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[website]); ?></td>
-    	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[appname]); ?></td>
+    	
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[contact]); ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[tel]); ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[city]); ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo (date("Y-m-d",$list[ctime])); ?></td>
-    	
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[submituser]); ?></td>
         <td>
         <span><a href="<?php echo U("addim?id=$list[id]");?>" title="新增附件"><span class="glyphicon glyphicon-plus"></span></a></span>&nbsp;|&nbsp;<a href="<?php echo U("showim?id=$list[id]");?>" title="查看附件"><span class="glyphicon glyphicon-zoom-in"></span></a><br>
         </td>
     	<td>
-        <a href="<?php echo U("updata?id=$list[id]");?>" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<a href="<?php echo U("delete?id=$list[id]");?>" title="删除"><span class="glyphicon glyphicon-trash"></span></a>
+        <a href="<?php echo U("updata?id=$list[id]");?>" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<a href="<?php echo U("delete?id=$list[id]");?>" <?php echo ($confirm); ?> title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         </td>
     </tr><?php endforeach; endif; else: echo "" ;endif; ?>
 </table>

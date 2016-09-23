@@ -122,7 +122,7 @@ class InvoiceController extends CommonController
         $Refund=M("Invoice");
         $Refund->create();
         $Refund->ctime=time();
-        $Refund->users2=session('u_id');
+        $Refund->users2=cookie('u_id');
         if($Refund->add()){
             $this->success("申请成功",U("index"));
 
@@ -173,7 +173,7 @@ class InvoiceController extends CommonController
         }
         $Refund->create();
         $Refund->kp_time=strtotime($Refund->kp_time);
-        $Refund->users2=session('u_id');
+        $Refund->users2=cookie('u_id');
         if($Refund->where("id=$id")->save())
         {
             $this->success('修改成功',U('index'));

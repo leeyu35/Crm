@@ -1,4 +1,4 @@
-<!doctype html>
+<?php if (!defined('THINK_PATH')) exit();?><!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -23,15 +23,35 @@
 		if($("#zhiwu").val()=="")
 		{
 			alert("请填写职务");
+			$("#zhiwu").select();
+			return false;	
+		}	
+
+		if($("#gongsi").val()=="")
+		{
+			alert("请填写外出公司");
+			$("#gongsi").select();
+
+			return false;	
+		}	
+		if($("#lianxiren").val()=="")
+		{
+			
+			alert("请填写外出联系人");
+			$("#lianxiren").select();
+			return false;	
+		}	
+		if($("#tel").val()=="")
+		{
+			alert("请填写联系人电话");
+			$("#tel").select();
 			return false;	
 		}	
 
 
-		if($("#tye").val()=="")
-		{
-			alert("请选择请假类型");
-			return false;	
-		}
+
+
+
 		
 		if($("#contract_start").val()=="")
 		{
@@ -57,17 +77,17 @@
 
 <body>
 <div class="container" style="width:100%;">
-<h3 class="bor-left-bull" >我要请假<small> I leave</small></h3>
+<h3 class="bor-left-bull" >我要外出<small> To go out</small></h3>
 <br>
-<form action="{:U('addru')}" method="post" class="form-horizontal" id="formid" >
-<input type="hidden" name="submituser" id="submituser"  value="{$Think.cookie.u_id}">
-<h4 class="bor-left-bull" >请假信息</h4>
+<form action="<?php echo U('addru');?>" method="post" class="form-horizontal" id="formid" >
+<input type="hidden" name="submituser" id="submituser"  value="<?php echo (cookie('u_id')); ?>">
+<h4 class="bor-left-bull" >外出信息</h4>
 <hr>
 
   <div class="form-group">
   
     <label for="inputEmail3" class="col-sm-2 control-label">部门</label>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
       <input type="text" class="form-control" autocomplete="off" name="bumen" id="bumen">
     <ul class="dropdown-menu" id="adlist">
 	  
@@ -78,33 +98,49 @@
     <div class="col-sm-2">
         <input type="text" class="form-control" name="zhiwu" id="zhiwu">        
     </div>
-    
-      	<label for="inputEmail3" class="col-sm-1 control-label">请假类型</label>
-    <div class="col-sm-2">
-      <select  class="form-control" name="type" id="type">
-      	<option>--请选择--</option>    
-        <option value="事假">事假</option>
-        <option value="病假">病假</option>
-        <option value="婚假">婚假</option>
-        <option value="丧假">丧假</option>
-        <option value="公假">公假</option>
-        <option value="工伤">工伤</option>
-        <option value="产假">产假</option>
-        <option value="护理假">护理假</option>
-        <option value="其他">其他</option>
-      </select>
-    </div>
+
   
   </div>
   <div class="form-group">
-
-
+  
+    <label for="inputEmail3" class="col-sm-2 control-label">外出公司名称</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" autocomplete="off" name="gongsi" id="gongsi">
+    <ul class="dropdown-menu" id="adlist">
+	  
+    </ul>
+    </div>
     
+    <label for="contract_money" class="col-sm-1 control-label">联系人</label>
+    <div class="col-sm-2">
+        <input type="text" class="form-control" name="lianxiren" id="lianxiren">        
     </div>
 
+  
+  </div>
+
+  <div class="form-group">
+  
+    <label for="inputEmail3" class="col-sm-2 control-label">外出公司地址</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" autocomplete="off" name="dizhi" id="dizhi">
+    <ul class="dropdown-menu" id="adlist">
+	  
+    </ul>
+    </div>
+    
+    <label for="contract_money" class="col-sm-1 control-label">联系人电话</label>
+    <div class="col-sm-2">
+        <input type="text" class="form-control" name="tel" id="tel">        
+    </div>
+
+  
+  </div>
+
+
     <div class="form-group">
-  <literal>
-    <label for="inputEmail3" class="col-sm-2 control-label">请假时间</label>
+  
+    <label for="inputEmail3" class="col-sm-2 control-label">外出时间</label>
     <div class="col-sm-2">
     	<input id="contract_start" class="Wdate form-control" type="text" name="starttime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_end\')||\'2020-10-01\'}'})"/> 
     </div>
@@ -112,16 +148,11 @@
 <input id="contract_end" class="Wdate form-control" type="text" name="endtime" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_start\')}',maxDate:'2020-10-01'})"/>
     </div>
 
-   </literal>
-	    <label for="inputEmail3" class="col-sm-1 control-label">说明</label>
-    <div class="col-sm-3">
-      <input name="shuoming" type="text" class="form-control" id="shuoming" placeholder="如果是请半天请在此说明">
-    </div>
-    
+       
   </div>
 
  
-  <h4 class="bor-left-bull" >请假事由</h4>
+  <h4 class="bor-left-bull" >外出事由</h4>
   <hr>
   <div class="form-group">
    <div class="col-sm-12">      
@@ -130,7 +161,7 @@
 
    </div>
 	<div class="form-group">
-    	<div class="col-sm-12">  注：1病假需出具医院证明。2请假必须通过审核才算生效（提交后为未审核状态）。3提交后不可更改</div>
+    	<div class="col-sm-12">   注：1请严格遵守此系统提交申请单。2请假必须通过审核才算生效（交后为未审核状态）3 外出请注意安全</div>
     </div>
     <div class="form-group">
     

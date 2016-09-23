@@ -24,7 +24,7 @@
     	<td><?php echo ($list[group_name]); ?></td>
 
     	<td><?php echo (date("Y-m-d",$list[ctime])); ?></td>
-    	<td><a href="<?php echo U("updata?id=$list[id]");?>">修改</a> <!--<a href="<?php echo U("delete?id=$list[id]");?>">删除</a>--></td>
+    	<td><a href="<?php echo U("updata?id=$list[id]");?>" title="修改"><span class="glyphicon glyphicon-pencil"></span></a> <!--<a href="<?php echo U("delete?id=$list[id]");?>">删除</a>--></td>
     </tr><?php endforeach; endif; else: echo "" ;endif; ?>
     
 </table>

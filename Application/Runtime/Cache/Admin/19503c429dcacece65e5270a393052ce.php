@@ -36,12 +36,16 @@
     <div class="col-sm-3">
     	<label  class="control-label"><strong> <?php echo ($yinfo[contract_no]); ?></strong></label>
     </div>
-    <label for="inputEmail3" class="col-sm-1 control-label">销售</label>
+    <label for="inputEmail3" class="col-sm-1 control-label">客户所属</label>
     <div class="col-sm-2">
     <label  class="control-label"><strong><?php echo ($users_info); ?></strong></label>
       
     </div>
- 
+     <label for="inputEmail3" class="col-sm-1 control-label">提交人</label>
+    <div class="col-sm-2">
+    <label  class="control-label"><strong><?php echo ($users_info2); ?></strong></label>
+      
+    </div>
   </div>
   
   
@@ -67,7 +71,7 @@
       
     </div>
     
-    <label for="inputEmail3" class="col-sm-1 control-label">续费合同编号</label>
+    <label for="inputEmail3" class="col-sm-1 control-label">续费编号</label>
     <div class="col-sm-3">
       <label  class="control-label"><strong><?php echo ($info[contract_no]); ?></strong></label>
     </div>
@@ -123,7 +127,7 @@
         <label  class="control-label"><strong><?php echo ($info[rebates_proportion]); ?>%</strong></label>
     </div>
     
-    <label for="show_money" class="col-sm-2 control-label">账户显示金额</label>
+    <label for="show_money" class="col-sm-2 control-label">充值百度币</label>
     <div class="col-sm-2">      
         <label  class="control-label"><strong><?php echo ($info[show_money]); ?>元</strong></label>
     </div>

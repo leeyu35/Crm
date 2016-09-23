@@ -54,10 +54,10 @@
     <div class="clear" style="margin-top:25px;">
         <div class="touxiang">
             <p>
-                <img src="<?php echo (session('u_image')); ?>" width="100" height="100" class="img-circle animated flipInY" />
+                <img src="<?php echo (cookie('u_image')); ?>" width="100" height="100" class="img-circle animated flipInY" />
             </p>
             <p style="text-align: center;font-size: 12px;color: #333333; padding-top:10px;">
-               <a href="<?php echo U("users/updata?id=$sessionuid");?>"><?php echo (session('u_name')); ?></a>【<?php echo ($group[group_name]); ?>】
+               <a href="<?php echo U("users/updata?id=$sessionuid");?>"><?php echo (cookie('u_name')); ?></a>【<?php echo ($group[group_name]); ?>】
             </p>
             <a href="<?php echo U("Email/message");?>">
             <span style="color: #999999;font-size: 12px; padding-top:10px; display:block;">
@@ -77,22 +77,22 @@
                     </span>
                     待办<br><br>
                     <a href="<?php echo U("Contract/index?shenhe=0");?>" class="btn btn-success" style="background:#693; color:#fff;">
-                    待审核合同 <span class="badge"><?php echo ($hetong?$hetong:'0'); ?></span>
+                    待审核合同 <?php if($hetong != 0): ?><span class="badge"><?php echo ($hetong?$hetong:'0'); ?></span><?php endif; ?>
                     </a>
                     <a  href="<?php echo U("Renew/index2?shenhe=0");?>"  class="btn btn-primary" >
-                    待审核续费 <span class="badge"><?php echo ($xufei?$xufei:'0'); ?></span>
+                    待审核续费 <?php if($xufei != 0): ?><span class="badge"><?php echo ($xufei?$xufei:'0'); ?></span><?php endif; ?>
                     </a>
                     <a  href="<?php echo U("Diankuan/index?shenhe=0");?>" class="btn btn-success">
-                    待审核垫款 <span class="badge"><?php echo ($diankuan?$diankuan:'0'); ?></span>
+                    待审核垫款 <?php if($diankuan != 0): ?><span class="badge"><?php echo ($diankuan?$diankuan:'0'); ?></span><?php endif; ?>
                     </a><br><br>
                     <a  href="<?php echo U("Refund/index?shenhe=0");?>" class="btn btn-info">
-                    待审核退款 <span class="badge"><?php echo ($tuikuan?$tuikuan:'0'); ?></span>
+                    待审核退款 <?php if($tuikuan != 0): ?><span class="badge"><?php echo ($tuikuan?$tuikuan:'0'); ?></span><?php endif; ?>
                     </a>
                     <a href="<?php echo U("Invoice/index?shenhe=0");?>" class="btn btn-warning">
-                    待审核发票 <span class="badge"><?php echo ($fapiao?$fapiao:'0'); ?></span>
+                    待审核发票 <?php if($fapiao != 0): ?><span class="badge"><?php echo ($fapiao?$fapiao:'0'); ?></span><?php endif; ?>
                     </a>
                     <a  href="<?php echo U("RefundInvoice/index?shenhe=0");?>"  class="btn btn-danger">
-                    待审核退票 <span class="badge"><?php echo ($tuipiao?$tuipiao:'0'); ?></span>
+                    待审核退票 <?php if($tuipiao != 0): ?><span class="badge"><?php echo ($tuipiao?$tuipiao:'0'); ?></span><?php endif; ?>
                     </a><br>
 <br>
 					<?php if($huikuan != ''): ?><div class="alert alert-danger" role="alert">近七天到期应回款：<a href="<?php echo U("Diankuan/index?shenhe=1");?>"><?php echo ($huikuan); ?></a></div>

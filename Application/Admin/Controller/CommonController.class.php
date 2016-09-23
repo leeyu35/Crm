@@ -11,7 +11,7 @@ class CommonController extends Controller
 {
     //前置操作方法
     public function _initialize(){
-     if(session("u_name")!='')
+     if(cookie("u_name")!='')
      {
          //检查权限
          $module=__CONTROLLER__;
@@ -23,7 +23,7 @@ class CommonController extends Controller
               {
                   case 'index' :
                       $array=explode(",",$one['show_']);
-                      if(in_array(session('u_groupid'),$array))
+                      if(in_array(cookie('u_groupid'),$array))
                       {
 
                       }else
@@ -35,7 +35,7 @@ class CommonController extends Controller
                       break;
                   case 'add'  :
                       $array=explode(",",$one['add_']);
-                      if(in_array(session('u_groupid'),$array))
+                      if(in_array(cookie('u_groupid'),$array))
                       {
 
                       }else
@@ -47,7 +47,7 @@ class CommonController extends Controller
                       break;
                   case 'updata' :
                       $array=explode(",",$one['update_']);
-                      if(in_array(session('u_groupid'),$array))
+                      if(in_array(cookie('u_groupid'),$array))
                       {
 
                       }else
@@ -59,7 +59,7 @@ class CommonController extends Controller
                       break;
                   case 'delete' :
                   $array=explode(",",$one['delete_']);
-                  if(in_array(session('u_groupid'),$array))
+                  if(in_array(cookie('u_groupid'),$array))
                   {
 
                   }else
@@ -76,7 +76,7 @@ class CommonController extends Controller
          }
         //echo $one;
         //echo $module;
-        //echo session('u_groupid');
+        //echo cookie('u_groupid');
 
 
      }else{

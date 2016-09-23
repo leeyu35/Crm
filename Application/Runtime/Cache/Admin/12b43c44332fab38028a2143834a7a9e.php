@@ -18,41 +18,17 @@
 				
 		$("#formid").submit(function(){
 	
-		if($("#gongsi").val()=="")
+		if($("#appname").val()=="")
 		{
-			alert("请填写公司名称");
-			$("#gongsi").select();
+			alert("请填写APP名称");
+			$("#appname").select();
 			return false;	
 		}	
-		if($("#contract_no").val()=="")
+		if($("#promote_url").val()=="")
 		{
-			alert("请选择合同编号");
+			alert("请填写推广URL");
 			return false;	
 		}	
-		if($("#r_money").val()=="")
-		{
-			alert("请填写退款金额");
-			$("#r_money").select();
-			return false;	
-		}	
-		if($("#r_open_account").val()=="")
-		{
-			alert("请填写退款开户行");
-			$("#r_open_account").select();
-			return false;	
-		}	
-		if($("#r_account").val()=="")
-		{
-			alert("请填写退款开户账户");
-			$("#show_money").select();
-			return false;	
-		}	
-		if($("#r_time").val()=="")
-		{
-			alert("请选择退款日期");
-			return false;	
-		}	
-
 
 				
 	})
@@ -72,7 +48,7 @@
 <h3 class="bor-left-bull" >添加账户<small>add Account</small></h3>
 <br>
 <form action="<?php echo U('addru');?>" method="post" class="form-horizontal" id="formid" >
-<input type="hidden" name="submituser" id="submituser" value="<?php echo (session('u_id')); ?>">
+<input type="hidden" name="submituser" id="submituser" value="<?php echo (cookie('u_id')); ?>">
 <h4 class="bor-left-bull" >账户基本信息</h4>
 <hr>
 
@@ -130,7 +106,17 @@
 
     
   </div>
+<div class="form-group">
+  
+    <label for="contract_money" class="col-sm-2 control-label">主手机号</label>
+    <div class="col-sm-3">
+        <input type="text" class="form-control" name="tel" id="tel">
+    </div>
+    
 
+
+    
+  </div>
   
   <h4 class="bor-left-bull" >账户账号信息</h4>
   <hr>

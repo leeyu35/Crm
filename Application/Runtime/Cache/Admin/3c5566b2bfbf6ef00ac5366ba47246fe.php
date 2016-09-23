@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/Public/css/reset.css"/>
     <link rel="stylesheet" href="/Public/css/login.css"/>
 <title>CRM管理平台</title>
+<link rel="shortcut icon" href="/favicon.ico" /> 
 </head>
 
 <body>
@@ -33,7 +34,7 @@
         </form>
         <div class="right">
             <p style="margin-top: 10px;">
-                <img src="/Public/images/admin/凌众.png" alt=""/>
+                <img src="/Public/images/admin/凌众.png" alt="" />
             </p>
             <p style="margin-top: 30px;">
                 <img src="/Public/images/admin/谋士.png" alt=""/>
@@ -49,7 +50,7 @@
     var bg=document.getElementsByClassName('total')[0];
     var a=Math.floor(Math.random()*7);
 //    console.log("login=bg="+a);
-    bg.style.background="url(/Public/images/admin/BG"+a+".png) no-repeat";
+    bg.style.background="url(/Public/images/admin/BG"+a+".jpg) no-repeat";
 </script>
 
 

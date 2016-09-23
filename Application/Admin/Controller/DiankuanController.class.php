@@ -107,7 +107,7 @@ class DiankuanController extends CommonController
         $Diankuan->d_time=strtotime($Diankuan->d_time);
         $Diankuan->back_money_time=strtotime($Diankuan->back_money_time);
         $Diankuan->ctime=time();
-        $Diankuan->users2=session('u_id');
+        $Diankuan->users2=cookie('u_id');
 
 
         if($insid=$Diankuan->add()){
@@ -185,7 +185,7 @@ class DiankuanController extends CommonController
         $Diankuan->d_time=strtotime($Diankuan->d_time);
         $Diankuan->back_money_time=strtotime($Diankuan->back_money_time);
         $Diankuan->ctime=I('post.time')+1;
-        $Diankuan->users2=session('u_id');
+        $Diankuan->users2=cookie('u_id');
         if($Diankuan->where("id=$id")->save())
         {
 

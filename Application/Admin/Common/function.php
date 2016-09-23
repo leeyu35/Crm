@@ -55,7 +55,7 @@ function quan_where($module,$join=""){
     $one=$rbac->where("module='$module'")->find();
     if($one!="") {
             $array=explode(",",$one['index_show']);
-            if(in_array(session('u_groupid'),$array))
+            if(in_array(cookie('u_groupid'),$array))
             {
                 if($join==""){
                     $where="id!='hjd'";
@@ -67,10 +67,10 @@ function quan_where($module,$join=""){
             }else
             {
                 if($join==""){
-                    $where="submituser=".session('u_id');
+                    $where="submituser=".cookie('u_id');
                 }else
                 {
-                    $where=$join.".submituser=".session('u_id');
+                    $where=$join.".submituser=".cookie('u_id');
                 }
 
             }
@@ -84,12 +84,12 @@ function quan_users_where($module,$join=""){
     $one=$rbac->where("module='$module'")->find();
     if($one!="") {
         $array=explode(",",$one['index_show']);
-        if(in_array(session('u_groupid'),$array))
+        if(in_array(cookie('u_groupid'),$array))
         {
                 $where=$join."id!='hjd'";
         }else
         {
-                $where=$join."id=".session('u_id');
+                $where=$join."id=".cookie('u_id');
         }
     }
     return $where;
@@ -102,7 +102,7 @@ function shenhe($module,$type){
     $one=$rbac->where("module='$module'")->find();
     if($one!="") {
         $array=explode(",",$one[$type]);
-        if(in_array(session('u_groupid'),$array))
+        if(in_array(cookie('u_groupid'),$array))
         {
             $code='200';
         }else
@@ -145,7 +145,7 @@ function getIPLoc_QQ($queryIP){
 //获取代办数目
 function daiban(){
     //组
-    $group=M("Groupl")->find(session("u_groupid"));
+    $group=M("Groupl")->find(cookie("u_groupid"));
     $group=$group;
     $group_name=$group['group_name'];
     //垫款
@@ -173,14 +173,14 @@ function daiban(){
     $raac_hetong=$rbac->where("module = '/Admin/Contract'")->find();
     //一级审核
     $array=explode(",",$raac_hetong['audit_1']);
-    if(in_array(session('u_groupid'),$array))
+    if(in_array(cookie('u_groupid'),$array))
     {
         $ht_s1=$hetong->where("audit_1 =0 and isxufei=0")->count();
         $rest+=$ht_s1;
     }
     //二级审核
     $array1=explode(",",$raac_hetong['audit_2']);
-    if(in_array(session('u_groupid'),$array1))
+    if(in_array(cookie('u_groupid'),$array1))
     {
         $ht_s2=$hetong->where("audit_2 =0  and isxufei=0")->count();
         $rest+=$ht_s2;
@@ -190,14 +190,14 @@ function daiban(){
 
     //一级审核
     $array=explode(",",$raac_hetong['audit_1']);
-    if(in_array(session('u_groupid'),$array))
+    if(in_array(cookie('u_groupid'),$array))
     {
         $ht_s1=$hetong->where("audit_1 =0 and isxufei=1")->count();
         $rest+=$ht_s1;
     }
     //二级审核
 
-    if(in_array(session('u_groupid'),$array1))
+    if(in_array(cookie('u_groupid'),$array1))
     {
         $ht_s2=$hetong->where("audit_2 =0  and isxufei=1")->count();
         $rest+=$ht_s2;
@@ -208,14 +208,14 @@ function daiban(){
     $raac_hetong=$rbac->where("module = '/Admin/Diankuan'")->find();
     //一级审核
     $array=explode(",",$raac_hetong['audit_1']);
-    if(in_array(session('u_groupid'),$array))
+    if(in_array(cookie('u_groupid'),$array))
     {
         $ht_s1=$hetong->where("audit_1 =0 ")->count();
         $rest+=$ht_s1;
     }
     //二级审核
     $array1=explode(",",$raac_hetong['audit_2']);
-    if(in_array(session('u_groupid'),$array1))
+    if(in_array(cookie('u_groupid'),$array1))
     {
         $ht_s2=$hetong->where("audit_2 =0 ")->count();
         $rest+=$ht_s2;
@@ -226,14 +226,14 @@ function daiban(){
     $raac_hetong=$rbac->where("module = '/Admin/Refund'")->find();
     //一级审核
     $array=explode(",",$raac_hetong['audit_1']);
-    if(in_array(session('u_groupid'),$array))
+    if(in_array(cookie('u_groupid'),$array))
     {
         $ht_s1=$hetong->where("audit_1 =0 ")->count();
         $rest+=$ht_s1;
     }
     //二级审核
     $array1=explode(",",$raac_hetong['audit_2']);
-    if(in_array(session('u_groupid'),$array1))
+    if(in_array(cookie('u_groupid'),$array1))
     {
         $ht_s2=$hetong->where("audit_2 =0 ")->count();
         $rest+=$ht_s2;
@@ -243,14 +243,14 @@ function daiban(){
     $raac_hetong=$rbac->where("module = '/Admin/Invoice'")->find();
     //一级审核
     $array=explode(",",$raac_hetong['audit_1']);
-    if(in_array(session('u_groupid'),$array))
+    if(in_array(cookie('u_groupid'),$array))
     {
         $ht_s1=$hetong->where("audit_1 =0 ")->count();
         $rest+=$ht_s1;
     }
     //二级审核
     $array1=explode(",",$raac_hetong['audit_2']);
-    if(in_array(session('u_groupid'),$array1))
+    if(in_array(cookie('u_groupid'),$array1))
     {
         $ht_s2=$hetong->where("audit_2 =0 ")->count();
         $rest+=$ht_s2;
@@ -261,14 +261,14 @@ function daiban(){
     $raac_hetong=$rbac->where("module = '/Admin/RefundInvoice'")->find();
     //一级审核
     $array=explode(",",$raac_hetong['audit_1']);
-    if(in_array(session('u_groupid'),$array))
+    if(in_array(cookie('u_groupid'),$array))
     {
         $ht_s1=$hetong->where("audit_1 =0 ")->count();
         $rest+=$ht_s1;
     }
     //二级审核
     $array1=explode(",",$raac_hetong['audit_2']);
-    if(in_array(session('u_groupid'),$array1))
+    if(in_array(cookie('u_groupid'),$array1))
     {
         $ht_s2=$hetong->where("audit_2 =0 ")->count();
         $rest+=$ht_s2;

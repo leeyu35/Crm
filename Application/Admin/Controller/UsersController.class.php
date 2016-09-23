@@ -102,7 +102,7 @@ class UsersController extends CommonController
         $users=M("Users");
         $info=$users->find($id);
         $this->info=$info;
-        $this->userszu=$Groupl->find(session('u_groupid'));
+        $this->userszu=$Groupl->find(cookie('u_groupid'));
 
         $this->display();
 

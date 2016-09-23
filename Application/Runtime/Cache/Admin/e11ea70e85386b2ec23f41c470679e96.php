@@ -60,6 +60,7 @@
     });
 
 </script>
+<link rel="icon" href="/favicon.ico" /> 
 </head>
 <body>
 
@@ -81,9 +82,9 @@
                 帮助
             </span>
         </span><span class="user">
-            <img  src="<?php echo (session('u_image')); ?>" width="30" height="30" class="img-circle" alt="" style="vertical-align: middle;margin-right: 5px;"/>
+            <img  src="<?php echo (cookie('u_image')); ?>" width="30" height="30" class="img-circle" alt="" style="vertical-align: middle;margin-right: 5px;"/>
             <span class="help1">
-               <?php echo (session('u_name')); ?>
+               <?php echo (cookie('u_name')); ?>
             </span>
             <img src="/Public/images/admin/下三角.png" alt="" style="vertical-align: middle;" class="no"/>
         </span>
@@ -133,11 +134,11 @@
                         账户管理
                     </div>
                 </li>
-                <li style="display: none;">
+                <li>
                     <img src="/Public/images/admin/盖章申请.png" alt="" style="vertical-align: middle"/>
-                    <span style="margin-left:10px;">盖章管理</span>
+                    <span style="margin-left:10px;">人事管理</span>
                     <div class="biao">
-                        盖章管理
+                        人事管理
                     </div>
                 </li>
             </ul>
@@ -186,6 +187,9 @@
             </div>
             <div class="liebiao" id="<?php echo U('Customer/index');?>">
                 <a  >客户列表</a>
+            </div>
+            <div class="liebiao" id="<?php echo U('Mv/index');?>">
+                <a  >客户转移</a>
             </div>
         </div>
         <div class="li2">
@@ -239,13 +243,13 @@
         <div class="li5">
             <img src="/Public/images/admin/收起.png" alt="" class="shou"/>
             <div class="guanli">
-                盖章管理
+                人事管理
             </div>
-            <div class="liebiao" >
-                <a >盖章意向</a>
+            <div class="liebiao" id="<?php echo U("Waichu/index");?>">
+                <a>外出</a>
             </div>
-            <div class="liebiao">
-                <a  >盖章列表</a>
+            <div class="liebiao" id="<?php echo U("holiday/index");?>">
+                <a>请假</a>
             </div>
         </div>
         <div class="li6">

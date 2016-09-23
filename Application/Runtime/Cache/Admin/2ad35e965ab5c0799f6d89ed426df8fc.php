@@ -128,7 +128,7 @@
     </div>
     </div>
     
-   
+
 
 
   
@@ -153,7 +153,17 @@
 
     
   </div>
+   <div class="form-group">
+  
+    <label for="contract_money" class="col-sm-2 control-label">主手机号</label>
+    <div class="col-sm-3">
+        <input type="text" class="form-control" name="tel" id="tel" value="<?php echo ($info[tel]); ?>">
+    </div>
+    
 
+
+    
+  </div>
   
   <h4 class="bor-left-bull" >账户账号信息</h4>
   <hr>

@@ -57,11 +57,12 @@ $(document).ready(function(e) {
     	<th>广告主公司名称</th>
     	<th>合同编号</th>
         <th>合同金额</th>
-        <!--<th>账户显示金额</th>
-        <th>付款金额</th>-->
+        <!--<th>账户显示金额</th>-->
+        <th>返点</th>
         <th>产品线</th>
         <th>创建时间</th>
         <th>状态</th>
+        <th>提交人</th>
         <!--<th>财务管理</th>-->	  
         <th>操作</th>	  
     </tr>
@@ -70,6 +71,7 @@ $(document).ready(function(e) {
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><a href="<?php echo U("Customer/show?id=$list[aid]");?>"><?php echo ($list[advertiser]); ?></a> <?php if($list[isguidang] == 1): ?><span title="合同已归档" class="glyphicon glyphicon-folder-close"></span><?php endif; ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[contract_no]); ?></td>
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[contract_money]); ?></td>
+    	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[rebates_proportion]); ?>%</td>
     	<!--<td><?php echo ($list[show_money]); ?></td>
     	<td>2016年8月15日</td>-->
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[name]); ?></td>
@@ -80,14 +82,18 @@ $(document).ready(function(e) {
         <span style="width:20px; display:inline-block"><a href="" title="退款">退</a></span>|&nbsp;&nbsp;<a href="" title="退款列表">列</a><br>  
         </td>-->
     	<td class="htshow" id="<?php echo U("show?id=$list[id]");?>">
-        <?php if(($list[audit_1] == 1) AND ($list[audit_2] == 1) ): ?><span class="glyphicon glyphicon-ok"></span><span class="shyes">已审核</span>
+        <?php if($list[audit_1] == 1): ?><span title="一级审核已审核" class="glyphicon glyphicon-ok"></span><span class="shyes"></span>
         <?php else: ?>
-        	<span class="glyphicon glyphicon-hourglass"></span><span class="shno">待审核</span><?php endif; ?>
+        	<span title="一级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span><?php endif; ?>
+        <?php if($list[audit_2] == 1): ?><span title="二级审核已审核"  class="glyphicon glyphicon-ok"></span><span class="shyes"></span>
+        <?php else: ?>
+        	<span title="二级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span><?php endif; ?>
         </td>
+		<td class="htshow" id="<?php echo U("show?id=$list[id]");?>"><?php echo ($list[submituser]); ?></td>
         <td>
         <a href="<?php echo U("Renew/index?id=$list[id]");?>" title="续费"><span class="glyphicon glyphicon-transfer"></span></a>&nbsp;|&nbsp;<!--<a href="#">发票</a><br>
         <a href="#">开户</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">财务</a><br>-->
-        <?php if($list[isguidang] == 0): ?><a href="<?php echo U("updata?id=$list[id]");?>" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<?php endif; ?><a href="<?php echo U("delete?id=$list[id]");?>" title="删除"><span class="glyphicon glyphicon-trash"></span></a>
+        <?php if($list[isguidang] == 0): ?><a href="<?php echo U("updata?id=$list[id]");?>" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<?php endif; ?><a href="<?php echo U("delete?id=$list[id]");?>"  <?php echo ($confirm); ?> title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         </td>
     </tr><?php endforeach; endif; else: echo "" ;endif; ?>
 </table>
