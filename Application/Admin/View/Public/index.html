@@ -56,9 +56,17 @@
 			})
 			move();
 		})
-
+		
+		window.setInterval(showalert, 4000); 
+		function showalert() 
+		{ 
+			$.get("{:U("daiban")}",function(data){
+				$("#daiban").html(data);
+			})
+		} 
+		
     });
-
+	
 </script>
 <link rel="icon" href="/favicon.ico" /> 
 </head>
@@ -73,7 +81,7 @@
     <div style="float:right;">
         <span class="xiaoxi iform_ck" id="{:U('Public/usermessage')}">
                 <img src="/Public/images/admin/消息.png" alt="" style="vertical-align: middle;margin-right: 5px;"/>待办
-                <span class="badge" style="background:#fe4e4b;">
+                <span class="badge" id="daiban" style="background:#fe4e4b;">
                     {$daiban}
                 </span>
         </span><span class="help iform_ck" id="{:U('Public/help')}">

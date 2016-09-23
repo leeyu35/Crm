@@ -233,5 +233,10 @@ class PublicController extends Controller
             $this->assign('page',$show);// 赋值分页输出
             $this->display();
         }
+        //获取代办数目
+        public function daiban(){
+
+            echo daiban();
+        }
 
 }
