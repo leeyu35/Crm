@@ -202,19 +202,22 @@ function daiban(){
     }
 
     //续费待审核
+    $raac_xhetong=$rbac->where("module = '/Admin/Renew'")->find();
 
     //一级审核
-    $array=explode(",",$raac_hetong['audit_1']);
+    $array=explode(",",$raac_xhetong['audit_1']);
     if(in_array(cookie('u_groupid'),$array))
     {
         $ht_s1=$hetong->where("audit_1 =0 and isxufei=1")->count();
         $rest+=$ht_s1;
     }
     //二级审核
-
+    $array1=explode(",",$raac_xhetong['audit_2']);
     if(in_array(cookie('u_groupid'),$array1))
     {
+
         $ht_s2=$hetong->where("audit_2 =0  and isxufei=1  and audit_1=1")->count();
+
         $rest+=$ht_s2;
     }
 
