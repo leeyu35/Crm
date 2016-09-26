@@ -403,4 +403,5 @@ a {blr:expression_r(this.onFocus=this.blur())}
 .users{display:inline-block; width:70px; text-align:center; margin-right:2px; padding:2px;}
 .xuanzhong{ background:#F66; color:#fff;}
 
-.index_right a{ width:120px; display:inline-block;}
+.index_right a{ width:32%; display:inline-block;}
+.width96{ width:98%;}

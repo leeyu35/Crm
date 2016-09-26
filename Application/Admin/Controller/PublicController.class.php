@@ -238,5 +238,24 @@ class PublicController extends Controller
 
             echo daiban();
         }
+        //提醒
+        public function txing(){
+            $email=M("Email");
+            $users=M("Users");
+            $count =$email->field('a.users,b.name')->join("a left join __USERS__ b on a.users=b.id")->where("a.s_users=".cookie('u_id')."  and a.s_show=0 and a.tixing=0 and a.state=0")->order("time desc")->count();
+            $list =$email->field('a.users,b.name')->join("a left join __USERS__ b on a.users=b.id")->where("a.s_users=".cookie('u_id')."  and a.s_show=0 and a.tixing=0 and a.state=0")->group("a.users")->order("time desc")->select();
+            foreach ($list as $key=>$val)
+            {
+                $name.=$val['name'].' ';
+            }
+            $json[count]=$count;
+            $json[str]="你的CRM收到{$count}条信息，发送者是：$name 请您注意查看哦~";
+            $data['tixing']=1;
+            $email->where("s_users=".cookie('u_id')." and tixing=0")->save($data);
+            $this->ajaxReturn($json);
+
+
+
+        }
 
 }

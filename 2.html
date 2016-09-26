@@ -13,11 +13,22 @@ document.addEventListener('DOMContentLoaded',function(){
 			}	
 			
 			Notification.requestPermission(function(permission){
-				var notification = new Notification("Here I am!",{body:'Thanks for clicking that button. Hope you liked.',icon:'https://cdn2.iconfinder.com/data/icons/ios-7-style-metro-ui-icons/512/MetroUI_HTML5.png',dir:'auto'});
+				
+				if(permission=='granted')
+				{
+					alert('您已开启消息通知!');	
+				}
 			});
+			
 		});
 	});
+function hjd(){
 
+	Notification.requestPermission(function(permission){
+			
+			var notification = new Notification("hello 您好 ~",{body:'您的CRM有一条新的未读信息哦~',icon:'http://localhost/Public/images/images/logo.png',dir:'auto'});
+		});
+}
 </script>
 <style type="text/css">
 #button{
@@ -40,5 +51,6 @@ document.addEventListener('DOMContentLoaded',function(){
 
 <body>
 <button id="button">Read your notification</button>
+<span onClick="return hjd()">发</span>
 </body>
 </html>

@@ -60,8 +60,20 @@
 		window.setInterval(showalert, 4000); 
 		function showalert() 
 		{ 
+			//待办
 			$.get("{:U("daiban")}",function(data){
 				$("#daiban").html(data);
+			})
+			//消息
+			$.get("{:U("txing")}",function(json){
+					var str=json.str;
+			
+					if(json.count>0){
+			
+					Notification.requestPermission(function(permission){
+						var notification = new Notification("您有新的提醒哦~",{body:str,icon:'http://localhost/Public/images/images/logo.png',dir:'auto'});
+					});
+					}
 			})
 		} 
 		
