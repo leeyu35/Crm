@@ -32,7 +32,7 @@ class EmailController extends CommonController
         $listgroup=$Groupl->field('id,group_name')->select();
 		$users=M('Users');
 		$this->list=$users->where(" id != ".cookie("u_id"))->field('id,name,image')->select();
-		
+		$this->id=I('get.id');
         $this->grouplist=$listgroup;
         $this->display();
     }
