@@ -296,19 +296,19 @@ class RenewController extends  CommonController
                 {
                     $this->success('审核成功',U("index?id=$yid"));
                     //修改审核者
-                    if($type=='audit_1')
-                    {
-                        $table->where("id=$id")->setField('susers1',cookie('u_id'));
-                    }
-                    if($type=='audit_2')
-                    {
-                        $table->where("id=$id")->setField('susers2',cookie('u_id'));
-                    }
+
                 }else
                 {
                     $this->success('审核成功',U("index2?shenhe=0"));
                 }
-
+                if($type=='audit_1')
+                {
+                    $table->where("id=$id")->setField('susers1',cookie('u_id'));
+                }
+                if($type=='audit_2')
+                {
+                    $table->where("id=$id")->setField('susers2',cookie('u_id'));
+                }
             }else
             {
                 $this->error('审核失败');
