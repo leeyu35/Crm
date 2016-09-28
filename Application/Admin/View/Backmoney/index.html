@@ -23,6 +23,8 @@ $(document).ready(function(e) {
   <div class="form-group">
      <select  class="form-control" name="searchtype">
      	<option value="advertiser" {$type=='advertiser'?'selected':''} >广告主公司名称</option>
+     	<option value="appname"  {$type=='appname'?'selected':''}>APP名称或简称</option>
+
      </select>
   </div>
   <div class="form-group">
@@ -44,11 +46,11 @@ $(document).ready(function(e) {
    <a class="btn btn-primary pull-right" href="{:U("add")}">添加回款</a>
 </form>
 </div>
-<table class="table table-hover">
+<table class="table table-hover  table-striped">
 	<tr>
     	<th>#</th>
     	<th>广告主公司名称</th>
-    	
+        <th>APP名称或简称</th>
         <th>回款金额</th>
 
         <th>回款日期</th>
@@ -61,7 +63,8 @@ $(document).ready(function(e) {
     <tr>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$k}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}"><a href="{:U("Customer/show?id=$list[aid]")}">{$list[advertiser]}</a></td>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[b_money]}</td>
+    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[appname]}</td>
+        <td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}" align="right">{$list[b_money]|num_format}&nbsp;&nbsp;&nbsp;&nbsp;</td>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[b_time]|date="y-m-d",###}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[ctime]|date="y-m-d",###}</td>
        <!-- <td>

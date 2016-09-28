@@ -30,15 +30,24 @@ class ContractController extends CommonController
             {
                 $where.=" and a.id!='hjd2' and a.contract_no like '%".I('get.search_text')."%'";
             }
+            if($type=='appname')
+            {
+                $where.=" and a.id!='hjd3' and a.appname like '%".I('get.search_text')."%'";
+            }
             $this->type=$type;
             $this->ser_txt=I('get.search_text');
 
         }
+
         //合同类型
         $httype=I('get.httype');
         if($httype!='')
         {
             $where.=" and a.type=2 ";
+            $this->httype=$httype;
+        }else
+        {
+            $where.=" and a.type=1 ";
             $this->httype=$httype;
         }
         //时间条件
@@ -73,6 +82,25 @@ class ContractController extends CommonController
             $this->ser_txt2=I('get.search_text');
 
         }
+        //归档条件
+        $type4=I('get.guidang');
+        if($type4!='')
+        {
+            if($type4=='k')
+            {
+                $where.=" and a.id!='hjd4' ";
+            }
+            if($type4=='0')
+            {
+                $where.=" and a.isguidang=0 ";
+            }
+            if($type4=='1')
+            {
+                $where.=" and a.isguidang=1 ";
+            }
+            $this->type4=$type4;
+
+        }
 
         $type3=I('get.pr_line');
         if($type3!='')
@@ -80,12 +108,13 @@ class ContractController extends CommonController
             $where.="and a.product_line =$type3";
             $this->type3=$type3;
         }
+        //echo $where;
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
         $count      = $hetong->field('a.id,a.advertiser,a.contract_no,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei='0' and ".$q_where.$where)->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
-        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
+        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
         foreach($list as $key => $val)
         {
             //提交人
@@ -245,6 +274,15 @@ class ContractController extends CommonController
             $table=M("Contract");
             if($table->where("id=$id")->setField($type,1))
             {
+                //修改审核者
+                if($type=='audit_1')
+                {
+                    $table->where("id=$id")->setField('susers1',cookie('u_id'));
+                }
+                if($type=='audit_2')
+                {
+                    $table->where("id=$id")->setField('susers2',cookie('u_id'));
+                }
                 $this->success('审核成功',U('index'));
             }else
             {
@@ -265,6 +303,13 @@ class ContractController extends CommonController
         //提交人
         $submitusers2=users_info($info[users2]);
         $this->users_info2=$submitusers2['name'];
+        //一级审核人
+        $submitusers3=users_info($info[susers1]);
+
+        $this->users_info3=$submitusers3['name'];
+        //二级审核人
+        $submitusers4=users_info($info[susers2]);
+        $this->users_info4=$submitusers4['name'];
         //产品线
         $product_line=M("ProductLine");
         $this->product_line_list=$product_line->field("id,name,title")->order("id asc")->select();
@@ -277,5 +322,71 @@ class ContractController extends CommonController
         $this->gongsi=$gs[advertiser];
         $this->display();
 
+    }
+    public function excel(){
+        $data=array(
+            array('username'=>'zhangsan','password'=>"123456"),
+            array('username'=>'lisi','password'=>"abcdefg"),
+            array('username'=>'wangwu','password'=>"111111"),
+        );
+        //导入PHPExcel类库，因为PHPExcel没有用命名空间，只能inport导入
+        import("Org.Util.PHPExcel");
+        import("Org.Util.PHPExcel.Writer.Excel5");
+        import("Org.Util.PHPExcel.IOFactory.php");
+        exit;
+        $filename="test_excel";
+        $headArr=array("用户名","密码");
+        $this->getExcel($filename,$headArr,$data);
+    }
+
+        private function getExcel($fileName,$headArr,$data){
+        //对数据进行检验
+        if(empty($data) || !is_array($data)){
+            die("data must be a array");
+        }
+        //检查文件名
+        if(empty($fileName)){
+            exit;
+        }
+
+        $date = date("Y_m_d",time());
+        $fileName .= "_{$date}.xls";
+
+        //创建PHPExcel对象，注意，不能少了\
+        $objPHPExcel = new \PHPExcel();
+        $objProps = $objPHPExcel->getProperties();
+
+        //设置表头
+        $key = ord("A");
+        foreach($headArr as $v){
+            $colum = chr($key);
+            $objPHPExcel->setActiveSheetIndex(0) ->setCellValue($colum.'1', $v);
+            $key += 1;
+        }
+
+        $column = 2;
+        $objActSheet = $objPHPExcel->getActiveSheet();
+        foreach($data as $key => $rows){ //行写入
+            $span = ord("A");
+            foreach($rows as $keyName=>$value){// 列写入
+                $j = chr($span);
+                $objActSheet->setCellValue($j.$column, $value);
+                $span++;
+            }
+            $column++;
+        }
+
+        $fileName = iconv("utf-8", "gb2312", $fileName);
+        //重命名表
+        // $objPHPExcel->getActiveSheet()->setTitle('test');
+        //设置活动单指数到第一个表,所以Excel打开这是第一个表
+        $objPHPExcel->setActiveSheetIndex(0);
+        header('Content-Type: application/vnd.ms-excel');
+        header("Content-Disposition: attachment;filename=\"$fileName\"");
+        header('Cache-Control: max-age=0');
+
+        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        $objWriter->save('php://output'); //文件通过浏览器下载
+        exit;
     }
 }

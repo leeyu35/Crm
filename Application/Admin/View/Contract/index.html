@@ -24,6 +24,7 @@ $(document).ready(function(e) {
      <select  class="form-control" name="searchtype">
      	<option value="advertiser" {$type=='advertiser'?'selected':''} >广告主公司名称</option>
      	<option value="contract_no"  {$type=='contract_no'?'selected':''}>合同编号</option>
+     	<option value="appname"  {$type=='appname'?'selected':''}>APP名称或简称</option>
      </select>
   </div>
   <div class="form-group">
@@ -43,6 +44,12 @@ $(document).ready(function(e) {
         	<option value="{$product_line_list['id']}" {$product_line_list[id]==$type3?'selected':''} >{$product_line_list[name]}</option>
         </volist>
   </select>
+  <select  class="form-control" name="guidang">
+     	<option value="k"   {$type4=='k'?'selected':''} >是否归档</option>
+     	<option value="1"  {$type4=='1'?'selected':''}>已归档</option>
+     	<option value="0"  {$type4=='0'?'selected':''}>未归档</option>
+  </select>
+
   <div class="form-group">
     	<input id="contract_start" class="Wdate form-control" type="text" name="time_start" placeholder="开始时间" value="{$time_start}" <literal>onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_end\')||\'2020-10-01\'}'})"</literal>/> 
   </div>
@@ -55,11 +62,11 @@ $(document).ready(function(e) {
 	</if>
 </form>
 </div>
-<table class="table table-hover">
+<table class="table table-hover table-striped">
 	<tr>
     	<th>#</th>
     	<th>广告主公司名称</th>
-    	<th>合同编号</th>
+    	<th>APP名称或简称</th>
         <th>合同金额</th>
         <!--<th>账户显示金额</th>-->
         <th>返点</th>
@@ -73,9 +80,9 @@ $(document).ready(function(e) {
     <volist id="list" name="list" key="k">
     <tr >
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$k}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]")}"><a href="{:U("Customer/show?id=$list[aid]")}">{$list[advertiser]}</a> <if condition="$list[isguidang] eq 1"><span title="合同已归档" class="glyphicon glyphicon-folder-close"></span></if></td>
-    	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[contract_no]}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[contract_money]}</td>
+    	<td class="htshow" id="{:U("show?id=$list[id]")}"><a href="{:U("Customer/show?id=$list[aid]")}">{$list[advertiser]}</a> <if condition="$list[isguidang] eq 1"><span title="合同已归档" class="glyphicon glyphicon-folder-close" style="color:#0492d9;"></span></if></td>
+    	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[appname]}</td>
+    	<td class="htshow" id="{:U("show?id=$list[id]")}" align="right">{$list[contract_money]|num_format}&nbsp;&nbsp;&nbsp;&nbsp;</td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[rebates_proportion]}%</td>
     	<!--<td>{$list[show_money]}</td>
     	<td>2016年8月15日</td>-->
@@ -88,12 +95,12 @@ $(document).ready(function(e) {
         </td>-->
     	<td class="htshow" id="{:U("show?id=$list[id]")}">
         <if condition="$list[audit_1] eq 1">
-        	<span title="一级审核已审核" class="glyphicon glyphicon-ok"></span><span class="shyes"></span>
+        	<span title="一级审核已审核" class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
         <else />
         	<span title="一级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
         </if>
         <if condition="$list[audit_2] eq 1">
-        	<span title="二级审核已审核"  class="glyphicon glyphicon-ok"></span><span class="shyes"></span>
+        	<span title="二级审核已审核"  class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
         <else />
         	<span title="二级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
         </if>
@@ -104,7 +111,8 @@ $(document).ready(function(e) {
         <a href="#">开户</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">财务</a><br>-->
         <if condition="$list[isguidang] eq 0">
         <a href="{:U("updata?id=$list[id]")}" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;
-        </if><a href="{:U("delete?id=$list[id]")}"  {$confirm} title="删除"><span class="glyphicon glyphicon-trash"></span></a>
+        <a href="{:U("delete?id=$list[id]")}"  {$confirm} title="删除"><span class="glyphicon glyphicon-trash"></span></a>
+        </if>
         </td>
     </tr>
     </volist>

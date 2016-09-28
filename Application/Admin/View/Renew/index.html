@@ -23,6 +23,8 @@ $(document).ready(function(e) {
   <div class="form-group">
      <select  class="form-control" name="searchtype">
      	<option value="contract_no"  {$type=='contract_no'?'selected':''}>续费合同编号</option>
+        <option value="appname"  {$type=='appname'?'selected':''}>APP名称或简称</option>
+
      </select>
   </div>
   <div class="form-group">
@@ -47,11 +49,11 @@ $(document).ready(function(e) {
    <a class="btn btn-primary pull-right" href="{:U("add?id=$info[id]")}">新增续费</a>
 </form>
 </div>
-<table class="table table-hover">
+<table class="table table-hover table-striped">
 	<tr>
     	<th>#</th>
     	<th>广告主公司名称</th>
-    	<th>续费合同编号</th>
+    	<th>APP名称或简称</th>
         <th>金额</th>
         <th>返点</th>
         <th>账户</th>
@@ -67,8 +69,8 @@ $(document).ready(function(e) {
     <tr>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$k}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}"><a href="{:U("Customer/show?id=$list[aid]")}">{$list[advertiser]}</a></td>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[contract_no]}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[contract_money]}</td>
+    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[appname]}</td>
+    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}" align="right">{$list[contract_money]|num_format}&nbsp;&nbsp;&nbsp;&nbsp;</td>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[rebates_proportion]}%</td>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[account]}</td>
     	<!--<td>2016年8月15日</td>-->

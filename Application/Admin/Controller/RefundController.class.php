@@ -28,6 +28,10 @@ class RefundController extends CommonController
                 {
                     $where.=" and a.id!='hjd2' and a.contract_no like '%".I('get.search_text')."%'";
                 }
+                if($type=='appname')
+                {
+                    $where.=" and a.id!='hjd3' and a.appname like '%".I('get.search_text')."%'";
+                }
                 $this->type=$type;
                 $this->ser_txt=I('get.search_text');
 
@@ -69,7 +73,7 @@ class RefundController extends CommonController
             $count      = $Refund->field('a.id,a.advertiser,a.contract_no,a.r_money,a.r_time,a.ctime,a.audit_1,a.audit_2,b.advertiser')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->count();// 查询满足要求的总记录数
             $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
             $show       = $Page->show();// 分页显示输出
-            $list=$Refund->field('a.id,a.users2,a.advertiser as aid,a.advertiser,a.contract_no,a.r_money,a.r_time,a.ctime,a.audit_1,a.audit_2,b.advertiser')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
+            $list=$Refund->field('a.id,a.users2,a.advertiser as aid,a.advertiser,a.appname,a.contract_no,a.r_money,a.r_time,a.ctime,a.audit_1,a.audit_2,b.advertiser')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
             foreach($list as $key => $val)
             {
                 //提交人
@@ -201,6 +205,15 @@ class RefundController extends CommonController
             if($table->where("id=$id")->setField($type,1))
             {
                 $this->success('审核成功',U('index'));
+                //修改审核者
+                if($type=='audit_1')
+                {
+                    $table->where("id=$id")->setField('susers1',cookie('u_id'));
+                }
+                if($type=='audit_2')
+                {
+                    $table->where("id=$id")->setField('susers2',cookie('u_id'));
+                }
             }else
             {
                 $this->error('审核失败');
@@ -220,6 +233,12 @@ class RefundController extends CommonController
         //提交人
         $submitusers2=users_info($info[users2]);
         $this->users_info2=$submitusers2['name'];
+        //一级审核人
+        $submitusers3=users_info($info[susers1]);
+        $this->users_info3=$submitusers3['name'];
+        //二级审核人
+        $submitusers4=users_info($info[susers2]);
+        $this->users_info4=$submitusers4['name'];
 
         //代理公司
         $agentcompany=M("AgentCompany");

@@ -23,6 +23,7 @@ $(document).ready(function(e) {
   <div class="form-group">
      <select  class="form-control" name="searchtype">
      	<option value="contract_no"  {$type=='contract_no'?'selected':''}>续费合同编号</option>
+     	<option value="appname"  {$type=='appname'?'selected':''}>APP名称或简称</option>
      </select>
   </div>
   <div class="form-group">
@@ -42,16 +43,16 @@ $(document).ready(function(e) {
 
   <button type="submit" class="btn btn-primary">搜索</button>
   	<if condition="($ser_txt neq '') OR ($time_end neq '')">
-  		<a class="btn btn-info" href="{:U("index?id=$info[id]")}">清除搜索条件</a>
+  		<a class="btn btn-info" href="{:U("index2")}">清除搜索条件</a>
 	</if>
    <a class="btn btn-primary pull-right" href="{:U("add?id=$info[id]")}">新增续费</a>
 </form>
 </div>
-<table class="table table-hover">
+<table class="table table-hover table-striped">
 	<tr>
     	<th>#</th>
     	<th>广告主公司名称</th>
-    	<th>续费合同编号</th>
+    	<th>APP名称或简称</th>
         <th>金额</th>
         <th>返点</th>
         <th>账户</th>
@@ -67,8 +68,8 @@ $(document).ready(function(e) {
     <tr>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid2=$list[xf_hetonghao]")}">{$k}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid2=$list[xf_hetonghao]")}"><a href="{:U("Customer/show?id=$list[aid]")}">{$list[advertiser]}</a></td>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid2=$list[xf_hetonghao]")}">{$list[contract_no]}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid2=$list[xf_hetonghao]")}">{$list[contract_money]}</td>
+    	<td class="htshow" id="{:U("show?id=$list[id]&yid2=$list[xf_hetonghao]")}">{$list[appname]}</td>
+    	<td class="htshow" id="{:U("show?id=$list[id]&yid2=$list[xf_hetonghao]")}" align="right">{$list[contract_money]|num_format}&nbsp;&nbsp;&nbsp;&nbsp;</td>
         <td class="htshow" id="{:U("show?id=$list[id]&yid2=$list[xf_hetonghao]")}">{$list[rebates_proportion]}%</td>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid2=$list[xf_hetonghao]")}">{$list[account]}</td>
     	<!--<td>2016年8月15日</td>-->
