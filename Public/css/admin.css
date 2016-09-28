@@ -405,3 +405,7 @@ a {blr:expression_r(this.onFocus=this.blur())}
 
 .index_right a{ width:32%; display:inline-block;}
 .width96{ width:98%;}
+.shno{ color:#F63; font-size:14px;}
+.shyes{ color:#0C0;font-size:14px;}
+.glyphicon-ok{color:#04cc25;}
+.glyphicon-hourglass{color:#969696;}
