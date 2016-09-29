@@ -83,16 +83,19 @@ $(document).ready(function(e) {
         </td>-->
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">
         <if condition="$list[audit_1] eq 1">
-        	<span title="一级审核已审核" class="glyphicon glyphicon-ok"></span><span class="shyes"></span>
-        <else />
+        	<span title="一级审核已审核" class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
+        <elseif condition="$list[audit_1] eq 2"/>
+        	<span title="一级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
+        <elseif condition="$list[audit_1] eq 0"/>
         	<span title="一级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
         </if>
         <if condition="$list[audit_2] eq 1">
-        	<span title="二级审核已审核"  class="glyphicon glyphicon-ok"></span><span class="shyes"></span>
-        <else />
+        	<span title="二级审核已审核"  class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
+        <elseif condition="$list[audit_2] eq 2"/>
+            <span title="一级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
+        <elseif condition="$list[audit_2] eq 0"/>
         	<span title="二级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
         </if>
-
         </td>
         <td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[submituser]}</td>
 

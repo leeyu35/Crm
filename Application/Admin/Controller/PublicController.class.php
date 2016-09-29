@@ -82,6 +82,7 @@ class PublicController extends Controller
             if(in_array(cookie('u_groupid'),$array))
             {
                 $ht_s1=$hetong->where("audit_1 =0 and isxufei=0")->count();
+
                 $rest+=$ht_s1;
             }
             //二级审核
@@ -91,6 +92,7 @@ class PublicController extends Controller
                 $ht_s2=$hetong->where("audit_2 =0  and isxufei=0 and audit_1=1")->count();
                 $rest+=$ht_s2;
             }
+
             $this->hetong=$rest;
 
             //续费待审核

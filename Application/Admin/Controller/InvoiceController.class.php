@@ -159,6 +159,12 @@ class InvoiceController extends CommonController
         $gs=kehu($info[advertiser]);
         $this->gongsi=$gs[advertiser];
         $this->kaipinfo=$gs;
+        //一级审核人
+        $submitusers3=users_info($info[susers1]);
+        $this->users_info3=$submitusers3['name'];
+        //二级审核人
+        $submitusers4=users_info($info[susers2]);
+        $this->users_info4=$submitusers4['name'];
         $this->display();
 
     }
@@ -212,7 +218,13 @@ class InvoiceController extends CommonController
         }else
         {
             $table=M("Invoice");
-            if($table->where("id=$id")->setField($type,1))
+            if(I('get.ju')!=''){
+                $shenhe=2;
+            }else
+            {
+                $shenhe=1;
+            }
+            if($table->where("id=$id")->setField($type,$shenhe))
             {
                 $this->success('审核成功',U('index'));
                 //修改审核者

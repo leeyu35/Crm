@@ -168,7 +168,12 @@ class DiankuanController extends CommonController
         $file=M("File");
         $filelist=$file->where("type=2 and yid=$id")->select();
         $this->filelist=$filelist;
-
+        //一级审核人
+        $submitusers3=users_info($info[susers1]);
+        $this->users_info3=$submitusers3['name'];
+        //二级审核人
+        $submitusers4=users_info($info[susers2]);
+        $this->users_info4=$submitusers4['name'];
 
         $this->display();
 
@@ -247,7 +252,13 @@ class DiankuanController extends CommonController
         }else
         {
             $table=M("Diankuan");
-            if($table->where("id=$id")->setField($type,1))
+            if(I('get.ju')!=''){
+                $shenhe=2;
+            }else
+            {
+                $shenhe=1;
+            }
+            if($table->where("id=$id")->setField($type,$shenhe))
             {
                 $this->success('审核成功',U('index'));
                 //修改审核者

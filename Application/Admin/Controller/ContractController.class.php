@@ -115,6 +115,7 @@ class ContractController extends CommonController
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
         $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
+
         foreach($list as $key => $val)
         {
             //提交人
@@ -218,6 +219,12 @@ class ContractController extends CommonController
         //公司名称
         $gs=kehu($info[advertiser]);
         $this->gongsi=$gs[advertiser];
+        //一级审核人
+        $submitusers3=users_info($info[susers1]);
+        $this->users_info3=$submitusers3['name'];
+        //二级审核人
+        $submitusers4=users_info($info[susers2]);
+        $this->users_info4=$submitusers4['name'];
         $this->display();
 
     }
@@ -272,7 +279,13 @@ class ContractController extends CommonController
         }else
         {
             $table=M("Contract");
-            if($table->where("id=$id")->setField($type,1))
+            if(I('get.ju')!=''){
+                $shenhe=2;
+            }else
+            {
+                $shenhe=1;
+            }
+            if($table->where("id=$id")->setField($type,$shenhe))
             {
                 //修改审核者
                 if($type=='audit_1')
@@ -305,7 +318,6 @@ class ContractController extends CommonController
         $this->users_info2=$submitusers2['name'];
         //一级审核人
         $submitusers3=users_info($info[susers1]);
-
         $this->users_info3=$submitusers3['name'];
         //二级审核人
         $submitusers4=users_info($info[susers2]);

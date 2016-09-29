@@ -161,15 +161,16 @@ class RenewController extends  CommonController
         $count      = $hetong->field('a.id,a.advertiser,a.contract_no,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei=1 and ".$q_where.$where)->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
-        $list=$hetong->field('a.id,a.advertiser as aid,a.users2,a.xf_hetonghao,a.rebates_proportion,a.contract_no,a.account,a.appname,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei=1  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
+        $list=$hetong->field('a.id,a.advertiser as aid,a.users2,a.xf_hetonghao,a.submituser,a.rebates_proportion,a.contract_no,a.account,a.appname,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei=1  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
         //echo $hetong->_sql();
-        $this->list=$list;
+
         foreach($list as $key => $val)
         {
             //提交人
             $uindo=users_info($val['users2']);
             $list[$key]['submituser']=$uindo[name];
         }
+        $this->list=$list;
         $this->assign('page',$show);// 赋值分页输出
         $this->display();
     }
@@ -240,6 +241,12 @@ class RenewController extends  CommonController
 
         $gs=kehu($info[advertiser]);
         $this->gongsi=$gs[advertiser];
+        //一级审核人
+        $submitusers3=users_info($info[susers1]);
+        $this->users_info3=$submitusers3['name'];
+        //二级审核人
+        $submitusers4=users_info($info[susers2]);
+        $this->users_info4=$submitusers4['name'];
         $this->display();
 
     }
@@ -256,7 +263,15 @@ class RenewController extends  CommonController
         $hetong->users2=cookie('u_id');
         if($hetong->where("id=$id")->save())
         {
-            $this->success('修改成功',U("index?id=".I('post.htid')));
+            if($yid!='')
+            {
+                $this->success('修改成功',U("index?id=$yid"));
+                //修改审核者
+
+            }else
+            {
+                $this->success('修改成功',U("index2?shenhe=0"));
+            }
         }else{
             $this->error('修改失败');
         }
@@ -290,7 +305,13 @@ class RenewController extends  CommonController
         }else
         {
             $table=M("Contract");
-            if($table->where("id=$id")->setField($type,1))
+            if(I('get.ju')!=''){
+                $shenhe=2;
+            }else
+            {
+                $shenhe=1;
+            }
+            if($table->where("id=$id")->setField($type,$shenhe))
             {
                 if($yid!='')
                 {
