@@ -49,12 +49,12 @@
     <volist id="list" name="list">
     	<if condition="$id eq ''">
     	<span class="users" id="{$list[id]}">
-        	<img src="{$list[image]}" width="40"  class="img-circle"><br>
+        	<img src="{$list[image]}" width="40" height="40"  class="img-circle"><br>
             {$list[name]}
         </span>
          <else /> 
  		<span class="users" id="{$list[id]}" {$id!=$list[id]?'style="display:none;"':''} >
-        	<img src="{$list[image]}" width="40"  class="img-circle"><br>
+        	<img src="{$list[image]}" width="40" height="40"  class="img-circle"><br>
             {$list[name]}
         </span>
         </if>
