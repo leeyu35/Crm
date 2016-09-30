@@ -42,6 +42,16 @@
 				$("#jiazai").hide();
 			})
 		})
+		
+		$(".client>li").click(function(){
+		
+			$(".liebiao").removeClass("xz");
+			
+			iformurl="{:U('Public/jiazai')}";
+			$("#frame").attr("src",iformurl);
+			
+		})
+		
 		$(".iform_ck").click(function(){
             $("#jiazai").show();
 			iformurl=$(this).attr("id");

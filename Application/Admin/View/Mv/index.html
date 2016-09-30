@@ -5,23 +5,54 @@
 <title>无标题文档</title>
 <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+<script src="/Public/js/jquery-3.1.0.min.js"></script>
+<script language="javascript">
+	$(document).ready(function(e) {
+        $("#users1").change(function(){
+			$("#qx").prop("checked",false)	
+			$("#kehu").html("加载中...");
+			$.post("{:U("kehu")}",{id:$(this).val()},function(data){
+				$("#kehu").html(data);
+			})
+			
+		})
+		
+		$("#qx").on("click",function(index){
+				//alert($(this).attr("checked"));
+				if($("#qx").is(":checked"))
+				{
+					$("input[name='kehu[]']").prop("checked",true)	
+				}else
+				{
+					$("input[name='kehu[]']").prop("checked",false)	
+				}
+			})
+	
+    });
+</script>
 </head>
 
 <body>
 <div class="container" style="width:100%;">
 <h3 class="bor-left-bull">客户转移<small> Customer transfer</small></h3>
 <br>
-<div style="width:500px; margin-left:30px;">
+<div>
 <form action="{:U("addru")}" method="post" enctype="multipart/form-data" id="addusers">
   <div class="form-group">
     <label for="exampleInputEmail1">转移谁的客户</label>
-	<select class="form-control" style="width:200px;" name="users1">
+	<select class="form-control" style="width:200px;" name="users1" id="users1">
       <volist id="list1" name="list">
       		<option value="{$list1[id]}">{$list1[name]}</option>
       </volist>
-    	
     </select>
-    
+    <br>
+    <div id="kehu">
+	请选择转移者
+    </div><br>
+	<label class="checkbox-inline">
+		<input type="checkbox" id="qx" value="1" name="qx"> 全选/取消
+    </label>
+
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">转移给</label>
