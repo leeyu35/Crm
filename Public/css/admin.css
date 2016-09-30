@@ -407,5 +407,14 @@ a {blr:expression_r(this.onFocus=this.blur())}
 .width96{ width:98%;}
 .shno{ color:#F63; font-size:14px;}
 .shyes{ color:#0C0;font-size:14px;}
+.shno1{ color:#F00; font-size:14px;}
 .glyphicon-ok{color:#04cc25;}
 .glyphicon-hourglass{color:#969696;}
+.glyphicon-remove{ color:#F00;}
+.glyphicon-transfer,.glyphicon-pencil,.glyphicon-trash,.glyphicon-plus,.glyphicon-zoom-in{
+color:#0d4680;
+}
+.glyphicon-transfer:hover,.glyphicon-pencil:hover,.glyphicon-trash:hover,.glyphicon-plus:hover,.glyphicon-zoom-in:hover{
+	color:#f21818;	
+}
+.checkbox_bo{ position:relative; top:-2px;}

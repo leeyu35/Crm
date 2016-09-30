@@ -5,7 +5,13 @@
 <title>无标题文档</title>
 <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+<script src="/Public/js/jquery-3.1.0.min.js"></script>
+<script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
+<script src="/Public/js/bootstrap.min.js"></script>
+
 </head>
+<body>
+
 <div class="container" style="width:100%;">
 <h3 class="bor-left-bull" >职位列表<small>Group list</small></h3>
 
@@ -25,13 +31,16 @@
     	<td>{$list[group_name]}</td>
 
     	<td>{$list[ctime]|date="Y-m-d",###}</td>
-    	<td><a href="{:U("updata?id=$list[id]")}" title="修改"><span class="glyphicon glyphicon-pencil"></span></a> <!--<a href="{:U("delete?id=$list[id]")}">删除</a>--></td>
+    	<td><a href="{:U("updata?id=$list[id]")}"  data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a> <!--<a href="{:U("delete?id=$list[id]")}">删除</a>--></td>
     </tr>
     </volist>
     
 </table>
 
 </div>
-<body>
+<script>
+   $(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script>
+
 </body>
 </html>

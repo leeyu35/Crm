@@ -5,6 +5,9 @@
 <title>无标题文档</title>
 <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+<script src="/Public/js/jquery-3.1.0.min.js"></script>
+<script src="/Public/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
@@ -29,7 +32,7 @@
     	<td>{$list[name]}</td>
     	<td>{$list[groupname]}</td>
     	<td>{$list[ctime]|date="Y-m-d",###}</td>
-    	<td><a href="{:U("updata?id=$list[id]")}" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{:U("delete?id=$list[id]")}"  {$confirm} title="删除"><span class="glyphicon glyphicon-trash"></span></a></td>
+    	<td><a href="{:U("updata?id=$list[id]")}"  data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{:U("delete?id=$list[id]")}"  {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a></td>
     </tr>
     </volist>
     
@@ -38,6 +41,10 @@
 </div>
 <br>
 <br>
+<script>
+   $(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script>
+
 
 </body>
 </html>

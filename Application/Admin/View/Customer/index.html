@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
 <script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
+<script src="/Public/js/bootstrap.min.js"></script>
 <script language="javascript">
 $(document).ready(function(e) {
     $(".htshow").click(function(){
@@ -16,6 +17,7 @@ $(document).ready(function(e) {
 });
 </script>
 </head>
+<body>
 <div class="container"  style="width:100%;">
 <h3  class="bor-left-bull" >客户列表<small>Customer list</small></h3>
 <div class="form-group">
@@ -71,10 +73,10 @@ $(document).ready(function(e) {
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[ctime]|date="Y-m-d",###}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[submituser]}</td>
         <td>
-        <span><a href="{:U("addim?id=$list[id]")}" title="新增附件"><span class="glyphicon glyphicon-plus"></span></a></span>&nbsp;|&nbsp;<a href="{:U("showim?id=$list[id]")}" title="查看附件"><span class="glyphicon glyphicon-zoom-in"></span></a><br>
+        <span><a href="{:U("addim?id=$list[id]")}" data-toggle="tooltip" data-placement="left" title="新增附件"><span class="glyphicon glyphicon-plus"></span></a></span>&nbsp;|&nbsp;<a href="{:U("showim?id=$list[id]")}" data-toggle="tooltip" data-placement="left" title="查看附件"><span class="glyphicon glyphicon-zoom-in"></span></a><br>
         </td>
     	<td>
-        <a href="{:U("updata?id=$list[id]")}" title="修改"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<a href="{:U("delete?id=$list[id]")}" {$confirm} title="删除"><span class="glyphicon glyphicon-trash"></span></a>
+        <a href="{:U("updata?id=$list[id]")}"  data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<a href="{:U("delete?id=$list[id]")}" {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         </td>
     </tr>
     </volist>
@@ -82,6 +84,9 @@ $(document).ready(function(e) {
 {$page}
 
 </div>
-<body>
+<script>
+   $(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script>
+
 </body>
 </html>
