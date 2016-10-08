@@ -83,7 +83,7 @@ $(document).ready(function(e) {
     <volist id="list" name="list" key="k">
     <tr >
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$k}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]")}"><a href="{:U("Customer/show?id=$list[aid]")}">{$list[advertiser]}</a> <if condition="$list[isguidang] eq 1"><span title="合同已归档" class="glyphicon glyphicon-folder-close" style="color:#0492d9;"></span></if></td>
+    	<td class="htshow" id="{:U("show?id=$list[id]")}"><a href="{:U("Customer/show?id=$list[aid]")}">{$list[advertiser]}</a> <if condition="$list[isguidang] eq 1"><span  data-toggle="tooltip" data-placement="left" title="合同已归档" class="glyphicon glyphicon-folder-close" style="color:#0492d9;"></span></if></td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[appname]}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}" align="right">{$list[contract_money]|num_format}&nbsp;&nbsp;&nbsp;&nbsp;</td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[rebates_proportion]}%</td>
