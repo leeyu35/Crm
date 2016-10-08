@@ -66,7 +66,7 @@ class MvController extends CommonController
             return 400;
         }
         $list=$coustomer->field('id,advertiser')->where("submituser=$id")->order("ctime desc")->select();
-       
+
         foreach ($list as $key=>$val)
         {
 

@@ -37,6 +37,9 @@ $(document).ready(function(e) {
 	
 });
 </script>
+<style type="text/css">
+.control-label{ text-align:left !important;}
+</style>
 </head>
 
 <body>
@@ -46,23 +49,23 @@ $(document).ready(function(e) {
 <form action="{:U('upru')}" method="post" class="form-horizontal">
 <input type="hidden" name="id" value="{$info[id]}">
 <input type="hidden" name="time" value="{$info[ctime]}">
-<h4>客户基本信息</h4>
+<h4  class="bor-left-bull" >客户基本信息</h4>
 <hr>
 
    <div class="form-group">
-   	 <label class="col-sm-2 control-label">销售</label>
+   	 <label class="col-sm-2 control-label text-left">销售</label>
      <div class="col-sm-3">
     	<label  class="control-label"><strong>{$users_info}</strong></label>
      </div>
    </div>
   <div class="form-group">
   
-    <label for="inputEmail3" class="col-sm-2 control-label">广告主公司名称</label>
+    <label for="inputEmail3" class="col-sm-2 control-label text-left">广告主公司名称</label>
     <div class="col-sm-3">
     	<label  class="control-label"><strong>{$info['advertiser']}</strong></label>
     </div>
     
-    <label for="inputEmail3" class="col-sm-1 control-label">客户类型</label>
+    <label for="inputEmail3" class="col-sm-1 control-label text-left">客户类型</label>
     <div class="col-sm-3">
       <label  class="control-label"><strong>
          {$info['type']=='1'?'公司':''}
@@ -96,27 +99,27 @@ $(document).ready(function(e) {
   
   <div class="form-group">
   
-    <label for="inputEmail3" class="col-sm-2 control-label">所属行业</label>
+    <label for="inputEmail3" class="col-sm-2 control-label text-left">所属行业</label>
     <div class="col-sm-3">
          	<label  class="control-label"><strong>{$info['industry']}</strong></label>
     </div>
     
-    <label for="inputEmail3" class="col-sm-1 control-label">公司官网</label>
+    <label for="inputEmail3" class="col-sm-1 control-label text-left">公司官网</label>
     <div class="col-sm-3">   
-         	<label  class="control-label"><strong>{$info['website']}</strong></label>
+         	<label  class="control-label"><strong><a href="{$info['website']}" target="_blank">{$info['website']}</a></strong></label>
     </div>
 
   </div>
   
   <div class="form-group">
   
-    <label for="inputEmail3" class="col-sm-2 control-label">是否有APP</label>
+    <label for="inputEmail3" class="col-sm-2 control-label text-left">是否有APP</label>
     <div class="col-sm-3">
              	<label  class="control-label"><strong>{$info['isapp']=='1'?'有':''} {$info['isapp']=='0'?'没有':''}</strong></label>
 
     </div>
     
-    <label for="inputEmail3" class="col-sm-1 control-label">APP名称</label>
+    <label for="inputEmail3" class="col-sm-1 control-label text-left">APP名称</label>
     <div class="col-sm-3">      
          	<label  class="control-label"><strong>{$info['appname']}</strong></label>
     </div>
@@ -129,45 +132,43 @@ $(document).ready(function(e) {
              	<label  class="control-label"><strong>{$info['city']}</strong></label>
     </div>
   </div>
-  
-  <h4>联系人</h4>
+
+  <h4 class="bor-left-bull" >联系人</h4>
   <hr>
   <div id="contactmain">
   <volist id="contact_list" name="contact_list" key="k">
 	<div class="form-group" id="contact_list_id_{$contact_list[id]}">
     <input type="hidden" name="contactid[]" value="{$contact_list[id]}">
-    <div class="col-sm-1">
-    	<label {$k!='1'?'style="display:none;"':''}  class="control-label">联系人</label>
-         <label  class="control-label"><strong>{$contact_list[name]}</strong></label>
+    
+    	<label  class="control-label col-sm-1" style="text-align:right !important;">联系人</label>
+      <div class="col-sm-3">
+        <label  class="control-label"><strong>{$contact_list[name]}</strong></label>
 
     </div>
-    
-    <div class="col-sm-2">
-    	<label {$k!='1'?'style="display:none;"':'style="display:block;text-align:left;"'} class="control-label">QQ</label>
+    	<label class="control-label  col-sm-1"  style="text-align:right !important;">QQ</label>
+    <div class="col-sm-3">
+    	
          <label  class="control-label"><strong>{$contact_list[qq]}</strong></label>
     </div>
     
-    
-    <div class="col-sm-2">
-    	<label {$k!='1'?'style="display:none;"':'style="display:block;text-align:left;"'} class="control-label">微信</label>
+    	<label class="control-label  col-sm-1"  style="text-align:right !important;">微信</label>
+    <div class="col-sm-3">
          <label  class="control-label"><strong>{$contact_list[weixin]}</strong></label>
     </div>
-
-    
-    <div class="col-sm-2">
-    	<label {$k!='1'?'style="display:none;"':'style="display:block;text-align:left;"'} class="control-label">邮箱</label>
+    </div>
+    <div class="form-group">	
+    <label class="control-label  col-sm-1"  style="text-align:right !important;">邮箱</label>
+    <div class="col-sm-3">
          <label  class="control-label"><strong>{$contact_list[email]}</strong></label>
     </div>
     
-   
-    <div class="col-sm-2">
-    	<label {$k!='1'?'style="display:none;"':'style="display:block;text-align:left;"'} class="control-label">职位</label>
+    <label class="control-label col-sm-1"  style="text-align:right !important;">职位</label>
+    <div class="col-sm-3">
          <label  class="control-label"><strong>{$contact_list[position]}</strong></label>
     </div>
     
-    
-    <div class="col-sm-2">
-    	<label {$k!='1'?'style="display:none;"':'style="display:block;text-align:left;"'} class="control-label">电话</label>
+    <label class="control-label col-sm-1"  style="text-align:right !important;">电话</label>
+    <div class="col-sm-3">
          <label  class="control-label"><strong>{$contact_list[tel]}</strong></label>
     </div>
     
@@ -176,17 +177,18 @@ $(document).ready(function(e) {
   </div>
   </volist>
  </div>
-   <h4>开票资料</h4>
+
+   <h4 class="bor-left-bull" >开票资料</h4>
   <hr>
   <div class="form-group">
   
     <label for="inputEmail3" class="col-sm-2 control-label">纳税人识别号</label>
     <div class="col-sm-3">
-         <label  class="control-label"><strong>{$info['tax_identification']}</strong></label>
+         <label  class="control-label" style="text-align:left !important;"><strong>{$info['tax_identification']}</strong></label>
     </div>
     
     <label for="inputEmail3" class="col-sm-1 control-label">开票地址</label>
-    <div class="col-sm-3">      
+    <div class="col-sm-4">      
          <label  class="control-label"><strong>{$info['ticket_address']}</strong></label>
     </div>
 

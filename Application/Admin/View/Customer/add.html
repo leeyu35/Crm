@@ -26,7 +26,14 @@ $("#formid").submit(function(){
 			alert("请填写公司名称");
 			$("#inputEmail3ad").select();
 			return false;	
-		}	
+		}		
+		if($("#website").val()=="" || $("#website").val()=='http://www.')
+		{
+			alert("请填写公司网址");
+			$("#website").select();
+			return false;	
+		}
+		
 		if($("#inputEmail8se").val()=="")
 		{
 			alert("请选择客户所属省份");
@@ -151,7 +158,7 @@ $("#formid").submit(function(){
     
     <label for="inputEmail6" class="col-sm-1 control-label">公司官网</label>
     <div class="col-sm-3">      
-		<input name="website" type="text" class="form-control" id="inputEmail6" value="http://www.">
+		<input name="website" id="website" type="text" class="form-control" id="inputEmail6" value="http://www.">
     </div>
 
   </div>
