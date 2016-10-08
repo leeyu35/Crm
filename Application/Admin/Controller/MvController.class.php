@@ -61,10 +61,16 @@ class MvController extends CommonController
     public function kehu(){
         $coustomer=M('Customer');
         $id=I('post.id');
+        if($id=="")
+        {
+            return 400;
+        }
         $list=$coustomer->field('id,advertiser')->where("submituser=$id")->order("ctime desc")->select();
+       
         foreach ($list as $key=>$val)
         {
-            $str.='<label class="checkbox-inline"><input class="checkbox_bo" name="kehu[]" type="checkbox" id="inlineCheckbox1" value="'.$val['id'].'">'.$val['advertiser'].'</label>    ';
+
+            $str.='<label class="checkbox-inline kehu_ju"><input class="checkbox_bo" name="kehu[]" type="checkbox" id="inlineCheckbox1" value="'.$val['id'].'">'.$val['advertiser'].'</label><br>';
         }
         echo $str;
     }

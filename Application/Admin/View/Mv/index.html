@@ -41,6 +41,7 @@
   <div class="form-group">
     <label for="exampleInputEmail1">转移谁的客户</label>
 	<select class="form-control" style="width:200px;" name="users1" id="users1">
+      <option value="">--请选择--</option>
       <volist id="list1" name="list">
       		<option value="{$list1[id]}">{$list1[name]}</option>
       </volist>
@@ -57,6 +58,7 @@
   <div class="form-group">
     <label for="exampleInputPassword1">转移给</label>
 	<select class="form-control" style="width:200px;" name="users2">
+	  <option value="">--请选择--</option>
       <volist id="lista" name="list">
       		<option value="{$lista[id]}">{$lista[name]}</option>
       </volist>
