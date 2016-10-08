@@ -33,9 +33,16 @@ class PublicController extends Controller
                 $data[users]=$vo['id'];
                 $data[dizhi]=getIPLoc_QQ($_SERVER["REMOTE_ADDR"])?getIPLoc_QQ($_SERVER["REMOTE_ADDR"]):'暂无地址信息';
                 $data[time]=time();
-                $log->add($data);
+                if($log->add($data))
+                {
+                    $this->success('登录成功',U("/adminIndex"));
+                }else
+                {
+                    $this->success('登录失败',U("/login"));
+                }
 
-                $this->success('登录成功',U("/adminIndex"));
+
+
             }else
             {
                 $this->error("用户名或密码错误");
