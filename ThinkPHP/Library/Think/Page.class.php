@@ -50,6 +50,7 @@ class Page{
         $this->firstRow   = $this->listRows * ($this->nowPage - 1);
     }
 
+    
     /**
      * 定制分页链接设置
      * @param string $name  设置名称
@@ -102,13 +103,13 @@ class Page{
         //第一页
         $the_first = '';
         if($this->totalPages > $this->rollPage && ($this->nowPage - $now_cool_page) >= 1){
-            $the_first = '<a class="first" href="' . $this->url(1) . '">' . $this->config['first'] . '</a>';
+            $the_first = '<li><a class="first" href="' . $this->url(1) . '">第一页</a></li>';
         }
 
         //最后一页
         $the_end = '';
         if($this->totalPages > $this->rollPage && ($this->nowPage + $now_cool_page) < $this->totalPages){
-            $the_end = '<a class="end" href="' . $this->url($this->totalPages) . '">' . $this->config['last'] . '</a>';
+            $the_end = '<li><a class="next" href="' . $this->url($this->totalPages) . '">最后一页</a></li>';
         }
 
         //数字连接
