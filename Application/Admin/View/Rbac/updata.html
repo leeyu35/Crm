@@ -88,7 +88,7 @@
     </volist>
   </div>  
   <div class="form-group">
-    <label>查看权限持有人：</label>
+    <label>是否可以看他人：</label>
     <volist id="grouplist7" name="grouplist">
     <label class="checkbox-inline">
     	<input type="checkbox" id="inlineCheckbox1" name="index_show[]" value="{$grouplist7.id}" <in name="grouplist7.id" value="$info[index_show]">
@@ -96,6 +96,8 @@
         </in>>{$grouplist7.group_name}
     </label>
     </volist>
+        （不勾选的职位只能看到自己提交的信息，看不到他人提交的信息）
+
   </div>
 
 	<hr>
