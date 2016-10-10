@@ -252,7 +252,7 @@ class ContractController extends CommonController
                 exit;
             }
         }
-        exit;
+       
         $hetong->create();
         $hetong->contract_start=strtotime($hetong->contract_start);
         $hetong->contract_end=strtotime($hetong->contract_end);
@@ -354,9 +354,18 @@ class ContractController extends CommonController
             array('username'=>'wangwu','password'=>"111111"),
         );
         //导入PHPExcel类库，因为PHPExcel没有用命名空间，只能inport导入
-        import("Org.Util.PHPExcel");
-        import("Org.Util.PHPExcel.Writer.Excel5");
-        import("Org.Util.PHPExcel.IOFactory.php");
+        import("PHPExcel","localhost/ThinkPHP/Library/Org/Util",".php");
+        echo dirname(__FILE__);
+        if (class_exists('Image')) {
+            echo "found";
+        }
+        else
+        {
+            echo "没有找到";
+        }
+        //import("Org.Util.PHPExcel.Writer.Excel5");
+        //import("Org.Util.PHPExcel.IOFactory.php");
+        echo 1;
         exit;
         $filename="test_excel";
         $headArr=array("用户名","密码");
