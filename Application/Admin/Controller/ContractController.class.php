@@ -241,6 +241,18 @@ class ContractController extends CommonController
             $this->error("没有这个公司!");
             exit;
         }
+        //判断合同归档的时候是否已经审核过
+        if(I('post.isguidang')==1)
+        {
+            //
+            $het=$hetong->field('audit_1,audit_1')->find($id);
+            if($het['audit_1']!=1 or $het['audit_2']!=1)
+            {
+                $this->error('此合同还未全部通过审核，无法操作归档');
+                exit;
+            }
+        }
+        exit;
         $hetong->create();
         $hetong->contract_start=strtotime($hetong->contract_start);
         $hetong->contract_end=strtotime($hetong->contract_end);
