@@ -78,7 +78,7 @@ class HolidayController extends CommonController
                     $q_where.=" and b.groupid=".cookie('u_groupid');
                 }else
                 {
-                    $q_where.=" and b.groupid=2";
+                    $q_where.=" and (b.groupid=2 or  b.groupid=9)";
                 }
             }
             if($my_zu=='超级管理员' or $my_zu=='人事' or $my_zu=='BOSS')
