@@ -44,6 +44,16 @@ function group_name($idstr){
     return $string;
 
 }
+//返回用户组名称d单个
+function group_name_find($id){
+
+    $product_line=M('Groupl');
+    $list= $product_line->field('id,group_name')->where("id = $id")->find();
+
+    $string=$list[group_name];
+    return $string;
+
+}
 
 //权限条件反馈
 /*传递模块名称，根据模块名称返回index方法 所包含的权限

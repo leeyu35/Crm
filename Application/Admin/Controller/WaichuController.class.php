@@ -66,6 +66,26 @@ class WaichuController extends CommonController
             }
             //权限条件
             $q_where=quan_where(__CONTROLLER__,"a");
+            $my_info=users_info(cookie('u_id'));//我的信息
+            $my_zu=group_name_find($my_info['groupid']);//我的组信息
+            if($my_info[manager]!=1 and $my_zu!='超级管理员' and $my_zu!='BOSS' and $my_zu!='人事')
+            {
+                $q_where.=" and a.submituser=".cookie('u_id');
+            }elseif($my_info[manager]==1)
+            {
+                if($my_zu!='销售经理')
+                {
+                    $q_where.=" and b.groupid=".cookie('u_groupid');
+                }else
+                {
+                    $q_where.=" and b.groupid=2";
+                }
+            }
+            if($my_zu=='超级管理员' or $my_zu=='人事' or $my_zu=='BOSS')
+            {
+                $q_where=" a.id !='hjd'";
+            }
+
             $count      = $Refund->field('a.id,a.bumen,a.zhiwu,a.type,a.starttime,a.endtime,a.ctime,a.audit_1,a.audit_2,b.name')->join("a left join __USERS__ b on a.submituser = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->count();// 查询满足要求的总记录数
             $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
             $show       = $Page->show();// 分页显示输出
@@ -124,9 +144,33 @@ class WaichuController extends CommonController
             $this->error("您没有权限执行审核操作哦");
         }else
         {
-            $table=M("Waichu");
-            if($table->where("id=$id")->setField("audit_1",1) and $table->where("id=$id")->setField("audit_2",1))
+            if($type=='audit_1')
             {
+                $my_info=users_info(cookie('u_id'));
+                if($my_info[manager]==0)
+                {
+                    $this->error('您不是这个部门的经理哦');
+                }
+            }
+            $table=M("Waichu");
+            if(I('get.ju')!=''){
+                $shenhe=2;
+            }else
+            {
+                $shenhe=1;
+            }
+            if($table->where("id=$id")->setField($type,$shenhe))
+            {
+                //修改审核者
+                if($type=='audit_1')
+                {
+                    $table->where("id=$id")->setField('susers1',cookie('u_id'));
+                }
+                if($type=='audit_2')
+                {
+                    $table->where("id=$id")->setField('susers2',cookie('u_id'));
+                }
+
                 $this->success('审核成功',U('index'));
             }else
             {
@@ -144,7 +188,12 @@ class WaichuController extends CommonController
         //销售
         $submitusers=users_info($info[submituser]);
         $this->users_info=$submitusers['name'];
-
+        //一级审核人
+        $submitusers3=users_info($info[susers1]);
+        $this->users_info3=$submitusers3['name'];
+        //二级审核人
+        $submitusers4=users_info($info[susers2]);
+        $this->users_info4=$submitusers4['name'];
 
         $this->display();
 

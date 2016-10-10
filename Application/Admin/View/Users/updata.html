@@ -50,7 +50,15 @@
       </volist>
     	
     </select>
-    
+    </div>
+     <div class="form-group">
+    <label for="blankRadio">是否为部门经理</label><br>
+     <label>
+    <input type="radio" name="manager" id="blankRadio1"  {$info[manager]==0?'checked':''}  value="0"> 不是
+	 </label>&nbsp;&nbsp;
+     <label>
+    <input type="radio" name="manager" id="blankRadio2" {$info[manager]==1?'checked':''} value="1"> 是
+	 </label>
   </div>
   </if>
 	<hr>

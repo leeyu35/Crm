@@ -25,7 +25,14 @@ a {blr:expression_r(this.onFocus=this.blur())}
 
 .bor-left-bull{
 	border-left:2px solid #88B7E0;
-	padding-left:10px; 
+	padding-left:10px;
+}
+h4.bor-left-bull{ margin-top:40px;
+	
+}
+h4.bor-left-bull:nth-of-type(1){
+	margin-top:0px;
+	
 }
 .control-label{ font-size:12px; font-weight:normal;}
 .form-control{ font-size:12px; border-radius:0px;}
@@ -418,3 +425,4 @@ color:#0d4680;
 	color:#f21818;	
 }
 .checkbox_bo{ position:relative; top:-2px;}
+

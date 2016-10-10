@@ -83,12 +83,20 @@ $(document).ready(function(e) {
         <span style="width:20px; display:inline-block"><a href="" title="退款">退</a></span>|&nbsp;&nbsp;<a href="" title="退款列表">列</a><br>  
         </td>-->
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">
-        <if condition="$list[audit_1] eq 1">
-        	<span data-toggle="tooltip" data-placement="left" title="已审核" class="glyphicon glyphicon-ok"></span><span class="shyes"></span>
-        <else />
-        	<span data-toggle="tooltip" data-placement="left" title="未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
+                <if condition="$list[audit_1] eq 1">
+        	<span data-toggle="tooltip" data-placement="left" title="一级审核已审核" class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
+        <elseif condition="$list[audit_1] eq 2"/>
+        	<span data-toggle="tooltip" data-placement="left" title="一级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
+        <elseif condition="$list[audit_1] eq 0"/>
+        	<span data-toggle="tooltip" data-placement="left"  title="一级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
         </if>
-
+        <if condition="$list[audit_2] eq 1">
+        	<span data-toggle="tooltip" data-placement="left" title="二级审核已审核"  class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
+        <elseif condition="$list[audit_2] eq 2"/>
+            <span data-toggle="tooltip" data-placement="left" title="二级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
+        <elseif condition="$list[audit_2] eq 0"/>
+        	<span data-toggle="tooltip" data-placement="left" title="二级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
+        </if>
         </td>
         <td>
         <a href="{:U("delete?id=$list[id]")}" {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>
