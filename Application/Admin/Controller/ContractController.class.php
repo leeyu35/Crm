@@ -151,7 +151,11 @@ class ContractController extends CommonController
             $this->error("没有这个公司!");
             exit;
         }
-
+        if($hetong->advertiser=='')
+        {
+            $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
+            exit;
+        }
          if($hetong->add()){
              $this->success("添加成功",U("index"));
 
@@ -241,6 +245,7 @@ class ContractController extends CommonController
             $this->error("没有这个公司!");
             exit;
         }
+
         //判断合同归档的时候是否已经审核过
         if(I('post.isguidang')==1)
         {
@@ -252,8 +257,13 @@ class ContractController extends CommonController
                 exit;
             }
         }
-       
+
         $hetong->create();
+        if($hetong->advertiser=='')
+        {
+            $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
+            exit;
+        }
         $hetong->contract_start=strtotime($hetong->contract_start);
         $hetong->contract_end=strtotime($hetong->contract_end);
         $hetong->payment_time=strtotime($hetong->payment_time);
@@ -353,73 +363,39 @@ class ContractController extends CommonController
             array('username'=>'lisi','password'=>"abcdefg"),
             array('username'=>'wangwu','password'=>"111111"),
         );
-        //导入PHPExcel类库，因为PHPExcel没有用命名空间，只能inport导入
-        import("PHPExcel","localhost/ThinkPHP/Library/Org/Util",".php");
-        echo dirname(__FILE__);
-        if (class_exists('Image')) {
-            echo "found";
-        }
-        else
+        $hetong=M("Contract");
+        //权限条件
+        $q_where=quan_where(__CONTROLLER__,"a");
+
+        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei='0' and ".$q_where)->order("ctime desc")->select();
+
+        foreach($list as $key => $val)
         {
-            echo "没有找到";
+            //公司
+            $list2[$key]['advertiser']=$val['advertiser'];
+            //合同编号
+            $list2[$key]['contract_no']=$val['contract_no'];
+            //appname
+            $list2[$key]['appname']=$val['appname'];
+            //合同金额
+            $list2[$key]['contract_money']=num_format($val['contract_money']);
+            //产品线
+            $list2[$key]['product_line']=$val['name'];
+            //返点
+            $list2[$key]['rebates_proportion']=$val['rebates_proportion'];
+            //显示百度币
+            $list2[$key]['show_money']=num_format($val['show_money']);
+            //提交时间
+            $list2[$key]['ctime']=date("Y-m-d H:i:s",$val['ctime']);
+            //提交人
+            $uindo=users_info($val['users2']);
+            $list2[$key]['submituser']=$uindo[name];
         }
-        //import("Org.Util.PHPExcel.Writer.Excel5");
-        //import("Org.Util.PHPExcel.IOFactory.php");
-        echo 1;
-        exit;
+
         $filename="test_excel";
-        $headArr=array("用户名","密码");
-        $this->getExcel($filename,$headArr,$data);
+        $headArr=array("公司","合同编号",'APP名称','合同金额','产品线','返点','显示百度币','提交时间','提交人');
+        getExcel($filename,$headArr,$list2);
     }
 
-        private function getExcel($fileName,$headArr,$data){
-        //对数据进行检验
-        if(empty($data) || !is_array($data)){
-            die("data must be a array");
-        }
-        //检查文件名
-        if(empty($fileName)){
-            exit;
-        }
 
-        $date = date("Y_m_d",time());
-        $fileName .= "_{$date}.xls";
-
-        //创建PHPExcel对象，注意，不能少了\
-        $objPHPExcel = new \PHPExcel();
-        $objProps = $objPHPExcel->getProperties();
-
-        //设置表头
-        $key = ord("A");
-        foreach($headArr as $v){
-            $colum = chr($key);
-            $objPHPExcel->setActiveSheetIndex(0) ->setCellValue($colum.'1', $v);
-            $key += 1;
-        }
-
-        $column = 2;
-        $objActSheet = $objPHPExcel->getActiveSheet();
-        foreach($data as $key => $rows){ //行写入
-            $span = ord("A");
-            foreach($rows as $keyName=>$value){// 列写入
-                $j = chr($span);
-                $objActSheet->setCellValue($j.$column, $value);
-                $span++;
-            }
-            $column++;
-        }
-
-        $fileName = iconv("utf-8", "gb2312", $fileName);
-        //重命名表
-        // $objPHPExcel->getActiveSheet()->setTitle('test');
-        //设置活动单指数到第一个表,所以Excel打开这是第一个表
-        $objPHPExcel->setActiveSheetIndex(0);
-        header('Content-Type: application/vnd.ms-excel');
-        header("Content-Disposition: attachment;filename=\"$fileName\"");
-        header('Cache-Control: max-age=0');
-
-        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-        $objWriter->save('php://output'); //文件通过浏览器下载
-        exit;
-    }
 }

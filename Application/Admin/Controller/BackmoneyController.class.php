@@ -87,7 +87,19 @@ class BackmoneyController extends CommonController
         $Diankuan->create();
         $Diankuan->b_time=strtotime($Diankuan->b_time);
         $Diankuan->ctime=time();
-
+        //检查是否有这个客户
+        $Customer=M("Customer");
+        $co=$Customer->where("advertiser='".I('post.gongsi')."'")->count();
+        if($co==0)
+        {
+            $this->error("没有这个公司!");
+            exit;
+        }
+        if($Diankuan->advertiser=='')
+        {
+            $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
+            exit;
+        }
 
 
         if($insid=$Diankuan->add()){
@@ -160,6 +172,12 @@ class BackmoneyController extends CommonController
             exit;
         }
         $Diankuan->create();
+
+        if($Diankuan->advertiser=='')
+        {
+            $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
+            exit;
+        }
         $Diankuan->b_time=strtotime($Diankuan->b_time);
 
         $Diankuan->ctime=I('post.time')+1;

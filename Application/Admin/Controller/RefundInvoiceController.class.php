@@ -124,6 +124,19 @@ class RefundInvoiceController extends CommonController
         $Refund->ctime=time();
         $Refund->kp_time=strtotime($Refund->kp_time);
         $Refund->users2=cookie('u_id');
+        //检查是否有这个客户
+        $Customer=M("Customer");
+        $co=$Customer->where("advertiser='".I('post.gongsi')."'")->count();
+        if($co==0)
+        {
+            $this->error("没有这个公司!");
+            exit;
+        }
+        if($Refund->advertiser=='')
+        {
+            $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
+            exit;
+        }
         if($Refund->add()){
             $this->success("申请成功",U("index"));
 

@@ -112,7 +112,19 @@ class DiankuanController extends CommonController
         $Diankuan->back_money_time=strtotime($Diankuan->back_money_time);
         $Diankuan->ctime=time();
         $Diankuan->users2=cookie('u_id');
-
+        //检查是否有这个客户
+        $Customer=M("Customer");
+        $co=$Customer->where("advertiser='".I('post.gongsi')."'")->count();
+        if($co==0)
+        {
+            $this->error("没有这个公司!");
+            exit;
+        }
+        if($Diankuan->advertiser=='')
+        {
+            $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
+            exit;
+        }
 
         if($insid=$Diankuan->add()){
 

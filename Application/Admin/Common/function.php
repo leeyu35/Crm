@@ -361,53 +361,78 @@ function num_format($num){
 }
 
 
-function excel(){
-    import("Org.Util.PHPExcel");
-    import("Org.Util.PHPExcel.Writer.Excel2007");
-//include 'Classes/PHPExcel/Writer/Excel2007.php';
-    // 创建一个处理对象实例
+ function getExcel($fileName,$headArr,$data){
+    //对数据进行检验
+    if(empty($data) || !is_array($data)){
+        die("data must be a array");
+    }
+    //检查文件名
+    if(empty($fileName)){
+        exit;
+    }
+    //导入PHPExcel类库，因为PHPExcel没有用命名空间，只能inport导入
+     import("Library.Org.Util.PHPExcel",THINK_PATH,".php");
 
-    $objExcel=new  \Org\Util\PHPExcel();
-// 创建文件格式写入对象实例, uncomment
+     import("Library.Org.Util.PHPExcel.Writer.Excel5",THINK_PATH,".php");
+     import("Library.Org.Util.PHPExcel.IOFactory",THINK_PATH,".php");
 
-    $objWriter=new \PHPExcel_Reader_Excel5($objExcel);
-//*************************************
-//设置当前的sheet索引，用于后续的内容操作。
-//一般只有在使用多个sheet的时候才需要显示调用。
-//缺省情况下，PHPExcel会自动创建第一个sheet被设置SheetIndex=0
-    $objExcel->setActiveSheetIndex(0);
-    $objActSheet = $objExcel->getActiveSheet();
+    $date = date("Y_m_d",time());
+    $fileName .= "_{$date}.xls";
 
-//设置当前活动sheet的名称
-    $objActSheet->setTitle('月增减变动报表');
-//设置单元格的值
-    $objActSheet->setCellValue('A1', '章贡区医疗保险局职工月增减变动报表');
-//合并单元格
-    $objActSheet->mergeCells('A1:N1');
-    $objActSheet->setCellValue('A2', '现所在单位');
-    $objActSheet->setCellValue('B2', '姓名');
-    $objActSheet->setCellValue('C2', '性别');
-    $objActSheet->setCellValue('D2', '身份证号码');
-    $objActSheet->setCellValue('E2', '参保时间');
-    $objActSheet->setCellValue('F2', '增减原因');
-    $objActSheet->setCellValue('G2', '原所在单位');
-    $objActSheet->setCellValue('H2', '增减时间');
-    $objActSheet->setCellValue('I2', '退休时间');
-    $objActSheet->setCellValue('J2', '原工资');
-    $objActSheet->setCellValue('K2', '现工资');
-    $objActSheet->setCellValue('L2', '定点医院');
-    $objActSheet->setCellValue('M2', '操作人');
-    $objActSheet->setCellValue('N2', '备注');
+    //创建PHPExcel对象，注意，不能少了\
+    $objPHPExcel = new \PHPExcel();
+    $objProps = $objPHPExcel->getProperties();
+     $objActSheet = $objPHPExcel->getActiveSheet();
+    //设置表头
+    $key = ord("A");
+    foreach($headArr as $v){
+        $colum = chr($key);
+        $objPHPExcel->setActiveSheetIndex(0) ->setCellValue($colum.'1', $v);
+        //设置列宽
+        $objActSheet->getColumnDimension($colum.'1')->setAutoSize(true);
+        //设置字体
+        $objActSheet->getStyle($colum.'1')->getFont()->setName('微软雅黑');
+        //设置加粗
+        $objActSheet->getStyle($colum.'1')->getFont()->setBold(true);
+        //设置字号
+        $objPHPExcel->getActiveSheet()->getStyle($colum.'1')->getFont()->setSize(10);
+        $key += 1;
+    }
 
-    header("Pragma: public");
-    header("Expires: 0");
-    header("Cache-Control:must-revalidate, post-check=0, pre-check=0");
-    header("Content-Type:application/force-download");
-    header("Content-Type:application/vnd.ms-execl");
-    header("Content-Type:application/octet-stream");
-    header("Content-Type:application/download");;
-    header('Content-Disposition:attachment;filename="resume.xls"');
-    header("Content-Transfer-Encoding:binary");
-    $objWriter->save('php://output');
 
+
+     $column = 2;
+   // $objActSheet = $objPHPExcel->getActiveSheet();
+    foreach($data as $key => $rows){ //行写入
+        $span = ord("A");
+        foreach($rows as $keyName=>$value){// 列写入
+            $j = chr($span);
+
+            //设置列宽
+            $objActSheet->getColumnDimension($j.$column)->setAutoSize(true);
+            //设置字体
+            $objActSheet->getStyle($j.$column)->getFont()->setName('微软雅黑');
+            //设置字号
+            $objPHPExcel->getActiveSheet()->getStyle($j.$column)->getFont()->setSize(10);
+
+            $objActSheet->setCellValue($j.$column, $value);
+            $span++;
+        }
+        $column++;
+    }
+
+    $fileName = iconv("utf-8", "gb2312", $fileName);
+     header("Pragma: public");
+     header("Expires: 0");
+     header("Cache-Control:must-revalidate, post-check=0, pre-check=0");
+     header("Content-Type:application/force-download");
+     header("Content-Type:application/vnd.ms-execl");
+     header("Content-Type:application/octet-stream");
+     header("Content-Type:application/download");;
+     header('Content-Disposition:attachment;filename="'.$fileName.'"');
+     header("Content-Transfer-Encoding:binary");
+     $objWriter = new \PHPExcel_Writer_Excel5($objPHPExcel);
+     $objWriter->save('php://output');
+
+     exit;
 }
