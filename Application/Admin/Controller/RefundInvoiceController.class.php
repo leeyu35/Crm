@@ -132,7 +132,7 @@ class RefundInvoiceController extends CommonController
             $this->error("没有这个公司!");
             exit;
         }
-        if($Refund->advertiser=='')
+        if($Refund->invoice_head=='')
         {
             $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
             exit;
