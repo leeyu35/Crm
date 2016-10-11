@@ -10,7 +10,6 @@
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
 <script language="javascript">
 	$(document).ready(function(e) {
-				
 		//动态加载公司名称
 		$("#gongsi").keyup(function(){
 			//$("#hjd").html($("#hjd").html()+"1");
@@ -82,7 +81,9 @@
 		$("#rebates_proportion").keyup(function(){
 			jr=$("#contract_money").val();	
 			bl=$("#rebates_proportion").val();
-			$("#show_money").val(jr*(1+(bl/100)));
+			//alert(1+(bl/100));
+			
+			$("#show_money").val((jr*(1+(bl/100))).toFixed(2));
 			
 		})
 		

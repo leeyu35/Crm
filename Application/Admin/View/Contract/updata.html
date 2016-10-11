@@ -81,7 +81,7 @@ $("#gongsi").on("blur",function(){
 		$("#rebates_proportion").keyup(function(){
 			jr=$("#contract_money").val();	
 			bl=$("#rebates_proportion").val();
-			$("#show_money").val(jr*(1+(bl/100)));
+			$("#show_money").val((jr*(1+(bl/100))).toFixed(2));
 			
 		})
 		$("input[name='type']").change(function(){
