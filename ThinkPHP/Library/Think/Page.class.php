@@ -50,7 +50,7 @@ class Page{
         $this->firstRow   = $this->listRows * ($this->nowPage - 1);
     }
 
-    
+
     /**
      * 定制分页链接设置
      * @param string $name  设置名称
