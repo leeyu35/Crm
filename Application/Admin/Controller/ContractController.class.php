@@ -47,9 +47,10 @@ class ContractController extends CommonController
             $this->httype=$httype;
         }else
         {
-            $where.=" and a.type=1 ";
+            $where.=" and a.type=1  and a.isxufei='0'";
             $this->httype=$httype;
         }
+
         //时间条件
         $time_start=I('get.time_start');
         $time_end=I('get.time_end');
@@ -111,11 +112,11 @@ class ContractController extends CommonController
         //echo $where;
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
-        $count      = $hetong->field('a.id,a.advertiser,a.contract_no,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei='0' and ".$q_where.$where)->count();// 查询满足要求的总记录数
+        $count      = $hetong->field('a.id,a.advertiser,a.contract_no,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where($q_where.$where)->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
-        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
-
+        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where($q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
+        
         foreach($list as $key => $val)
         {
             //提交人
@@ -358,16 +359,106 @@ class ContractController extends CommonController
 
     }
     public function excel(){
-        $data=array(
-            array('username'=>'zhangsan','password'=>"123456"),
-            array('username'=>'lisi','password'=>"abcdefg"),
-            array('username'=>'wangwu','password'=>"111111"),
-        );
+        //搜索条件
+        $type=I('get.searchtype');
+        if($type!='')
+        {
+            if($type=='advertiser')
+            {
+                $coustomer=M('Customer');
+                $zsql=$coustomer->field("id")->where(" advertiser like '%".I('get.search_text')."%'")->select(false);
+                $where.=" and  a.id!='hjd2' and a.advertiser in($zsql)";
+
+            }
+            if($type=='contract_no')
+            {
+                $where.=" and a.id!='hjd2' and a.contract_no like '%".I('get.search_text')."%'";
+            }
+            if($type=='appname')
+            {
+                $where.=" and a.id!='hjd3' and a.appname like '%".I('get.search_text')."%'";
+            }
+            $this->type=$type;
+            $this->ser_txt=I('get.search_text');
+
+        }
+
+        //合同类型
+        $httype=I('get.httype');
+        if($httype!='')
+        {
+            $where.=" and a.type=2 ";
+            $this->httype=$httype;
+        }else
+        {
+            $where.=" and a.type=1  and a.isxufei='0'";
+            $this->httype=$httype;
+        }
+
+
+        //时间条件
+        $time_start=I('get.time_start');
+        $time_end=I('get.time_end');
+        if($time_start!="" and $time_end!="")
+        {
+            $time_start=strtotime($time_start);
+            $time_end=strtotime($time_end);
+
+            $where.=" and a.ctime > $time_start and a.ctime < $time_end";
+            $this->time_start=I('get.time_start');
+            $this->time_end=I('get.time_end');
+        }
+        //审核条件
+        $type2=I('get.shenhe');
+        if($type2!='')
+        {
+            if($type2=='k')
+            {
+                $where.=" and a.id!='hjd3' ";
+            }
+            if($type2=='0')
+            {
+                $where.=" and (a.audit_1=0 or a.audit_2=0)";
+            }
+            if($type2=='1')
+            {
+                $where.=" and a.audit_1=1 and a.audit_2=1";
+            }
+            $this->type2=$type2;
+            $this->ser_txt2=I('get.search_text');
+
+        }
+        //归档条件
+        $type4=I('get.guidang');
+        if($type4!='')
+        {
+            if($type4=='k')
+            {
+                $where.=" and a.id!='hjd4' ";
+            }
+            if($type4=='0')
+            {
+                $where.=" and a.isguidang=0 ";
+            }
+            if($type4=='1')
+            {
+                $where.=" and a.isguidang=1 ";
+            }
+            $this->type4=$type4;
+
+        }
+
+        $type3=I('get.pr_line');
+        if($type3!='')
+        {
+            $where.="and a.product_line =$type3";
+            $this->type3=$type3;
+        }
         $hetong=M("Contract");
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
 
-        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei='0' and ".$q_where)->order("ctime desc")->select();
+        $list=$hetong->field('a.id,a.advertiser as aid,a.fk_money,a.payment_time,a.agent_company,a.contract_no,a.contract_start,a.contract_end,a.type,a.users2,a.isguidang,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where($q_where.$where)->order("a.ctime desc")->select();
 
         foreach($list as $key => $val)
         {
@@ -379,21 +470,47 @@ class ContractController extends CommonController
             $list2[$key]['appname']=$val['appname'];
             //合同金额
             $list2[$key]['contract_money']=num_format($val['contract_money']);
+            //显示百度币
+            $list2[$key]['show_money']=num_format($val['show_money']);
+            //付款金额
+            $list2[$key]['fk_money']=num_format($val['fk_money']);
             //产品线
             $list2[$key]['product_line']=$val['name'];
             //返点
             $list2[$key]['rebates_proportion']=$val['rebates_proportion'];
-            //显示百度币
-            $list2[$key]['show_money']=num_format($val['show_money']);
+
             //提交时间
             $list2[$key]['ctime']=date("Y-m-d H:i:s",$val['ctime']);
+            //代理公司
+            $agentcompany=M("AgentCompany");
+            $aagentcompany=$agentcompany->field("companyname")->find($val[agent_company]);
+            $list2[$key]['daili']=$aagentcompany['companyname'];
+            //合同类型
+            $list2[$key]['type']=$val['type']==1?'普通合同':'框架合同';
+            //保证金
+            $list2[$key]['margin']=$val['margin'];
+            //合同开始时间
+            $list2[$key]['contract_start']=date("Y-m-d",$val['contract_start']);
+            //合同结束时间
+            $list2[$key]['contract_end']=date("Y-m-d",$val['contract_end']);
+            //付款方式
+            $list2[$key]['payment_type']=$val['payment_type']==1?'预付':'垫付';
+            //付款时间
+            $list2[$key]['payment_time']=$val['payment_time']?date("Y-m-d",$val['payment_time']):'';
+            //是否归档
+            $list2[$key]['isguidang']=$val['isguidang']==0?'未归档':'已归档';
+
+            //销售
+            $submitusers=users_info($val[submituser]);
+            $list2[$key]['submitusers2']=$submitusers['name'];
+
             //提交人
             $uindo=users_info($val['users2']);
             $list2[$key]['submituser']=$uindo[name];
         }
 
-        $filename="test_excel";
-        $headArr=array("公司","合同编号",'APP名称','合同金额','产品线','返点','显示百度币','提交时间','提交人');
+        $filename="hetong_excel";
+        $headArr=array("公司","合同编号",'APP名称','合同金额','显示百度币','付款金额','产品线','返点','提交时间','代理公司','合同类型','保证金','合同开始时间','合同结束时间','付款方式','付款时间','是否归档','销售','提交人');
         getExcel($filename,$headArr,$list2);
     }
 
