@@ -60,9 +60,9 @@ $(document).ready(function(e) {
         <th>附件</th>	  
         <th>操作</th>	  
     </tr>
-    <volist id="list" name="list">
+    <volist id="list" name="list" key="k">
     <tr>
-    	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[id]}</td>
+    	<td class="htshow" id="{:U("show?id=$list[id]")}">{$k}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[advertiser]}</td>
         <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[appname]}</td>
         <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[industry]}</td>
