@@ -251,7 +251,7 @@ class ContractController extends CommonController
         if(I('post.isguidang')==1)
         {
             //
-            $het=$hetong->field('audit_1,audit_1')->find($id);
+            $het=$hetong->field('audit_1,audit_2')->find($id);
             if($het['audit_1']!=1 or $het['audit_2']!=1)
             {
                 $this->error('此合同还未全部通过审核，无法操作归档');
