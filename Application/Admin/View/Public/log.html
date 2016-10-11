@@ -19,17 +19,16 @@
     	<th>姓名</th>
         <th>职位</th>
         <th>登录时间</th>
-        <th>地址</th>
+        
     </tr>
     <volist id="list" name="list" key="k">
     <tr>
     	<td>{$k}</td>
         <td><img src="{$list[image]}" width="50" height="50" class="img-circle"/></td>
-    	<td><a href="https://www.baidu.com/baidu?wd={$list[ip]}&tn=monline_dg&ie=utf-8">{$list[ip]}</a></td>
+    	<td><a href="https://www.baidu.com/baidu?wd={$list[ip]}">{$list[ip]}</a></td>
     	<td>{$list[name]}</td>
     	<td>{$list[groupname]}</td>
     	<td>{$list[time]|date="Y-m-d H:i:s",###}</td>
-        <td>{$list[dizhi]?$list[dizhi]:'暂无地址信息'}</td>
     </tr>
     </volist>
     
