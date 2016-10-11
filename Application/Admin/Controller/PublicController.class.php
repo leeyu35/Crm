@@ -31,7 +31,7 @@ class PublicController extends Controller
                 $log=M("Log");
                 $data[ip]=$_SERVER["REMOTE_ADDR"];
                 $data[users]=$vo['id'];
-                $data[dizhi]=getIPLoc_QQ($_SERVER["REMOTE_ADDR"])?getIPLoc_QQ($_SERVER["REMOTE_ADDR"]):'暂无地址信息';
+                $data[dizhi]='暂无地址信息';
                 $data[time]=time();
                 if($log->add($data))
                 {
