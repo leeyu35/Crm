@@ -364,7 +364,7 @@ function num_format($num){
  function getExcel($fileName,$headArr,$data){
     //对数据进行检验
     if(empty($data) || !is_array($data)){
-        die("data must be a array");
+        $this->error("没有数据可导出");
     }
     //检查文件名
     if(empty($fileName)){
