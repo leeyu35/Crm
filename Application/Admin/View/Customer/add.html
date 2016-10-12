@@ -16,7 +16,7 @@
 $(document).ready(function(e) {
     $("#new_contact").click(function(){
 		
-		$("#contactmain").append('<div class="form-group"><div class="col-sm-2"><input type="text" class="form-control" name="name[]" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="qq[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="weixin[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="email[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="position[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="tel[]" class="form-control" id="inputEmail333" required="required"></div></div>')})
+		$("#contactmain").append('<div class="form-group"><div class="col-sm-2"><input type="text" class="form-control" name="name[]" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="tel[]" class="form-control" id="inputEmail333" required="required"></div><div class="col-sm-2"><input type="text" name="qq[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="weixin[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="email[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="position[]"  class="form-control" id="inputEmail3"></div></div>')})
 	
 	
 $("#formid").submit(function(){
@@ -241,8 +241,13 @@ $("#formid").submit(function(){
     
     <div class="col-sm-2">
     	<label for="inputEmail3" class="control-label">联系人</label>
-      	<input type="text" class="form-control" name="name[]" id="inputEmail3">
+      	<input type="text" class="form-control" name="name[]" id="inputEmail3" required>
     </div>
+     <div class="col-sm-2">
+    	<label for="inputEmail3" class="control-label">电话</label>
+      	<input type="text" class="form-control" name="tel[]" id="inputEmail333" required>
+    </div>
+
     <div class="col-sm-2">
     	<label for="inputEmail3" class="control-label">QQ</label>
       	<input type="text" class="form-control" name="qq[]" id="inputEmail3" >
@@ -267,10 +272,6 @@ $("#formid").submit(function(){
     </div>
     
     
-    <div class="col-sm-2">
-    	<label for="inputEmail3" class="control-label">电话</label>
-      	<input type="text" class="form-control" name="tel[]" id="inputEmail333" required>
-    </div>
 
 
 
