@@ -380,6 +380,12 @@ class ContractController extends CommonController
             {
                 $where.=" and a.id!='hjd3' and a.appname like '%".I('get.search_text')."%'";
             }
+            if ($type == 'submitname')
+            {
+                $coustomer=M('Users');
+                $zsql=$coustomer->field("id")->where(" name like '%".I('get.search_text')."%'")->select(false);
+                $where.=" and  a.id!='hjd2' and a.submituser in($zsql)";
+            }
             $this->type=$type;
             $this->ser_txt=I('get.search_text');
 

@@ -149,14 +149,14 @@ $("#gongsi").on("blur",function(){
   <div class="form-group">
   
     <label for="contract_money" class="col-sm-2 control-label">垫款金额</label>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
       	<div class="input-group">
         <input type="text" class="form-control" name="d_money" id="d_money" value="{$info[d_money]}">
     	<span class="input-group-addon">元</span>
         </div>
     </div>
     
-    <label for="rebates_proportion" class="col-sm-1 control-label">垫款账户名称</label>
+    <label for="rebates_proportion" class="col-sm-2 control-label">垫款账户名称</label>
     <div class="col-sm-2">      
     	
 		<input type="text" class="form-control" name="d_account_name" id="d_account_name" value="{$info[d_account_name]}">
@@ -173,10 +173,10 @@ $("#gongsi").on("blur",function(){
   <div class="form-group">
   
     <label for="inputEmail3" class="col-sm-2 control-label">垫款日期</label>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
     	<input type="text" name="d_time" class="Wdate form-control" id="d_time" onClick="WdatePicker()" value="{$info[d_time]|date="Y-m-d",###}">
     </div>
-   <label for="inputEmail3" class="col-sm-1 control-label">预计回款日期</label>
+   <label for="inputEmail3" class="col-sm-2 control-label">预计回款日期</label>
     <div class="col-sm-2">
     	<input type="text" name="back_money_time" class="Wdate form-control" id="back_money_time" onClick="WdatePicker()"value="{$info[back_money_time]|date="Y-m-d",###}">
     </div>

@@ -16,11 +16,10 @@
 $(document).ready(function(e) {
     $("#new_contact").click(function(){
 		
-		$("#contactmain").append('<div class="form-group"><div class="col-sm-2"><input type="text" class="form-control" name="name[]" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="qq[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="weixin[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="email[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="position[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="tel[]" class="form-control" id="inputEmail3"></div></div>')})
+		$("#contactmain").append('<div class="form-group"><div class="col-sm-2"><input type="text" class="form-control" name="name[]" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="qq[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="weixin[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="email[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="position[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="tel[]" class="form-control" id="inputEmail333" required="required"></div></div>')})
 	
 	
 $("#formid").submit(function(){
-	
 		if($("#inputEmail3ad").val()=="")
 		{
 			alert("请填写公司名称");
@@ -33,6 +32,12 @@ $("#formid").submit(function(){
 			$("#website").select();
 			return false;	
 		}
+		if($("#industry").val()=="")
+		{
+			alert("请选择客户所属行业");
+		
+			return false;	
+		}
 		
 		if($("#inputEmail8se").val()=="")
 		{
@@ -40,7 +45,7 @@ $("#formid").submit(function(){
 		
 			return false;	
 		}	
-				
+		
 	})
 	
 });
@@ -158,7 +163,7 @@ $("#formid").submit(function(){
     
     <label for="inputEmail6" class="col-sm-1 control-label">公司官网</label>
     <div class="col-sm-3">      
-		<input name="website" id="website" type="text" class="form-control" id="inputEmail6" value="http://www.">
+		<input name="website" id="website" type="url" class="form-control" id="inputEmail6" value="http://www.">
     </div>
 
   </div>
@@ -166,7 +171,7 @@ $("#formid").submit(function(){
   <div class="form-group">
   
     <label class="col-sm-2 control-label">是否有APP</label>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
     <label class="radio-inline">
     	<input name="isapp" type="radio" id="inlineRadio1" value="1" checked> 有
     </label>
@@ -175,7 +180,7 @@ $("#formid").submit(function(){
     </label>
     </div>
     
-    <label for="inputEmail7" class="col-sm-1 control-label">APP名称或简称</label>
+    <label for="inputEmail7" class="col-sm-2 control-label">APP名称或简称</label>
     <div class="col-sm-3">      
 		<input name="appName" type="text" class="form-control" id="inputEmail7">
     </div>
@@ -240,7 +245,7 @@ $("#formid").submit(function(){
     </div>
     <div class="col-sm-2">
     	<label for="inputEmail3" class="control-label">QQ</label>
-      	<input type="text" class="form-control" name="qq[]" id="inputEmail3">
+      	<input type="text" class="form-control" name="qq[]" id="inputEmail3" >
     </div>
     
     
@@ -264,7 +269,7 @@ $("#formid").submit(function(){
     
     <div class="col-sm-2">
     	<label for="inputEmail3" class="control-label">电话</label>
-      	<input type="text" class="form-control" name="tel[]" id="inputEmail3">
+      	<input type="text" class="form-control" name="tel[]" id="inputEmail333" required>
     </div>
 
 
@@ -318,7 +323,14 @@ $("#formid").submit(function(){
    </div>
 
 </form>
-
+<script>
+inputEmail333.oninput=function(){
+  inputEmail333.setCustomValidity("");
+};
+inputEmail333.oninvalid=function(){
+  inputEmail333.setCustomValidity("请填写客户联系方式");
+};
+</script>
 </div>
 <br>
 <br>

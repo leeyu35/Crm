@@ -148,7 +148,7 @@
     <label for="inputEmail3" class="col-sm-2 control-label">合同有效期</label>
     <div class="col-sm-4">
          <label  class="control-label"><strong>{$info[contract_start]|date='Y-m-d',###}</strong></label>
-         到<label  class="control-label"><strong>{$info[contract_end]|date='Y-m-d',###}</strong></label>
+         到 <label  class="control-label">{$info[contract_end]=='0'?'消费结束':''}<strong>{$info[contract_end]!='0'?$info[contract_end]|date='Y-m-d',###:''}</strong></label>
     </div>
 
 
