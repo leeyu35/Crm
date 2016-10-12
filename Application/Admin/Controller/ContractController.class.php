@@ -17,22 +17,24 @@ class ContractController extends CommonController
         $hetong=M("Contract");
         //搜索条件
         $type=I('get.searchtype');
-        if($type!='')
-        {
-            if($type=='advertiser')
-            {
-                $coustomer=M('Customer');
-                $zsql=$coustomer->field("id")->where(" advertiser like '%".I('get.search_text')."%'")->select(false);
-                $where.=" and  a.id!='hjd2' and a.advertiser in($zsql)";
+        if($type!='') {
+            if ($type == 'advertiser') {
+                $coustomer = M('Customer');
+                $zsql = $coustomer->field("id")->where(" advertiser like '%" . I('get.search_text') . "%'")->select(false);
+                $where .= " and  a.id!='hjd2' and a.advertiser in($zsql)";
 
             }
-            if($type=='contract_no')
-            {
-                $where.=" and a.id!='hjd2' and a.contract_no like '%".I('get.search_text')."%'";
+            if ($type == 'contract_no') {
+                $where .= " and a.id!='hjd2' and a.contract_no like '%" . I('get.search_text') . "%'";
             }
-            if($type=='appname')
+            if ($type == 'appname') {
+                $where .= " and a.id!='hjd3' and a.appname like '%" . I('get.search_text') . "%'";
+            }
+            if ($type == 'submitname')
             {
-                $where.=" and a.id!='hjd3' and a.appname like '%".I('get.search_text')."%'";
+                $coustomer=M('Users');
+                $zsql=$coustomer->field("id")->where(" name like '%".I('get.search_text')."%'")->select(false);
+                $where.=" and  a.id!='hjd2' and a.submituser in($zsql)";
             }
             $this->type=$type;
             $this->ser_txt=I('get.search_text');
