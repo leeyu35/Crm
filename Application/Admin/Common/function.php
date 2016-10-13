@@ -331,6 +331,10 @@ function num_format($num){
     if(!is_numeric($num)){
         return false;
     }
+    if($num==0)
+    {
+        return 0;
+    }
     $rvalue='';
     $num = explode('.',$num);//把整数和小数分开
     $rl = !isset($num['1']) ? '' : $num['1'];//小数部分的值
