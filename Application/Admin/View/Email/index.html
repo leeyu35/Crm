@@ -36,7 +36,7 @@ $(document).ready(function(e) {
     	<td  class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$k}</td>
         <td  class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[title]}</td>
     	<td  class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">
-        <img src="{$list[s_images]}" width="30" class="img-circle"><br>{$list[s_users]}</td>
+        <!--<img src="{$list[s_images]}" width="30" class="img-circle"><br>-->{$list[s_users]}</td>
         <td  class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[state]==0?'未读':'已读'}</td>
     	<td  class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[time]|date="Y-m-d H:i:s",###}</td>
     	<td><a href="{:U("delete?id=$list[id]&type=f_show")}" {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a></td>
