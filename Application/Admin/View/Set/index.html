@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+<script src="/Public/js/jquery-3.1.0.min.js"></script>
+<script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
+<script src="/Public/js/bootstrap.min.js"></script>
+<script language="javascript">
+$(document).ready(function(e) {
+ 		$(".liebiao").click(function(){
+
+			$(".liebiao").removeClass("active");
+			iformurl=$(this).attr("id");
+			$("#frame").attr("src",iformurl);
+			$(this).addClass("active");
+			
+		})
+});
+</script>
+<style type="text/css">
+#frame{
+            width: 100%;
+            height: 100%;
+        }
+html,body{ height:100%; overflow:hidden;}
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-default " role="navigation">
+	<div class="container-fluid">
+    <div class="navbar-form">
+    <ul class="nav nav-pills " role="tablist">
+      <li role="presentation" class="active liebiao" id="{:U('Accounttype/index')}"><a href="#">开户类型</a></li>
+      <li role="presentation" class="liebiao" id="{:U('Agentcompany/index')}"><a href="#">代理公司</a></li>
+      <li role="presentation" class="liebiao" id="{:U('Piaotype/index')}"><a href="#">开票类型</a></li>
+      <li role="presentation" class="liebiao" id="{:U('Productline/index')}"><a href="#">产品线管理</a></li>
+    </ul>
+    </div>
+    </div>
+</nav>
+
+<div class="container"  style="width:100%; height:92%; overflow:hidden;">
+ <iframe src="{:U('Accounttype/index')}" frameborder="0" id="frame"></iframe>
+</div>
+
+
+
+</body>
+</html>
