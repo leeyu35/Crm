@@ -44,6 +44,11 @@ $(document).ready(function(e) {
      	<option value="0"  {$type2=='0'?'selected':''}>未审核</option>
      	<option value="1"  {$type2=='1'?'selected':''}>已审核</option>
   </select>
+  <select  class="form-control" name="state">
+     	<option value="k"   {$type3=='k'?'selected':''} >回款状态</option>
+     	<option value="0"  {$type3=='0'?'selected':''}>未回款</option>
+     	<option value="1"  {$type3=='1'?'selected':''}>已回款</option>
+  </select>
 
   <button type="submit" class="btn btn-primary">搜索</button>
   	<if condition="($ser_txt neq '') OR ($time_end neq '')">
@@ -106,7 +111,11 @@ $(document).ready(function(e) {
     </tr>
     </volist>
 </table>
-{$page}
+<div class="row">
+	<div class="col-sm-10">{$page}</div>
+	<div class="col-sm-2 text-right"><a href="{:U("excel?searchtype=$type&search_text=$ser_txt&shenhe=$type2&state=$type3&guidang=$type4&time_start=$time_start&time_end=$time_end&httype=$httype")}" style=" margin-top:20px;"  type="button" class="btn btn-primary  btn-sm"><span class="glyphicon glyphicon-save"></span> 导出Excel</a>
+</div>
+</div>
 </div>
 <script>
    $(function () { $("[data-toggle='tooltip']").tooltip(); });

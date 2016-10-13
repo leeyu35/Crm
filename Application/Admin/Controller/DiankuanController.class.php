@@ -68,6 +68,24 @@ class DiankuanController extends CommonController
                 $this->ser_txt2=I('get.search_text');
 
             }
+            //状态条件
+            $type3=I('get.state');
+            if($type3!='')
+            {
+                if($type3=='k')
+                {
+                    $where.="";
+                }
+                if($type3=='0')
+                {
+                    $where.=" and a.state=0";
+                }
+                if($type3=='1')
+                {
+                    $where.=" and a.state=1";
+                }
+                $this->type3=$type3;
+            }
             //权限条件
             $q_where=quan_where(__CONTROLLER__,"a");
             $count      = $Diankuan->field('a.id,a.advertiser,a.contract_no,a.d_money,a.d_time,a.back_money_time,a.ctime,a.audit_1,a.audit_2,b.advertiser')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->count();// 查询满足要求的总记录数
@@ -338,4 +356,131 @@ class DiankuanController extends CommonController
             $this->error("删除失败");
         }
     }
+
+    public function excel(){
+        $Diankuan=M("Diankuan");
+        //搜索条件
+        $type=I('get.searchtype');
+        if($type!='')
+        {
+            if($type=='advertiser')
+            {
+                $coustomer=M('Customer');
+                $zsql=$coustomer->field("id")->where(" advertiser like '%".I('get.search_text')."%'")->select(false);
+                $where.=" and  a.id!='hjd2' and a.advertiser in($zsql)";
+
+            }
+            if($type=='contract_no')
+            {
+                $where.=" and a.id!='hjd2' and a.contract_no like '%".I('get.search_text')."%'";
+            }
+            if($type=='appname')
+            {
+                $where.=" and a.id!='hjd3' and a.appname like '%".I('get.search_text')."%'";
+            }
+            $this->type=$type;
+            $this->ser_txt=I('get.search_text');
+
+        }
+        //时间条件
+        $time_start=I('get.time_start');
+        $time_end=I('get.time_end');
+        if($time_start!="" and $time_end!="")
+        {
+            $time_start=strtotime($time_start);
+            $time_end=strtotime($time_end);
+
+            $where.=" and a.ctime > $time_start and a.ctime < $time_end";
+            $this->time_start=I('get.time_start');
+            $this->time_end=I('get.time_end');
+        }
+        //审核条件
+        $type2=I('get.shenhe');
+        if($type2!='')
+        {
+            if($type2=='k')
+            {
+                $where.=" and a.id!='hjd3' ";
+            }
+            if($type2=='0')
+            {
+                $where.=" and (a.audit_1=0 or a.audit_2=0)";
+            }
+            if($type2=='1')
+            {
+                $where.=" and a.audit_1=1 and a.audit_2=1";
+            }
+            $this->type2=$type2;
+            $this->ser_txt2=I('get.search_text');
+
+        }
+        //状态条件
+        $type3=I('get.state');
+        if($type3!='')
+        {
+            if($type3=='k')
+            {
+                $where.="";
+            }
+            if($type3=='0')
+            {
+                $where.=" and a.state=0";
+            }
+            if($type3=='1')
+            {
+                $where.=" and a.state=1";
+            }
+            $this->type3=$type3;
+        }
+        //权限条件
+        $q_where=quan_where(__CONTROLLER__,"a");
+
+        $list=$Diankuan->field('a.id,a.users2,a.advertiser as aid,a.advertiser,a.appname,a.ispiao,a.d_company,a.state,a.d_account_name,a.submituser,a.state,a.users2,a.contract_no,a.d_money,a.back_money_time,a.d_time,a.ctime,a.audit_1,a.audit_2,b.advertiser')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and ".$q_where.$where)->order("a.ctime desc")->select();
+
+        //主体公司
+        $agentcompany=M("AgentCompany");
+        foreach($list as $key => $val)
+        {
+            //公司
+            $list2[$key]['advertiser']=$val['advertiser'];
+            //垫款主体
+            $zhuti=$agentcompany->field("id,companyname,title")->find($val['d_company']);
+            $list2[$key]['companyname']=$zhuti['companyname'];
+            //合同编号
+            $list2[$key]['contract_no']=$val['contract_no'];
+            //appname
+            $list2[$key]['appname']=$val['appname'];
+            //垫款金额
+            $list2[$key]['d_money']=num_format($val['d_money']);
+            //垫款账户名称
+            $list2[$key]['d_account_name']=$val['d_account_name'];
+
+
+            //是否开票
+            $list2[$key]['ispiao']=$val['ispiao']==0?'未开票':'已开票';
+            //提交时间
+            $list2[$key]['ctime']=date("Y-m-d H:i:s",$val['ctime']);
+
+            //垫款日期
+            $list2[$key]['d_time']=date("Y-m-d",$val['d_time']);
+            //预计回款日期
+            $list2[$key]['back_money_time']=date("Y-m-d",$val['back_money_time']);
+
+            //是否回款
+            $list2[$key]['state']=$val['state']==0?'未回款':'已回款';
+
+            //销售
+            $submitusers=users_info($val[submituser]);
+            $list2[$key]['submitusers2']=$submitusers['name'];
+
+            //提交人
+            $uindo=users_info($val['users2']);
+            $list2[$key]['submituser']=$uindo[name];
+        }
+
+        $filename="diakuan_excel";
+        $headArr=array("公司",'垫款主体',"合同编号",'APP名称','垫款金额','垫款账户名称','是否开票','提交时间','垫款日期','预计回款日期','是否回款','销售','提交人');
+        getExcel($filename,$headArr,$list2);
+    }
+
 }

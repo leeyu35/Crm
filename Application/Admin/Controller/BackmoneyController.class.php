@@ -290,4 +290,76 @@ class BackmoneyController extends CommonController
             $this->error("删除失败");
         }
     }
+
+    public function excel(){
+        $Diankuan=M("Back_money");
+        //搜索条件
+        $type=I('get.searchtype');
+        if($type!='')
+        {
+
+            if($type=='advertiser')
+            {
+                $coustomer=M('Customer');
+                $zsql=$coustomer->field("id")->where(" advertiser like '%".I('get.search_text')."%'")->select(false);
+                $where.=" and  a.id!='hjd2' and a.advertiser in($zsql)";
+
+            }
+
+            $this->ser_txt=I('get.search_text');
+            if($type=='appname')
+            {
+                $where.=" and a.id!='hjd3' and a.appname like '%".I('get.search_text')."%'";
+            }
+            $this->type=$type;
+        }
+
+        //时间条件
+        $time_start=I('get.time_start');
+        $time_end=I('get.time_end');
+        if($time_start!="" and $time_end!="")
+        {
+            $time_start=strtotime($time_start);
+            $time_end=strtotime($time_end);
+
+            $where.=" and a.ctime > $time_start and a.ctime < $time_end";
+            $this->time_start=I('get.time_start');
+            $this->time_end=I('get.time_end');
+        }
+
+
+        //权限条件
+        $q_where=quan_where(__CONTROLLER__,"a");
+        $list=$Diankuan->field('a.id,a.advertiser as aid,a.b_company,a.appname,a.advertiser,a.b_money,a.b_time,a.ctime,a.submituser,b.advertiser')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
+
+        //主体公司
+        $agentcompany=M("AgentCompany");
+        foreach($list as $key => $val)
+        {
+            //公司
+            $list2[$key]['advertiser']=$val['advertiser'];
+            //回款主体
+            $zhuti=$agentcompany->field("id,companyname,title")->find($val['b_company']);
+            $list2[$key]['b_company']=$zhuti['companyname'];
+
+
+            //回款金额
+            $list2[$key]['b_money']=num_format($val['b_money']);
+            //appname
+            $list2[$key]['appname']=$val['appname'];
+            //回款日期
+            $list2[$key]['b_time']=date("Y-m-d",$val['b_time']);
+            //提交时间
+            $list2[$key]['ctime']=date("Y-m-d H:i:s",$val['ctime']);
+
+            //提交人
+            $submitusers=users_info($val[submituser]);
+            $list2[$key]['submitusers2']=$submitusers['name'];
+
+        }
+
+        $filename="huikuan_excel";
+        $headArr=array("公司",'回款主体',"回款金额",'APP名称','回款日期','提交时间','提交人');
+        getExcel($filename,$headArr,$list2);
+    }
 }

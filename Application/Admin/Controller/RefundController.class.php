@@ -275,4 +275,114 @@ class RefundController extends CommonController
         $this->display();
 
     }
+
+    public function excel(){
+        $Refund=M("Refund");
+        //搜索条件
+        $type=I('get.searchtype');
+        if($type!='')
+        {
+            if($type=='advertiser')
+            {
+                $coustomer=M('Customer');
+                $zsql=$coustomer->field("id")->where(" advertiser like '%".I('get.search_text')."%'")->select(false);
+                $where.=" and  a.id!='hjd2' and a.advertiser in($zsql)";
+
+            }
+            if($type=='contract_no')
+            {
+                $where.=" and a.id!='hjd2' and a.contract_no like '%".I('get.search_text')."%'";
+            }
+            if($type=='appname')
+            {
+                $where.=" and a.id!='hjd3' and a.appname like '%".I('get.search_text')."%'";
+            }
+            $this->type=$type;
+            $this->ser_txt=I('get.search_text');
+
+        }
+        //时间条件
+        $time_start=I('get.time_start');
+        $time_end=I('get.time_end');
+        if($time_start!="" and $time_end!="")
+        {
+            $time_start=strtotime($time_start);
+            $time_end=strtotime($time_end);
+
+            $where.=" and a.ctime > $time_start and a.ctime < $time_end";
+            $this->time_start=I('get.time_start');
+            $this->time_end=I('get.time_end');
+        }
+        //审核条件
+        $type2=I('get.shenhe');
+        if($type2!='')
+        {
+            if($type2=='k')
+            {
+                $where.=" and a.id!='hjd3' ";
+            }
+            if($type2=='0')
+            {
+                $where.=" and (a.audit_1=0 or a.audit_2=0)";
+            }
+            if($type2=='1')
+            {
+                $where.=" and a.audit_1=1 and a.audit_2=1";
+            }
+            $this->type2=$type2;
+            $this->ser_txt2=I('get.search_text');
+
+        }
+        //权限条件
+        $q_where=quan_where(__CONTROLLER__,"a");
+        $list=$Refund->field('a.id,a.users2,a.advertiser as aid,a.advertiser,a.r_company,a.r_open_account,a.r_account,a.baiduhu,a.baidubi,a.submituser,a.r_company,a.appname,a.contract_no,a.r_money,a.r_time,a.ctime,a.audit_1,a.audit_2,b.advertiser')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and ".$q_where.$where)->order("a.ctime desc")->select();
+
+
+        //主体公司
+        $agentcompany=M("AgentCompany");
+        foreach($list as $key => $val)
+        {
+            //公司
+            $list2[$key]['advertiser']=$val['advertiser'];
+            //退款主体
+            $zhuti=$agentcompany->field("id,companyname,title")->find($val['r_company']);
+            $list2[$key]['companyname']=$zhuti['r_company'];
+            //合同编号
+            $list2[$key]['contract_no']=$val['contract_no'];
+            //appname
+            $list2[$key]['appname']=$val['appname'];
+            //退款金额
+            $list2[$key]['r_money']=num_format($val['r_money']);
+            //退款开户行
+            $list2[$key]['r_open_account']=$val['r_open_account'];
+            //退款开户账号
+            $list2[$key]['r_account']=$val['r_account'];
+            //百度账户
+            $list2[$key]['baiduhu']=$val['baiduhu'];
+            //百度币
+            $list2[$key]['baidubi']=$val['baidubi'];
+
+
+            //是否开票
+            $list2[$key]['ispiao']=$val['ispiao']==0?'未开票':'已开票';
+            //提交时间
+            $list2[$key]['ctime']=date("Y-m-d H:i:s",$val['ctime']);
+
+            //退款日期
+            $list2[$key]['r_time']=date("Y-m-d",$val['r_time']);
+
+
+            //销售
+            $submitusers=users_info($val[submituser]);
+            $list2[$key]['submitusers2']=$submitusers['name'];
+
+            //提交人
+            $uindo=users_info($val['users2']);
+            $list2[$key]['submituser']=$uindo[name];
+        }
+
+        $filename="diakuan_excel";
+        $headArr=array("公司",'退款主体',"合同编号",'APP名称','退款金额','退款开户行','退款开户账号','百度账户','百度币','是否开票','提交时间','退款日期','销售','提交人');
+        getExcel($filename,$headArr,$list2);
+    }
 }

@@ -289,4 +289,113 @@ class InvoiceController extends CommonController
         $this->display();
 
     }
+
+    public function excel(){
+        $Refund=M("Invoice");
+        //搜索条件
+        $type=I('get.searchtype');
+        if($type!='')
+        {
+            if($type=='advertiser')
+            {
+                $coustomer=M('Customer');
+                $zsql=$coustomer->field("id")->where(" advertiser like '%".I('get.search_text')."%'")->select(false);
+                $where.=" and  a.id!='hjd2' and a.invoice_head in($zsql)";
+
+            }
+            if($type=='contract_no')
+            {
+                $where.=" and a.id!='hjd2' and a.contract_no like '%".I('get.search_text')."%'";
+            }
+            if($type=='appname')
+            {
+                $where.=" and a.id!='hjd3' and a.appname like '%".I('get.search_text')."%'";
+            }
+            $this->type=$type;
+            $this->ser_txt=I('get.search_text');
+
+        }
+        //时间条件
+        $time_start=I('get.time_start');
+        $time_end=I('get.time_end');
+        if($time_start!="" and $time_end!="")
+        {
+            $time_start=strtotime($time_start);
+            $time_end=strtotime($time_end);
+
+            $where.=" and a.ctime > $time_start and a.ctime < $time_end";
+            $this->time_start=I('get.time_start');
+            $this->time_end=I('get.time_end');
+        }
+        //审核条件
+        $type2=I('get.shenhe');
+        if($type2!='')
+        {
+            if($type2=='k')
+            {
+                $where.=" and a.id!='hjd3' ";
+            }
+            if($type2=='0')
+            {
+                $where.=" and (a.audit_1=0 or a.audit_2=0)";
+            }
+            if($type2=='1')
+            {
+                $where.=" and a.audit_1=1 and a.audit_2=1";
+            }
+            $this->type2=$type2;
+            $this->ser_txt2=I('get.search_text');
+
+        }
+        //权限条件
+        $q_where=quan_where(__CONTROLLER__,"a");
+
+        $list=$Refund->field('a.id,a.invoice_head as aid,a.users2,a.main_company,a.type,a.is_back_money,a.state,a.submituser,a.fp_on,a.kp_time,a.type2,a.invoice_head,a.appname,a.contract_no,a.money,a.ctime,a.audit_1,a.audit_2,b.advertiser')->join("a left join __CUSTOMER__ b on a.invoice_head = b.id ")->where("a.id!='0' and ".$q_where.$where)->order("a.ctime desc")->select();
+
+        //主体公司
+        $agentcompany=M("AgentCompany");
+        foreach($list as $key => $val)
+        {
+            //发票抬头
+            $list2[$key]['advertiser']=$val['advertiser'];
+            //开票主体
+            $zhuti=$agentcompany->field("id,companyname,title")->find($val['main_company']);
+            $list2[$key]['companyname']=$zhuti['companyname'];
+            //合同编号
+            $list2[$key]['contract_no']=$val['contract_no'];
+            //appname
+            $list2[$key]['appname']=$val['appname'];
+            //开票金额
+            $list2[$key]['money']=num_format($val['money']);
+            //开票类型
+            $list2[$key]['type2']=$val['type2']==1?'专票':'普票';
+            //税目
+            $p=M("piaotype");
+            $shuimu=$p->field('name')->find($val['type']);
+            $list2[$key]['shuimu']=$shuimu['name'];
+            //是否回款
+            $list2[$key]['state']=$val['state']==0?'未回款':'已回款';
+            //发票号
+            $list2[$key]['fp_on']=$val['fp_on'];
+            //开票时间
+            $list2[$key]['kp_time']=$val['kp_time']?date("Y-m-d H:i:s",$val['kp_time']):'';
+
+            //提交时间
+            $list2[$key]['ctime']=date("Y-m-d H:i:s",$val['ctime']);
+
+
+
+            //销售
+            $submitusers=users_info($val[submituser]);
+            $list2[$key]['submitusers2']=$submitusers['name'];
+
+            //提交人
+            $uindo=users_info($val['users2']);
+            $list2[$key]['submituser']=$uindo[name];
+        }
+
+        $filename="diakuan_excel";
+        $headArr=array("发票抬头",'开票主体',"合同编号",'APP名称','开票金额','开票类型','税目','是否回款','发票号','开票时间','提交时间','销售','提交人');
+        getExcel($filename,$headArr,$list2);
+    }
 }
