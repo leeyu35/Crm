@@ -381,8 +381,11 @@ class RefundController extends CommonController
             $list2[$key]['submituser']=$uindo[name];
         }
 
-        $filename="diakuan_excel";
+        $filename="tuikuan_excel";
         $headArr=array("公司",'退款主体',"合同编号",'APP名称','退款金额','退款开户行','退款开户账号','百度账户','百度币','是否开票','提交时间','退款日期','销售','提交人');
-        getExcel($filename,$headArr,$list2);
+        if(!getExcel($filename,$headArr,$list2))
+        {
+            $this->error('没有数据可导出');
+        };
     }
 }

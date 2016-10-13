@@ -360,6 +360,9 @@ class BackmoneyController extends CommonController
 
         $filename="huikuan_excel";
         $headArr=array("公司",'回款主体',"回款金额",'APP名称','回款日期','提交时间','提交人');
-        getExcel($filename,$headArr,$list2);
+        if(!getExcel($filename,$headArr,$list2))
+        {
+            $this->error('没有数据可导出');
+        };
     }
 }

@@ -399,8 +399,11 @@ class RefundInvoiceController extends CommonController
             $list2[$key]['submituser']=$uindo[name];
         }
 
-        $filename="diakuan_excel";
+        $filename="tuipiao_excel";
         $headArr=array("发票抬头",'开票主体',"合同编号",'APP名称','退票金额','开票类型','税目','是否回款','发票号','开票时间','是否跨月','是否认证','提交时间','销售','提交人');
-        getExcel($filename,$headArr,$list2);
+        if(!getExcel($filename,$headArr,$list2))
+        {
+            $this->error('没有数据可导出');
+        };
     }
 }

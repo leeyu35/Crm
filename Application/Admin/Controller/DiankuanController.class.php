@@ -480,7 +480,10 @@ class DiankuanController extends CommonController
 
         $filename="diakuan_excel";
         $headArr=array("公司",'垫款主体',"合同编号",'APP名称','垫款金额','垫款账户名称','是否开票','提交时间','垫款日期','预计回款日期','是否回款','销售','提交人');
-        getExcel($filename,$headArr,$list2);
+        if(!getExcel($filename,$headArr,$list2))
+        {
+            $this->error('没有数据可导出');
+        };
     }
 
 }
