@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
 <script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
+<script src="/Public/js/layer/layer.js"></script>
 
 <style type="text/css">
 	#adlist{ margin-left:15px;}
@@ -189,7 +190,20 @@
     </div>
     
   </div>
- 
+  <h4 class="bor-left-bull" >附件</h4>
+  <hr>
+	<div class="form-group">
+   <div class="col-sm-12" id="imgshowtime">
+    	
+      	<volist id="filelist" name="filelist">
+        	<div class="col-sm-1" style="padding-right:5px;">
+        	<img class="shouim" layer-src="{$filelist[file]}" src="{$filelist[file]}" width="100" height="100" style="border:1px #ccc solid; ">&nbsp;
+				<a href="{:U("defile?id=$filelist[id]")}">删除</a>
+            </div>
+        </volist>
+    </div>
+    
+  </div>
   <h4 class="bor-left-bull" >合同备注</h4>
   <hr>
   <div class="form-group">
@@ -246,6 +260,22 @@
 <br>
 <br>
 <br>
+<script>
+;!function(){
 
+//页面一打开就执行，放入ready是为了layer所需配件（css、扩展模块）加载完毕
+layer.ready(function(){ 
+  //官网欢迎页
+  
+  //使用相册
+  layer.photos({
+    photos: '#imgshowtime'
+  });
+});
+
+
+
+}();
+</script>
 </body>
 </html>

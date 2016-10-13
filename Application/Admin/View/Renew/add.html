@@ -10,9 +10,6 @@
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
 <script language="javascript">
 	$(document).ready(function(e) {
-				
-
-		
 		bianhao();
 
 		function bianhao(){
@@ -153,7 +150,7 @@
 <div class="container" style="width:100%;">
 <h3 class="bor-left-bull" >{$info[gongsi]}<span class="glyphicon glyphicon-share-alt"></span>{$info[name]}<span class="glyphicon glyphicon-share-alt"></span>新增续费</h3>
 <br>
-<form action="{:U('addru')}" method="post" class="form-horizontal" id="formid" >
+<form action="{:U('addru')}" method="post" class="form-horizontal" id="formid" enctype="multipart/form-data" >
 <input type="hidden" name="advertiser" id="advertiser" value="{$info[advertiser]}">
 <input type="hidden" name="submituser" id="submituser" value="{$info[submituser]}">
 <input type="hidden" name="agent_company" id="agent_company" value="{$info[agent_company]}">
@@ -279,17 +276,17 @@
   
   
   <div class="form-group">
-  <literal>
+  
     <label for="inputEmail3" class="col-sm-2 control-label">合同有效期</label>
     <div class="col-sm-3">
-    	<input id="contract_start" class="Wdate form-control" type="text" name="contract_start" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_start\')||\'2020-10-01\'}'})"/> 
+    	<input id="contract_start" class="Wdate form-control" type="text" name="contract_start" <literal>onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_start\')||\'2020-10-01\'}'})" </literal>value="{$info[contract_start]|date='Y-m-d',###}"/> 
     </div>
     <label for="inputEmail3" class="col-sm-1 control-label">结束时间</label>
         <div class="col-sm-2">
-<input id="contract_end" class="Wdate form-control" type="text" name="contract_end" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_end\')}',maxDate:'2020-10-01'})"/>
+<input id="contract_end" class="Wdate form-control" type="text" name="contract_end" <literal> onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_end\')}',maxDate:'2020-10-01'})"</literal> value="{$info[contract_end]|date='Y-m-d',###}"/>
     </div>
 
-   </literal>
+   
     <div  class="col-sm-4 control-label" style="text-align:left;">
     <span class="glyphicon glyphicon-bookmark"></span> 结束时间为空则认为合同截止日期为： 至消费结束
 
@@ -339,7 +336,17 @@
     </div>
     
   </div>
- 
+   <h4 class="bor-left-bull" >上传附件</h4>
+  <hr>
+	<div class="form-group">
+  
+    <label for="payment_type" class="col-sm-2 control-label">选择文件</label>
+    <div class="col-sm-3">
+        <input name="file[]" type="file" multiple>
+    </div>
+
+    
+  </div>
   <h4 class="bor-left-bull" >续费备注</h4>
   <hr>
   <div class="form-group">

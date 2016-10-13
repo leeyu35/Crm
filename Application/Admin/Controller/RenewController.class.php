@@ -177,7 +177,7 @@ class RenewController extends  CommonController
     public function add(){
         //要续费合同信息
         $hetong=M("Contract");
-        $info=$hetong->field("a.*,b.advertiser as gongsi,c.name")->join("a left join jd_customer b on a.advertiser=b.id left join jd_product_line c on a.product_line = c.id")->where("a.id=".I('get.id'))->find();
+        $info=$hetong->field("a.*,b.advertiser as gongsi,c.name,a.contract_start,a.contract_end")->join("a left join jd_customer b on a.advertiser=b.id left join jd_product_line c on a.product_line = c.id")->where("a.id=".I('get.id'))->find();
         $this->info=$info;
         //产品线列表
         $product_line=M("ProductLine");
@@ -213,7 +213,31 @@ class RenewController extends  CommonController
         $hetong->ctime=time();
         $hetong->users2=cookie('u_id');
 
-        if($hetong->add()){
+        if($insid=$hetong->add()){
+            dump($_FILES["file"]);
+            if($_FILES["file"]['name'][0]!="") {
+                $upload = new \Think\Upload();// 实例化上传类
+                $upload->maxSize = 3145728;// 设置附件上传大小
+                $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+                $upload->rootPath = './Uploads/'; // 设置附件上传根目录
+                $upload->savePath = '/xufei/'; // 设置附件上传（子）目录
+                // 上传文件
+                $info = $upload->upload();
+                if (!$info) {// 上传错误提示错误信息
+                    $this->error($upload->getError());
+                } else {// 上传成功
+                    $dkfile = M("File");//type=2
+                    foreach ($info as $file) {
+                        $datafile['type'] = 4;
+                        $datafile['yid'] = $insid;
+                        $datafile['file'] = C('Upload_path') . $file['savepath'] . $file['savename'];
+                        $dkfile->add($datafile);
+                        //echo $dkfile->_sql();
+                    }
+
+                }
+            }
+
             $this->success("添加成功",U("index?id=".I('post.htid')));
 
         }else
@@ -230,7 +254,12 @@ class RenewController extends  CommonController
         $this->info=$info;
 
         $this->yid=I('get.yid');
+        $id=I('get.id');
 
+        //文件
+        $file=M("File");
+        $filelist=$file->where("type=4 and yid=$id")->select();
+        $this->filelist=$filelist;
         //产品线
         $product_line=M("ProductLine");
         $this->product_line_list=$product_line->field("id,name,title")->order("id asc")->select();
@@ -260,11 +289,36 @@ class RenewController extends  CommonController
         $hetong->contract_start=strtotime($hetong->contract_start);
         $hetong->contract_end=strtotime($hetong->contract_end);
         $hetong->payment_time=strtotime($hetong->payment_time);
+        $hetong->ctime=I('post.time')+1;
         $hetong->users2=cookie('u_id');
         if($hetong->where("id=$id")->save())
         {
+            if($_FILES["file"]['name'][0]!="") {
+                $upload = new \Think\Upload();// 实例化上传类
+                $upload->maxSize = 3145728;// 设置附件上传大小
+                $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+                $upload->rootPath = './Uploads/'; // 设置附件上传根目录
+                $upload->savePath = '/xufei/'; // 设置附件上传（子）目录
+                // 上传文件
+                $info = $upload->upload();
+                if (!$info) {// 上传错误提示错误信息
+                    $this->error($upload->getError());
+                } else {// 上传成功
+                    $dkfile = M("File");//type=2
+                    foreach ($info as $file) {
+                        $datafile['type'] = 4;
+                        $datafile['yid'] = $id;
+                        $datafile['file'] = C('Upload_path') . $file['savepath'] . $file['savename'];
+                        $dkfile->add($datafile);
+                        //echo $dkfile->_sql();
+                    }
+
+                }
+            }
+
             if($yid!='')
             {
+
                 $this->success('修改成功',U("index?id=$yid"));
                 //修改审核者
 
@@ -336,6 +390,22 @@ class RenewController extends  CommonController
             }
         }
     }
+    //删除图片
+    public function defile(){
+        $id=I('get.id');
+
+        $file=M("File");
+        $info=$file->find($id);
+        if($file->delete($id))
+        {
+            $this->success("删除图片成功");
+            unlink(".".$info["File"]);
+        }else
+        {
+            $this->error("删除失败");
+        }
+    }
+
     //查看合同
     public function show(){
         $id=I('get.id');
@@ -370,6 +440,11 @@ class RenewController extends  CommonController
         $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
         $gs=kehu($info[advertiser]);
         $this->gongsi=$gs[advertiser];
+
+        //文件
+        $file=M("File");
+        $filelist=$file->where("type=4 and yid=$id")->select();
+        $this->filelist=$filelist;
         $this->display();
 
     }

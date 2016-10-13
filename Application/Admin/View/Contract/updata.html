@@ -347,7 +347,7 @@ $("#gongsi").on("blur",function(){
     
     <label for="payment_time" class="col-sm-1 control-label">付款日期</label>
     <div class="col-sm-2">      
-		<input type="text" name="payment_time" value="{$info[payment_time]|date='Y-m-d',###}" class="Wdate form-control" id="payment_time" onClick="WdatePicker()">
+		<input type="text" name="payment_time" value="{$info[payment_time]!='0'?$info[payment_time]|date='Y-m-d',###:''}" class="Wdate form-control" id="payment_time" onClick="WdatePicker()">
     </div>
     
     <label for="inputEmail3" class="col-sm-1 control-label">付款金额</label>
