@@ -214,7 +214,7 @@ class RenewController extends  CommonController
         $hetong->users2=cookie('u_id');
 
         if($insid=$hetong->add()){
-            dump($_FILES["file"]);
+            //dump($_FILES["file"]);
             if($_FILES["file"]['name'][0]!="") {
                 $upload = new \Think\Upload();// 实例化上传类
                 $upload->maxSize = 3145728;// 设置附件上传大小

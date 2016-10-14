@@ -259,7 +259,7 @@
     	<input id="contract_start" class="Wdate form-control" type="text" value="{$info[contract_start]|date='Y-m-d',###}" name="contract_start"  <literal>onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_start\')||\'2020-10-01\'}'})" </literal>/> 
     </div>
         <div class="col-sm-2">
-<input id="contract_end" class="Wdate form-control" type="text" value="{$info[contract_end]|date='Y-m-d',###}"  name="contract_end" <literal>onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_end\')}',maxDate:'2020-10-01'})"</literal> />
+<input id="contract_end" class="Wdate form-control" type="text" value="{$info[contract_end]?$info[contract_end]|date='Y-m-d',###:''}"  name="contract_end" <literal>onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_end\')}',maxDate:'2020-10-01'})"</literal> />
     </div>
     <div  class="col-sm-4 control-label" style="text-align:left;">
     <span class="glyphicon glyphicon-bookmark"></span> 结束时间为空则认为合同截止日期为： 至消费结束
