@@ -198,7 +198,7 @@ class BackmoneyController extends CommonController
                 } else {// 上传成功
                     $dkfile = M("File");//type=2
                     foreach ($info as $file) {
-                        $datafile['type'] = 2;
+                        $datafile['type'] = 3;
                         $datafile['yid'] = $id;
                         $datafile['file'] = C('Upload_path') . $file['savepath'] . $file['savename'];
                         $dkfile->add($datafile);
@@ -207,6 +207,7 @@ class BackmoneyController extends CommonController
 
                 }
             }
+
             $this->success('修改成功',U('index'));
         }else{
             $this->error('修改失败');
