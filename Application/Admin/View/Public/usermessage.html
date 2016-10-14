@@ -10,7 +10,8 @@
     
 <link rel="stylesheet" type="text/css" href="../../../Public/css/stylesheets/simple-calendar.css">
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
-<script type="text/javascript" src="../../../Public/js/javascripts/simple-calendar.js"></script>
+<script src="/Public/js/echarts.js"></script>
+<script src="/Public/js/china.js"></script>
 
     <title></title>
     <style>
@@ -157,11 +158,79 @@ document.addEventListener('DOMContentLoaded',function(){
 
 </div>
 
+</div>
     <div style="margin-bottom:50px;">
-    <div id='container' style="width:50%; margin-left:40px; margin-bottom:50px; float:left; clear:both; margin-top:50px;"></div>
-	<script>
-        var myCalendar = new SimpleCalendar('#container');
+    <div id='container' style="width:50%; margin-left:40px; margin-bottom:50px; float:left; clear:both; margin-top:50px; border:none;">
+        <div id="main23" style=" height:600px;"></div>
+
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main23'));
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption({
+
+    title: {
+        text: '客户分布图',
+        subtext: '根据客户资料省份信息',
+        left: 'center'
+    },
+    tooltip: {
+        trigger: 'item'
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+        data:['客户']
+    },
+    visualMap: {
+        min: 0,
+        max: 200,
+        left: 'left',
+        top: 'bottom',
+        text: ['高','低'],           // 文本，默认为数值文本
+        calculable: true
+    },
+    toolbox: {
+        show: true,
+        orient: 'vertical',
+        left: 'right',
+        top: 'center',
+        feature: {
+            dataView: {readOnly: false},
+            restore: {},
+            saveAsImage: {}
+        }
+    },
+    series: [
+        {
+            name: '客户',
+            type: 'map',
+            mapType: 'china',
+            roam: false,
+            label: {
+                normal: {
+                    show: true
+                },
+                emphasis: {
+                    show: true
+                }
+            },
+            data:[
+				<volist name="kehucity" id="kehucity">
+					 {name: '{$kehucity[city]|msubstr=0,-1,'utf-8',false}',value: {$kehucity[citysum]}},
+				</volist>
+
+            ]
+        },
+        
+    ]
+
+
+		});
     </script>
+
+    </div>
+	
     <div class="ring_2">
     	
     	<div class="r2_t1" style="padding:10px;">
@@ -169,14 +238,50 @@ document.addEventListener('DOMContentLoaded',function(){
         	<img src="/Public/images/admin/谋士LOGO.png" width="30%" style="float:right;" class="animated bounceInRight ">
         </div>
         <div class="r2_t1" style="padding:10px;"><h2>{$lizhi}</h2></div>
-        
+        <div id="main" style="height:500px;"></div>
+         <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption({
+			 title: {
+				text: '产品线分布',
+				left: 'center',
+				top: 20,
+				textStyle: {
+					color: '#575757'
+				}
+			},
+			tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+   			 },
+			 series : [
+				{
+					name: '产品线',
+					type: 'pie',
+					radius: '55%',
+					data:[
+					 <volist id="cpxfb" name="cpxfb">
+					 	{value:{$cpxfb[prsum]}, name:'{$cpxfb[name]}'},	
+					 </volist>
+
+					],
+					roseType: 'angle'
+				}
+				]
+			});
+    </script>
+
     </div>
     </div>
     
     <div style="clear:both; height:50px;"></div>
-     <div class="container">
+     <div class="container" >
+     
+	</div>
 
-
-</div>
 </body>
 </html>

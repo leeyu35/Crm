@@ -83,13 +83,19 @@ class PublicController extends Controller
             //获取合同审核权限组并且判断是否有消息
             //合同待审核
             $hetong=M("Contract");
+            //产品线分布
+            $cpx=$hetong->field('a.product_line,count(a.product_line) as prsum ,b.name')->join(" a left join __PRODUCT_LINE__ b on a.product_line=b.id")->group('a.product_line')->select();
+            $this->cpxfb=$cpx;
+            //客户分布图
+            $kehucity=M('Customer')->field('city,count(city) as citysum')->group('city')->select();
+            $this->kehucity=$kehucity;
+            //dump($kehucity);
             $raac_hetong=$rbac->where("module = '/Admin/Contract'")->find();
             //一级审核
             $array=explode(",",$raac_hetong['audit_1']);
             if(in_array(cookie('u_groupid'),$array))
             {
                 $ht_s1=$hetong->where("audit_1 =0 and isxufei=0")->count();
-
                 $rest+=$ht_s1;
             }
             //二级审核
@@ -195,6 +201,7 @@ class PublicController extends Controller
 
             $this->sessionuid=cookie("u_id");
             $this->url=$_SERVER['SERVER_NAME'];
+
             //随机励志语录
             $lizhi=array('将来的你会感谢 现在勇敢拼搏的你',
                 '我自信，故我成功，我行，我一定能行。',
