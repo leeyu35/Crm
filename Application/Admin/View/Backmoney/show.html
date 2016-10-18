@@ -19,13 +19,13 @@
 
 <span id="hjd"></span>
 <div class="container" style="width:100%;">
-<h3 class="bor-left-bull" >查看垫款<small>Refund</small></h3>
+<h3 class="bor-left-bull" >查看回款<small>Backmoney</small></h3>
 <br>
 <form action="#" method="post" class="form-horizontal" id="formid" >
 <input type="hidden" name="id" id="id" value="{$info[id]}">
 <input type="hidden" name="advertiser" id="advertiser" value="{$info[advertiser]}">
 <input type="hidden" name="submituser" id="submituser" value="{$info[submituser]}">
-<h4 class="bor-left-bull" >垫款基本信息</h4>
+<h4 class="bor-left-bull" >回款基本信息</h4>
 <hr>
 <div class="form-group">
    	 <label class="col-sm-2 control-label">提交人</label>
@@ -41,7 +41,7 @@
     <label  class="control-label"><strong>{$gongsi}</strong></label>
     </div>
     
-    <label for="inputEmail3" class="col-sm-1 control-label">垫款主体</label>
+    <label for="inputEmail3" class="col-sm-1 control-label">回款主体</label>
     <div class="col-sm-2">
        <volist id="agentcompany" name="agentcompany" key="k">
      	 <label  class="control-label"><strong>{$info[b_company]==$agentcompany[id]?"$agentcompany[companyname]":''}</strong></label>
@@ -95,7 +95,7 @@
     
   </div>
  
-  <h4 class="bor-left-bull" >垫款备注</h4>
+  <h4 class="bor-left-bull" >回款备注</h4>
   <hr>
   <div class="form-group">
    <div class="col-sm-12">
