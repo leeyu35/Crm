@@ -166,7 +166,7 @@ class RefundInvoiceController extends CommonController
         $this->list=$p->where("advertiser = $info[main_company]")->select();
 
         //公司名称
-        $gs=kehu($info[advertiser]);
+        $gs=kehu($info[invoice_head]);
         $this->gongsi=$gs[advertiser];
         $this->kaipinfo=$gs;
         //一级审核人
@@ -279,7 +279,7 @@ class RefundInvoiceController extends CommonController
         $id=I("post.id");
         $this->list=$p->where("advertiser = $info[main_company]")->select();
         //公司名称
-        $gs=kehu($info[advertiser]);
+        $gs=kehu($info[invoice_head]);
         $this->gongsi=$gs[advertiser];
         $this->kaipinfo=$gs;
 

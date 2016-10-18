@@ -403,7 +403,7 @@ function getExcel($fileName,$headArr,$data){
     //导入PHPExcel类库，因为PHPExcel没有用命名空间，只能inport导入
      import("Library.Org.Util.PHPExcel",THINK_PATH,".php");
 
-     import("Library.Org.Util.PHPExcel.Writer.Excel5",THINK_PATH,".php");
+     import("Library.Org.Util.PHPExcel.Writer.Excel2007",THINK_PATH,".php");
      import("Library.Org.Util.PHPExcel.IOFactory",THINK_PATH,".php");
 
     $date = date("Y_m_d",time());
@@ -411,10 +411,14 @@ function getExcel($fileName,$headArr,$data){
 
     //创建PHPExcel对象，注意，不能少了\
     $objPHPExcel = new \PHPExcel();
+
     $objProps = $objPHPExcel->getProperties();
+
      $objActSheet = $objPHPExcel->getActiveSheet();
+
     //设置表头
     $key = ord("A");
+
     foreach($headArr as $v){
         $colum = chr($key);
         $objPHPExcel->setActiveSheetIndex(0) ->setCellValue($colum.'1', $v);
@@ -433,13 +437,14 @@ function getExcel($fileName,$headArr,$data){
 
      $column = 2;
    // $objActSheet = $objPHPExcel->getActiveSheet();
+
     foreach($data as $key => $rows){ //行写入
         $span = ord("A");
         foreach($rows as $keyName=>$value){// 列写入
             $j = chr($span);
 
             //设置列宽
-            $objActSheet->getColumnDimension($j.$column)->setAutoSize(true);
+           // $objActSheet->getColumnDimension($j.$column)->setAutoSize(true);
             //设置字体
             $objActSheet->getStyle($j.$column)->getFont()->setName('微软雅黑');
             //设置字号

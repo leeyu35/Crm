@@ -470,6 +470,9 @@ class ContractController extends CommonController
 
         foreach($list as $key => $val)
         {
+
+
+
             //公司
             $list2[$key]['advertiser']=$val['advertiser'];
             //合同编号
@@ -515,7 +518,9 @@ class ContractController extends CommonController
             //提交人
             $uindo=users_info($val['users2']);
             $list2[$key]['submituser']=$uindo[name];
+
         }
+
 
         $filename="hetong_excel";
         $headArr=array("公司","合同编号",'APP名称','合同金额','显示百度币','付款金额','产品线','返点','提交时间','代理公司','合同类型','保证金','合同开始时间','合同结束时间','付款方式','付款时间','是否归档','销售','提交人');
