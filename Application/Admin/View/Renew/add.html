@@ -112,6 +112,12 @@
 			alert("请填写账户显示金额");
 			$("#show_money").select();
 			return false;	
+		}
+		if($("#account").val()=="")
+		{
+			alert("请填写账户名称");
+			$("#account").select();
+			return false;	
 		}	
 		/*
 		if($("#contract_start").val()=="")
