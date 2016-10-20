@@ -418,10 +418,10 @@ h4.bor-left-bull:nth-of-type(1){
 .glyphicon-ok{color:#04cc25;}
 .glyphicon-hourglass{color:#969696;}
 .glyphicon-remove{ color:#F00;}
-.glyphicon-transfer,.glyphicon-pencil,.glyphicon-trash,.glyphicon-plus,.glyphicon-zoom-in{
+.glyphicon-transfer,.glyphicon-pencil,.glyphicon-trash,.glyphicon-plus,.glyphicon-zoom-in,.glyphicon-list{
 color:#0d4680;
 }
-.glyphicon-transfer:hover,.glyphicon-pencil:hover,.glyphicon-trash:hover,.glyphicon-plus:hover,.glyphicon-zoom-in:hover{
+.glyphicon-transfer:hover,.glyphicon-pencil:hover,.glyphicon-trash:hover,.glyphicon-plus:hover,.glyphicon-zoom-in:hover,.glyphicon-list:hover{
 	color:#f21818;	
 }
 .checkbox_bo{ position:relative; top:-2px;}
