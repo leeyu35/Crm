@@ -60,14 +60,34 @@ class AccountController extends CommonController
                 $this->ser_txt2=I('get.search_text');
 
             }
+            //从合同列表点击过来
+            $contract_id=I('get.contract_id');
+            if($contract_id!='')
+            {
+                $where.=' and contract_id='.$contract_id;
+                ////合同编号
+                $hetong=M("Contract");
+                $hetong_on_name=$hetong->field('a.contract_no,b.advertiser,b.id')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("a.id =".$contract_id)->find();
+                $this->hetong=$hetong_on_name;
+                $this->contract_id=$contract_id;
+            }
+
             //权限条件
             $q_where=quan_where(__CONTROLLER__,"a");
             $count      = $Refund->field('a.id,a.appname,a.type,a.promote_url,a.a_users,a.ctime,a.a_password,a.fandian,a.ip,a.tel,b.name')->join("a left join __ACCOUNTTYPE__ b on a.type = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->count();// 查询满足要求的总记录数
             $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
             $show       = $Page->show();// 分页显示输出
-            $list=$Refund->field('a.id,a.appname,a.type,a.promote_url,a.a_users,a.ctime,a.a_password,a.ip,a.fandian,a.tel,b.name')->join("a left join __ACCOUNTTYPE__ b on a.type = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
+            $list=$Refund->field('a.id,a.appname,a.type,a.promote_url,a.a_users,a.ctime,a.a_password,a.ip,a.fandian,a.tel,a.contract_id,b.name')->join("a left join __ACCOUNTTYPE__ b on a.type = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
+            $hetong=M("Contract");
 
+            foreach ($list as $key=>$val)
+            {
+                $ht=$hetong->field('a.contract_no,b.advertiser')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("a.id =".$val['contract_id'])->find();
+                $list[$key]['advertiser']=$ht['advertiser'];
+                $list[$key]['contract_no']=$ht['contract_no'];
+            }
             $this->list=$list;
+
             $this->assign('page',$show);// 赋值分页输出
             $this->display();
 
@@ -76,19 +96,63 @@ class AccountController extends CommonController
         //代理公司
         $Accounttype=M("Accounttype");
         $this->accounttype=$Accounttype->field("id,name")->order("id asc")->select();
+        //从合同列表点击过来
+        $contract_id=I('get.contract_id');
+        if($contract_id!='')
+        {
 
+            ////合同编号
+            $hetong=M("Contract");
+            $hetong_on_name=$hetong->field('a.contract_no,b.advertiser,b.id')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("a.id =".$contract_id)->find();
+            $this->hetong=$hetong_on_name;
+           // dump($hetong_on_name);
+            $this->contract_id=$contract_id;
+        }
         $this->display();
     }
 
+    public function keyup_adlist(){
+        $Blog = R('Contract/keyup_adlist');
+        echo $Blog;
+    }
 
+    public function no_list(){
+        $NOLIST=R('Refund/no_list');
+        echo $NOLIST;
 
+    }
+    function keyup_fzrlist(){
+        $val=I('post.val');
+        if($val=='')
+        {
+            return ;
+        }
+        $Customer=M("Users");
+        //权限条件
+
+        $list=$Customer->field("id,name")->where(" name like '%$val%' ")->select();
+
+        foreach ($list as $key=>$val)
+        {
+            $str.="<li><a id='".$val[id]."'>$val[name]</a></li>";
+        }
+        echo $str;
+
+    }
     public function addru(){
 
         $Refund=M("Account");
-        $Refund->create();
+        $list=$Refund->create();
         $Refund->ctime=time();
+
         if($Refund->add()){
-            $this->success("添加成功",U("index"));
+            if(I('post.for_contract')!=1)
+            {
+                $this->success("添加成功",U("index"));
+            }else{
+                $this->success("添加成功",U("index?contract_id=".I('post.contract_id')));
+            }
+
 
         }else
         {
@@ -104,8 +168,22 @@ class AccountController extends CommonController
         $info=$Refund->find($id);
         $this->info=$info;
 
+        //合同编号
+        $hetong=M("Contract");
+        $hetong_on_name=$hetong->field('a.contract_no,b.advertiser,b.id')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("a.id =".$info['contract_id'])->find();
+        $this->hetong=$hetong_on_name;
+        $biaohao=$hetong->field('id,contract_no,advertiser')->where(" isxufei=0 and advertiser=".$hetong_on_name['id'])->select();
+        $this->bianhao=$biaohao;
+      //  dump($biaohao);
         $Accounttype=M("Accounttype");
         $this->accounttype=$Accounttype->field("id,name")->order("id asc")->select();
+        //从合同列表点击过来
+        $contract_id=I('get.contract_id');
+        if($contract_id!='')
+        {
+            $this->contract_id=$contract_id;
+        }
+
         $this->display();
 
     }
@@ -117,7 +195,13 @@ class AccountController extends CommonController
         $Refund->create();
         if($Refund->where("id=$id")->save())
         {
-            $this->success('修改成功',U('index'));
+            if(I('post.for_contract')!=1)
+            {
+                $this->success("修改成功",U("index"));
+            }else{
+                $this->success("修改成功",U("index?contract_id=".I('post.contract_id')));
+            }
+
         }else{
             $this->error('修改失败');
         }
@@ -131,11 +215,18 @@ class AccountController extends CommonController
         $Refund=M("Account");
         if($Refund->delete($id))
         {
-            $this->success("删除成功",U('index'));
+            if(I('get.contract_id')=="")
+            {
+                $this->success("删除成功",U("index"));
+            }else{
+                $this->success("删除成功",U("index?contract_id=".I('get.contract_id')));
+            }
         }else
         {
             $this->error("删除失败");
         }
+
+
     }
 
 
@@ -149,6 +240,12 @@ class AccountController extends CommonController
         //销售
         $submitusers=users_info($info[submituser]);
         $this->users_info=$submitusers['name'];
+
+
+        //合同编号
+        $hetong=M("Contract");
+        $hetong_on_name=$hetong->field('a.contract_no,b.advertiser,b.id')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("a.id =".$info['contract_id'])->find();
+        $this->hetong=$hetong_on_name;
 
         $Accounttype=M("Accounttype");
         $this->accounttype=$Accounttype->field("id,name")->order("id asc")->select();

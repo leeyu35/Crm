@@ -82,7 +82,7 @@ $(document).ready(function(e) {
         <th>操作</th>	  
     </tr>
     <volist id="list" name="list" key="k">
-    <tr >
+    <tr>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$k}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}"><a href="{:U("Customer/show?id=$list[aid]")}">{$list[advertiser]}</a> <if condition="$list[isguidang] eq 1"><span  data-toggle="tooltip" data-placement="left" title="合同已归档" class="glyphicon glyphicon-folder-close" style="color:#0492d9;"></span></if></td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[appname]}</td>
@@ -115,10 +115,10 @@ $(document).ready(function(e) {
         </td>
 		<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[submituser]}</td>
         <td>
-        <a href="{:U("Renew/index?id=$list[id]")}" data-toggle="tooltip" data-placement="left" title="续费"><span class="glyphicon glyphicon-transfer"></span></a>&nbsp;|&nbsp;<!--<a href="#">发票</a><br>
-        <a href="#">开户</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">财务</a><br>-->
+        <a href="{:U("Renew/index?id=$list[id]")}" data-toggle="tooltip" data-placement="left" title="续费"><span class="glyphicon glyphicon-transfer"></span></a>&nbsp;|
+        <a  href="{:U("Account/index?contract_id=$list[id]")}"   data-toggle="tooltip" data-placement="left" title="账户"><span class="glyphicon glyphicon-list"></span></a>&nbsp;|
         <if condition="$list[isguidang] eq 0">
-        <a href="{:U("updata?id=$list[id]")}"    data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;
+        <a href="{:U("updata?id=$list[id]")}"    data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|
         <a href="{:U("delete?id=$list[id]")}" {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         </if>
         </td>

@@ -327,6 +327,17 @@ function daiban(){
 
 
 }
+
+//账户信息
+    function account($id){
+        $account=M("Account");
+        $find=$account->field('id,a_users')->find($id);
+        return $find;
+
+
+    }
+
+
 function num_format($num){
     if(!is_numeric($num)){
         return false;

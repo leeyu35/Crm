@@ -147,7 +147,8 @@
 <style type="text/css">
 	#adlist{ margin-left:15px;}
 	#adlist li a{ cursor:pointer;}
-	.bzj{ display:none;}
+	
+	
 </style>
 </head>
 
@@ -212,16 +213,16 @@
     <label for="inputEmail3" class="col-sm-2 control-label">合同类型</label>
     <div class="col-sm-3">
    	    <label class="radio-inline">
-   	      <input name="type" type="radio" id="type_0" value="1" checked disabled>
+   	      <input name="type" type="radio" id="type_0" value="1" {$info[type]=='1'?'checked':''}  disabled>
    	      普通合同</label>
    	    
    	    <label class="radio-inline">
-   	      <input type="radio" name="type" value="2" id="type_1" disabled>
+   	      <input type="radio" name="type" value="2" id="type_1" {$info[type]=='2'?'checked':''} disabled>
    	      框架合同</label>
    
     </div>
     
-    <label for="inputEmail3" class="col-sm-1 control-label bzj">保证金</label>
+    <label for="inputEmail3" class="col-sm-1 control-label" {$info[type]=='1'?'style="display:none;"':''} >保证金</label>
     <div class="col-sm-3 bzj">
       <div class="input-group">
       <input name="margin" type="text" class="form-control" id="margin">
@@ -305,7 +306,12 @@
   
     <label for="inputEmail3" class="col-sm-2 control-label">账户名称</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" autocomplete="off" name="account" id="account" value="{$info[account]}" >
+    	<select  class="form-control" name="account" id="account" >
+        	<option>--请选择账户--</option>
+        	<volist id="account" name="account">
+        	<option value="{$account[id]}">{$account[a_users]}</option>
+            </volist>
+        </select>
     </div>
     
     <label for="inputEmail3" class="col-sm-1 control-label">APP名称</label>

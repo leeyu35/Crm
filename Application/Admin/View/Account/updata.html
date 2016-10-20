@@ -27,8 +27,8 @@
 					$("#contract_no").html(data);
 			})
 			
-			$("#advertiser").val($(this).attr("id"));
-			$("#submituser").val($(this).attr("title"));
+		//	$("#advertiser").val($(this).attr("id"));
+		//	$("#submituser").val($(this).attr("title"));
 			$("#gongsi").val(($(this).html()));
 			$("#adlist").hide();
 			//$("#gongsi").html(data);
@@ -39,7 +39,14 @@ $("#gongsi").on("blur",function(){
             }, 300);
 		})
 		
-
+		$("#contract_no").on("change",function(){
+			a=$("#contract_no").find("option:selected").attr("id");
+			//alert($(this).val())
+			
+			$("#contract_id").val(a);
+			//alert($("#contract_id").val());
+			//contract_id
+		})
 
 				
 		$("#formid").submit(function(){
@@ -75,10 +82,33 @@ $("#gongsi").on("blur",function(){
 <form action="{:U('upru')}" method="post" class="form-horizontal" id="formid" >
 <input type="hidden" name="id" id="id" value="{$info[id]}">
 <input type="hidden" name="submituser" id="submituser" value="{$info[submituser]}">
+<input type="hidden" name="contract_id" id="contract_id" value="{$info[contract_id]}">
+{$contract_id?'<input type="hidden" name="for_contract" id="for_contract" value="1">':''}
 
 <h4 class="bor-left-bull" >账户基本信息</h4>
 <hr>
-
+<div class="form-group">
+  
+    <label for="inputEmail3" class="col-sm-2 control-label">广告主公司名称</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" autocomplete="off" name="gongsi" id="gongsi" placeholder="输入客户名称前几个字我们将自动匹配" value="{$hetong[advertiser]}">
+    <ul class="dropdown-menu" id="adlist">
+	  
+    </ul>
+    </div>
+    
+    <label for="inputEmail3" class="col-sm-1 control-label">合同编号</label>
+    <div class="col-sm-3">
+    	<select  class="form-control" name="contract_no" id="contract_no">
+        	<volist id="bianhao" name="bianhao">
+            	<option id="{$bianhao[id]}" value="{$bianhao[contract_no]}" {$hetong[contract_no]==$bianhao[contract_no]?'selected':''} >{$bianhao[contract_no]}</option>
+            </volist>
+    	
+        </select>
+    </div>
+    
+    
+  </div>
   <div class="form-group">
   
     <label for="inputEmail3" class="col-sm-2 control-label">APP名称</label>
@@ -113,28 +143,6 @@ $("#gongsi").on("blur",function(){
 
 
 
-  
-  
-  <div class="form-group">
-  
-    <label for="contract_money" class="col-sm-2 control-label">返点</label>
-    <div class="col-sm-3">
-      	<div class="input-group">
-        <input type="text" class="form-control" name="fandian" id="fandian" value="{$info[fandian]}">
-    	<span class="input-group-addon">%</span>
-        </div>
-    </div>
-    
-    <label for="rebates_proportion" class="col-sm-1 control-label">屏蔽地域</label>
-    <div class="col-sm-3">      
-    	
-		<input type="text" class="form-control" name="pingbidiyu" id="pingbidiyu" value="{$info[pingbidiyu]}">
-    	
-    </div>
-    
-
-    
-  </div>
    <div class="form-group">
   
     <label for="contract_money" class="col-sm-2 control-label">主手机号</label>
@@ -142,7 +150,12 @@ $("#gongsi").on("blur",function(){
         <input type="text" class="form-control" name="tel" id="tel" value="{$info[tel]}">
     </div>
     
-
+<label for="rebates_proportion" class="col-sm-1 control-label">屏蔽地域</label>
+    <div class="col-sm-3">      
+    	
+		<input type="text" class="form-control" name="pingbidiyu" id="pingbidiyu" value="{$info[pingbidiyu]}">
+    	
+    </div>
 
     
   </div>
