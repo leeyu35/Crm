@@ -89,6 +89,11 @@ class RenewController extends  CommonController
             //提交人
             $uindo=users_info($val['users2']);
             $list[$key]['submituser']=$uindo[name];
+            //账户信息
+            $account=account($val['account']);
+            $list[$key]['a_users']=$account['a_users'];
+            $list[$key]['a_id']=$account['id'];
+
         }
         $this->list=$list;
         $this->assign('page',$show);// 赋值分页输出
@@ -169,6 +174,10 @@ class RenewController extends  CommonController
             //提交人
             $uindo=users_info($val['users2']);
             $list[$key]['submituser']=$uindo[name];
+            //账户信息
+            $account=account($val['account']);
+            $list[$key]['a_users']=$account['a_users'];
+            $list[$key]['a_id']=$account['id'];
         }
         $this->list=$list;
         $this->assign('page',$show);// 赋值分页输出
@@ -185,6 +194,11 @@ class RenewController extends  CommonController
         //代理公司
         $agentcompany=M("AgentCompany");
         $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
+        //账户
+        $account=M("Account");
+        $accountlist=$account->field("id,a_users")->where("contract_id =".I('get.id'))->select();
+
+        $this->account=$accountlist;
         $this->display();
 
     }
@@ -203,6 +217,8 @@ class RenewController extends  CommonController
 
         echo $num;
     }
+
+
 
     public function addru(){
         $hetong=M("Contract");
@@ -340,7 +356,14 @@ class RenewController extends  CommonController
         $yid=I('get.yid');
         if($group->delete($id))
         {
-            $this->success("删除成功",U("index?id=$yid"));
+            if($yid!='')
+            {
+                $this->success("删除成功",U("index?id=$yid"));
+            }else
+            {
+                $this->success("删除成功",U("index2"));
+            }
+
         }else
         {
             $this->error("删除失败");
@@ -411,6 +434,12 @@ class RenewController extends  CommonController
         $id=I('get.id');
         $hetong=M("Contract");
         $info=$hetong->find($id);
+
+        //账户信息
+        $account=account($info['account']);
+        $info['a_users']=$account['a_users'];
+        $info['a_id']=$account['id'];
+
         $this->info=$info;
         $this->yid=I('get.yid');
         //销售
@@ -445,6 +474,9 @@ class RenewController extends  CommonController
         $file=M("File");
         $filelist=$file->where("type=4 and yid=$id")->select();
         $this->filelist=$filelist;
+
+
+
         $this->display();
 
     }

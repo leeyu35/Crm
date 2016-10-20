@@ -106,7 +106,7 @@ class RefundController extends CommonController
         $q_where=quan_where(__CONTROLLER__);
 
         $list=$Contract->field("id,advertiser,submituser,contract_no")->where("advertiser = '$id' and isxufei=0 and ".$q_where)->select();
-
+        $str.='<option value="">--选择合同编号--</option>';
         foreach ($list as $key=>$val)
         {
             $str.="<option id='".$val[id]."' title='".$val[submituser]."' value='".$val[contract_no]."'>$val[contract_no]</></option>";
