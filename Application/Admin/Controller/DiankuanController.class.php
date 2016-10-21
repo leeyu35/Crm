@@ -312,6 +312,11 @@ class DiankuanController extends CommonController
         $id=I('get.id');
         $Diankuan=M("Diankuan");
         $info=$Diankuan->find($id);
+        //账户信息
+        $account=account($info['d_account_name']);
+        $info['a_users']=$account['a_users'];
+        $info['a_id']=$account['id'];
+
         $this->info=$info;
 
         //销售
