@@ -36,16 +36,34 @@
 		})
 		//点击新增负责人
 		$("#add_fzr").on("click",function(){
+			if($("#fuzeren").val()=="")
+			{
+				alert('负责人姓名不能为空');
+				return false;	
+			}else
+			{
+				$.get("{:U("isfzr")}",{val:$("#fuzeren").val()},function(data){
+						if(data==0)
+						{
+							alert("没有这个人员哦~");
+							return false;
+						}else
+						{
+							name=$("#fuzeren").val();
+							id=$("#fuzeren").attr("title");
+							$(".fzrlist").append('<span class="btn btn-danger">'+name+" x</span> ");
+							$("#fzrlsitwz").append('<input type="hidden" class="fzrlist" name="fzrlist[]" value="'+id+'">');
+							
+						}
+				})	
 			
-			name=$("#fuzeren").val();
-			id=$("#fuzeren").attr("title");
-			$(".fzrlist").append('<span class="btn btn-danger">'+name+" x</span> ");
-			$("#fzrlsitwz").append('<input type="hidden" name="fzrlist[]" value="'+id+'">');
+			}
+			
 		})
 		//删除已选负责人
 		$(".fzrlist").on("click","span",function(){
-			alert(1)
-				
+			$(".fzrlist").eq($(this).index()).remove();
+			$(this).remove();
 		})
 		
 		$("#contract_no").on("change",function(){
@@ -113,7 +131,7 @@
 {$contract_id?'<input type="hidden" name="for_contract" id="for_contract" value="1">':''}
 <span id="fzrlsitwz"></span>
 <h4 class="bor-left-bull" >账户基本信息</h4>
-<hr>
+<h r>
   <div class="form-group">
   
     <label for="inputEmail3" class="col-sm-2 control-label">广告主公司名称</label>

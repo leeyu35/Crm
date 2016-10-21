@@ -198,6 +198,7 @@ class RenewController extends  CommonController
         $account=M("Account");
         $accountlist=$account->field("id,a_users")->where("contract_id =".I('get.id'))->select();
 
+
         $this->account=$accountlist;
         $this->display();
 
@@ -222,12 +223,30 @@ class RenewController extends  CommonController
 
     public function addru(){
         $hetong=M("Contract");
-        $hetong->create();
+        $postdate=$hetong->create();
         $hetong->contract_start=strtotime($hetong->contract_start);
         $hetong->contract_end=strtotime($hetong->contract_end);
         $hetong->payment_time=strtotime($hetong->payment_time);
         $hetong->ctime=time();
         $hetong->users2=cookie('u_id');
+
+
+        // 映射垫款表
+        $dk['d_company']=$postdate['agent_company'];//代理公司
+        $dk['d_account_name']=$postdate['account'];
+        $dk['d_money']=$postdate['fk_money'];
+        $dk['back_money_time']=strtotime(I('post.back_money_time'));
+        $dk['d_time']=strtotime($postdate['payment_time']);
+        $dk['advertiser']=$postdate['advertiser'];
+        $dk['appName']=$postdate['appname'];
+        $dk['contract_no']=$postdate['xf_hetonghao'];
+        $dk['ctime']=time();
+        $dk['submituser']=$postdate['submituser'];
+        $dk['ispiao']=I("post.ispiao");
+        $dk['state']=0;
+        $dk['users2']=cookie('u_id');
+
+
 
         if($insid=$hetong->add()){
             //dump($_FILES["file"]);
@@ -254,7 +273,16 @@ class RenewController extends  CommonController
                 }
             }
 
-            $this->success("添加成功",U("index?id=".I('post.htid')));
+            //映射垫款  添加
+            $diankuan=M("Diankuan");
+            if($diankuan->add($dk))
+            {
+                $success_str="并生成垫款一条垫款记录";
+            }else
+            {
+                $success_str="但生成垫款记录失败，请联系管理员";
+            }
+            $this->success("添加成功 $success_str",U("index?id=".I('post.htid')));
 
         }else
         {

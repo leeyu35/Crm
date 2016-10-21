@@ -145,7 +145,20 @@ class AccountController extends CommonController
         $list=$Refund->create();
         $Refund->ctime=time();
 
-        if($Refund->add()){
+        if($insertid=$Refund->add()){
+
+
+            if(I('post.fzrlist')){
+                    //循环联系人并且记录
+                    foreach (I('post.fzrlist') as $key => $val)
+                    {
+                        $contact_list[]=array("account_id"=>$insertid,"u_id"=>I('post.fzrlist')[$key]);
+                    }
+                    //联系人表
+                    $contact=M("AccountUsers");
+
+                    $contact->addAll($contact_list);
+            }
             if(I('post.for_contract')!=1)
             {
                 $this->success("添加成功",U("index"));
@@ -184,6 +197,12 @@ class AccountController extends CommonController
             $this->contract_id=$contract_id;
         }
 
+        //负责人
+        $principal=M("AccountUsers");
+        $fzridlist=$principal->field('u_id')->where("account_id = $id")->select(false);
+        $userslist=M("Users")->field('id,name')->where("id in ($fzridlist)")->select();
+        $this->userslist=$userslist;
+
         $this->display();
 
     }
@@ -193,8 +212,25 @@ class AccountController extends CommonController
         $Refund=M("Account");
 
         $Refund->create();
+        $Refund->ctime=$Refund->ctime+1;
         if($Refund->where("id=$id")->save())
         {
+
+            if(I('post.fzrlist')){
+                //循环联系人并且记录
+                foreach (I('post.fzrlist') as $key => $val)
+                {
+                    $contact_list[]=array("account_id"=>$id,"u_id"=>I('post.fzrlist')[$key]);
+                }
+                //联系人表
+                $contact=M("AccountUsers");
+                //删除现在有联系人
+                $contact->where("account_id=$id")->delete();
+                if(!$contact->addAll($contact_list))
+                {
+                    $this->error('添加负责人失败');
+                }
+            }
             if(I('post.for_contract')!=1)
             {
                 $this->success("修改成功",U("index"));
@@ -247,9 +283,28 @@ class AccountController extends CommonController
         $hetong_on_name=$hetong->field('a.contract_no,b.advertiser,b.id')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("a.id =".$info['contract_id'])->find();
         $this->hetong=$hetong_on_name;
 
+        //负责人
+        $principal=M("AccountUsers");
+        $fzridlist=$principal->field('u_id')->where("account_id = $id")->select(false);
+        $userslist=M("Users")->field('name')->where("id in ($fzridlist)")->select();
+        $this->userslist=$userslist;
+
         $Accounttype=M("Accounttype");
         $this->accounttype=$Accounttype->field("id,name")->order("id asc")->select();
         $this->display();
+
+    }
+    function isfzr(){
+        $Customer=M("Users");
+        $val=I('get.val');
+        $count=$Customer->where("name = '$val'")->count();
+        if($count<1)
+        {
+            echo 0;
+        }else
+        {
+            echo 1;
+        }
 
     }
 }

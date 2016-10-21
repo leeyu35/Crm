@@ -59,11 +59,9 @@
 				$("#contract_no").val(gs+xhx+pr+xhx+str+num);
 			})
 			*/
-			
-				
-			
-			
 		}
+		
+		
 		//自动换算百度币
 		$("#rebates_proportion").keyup(function(){
 			jr=$("#contract_money").val();	
@@ -79,6 +77,13 @@
 			}else
 			{
 				$(".bzj").hide(100);	
+			}	
+		})
+		
+		$("#payment_type").change(function(){
+			if($(this).val()==2)
+			{
+				$(".diankuan").show();	
 			}	
 		})
 				
@@ -120,6 +125,8 @@
 			return false;	
 		}	
 		/*
+		
+		
 		if($("#contract_start").val()=="")
 		{
 			alert("请选择合同开始时间");
@@ -147,7 +154,7 @@
 <style type="text/css">
 	#adlist{ margin-left:15px;}
 	#adlist li a{ cursor:pointer;}
-	
+	.diankuan{ display:none;}
 	
 </style>
 </head>
@@ -223,7 +230,7 @@
     </div>
     
     <label for="inputEmail3" class="col-sm-1 control-label" {$info[type]=='1'?'style="display:none;"':''} >保证金</label>
-    <div class="col-sm-3 bzj">
+    <div class="col-sm-3 bzj" {$info[type]=='1'?'style="display:none;"':''}>
       <div class="input-group">
       <input name="margin" type="text" class="form-control" id="margin">
       <span class="input-group-addon">元</span>
@@ -329,6 +336,7 @@
     <label for="payment_type" class="col-sm-2 control-label">付款方式</label>
     <div class="col-sm-3">
       <select  class="form-control" name="payment_type" id="payment_type">
+      	<option>--请选择--</option>
       	<option value="1">预付</option>
       	<option value="2">垫付</option>
       </select>
@@ -348,6 +356,27 @@
     </div>
     
   </div>
+  
+  <div class="form-group diankuan">
+
+    <label for="inputEmail3" class="col-sm-2 control-label">是否开票</label>
+    <div class="col-sm-3">
+     	<label class="radio-inline">
+   	      <input name="ispiao" type="radio" id="type_0" value="0" checked>
+   	      未开</label>
+   	    
+   	    <label class="radio-inline">
+   	      <input type="radio" name="ispiao" value="1" id="type_1">
+   	      已开</label>
+    </div>
+    
+    <label for="inputEmail3" class="col-sm-1 control-label">预计回款日期</label>
+    <div class="col-sm-2">
+    	<input type="text" name="back_money_time" class="Wdate form-control" id="back_money_time" onClick="WdatePicker()">
+    </div>
+  </div>
+  
+  
    <h4 class="bor-left-bull" >上传附件</h4>
   <hr>
 	<div class="form-group">

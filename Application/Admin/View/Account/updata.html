@@ -33,6 +33,56 @@
 			$("#adlist").hide();
 			//$("#gongsi").html(data);
 		})
+		
+		//选择了负责人
+		$("#fzrlist").on("click","a",function(){
+			$("#fuzeren").attr("title",$(this).attr("id"))
+			$("#fuzeren").val($(this).html());
+			$("#fzrlist").hide();
+		})
+		//点击新增负责人
+		$("#add_fzr").on("click",function(){
+			if($("#fuzeren").val()=="")
+			{
+				alert('负责人姓名不能为空');
+				return false;	
+			}else
+			{
+				$.get("{:U("isfzr")}",{val:$("#fuzeren").val()},function(data){
+						if(data==0)
+						{
+							alert("没有这个人员哦~");
+							return false;
+						}else
+						{
+							name=$("#fuzeren").val();
+							id=$("#fuzeren").attr("title");
+							$(".fzrlist").append('<span class="btn btn-danger">'+name+" x</span> ");
+							$("#fzrlsitwz").append('<input type="hidden" class="fzrlist" name="fzrlist[]" value="'+id+'">');
+							
+						}
+				})	
+			
+			}
+		})
+		//删除已选负责人
+		$(".fzrlist").on("click","span",function(){
+			$(".fzrlist").eq($(this).index()).remove();
+			$(this).remove();
+		})
+		//动态加载员工姓名
+		$("#fuzeren").keyup(function(){
+			//$("#hjd").html($("#hjd").html()+"1");
+			val=$(this).val();
+			$.post("{:U('keyup_fzrlist')}",{val:val},function(data){
+					if(data!='')
+					{
+						$("#fzrlist").html(data);
+					}
+			})
+			$("#fzrlist").show();
+		})
+
 $("#gongsi").on("blur",function(){
 			setTimeout(function () {
 				$("#adlist").hide();
@@ -83,7 +133,13 @@ $("#gongsi").on("blur",function(){
 <input type="hidden" name="id" id="id" value="{$info[id]}">
 <input type="hidden" name="submituser" id="submituser" value="{$info[submituser]}">
 <input type="hidden" name="contract_id" id="contract_id" value="{$info[contract_id]}">
+<input type="hidden" name="ctime" id="ctime" value="{$info[ctime]}">
 {$contract_id?'<input type="hidden" name="for_contract" id="for_contract" value="1">':''}
+<span id="fzrlsitwz">
+    <volist id="userslist1" name="userslist">
+        <input type="hidden" class="fzrlist" name="fzrlist[]" value="{$userslist1[id]}">
+    </volist>
+</span>
 
 <h4 class="bor-left-bull" >账户基本信息</h4>
 <hr>
@@ -176,7 +232,33 @@ $("#gongsi").on("blur",function(){
 
     
   </div>
- 
+   <h4 class="bor-left-bull" >账户负责人信息</h4>
+  <hr>
+    <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">负责人</label>
+
+	<div class="col-sm-3">
+     <div class="input-group">
+    <input type="text" class="form-control" autocomplete="off" name="fuzeren" id="fuzeren" placeholder="输入姓氏我们将自动匹配" >
+    <ul class="dropdown-menu" id="fzrlist">
+	  
+    </ul>
+      <span class="input-group-btn">
+        <button class="btn btn-success" type="button" id="add_fzr">新增</button>
+      </span>
+      </div>
+   </div>
+   <div class="col-sm-7">
+   		 <div class="input-group">
+   		<span class="btn btn-danger">已选负责人</span> <span class="fzrlist">
+        	<volist id="userslist" name="userslist">
+        		<span class="btn btn-danger">{$userslist[name]} x</span>&nbsp;
+            </volist>
+        </span>
+        </div>
+   </div>
+   </div>
+
   <h4 class="bor-left-bull" >退款备注</h4>
   <hr>
   <div class="form-group">
