@@ -45,6 +45,7 @@
 			if($("#fuzeren").val()=="")
 			{
 				alert('负责人姓名不能为空');
+				$("#fuzeren").select();
 				return false;	
 			}else
 			{
@@ -52,6 +53,7 @@
 						if(data==0)
 						{
 							alert("没有这个人员哦~");
+							$("#fuzeren").select();
 							return false;
 						}else
 						{
