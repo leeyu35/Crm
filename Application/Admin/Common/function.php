@@ -91,24 +91,23 @@ function quan_where($module,$join="",$setype=""){
 
             //如果是二级审核 则一级审核通过才显示
             //组
-            $group=M("Groupl")->find(cookie("u_groupid"));
+                $group=M("Groupl")->find(cookie("u_groupid"));
                 $group=$group;
                 $group_name=$group['group_name'];
-
                 if($group_name!='超级管理员' )
                 {
+                    $array_s1=explode(",",$one['audit_1']);
                     $array_s2=explode(",",$one['audit_2']);
-
-                    if(in_array(cookie('u_groupid'),$array_s2))
+                   // echo cookie('u_groupid');
+                   // dump($array_s1);
+                    if(in_array(cookie('u_groupid'),$array_s2) and !in_array(cookie('u_groupid'),$array_s1))
                     {
-                        //echo '1';
                         if($join==""){
                             $where.=" and audit_1=1 ";
                         }else
                         {
                             $where.=" and ".$join.".audit_1=1 ";
                         }
-
                     }
                 }
             }
