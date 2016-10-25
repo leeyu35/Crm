@@ -260,7 +260,7 @@ class ContractController extends CommonController
         }
         //检查合同编号是否重复
         $biaohaocon=$hetong->where("contract_no='".I('post.contract_no')."'")->count();
-        if($biaohaocon>0)
+        if($biaohaocon>1)
         {
             $this->error("合同编号重复!");
             exit;
