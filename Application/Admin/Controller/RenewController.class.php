@@ -207,10 +207,11 @@ class RenewController extends  CommonController
     public function Contract_num(){
         $hetong=M("Contract");
         $advertiser=I('get.advertiser');
-        $on=I('get.on');
-        $num=$hetong->where("advertiser=$advertiser and xf_hetonghao='$on'")->count();
-
-        $num=$num+1;
+        $pr=I('get.pr');
+        $today = strtotime(date('Y-m-d', time()));//获取当天0点
+        $max=$hetong->field('contract_no')->where("isxufei=1 and ctime>$today and product_line=$pr")->order("ctime desc")->find();
+        $maxsun=substr($max['contract_no'],-2,2);
+        $num=$maxsun+1;
         if($num<10)
         {
             $num="0".$num;
@@ -229,22 +230,31 @@ class RenewController extends  CommonController
         $hetong->payment_time=strtotime($hetong->payment_time);
         $hetong->ctime=time();
         $hetong->users2=cookie('u_id');
+        //检查合同编号是否重复
+        $biaohaocon=$hetong->where("contract_no='".I('post.contract_no')."'")->count();
+        if($biaohaocon>0)
+        {
+            $this->error("合同编号重复!");
+            exit;
+        }
+        if(I('post.payment_type')==2);
+        {
+            // 映射垫款表
+            $dk['d_company']=$postdate['agent_company'];//代理公司
+            $dk['d_account_name']=$postdate['account'];
+            $dk['d_money']=$postdate['fk_money'];
+            $dk['back_money_time']=strtotime(I('post.back_money_time'));
+            $dk['d_time']=strtotime($postdate['payment_time']);
+            $dk['advertiser']=$postdate['advertiser'];
+            $dk['appName']=$postdate['appname'];
+            $dk['contract_no']=$postdate['xf_hetonghao'];
+            $dk['ctime']=time();
+            $dk['submituser']=$postdate['submituser'];
+            $dk['ispiao']=I("post.ispiao");
+            $dk['state']=0;
+            $dk['users2']=cookie('u_id');
+        }
 
-
-        // 映射垫款表
-        $dk['d_company']=$postdate['agent_company'];//代理公司
-        $dk['d_account_name']=$postdate['account'];
-        $dk['d_money']=$postdate['fk_money'];
-        $dk['back_money_time']=strtotime(I('post.back_money_time'));
-        $dk['d_time']=strtotime($postdate['payment_time']);
-        $dk['advertiser']=$postdate['advertiser'];
-        $dk['appName']=$postdate['appname'];
-        $dk['contract_no']=$postdate['xf_hetonghao'];
-        $dk['ctime']=time();
-        $dk['submituser']=$postdate['submituser'];
-        $dk['ispiao']=I("post.ispiao");
-        $dk['state']=0;
-        $dk['users2']=cookie('u_id');
 
 
 
@@ -272,16 +282,20 @@ class RenewController extends  CommonController
 
                 }
             }
-
-            //映射垫款  添加
-            $diankuan=M("Diankuan");
-            if($diankuan->add($dk))
+            if(I('post.payment_type')==2)
             {
-                $success_str="并生成垫款一条垫款记录";
-            }else
-            {
-                $success_str="但生成垫款记录失败，请联系管理员";
+                $dk['contract_id']=$insid;
+                //映射垫款  添加
+                $diankuan=M("Diankuan");
+                if($diankuan->add($dk))
+                {
+                    $success_str="并生成垫款一条垫款记录";
+                }else
+                {
+                    $success_str="但生成垫款记录失败，请联系管理员";
+                }
             }
+
             $this->success("添加成功 $success_str",U("index?id=".I('post.htid')));
 
         }else
@@ -320,6 +334,14 @@ class RenewController extends  CommonController
         //二级审核人
         $submitusers4=users_info($info[susers2]);
         $this->users_info4=$submitusers4['name'];
+        //账户
+        $account=M("Account");
+        $accountlist=$account->field("id,a_users")->where("contract_id =".I('get.yid'))->select();
+
+        //显示垫付信息
+        $diankuan=M("Diankuan");
+        $this->dinfo=$diankuan->find($info['contract_id']);
+
         $this->display();
 
     }

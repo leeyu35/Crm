@@ -15,6 +15,7 @@
 		function bianhao(){
 			gs=$("#agent_company1 option:selected").attr("title");
 			pr=$("#product_line1 option:selected").attr("title");
+			prid=$("#product_line1 option:selected").val();
 			xhx="_";
 			var mydate = new Date();
 
@@ -28,7 +29,7 @@
 			 }
 			  
 			  str += mydate.getDate();
-			 $.get("{:U('Contract_num')}",{advertiser:{$info[advertiser]},on:"{$info[contract_no]}"},function(index){
+			 $.get("{:U('Contract_num')}",{advertiser:{$info[advertiser]},on:"{$info[contract_no]}",pr:prid},function(index){
 				num=index;	
 				//alert(gs+xhx+pr+xhx+str+num);
 				$("#contract_no").val("X"+xhx+gs+xhx+pr+xhx+str+num);
@@ -71,6 +72,7 @@
 		})
 		
 		$("input[name='type']").change(function(){
+			
 			if($(this).val()=='2')
 			{
 				$(".bzj").show(200);	
@@ -84,7 +86,10 @@
 			if($(this).val()==2)
 			{
 				$(".diankuan").show();	
-			}	
+			}else
+			{
+				$(".diankuan").hide();
+			}
 		})
 				
 		$("#formid").submit(function(){

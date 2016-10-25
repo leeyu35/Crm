@@ -154,6 +154,13 @@ class ContractController extends CommonController
             $this->error("没有这个公司!");
             exit;
         }
+        //检查合同编号是否重复
+        $biaohaocon=$hetong->where("contract_no='".I('post.contract_no')."'")->count();
+        if($biaohaocon>0)
+        {
+            $this->error("合同编号重复!");
+            exit;
+        }
         if($hetong->advertiser=='')
         {
             $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
@@ -200,9 +207,12 @@ class ContractController extends CommonController
         $hetong=M("Contract");
         $advertiser=I('get.advertiser');
         $prid=I('get.prid');
-        $num=$hetong->where("advertiser=$advertiser and product_line=$prid")->count();
+        $today = strtotime(date('Y-m-d', time()));//获取当天0点
 
-        $num=$num+1;
+        $max=$hetong->field('contract_no')->where("product_line=$prid and ctime>$today and isxufei=0")->order("ctime desc")->find();
+        $maxsun=substr($max['contract_no'],-2,2);
+        $num=$maxsun+1;
+
         if($num<10)
         {
             $num="0".$num;
@@ -248,7 +258,13 @@ class ContractController extends CommonController
             $this->error("没有这个公司!");
             exit;
         }
-
+        //检查合同编号是否重复
+        $biaohaocon=$hetong->where("contract_no='".I('post.contract_no')."'")->count();
+        if($biaohaocon>0)
+        {
+            $this->error("合同编号重复!");
+            exit;
+        }
         //判断合同归档的时候是否已经审核过
         if(I('post.isguidang')==1)
         {
