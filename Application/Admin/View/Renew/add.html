@@ -11,7 +11,6 @@
 <script language="javascript">
 	$(document).ready(function(e) {
 		bianhao();
-
 		function bianhao(){
 			gs=$("#agent_company1 option:selected").attr("title");
 			pr=$("#product_line1 option:selected").attr("title");
@@ -176,6 +175,7 @@
 <input type="hidden" name="product_line" id="product_line" value="{$info[product_line]}">
 <input type="hidden" name="type" id="type" value="{$info[type]}">
 <input type="hidden" name="xf_hetonghao" id="xf_hetonghao" value="{$info[contract_no]}">
+<input type="hidden" name="xf_contractid" id="xf_contractid" value="{$info[id]}">
 <input type="hidden" name="htid" id="htid" value="{$info[id]}">
 <input type="hidden" name="isxufei" id="isxufei" value="1">
 <h4 class="bor-left-bull" >续费基本信息</h4>
