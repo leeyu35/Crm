@@ -96,6 +96,15 @@
 				$(".bzj").hide(100);	
 			}	
 		})
+		$("#payment_type").change(function(){
+			if($(this).val()==2)
+			{
+				$(".diankuan").show();	
+			}else
+			{
+				$(".diankuan").hide();
+			}
+		})
 				
 		$("#formid").submit(function(){
 	
@@ -159,6 +168,7 @@
 	#adlist{ margin-left:15px;}
 	#adlist li a{ cursor:pointer;}
 	.bzj{ display:none;}
+	.diankuan{ display:none;}
 </style>
 </head>
 
@@ -338,6 +348,25 @@
         </div>
     </div>
     
+  </div>
+ 
+ <div class="form-group diankuan">
+
+    <label for="inputEmail3" class="col-sm-2 control-label">是否开票</label>
+    <div class="col-sm-3">
+     	<label class="radio-inline">
+   	      <input name="ispiao" type="radio" id="type_0" value="0" checked>
+   	      未开</label>
+   	    
+   	    <label class="radio-inline">
+   	      <input type="radio" name="ispiao" value="1" id="type_1">
+   	      已开</label>
+    </div>
+    
+    <label for="inputEmail3" class="col-sm-1 control-label">预计回款日期</label>
+    <div class="col-sm-2">
+    	<input type="text" name="back_money_time" class="Wdate form-control" id="back_money_time" onClick="WdatePicker()">
+    </div>
   </div>
  
   <h4 class="bor-left-bull" >合同备注</h4>

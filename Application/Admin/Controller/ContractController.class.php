@@ -140,7 +140,7 @@ class ContractController extends CommonController
     }
     public function addru(){
         $hetong=M("Contract");
-        $hetong->create();
+        $postdate=$hetong->create();
         $hetong->contract_start=strtotime($hetong->contract_start);
         $hetong->contract_end=strtotime($hetong->contract_end);
         $hetong->payment_time=strtotime($hetong->payment_time);
@@ -161,13 +161,49 @@ class ContractController extends CommonController
             $this->error("合同编号重复!");
             exit;
         }
+        if(I('post.payment_type')==2);
+        {
+            // 映射垫款表
+            $dk['d_company']=$postdate['agent_company'];//代理公司
+            $dk['d_account_name']='';
+            $dk['d_money']=$postdate['fk_money'];
+            $dk['back_money_time']=strtotime(I('post.back_money_time'));
+            $dk['d_time']=strtotime($postdate['payment_time']);
+            $dk['advertiser']=$postdate['advertiser'];
+            $dk['appName']=$postdate['appname'];
+            $dk['contract_no']=$postdate['contract_no'];
+            $dk['ctime']=time();
+            $dk['submituser']=$postdate['submituser'];
+            $dk['ispiao']=I("post.ispiao");
+            $dk['state']=0;
+            $dk['users2']=cookie('u_id');
+        }
+
+
         if($hetong->advertiser=='')
         {
             $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
             exit;
         }
-         if($hetong->add()){
-             $this->success("添加成功",U("index"));
+         if($insid=$hetong->add()){
+             if(I('post.payment_type')==2)
+             {
+
+
+                 $dk['contract_id']=$insid;
+                 //映射垫款  添加
+                 $diankuan=M("Diankuan");
+
+
+                 if($diankuan->add($dk))
+                 {
+                     $success_str="并生成垫款一条垫款记录";
+                 }else
+                 {
+                     $success_str="但生成垫款记录失败，请联系管理员";
+                 }
+             }
+             $this->success("添加成功".$success_str,U("index"));
 
          }else
          {
@@ -242,6 +278,10 @@ class ContractController extends CommonController
         //二级审核人
         $submitusers4=users_info($info[susers2]);
         $this->users_info4=$submitusers4['name'];
+        //显示垫付信息
+        $diankuan=M("Diankuan");
+        $this->dinfo=$diankuan->find($info['contract_id']);
+
         $this->display();
 
     }
@@ -277,7 +317,7 @@ class ContractController extends CommonController
             }
         }
 
-        $hetong->create();
+        $postdate=$hetong->create();
         if($hetong->advertiser=='')
         {
             $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
@@ -287,9 +327,63 @@ class ContractController extends CommonController
         $hetong->contract_end=strtotime($hetong->contract_end);
         $hetong->payment_time=strtotime($hetong->payment_time);
         $hetong->users2=cookie('u_id');
+        //如果是垫款
+        if(I('post.payment_type')==2)
+        {
+            // 映射垫款表
+            $dk['d_company']=$postdate['agent_company'];//代理公司
+
+            $dk['d_money']=$postdate['fk_money'];
+            $dk['back_money_time']=strtotime(I('post.back_money_time'));
+            $dk['d_time']=strtotime($postdate['payment_time']);
+            $dk['advertiser']=$postdate['advertiser'];
+            $dk['appName']=$postdate['appname'];
+
+            $dk['submituser']=$postdate['submituser'];
+            $dk['ispiao']=I("post.ispiao");
+            $dk['state']=0;
+            $dk['users2']=cookie('u_id');
+        }else
+        {
+            //删除相应垫款记录
+            M("Diankuan")->where("contract_id=$id")->delete();
+        }
+
+        //映射垫款  添加
+        if(I('post.payment_type')==2){
+
+            $dk['contract_id']=$id;
+            $diankuan=M("Diankuan");
+            //先检查是修改还是添加
+            $cou=$diankuan->where("contract_id=$id")->count();
+            if($cou>0)
+            {
+                if($diankuan->where("contract_id=$id")->save($dk))
+                {
+                    $success_str="并修改了一条垫款记录";
+                }else
+                {
+                    $success_str="但修改垫款记录失败";
+                }
+            }else
+            {
+                $dk['contract_no']=I("post.contract_no");
+                $dk['ctime']=time();
+
+                if($diankuan->add($dk))
+                {
+                    $success_str="并生成垫款一条垫款记录";
+                }else
+                {
+                    $success_str="但生成垫款记录失败，请联系管理员";
+                }
+            }
+
+        }
+
         if($hetong->where("id=$id")->save())
         {
-            $this->success('修改成功',U('index'));
+            $this->success('修改成功'.$success_str,U('index'));
         }else{
             $this->error('修改失败');
         }

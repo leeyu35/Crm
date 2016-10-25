@@ -374,8 +374,7 @@ class RenewController extends  CommonController
             $dk['d_time']=strtotime($postdate['payment_time']);
             $dk['advertiser']=$postdate['advertiser'];
             $dk['appName']=$postdate['appname'];
-            $dk['contract_no']=$postdate['xf_contractid'];
-            //$dk['ctime']=time();
+
             $dk['submituser']=$postdate['submituser'];
             $dk['ispiao']=I("post.ispiao");
             $dk['state']=0;
@@ -428,6 +427,9 @@ class RenewController extends  CommonController
                     }
                 }else
                 {
+                    $dk['contract_no']=I("post.xf_contract_on");
+                    $dk['ctime']=time();
+
                     if($diankuan->add($dk))
                     {
                         $success_str="并生成垫款一条垫款记录";
