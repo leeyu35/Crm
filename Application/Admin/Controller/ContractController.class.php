@@ -165,7 +165,8 @@ class ContractController extends CommonController
         {
             // 映射垫款表
             $dk['d_company']=$postdate['agent_company'];//代理公司
-            $dk['d_account_name']='';
+            $dk['d_account_name']=' ';
+            $dk['note']=' ';
             $dk['d_money']=$postdate['fk_money'];
             $dk['back_money_time']=strtotime(I('post.back_money_time'));
             $dk['d_time']=strtotime($postdate['payment_time']);
@@ -333,6 +334,8 @@ class ContractController extends CommonController
             // 映射垫款表
             $dk['d_company']=$postdate['agent_company'];//代理公司
             $dk['d_account_name']=' ';
+            $dk['note']=' ';
+
             $dk['d_money']=$postdate['fk_money'];
             $dk['back_money_time']=strtotime(I('post.back_money_time'));
             $dk['d_time']=strtotime($postdate['payment_time']);
