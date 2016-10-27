@@ -69,10 +69,10 @@ function quan_where($module,$join="",$setype=""){
             if(in_array(cookie('u_groupid'),$array))
             {
                 if($join==""){
-                    $where="id!='hjd'";
+                    $where="id!='0'";
                 }else
                 {
-                    $where=$join.".id!='hjd'";
+                    $where=$join.".id!='0'";
                 }
 
             }else
@@ -124,7 +124,7 @@ function quan_users_where($module,$join=""){
         $array=explode(",",$one['index_show']);
         if(in_array(cookie('u_groupid'),$array))
         {
-                $where=$join."id!='hjd'";
+                $where=$join."id!='0'";
         }else
         {
                 $where=$join."id=".cookie('u_id');

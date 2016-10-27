@@ -21,12 +21,12 @@ class WaichuController extends CommonController
                 {
                     $coustomer=M('Users');
                     $zsql=$coustomer->field("id")->where(" name like '%".I('get.search_text')."%'")->select(false);
-                    $where.=" and  a.id!='hjd2' and a.submituser in($zsql)";
+                    $where.=" and  a.id!='0' and a.submituser in($zsql)";
 
                 }
                 if($type=='gongsi')
                 {
-                    $where.=" and a.id!='hjd2' and a.gongsi like '%".I('get.search_text')."%'";
+                    $where.=" and a.id!='0' and a.gongsi like '%".I('get.search_text')."%'";
                 }
                 $this->type=$type;
                 $this->ser_txt=I('get.search_text');
@@ -50,7 +50,7 @@ class WaichuController extends CommonController
             {
                 if($type2=='k')
                 {
-                    $where.=" and a.id!='hjd3' ";
+                    $where.=" and a.id!='0' ";
                 }
                 if($type2=='0')
                 {
@@ -83,10 +83,10 @@ class WaichuController extends CommonController
             }
             if($my_zu=='超级管理员' or $my_zu=='人事' or $my_zu=='BOSS')
             {
-                $q_where=" a.id !='hjd'";
+                $q_where=" a.id !='0'";
             }
 
-            $count      = $Refund->field('a.id,a.bumen,a.zhiwu,a.type,a.starttime,a.endtime,a.ctime,a.audit_1,a.audit_2,b.name')->join("a left join __USERS__ b on a.submituser = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->count();// 查询满足要求的总记录数
+            $count      = $Refund->field('a.id,a.bumen,a.zhiwu,a.type,a.starttime,a.endtime,a.ctime,a.audit_1,a.audit_2,b.name')->join("a left join __USERS__ b on a.submituser = b.id ")->where("a.id!='0' and ".$q_where.$where)->count();// 查询满足要求的总记录数
             $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
             $show       = $Page->show();// 分页显示输出
             $list=$Refund->field('a.id,a.bumen,a.zhiwu,a.gongsi,a.starttime,a.lianxiren,a.dizhi,a.endtime,a.ctime,a.audit_1,a.audit_2,b.name')->join("a left join __USERS__ b on a.submituser = b.id  ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();

@@ -96,6 +96,12 @@ class CustomerController extends CommonController
 
             if($insertid=$Customer->add()){
 
+                if($insertid==1)
+                {
+                    $result = $Customer->query("select currval('jd_customer_id_seq')");
+                    $insertid=$result[0][currval];
+                }
+
                 if(I('post.name')){
                     //循环联系人并且记录
                     foreach (I('post.name') as $key => $val)
@@ -107,6 +113,7 @@ class CustomerController extends CommonController
 
                     $contact->addAll($contact_list);
                 }
+
                 $this->success("添加成功",U("index"));
             }else
             {

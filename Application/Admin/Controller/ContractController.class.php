@@ -21,20 +21,20 @@ class ContractController extends CommonController
             if ($type == 'advertiser') {
                 $coustomer = M('Customer');
                 $zsql = $coustomer->field("id")->where(" advertiser like '%" . I('get.search_text') . "%'")->select(false);
-                $where .= " and  a.id!='hjd2' and a.advertiser in($zsql)";
+                $where .= " and  a.id!='0' and a.advertiser in($zsql)";
 
             }
             if ($type == 'contract_no') {
-                $where .= " and a.id!='hjd2' and a.contract_no like '%" . I('get.search_text') . "%'";
+                $where .= " and a.id!='0' and a.contract_no like '%" . I('get.search_text') . "%'";
             }
             if ($type == 'appname') {
-                $where .= " and a.id!='hjd3' and a.appname like '%" . I('get.search_text') . "%'";
+                $where .= " and a.id!='0' and a.appname like '%" . I('get.search_text') . "%'";
             }
             if ($type == 'submitname')
             {
                 $coustomer=M('Users');
                 $zsql=$coustomer->field("id")->where(" name like '%".I('get.search_text')."%'")->select(false);
-                $where.=" and  a.id!='hjd2' and a.submituser in($zsql)";
+                $where.=" and  a.id!='0' and a.submituser in($zsql)";
             }
             $this->type=$type;
             $this->ser_txt=I('get.search_text');
@@ -71,7 +71,7 @@ class ContractController extends CommonController
         {
             if($type2=='k')
             {
-                $where.=" and a.id!='hjd3' ";
+                $where.=" and a.id!='0' ";
             }
             if($type2=='0')
             {
@@ -91,7 +91,7 @@ class ContractController extends CommonController
         {
             if($type4=='k')
             {
-                $where.=" and a.id!='hjd4' ";
+                $where.=" and a.id!='0' ";
             }
             if($type4=='0')
             {
@@ -187,6 +187,12 @@ class ContractController extends CommonController
             exit;
         }
          if($insid=$hetong->add()){
+             if($insid==1)
+             {
+                 $result = $hetong->query("select currval('jd_contract_id_seq')");
+                 $insid=$result[0][currval];
+             }
+
              if(I('post.payment_type')==2)
              {
 
@@ -482,22 +488,22 @@ class ContractController extends CommonController
             {
                 $coustomer=M('Customer');
                 $zsql=$coustomer->field("id")->where(" advertiser like '%".I('get.search_text')."%'")->select(false);
-                $where.=" and  a.id!='hjd2' and a.advertiser in($zsql)";
+                $where.=" and  a.id!='0' and a.advertiser in($zsql)";
 
             }
             if($type=='contract_no')
             {
-                $where.=" and a.id!='hjd2' and a.contract_no like '%".I('get.search_text')."%'";
+                $where.=" and a.id!='0' and a.contract_no like '%".I('get.search_text')."%'";
             }
             if($type=='appname')
             {
-                $where.=" and a.id!='hjd3' and a.appname like '%".I('get.search_text')."%'";
+                $where.=" and a.id!='0' and a.appname like '%".I('get.search_text')."%'";
             }
             if ($type == 'submitname')
             {
                 $coustomer=M('Users');
                 $zsql=$coustomer->field("id")->where(" name like '%".I('get.search_text')."%'")->select(false);
-                $where.=" and  a.id!='hjd2' and a.submituser in($zsql)";
+                $where.=" and  a.id!='0' and a.submituser in($zsql)";
             }
             $this->type=$type;
             $this->ser_txt=I('get.search_text');
@@ -535,7 +541,7 @@ class ContractController extends CommonController
         {
             if($type2=='k')
             {
-                $where.=" and a.id!='hjd3' ";
+                $where.=" and a.id!='0' ";
             }
             if($type2=='0')
             {
@@ -555,7 +561,7 @@ class ContractController extends CommonController
         {
             if($type4=='k')
             {
-                $where.=" and a.id!='hjd4' ";
+                $where.=" and a.id!='0' ";
             }
             if($type4=='0')
             {

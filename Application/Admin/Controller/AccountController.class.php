@@ -20,7 +20,7 @@ class AccountController extends CommonController
                 if($type=='advertiser')
                 {
 
-                    $where.=" and  a.id!='hjd2' and a.appname like '%".I('get.search_text')."%'";
+                    $where.=" and  a.id!='0' and a.appname like '%".I('get.search_text')."%'";
 
                 }
 
@@ -46,7 +46,7 @@ class AccountController extends CommonController
             {
                 if($type2=='k')
                 {
-                    $where.=" and a.id!='hjd3' ";
+                    $where.=" and a.id!='0' ";
                 }
                 if($type2=='0')
                 {
@@ -74,7 +74,7 @@ class AccountController extends CommonController
 
             //权限条件
             $q_where=quan_where(__CONTROLLER__,"a");
-            $count      = $Refund->field('a.id,a.appname,a.type,a.promote_url,a.a_users,a.ctime,a.a_password,a.fandian,a.ip,a.tel,b.name')->join("a left join __ACCOUNTTYPE__ b on a.type = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->count();// 查询满足要求的总记录数
+            $count      = $Refund->field('a.id')->join("a left join __ACCOUNTTYPE__ b on a.type = b.id ")->where("a.id!='0' and ".$q_where.$where)->count();// 查询满足要求的总记录数
             $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
             $show       = $Page->show();// 分页显示输出
             $list=$Refund->field('a.id,a.appname,a.type,a.promote_url,a.a_users,a.ctime,a.a_password,a.ip,a.fandian,a.tel,a.contract_id,b.name')->join("a left join __ACCOUNTTYPE__ b on a.type = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
@@ -208,8 +208,9 @@ class AccountController extends CommonController
     }
     //修改返回
     public function upru(){
-        $id=I('post.id');
+        $id=(int)I('post.id');
         $Refund=M("Account");
+
 
         $Refund->create();
         $Refund->ctime=$Refund->ctime+1;
@@ -220,15 +221,23 @@ class AccountController extends CommonController
                 //循环联系人并且记录
                 foreach (I('post.fzrlist') as $key => $val)
                 {
-                    $contact_list[]=array("account_id"=>$id,"u_id"=>I('post.fzrlist')[$key]);
+                    $contact_list[]=array("account_id"=>$id,"u_id"=>(int)I('post.fzrlist')[$key]);
                 }
+
                 //联系人表
                 $contact=M("AccountUsers");
                 //删除现在有联系人
                 $contact->where("account_id=$id")->delete();
+                /*
                 if(!$contact->addAll($contact_list))
                 {
+                    echo $contact->_sql();
                     $this->error('添加负责人失败');
+                }
+                */
+                foreach($contact_list as $key=>$val)
+                {
+                    $contact->add($contact_list[$key]);
                 }
             }
             if(I('post.for_contract')!=1)

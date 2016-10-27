@@ -84,7 +84,7 @@ class PublicController extends Controller
             //合同待审核
             $hetong=M("Contract");
             //产品线分布
-            $cpx=$hetong->field('a.product_line,count(a.product_line) as prsum ,b.name')->join(" a left join __PRODUCT_LINE__ b on a.product_line=b.id")->group('a.product_line')->select();
+            $cpx=$hetong->field('a.product_line,count(a.product_line) as prsum ,b.name')->join(" a left join __PRODUCT_LINE__ b on a.product_line=b.id")->group('a.product_line,b.name')->select();
             $this->cpxfb=$cpx;
             //客户分布图
             $kehucity=M('Customer')->field('city,count(city) as citysum')->group('city')->select();
@@ -215,7 +215,7 @@ class PublicController extends Controller
 
             );
             $this->lizhi=$lizhi[rand(0,8)];
-            $this->messagecount =M("Email")->where("s_users=".cookie('u_id')." and state =0 and s_show=0 ")->order("time desc")->count();// 查询满足要求的总记录数
+            $this->messagecount =M("Email")->where("s_users=".cookie('u_id')." and state =0 and s_show=0 ")->count();// 查询满足要求的总记录数
 
             $this->display();
         }
@@ -232,10 +232,10 @@ class PublicController extends Controller
             $log=M("Log");
             $users=M('Users');
 
-            $count      = $log->field('a.id,a.ip,a.dizhi,a.time,b.name,b.image,b.groupid')->join("a left join jd_users b on a.users=b.id")->where("b.id !=''")->count();// 查询满足要求的总记录数
+            $count      = $log->field('a.id,a.ip,a.dizhi,a.time,b.name,b.image,b.groupid')->join("a left join jd_users b on a.users=b.id")->where("b.id !='0'")->count();// 查询满足要求的总记录数
             $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
             $show       = $Page->show();// 分页显示输出
-            $list=$log->field('a.id,a.ip,a.dizhi,a.time,b.name,b.image,b.groupid')->join("a left join jd_users b on a.users=b.id")->where("b.id !=''")->limit($Page->firstRow.','.$Page->listRows)->order("a.time desc")->select();
+            $list=$log->field('a.id,a.ip,a.dizhi,a.time,b.name,b.image,b.groupid')->join("a left join jd_users b on a.users=b.id")->where("b.id !='0'")->limit($Page->firstRow.','.$Page->listRows)->order("a.time desc")->select();
 
             foreach ($list as $key=>$val)
             {
@@ -272,6 +272,44 @@ class PublicController extends Controller
 
 
 
+        }
+
+        public function hjdpg()
+        {
+
+
+
+            $servername = "123.57.41.166";
+            $username = "crmlzad";
+            $password = "lingzhong";
+            $dbname = "crm";
+
+// 创建连接
+            $conn = mysqli_connect($servername, $username, $password, $dbname);
+// 检测连接
+            if ($conn->connect_error) {
+                die("连接失败: " . $conn->connect_error);
+            }
+
+            $sql = "SELECT * FROM jd_users";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                // 输出每行数据
+                while($row = $result->fetch_assoc()) {
+                    echo "<br> id: ". $row["id"];
+                }
+            } else {
+                echo "0 个结果";
+            }
+            $conn->close();
+
+            /*
+            $users=M("Users");
+            $list=$users->select();
+            dump($list);
+            echo '1';
+            */
         }
 
 }

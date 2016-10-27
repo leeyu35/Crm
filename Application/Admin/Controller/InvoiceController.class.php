@@ -21,16 +21,16 @@ class InvoiceController extends CommonController
                 {
                     $coustomer=M('Customer');
                     $zsql=$coustomer->field("id")->where(" advertiser like '%".I('get.search_text')."%'")->select(false);
-                    $where.=" and  a.id!='hjd2' and a.invoice_head in($zsql)";
+                    $where.=" and  a.id!='0' and a.invoice_head in($zsql)";
 
                 }
                 if($type=='contract_no')
                 {
-                    $where.=" and a.id!='hjd2' and a.contract_no like '%".I('get.search_text')."%'";
+                    $where.=" and a.id!='0' and a.contract_no like '%".I('get.search_text')."%'";
                 }
                 if($type=='appname')
                 {
-                    $where.=" and a.id!='hjd3' and a.appname like '%".I('get.search_text')."%'";
+                    $where.=" and a.id!='0' and a.appname like '%".I('get.search_text')."%'";
                 }
                 $this->type=$type;
                 $this->ser_txt=I('get.search_text');
@@ -54,7 +54,7 @@ class InvoiceController extends CommonController
             {
                 if($type2=='k')
                 {
-                    $where.=" and a.id!='hjd3' ";
+                    $where.=" and a.id!='0' ";
                 }
                 if($type2=='0')
                 {
@@ -71,7 +71,7 @@ class InvoiceController extends CommonController
             //权限条件
             $q_where=quan_where(__CONTROLLER__,"a");
            // echo $q_where;
-            $count      = $Refund->field('a.id,a.invoice_head,a.contract_no,a.money,a.ctime,a.audit_1,a.audit_2,b.advertiser')->join("a left join __CUSTOMER__ b on a.invoice_head = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->count();// 查询满足要求的总记录数
+            $count      = $Refund->field('a.id,a.invoice_head,a.contract_no,a.money,a.ctime,a.audit_1,a.audit_2,b.advertiser')->join("a left join __CUSTOMER__ b on a.invoice_head = b.id ")->where("a.id!='0' and ".$q_where.$where)->count();// 查询满足要求的总记录数
             $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
             $show       = $Page->show();// 分页显示输出
             $list=$Refund->field('a.id,a.invoice_head as aid,a.users2,a.invoice_head,a.appname,a.contract_no,a.money,a.ctime,a.audit_1,a.audit_2,b.advertiser')->join("a left join __CUSTOMER__ b on a.invoice_head = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
@@ -302,16 +302,16 @@ class InvoiceController extends CommonController
             {
                 $coustomer=M('Customer');
                 $zsql=$coustomer->field("id")->where(" advertiser like '%".I('get.search_text')."%'")->select(false);
-                $where.=" and  a.id!='hjd2' and a.invoice_head in($zsql)";
+                $where.=" and  a.id!='0' and a.invoice_head in($zsql)";
 
             }
             if($type=='contract_no')
             {
-                $where.=" and a.id!='hjd2' and a.contract_no like '%".I('get.search_text')."%'";
+                $where.=" and a.id!='0' and a.contract_no like '%".I('get.search_text')."%'";
             }
             if($type=='appname')
             {
-                $where.=" and a.id!='hjd3' and a.appname like '%".I('get.search_text')."%'";
+                $where.=" and a.id!='0' and a.appname like '%".I('get.search_text')."%'";
             }
             $this->type=$type;
             $this->ser_txt=I('get.search_text');
@@ -335,7 +335,7 @@ class InvoiceController extends CommonController
         {
             if($type2=='k')
             {
-                $where.=" and a.id!='hjd3' ";
+                $where.=" and a.id!='0' ";
             }
             if($type2=='0')
             {

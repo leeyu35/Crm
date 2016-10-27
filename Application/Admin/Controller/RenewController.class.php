@@ -259,6 +259,14 @@ class RenewController extends  CommonController
 
 
         if($insid=$hetong->add()){
+
+            if($insid==1)
+            {
+
+                $result = $hetong->query("select currval('jd_contract_id_seq')");
+                $insid=$result[0][currval];
+            }
+
             //dump($_FILES["file"]);
             if($_FILES["file"]['name'][0]!="") {
                 $upload = new \Think\Upload();// 实例化上传类
@@ -600,16 +608,16 @@ class RenewController extends  CommonController
             {
                 $coustomer=M('Customer');
                 $zsql=$coustomer->field("id")->where(" advertiser like '%".I('get.search_text')."%'")->select(false);
-                $where.=" and  a.id!='hjd2' and a.advertiser in($zsql)";
+                $where.=" and  a.id!='0' and a.advertiser in($zsql)";
 
             }
             if($type=='contract_no')
             {
-                $where.=" and a.id!='hjd2' and a.contract_no like '%".I('get.search_text')."%'";
+                $where.=" and a.id!='0' and a.contract_no like '%".I('get.search_text')."%'";
             }
             if($type=='appname')
             {
-                $where.=" and a.id!='hjd3' and a.appname like '%".I('get.search_text')."%'";
+                $where.=" and a.id!='0' and a.appname like '%".I('get.search_text')."%'";
             }
             $this->type=$type;
             $this->ser_txt=I('get.search_text');
@@ -645,7 +653,7 @@ class RenewController extends  CommonController
         {
             if($type2=='k')
             {
-                $where.=" and a.id!='hjd3' ";
+                $where.=" and a.id!='0' ";
             }
             if($type2=='0')
             {
@@ -665,7 +673,7 @@ class RenewController extends  CommonController
         {
             if($type4=='k')
             {
-                $where.=" and a.id!='hjd4' ";
+                $where.=" and a.id!='0' ";
             }
             if($type4=='0')
             {
