@@ -197,7 +197,7 @@ function daiban(){
         case "商务":
             $qitian=strtotime("+1 week");
             $time=time();
-            $Diankuanlst=$Diankuan->field('id')->where(" audit_1=1 and audit_2 and state=0 and back_money_time>$time and back_money_time <$qitian")->count();
+            $Diankuanlst=$Diankuan->field('id')->where(" audit_1=1 and audit_2=1 and state=0 and back_money_time>$time and back_money_time <$qitian")->count();
             $rest=$Diankuanlst;
 
 

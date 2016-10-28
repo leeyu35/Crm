@@ -73,7 +73,7 @@ class PublicController extends Controller
                 $Diankuan=M("Diankuan");
                 $qitian=strtotime("+1 week");
                 $time=time();
-                $Diankuanlst=$Diankuan->where(" audit_1=1 and audit_2 and state=0 and back_money_time>$time and back_money_time <$qitian")->count();
+                $Diankuanlst=$Diankuan->where(" audit_1=1 and audit_2=1 and state=0 and back_money_time>$time and back_money_time <$qitian")->count();
                 $this->huikuan=$Diankuanlst;
             }
 
