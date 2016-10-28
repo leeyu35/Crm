@@ -9,7 +9,7 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 // 应用入口文件
-die("crm 数据迁移维护中,请稍后访问，给您造成的不便敬请谅解....");
+die("<h1>Crm Maintenance, please visit later....</h1>");
 // 检测PHP环境
 if(version_compare(PHP_VERSION,'5.3.0','<'))  die('require PHP > 5.3.0 !');
 
