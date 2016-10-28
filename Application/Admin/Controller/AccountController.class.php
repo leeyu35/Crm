@@ -23,7 +23,18 @@ class AccountController extends CommonController
                     $where.=" and  a.id!='0' and a.appname like '%".I('get.search_text')."%'";
 
                 }
+                if ($type == 'gongsi') {
+                    //客户表
+                    $coustomer = M('Customer');
+                    //查询like 搜索文字的客户公司名称
+                    $zsql = $coustomer->field("id")->where(" advertiser like '%" . I('get.search_text') . "%'")->select(false);
+                    //查询所有 带搜索文字客户公司名称 的合同id,
+                    $hetong=M("Contract");
+                    $ht_search_text=$hetong->field('id')->where("advertiser in($zsql)")->select(false);
+                    //c查询合同id 等于 带搜索文字客户公司名称的合同id 
+                    $where .= " and  a.id!='0' and a.contract_id in($ht_search_text)";
 
+                }
                 $this->type=$type;
                 $this->ser_txt=I('get.search_text');
 
