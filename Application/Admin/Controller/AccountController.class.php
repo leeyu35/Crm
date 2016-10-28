@@ -146,7 +146,11 @@ class AccountController extends CommonController
         $Refund->ctime=time();
 
         if($insertid=$Refund->add()){
-
+            if($insertid==1)
+            {
+                $result = $Refund->query("select currval('jd_account_id_seq')");
+                $insertid=$result[0][currval];
+            }
 
             if(I('post.fzrlist')){
                     //循环联系人并且记录
