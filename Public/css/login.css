@@ -16,7 +16,10 @@ body,html{
     height: 100%;
     overflow: hidden;
 }
-.left,.right{
+.right{
+	float:left;
+	}
+.left{
     float: right;
 }
 .top{
@@ -78,7 +81,7 @@ body,html{
     margin-top: 30px;
 }
 .right{
-    margin-right:8%;
+    margin-left:10%;
 }
 .banben{
     width: 100%;
