@@ -31,7 +31,7 @@ class AccountController extends CommonController
                     //查询所有 带搜索文字客户公司名称 的合同id,
                     $hetong=M("Contract");
                     $ht_search_text=$hetong->field('id')->where("advertiser in($zsql)")->select(false);
-                    //c查询合同id 等于 带搜索文字客户公司名称的合同id 
+                    //c查询合同id 等于 带搜索文字客户公司名称的合同id
                     $where .= " and  a.id!='0' and a.contract_id in($ht_search_text)";
 
                 }
@@ -171,8 +171,11 @@ class AccountController extends CommonController
                     }
                     //联系人表
                     $contact=M("AccountUsers");
-
-                    $contact->addAll($contact_list);
+                    foreach($contact_list as $key=>$val)
+                    {
+                        $contact->add($contact_list[$key]);
+                    }
+                   // $contact->addAll($contact_list);
             }
             if(I('post.for_contract')!=1)
             {

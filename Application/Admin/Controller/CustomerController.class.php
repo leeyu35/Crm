@@ -110,8 +110,11 @@ class CustomerController extends CommonController
                     }
                     //联系人表
                     $contact=M("ContactList");
-
-                    $contact->addAll($contact_list);
+                    foreach($contact_list as $key=>$val)
+                    {
+                        $contact->add($contact_list[$key]);
+                    }
+                    //$contact->addAll($contact_list);
                 }
 
                 $this->success("添加成功",U("index"));
@@ -218,8 +221,12 @@ class CustomerController extends CommonController
             $contact_list2[]=array("name"=>I('post.name_n')[$key],"qq"=>I('post.qq_n')[$key],"weixin"=>I('post.weixin_n')[$key],"email"=>I('post.email_n')[$key],"position"=>I('post.position_n')[$key],"tel"=>I('post.tel_n')[$key],"time"=>time(),"customer_id"=>$id);
         }
 
+        foreach($contact_list2 as $key=>$val)
+        {
+            $contact->add($contact_list[$key]);
+        }
 
-        $contact->addAll($contact_list2);
+        //$contact->addAll($contact_list2);
 
         if($Customer->where("id=$id")->save())
         {
