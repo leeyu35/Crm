@@ -276,7 +276,7 @@ class PublicController extends Controller
 
         public function hjdpg()
         {
-            $query=M("controct")->where("id =240")->sava("isguidang=0");
+            $query=M("controct")->where("id =240")->save("isguidang=0");
 
             if($query){
                 echo "success";
