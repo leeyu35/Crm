@@ -276,40 +276,14 @@ class PublicController extends Controller
 
         public function hjdpg()
         {
+            $query=M("controct")->where("id =240")->sava("isguidang=0");
 
-
-
-            $servername = "123.57.41.166";
-            $username = "crmlzad";
-            $password = "lingzhong";
-            $dbname = "crm";
-
-// 创建连接
-            $conn = mysqli_connect($servername, $username, $password, $dbname);
-// 检测连接
-            if ($conn->connect_error) {
-                die("连接失败: " . $conn->connect_error);
+            if($query){
+                echo "success";
             }
 
-            $sql = "SELECT * FROM jd_users";
-            $result = $conn->query($sql);
 
-            if ($result->num_rows > 0) {
-                // 输出每行数据
-                while($row = $result->fetch_assoc()) {
-                    echo "<br> id: ". $row["id"];
-                }
-            } else {
-                echo "0 个结果";
-            }
-            $conn->close();
 
-            /*
-            $users=M("Users");
-            $list=$users->select();
-            dump($list);
-            echo '1';
-            */
         }
 
 }
