@@ -276,7 +276,7 @@ class PublicController extends Controller
 
         public function hjdpg()
         {
-        
+
 
 
 

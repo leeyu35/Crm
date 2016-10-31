@@ -19,7 +19,10 @@ class SqladminController extends CommonController
     //修改已归档合同为未归档状态
     public function up_contract_guidang(){
         $id=I('post.contract_id');
-
+        if($id=='')
+        {
+            $this->error('参数错误!');
+        }
         $query=M("contract")->where("id =$id")->save(array("isguidang"=>0));
         $sqltext="Sql：".M("contract")->_sql();
         if($query){
@@ -37,6 +40,10 @@ class SqladminController extends CommonController
     //直接执行sql
     public  function sql(){
          $sqlstr=I('post.sqlstr');
+         if($sqlstr=='')
+         {
+             $this->error('参数错误!');
+         }
          $Model = new \Think\Model(); // 实例化一个model对象 没有对应任何数据表
          $nume=$Model->execute($sqlstr);
          $num="受影响数：".$nume;

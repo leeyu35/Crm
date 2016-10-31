@@ -4,6 +4,28 @@
 <meta charset="utf-8">
 <title>无标题文档</title>
 <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
+<script src="/Public/js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(e) {
+        $("#form1").submit(function(){
+			if($("#sqlstr").val()=='')
+			{
+				alert('请输入您的sql语句');
+				$("#sqlstr").select();
+				return false;	
+			}	
+		})
+        $("#form2").submit(function(){
+			if($("#contract_id").val()=='')
+			{
+				alert('请输入要修改的合同ID');
+				$("#contract_id").select();
+				return false;
+			}	
+		})
+    });
+</script>
+
 </head>
 
 <body>
@@ -16,16 +38,16 @@
 </div>
 <div class="container">
 <form id="form1" name="form1" method="post" action="{:U("sql")}">
-<textarea class="form-control" rows="3" name="sqlstr" placeholder="在这里输入你的sql 语句..."></textarea><br>
+<textarea class="form-control" rows="3" name="sqlstr" id="sqlstr" placeholder="在这里输入你的sql 语句..."></textarea><br>
 
 <input type="submit" value="submit" name="submit" class="btn btn-danger pull-right ">
 </form>
 </div>
 <br>
 <div class="container">
-<form id="form1" name="form1" method="post" action="{:U("up_contract_guidang")}">
+<form id="form2" name="form1" method="post" action="{:U("up_contract_guidang")}">
 <div class="input-group">
-      <input type="number" class="form-control" name="contract_id" placeholder="输入你要修改为未归档的合同id">
+      <input type="number" class="form-control" id="contract_id" name="contract_id" placeholder="输入你要修改为未归档的合同id">
       <span class="input-group-btn">
         <button class="btn btn-success" type="submit">修改该合同为未归档状态</button>
       </span>
