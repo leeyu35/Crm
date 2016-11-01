@@ -256,10 +256,12 @@ class PublicController extends Controller
         }
         //提醒
         public function txing(){
+            $name='';
             $email=M("Email");
             $users=M("Users");
-            $count =$email->field('a.users,b.name')->join("a left join __USERS__ b on a.users=b.id")->where("a.s_users=".cookie('u_id')."  and a.s_show=0 and a.tixing=0 and a.state=0")->order("time desc")->count();
-            $list =$email->field('a.users,b.name')->join("a left join __USERS__ b on a.users=b.id")->where("a.s_users=".cookie('u_id')."  and a.s_show=0 and a.tixing=0 and a.state=0")->group("a.users")->order("time desc")->select();
+            $count =$email->field('a.users,b.name')->join("a left join __USERS__ b on a.users=b.id")->where("a.s_users=".cookie('u_id')."  and a.s_show=0 and a.tixing=0 and a.state=0")->count();
+
+            $list =$email->field('a.users,b.name')->join("a left join __USERS__ b on a.users=b.id")->where("a.s_users=".cookie('u_id')."  and a.s_show=0 and a.tixing=0 and a.state=0")->group("a.users,b.name,a.time")->order("a.time desc")->select();
             foreach ($list as $key=>$val)
             {
                 $name.=$val['name'].' ';

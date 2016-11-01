@@ -186,6 +186,7 @@ function getIPLoc_QQ($queryIP){
 }
 //获取代办数目
 function daiban(){
+    $rest=0;
     //组
     $group=M('Groupl')->field('group_name')->find(cookie('u_groupid'));
     $group=$group;
