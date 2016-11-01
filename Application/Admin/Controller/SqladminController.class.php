@@ -7,22 +7,28 @@
  */
 
 namespace Admin\Controller;
-
+use Think\Controller;
 
 class SqladminController extends CommonController
 {
-    public function index(){
-
+    public function index()
+    {
         $this->display();
+
     }
+
+
 
     //修改已归档合同为未归档状态
     public function up_contract_guidang(){
+
+       
         $id=I('post.contract_id');
         if($id=='')
         {
             $this->error('参数错误!');
         }
+
         $query=M("contract")->where("id =$id")->save(array("isguidang"=>0));
         $sqltext="Sql：".M("contract")->_sql();
         if($query){
@@ -60,5 +66,6 @@ class SqladminController extends CommonController
 
 
     }
+
 
 }
