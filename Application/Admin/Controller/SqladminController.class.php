@@ -22,7 +22,7 @@ class SqladminController extends CommonController
     //修改已归档合同为未归档状态
     public function up_contract_guidang(){
 
-       
+
         $id=I('post.contract_id');
         if($id=='')
         {

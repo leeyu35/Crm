@@ -79,8 +79,8 @@ $(document).ready(function(e) {
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[appname]}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}" align="right">{$list[d_money]|num_format}&nbsp;&nbsp;&nbsp;&nbsp;</td>
     	<!--<td>{$list[show_money]}</td>-->
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[d_time]|date="y-m-d",###}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[back_money_time]|date="y-m-d",###}</td>
+    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[d_time]?$list[d_time]|date="y-m-d",###:''}</td>
+    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[back_money_time]?$list[back_money_time]|date="y-m-d",###:''}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[ctime]|date="y-m-d",###}</td>
        <!-- <td>
         <span style="width:20px; display:inline-block"><a href="" title="垫款">垫</a></span>|&nbsp;&nbsp;<a href="" title="垫款列表">列</a><br>

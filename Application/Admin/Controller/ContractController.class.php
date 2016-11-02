@@ -171,7 +171,7 @@ class ContractController extends CommonController
             $dk['back_money_time']=strtotime(I('post.back_money_time'));
             $dk['d_time']=strtotime($postdate['payment_time']);
             $dk['advertiser']=$postdate['advertiser'];
-            $dk['appName']=$postdate['appname'];
+            $dk['appname']=$postdate['appname'];
             $dk['contract_no']=$postdate['contract_no'];
             $dk['ctime']=time();
             $dk['submituser']=$postdate['submituser'];
@@ -346,7 +346,7 @@ class ContractController extends CommonController
             $dk['back_money_time']=strtotime(I('post.back_money_time'));
             $dk['d_time']=strtotime($postdate['payment_time']);
             $dk['advertiser']=$postdate['advertiser'];
-            $dk['appName']=$postdate['appname'];
+            $dk['appname']=$postdate['appname'];
 
             $dk['submituser']=$postdate['submituser'];
             $dk['ispiao']=I("post.ispiao");
