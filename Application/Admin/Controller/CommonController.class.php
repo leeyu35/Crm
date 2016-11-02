@@ -15,8 +15,16 @@ class CommonController extends Controller
      {
          //检查权限
          $module=__CONTROLLER__;
+
+
          $rbac=M("Rbac");
          $one=$rbac->where("module='$module'")->find();
+         if($one['title']!='')
+         {
+             $title="(".$one['title'].")";
+         }
+
+         crm_record(cookie('u_name').'执行了'.$module."{$title}的".ACTION_NAME.'操作');
          if($one!="")
          {
               switch (ACTION_NAME)
