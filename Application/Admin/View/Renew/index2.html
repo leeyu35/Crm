@@ -102,7 +102,7 @@ $(document).ready(function(e) {
         <td class="htshow" id="{:U("show?id=$list[id]&yid2=$list[xf_hetonghao]")}">{$list[submituser]}</td>
         <td>
         <!--<a href="#">发票</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">财务</a><br>-->
-        <a href="{:U("updata?id=$list[id]&yid=$list[xf_contractid]")}"  data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{:U("delete?id=$list[id]&yid=$info[id]")}"  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>
+        <a href="{:U("updata?id=$list[id]&yid=$list[xf_contractid]")}"  data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{:U("delete?id=$list[id]&yid=$info[id]")}" {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         </td>
     </tr>
     </volist>
