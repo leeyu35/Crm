@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
+<script src="/Public/js/jquery-3.1.0.min.js"></script>
+
+</head>
+
+<body>
+ <form id="form1" name="form1" method="post" action="{:U("index")}">
+
+<div class=" container-fluid" style=" margin-top:20px;">
+<div class="panel panel-primary">
+  <div class="panel-heading">Crm Operation Log</div>
+  <div class="panel-body" id="content" style="height:350px; overflow:auto; padding-top:10px; padding-bottom:10px;">
+    {$log}>Waiting
+
+  </div>
+</div>
+<div class="row">
+    <div class="col-lg-3" style="width:300px;">
+
+             <div class="input-group">
+       
+         <input type="text" class="form-control" name="date"  placeholder="格式：2016_11_03" value="{$date}">
+            <span class="input-group-btn">
+                <button class="btn btn-danger" type="button">查看该日期!</button>
+            </span>
+        </div><!-- /input-group -->
+        
+       
+     </div>
+       
+	 <div class="col-lg-9">
+     
+  		<a href="{:U("index")}" class="btn btn-danger pull-right" style="margin-top:-35px;">&nbsp;&nbsp;&nbsp;&nbsp;Refresh &nbsp;&nbsp;&nbsp;&nbsp;</a>
+
+     </div>
+</div>
+<script>
+ var div=document.getElementById('content');
+           if(div.scrollHeight>div.offsetHeight)
+                div.scrollTop=div.scrollHeight-div.offsetHeight; 
+ </script>
+	
+</div>
+ </form>
+
+</body>
+</html>
