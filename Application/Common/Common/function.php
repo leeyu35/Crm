@@ -10,7 +10,7 @@ function crm_record($str){
     //记录日志
     $date=date("Y_m_d");
     $txt=fopen("./Crm_Record/{$date}.txt",'a+');
-    fwrite($txt,"[".date("Y-m-d H:i:s")."- *{$_SERVER['REMOTE_ADDR']}*] $str \n");
+    fwrite($txt,"[".date("Y-m-d H:i:s")." *{$_SERVER['REMOTE_ADDR']}*] $str \n");
     fclose($txt);
 
 }

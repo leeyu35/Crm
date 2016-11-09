@@ -93,7 +93,6 @@ class RenewController extends  CommonController
             $account=account($val['account']);
             $list[$key]['a_users']=$account['a_users'];
             $list[$key]['a_id']=$account['id'];
-
         }
         $this->list=$list;
         $this->assign('page',$show);// 赋值分页输出
@@ -271,7 +270,7 @@ class RenewController extends  CommonController
             //dump($_FILES["file"]);
             if($_FILES["file"]['name'][0]!="") {
                 $upload = new \Think\Upload();// 实例化上传类
-                $upload->maxSize = 3145728;// 设置附件上传大小
+                $upload->maxSize = 2097152;// 设置附件上传大小
                 $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
                 $upload->rootPath = './Uploads/'; // 设置附件上传根目录
                 $upload->savePath = '/xufei/'; // 设置附件上传（子）目录
@@ -398,7 +397,7 @@ class RenewController extends  CommonController
         {
             if($_FILES["file"]['name'][0]!="") {
                 $upload = new \Think\Upload();// 实例化上传类
-                $upload->maxSize = 3145728;// 设置附件上传大小
+                $upload->maxSize = 2097152;// 设置附件上传大小
                 $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
                 $upload->rootPath = './Uploads/'; // 设置附件上传根目录
                 $upload->savePath = '/xufei/'; // 设置附件上传（子）目录

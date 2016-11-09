@@ -19,7 +19,7 @@ class CrmrecordController extends Controller
             $this->error('您还没有登录',U("/login"));
             exit;
         }
-        
+
         if(I('post.date'))
         {
             $date=I('post.date');
