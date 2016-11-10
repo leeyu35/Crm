@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
 <script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
+<script src="/Public/js/hjdfunction.js"></script>
 <script language="javascript">
 	$(document).ready(function(e) {
 		bianhao();
@@ -92,7 +93,11 @@
 		})
 				
 		$("#formid").submit(function(){
-	
+		if(!findSize("fileup"))
+		{
+			alert('上传的文件可能超出大小限制，请重新选择2M以内图片!');
+			return false;
+		}
 		if($("#gongsi").val()=="")
 		{
 			alert("请填写公司名称");
@@ -153,7 +158,10 @@
 		}	
 		
 	})
+	
     });
+	
+	
 </script>
 <style type="text/css">
 	#adlist{ margin-left:15px;}
@@ -388,7 +396,7 @@
   
     <label for="payment_type" class="col-sm-2 control-label">选择文件</label>
     <div class="col-sm-3">
-        <input name="file[]" type="file" multiple>
+        <input name="file[]" type="file" id="fileup" multiple>
     </div>
 
     

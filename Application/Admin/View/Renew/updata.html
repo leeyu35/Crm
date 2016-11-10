@@ -9,6 +9,8 @@
 <script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
 <script src="/Public/js/layer/layer.js"></script>
+<script src="/Public/js/hjdfunction.js"></script>
+
 <script language="javascript">
 	$(document).ready(function(e) {
 			//alert("X"+xhx+gs+xhx+pr+xhx+str)
@@ -71,7 +73,11 @@
 		})
 				
 		$("#formid").submit(function(){
-	
+		if(!findSize("fileup"))
+		{
+			alert('上传的文件可能超出大小限制，请重新选择2M以内图片!');
+			return false;
+		}
 		if($("#gongsi").val()=="")
 		{
 			alert("请填写公司名称");
@@ -365,7 +371,7 @@
     
 	<div class="col-sm-12">
       <br>
-<input name="file[]" type="file" multiple>
+<input name="file[]" type="file" multiple id="fileup">
     </div>
   </div>
   <h4 class="bor-left-bull" >合同备注</h4>
