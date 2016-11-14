@@ -20,7 +20,7 @@ class PublicController extends Controller
             $users=M("Users");
             $u=I('post.users');
             $p=md5(I('post.password'));
-            $vo=$users->where("users='$u' and password='$p'")->find();
+            $vo=$users->where("users='$u' and password='$p' and is_delete!=1")->find();
             if($vo)
             {
                 cookie("u_id",$vo['id'],3600*24*365);  //用户ID

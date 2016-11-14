@@ -287,7 +287,6 @@ class RenewController extends  CommonController
                         $dkfile->add($datafile);
                         //echo $dkfile->_sql();
                     }
-
                 }
             }
             if(I('post.payment_type')==2)
