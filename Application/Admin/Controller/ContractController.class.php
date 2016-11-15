@@ -161,6 +161,7 @@ class ContractController extends CommonController
             $this->error("合同编号重复!");
             exit;
         }
+        /*
         if(I('post.payment_type')==2);
         {
             // 映射垫款表
@@ -180,13 +181,15 @@ class ContractController extends CommonController
             $dk['users2']=cookie('u_id');
         }
 
-
+        */
         if($hetong->advertiser=='')
         {
             $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
             exit;
         }
          if($insid=$hetong->add()){
+             /*
+              * 添加合同生成垫款记录，已取消此功能，2016年11月15日（由王秋月建议）。如果要改回 取消模板注释和此注释即可
              if($insid==1)
              {
                  $result = $hetong->query("select currval('jd_contract_id_seq')");
@@ -210,6 +213,7 @@ class ContractController extends CommonController
                      $success_str="但生成垫款记录失败，请联系管理员";
                  }
              }
+             */
              $this->success("添加成功".$success_str,U("index"));
 
          }else
@@ -335,6 +339,7 @@ class ContractController extends CommonController
         $hetong->payment_time=strtotime($hetong->payment_time);
         $hetong->users2=cookie('u_id');
         //如果是垫款
+        /*
         if(I('post.payment_type')==2)
         {
             // 映射垫款表
@@ -389,7 +394,7 @@ class ContractController extends CommonController
             }
 
         }
-
+        */
         if($hetong->where("id=$id")->save())
         {
             $this->success('修改成功'.$success_str,U('index'));
