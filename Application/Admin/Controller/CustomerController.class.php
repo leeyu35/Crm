@@ -205,7 +205,8 @@ class CustomerController extends CommonController
         $Customer=M("Customer");
         $Customer->create();
         $Customer->product_line=$product_line;
-        $Customer->ctime=I('post.time')+1;
+        $Customer->ctime=time();
+
         //联系人操作
         $contact=M('ContactList');
         //修改
