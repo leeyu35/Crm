@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<form method="post" enctype="multipart/form-data" name="form1" id="form1" action="{:U('upload')}">
+  <p>
+    <label for="fileField">File:</label>
+    <input type="file" name="file" id="fileField">
+ </p>
+  <p>
+    <label for="textfield">x轴:</label>
+    <input type="text" name="img_x" id="textfield">
+  </p>
+  <p>
+    <label for="textfield">y轴:</label>
+    <input type="text" name="img_y" id="textfield">
+  </p>
+  <p>
+    <label for="textfield">裁剪图片宽度:</label>
+    <input type="text" name="img_w" id="textfield">
+  </p>
+  <p>
+    <label for="textfield">裁剪图片高度:</label>
+    <input type="text" name="img_h" id="textfield">
+  </p>
+  <p>
+    <label for="textfield">字号:</label>
+    <input type="text" name="font_size" id="textfield">
+  </p>
+  <p>
+    <label for="textfield">文字:</label>
+    <input type="text" name="string" id="textfield">
+  </p>
+  <p>
+  <input type="submit" name="submit" id="submit" value="提交">
+  </p>
+</form>
+</body>
+</html>
