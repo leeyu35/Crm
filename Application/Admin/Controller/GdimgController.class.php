@@ -81,7 +81,6 @@ class GdimgController extends Controller
     }
 
     function img_save($img,$str,$font,$fonpx){
-
         //主图片
         $images=$img;
 
@@ -263,7 +262,7 @@ class GdimgController extends Controller
 
         $im=$this->imagetype($images);
 
-        $image_p = imagecreatetruecolor(200,200);
+        $image_p = imagecreatetruecolor($w,$h);
 
         imagecopyresampled($image_p,$im,0,0,$x,$y,$w,$h,$w,$h);
 
