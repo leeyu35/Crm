@@ -34,7 +34,7 @@ class GdimgController extends Controller
                 $Imgpath='./gdimg/upload/'.$info['file']['savepath'].$info['file']['savename'];
         }
         dump($_POST);
-        EXIT;
+        exit;
         $x=I('post.img_x');
         $y=I('post.img_y');
         $w=I('post.img_w');
