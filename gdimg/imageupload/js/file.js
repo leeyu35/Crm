@@ -96,10 +96,12 @@ var urlData = "";
                 async: true,
                 dataType: 'json',
                 success: function(data){
-
-
-                    console.log(data);
-
+                    if(data.code == 200){
+                        $(".new_img").attr({src:data.imageurl})
+                        $(".down").attr({href:data.imageurl})
+                    }else{
+                        alert('上传失败');
+                    }
                 },
                 error: function(err){
 
