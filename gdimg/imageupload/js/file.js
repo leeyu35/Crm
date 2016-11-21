@@ -83,20 +83,18 @@ var urlData = "";
             $.ajax({
                 type:'POST',
 
-                url: 'http://c.lzad.cc/Admin/Gdimg/upload.html',
+                url: 'http://c.lzad.cc/Admin/Gdimg/upload_ajax.html',
                 data: {
                     file: urlData,
                     img_x: img_x,
                     img_y:img_y,
                     img_w:img_w,
                     img_h:img_h,
-                    font_size:13,
+                    font_size:14,
                     string:input
                 },
-                //async: false,
-
-                //dataType: 'json',
-
+                async: true,
+                dataType: 'json',
                 success: function(data){
 
 
