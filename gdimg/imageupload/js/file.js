@@ -90,13 +90,11 @@ var urlData = "";
                     img_y:img_y,
                     img_w:img_w,
                     img_h:img_h,
-                    font_size:13,
+                    font_size:14,
                     string:input
                 },
-                //async: false,
-
-                //dataType: 'json',
-
+                async: true,
+                dataType: 'json',
                 success: function(data){
 
 
