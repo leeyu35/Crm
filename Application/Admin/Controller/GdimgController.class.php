@@ -12,9 +12,7 @@ class GdimgController extends Controller
 {
 
     function index(){
-
         $this->display();
-
     }
     function upload(){
 
@@ -62,7 +60,7 @@ class GdimgController extends Controller
         $h=I('post.img_h');
         $font_size=I('post.font_size');
         $string=I('post.string');
-        if($img64=='' or $x=='' or $y=='' or $w=='' or $h=='' or $font_size=='' or $string=='')
+        if($img64=='' or $x=='' or $y=='' or $w=='' or $h=='' or $font_size=='')
         {
             $array["code"]=403;
         }
