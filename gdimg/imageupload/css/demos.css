@@ -18,7 +18,6 @@ body{
 	height:100%;
 	font-size:14px;
 	background: #eceeef;
-	position: relative;
 }
 #outer{
 	width:100%;
@@ -109,8 +108,4 @@ form label
 }
 .btn:hover{
 	background: white ;
-}
-.new_img{
-	position: absolute;
-	right:0;
 }
