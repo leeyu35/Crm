@@ -88,7 +88,9 @@ var urlData = "";
                     file: urlData,
                     img_x: img_x,
                     img_y:img_y,
-                    font_size:"13px",
+                    img_w:img_w,
+                    img_h:img_h,
+                    font_size:13,
                     string:input
                 },
                 //async: false,
