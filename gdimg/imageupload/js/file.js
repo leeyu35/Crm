@@ -22,6 +22,7 @@ var urlData = "";
         }
     }
     file()
+
     //上传图片
     function img(){
         var api = $.Jcrop('.cropbox',{
