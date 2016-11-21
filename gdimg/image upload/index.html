@@ -1,0 +1,58 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>file2</title>
+    <link rel="stylesheet" href="css/jquery.Jcrop.css" type="text/css" />
+    <link rel="stylesheet" href="css/demos.css" type="text/css" />
+</head>
+
+<body>
+<div id="outer">
+
+    <div class="uploading">
+        <!--file上传文件-->
+        <input type="file" multiple = "multiple" value="上传图片" id="img">
+        <!--字体下拉列表-->
+        <select id="font-size" name="selse" >
+            <option value="Yahoo! U.S">微软雅黑.</option>
+            <option value="UK.">火星文</option>
+            <option value="FFF."> 楷体</option>
+            <option value="EEE.">斜体</option>
+        </select>
+        <a href="" target="_blank" download="w3logo" class="down">下载图片</a>
+        <span class="mistakes">当前没有图片，无法下载</span>
+    </div>
+    <!--上传图片-->
+    <div class="img_box">
+        <img src="" alt=""  class="cropbox" id="other">
+    </div>
+    <div class="nav">
+        <div class="select">
+            <button id="anim1">644*280px</button>
+            <button id="anim2">600*248px</button>
+            <button id="anim3">190*190px</button>
+            <button id="anim4">220*220px</button>
+        </div>
+        <div class="coordinates">
+            <label>X1 <input type="text" size="4" id="x" name="x" readOnly="true"/></label>
+            <label>Y1 <input type="text" size="4" id="y" name="y" readOnly="true"/></label>
+            <label>X2 <input type="text" size="4" id="x2" name="x2" readOnly="true"/></label>
+            <label>Y2 <input type="text" size="4" id="y2" name="y2" readOnly="true"/></label>
+            <label>W <input type="text" size="4" id="w" name="w" readOnly="true"/></label>
+            <label>H <input type="text" size="4" id="h" name="h" readOnly="true" /></label>
+        </div>
+        <form >
+            <p>输入：<input type="text" value="" maxlength="10" class="font_learn"></p>
+            <!--<input type="submit" class="btn" value="提交" onclick="btn()"/>-->
+            <div onclick="btn()"  class="btn">提交</div>
+
+        </form>
+    </div>
+
+</div>
+<script src="js/jquery.min.js "></script>
+<script src="js/jquery.Jcrop.js"></script>
+<script src="js/file.js"></script>
+</body>
+</html>
+
