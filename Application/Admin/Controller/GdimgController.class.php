@@ -33,16 +33,43 @@ class GdimgController extends Controller
                // dump($info);
                 $Imgpath='./gdimg/upload/'.$info['file']['savepath'].$info['file']['savename'];
         }
-        dump($_POST);
-        dump($_FILES);
-        exit;
+        $x=I('post.img_x');
+        $y=I('post.img_y');
+        $w=I('post.img_w');
+        $h=I('post.img_h');
+
+        $font_size=I('post.font_size');
+        $string=I('post.string');
+        $cimg= $this->caijian($Imgpath,$x,$y,$w,$h);
+
+        $rimg= $this->img_save($cimg,$string,'./gdimg/MFLiHei.otf',$font_size);
+        $rimg=substr($rimg,1,200);
+        if($array['code']!=403){
+            $array["code"]=200;
+            $array["imageurl"]="http://".$_SERVER['HTTP_HOST'].$rimg;
+        }
+
+
+        $this->ajaxReturn($array);
+        //echo '<img src="'.$rimg.'">';
+    }
+    function upload_ajax(){
+
+        $img64=I('post.file');
         $x=I('post.img_x');
         $y=I('post.img_y');
         $w=I('post.img_w');
         $h=I('post.img_h');
         $font_size=I('post.font_size');
         $string=I('post.string');
-        $cimg= $this->caijian($Imgpath,$x,$y,$w,$h);
+        if($img64=='' or $x=='' or $y=='' or $w=='' or $h=='' or $font_size=='' or $string=='')
+        {
+            $array["code"]=403;
+        }
+
+
+        $cimg= $this->caijian($img64,$x,$y,$w,$h);
+
         $rimg= $this->img_save($cimg,$string,'./gdimg/MFLiHei.otf',$font_size);
         $rimg=substr($rimg,1,200);
         if($array['code']!=403){
@@ -237,8 +264,11 @@ class GdimgController extends Controller
         list($width, $height) = getimagesize($images);
 
         $im=$this->imagetype($images);
-        $image_p = imagecreatetruecolor($w,$h);
+
+        $image_p = imagecreatetruecolor(200,200);
+
         imagecopyresampled($image_p,$im,0,0,$x,$y,$w,$h,$w,$h);
+
         $rand=rand(1000,9999);
         $imgname='./gdimg/upload/'.time().$rand.'.jpg';
         imagepng($image_p,$imgname);
