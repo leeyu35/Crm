@@ -6,11 +6,9 @@
  * Time: 10:41
 
  */
- phpinfo();
 
-
-$im = new imagick( 'a.jpg' );
-// resize by 200 width and keep the ratio
-$im->thumbnailImage( 200, 0);
-// write to disk
-$im->writeImage( 'a_thumbnail.jpg' );
+ ini_set('display_errors',1);
+ header('Content-type: image/jpeg');
+ $image = new Imagick('1.jpg');
+ $image->rollImage(20,39);
+ echo $image;
