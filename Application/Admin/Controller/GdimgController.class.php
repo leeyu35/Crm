@@ -12,6 +12,7 @@ class GdimgController extends Controller
 {
 
     function index(){
+        echo $this->webtoimage('http://www.jb51.net/images/logo.gif');
         $this->display();
     }
     function upload(){
@@ -37,6 +38,8 @@ class GdimgController extends Controller
         $h=I('post.img_h');//高度
         $line=I('post.line');//行数
         $color=I('post.color');//字颜色
+        $logo=$this->webtoimage(I('post.logo'));//logo转存到服务器
+
         //拆分RGB
         $array2=explode(",",$color);
         list($r,$g,$b)=$array2;
@@ -47,7 +50,7 @@ class GdimgController extends Controller
         $string=str_replace('br',"\n",$string);
         $cimg= $this->caijian($Imgpath,$x,$y,$w,$h);
 
-        $rimg= $this->img_save($cimg,$string,'./gdimg/font/'.$font,$font_size,$r,$g,$b,$line);
+        $rimg= $this->img_save($cimg,$string,'./gdimg/font/'.$font,$font_size,$r,$g,$b,$line,$logo);
         $rimg=substr($rimg,1,200);
         if($array['code']!=403){
             $array["code"]=200;
@@ -67,6 +70,7 @@ class GdimgController extends Controller
         //$h=I('post.img_h');//高度
         $line=I('post.line');//行数
         $color=I('post.color');//字颜色
+
         //拆分RGB
         $array2=explode(",",$color);
         list($r,$g,$b)=$array2;
@@ -75,6 +79,7 @@ class GdimgController extends Controller
         $font_size=I('post.font_size');//字号
         $string=$_POST['string'];//文字信息
         $string=str_replace('br',"\n",$string);//处理换行
+        $logo=$this->webtoimage(I('post.logo'));//logo转存到服务器
 
         if($img64=='' or $font_size=='' or $font=='' or $line=='')
         {
@@ -85,7 +90,7 @@ class GdimgController extends Controller
         //$cimg= $this->caijian($img64,$x,$y,$w,$h);
 
 
-        $rimg= $this->img_save($img64,$string,'./gdimg/font/'.$font,$font_size,$r,$g,$b,$line);
+        $rimg= $this->img_save($img64,$string,'./gdimg/font/'.$font,$font_size,$r,$g,$b,$line,$logo);
         $rimg=substr($rimg,1,200);
         if($array['code']!=403){
             $array["code"]=200;
@@ -97,7 +102,7 @@ class GdimgController extends Controller
         //echo '<img src="'.$rimg.'">';
     }
 
-    function img_save($img,$str,$font,$fonpx,$r=255,$g=255,$b=255,$line){
+    function img_save($img,$str,$font,$fonpx,$r=255,$g=255,$b=255,$line,$logo){
         //主图片
         $images=$img;
 
@@ -139,7 +144,7 @@ class GdimgController extends Controller
 
         $rand=rand(1000,9999);
         $imgname='./gdimg/upload/'.time().$rand.'.jpg';
-        $logo='./gdimg/upload/logo-jp.png';
+
 
 
         imagejpeg($im,$imgname);
@@ -302,6 +307,24 @@ class GdimgController extends Controller
         imagejpeg($image_p,$imgname);
         return $imgname;
     }
+    public function webtoimage($rul){
+
+        $img = file_get_contents($rul);
+        $rand=rand(1000,9999);
+        $imgname='./gdimg/upload/'.time().$rand.'.jpg';
+# 网络显示图片扩展名不是必须的，只不过在windows中无法识别
+        file_put_contents($imgname,$img);
+
+        return $imgname;
+        /*
+        exit;
+        $rimg=substr($imgname,1,200);
+        $rimg="http://".$_SERVER['HTTP_HOST'].$rimg;
+
+        return $rimg;
+        */
+    }
+
 
     //改变大小 生成png透明图片
     function createpng(){
