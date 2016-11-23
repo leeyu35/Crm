@@ -91,6 +91,7 @@ class GdimgController extends Controller
 
 
         $rimg= $this->img_save($img64,$string,'./gdimg/font/'.$font,$font_size,$r,$g,$b,$line,$logo);
+
         $rimg=substr($rimg,1,200);
         if($array['code']!=403){
             $array["code"]=200;
@@ -102,7 +103,7 @@ class GdimgController extends Controller
         //echo '<img src="'.$rimg.'">';
     }
 
-    function img_save($img,$str,$font,$fonpx,$r=255,$g=255,$b=255,$line,$logo){
+    function img_save($img,$str,$font,$fonpx,$r=255,$g=255,$b=255,$line,$logo=''){
         //主图片
         $images=$img;
 
@@ -154,7 +155,11 @@ class GdimgController extends Controller
 
 
         //$image->open($logo)->thumb($px50, $pxheight,\Think\Image::IMAGE_THUMB_FIXED)->save('./thumb.png');
-        $image->open($imgname)->water($logo,3)->save($imgname);
+        if($logo!='')
+        {
+            $image->open($imgname)->water($logo,3)->save($imgname);
+        }
+
 
 
         return $imgname;
@@ -308,7 +313,10 @@ class GdimgController extends Controller
         return $imgname;
     }
     public function webtoimage($rul){
-
+        if($rul=='')
+        {
+            return '';
+        }
         $img = file_get_contents($rul);
         $rand=rand(1000,9999);
         $imgname='./gdimg/upload/'.time().$rand.'.jpg';
