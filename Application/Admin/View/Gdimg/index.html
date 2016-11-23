@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<form method="post" enctype="multipart/form-data" name="form1" id="form1" action="{:U('upload')}">
+<form method="post" enctype="multipart/form-data" name="form1" id="form1" action="{:U("upload")}">
   <p>
     <label for="fileField">File:</label>
     <input type="file" name="file" id="fileField">
@@ -33,7 +33,26 @@
   </p>
   <p>
     <label for="textfield">文字:</label>
-    <input type="text" name="string" id="textfield">
+    <textarea name="string"></textarea>
+  </p>
+  <p>
+    <label for="textfield">颜色:</label>
+    <input name="color" type="text" id="textfield" value="255,255,255">
+  </p>
+  <p>
+    <label for="textfield">行数:</label>
+    <input name="line" type="text" id="line" value="1">
+  </p>
+  <p>
+    <label for="textfield">字体:</label>
+	<select name="font">
+    	<option value="FZLTZH.TTF" selected>方正兰亭中黑</option>
+        <option value="FZZYJT.ttf">方正准圆简体</option>
+        <option value="FZCSK.ttf">FZCSK</option>
+        <option value="MFLangQian.otf">MFLangQian</option>
+        <option value="MFLiHei.otf">MFLiHei</option>
+        <option value="MFYueYuan.otf">MFYueYuan</option>
+    </select>
   </p>
   <p>
   <input type="submit" name="submit" id="submit" value="提交">

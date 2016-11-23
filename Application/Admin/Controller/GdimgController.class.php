@@ -31,16 +31,23 @@ class GdimgController extends Controller
                // dump($info);
                 $Imgpath='./gdimg/upload/'.$info['file']['savepath'].$info['file']['savename'];
         }
-        $x=I('post.img_x');
-        $y=I('post.img_y');
-        $w=I('post.img_w');
-        $h=I('post.img_h');
+        $x=I('post.img_x');//x轴
+        $y=I('post.img_y');//y轴
+        $w=I('post.img_w');//宽度
+        $h=I('post.img_h');//高度
+        $line=I('post.line');//行数
+        $color=I('post.color');//字颜色
+        //拆分RGB
+        $array2=explode(",",$color);
+        list($r,$g,$b)=$array2;
 
-        $font_size=I('post.font_size');
-        $string=I('post.string');
+        $font=I('post.font');//字体
+        $font_size=I('post.font_size');//字号
+        $string=$_POST['string'];//文字信息
+        $string=str_replace('br',"\n",$string);
         $cimg= $this->caijian($Imgpath,$x,$y,$w,$h);
 
-        $rimg= $this->img_save($cimg,$string,'./gdimg/MFLiHei.otf',$font_size);
+        $rimg= $this->img_save($cimg,$string,'./gdimg/font/'.$font,$font_size,$r,$g,$b,$line);
         $rimg=substr($rimg,1,200);
         if($array['code']!=403){
             $array["code"]=200;
@@ -54,21 +61,31 @@ class GdimgController extends Controller
     function upload_ajax(){
 
         $img64=I('post.file');
-        $x=I('post.img_x');
-        $y=I('post.img_y');
-        $w=I('post.img_w');
-        $h=I('post.img_h');
-        $font_size=I('post.font_size');
-        $string=I('post.string');
-        if($img64=='' or $x=='' or $y=='' or $w=='' or $h=='' or $font_size=='')
+        //$x=I('post.img_x');//x轴
+        //$y=I('post.img_y');//y轴
+        //$w=I('post.img_w');//宽度
+        //$h=I('post.img_h');//高度
+        $line=I('post.line');//行数
+        $color=I('post.color');//字颜色
+        //拆分RGB
+        $array2=explode(",",$color);
+        list($r,$g,$b)=$array2;
+
+        $font=I('post.font');//字体
+        $font_size=I('post.font_size');//字号
+        $string=$_POST['string'];//文字信息
+        $string=str_replace('br',"\n",$string);//处理换行
+
+        if($img64=='' or $font_size=='' or $font=='' or $line=='')
         {
             $array["code"]=403;
         }
 
 
-        $cimg= $this->caijian($img64,$x,$y,$w,$h);
+        //$cimg= $this->caijian($img64,$x,$y,$w,$h);
 
-        $rimg= $this->img_save($cimg,$string,'./gdimg/MFLiHei.otf',$font_size);
+
+        $rimg= $this->img_save($img64,$string,'./gdimg/font/'.$font,$font_size,$r,$g,$b,$line);
         $rimg=substr($rimg,1,200);
         if($array['code']!=403){
             $array["code"]=200;
@@ -80,7 +97,7 @@ class GdimgController extends Controller
         //echo '<img src="'.$rimg.'">';
     }
 
-    function img_save($img,$str,$font,$fonpx){
+    function img_save($img,$str,$font,$fonpx,$r=255,$g=255,$b=255,$line){
         //主图片
         $images=$img;
 
@@ -105,22 +122,36 @@ class GdimgController extends Controller
         $im2 = imagecreatetruecolor($width,$bghigh);
 
 //获取字符串长度
+        //居中
+        /*
         $txt_len=imagettfbbox($fonsz,0 , $font,$string);
         $txt_width=$txt_len[2];//获得字符串长度;
         $left_pa=($width/2)-($txt_width/2);//获取左移像素
-        imagecopymerge ($im, $im2, 0, $height-($fontpx*3), 0, 0, $width,$fontpx*3, 50);
+        */
+        imagecopymerge ($im, $im2, 0, $height-($fontpx*(3+$line)), 0, 0, $width,$fontpx*(3+$line), 50);
 //文字颜色
-        $im_str_color = imagecolorallocate($im, 255, 255, 255);
+        $im_str_color = imagecolorallocate($im,$r,$g,$b);
 //imagestring($im,3, 150, $width-30, $string, $im_str_color);//写入文字
 //写入文字
+        //高度居中
+        $boo_pa=($fontpx*(3+$line)/2)-($fontpx*$line/2);//获取左移像素
+        imagettftext($im, $fonsz,0, 10, $height-($fontpx*$line)+10-$boo_pa,$im_str_color,$font,$string);
 
-        imagettftext($im, $fonsz,0, $left_pa, $height-($fontpx*1),$im_str_color,$font,$string);
-
-        //header("Content-type:image/png");
         $rand=rand(1000,9999);
         $imgname='./gdimg/upload/'.time().$rand.'.jpg';
-        imagepng($im,$imgname);
+        $logo='./gdimg/upload/logo-jp.png';
+
+
+        imagejpeg($im,$imgname);
         imagedestroy($im);
+        $image = new \Think\Image();
+
+
+
+        //$image->open($logo)->thumb($px50, $pxheight,\Think\Image::IMAGE_THUMB_FIXED)->save('./thumb.png');
+        $image->open($imgname)->water($logo,3)->save($imgname);
+
+
         return $imgname;
 
     }
@@ -268,9 +299,26 @@ class GdimgController extends Controller
 
         $rand=rand(1000,9999);
         $imgname='./gdimg/upload/'.time().$rand.'.jpg';
-        imagepng($image_p,$imgname);
+        imagejpeg($image_p,$imgname);
         return $imgname;
     }
 
+    //改变大小 生成png透明图片
+    function createpng(){
+        $srcImg = imagecreatefrompng($logo);
+        $width = $image->width();
+        $heghit = $image->height();
+        echo $width;
+        $px50=150;
+        $pxheight=(150/$width)*$heghit;
+        $newImg = imagecreatetruecolor($px50, $pxheight);
+        //分配颜色 + alpha，将颜色填充到新图上
+        $alpha = imagecolorallocatealpha($newImg, 0, 0, 0, 127);
+        imagefill($newImg, 0, 0, $alpha);
 
+//将源图拷贝到新图上，并设置在保存 PNG 图像时保存完整的 alpha 通道信息
+        imagecopyresampled($newImg, $srcImg, 0, 0, 0, 0, $px50, $pxheight, $width, $heghit);
+        imagesavealpha($newImg, true);
+        imagepng($newImg, './thumb.png');
+    }
 }
