@@ -232,10 +232,9 @@ $(".a-tip").on("click","button",function(){
 })
 
 function btn(){
-  $(".box_img").attr({src:"./img/ICBCLoading (1).gif"})
     //获取图片地址
     var urlData = $(".box_img").attr("src");//图片信息
-      // console.log(urlData)
+    console.log(urlData)
     var text = $(".text").val();//上传文字
     console.log(text)
     var row = $(".row").val();//行数
@@ -245,11 +244,10 @@ function btn(){
     var font = $("#font option:selected").val();//字体样式
   console.log(font);
   console.log(logoURL);
-
      $.ajax({
        type:'POST',
 
-       url: 'http://c.lzad.cc/Admin/Gdimg/upload_ajax.html',
+       url: 'http://http://192.168.199.153//Admin/Gdimg/upload_ajax.html',
        data: {
          file: urlData,
          font_size: set,
