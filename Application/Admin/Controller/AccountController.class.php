@@ -334,4 +334,120 @@ class AccountController extends CommonController
         }
 
     }
+    public function semindex(){
+        $accountsem_list=hjd_curl('http://www.yushanapp.com/api/get/customer/c03d80f07c144cdab5e881866b92ad9f');
+
+        //$accountsem_list['customers']=array_slice($accountsem_list['customers'], 10,10);
+       //dump($accountsem_list);
+        foreach ($accountsem_list['customers'] as $key=>$val)
+        {
+            $array_slist[$key]['l_app']=$val['username'];
+            $array_slist[$key]['sem']=$val['sem'];
+            $array_slist[$key]['appid']=$val['appid'];
+        }
+        foreach ($array_slist as $key=>$val)
+        {
+
+           
+            $accountsem_one=hjd_curl('http://101.200.130.178:5281/account/getweekcost?appid='.$val['appid']);
+            $array_slist[$key]['data']=$accountsem_one['data'];
+
+
+           // $array_slist[$key]['data']=$accountsem_one['data'];
+        }
+        dump($array_slist);
+        exit;
+        $Refund=M("Account");
+        //搜索条件
+        $type=I('get.searchtype');
+        if($type!='')
+        {
+            if($type=='advertiser')
+            {
+
+                $where.=" and  a.id!='0' and a.appname like '%".I('get.search_text')."%'";
+
+            }
+            if ($type == 'gongsi') {
+                //客户表
+                $coustomer = M('Customer');
+                //查询like 搜索文字的客户公司名称
+                $zsql = $coustomer->field("id")->where(" advertiser like '%" . I('get.search_text') . "%'")->select(false);
+                //查询所有 带搜索文字客户公司名称 的合同id,
+                $hetong=M("Contract");
+                $ht_search_text=$hetong->field('id')->where("advertiser in($zsql)")->select(false);
+                //c查询合同id 等于 带搜索文字客户公司名称的合同id
+                $where .= " and  a.id!='0' and a.contract_id in($ht_search_text)";
+
+            }
+            $this->type=$type;
+            $this->ser_txt=I('get.search_text');
+
+        }
+        //时间条件
+
+        $time_start=I('get.time_start');
+        $time_end=I('get.time_end');
+        if($time_start!="" and $time_end!="")
+        {
+            $time_start=strtotime($time_start);
+            $time_end=strtotime($time_end);
+
+            $where.=" and a.ctime > $time_start and a.ctime < $time_end";
+            $this->time_start=I('get.time_start');
+            $this->time_end=I('get.time_end');
+        }
+        //审核条件
+        $type2=I('get.shenhe');
+        if($type2!='')
+        {
+            if($type2=='k')
+            {
+                $where.=" and a.id!='0' ";
+            }
+            if($type2=='0')
+            {
+                $where.=" and a.audit_1=0 and a.audit_2=0";
+            }
+            if($type2=='1')
+            {
+                $where.=" and a.audit_1=1 and a.audit_2=1";
+            }
+            $this->type2=$type2;
+            $this->ser_txt2=I('get.search_text');
+
+        }
+        //从合同列表点击过来
+        $contract_id=I('get.contract_id');
+        if($contract_id!='')
+        {
+            $where.=' and contract_id='.$contract_id;
+            ////合同编号
+            $hetong=M("Contract");
+            $hetong_on_name=$hetong->field('a.contract_no,b.advertiser,b.id')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("a.id =".$contract_id)->find();
+            $this->hetong=$hetong_on_name;
+            $this->contract_id=$contract_id;
+        }
+
+        //权限条件
+        $q_where=quan_where(__CONTROLLER__,"a");
+        $count      = $Refund->field('a.id')->join("a left join __ACCOUNTTYPE__ b on a.type = b.id ")->where("a.id!='0' and ".$q_where.$where)->count();// 查询满足要求的总记录数
+        $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        $show       = $Page->show();// 分页显示输出
+        $list=$Refund->field('a.id,a.appname,a.type,a.promote_url,a.a_users,a.ctime,a.a_password,a.ip,a.fandian,a.tel,a.contract_id,b.name')->join("a left join __ACCOUNTTYPE__ b on a.type = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
+        $hetong=M("Contract");
+
+        foreach ($list as $key=>$val)
+        {
+            $ht=$hetong->field('a.contract_no,b.advertiser')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("a.id =".$val['contract_id'])->find();
+            $list[$key]['advertiser']=$ht['advertiser'];
+            $list[$key]['contract_no']=$ht['contract_no'];
+        }
+        $this->list=$list;
+
+        $this->assign('page',$show);// 赋值分页输出
+        $this->display();
+
+
+    }
 }
