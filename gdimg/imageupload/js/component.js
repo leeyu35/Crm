@@ -247,7 +247,7 @@ function btn(){
      $.ajax({
        type:'POST',
 
-       url: 'http://http://192.168.199.153//Admin/Gdimg/upload_ajax.html',
+       url: 'http://c.lzad.cc/Admin/Gdimg/upload_ajax.html',
        data: {
          file: urlData,
          font_size: set,
@@ -256,7 +256,7 @@ function btn(){
          color:"255,255,255",
          font_size:14,
          font:font,
-           logo:logoURL
+         logo:logoURL
        },
        async: true,
        dataType: 'json',
