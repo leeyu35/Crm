@@ -1,61 +1,84 @@
-<html>
+<!DOCTYPE html>
+<html lang="en" class="no-js">
 <head>
-    <meta charset="UTF-8">
-    <title>file2</title>
-    <link rel="stylesheet" href="css/jquery.Jcrop.css" type="text/css" />
-    <link rel="stylesheet" href="css/demos.css" type="text/css" />
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>图片上传</title>
+
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/demo.css" />
+
+	<link rel="stylesheet" type="text/css" href="css/component.css" />
 </head>
-
 <body>
-<div id="outer">
-
-    <div class="uploading">
-        <!--file上传文件-->
-        <input type="file" multiple = "multiple" value="上传图片" id="img">
-        <!--字体下拉列表-->
-        <select id="font-size" name="selse" >
-            <option value="Yahoo! U.S">微软雅黑.</option>
-            <option value="UK.">火星文</option>
-            <option value="FFF."> 楷体</option>
-            <option value="EEE.">斜体</option>
-        </select>
-        <a href="" target="_blank" download="w3logo" class="down">下载图片</a>
-        <span class="mistakes">当前没有图片，无法下载</span>
-    </div>
-    <!--上传图片-->
-    <div class="nav">
-        <div class="select">
-            <button id="anim1">644*280px</button>
-            <button id="anim2">600*248px</button>
-            <button id="anim3">190*190px</button>
-            <button id="anim4">220*220px</button>
-        </div>
-        <div class="coordinates">
-            <label>X1 <input type="text" size="4" id="x" name="x" readOnly="true"/></label>
-            <label>Y1 <input type="text" size="4" id="y" name="y" readOnly="true"/></label>
-            <label>X2 <input type="text" size="4" id="x2" name="x2" readOnly="true"/></label>
-            <label>Y2 <input type="text" size="4" id="y2" name="y2" readOnly="true"/></label>
-            <label>W <input type="text" size="4" id="w" name="w" readOnly="true"/></label>
-            <label>H <input type="text" size="4" id="h" name="h" readOnly="true" /></label>
-        </div>
-        <form >
-            <p>输入：<input type="text" value="" maxlength="10" class="font_learn"></p>
-            <!--<input type="submit" class="btn" value="提交" onclick="btn()"/>-->
-            <div onclick="btn()"  class="btn">提交</div>
-
-        </form>
-        <div class="img_box">
-            <img src="" alt=""  class="cropbox" id="other">
-        </div>
-        <div class="new_box">
-            <img src="" alt="" class="new_img"/>
-        </div>
-    </div>
-
+<div class="a-tip">
+		<select id="set">  
+			  <option value ="14">14号字体</option>
+			  <option value ="15">15号字体</option>
+			  <option value="16">16号字体</option>
+			  <option value="17">17号字体</option>
+			  <option value ="18">18号字体</option>
+			  <option value ="19">19号字体</option>
+			  <option value="21">21号字体</option>
+			  <option value="22">22号字体</option>
+			  <option value ="23">23号字体</option>
+			  <option value ="25">25号字体</option>
+			  <option value="26">26号字体</option>
+			  <option value="27">27号字体</option>
+			  <option value ="28">28号字体</option>
+			  <option value ="29">29号字体</option>
+			  <option value="30">30号字体</option>
+			  <option value="32">32号字体</option>
+		</select>
+	    <select id="font" name="">
+			<option value="FZLTZH.TTF" selected>方正兰亭中黑</option>
+			<option value="FZZYJT.ttf">方正准圆简体</option>
+			<option value="FZCSK.ttf">FZCSK</option>
+			<option value="MFLangQian.otf">MFLangQian</option>
+			<option value="MFLiHei.otf">MFLiHei</option>
+			<option value="MFYueYuan.otf">MFYueYuan</option>
+		<select>
+		<input type="text" value="白色(暂未开放其他颜色)" readonly="readonly" class="write"/>
+		<button class="fonts_color">点击输入文字</button>
+		<div class="show">
+			<textarea cloae="5" rows="5" class="text" placeholder="输入br换行"></textarea>
+		<input type="text" placeholder="输入行数" class="row">
+		</div>
+		
+	</div>
+<div class="box">
+	<a href="##" class="close">X</a>
+	<img src="" class="box_img">
+	<a class="put" onclick="btn()">下载</a>
 </div>
-<script src="js/jquery.min.js "></script>
-<script src="js/jquery.Jcrop.js"></script>
-<script src="js/file.js"></script>
+<div class="content">
+	<div class="component">
+
+		<div class="overlay">
+			<div class="overlay-inner"></div>
+		</div>
+		<img  class="resize-image" id="other"/>
+		<div class="file_none">
+			<a href="##">上传</a>		
+			<input type="file" multiple = "multiple" value="上传" id="img" onclick="file()" class="js-data">
+		</div>
+
+		
+		<button class="btn-crop js-crop">截图<img class="icon-crop" src="img/crop.svg"></button>
+		<div class="button a-tip">
+			<button id="anim1 ">644*280px</button>
+			<button id="anim2">600*248px</button>
+			<button id="anim3">190*190px</button>
+			<button id="anim4">220*220px</button>
+		</div>
+		
+
+	</div>
+	<div style="text-align:center;clear:both;">
+	</div>
+</div>
+<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/component.js"></script>
 </body>
 </html>
-

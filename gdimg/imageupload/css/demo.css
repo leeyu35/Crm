@@ -1,0 +1,149 @@
+
+*, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
+.clearfix:before, .clearfix:after { content: ''; display: table; }
+.clearfix:after { clear: both; }
+
+body {
+	background: #ffffff;
+	color: #EBF7F8;
+	font-weight: 500;
+	font-size: 1em;
+	font-family: 'Raleway', Arial, sans-serif;
+	position: relative;
+}
+a {
+	color: #D0E0EB;
+	text-decoration: none;
+	outline: none;
+}
+
+a:hover, a:focus {
+	color: #fff;
+}
+
+.a-tip{
+	margin:20px 0 30px 180px;
+	position: relative;
+}
+.show{
+	display: none;
+	position: absolute;
+	top: -5px;
+	left: 800px;
+	z-index: 9999;
+}
+.box{
+	width: 300px;
+	height: 300px;
+	border: 1px solid red;
+	position: absolute;
+	top:100px;
+	right:100px;
+	background: url(../img/gridme.png) repeat center center;
+	display: none;
+}
+.box_img{
+	display: block;
+	margin:0 auto;
+}
+.close{
+	position: absolute;
+	top:0;
+	right:0;
+	color: orange;
+	font-size:25px;
+}
+.put{
+	width:50px;
+	height:30px;
+	text-align: center;
+	line-height:30px;
+	background-color: rgb(222,60,80);
+	border-radius: 5px;
+	border:none;
+	outline: none;
+	position: absolute;
+	left:50%;
+	right:50%;
+	bottom:0;
+	margin-left:-25px;
+	color: white;
+}
+.content {
+	max-width: 1290px;
+	padding: 0 1em;
+	margin:0 10px 0 0;
+	text-align: center;
+}
+.component {
+	background: url(../img/gridme.png) repeat center center;
+	padding: 4em;
+	height: 500px;
+	border: 3px solid #49708A;
+	max-width: 901px;
+	overflow: hidden;
+	position: relative;
+}
+.js-data{
+	width: 100px;
+	position: absolute;
+	padding: 6px 10px;
+	 background-color: rgb(222,60,80);
+    border: none;
+    border-radius: 5px;
+    color: #FFF;
+    bottom: 5px;
+    left: 5px;
+}
+.file_none{
+	position: absolute;
+	bottom: 5px;
+    left: 5px;
+    width: 100px;
+    height: 31px;
+    text-align: center;
+    line-height: 31px;
+	border-radius: 5px;
+	background-color: rgb(222,60,80);
+}
+.file_none a{
+	color:#fff;
+}
+.file_none a:link {
+text-decoration: none;
+color: #F60;
+}
+.file_none a:visited {
+text-decoration: none;
+}
+.file_none a:hover {
+text-decoration: none;
+}
+.file_none a:active {
+text-decoration: none;
+font-size: 14px;
+font-weight: bold;
+}
+#img{
+	width: 100%;
+	opacity:0;
+}
+.button{
+	position: absolute;
+    vertical-align: bottom;
+    bottom: -5px;
+	right: 260px;
+    z-index: 999;
+   
+}
+.button button{
+	padding: 6px 10px;
+	 background-color: rgb(222,60,80);
+    border: none;
+    border-radius: 5px;
+    color: #FFF;
+}
+.codrops-header {
+	padding: 0 0 2em;
+	letter-spacing: -1px;
+}
