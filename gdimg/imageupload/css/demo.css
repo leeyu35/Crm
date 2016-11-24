@@ -16,58 +16,26 @@ a {
 	text-decoration: none;
 	outline: none;
 }
-
-a:hover, a:focus {
-	color: #fff;
-}
-
-.a-tip{
-	margin:20px 0 30px 180px;
-	position: relative;
-}
-.show{
-	display: none;
-	position: absolute;
-	top: -5px;
-	left: 800px;
-	z-index: 9999;
-}
-.box{
-	width: 300px;
-	height: 300px;
-	border: 1px solid red;
-	position: absolute;
-	top:100px;
-	right:100px;
-	background: url(../img/gridme.png) repeat center center;
-	display: none;
-}
-.box_img{
-	display: block;
+.header{
+	width:900px;
 	margin:0 auto;
 }
-.close{
-	position: absolute;
-	top:0;
-	right:0;
-	color: orange;
-	font-size:25px;
-}
-.put{
-	width:50px;
-	height:30px;
+.header h1{
+	color: black;
 	text-align: center;
-	line-height:30px;
-	background-color: rgb(222,60,80);
-	border-radius: 5px;
-	border:none;
-	outline: none;
+	font-size: 35px;
+}
+.look_logo{
+	width:80px;
+	height:80px;
 	position: absolute;
-	left:50%;
-	right:50%;
-	bottom:0;
-	margin-left:-25px;
-	color: white;
+	top:0px;
+	left:23%;
+	display: none;
+}
+#logo_img{
+	width:80px;
+	height:80px;
 }
 .content {
 	max-width: 1290px;
@@ -78,11 +46,58 @@ a:hover, a:focus {
 .component {
 	background: url(../img/gridme.png) repeat center center;
 	padding: 4em;
-	height: 500px;
+	height: 800px;
 	border: 3px solid #49708A;
-	max-width: 901px;
+	width:900px;
 	overflow: hidden;
 	position: relative;
+}
+.component_file_box{
+	position: absolute;
+	top:10px;
+	left:5px;
+}
+.hide{
+	display: none;
+}
+.file_box{
+	width: 100px;
+	height: 31px;
+	text-align: center;
+	line-height: 31px;
+	display: inline-block;
+	border-radius: 5px;
+	background-color: rgb(222,60,80);
+	position: relative;
+	margin:-100px 0 0 0 ;
+}
+#logo{
+	width: 100px;
+	height: 31px;
+	position: absolute;
+	right:0;
+	left:0;
+	margin-right:20px;
+	opacity:0;
+}
+.file_box a{
+	color:#fff;
+}
+.all{
+	width: 100px;
+	height: 31px;
+	line-height: 31px;
+	text-align: center;
+	background-color: rgb(222,60,80);
+	margin:10px 0 10px 0;
+	border-radius: 5px;
+}
+#set,#font,#color,#fonts{
+	width: 100px;
+	background-color: rgb(222,60,80);
+	border:none;
+	color: white;
+	outline: none;
 }
 .js-data{
 	width: 100px;
@@ -131,7 +146,7 @@ font-weight: bold;
 .button{
 	position: absolute;
     vertical-align: bottom;
-    bottom: -5px;
+    bottom: 20px;
 	right: 260px;
     z-index: 999;
    
@@ -146,4 +161,63 @@ font-weight: bold;
 .codrops-header {
 	padding: 0 0 2em;
 	letter-spacing: -1px;
+}
+/*切图后效果展示*/
+.box{
+	width: 300px;
+	height: 300px;
+	border: 3px solid #49708A;
+	position: absolute;
+	top:100px;
+	right:100px;
+	background: url(../img/gridme.png) repeat center center;
+	display: none;
+	z-index: 9999;
+}
+.box .box_img{
+	display: block;
+	margin:10px auto 0;
+}
+.box .close{
+	position: absolute;
+	top:0;
+	right:0;
+	color: orange;
+	font-size:25px;
+}
+.box .look{
+	width:80px;
+	height:30px;
+	text-align: center;
+	line-height:30px;
+	background-color: rgb(222,60,80);
+	border-radius: 5px;
+	border:none;
+	outline: none;
+	color: white;
+	position: absolute;
+	bottom:0;
+	left:0;
+}
+.box .put{
+	width:80px;
+	height:30px;
+	text-align: center;
+	line-height:30px;
+	background-color: rgb(222,60,80);
+	border-radius: 5px;
+	border:none;
+	outline: none;
+	color: white;
+	position: absolute;
+	bottom:0;
+	right:0;
+}
+/*输入文字隐藏*/
+.show{
+	display: none;
+	position: absolute;
+	top: 30%;
+	left:  75%;
+	z-index: 9999;
 }

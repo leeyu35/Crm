@@ -1,4 +1,4 @@
-
+var logoURL = "";
 var resizeableImage = function(image_target) {
   var $container,
       orig_src = new Image(),
@@ -21,7 +21,7 @@ var resizeableImage = function(image_target) {
         .after('<span class="resize-handle resize-handle-sw"></span>');
     $container =  $(image_target).parent('.resize-container');
 
-    // Add events
+
     $container.on('mousedown touchstart', '.resize-handle', startResize);
     $container.on('mousedown touchstart', 'img', startMoving);
     $('.js-crop').on('click', crop);
@@ -92,7 +92,7 @@ var resizeableImage = function(image_target) {
       }
     }
 
-    // Optionally maintain aspect ratio
+
     if(constrain || e.shiftKey){
       height = width / orig_src.width * orig_src.height;
     }
@@ -210,7 +210,7 @@ $(".a-tip").on("click","button",function(){
   switch (b){
     case "644*280px":{
       $(".overlay").css({width:644,height:280,marginLeft:0,left:140});
-      $(".box").css({width:700,height:300});
+      $(".box").css({width:700,height:330});
     }
       break;
     case "600*248px" :{
@@ -232,6 +232,7 @@ $(".a-tip").on("click","button",function(){
 })
 
 function btn(){
+  $(".box_img").attr({src:"./img/ICBCLoading (1).gif"})
     //获取图片地址
     var urlData = $(".box_img").attr("src");//图片信息
       // console.log(urlData)
@@ -239,21 +240,25 @@ function btn(){
     console.log(text)
     var row = $(".row").val();//行数
     console.log(row)
-    var font_size = $("#set option:selected").val();//字体大小
+    var set = $("#set option:selected").val();//字体
     console.log(set)
     var font = $("#font option:selected").val();//字体样式
-  console.log(font)
+  console.log(font);
+  console.log(logoURL);
+
      $.ajax({
        type:'POST',
-       url: 'http://c.lzad.cc/Admin/Gdimg/upload_ajax.html',
+
+       url: 'http://http://192.168.199.153//Admin/Gdimg/upload_ajax.html',
        data: {
          file: urlData,
-         font_size: font_size,
+         font_size: set,
          string:text,
          line:row,
          color:"255,255,255",
+         font_size:14,
          font:font,
-         logo:""
+           logo:logoURL
        },
        async: true,
        dataType: 'json',
@@ -266,13 +271,76 @@ function btn(){
          }
        },
        error: function(err){
-
          alert('网络故障');
-
        }
 
      });
 }
-$(".fonts_color").click(function(){
+$("#fonts").click(function(){
   $(".show").fadeIn();
 })
+//点击上传logo
+function logo(){
+  $(".look_logo").show();
+  document.getElementById('logo').onchange = function(){
+    //获取上传的照片
+    var resultFile = document.getElementById("logo").files[0];
+    var reader = new FileReader();
+    //调用这个方法，并且将获取到的文件传入
+    reader.readAsDataURL(resultFile);
+    //要想显示这个照片 必须要在这边调用它的onload方法
+    reader.onload = function (e) {
+      logoURL = this.result;
+      $('#logo_img').attr('src',logoURL);
+    };
+  }
+}
+
+//点击拖动
+$(document).ready(function(){
+  var $div = $(".box");
+  /* 绑定鼠标左键按住事件 */
+  $div.bind("mousedown",function(event){
+    /* 获取需要拖动节点的坐标 */
+    var offset_x = $(this)[0].offsetLeft;//x坐标
+    var offset_y = $(this)[0].offsetTop;//y坐标
+    /* 获取当前鼠标的坐标 */
+    var mouse_x = event.pageX;
+    var mouse_y = event.pageY;
+    /* 绑定拖动事件 */
+    /* 由于拖动时，可能鼠标会移出元素，所以应该使用全局（document）元素 */
+    $(document).bind("mousemove",function(ev){
+      /* 计算鼠标移动了的位置 */
+      var _x = ev.pageX - mouse_x;
+      var _y = ev.pageY - mouse_y;
+      /* 设置移动后的元素坐标 */
+      var now_x = (offset_x + _x ) + "px";
+      var now_y = (offset_y + _y ) + "px";
+      /* 改变目标元素的位置 */
+      $div.css({
+        top:now_y,
+        left:now_x
+      });
+    });
+  });
+  /* 当鼠标左键松开，接触事件绑定 */
+  $(document).bind("mouseup",function(){
+    $(this).unbind("mousemove");
+  });
+})
+
+//点击工具显示
+function tool(){
+  var a = 1;
+  $(".tool").click(function(){
+    if(a == 1){
+      $(".hide").show(500);
+      a = 2;
+    }else{
+      $(".hide").hide(500);
+      a = 1;
+    }
+
+  })
+}
+tool()
