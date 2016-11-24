@@ -12,7 +12,7 @@ class GdimgController extends Controller
 {
 
     function index(){
-        echo $this->webtoimage('http://www.jb51.net/images/logo.gif');
+       // echo $this->webtoimage('http://www.jb51.net/images/logo.gif');
         $this->display();
     }
     function upload(){
