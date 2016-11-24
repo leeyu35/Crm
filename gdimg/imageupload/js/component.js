@@ -245,7 +245,7 @@ function btn(){
   console.log(font)
      $.ajax({
        type:'POST',
-       url: 'http://http://192.168.199.153//Admin/Gdimg/upload_ajax.html',
+       url: 'http://c.lzad.cc/Admin/Gdimg/upload_ajax.html',
        data: {
          file: urlData,
          font_size: font_size,
