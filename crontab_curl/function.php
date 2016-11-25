@@ -5,6 +5,8 @@
  * Date: 2016/11/25
  * Time: 9:55
  */
+
+date_default_timezone_set('PRC');
 //记录curl 接口 操作
 function json_record($str){
     //记录日志
