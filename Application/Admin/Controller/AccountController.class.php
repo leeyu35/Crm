@@ -335,28 +335,8 @@ class AccountController extends CommonController
 
     }
     public function semindex(){
-        $accountsem_list=hjd_curl('http://www.yushanapp.com/api/get/customer/c03d80f07c144cdab5e881866b92ad9f');
-
-        //$accountsem_list['customers']=array_slice($accountsem_list['customers'], 10,10);
-       //dump($accountsem_list);
-        foreach ($accountsem_list['customers'] as $key=>$val)
-        {
-            $array_slist[$key]['l_app']=$val['username'];
-            $array_slist[$key]['sem']=$val['sem'];
-            $array_slist[$key]['appid']=$val['appid'];
-        }
-        foreach ($array_slist as $key=>$val)
-        {
-
-           
-            $accountsem_one=hjd_curl('http://101.200.130.178:5281/account/getweekcost?appid='.$val['appid']);
-            $array_slist[$key]['data']=$accountsem_one['data'];
-
-
-           // $array_slist[$key]['data']=$accountsem_one['data'];
-        }
-        dump($array_slist);
-        exit;
+        dump(S('account_data'));
+        exit();
         $Refund=M("Account");
         //搜索条件
         $type=I('get.searchtype');
@@ -392,7 +372,6 @@ class AccountController extends CommonController
         {
             $time_start=strtotime($time_start);
             $time_end=strtotime($time_end);
-
             $where.=" and a.ctime > $time_start and a.ctime < $time_end";
             $this->time_start=I('get.time_start');
             $this->time_end=I('get.time_end');
@@ -450,4 +429,6 @@ class AccountController extends CommonController
 
 
     }
+
+
 }
