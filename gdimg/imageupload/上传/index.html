@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>图片上传</title>
+
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/demo.css" />
+
+	<link rel="stylesheet" type="text/css" href="css/component.css" />
+</head>
+<body>
+<div class="header">
+	<h1>凌众</h1>
+	<!--显示上传logo-->
+	<div class="look_logo">
+		<img id="logo_img">
+	</div>
+<div class="content">
+	<div class="component">
+		<div class="component_file_box">
+			<div class = "tool all">工具</div>
+			<div class="hide">
+				<div class="file_box ">
+					<a>上传logo</a>
+					<input type="file"  value="" id="logo" onclick="logo()" >
+				</div>
+
+				<div class="set_fontsize all">
+					<select id="set">
+						<option value ="14">14号字体</option>
+						<option value ="15">15号字体</option>
+						<option value="16">16号字体</option>
+						<option value="17">17号字体</option>
+						<option value ="18">18号字体</option>
+						<option value ="19">19号字体</option>
+						<option value="21">21号字体</option>
+						<option value="22">22号字体</option>
+						<option value ="23">23号字体</option>
+						<option value ="25">25号字体</option>
+						<option value="26">26号字体</option>
+						<option value="27">27号字体</option>
+						<option value ="28">28号字体</option>
+						<option value ="29">29号字体</option>
+						<option value="30">30号字体</option>
+						<option value="32">32号字体</option>
+					</select>
+				</div>
+				<div class="set_font all">
+					<select id="font" name="">
+						<option value="FZLTZH.TTF">方正兰亭中黑</option>
+						<option value="FZZYJT.ttf">方正准圆简体</option>
+						<option value="FZCSK.ttf">FZCSK</option>
+						<option value="MFLangQian.otf">MFLangQian</option>
+						<option value="MFLiHei.otf">MFLiHei</option>
+						<option value="MFYueYuan.otf">MFYueYuan</option>
+					</select>
+				</div>
+				<div class="set_color all">
+					<input type="text" value="白色(暂未开放其他颜色)" readonly="readonly" id="color"/>
+				</div>
+				<div class=" inputText all">
+					<button id="fonts">输入文字</button>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="overlay">
+			<div class="overlay-inner"></div>
+		</div>
+		<img  class="resize-image" id="other"/>
+		<div class="file_none">
+			<a href="##">上传</a>
+			<input type="file" multiple = "multiple" value="上传" id="img" onclick="file()" class="js-data">
+		</div>
+		<button class="btn-crop js-crop">截图<img class="icon-crop" src="img/crop.svg"></button>
+		<div class="button a-tip">
+			<button id="anim1 ">644*280px</button>
+			<button id="anim2">600*248px</button>
+			<button id="anim3">190*190px</button>
+			<button id="anim4">220*220px</button>
+		</div>
+	</div>
+	<div style="text-align:center;clear:both;"></div>
+</div>
+
+</div>
+<!--隐藏切图-->
+<div class="box">
+	<a href="##" class="close">X</a>
+	<img src="" class="box_img">
+	<a href ="##" class="look" onclick="btn()">查看效果</a>
+	<a href="" target="_blank" download="w3logo" class="put" >下载图片</a>
+</div>
+<!--隐藏输入框-->
+<div class="show">
+	<textarea  class="text" placeholder="输入br换行"></textarea>
+	<input type="text" placeholder="输入行数" class="row">
+</div>
+
+<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/component.js"></script>
+</body>
+</html>
