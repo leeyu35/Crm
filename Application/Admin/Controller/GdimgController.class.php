@@ -161,7 +161,7 @@ class GdimgController extends Controller
         //$image->open($logo)->thumb($px50, $pxheight,\Think\Image::IMAGE_THUMB_FIXED)->save('./thumb.png');
         if($logo!='')
         {
-            $image->open($imgname)->water($logo,3,80)->save($imgname);
+            $image->open($imgname)->water($logo,1,80)->save($imgname);
         }
 
 
