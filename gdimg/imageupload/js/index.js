@@ -368,8 +368,6 @@ function btn(){
     // console.log(urlData)
     var text = $(".text").val();//上传文字
     console.log(text)
-    var row = $(".line_ul_text").val();//行数
-    console.log(row)
     var font_size = $("#set option:selected").val();//字号
     console.log(font_size)
     var font = $("#font option:selected").val();//字体样式
@@ -382,7 +380,7 @@ function btn(){
        data: {
          file: urlData,
          string:text,
-         line:row,
+         line:1,
          font_size: font_size,
          color:"255,255,255",
          font:font,
