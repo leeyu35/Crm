@@ -104,6 +104,9 @@ class GdimgController extends Controller
     }
 
     function img_save($img,$str,$font,$fonpx,$r=255,$g=255,$b=255,$line,$logo=''){
+        $strarrat_line=count(explode("\n",$str));//获取文字行数
+
+
         //主图片
         $images=$img;
 
@@ -121,6 +124,7 @@ class GdimgController extends Controller
 //获取主图宽度高度
         list($width, $height, $type, $attr) = getimagesize($images);
 
+        $line=$strarrat_line;
 
 //背景图片高度
         $bghigh=$fontpx*3;
@@ -157,7 +161,7 @@ class GdimgController extends Controller
         //$image->open($logo)->thumb($px50, $pxheight,\Think\Image::IMAGE_THUMB_FIXED)->save('./thumb.png');
         if($logo!='')
         {
-            $image->open($imgname)->water($logo,3)->save($imgname);
+            $image->open($imgname)->water($logo,3,80)->save($imgname);
         }
 
 
