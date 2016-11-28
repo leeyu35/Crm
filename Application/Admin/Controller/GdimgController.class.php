@@ -127,7 +127,7 @@ class GdimgController extends Controller
         $line=$strarrat_line;
 
 //背景图片高度
-        $bghigh=$fontpx*3;
+        $bghigh=$fontpx*2;
 //背景色图片
         $im2 = imagecreatetruecolor($width,$bghigh);
 
@@ -138,20 +138,23 @@ class GdimgController extends Controller
         $txt_width=$txt_len[2];//获得字符串长度;
         $left_pa=($width/2)-($txt_width/2);//获取左移像素
         */
-        imagecopymerge ($im, $im2, 0, $height-($fontpx*(3+$line)), 0, 0, $width,$fontpx*(3+$line), 50);
+        imagecopymerge ($im, $im2, 0, $height-($fontpx*(2+$line)), 0, 0, $width,$fontpx*(2+$line), 50);
 //文字颜色
         $im_str_color = imagecolorallocate($im,$r,$g,$b);
 //imagestring($im,3, 150, $width-30, $string, $im_str_color);//写入文字
 //写入文字
         //高度居中
-        $boo_pa=($fontpx*(3+$line)/2)-($fontpx*$line/2);//获取左移像素
-        imagettftext($im, $fonsz,0, 10, $height-($fontpx*$line)+10-$boo_pa,$im_str_color,$font,$string);
+        $boo_pa=($fontpx*(2+$line)/2)-($fontpx*$line/2);//获取左移像素
+        imagettftext($im, $fonsz,0, 10, $height-($fontpx*$line)+$fontpx-$boo_pa,$im_str_color,$font,$string);
 
         $rand=rand(1000,9999);
         $imgname='./gdimg/upload/'.time().$rand.'.jpg';
 
-
-
+        /*
+        Header("Content-type: image/PNG");
+        imagejpeg($im);
+        exit;
+        */
         imagejpeg($im,$imgname);
         imagedestroy($im);
         $image = new \Think\Image();
@@ -324,7 +327,7 @@ class GdimgController extends Controller
         $img = file_get_contents($rul);
         $rand=rand(1000,9999);
         $imgname='./gdimg/upload/'.time().$rand.'.jpg';
-# 网络显示图片扩展名不是必须的，只不过在windows中无法识别
+        # 网络显示图片扩展名不是必须的，只不过在windows中无法识别
         file_put_contents($imgname,$img);
 
         return $imgname;
