@@ -1,4 +1,4 @@
-div,html,body,div,a,p,h1,h2,h3,h4,h5,ul,ol,li,input,span{
+lodiv,html,body,div,a,p,h1,h2,h3,h4,h5,ul,ol,li,input,span{
     margin:0;
     padding:0;
     box-sizing: border-box;
@@ -194,8 +194,8 @@ ul,ol,li{
 }
 .logo_img{
     position: absolute;
-    right: 0;
     top: 0;
+    left: 0;
 }
 /*=======================脚部================*/
 .foot{
