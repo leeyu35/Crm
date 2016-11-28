@@ -206,19 +206,34 @@ $(".button").on("click","button",function(){
   var b = $(this).text();
   switch (b){
     case "644*280px":{
-      $(".overlay").css({width:644,height:280,marginLeft:0,left:140});
+      $(".overlay").css({width:644,height:280});
     }
       break;
     case "600*248px" :{
-      $(".overlay").css({width:600,height:248,marginLeft:0,left:190});
+      $(".overlay").css({width:600,height:248});
     }
       break;
     case "220*220px" :{
-      $(".overlay").css({width:220,height:220,marginLeft:390,left:0});
+      $(".overlay").css({width:220,height:220});
     }
       break;
     case "190*190px" :{
-      $(".overlay").css({width:190,height:190,marginLeft:390,left:0});
+      $(".overlay").css({width:190,height:190});
+    }
+      break;
+      case "自定义" :{
+             $(".btn_show").hide();
+             $(".but_custom").show();
+             $(this).text("确定") ;
+    }
+      break;
+       case "确定" :{
+             $(".btn_show").show();
+             $(".but_custom").hide();
+             var height = $(".but_height").val();
+             var width = $(".but_width").val();
+             $(".overlay").css({width:width,height:height});
+             $(this).text("自定义") ;
     }
       break;
   }
@@ -353,8 +368,6 @@ function btn(){
     // console.log(urlData)
     var text = $(".text").val();//上传文字
     console.log(text)
-    var row = $(".line_ul_text").val();//行数
-    console.log(row)
     var font_size = $("#set option:selected").val();//字号
     console.log(font_size)
     var font = $("#font option:selected").val();//字体样式
@@ -367,7 +380,7 @@ function btn(){
        data: {
          file: urlData,
          string:text,
-         line:row,
+         line:1,
          font_size: font_size,
          color:"255,255,255",
          font:font,

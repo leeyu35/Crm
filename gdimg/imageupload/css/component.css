@@ -52,10 +52,11 @@
 
 .overlay {
 	position: absolute;
-	left: 50%;
-	top: 40%;
-	margin-left: -100px;
-	margin-top: -100px;
+	left: 0;
+	top: 0;
+    right: 0;
+    bottom: 0;
+	margin: auto;
 	z-index: 999;
 	width: 220px;
 	height: 220px;
@@ -67,21 +68,4 @@
     position: absolute;
     top: 0px;
     left: 0px;
-}
-.btn-crop {
-	position: absolute;
-	vertical-align: bottom;
-	right: 5px;
-	bottom: 5px;
-	padding: 6px 10px;
-	z-index: 999;
-	background-color: rgb(222,60,80);
-	border: none;
-	border-radius: 5px;
-	color: #FFF;
-}
-
-.btn-crop img {
-	vertical-align: middle;
-	margin-left: 8px;
 }
