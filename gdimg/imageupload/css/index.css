@@ -127,7 +127,7 @@ ul,ol,li{
 }
 /*=====右边栏====*/
 .content_right{
-    width:1018px;
+    width:1020px;
     height:566px;
     float: left;
     border:2px solid #dddddd;
@@ -154,6 +154,8 @@ ul,ol,li{
     bottom: 5px;
     right: 260px;
     z-index: 999;
+    color: rgb(222,60,80);
+    font-size: 18px;
    
 }
 .button button{
@@ -162,6 +164,15 @@ ul,ol,li{
     border: none;
     border-radius: 5px;
     color: #FFF;
+}
+.button span,.button input{
+    display: none;
+}
+.button input {
+    width: 80px;
+    outline: none;
+    border: 1px solid rgb(222,60,80);
+    margin-right: 30px;
 }
 .codrops-header {
     padding: 0 0 2em;
@@ -180,6 +191,11 @@ ul,ol,li{
     height: 10px;
     margin:0 auto;
     background: white;
+}
+.logo_img{
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 /*=======================脚部================*/
 .foot{
