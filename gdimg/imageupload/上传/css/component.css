@@ -53,20 +53,15 @@
 .overlay {
 	position: absolute;
 	left: 50%;
-	top: 40%;
+	top: 50%;
 	margin-left: -100px;
 	margin-top: -100px;
 	z-index: 999;
-	width: 220px;
-	height: 220px;
+	width: 200px;
+	height: 200px;
     border: solid 2px rgba(222,60,80,.9);
 	box-sizing: content-box;
 	pointer-events: none;
-}
-.overlay_logo{
-    position: absolute;
-    top: 0px;
-    left: 0px;
 }
 .btn-crop {
 	position: absolute;

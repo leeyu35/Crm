@@ -1,106 +1,151 @@
-<!DOCTYPE html>
-<html lang="en" class="no-js">
+<!doctype html>
+<html lang="en">
 <head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>图片上传</title>
-
-	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
-	<link rel="stylesheet" type="text/css" href="css/demo.css" />
-
-	<link rel="stylesheet" type="text/css" href="css/component.css" />
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/component.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
 </head>
 <body>
-<div class="header">
-	<h1>凌众</h1>
-	<!--显示上传logo-->
-	<div class="look_logo">
-		<img id="logo_img">
-	</div>
-<div class="content">
-	<div class="component">
-		<div class="component_file_box">
-			<div class = "tool all">工具</div>
-			<div class="hide">
-				<div class="file_box ">
-					<a>上传logo</a>
-					<input type="file"  value="" id="logo" onclick="logo()" >
-				</div>
-
-				<div class="set_fontsize all">
-					<select id="set">
-						<option value ="14">14号字体</option>
-						<option value ="15">15号字体</option>
-						<option value="16">16号字体</option>
-						<option value="17">17号字体</option>
-						<option value ="18">18号字体</option>
-						<option value ="19">19号字体</option>
-						<option value="21">21号字体</option>
-						<option value="22">22号字体</option>
-						<option value ="23">23号字体</option>
-						<option value ="25">25号字体</option>
-						<option value="26">26号字体</option>
-						<option value="27">27号字体</option>
-						<option value ="28">28号字体</option>
-						<option value ="29">29号字体</option>
-						<option value="30">30号字体</option>
-						<option value="32">32号字体</option>
-					</select>
-				</div>
-				<div class="set_font all">
-					<select id="font" name="">
-						<option value="FZLTZH.TTF">方正兰亭中黑</option>
-						<option value="FZZYJT.ttf">方正准圆简体</option>
-						<option value="FZCSK.ttf">FZCSK</option>
-						<option value="MFLangQian.otf">MFLangQian</option>
-						<option value="MFLiHei.otf">MFLiHei</option>
-						<option value="MFYueYuan.otf">MFYueYuan</option>
-					</select>
-				</div>
-				<div class="set_color all">
-					<input type="text" value="白色(暂未开放其他颜色)" readonly="readonly" id="color"/>
-				</div>
-				<div class=" inputText all">
-					<button id="fonts">输入文字</button>
-				</div>
-			</div>
-		</div>
-
-
-		<div class="overlay">
-			<div class="overlay-inner"></div>
-		</div>
-		<img  class="resize-image" id="other"/>
-		<div class="file_none">
-			<a href="##">上传</a>
-			<input type="file" multiple = "multiple" value="上传" id="img" onclick="file()" class="js-data">
-		</div>
-		<button class="btn-crop js-crop">截图<img class="icon-crop" src="img/crop.svg"></button>
-		<div class="button a-tip">
-			<button id="anim1 ">644*280px</button>
-			<button id="anim2">600*248px</button>
-			<button id="anim3">190*190px</button>
-			<button id="anim4">220*220px</button>
-		</div>
-	</div>
-	<div style="text-align:center;clear:both;"></div>
-</div>
-
-</div>
-<!--隐藏切图-->
 <div class="box">
-	<a href="##" class="close">X</a>
-	<img src="" class="box_img">
-	<a href ="##" class="look" onclick="btn()">查看效果</a>
-	<a href="" target="_blank" download="w3logo" class="put" >下载图片</a>
+    <div class="header">
+        <h1>凌众广告</h1>
+        <div class="time"></div>
+    </div>
+    <div class="content_box">
+        <div class="content_title">
+            <p>裁剪工具</p>
+        </div>
+        <div class="content_canver">
+            <div class="content_left">
+                <div class="content_left_center">
+                    <div class="select">
+                        <div class="font" style="color:black;border-bottom:none;">字符</div>
+                        <div class="color">颜色</div>
+                        <div class="line">行数</div>
+                    </div>
+                    <div class="content_left_center_line"></div>
+                    <!-- 字体样式 -->
+                    <ul class="form font_ul">
+                         <li>
+                         <p>字号</p>
+
+                            <select id="set">
+                                <option value ="14">14号字体</option>
+                                <option value ="15">15号字体</option>
+                                <option value="16">16号字体</option>
+                                <option value="17">17号字体</option>
+                                <option value ="18">18号字体</option>
+                                <option value ="19">19号字体</option>
+                                <option value="21">21号字体</option>
+                                <option value="22">22号字体</option>
+                                <option value ="23">23号字体</option>
+                                <option value ="25">25号字体</option>
+                                <option value="26">26号字体</option>
+                                <option value="27">27号字体</option>
+                                <option value ="28">28号字体</option>
+                                <option value ="29">29号字体</option>
+                                <option value="30">30号字体</option>
+                                <option value="32">32号字体</option>
+                            </select>
+                          </li>
+                        
+                         <li>
+                          <p>字体</p>
+                            <select id="font" name="">
+                                <option value="FZLTZH.TTF">方正兰亭中黑</option>
+                                <option value="FZZYJT.ttf">方正准圆简体</option>
+                                <option value="FZCSK.ttf">FZCSK</option>
+                                <option value="MFLangQian.otf">MFLangQian</option>
+                                <option value="MFLiHei.otf">MFLiHei</option>
+                                <option value="MFYueYuan.otf">MFYueYuan</option>
+                           </select>
+
+                         </li>
+                    </ul>
+                    <!-- 颜色 -->
+                    <ul class="form color_ul">
+                        <li>
+                          <p>颜色</p>
+                            <select id="font" name="">
+                                <option value="FZLTZH.TTF">白色</option>
+                           </select>
+
+                         </li>
+                    </ul>
+                    <ul class="form line_ul">
+                        <li>
+                          <p>行数</p>
+                            <input type="text" class="line_ul_text" placeholder="请输入行数" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();"/>
+
+                         </li>
+                    </ul>
+                </div>
+            </div>
+        <div class="content_right">
+            <div class="content">
+                <div class="component">
+                    <div class="overlay">
+                        <div class="overlay-inner"></div>
+                        <div class="overlay_logo">
+                            <img class="logo_img" >
+                        </div>
+                    </div>
+                    <div class="resize-container">
+                    <!-- 左上角 -->
+                        <span class="resize-handle resize-handle-nw"></span>
+                        <!-- 右上角 -->
+                        <span class="resize-handle resize-handle-ne"></span>
+                        <img  class="resize-image" id="other"/>
+                        <!-- 左下角 -->
+                        <span class="resize-handle resize-handle-se"></span>
+                        <!-- 右下角 -->
+                        <span class="resize-handle resize-handle-sw"></span>
+                    </div>
+                    <textarea cloae="5" rows="5" class="text" placeholder="输入br换行"></textarea>
+                    <div class="button">
+                        <button id="anim1 ">644*280px</button>
+                        <button id="anim2">600*248px</button>
+                        <button id="anim3">190*190px</button>
+                        <button id="anim4">220*220px</button>
+                    </div>
+                    <button class="btn-crop js-crop">截图<img class="icon-crop" src="img/crop.svg"></button>
+                </div>
+            <div style="text-align:center;clear:both;"></div>
+        </div>
+            <div class="right_bottom"></div>
+        </div>
+        </div>
+    </div>
+
+    </div>
+    <div class="foot">
+    <div class="foot_null"></div>
+    <div class="foot_infor">
+         <ul>
+            <li class="file_none"><a href="##">添加图片</a>     
+            <input type="file" multiple = "multiple" value="上传" id="img" onclick="file()"></li>
+            <li class="file_none">
+            <a>上传logo</a>
+                    <input type="file"  value="" id="logo" onclick="logo()" >
+            </li>
+            <li ><a href="##" class="add_text">添加文字</a></li>
+            <li ><a href="##" onclick="btn()">查看效果</a></li>
+            <li class="line_none download"><a target="_blank" download="w3logo" class="put" >下载图片</a></li>
+        </ul>
+    </div>
+       
+    </div>
 </div>
-<!--隐藏输入框-->
-<div class="show">
-	<textarea cloae="5" rows="5" class="text" placeholder="输入br换行"></textarea>
-	<input type="text" placeholder="输入行数" class="row">
-</div>
+<!-- 数据返回图片 -->
+<div class="new_img">
+    <img  class="box_img">
+    <a href="##" class="close">X</a>
+<div>
+    
+<script type="text/javascript" src="js/时间.js"></script>
 <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="js/component.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
 </body>
 </html>
