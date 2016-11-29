@@ -714,8 +714,11 @@ class RenewController extends  CommonController
             $list2[$key]['contract_no']=$val['contract_no'];
             //appname
             $list2[$key]['appname']=$val['appname'];
+            //账户信息
+            $account=account($val['account']);
+            $list2[$key]['account']=$account['a_users'];
             //账户名称
-            $list2[$key]['account']=$val['account'];
+           // $list2[$key]['account']=$val['account'];
             //合同金额
             $list2[$key]['contract_money']=num_format($val['contract_money']);
             //显示百度币
