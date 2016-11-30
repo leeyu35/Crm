@@ -358,7 +358,7 @@ class AccountController extends CommonController
     public function semindex(){
         $dataarr=S('account_data');
 
-       // dump($dataarr);
+       dump($dataarr);
         foreach ($dataarr as $key=>$val)
         {
             //echo $val['account'].'========'.$val["l_app"];
