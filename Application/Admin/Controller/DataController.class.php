@@ -77,7 +77,7 @@ class DataController extends Controller
             $enddate=date("Y-m-d",strtotime("+1 week -1 day",$start));
             if($enddate > date("Y-m-d"))
             {
-                $enddate=date("Y-m-d");
+                $enddate=date("Y-m-d",strtotime("-1 day"));
             }
             $array[$i]['end']=$enddate;//结束日期
 
