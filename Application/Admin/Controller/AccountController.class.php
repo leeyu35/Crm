@@ -357,6 +357,21 @@ class AccountController extends CommonController
     }
     public function semindex(){
         $dataarr=S('account_data');
+        if(I('get.to')!='')
+        {
+            $to=I('get.to');
+        }else
+        {
+            $to=8;
+        }
+        $this->to=$to;
+
+        //dump($dataarr);
+        //$a=array("a"=>"red","b"=>"green","c"=>"blue","sem"=>"李金茹","data"=>array('123'));
+
+
+
+
 
         foreach ($dataarr as $key=>$val)
         {
@@ -374,6 +389,39 @@ class AccountController extends CommonController
                 }
             }
         }
+
+        //搜索条件
+        $type=I('get.searchtype');
+
+        if(!empty($type) and I('get.search_text')!='')
+        {
+            unset($serarray);
+            if($type=='advertiser')
+            {
+                foreach ($dataarr as $key=>$val)
+                {
+
+                    if(strpos($val['l_app'],I('get.search_text'))!==false)
+                    {
+                        $serarray[]=$dataarr[$key];
+                    }
+                }
+            }
+            if ($type=='gongsi') {
+                foreach ($dataarr as $key=>$val)
+                {
+
+                    if(strpos($val['advertiser'],I('get.search_text'))!==false)
+                    {
+                        $serarray[]=$dataarr[$key];
+                    }
+                }
+            }
+            $this->type=$type;
+            $this->ser_txt=I('get.search_text');
+            $dataarr=$serarray;
+        }
+
         $this->list=$dataarr;
 
         $this->display();

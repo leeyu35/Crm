@@ -20,7 +20,7 @@ $(document).ready(function(e) {
 <body>
 
 <div class="container"  style="width:100%;">
-<h3 class="bor-left-bull">{$hetong[advertiser]?"$hetong[advertiser]的":''}账户列表</h3>
+<h3 class="bor-left-bull">账户周消费统计</h3>
 <div class="form-group">
 <form class="form-inline" method="get">
   <div class="form-group">
@@ -32,14 +32,17 @@ $(document).ready(function(e) {
   <div class="form-group">
     <input type="text" class="form-control" name="search_text" value="{$ser_txt}" id="exampleInputEmail2" placeholder="输入关键字" >
   </div>
+  <!--
     <div class="form-group">
     	<input id="contract_start" class="Wdate form-control" type="text" name="time_start" placeholder="开始时间" value="{$time_start}" <literal>onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_end\')||\'2020-10-01\'}'})"</literal>/> 
   </div>
   <div class="form-group">
 <input id="contract_end" class="Wdate form-control" type="text" name="time_end"  placeholder="结束时间" value="{$time_end}" <literal> onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_start\')}',maxDate:'2020-10-01'})"</literal>/>
     </div>
-
-
+    -->
+ <div class="form-group">
+    &nbsp;&nbsp;最近 <input type="number" class="form-control" name="to" value="{$to}" id="exampleInputEmail2" style="width:80px" placeholder="查看最近几周" > 周
+  </div>
 
   <button type="submit" class="btn btn-primary">搜索</button>
   	<if condition="($ser_txt neq '') OR ($time_end neq '')">
@@ -52,46 +55,27 @@ $(document).ready(function(e) {
 	<tr>
     	<th>#</th>
     	<th>广告主名称</th>
-    	<!--<th>合同编号</th>-->
     	<th>广告主简称</th>
     	<th>账户名称</th>
     	<th>账户类型</th>
-        <!--<th>推广URL</th>
-        <th>账户显示金额</th>
-        <th>付款金额</th>
-        <th>IP</th>-->
         <th>SEM经理</th>
-        <!--<th>财务管理</th>-->	  
-        <th width="100">{$list[0][data][0][date]}</th>	 
-        <th width="100">{$list[0][data][1][date]}</th>	 
-        <th width="100">{$list[0][data][2][date]}</th>	 
-        <th width="100">{$list[0][data][3][date]}</th>	 
+        <for start="0" end="$to">
+        <th width="100">{$list[0][data][$i][date]}</th>	 
+        </for>	  
     </tr>
     <volist id="list" name="list" key="k">
    <!-- <i2f condition="($list[advertiser] eq '暂无数据') and ($list[account] neq 'init')">-->
     <tr>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$k}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[advertiser]}</td>
-        <td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[l_app]}</td>
+    	<td >{$k}</td>
+    	<td >{$list[advertiser]}</td>
+        <td >{$list[l_app]}</td>
 
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[account]}</td>
-    	<!--<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[contract_no]}</td>-->
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[type]}</td>
-    	<!--<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[promote_url]}</td>
-    	<td>{$list[show_money]}</td>
-    	<td>2016年8月15日</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[ip]}</td>-->
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[sem]}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[data][0][cost]}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[data][1][cost]}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[data][2][cost]}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[data][3][cost]}</td>
-    	
-       <!-- <td>
-        <span style="width:20px; display:inline-block"><a href="" title="垫款">垫</a></span>|&nbsp;&nbsp;<a href="" title="垫款列表">列</a><br>
-        <span style="width:20px; display:inline-block"><a href="" title="回款">回</a></span>|&nbsp;&nbsp;<a href="" title="回款列表">列</a><br>
-        <span style="width:20px; display:inline-block"><a href="" title="退款">退</a></span>|&nbsp;&nbsp;<a href="" title="退款列表">列</a><br>  
-        </td>-->
+    	<td >{$list[account]}</td>
+    	<td >{$list[type]}</td>
+    	<td >{$list[sem]}</td>
+        <for start="0" end="$to">
+        <th width="100">{$list[data][$i][cost]}</th>	 
+        </for>	  
 
     </tr>
    <!-- </if>-->
