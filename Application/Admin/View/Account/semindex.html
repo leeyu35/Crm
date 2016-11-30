@@ -68,7 +68,7 @@ $(document).ready(function(e) {
         <th width="100">{$list[0][data][3][date]}</th>	 
     </tr>
     <volist id="list" name="list" key="k">
-    <if condition="($list[advertiser] eq '暂无数据') and ($list[account] neq 'init')">
+   <!-- <i2f condition="($list[advertiser] eq '暂无数据') and ($list[account] neq 'init')">-->
     <tr>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$k}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[advertiser]}</td>
@@ -94,7 +94,7 @@ $(document).ready(function(e) {
         </td>-->
 
     </tr>
-    </if>
+   <!-- </if>-->
     </volist>
 </table>
 {$page}
