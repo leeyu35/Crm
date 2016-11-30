@@ -11,14 +11,14 @@
 						//此处是循环文件对象 100足够
 						for(i=0;i<=100;i++)
 						{
-							
+							//判断对象长度 如果没有了则返回
 							if($("#"+field_id)[0].files[i].name=="")
 							{
 								break;	
 							}
-							 var fileInput = $("#"+field_id)[0];
-		       				 var byteSize  = fileInput.files[i].size;
-		       				 var size= Math.ceil( byteSize / 1024);
+							 var fileInput = $("#"+field_id)[0];//文件选择器
+		       				 var byteSize  = fileInput.files[i].size;//单一文件大小
+		       				 var size= Math.ceil( byteSize / 1024); 
 							
 							 if(size>2048)
 							 {
