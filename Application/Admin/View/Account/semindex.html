@@ -38,11 +38,10 @@ $(document).ready(function(e) {
 			{ width: 200, align: 'left' },
 			{ width: 100, align: 'left' },
 			{ width: 100, align: 'left' },
-			{ width: 200, align: 'left' },
+			{ width: 80, align: 'left' },
 			<for start="0" end="$to">
-       		 { width: 200, align: 'left' },
+       		 { width: 160, align: 'left' },
         	</for>	
-			 { width: 20, align: 'left' },
 			],
 			
 	
@@ -117,7 +116,6 @@ $(document).ready(function(e) {
         <for start="0" end="$to">
         <th >{$list[0][data][$i][date]}</th>	 
         </for>	  
-        <th>e</th>
     </tr>
     </thead>
     <volist id="list" name="list" key="k">
@@ -134,7 +132,6 @@ $(document).ready(function(e) {
         <for start="0" end="$to">
         <td style="text-align:right;">{$list[data][$i][cost]}</td>	 
         </for>	  
-		<td>w  </td>
     </tr>
    <!-- </if>-->
     </volist>
