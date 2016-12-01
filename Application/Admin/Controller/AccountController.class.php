@@ -346,11 +346,13 @@ class AccountController extends CommonController
             $ht=$hetong->field('a.contract_no,b.advertiser')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("a.id =".$val['contract_id'])->find();
             $list[$key]['advertiser']=$ht['advertiser'];
             $list[$key]['contract_no']=$ht['contract_no'];
+            $list[$key]['market']=$ht['market'];
         }}else
         {
 
             $list[0]['advertiser']='暂无数据';
             $list[0]['contract_no']='暂无数据';
+            $list[0]['market']='暂无数据';
         }
 
         return $list;
@@ -387,6 +389,7 @@ class AccountController extends CommonController
                 {
                     $dataarr[$key]['advertiser']=$v['advertiser']?$v['advertiser']:'暂无数据';
                     $dataarr[$key]['type']=$v['name']?$v['name']:'暂无数据';
+                    $dataarr[$key]['market']=$v['market']?$v['market']:'暂无数据';
                 }
             }
         }

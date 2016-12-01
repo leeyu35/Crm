@@ -112,7 +112,8 @@ $(document).ready(function(e) {
     	
     	<th>账户类型</th>
         <th>SEM经理</th>
-        <th>账户名称</th>
+ 		<th>销售经理</th>
+        <!--<th>账户名称</th>-->
         <for start="0" end="$to">
         <th >{$list[0][data][$i][date]}</th>	 
         </for>	  
@@ -129,7 +130,8 @@ $(document).ready(function(e) {
     	
     	<td >{$list[type]}</td>
     	<td >{$list[sem]}</td>
-        <td >{$list[account]}</td>
+    	<td >{$list[market]}</td>
+        <!--<td >{$list[account]}</td>-->
         <for start="0" end="$to">
         <td style="text-align:right;">{$list[data][$i][cost]}</td>	 
         </for>	  
