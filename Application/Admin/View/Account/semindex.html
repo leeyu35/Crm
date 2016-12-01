@@ -25,7 +25,9 @@ $(document).ready(function(e) {
 	<script src="/Public/js/sortable_table.js" type="text/javascript"></script>
 	<script src="/Public/js/fixed_table_rc.js" type="text/javascript"></script>
 <script>
+	
 	$(function () {
+		$("#looad").show();
 		$('#tablesorter').fxdHdrCol({
 			fixedCols:5,
 			width: "100%",
@@ -38,26 +40,33 @@ $(document).ready(function(e) {
 			{ width: 100, align: 'left' },
 			{ width: 200, align: 'left' },
 			<for start="0" end="$to">
-       		 { width: 100, align: 'right' },
+       		 { width: 200, align: 'left' },
         	</for>	
+			 { width: 20, align: 'left' },
 			],
-
-
+			
+	
 		});
-		
+		$("#looad").hide();
+		$("#tablesorter").show();
 	});
 	</script>
     <style type="text/css">
-    	#tablesorter tr td,#tablesorter tr th{ border-left:none; border-right:none; line-height:30px;}
+    	#tablesorter tr td,#tablesorter tr th{ border-left:none; border-right:none; line-height:30px; vertical-align:top;}
 		.ft_container table tr td{ border-left:none; border-right:none; line-height:30px;}
-		.ft_container table tr:first-child th{ border-left:none; border-right:none; }
+		.ft_container table tr:first-child th{ border-left:none; border-right:none; line-height:50px;}
+		#tablesorter{ display:none;}
     </style>
 </head>
 <body>
 
-<div class="container"  style="width:100%;">
-<h3 class="bor-left-bull">账户周消费统计</h3>
-<div class="form-group">
+<div class="container"  style="width:100%; padding-top:20px;">
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">账户周消费统计</div>
+  <div class="panel-body">
+    <div class="form-group">
 <form class="form-inline" method="get">
   <div class="form-group">
      <select  class="form-control" name="searchtype">
@@ -77,7 +86,7 @@ $(document).ready(function(e) {
     </div>
     -->
  <div class="form-group">
-    &nbsp;&nbsp;最近 <input type="number" class="form-control" name="to" value="{$to}" id="exampleInputEmail2" style="width:80px" placeholder="查看最近几周" > 周
+    &nbsp;&nbsp;最近 <input type="number" class="form-control" name="to" value="{$to}" id="exampleInputEmail2" style="width:80px" placeholder="查看最近几周" max="20" min="1"> 周
   </div>
 
   <button type="submit" class="btn btn-primary">搜索</button>
@@ -86,7 +95,15 @@ $(document).ready(function(e) {
 	</if>
 </form>
 </div>
-<table id="tablesorter">
+    <p>说明：1 最大可获取20周的周消费数据。2 广告主公司名称为暂无数据表示CRM暂无与该账户名称匹配的账户 3 账户名称为init 表示没有开通百度api
+</p>
+  </div>
+  <table id="looad" class="table">
+  	<tr>
+    	<td>数据加载中,请稍后...</td>
+    </tr>
+  </table>
+<table id="tablesorter" style="padding-right:20px;">
 	<thead>
 	<tr>
     	<th>#</th>
@@ -99,6 +116,7 @@ $(document).ready(function(e) {
         <for start="0" end="$to">
         <th >{$list[0][data][$i][date]}</th>	 
         </for>	  
+        <th>&nbsp;</th>
     </tr>
     </thead>
     <volist id="list" name="list" key="k">
@@ -115,15 +133,13 @@ $(document).ready(function(e) {
         <for start="0" end="$to">
         <td style="text-align:right;">{$list[data][$i][cost]}</td>	 
         </for>	  
-
+		<td>&nbsp;</td>
     </tr>
    <!-- </if>-->
     </volist>
 </table>
-{$page}
 </div>
-<script>
-   $(function () { $("[data-toggle='tooltip']").tooltip(); });
-</script>
+</div>
+
 </body>
 </html>

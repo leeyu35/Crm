@@ -357,6 +357,7 @@ class AccountController extends CommonController
     }
     public function semindex(){
         $dataarr=S('account_data');
+
         if(I('get.to')!='')
         {
             $to=I('get.to');
