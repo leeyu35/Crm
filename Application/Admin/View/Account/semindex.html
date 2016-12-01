@@ -29,13 +29,13 @@ $(document).ready(function(e) {
 	$(function () {
 		$("#looad").show();
 		$('#tablesorter').fxdHdrCol({
-			fixedCols:5,
+			fixedCols:3,
 			width: "100%",
 			height: 500,
 			colModal: [
 			{ width: 50, align: 'center' },
-			{ width: 200, align: 'left' },
 			{ width: 70, align: 'left' },
+			{ width: 200, align: 'left' },
 			{ width: 100, align: 'left' },
 			{ width: 100, align: 'left' },
 			{ width: 200, align: 'left' },
@@ -58,11 +58,11 @@ $(document).ready(function(e) {
 		#tablesorter{ display:none;}
     </style>
 </head>
-<body>
+<body >
 
-<div class="container"  style="width:100%; padding-top:20px;">
+<div class="container"  style="width:100%; padding-top:20px; ">
 
-<div class="panel panel-default">
+<div class="panel panel-default" >
   <!-- Default panel contents -->
   <div class="panel-heading">账户周消费统计</div>
   <div class="panel-body">
@@ -103,13 +103,13 @@ $(document).ready(function(e) {
     	<td>数据加载中,请稍后...</td>
     </tr>
   </table>
-<table id="tablesorter" style="padding-right:20px;">
+<table id="tablesorter" >
 	<thead>
 	<tr>
     	<th>#</th>
-    	<th>广告主名称</th>
-    	<th>广告主简称</th>
     	
+    	<th>广告主简称</th>
+    	<th>广告主名称</th>
     	<th>账户类型</th>
         <th>SEM经理</th>
  		<th>销售经理</th>
@@ -117,17 +117,16 @@ $(document).ready(function(e) {
         <for start="0" end="$to">
         <th >{$list[0][data][$i][date]}</th>	 
         </for>	  
-        <th>&nbsp;</th>
+        <th>e</th>
     </tr>
     </thead>
     <volist id="list" name="list" key="k">
    <!-- <i2f condition="($list[advertiser] eq '暂无数据') and ($list[account] neq 'init')">-->
     <tr>
     	<td >{$k}</td>
-    	<td >{$list[advertiser]}</td>
-        <td >{$list[l_app]}</td>
-
     	
+        <td >{$list[l_app]}</td>
+		<td >{$list[advertiser]}</td>
     	<td >{$list[type]}</td>
     	<td >{$list[sem]}</td>
     	<td >{$list[market]}</td>
@@ -135,7 +134,7 @@ $(document).ready(function(e) {
         <for start="0" end="$to">
         <td style="text-align:right;">{$list[data][$i][cost]}</td>	 
         </for>	  
-		<td>&nbsp;</td>
+		<td>w  </td>
     </tr>
    <!-- </if>-->
     </volist>
