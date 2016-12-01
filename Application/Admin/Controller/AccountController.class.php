@@ -343,7 +343,7 @@ class AccountController extends CommonController
 
         foreach ($list as $key=>$val)
         {
-            $ht=$hetong->field('a.contract_no,b.advertiser')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("a.id =".$val['contract_id'])->find();
+            $ht=$hetong->field('a.contract_no,a.market,b.advertiser')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("a.id =".$val['contract_id'])->find();
             $list[$key]['advertiser']=$ht['advertiser'];
             $list[$key]['contract_no']=$ht['contract_no'];
             $list[$key]['market']=$ht['market'];
