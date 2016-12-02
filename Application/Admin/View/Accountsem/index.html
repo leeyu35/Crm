@@ -11,11 +11,6 @@
 <!--<script src="http://cdn.bootcss.com/jquery.tablesorter/2.27.2/js/jquery.tablesorter.min.js"></script>
 <script language="javascript">
 $(document).ready(function(e) {
-    $(".htshow").click(function(){
-		url=$(this).attr("id");
-		window.location.href=url;
-	})
-	
 	//$.tablesorter.defaults.headers = {0: {sorter: false}}; 
 	$("#tablesorter").tablesorter(); 
 });
@@ -27,7 +22,9 @@ $(document).ready(function(e) {
 <script>
 	
 	$(function () {
+		
 		$("#looad").show();
+		
 		$('#tablesorter').fxdHdrCol({
 			fixedCols:3,
 			width: "100%",
@@ -40,21 +37,32 @@ $(document).ready(function(e) {
 			{ width: 100, align: 'left' },
 			{ width: 80, align: 'left' },
 			<for start="0" end="$to">
-       		 { width: 160, align: 'left' },
+       		 { width: 170, align: 'left' },
         	</for>	
 			],
 			
 	
 		});
+		$(".hjdck").click(function(){
+			var to=$("#to").val();
+			var url="{:U("index?to=")}";
+			url=url.replace(".html","/");
+			url=url+"to/"+to+"/sort/"+$(this).attr("id")
+			window.location.href=url;
+			
+		})
 		$("#looad").hide();
 		$("#tablesorter").show();
 	});
 	</script>
+    
     <style type="text/css">
     	#tablesorter tr td,#tablesorter tr th{ border-left:none; border-right:none; line-height:30px; vertical-align:top;}
 		.ft_container table tr td{ border-left:none; border-right:none; line-height:30px;}
 		.ft_container table tr:first-child th{ border-left:none; border-right:none; line-height:50px;}
 		#tablesorter{ display:none;}
+		.xuanzhong1{ background:#CCC;}
+		.hjdck{ cursor:pointer;}
     </style>
 </head>
 <body >
@@ -65,7 +73,7 @@ $(document).ready(function(e) {
   <!-- Default panel contents -->
   <div class="panel-heading">账户周消费统计</div>
   <div class="panel-body">
-    <div class="form-group">
+  <div class="form-group">
 <form class="form-inline" method="get">
   <div class="form-group">
      <select  class="form-control" name="searchtype">
@@ -85,7 +93,7 @@ $(document).ready(function(e) {
     </div>
     -->
  <div class="form-group">
-    &nbsp;&nbsp;最近 <input type="number" class="form-control" name="to" value="{$to}" id="exampleInputEmail2" style="width:80px" placeholder="查看最近几周" max="20" min="1"> 周
+    &nbsp;&nbsp;最近 <input type="number" class="form-control" name="to" value="{$to}" id="to" style="width:80px" placeholder="查看最近几周" max="20" min="1"> 周
   </div>
 
   <button type="submit" class="btn btn-primary">搜索</button>
@@ -114,7 +122,8 @@ $(document).ready(function(e) {
  		<th>销售经理</th>
         <!--<th>账户名称</th>-->
         <for start="0" end="$to">
-        <th >{$list[0][data][$i][date]}</th>	 
+        <th class='hjdck <if condition="$Think.get.sort eq $i ">xuanzhong1</if>' id="{$i}">{$list[0][data][$i][date]} <if condition="$Think.get.sort eq $i ">▼</if>
+        </th>	 
         </for>	  
     </tr>
     </thead>
@@ -123,14 +132,14 @@ $(document).ready(function(e) {
     <tr>
     	<td >{$k}</td>
     	
-        <td >{$list[l_app]}</td>
+        <td>{$list[l_app]}</td>
 		<td >{$list[advertiser]}</td>
     	<td >{$list[type]}</td>
     	<td >{$list[sem]}</td>
     	<td >{$list[market]}</td>
         <!--<td >{$list[account]}</td>-->
         <for start="0" end="$to">
-        <td style="text-align:right;">{$list[data][$i][cost]}</td>	 
+        	<td style="text-align:right;">{$list[data][$i][cost]}</td>	 
         </for>	  
     </tr>
    <!-- </if>-->

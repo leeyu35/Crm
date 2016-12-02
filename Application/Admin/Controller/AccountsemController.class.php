@@ -102,6 +102,30 @@ class AccountsemController extends CommonController
             $this->ser_txt=I('get.search_text');
             $dataarr=$serarray;
         }
+        $srot=I("sort");
+
+        //排序
+        if($srot!='')
+        {
+            uasort($dataarr,function($a,$b){
+                $srot=I("sort");
+                if($a['data'][$srot]['cost']>$b['data'][$srot]['cost'])
+                {
+                    return -1;
+                }elseif($a['data'][$srot]['cost']<$b['data'][$srot]['cost'])
+                {
+                    return 1;
+                }elseif($a['data'][$srot]['cost']==$b['data'][$srot]['cost'])
+                {
+                    return 0;
+                }
+
+
+            });
+
+
+        }
+
 
         $this->list=$dataarr;
 
@@ -112,6 +136,20 @@ class AccountsemController extends CommonController
 
     }
 
+    static  function  aa($a,$b){
 
+        if($a['data'][$srot]['cost']>$b['data'][$srot]['cost'])
+        {
+            return 1;
+        }elseif($a['data'][$srot]['cost']<$b['data'][$srot]['cost'])
+        {
+            return -1;
+        }elseif($a['data'][$srot]['cost']==$b['data'][$srot]['cost'])
+        {
+            return 0;
+        }
+
+
+    }
 
 }
