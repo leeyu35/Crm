@@ -102,7 +102,7 @@ class PublicController extends Controller
             $array1=explode(",",$raac_hetong['audit_2']);
             if(in_array(cookie('u_groupid'),$array1))
             {
-                $ht_s2=$hetong->where("audit_2 =0  and isxufei=0  type=1 and audit_1=1")->count();
+                $ht_s2=$hetong->where("audit_2 =0  and isxufei=0 and type=1 and audit_1=1")->count();
                 $rest+=$ht_s2;
             }
 
