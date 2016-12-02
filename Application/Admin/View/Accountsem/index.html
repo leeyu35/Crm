@@ -122,7 +122,7 @@ $(document).ready(function(e) {
  		<th>销售经理</th>
         <!--<th>账户名称</th>-->
         <for start="0" end="$to">
-        <th class='hjdck <if condition="$Think.get.sort eq $i ">xuanzhong1</if>' id="{$i}">{$list[0][data][$i][date]} <if condition="$Think.get.sort eq $i ">▼</if>
+        <th class='hjdck <if condition="($Think.get.sort eq $i) and ($Think.get.sort neq '') ">xuanzhong1</if>' id="{$i}">{$list[0][data][$i][date]} <if condition="($Think.get.sort eq $i)  and ($Think.get.sort neq '') ">▼</if>
         </th>	 
         </for>	  
     </tr>
