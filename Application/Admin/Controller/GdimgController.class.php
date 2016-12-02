@@ -13,6 +13,7 @@ class GdimgController extends Controller
 
     function index(){
        // echo $this->webtoimage('http://www.jb51.net/images/logo.gif');
+
         $this->display();
     }
     function upload(){
@@ -38,8 +39,12 @@ class GdimgController extends Controller
         $h=I('post.img_h');//高度
         $line=I('post.line');//行数
         $color=I('post.color');//字颜色
-        $logo=$this->webtoimage(I('post.logo'));//logo转存到服务器
-
+        //$logo=$this->webtoimage(I('post.logo'));//logo转存到服务器
+        $logo=I('post.logo');
+        $logo_w=I('post.logo_w');
+        $logo_h=I('post.logo_h');
+        $logo_x=I('post.logo_x');
+        $logo_y=I('post.logo_y');
         //拆分RGB
         $array2=explode(",",$color);
         list($r,$g,$b)=$array2;
@@ -50,7 +55,7 @@ class GdimgController extends Controller
         $string=str_replace('br',"\n",$string);
         $cimg= $this->caijian($Imgpath,$x,$y,$w,$h);
 
-        $rimg= $this->img_save($cimg,$string,'./gdimg/font/'.$font,$font_size,$r,$g,$b,$line,$logo);
+        $rimg= $this->img_save($cimg,$string,'./gdimg/font/'.$font,$font_size,$r,$g,$b,$line,$logo,$logo_w,$logo_h,$logo_x,$logo_y);
         $rimg=substr($rimg,1,200);
         if($array['code']!=403){
             $array["code"]=200;
@@ -79,8 +84,12 @@ class GdimgController extends Controller
         $font_size=I('post.font_size');//字号
         $string=$_POST['string'];//文字信息
         $string=str_replace('br',"\n",$string);//处理换行
-        $logo=$this->webtoimage(I('post.logo'));//logo转存到服务器
-
+        //$logo=$this->webtoimage(I('post.logo'));//logo转存到服务器
+        $logo=I('post.logo');
+        $logo_w=I('post.logo_w');
+        $logo_h=I('post.logo_h');
+        $logo_x=I('post.logo_x');
+        $logo_y=I('post.logo_y');
         if($img64=='' or $font_size=='' or $font=='' or $line=='')
         {
             $array["code"]=403;
@@ -90,7 +99,7 @@ class GdimgController extends Controller
         //$cimg= $this->caijian($img64,$x,$y,$w,$h);
 
 
-        $rimg= $this->img_save($img64,$string,'./gdimg/font/'.$font,$font_size,$r,$g,$b,$line,$logo);
+        $rimg= $this->img_save($img64,$string,'./gdimg/font/'.$font,$font_size,$r,$g,$b,$line,$logo,$logo_w,$logo_h,$logo_x,$logo_y);
 
         $rimg=substr($rimg,1,200);
         if($array['code']!=403){
@@ -103,7 +112,11 @@ class GdimgController extends Controller
         //echo '<img src="'.$rimg.'">';
     }
 
-    function img_save($img,$str,$font,$fonpx,$r=255,$g=255,$b=255,$line,$logo=''){
+    //主方法
+    /*参数说明 主图,文字,字体，字号，颜色R，颜色G，颜色B，行数，LOGO，logo宽度，logo高度，logoX 轴，logoY轴
+     *
+     * */
+    function img_save($img,$str,$font,$fonpx,$r=255,$g=255,$b=255,$line,$logo='',$logo_w='',$logo_h='',$logo_x='',$logo_y=''){
         $strarrat_line=count(explode("\n",$str));//获取文字行数
 
 
@@ -150,25 +163,49 @@ class GdimgController extends Controller
         $rand=rand(1000,9999);
         $imgname='./gdimg/upload/'.time().$rand.'.jpg';
 
-        /*
-        Header("Content-type: image/PNG");
-        imagejpeg($im);
-        exit;
-        */
-        imagejpeg($im,$imgname);
-        imagedestroy($im);
+
+
+       // imagedestroy($im);
         $image = new \Think\Image();
 
-
-
-        //$image->open($logo)->thumb($px50, $pxheight,\Think\Image::IMAGE_THUMB_FIXED)->save('./thumb.png');
         if($logo!='')
         {
-            $image->open($imgname)->water($logo,1,80)->save($imgname);
+            $x=$logo_x;
+            $y=$logo_y;
+            $logo=$this->createpng($logo,$logo_w,$logo_h);
+            //$logo=$this->webtoimage('http://lzad.cc/images/logo_03.png');
+            //获取水印图像信息
+            $info = getimagesize($logo);
+            if(false === $info || (IMAGETYPE_GIF === $info[2] && empty($info['bits']))){
+                E('非法水印文件');
+            }
+//创建水印图像资源
+            $fun   = 'imagecreatefrom' . image_type_to_extension($info[2], false);
+            $water = $fun($logo);
+            //添加水印
+            $src = imagecreatetruecolor($info[0], $info[1]);
+            //调整默认颜色
+            $color = imagecolorallocate($src, 255, 255, 255);
+            imagefill($src, 0, 0, $color);
+
+            //设定水印图像的混色模式
+            imagealphablending($water, true);
+            imagecopy($src,$im, 0, 0, $x, $y, $info[0], $info[1]);
+
+            imagecopy($src, $water, 0, 0, 0, 0, $info[0], $info[1]);
+            imagecopymerge($im, $src, $x, $y, 0, 0, $info[0], $info[1],100);
+
+
+
+
+            //$image->open($imgname)->water($logo,7,80)->save($imgname);
         }
 
+        //$image->open($logo)->thumb($px50, $pxheight,\Think\Image::IMAGE_THUMB_FIXED)->save('./thumb.png');
 
 
+        imagejpeg($im,$imgname);
+        imagedestroy($im);
         return $imgname;
 
     }
@@ -342,21 +379,26 @@ class GdimgController extends Controller
 
 
     //改变大小 生成png透明图片
-    function createpng(){
+    function createpng($logo,$width,$height){
+        //获取源图gd图像标识符
         $srcImg = imagecreatefrompng($logo);
-        $width = $image->width();
-        $heghit = $image->height();
-        echo $width;
-        $px50=150;
-        $pxheight=(150/$width)*$heghit;
-        $newImg = imagecreatetruecolor($px50, $pxheight);
-        //分配颜色 + alpha，将颜色填充到新图上
+        $srcWidth = imagesx($srcImg);
+        $srcHeight = imagesy($srcImg);
+
+//创建新图
+        $newWidth = $width;
+        $newHeight = $height;
+        $newImg = imagecreatetruecolor($newWidth, $newHeight);
+//分配颜色 + alpha，将颜色填充到新图上
         $alpha = imagecolorallocatealpha($newImg, 0, 0, 0, 127);
         imagefill($newImg, 0, 0, $alpha);
 
 //将源图拷贝到新图上，并设置在保存 PNG 图像时保存完整的 alpha 通道信息
-        imagecopyresampled($newImg, $srcImg, 0, 0, 0, 0, $px50, $pxheight, $width, $heghit);
+        imagecopyresampled($newImg, $srcImg, 0, 0, 0, 0, $newWidth, $newHeight, $srcWidth, $srcHeight);
         imagesavealpha($newImg, true);
-        imagepng($newImg, './thumb.png');
+        $rand=rand(1000,9999);
+        $imgname='./gdimg/upload/'.time().$rand.'.png';
+        imagepng($newImg,$imgname);
+        return $imgname;
     }
 }
