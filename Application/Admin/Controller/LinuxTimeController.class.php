@@ -39,7 +39,7 @@ class LinuxTimeController extends Controller
             }
 
 
-            $tabledata = M ("accountdaily","baiduapi_","pgsql://rdspg:anmeng@rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com:3432/msdb");
+            $tabledata = M ("accountdaily","baiduapi_","pgsql://rdspg:anmeng@rds455ekt1422z8sh7e2.pg.rds.aliyuncs.com:3433/msdb");
 
 
             $account_day_cost=$tabledata->field('appid,date,baidu_cost_total')->select();
