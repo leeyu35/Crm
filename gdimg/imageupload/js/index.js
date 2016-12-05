@@ -207,18 +207,23 @@ $(".button").on("click","button",function(){
   switch (b){
     case "644*280px":{
       $(".overlay").css({width:644,height:280});
+      //设置最外层logo父元素的大小
+      $(".content_right_logo").css({width:644,height:280});
     }
       break;
     case "600*248px" :{
       $(".overlay").css({width:600,height:248});
+      $(".content_right_logo").css({width:600,height:248});
     }
       break;
     case "220*220px" :{
       $(".overlay").css({width:220,height:220});
+      $(".content_right_logo").css({width:220,height:220});
     }
       break;
     case "190*190px" :{
       $(".overlay").css({width:190,height:190});
+      $(".content_right_logo").css({width:190,height:190});
     }
       break;
       case "自定义" :{
@@ -233,66 +238,16 @@ $(".button").on("click","button",function(){
              var height = $(".but_height").val();
              var width = $(".but_width").val();
              $(".overlay").css({width:width,height:height});
+              $(".content_right_logo").css({width:width,height:height});
              $(this).text("自定义") ;
     }
       break;
   }
 })
 
-//点击上传logo
-function logo(){
-  document.getElementById('logo').onchange = function(){
-    //获取上传的照片
-    var resultFile = document.getElementById("logo").files[0];
-    var reader = new FileReader();
-    //调用这个方法，并且将获取到的文件传入
-    reader.readAsDataURL(resultFile);
-    //要想显示这个照片 必须要在这边调用它的onload方法
-    reader.onload = function (e) {
-      logoURL = this.result;
-      $('.logo_img').attr('src',logoURL);
-    };
-  }
-}
-
-
-
 // //点击拖动
 $(document).ready(function(){
-  var $div = $(".new_img");
-  /* 绑定鼠标左键按住事件 */
-  $div.on("mousedown",function(event){
-    event.preventDefault()
-    /* 获取需要拖动节点的坐标 */
-    var offset_x = $(this)[0].offsetLeft;//x坐标
-    var offset_y = $(this)[0].offsetTop;//y坐标
-    /* 获取当前鼠标的坐标 */
-    var mouse_x = event.pageX;
-    var mouse_y = event.pageY;
-    /* 绑定拖动事件 */
-    /* 由于拖动时，可能鼠标会移出元素，所以应该使用全局（document）元素 */
-    $(document).on("mousemove",function(ev){
-      /* 计算鼠标移动了的位置 */
-      var _x = ev.pageX - mouse_x;
-      var _y = ev.pageY - mouse_y;
-      /* 设置移动后的元素坐标 */
-      var now_x = (offset_x + _x ) + "px";
-      var now_y = (offset_y + _y ) + "px";
-      /* 改变目标元素的位置 */
-      $div.css({
-        top:now_y,
-        left:now_x
-      });
-
-
-
-    });
-  });
-  /* 当鼠标左键松开，接触事件绑定 */
-  $div.on("mouseup",function(event){
-    $(document).unbind('mousemove');
-  });
-
+  $(".new_img").draggable()
 })
 
 //点击切换导航栏
@@ -338,41 +293,19 @@ function inputshow(){
   
 }
 inputshow();
-
-//时间
-function fun(){
-        var d = new Date();
-        var year = d.getFullYear();
-        var month = d.getMonth()+1;
-        var date = d.getDate();
-        var wk = d.getDay();
-        var hour = d.getHours();
-        var min = d.getMinutes();
-        var sec = d.getSeconds();
-      var str =year +"年 "+ toDoubleNum(month)+"月 "+ toDoubleNum(date)+"日 "+week(wk)+" "+toDoubleNum(hour)+":"+toDoubleNum(min)+":"+toDoubleNum(sec);
-      return str
-      }
-      var d =new Date();
-      $(".time").text(fun());
-      setInterval(function(){
-        d.getSeconds(d.getSeconds()+1)
-         $(".time").text(fun());
-      },1000);
-
       //数据请求
 function btn(){
   //调用裁切事件，不需要截图获取事件
     crop();
     //获取图片地址
     var urlData = $(".box_img").attr("src");//图片信息
-    // console.log(urlData)
     var text = $(".text").val();//上传文字
-    console.log(text)
     var font_size = $("#set option:selected").val();//字号
-    console.log(font_size)
     var font = $("#font option:selected").val();//字体样式
-  console.log(font);
-  console.log(logoURL );
+    var logo_w = parseInt($(".logo_img").css("width")); //logo宽
+    var logo_h = parseInt($(".logo_img").css("height")); //logo高
+    var logo_l = parseInt($(".logo_img_box").css("left")); //logo left偏移量
+    var logo_t = parseInt($(".logo_img_box").css("top")); //logo top的偏移量
   $(".new_img").show();
      $.ajax({
        type:'POST',
@@ -402,4 +335,28 @@ function btn(){
        }
 
      });
+}
+//图片显示
+function logo(){
+  document.getElementById('logo').onchange = function(){
+    //获取上传的照片
+    var resultFile = document.getElementById("logo").files[0];
+    var reader = new FileReader();
+    //调用这个方法，并且将获取到的文件传入
+    reader.readAsDataURL(resultFile);
+    //要想显示这个照片 必须要在这边调用它的onload方法
+    reader.onload = function (e) {
+      logoURL = this.result;
+      //设置一张隐藏图片，获取原图片的宽高，动态调动div宽高
+      $('.logo_img_none').attr('src',logoURL);
+      var w = $('.logo_img_none').css('width');
+      var h = $('.logo_img_none').css('height');
+      $(".ui-wrapper").css({width:w,height:h});
+      $(".logo_img").css({width:w,height:h});
+
+      $('.logo_img').attr('src',logoURL);
+      $( ".logo_img" ).resizable();
+      $( ".logo_img_box" ).draggable({ containment: ".content_right_logo", scroll: false}); 
+    };
+  } 
 }
