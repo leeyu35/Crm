@@ -304,8 +304,8 @@ function btn(){
     var font = $("#font option:selected").val();//字体样式
     var logo_w = parseInt($(".logo_img").css("width")); //logo宽
     var logo_h = parseInt($(".logo_img").css("height")); //logo高
-    var logo_l = parseInt($(".logo_img_box").css("left")); //logo left偏移量
-    var logo_t = parseInt($(".logo_img_box").css("top")); //logo top的偏移量
+    var logo_x = parseInt($(".logo_img_box").css("left")); //logo left偏移量
+    var logo_y = parseInt($(".logo_img_box").css("top")); //logo top的偏移量
   $(".new_img").show();
      $.ajax({
        type:'POST',
@@ -317,7 +317,11 @@ function btn(){
          font_size: font_size,
          color:"255,255,255",
          font:font,
-         logo:logoURL
+         logo:logoURL,
+         logo_w:logo_w,
+         logo_h:logo_h,
+         logo_x:logo_x,
+         logo_y:logo_y
        },
        async: true,
        dataType: 'json',
