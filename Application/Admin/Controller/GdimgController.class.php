@@ -40,7 +40,7 @@ class GdimgController extends Controller
         $line=I('post.line');//行数
         $color=I('post.color');//字颜色
         $logo=$this->webtoimage(I('post.logo'));//logo转存到服务器
-        $logo=I('post.logo');
+        //$logo=I('post.logo');
         $logo_w=I('post.logo_w');
         $logo_h=I('post.logo_h');
         $logo_x=I('post.logo_x');
@@ -85,7 +85,7 @@ class GdimgController extends Controller
         $string=$_POST['string'];//文字信息
         $string=str_replace('br',"\n",$string);//处理换行
         $logo=$this->webtoimage(I('post.logo'));//logo转存到服务器
-        $logo=I('post.logo');
+        //$logo=I('post.logo');
         $logo_w=I('post.logo_w');
         $logo_h=I('post.logo_h');
         $logo_x=I('post.logo_x');
