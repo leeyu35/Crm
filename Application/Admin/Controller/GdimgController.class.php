@@ -41,6 +41,7 @@ class GdimgController extends Controller
         $color=I('post.color');//字颜色
         $logo=$this->webtoimage(I('post.logo'));//logo转存到服务器
         //$logo=I('post.logo');
+
         $logo_w=I('post.logo_w');
         $logo_h=I('post.logo_h');
         $logo_x=I('post.logo_x');
@@ -120,6 +121,7 @@ class GdimgController extends Controller
         $strarrat_line=count(explode("\n",$str));//获取文字行数
 
 
+
         //主图片
         $images=$img;
 
@@ -173,6 +175,7 @@ class GdimgController extends Controller
             $x=$logo_x;
             $y=$logo_y;
             $logo=$this->createpng($logo,$logo_w,$logo_h);
+
             //$logo=$this->webtoimage('http://lzad.cc/images/logo_03.png');
             //获取水印图像信息
             $info = getimagesize($logo);
@@ -380,8 +383,9 @@ class GdimgController extends Controller
 
     //改变大小 生成png透明图片
     function createpng($logo,$width,$height){
+
         //获取源图gd图像标识符
-        $srcImg = imagecreatefrompng($logo);
+        $srcImg = $this->imagetype($logo);
         $srcWidth = imagesx($srcImg);
         $srcHeight = imagesy($srcImg);
 
