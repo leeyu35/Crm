@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" type="text/css" href="css/component.css">
     <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
 </head>
 <body>
 <div class="box">
@@ -75,18 +76,31 @@
                     </ul>
                 </div>
             </div>
+
+                                
         <div class="content_right">
             <div class="content">
                 <div class="component">
-                    <div class="overlay">
-                            <img class="logo_img" >
+                <div class="content_right_logo">
+                    <div class="logo_img_box">
+                    <!-- 图片目的是获取原图片高度 -->
+                        <img class="logo_img_none" alt="">
+                        <img class="logo_img" alt="">
                     </div>
+                </div>
+                    <div class="overlay">
+                        <div class="overlay_logo">
+                          
+                        </div>
+
+                    </div>
+                    
                     <div class="resize-container">
                     <!-- 左上角 -->
                         <span class="resize-handle resize-handle-nw"></span>
                         <!-- 右上角 -->
                         <span class="resize-handle resize-handle-ne"></span>
-                        <img  class="resize-image" id="other"/>
+                        <img  class="resize-image" id="other" alt=""/>
                         <!-- 左下角 -->
                         <span class="resize-handle resize-handle-se"></span>
                         <!-- 右下角 -->
@@ -131,12 +145,12 @@
 </div>
 <!-- 数据返回图片 -->
 <div class="new_img">
-    <img  class="box_img">
+    <img  class="box_img" alt=""/>
     <a href="##" class="close">X</a>
 <div>
-    
-<script type="text/javascript" src="js/时间.js"></script>
 <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
+<!-- 拖动插件 -->
+<script type="text/javascript" src="js/jquery-ui-1.9.2.custom.min.js"></script>
 </body>
 </html>
