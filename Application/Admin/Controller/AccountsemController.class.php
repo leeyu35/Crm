@@ -57,6 +57,7 @@ class AccountsemController extends CommonController
         {
             //echo $val['account'].'========'.$val["l_app"];
             $list=$this->account_info($val['account']);
+
             if(!is_array($list))
             {
                 $dataarr[$key]['advertiser']='暂无数据';

@@ -18,16 +18,17 @@ $response = curl_exec($ch);
 
 $response=json_decode($response,true);
 
-if ($response  === FALSE or $response['code']!='200') {
+if ($response  === FALSE ){
     json_record('Error:访问账户接口失败 导致生成缓存失败!');
     //echo "cURL 具体出错信息: " . curl_error($ch);
 
  }elseif($response['code']==200){
     json_record('访问账户信息并生产缓存成功!');
     echo 'success';
-}else{
+}elseif($response['code']==403){
     json_record('Error:访问账户信息并生产缓存失败!');
-
+}elseif($response['code']==404){
+    json_record('Error:访问周消费日期接口失败 导致生成缓存失败!');
 }
 
 $curl_info= curl_getinfo($ch);

@@ -19,6 +19,7 @@ class DataController extends Controller
             return 403;
         }
         $table=S("account_day_cost");//读取缓存文件
+
         //循环搜索数据
         foreach ($table as $key=>$val)
         {
@@ -27,7 +28,7 @@ class DataController extends Controller
                $data[]=$table[$key];
             }
         }
-        // dump($data);
+
        // $tabdate=$conn->where("appid='$appid'")->select();
 
        $zhouar=$this->teodate($to); //获取日期
