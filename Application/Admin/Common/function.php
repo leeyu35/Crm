@@ -348,7 +348,7 @@ function num_format($num){
     }
     if($num==0)
     {
-        return 0;
+        return $num;
     }
     $rvalue='';
     $num = explode('.',$num);//把整数和小数分开
