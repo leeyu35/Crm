@@ -344,11 +344,11 @@ function num_format($num){
     }
     if($num<0)
     {
-        return false;
+        return $num;
     }
     if($num==0)
     {
-        return $num;
+        return 0;
     }
     $rvalue='';
     $num = explode('.',$num);//把整数和小数分开
