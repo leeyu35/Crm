@@ -16,6 +16,22 @@ class LinuxTimeController extends Controller
             $accountsem_list=hjd_curl('http://www.yushanapp.com/api/get/customer/c03d80f07c144cdab5e881866b92ad9f');
             //$accountsem_list['customers']=array_slice($accountsem_list['customers'], 10,10);
 
+            //缓存每个客户具体消费情况 appid ,日期,消费  获取周消费的时候要调用缓存 所以在这里先生存缓存
+            $tabledata = M ("accountdaily","baiduapi_","pgsql://rdspg:anmeng@rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com:3432/msdb");
+            $account_day_cost=$tabledata->field('appid,date,baidu_cost_total')->select();
+            if(!isset($account_day_cost))
+            {
+
+                $data['code']=404;
+                $this->ajaxReturn($data);
+                exit;
+            }else {
+                //缓存周消费数据
+                S('account_day_cost', $account_day_cost);
+            }
+
+
+
             if(!is_array($accountsem_list['customers']) or $accountsem_list=='')
             {
                 $data['code']=403;
@@ -41,28 +57,14 @@ class LinuxTimeController extends Controller
             }
 
 
-            $tabledata = M ("accountdaily","baiduapi_","pgsql://rdspg:anmeng@rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com:3432/msdb");
 
 
-            $account_day_cost=$tabledata->field('appid,date,baidu_cost_total')->select();
-
-
-
-            if(!isset($account_day_cost))
-            {
-
-                $data['code']=404;
-            }else{
-                //缓存周消费数据
-                S('account_day_cost',$account_day_cost);
-                //缓存数据具体
-                if(S('account_data',$array_slist)){
-                    $data['code']=200;
-                }else{
-                    $data['code']=403;
-                }
-            }
-
+        //缓存数据具体
+        if(S('account_data',$array_slist)){
+            $data['code']=200;
+        }else{
+            $data['code']=403;
+        }
 
             $this->ajaxReturn($data);
     }
