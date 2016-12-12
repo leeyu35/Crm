@@ -14,7 +14,7 @@
 <script language="javascript">
 $(document).ready(function(e) {
     $("#new_contact").click(function(){
-		$("#contactmain").append('<div class="form-group"><div class="col-sm-1"><input type="text" class="form-control" name="name_n[]" id="inputEmail3" placeholder="联系人"></div><div class="col-sm-2"><input type="text" name="qq_n[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="weixin_n[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="email_n[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="position_n[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="tel_n[]" class="form-control" id="inputEmail3"></div></div>')
+		$("#contactmain").append('<div class="form-group"><div class="col-sm-1"><input type="text" class="form-control" name="name_n[]" id="inputEmail3" required placeholder="联系人"></div><div class="col-sm-2"><input type="text" name="tel_n[]" required placeholder="电话" class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="qq_n[] "placeholder="QQ"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="weixin_n[]" placeholder="微信" class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="email_n[]" placeholder="邮箱"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="position_n[]" placeholder="职位" class="form-control" id="inputEmail3"></div></div>')
 	})
 	$(".de_contact").click(function(){
 		deid=$(this).attr("id");
@@ -34,7 +34,36 @@ $(document).ready(function(e) {
 		
 	})
 	
-	
+		
+$("#formid").submit(function(){
+		if($("#inputEmail3ad").val()=="")
+		{
+			alert("请填写公司名称");
+			$("#inputEmail3ad").select();
+			return false;	
+		}		
+		if($("#website").val()=="" || $("#website").val()=='http://www.')
+		{
+			alert("请填写公司网址");
+			$("#website").select();
+			return false;	
+		}
+		if($("#industry").val()=="")
+		{
+			alert("请选择客户所属行业");
+		
+			return false;	
+		}
+		
+		if($("#inputEmail8se").val()=="")
+		{
+			alert("请选择客户所属省份");
+		
+			return false;	
+		}	
+		
+	})
+
 });
 </script>
 </head>
@@ -43,7 +72,7 @@ $(document).ready(function(e) {
 <div class="container" style="width:100%;" >
 <h3 class="bor-left-bull" >修改客户<small>update Customer</small></h3>
 <br>
-<form action="<?php echo U('upru');?>" method="post" class="form-horizontal">
+<form action="<?php echo U('upru');?>" method="post" class="form-horizontal" id="formid">
 <input type="hidden" name="id" value="<?php echo ($info[id]); ?>">
 <input type="hidden" name="time" value="<?php echo ($info[ctime]); ?>">
 <h4>客户基本信息</h4>
@@ -170,7 +199,7 @@ $(document).ready(function(e) {
     
     <label for="inputEmail3" class="col-sm-1 control-label">APP名称</label>
     <div class="col-sm-3">      
-		<input name="appName" type="text" class="form-control" value="<?php echo ($info['appname']); ?>" id="inputEmail3">
+		<input name="appname" type="text" class="form-control" value="<?php echo ($info['appname']); ?>" id="inputEmail3">
     </div>
 
   </div>
@@ -226,8 +255,14 @@ $(document).ready(function(e) {
     <input type="hidden" name="contactid[]" value="<?php echo ($contact_list[id]); ?>">
     <div class="col-sm-1">
     	<label <?php echo ($k!='1'?'style="display:none;"':''); ?>  class="control-label">联系人</label>
-      	<input type="text" class="form-control" name="name[]" value="<?php echo ($contact_list[name]); ?>" id="inputEmail3" >
+      	<input type="text" class="form-control" name="name[]" required value="<?php echo ($contact_list[name]); ?>" id="inputEmail3" >
     </div>
+    
+    <div class="col-sm-2">
+    	<label <?php echo ($k!='1'?'style="display:none;"':''); ?> class="control-label">电话</label>
+      	<input type="text" class="form-control" name="tel[]" value="<?php echo ($contact_list[tel]); ?>" id="inputEmail3" required>
+    </div>
+
     
     <div class="col-sm-2">
     	<label <?php echo ($k!='1'?'style="display:none;"':''); ?> class="control-label">QQ</label>
@@ -249,14 +284,10 @@ $(document).ready(function(e) {
    
     <div class="col-sm-2">
     	<label <?php echo ($k!='1'?'style="display:none;"':''); ?> class="control-label">职位</label>
-      	<input type="text" class="form-control" name="position[]"  value="<?php echo ($contact_list[position]); ?>" id="inputEmail3">
+      	<input type="text" class="form-control" name="position[]"  value="<?php echo ($contact_list[position]); ?>" id="inputEmail3" >
     </div>
     
     
-    <div class="col-sm-2">
-    	<label <?php echo ($k!='1'?'style="display:none;"':''); ?> class="control-label">电话</label>
-      	<input type="text" class="form-control" name="tel[]" value="<?php echo ($contact_list[tel]); ?>" id="inputEmail3">
-    </div>
     
     <div class="col-sm-1">
     	<label <?php echo ($k!='1'?'style="display:none;"':''); ?> class="control-label" style="color:#fff;">操作执行 </label>
