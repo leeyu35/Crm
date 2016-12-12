@@ -43,7 +43,9 @@ class RefundInvoiceController extends CommonController
             if($time_start!="" and $time_end!="")
             {
                 $time_start=strtotime($time_start);
+                $time_start=strtotime("-1 days",$time_start);
                 $time_end=strtotime($time_end);
+                $time_end=strtotime("+1 days",$time_end);
 
                 $where.=" and a.ctime >= $time_start and a.ctime <= $time_end";
                 $this->time_start=I('get.time_start');
@@ -320,7 +322,9 @@ class RefundInvoiceController extends CommonController
         if($time_start!="" and $time_end!="")
         {
             $time_start=strtotime($time_start);
+            $time_start=strtotime("-1 days",$time_start);
             $time_end=strtotime($time_end);
+            $time_end=strtotime("+1 days",$time_end);
 
             $where.=" and a.ctime >= $time_start and a.ctime <= $time_end";
             $this->time_start=I('get.time_start');
