@@ -343,7 +343,9 @@ class Model {
         // 数据处理
         foreach ($dataList as $key=>$data){
             $dataList[$key] = $this->_facade($data);
+
         }
+
         // 分析表达式
         $options =  $this->_parseOptions($options);
         // 写入数据到数据库

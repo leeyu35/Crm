@@ -323,6 +323,7 @@ class Model {
               // 增加复合主键支持
             if (is_array($pk)) return $result;
             $insertId   =   $this->getLastInsID();
+
             if($insertId) {
                 // 自增主键返回插入ID
                 $data[$pk]  = $insertId;
@@ -1906,5 +1907,6 @@ class Model {
             $this->$name = $value;
         return $this;
     }
-
+ 
+   
 }
