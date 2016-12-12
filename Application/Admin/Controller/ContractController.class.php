@@ -61,7 +61,7 @@ class ContractController extends CommonController
             $time_start=strtotime($time_start);
             $time_end=strtotime($time_end);
 
-            $where.=" and a.ctime > $time_start and a.ctime < $time_end";
+            $where.=" and a.ctime >= $time_start and a.ctime <= $time_end";
             $this->time_start=I('get.time_start');
             $this->time_end=I('get.time_end');
         }
@@ -536,7 +536,7 @@ class ContractController extends CommonController
             $time_start=strtotime($time_start);
             $time_end=strtotime($time_end);
 
-            $where.=" and a.ctime > $time_start and a.ctime < $time_end";
+            $where.=" and a.ctime >= $time_start and a.ctime <= $time_end";
             $this->time_start=I('get.time_start');
             $this->time_end=I('get.time_end');
         }
