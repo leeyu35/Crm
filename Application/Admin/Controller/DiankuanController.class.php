@@ -170,9 +170,7 @@ class DiankuanController extends CommonController
 
                 }
             }
-
             $this->success("提交成功",U("index"));
-
         }else
         {
             $this->error("提交失败");

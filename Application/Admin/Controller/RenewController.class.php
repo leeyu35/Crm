@@ -644,7 +644,9 @@ class RenewController extends  CommonController
         if($time_start!="" and $time_end!="")
         {
             $time_start=strtotime($time_start);
+            $time_start=strtotime("-1 days",$time_start);
             $time_end=strtotime($time_end);
+            $time_end=strtotime("+1 days",$time_end);
 
             $where.=" and a.ctime >= $time_start and a.ctime <= $time_end";
             $this->time_start=I('get.time_start');
@@ -708,7 +710,7 @@ class RenewController extends  CommonController
             $info=$hetong->field("a.*,b.advertiser as gongsi,c.name")->join("a left join jd_customer b on a.advertiser=b.id left join jd_product_line c on a.product_line = c.id")->where("a.id=".I('get.yid'))->find();
             $where1="a.xf_hetonghao='$info[contract_no]'";
         }
-        $list=$hetong->field('a.id,a.advertiser as aid,a.fk_money,a.agent_company,a.payment_time,a.account,a.contract_no,a.contract_start,a.contract_end,a.type,a.users2,a.isguidang,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("$where1 and ".$q_where.$where)->order("a.ctime desc")->select();
+        $list=$hetong->field('a.id,a.advertiser as aid,a.fk_money,a.agent_company,a.payment_type,a.payment_time,a.account,a.contract_no,a.contract_start,a.contract_end,a.type,a.users2,a.isguidang,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("$where1 and ".$q_where.$where)->order("a.ctime desc")->select();
 
         foreach($list as $key => $val)
         {
@@ -763,8 +765,7 @@ class RenewController extends  CommonController
             $uindo=users_info($val['users2']);
             $list2[$key]['submituser']=$uindo[name];
         }
-        dump($list2);
-        exit;
+
         $filename="xufei_excel";
         $headArr=array("公司","合同编号",'APP名称','账户名称','合同金额','显示百度币','付款金额','产品线','返点','提交时间','代理公司','合同类型','保证金','合同开始时间','合同结束时间','付款方式','付款时间','是否归档','销售','提交人');
 
