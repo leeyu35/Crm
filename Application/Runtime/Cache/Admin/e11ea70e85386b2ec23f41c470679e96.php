@@ -66,7 +66,7 @@
 			})
 			move();
 		})
-		
+		/*
 		window.setInterval(showalert, 10000); 
 		function showalert() 
 		{ 
@@ -86,7 +86,7 @@
 					}
 			})
 		} 
-		
+		*/
     });
 	
 </script>
@@ -271,6 +271,9 @@
             </div>
             <div class="liebiao" id="<?php echo U("Account/index");?>">
                 <a>账户列表</a>
+            </div>
+            <div class="liebiao" id="<?php echo U("Accountsem/index");?>"> 
+                <a>账户周消费</a>
             </div>
         </div>
         <div class="li5">

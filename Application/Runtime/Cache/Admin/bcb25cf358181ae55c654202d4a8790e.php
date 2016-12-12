@@ -249,7 +249,11 @@
     <div class="col-sm-3">
       <input type="text" class="form-control" autocomplete="off" name="appname" id="appname" value="<?php echo ($info[appname]); ?>" >
     </div>
-    
+        <label for="inputEmail3" class="col-sm-1 control-label">销售</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" autocomplete="off" name="market" id="appname" value="<?php echo ($info[market]); ?>" >
+    </div>
+
 
     
   </div>
@@ -345,7 +349,7 @@
     </div>
     
   </div>
- 
+ <!--
  <div class="form-group diankuan">
 
     <label for="inputEmail3" class="col-sm-2 control-label">是否开票</label>
@@ -364,7 +368,7 @@
     	<input type="text" name="back_money_time" class="Wdate form-control" id="back_money_time" onClick="WdatePicker()">
     </div>
   </div>
- 
+ -->
   <h4 class="bor-left-bull" >合同备注</h4>
   <hr>
   <div class="form-group">
