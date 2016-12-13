@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded',function(){
                        {$daiban}
                     </span>
                     待办<br><br>
-                    <a href="{:U("Contract/index?shenhe=0")}" class="btn btn-success" style="background:#693; color:#fff;">
+                    <a href="{:U("Contract/index?shenhe=0&httype=3")}" class="btn btn-success" style="background:#693; color:#fff;">
                     待审核合同 <if condition="$hetong neq 0"><span class="badge">{$hetong?$hetong:'0'}</span></if>
                     </a>
                     <a  href="{:U("Renew/index2?shenhe=0")}"  class="btn btn-primary" >

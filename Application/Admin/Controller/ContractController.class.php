@@ -45,10 +45,18 @@ class ContractController extends CommonController
         $httype=I('get.httype');
         if($httype!='')
         {
-            $where.=" and a.type=2  and a.isxufei='0'";
-            $this->httype=$httype;
+            if($httype!=3)
+            {
+                $where.=" and a.type=2  and a.isxufei='0'";
+                $this->httype=$httype;
+            }else
+            {
+                $where.=" and a.isxufei='0'";
+            }
+
         }else
         {
+
             $where.=" and a.type=1  and a.isxufei='0'";
             $this->httype=$httype;
         }
