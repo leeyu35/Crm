@@ -93,7 +93,7 @@ class NewCaiwuController extends CommonController
 
         //续费的记录 1预付 2垫付
         $hetong=M("contract");
-        $xflist=$hetong->field('fk_money,payment_time,payment_type')->where("xf_contratcid=$contract_id")->order("payment_time asc,id desc")->select();
+        $xflist=$hetong->field('fk_money,payment_time,payment_type')->where("xf_contractid=$contract_id")->order("payment_time asc,id desc")->select();
         $yue=0;
         foreach ($xflist as $key=>$val)
         {
