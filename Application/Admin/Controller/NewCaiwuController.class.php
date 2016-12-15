@@ -121,10 +121,11 @@ class NewCaiwuController extends CommonController
             }elseif($a['date']<$b['date'])
             {
                 return 1;
-            }elseif($a['date']=$b['date'])
+            }elseif($a['date']==$b['date'])
             {
                 return 0;
-         });
+            }
+        });
         // dump($history);
         $this->yue=$yue;
         $this->history=$history;
