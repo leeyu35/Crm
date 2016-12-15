@@ -99,11 +99,11 @@ class NewCaiwuController extends CommonController
         {
             if($val[payment_type]==1)
             {
-                $history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"付款".$val['fk_money'],"yue"=>$yue+=$val['fk_money']);
+                $history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 付款".$val['fk_money'],"yue"=>$yue+=$val['fk_money']);
 
             }elseif($val[payment_type]==2)
             {
-                $history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"垫款".$val['fk_money'],"yue"=>$yue-=$val['fk_money']);
+                $history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 垫款".$val['fk_money'],"yue"=>$yue-=$val['fk_money']);
 
             }
         }
