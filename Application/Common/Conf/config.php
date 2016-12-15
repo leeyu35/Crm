@@ -24,15 +24,24 @@ $config_1= array(
     'DB_SLAVE_NO'           =>  '', // 指定从服务器序号
     */
     /* //PDO连接方式*/
-    'DB_TYPE' => 'pgsql', // 数据库类型
-    'DB_HOST'               =>  'rds455ekt1422z8sh7e2.pg.rds.aliyuncs.com', // 服务器地址
-    'DB_NAME'               =>  'crm',          // 数据库名
-    'DB_USER' => 'rdspg', // 用户名
-    'DB_PWD' => 'anmeng', // 密码
-    'DB_PORT'               =>  '3433',        // 端口
-    'DB_PREFIX' => 'jd_', // 数据库表前缀
-    //'DB_DSN' => 'pgsql:host=localhost;port=5432;dbname=crm;',
 
+    'DB_TYPE' => 'pgsql', // 数据库类型
+    'DB_HOST'               =>  'localhost', // 服务器地址
+    'DB_NAME'               =>  'crm',          // 数据库名
+    'DB_USER' => 'postgres', // 用户名
+    'DB_PWD' => '123456', // 密码
+    'DB_PORT'               =>  '5432',        // 端口
+    'DB_PREFIX' => 'jd_', // 数据库表前缀
+    /*
+    'DB_TYPE' => 'mongo', // 数据库类型
+    'DB_HOST'               =>  '101.200.174.136', // 服务器地址
+    'DB_NAME'               =>  'yushan',          // 数据库名
+    'DB_USER' => 'yushan', // 用户名
+    'DB_PWD' => 'yushan', // 密码
+    'DB_PORT'               =>  '10222',        // 端口
+    'DB_PREFIX' => '', // 数据库表前缀
+*/
+    //'DB_DSN' => 'pgsql:host=localhost;port=5432;dbname=crm;',
 
     /* URL设置 */
     'URL_CASE_INSENSITIVE'  =>  true,   // 默认false 表示URL区分大小写 true则表示不区分大小写
@@ -75,8 +84,16 @@ $config_1= array(
        // 'news/:year/:month/:day' => array('News/archive', 'status=1'),
         'login'               => 'Public/login',
         'adminIndex'               => 'Public/index',
+        //'sqladmin'               => 'Sqladmin/index',
         //'news/read/:id'          => '/news/:1',
     ),
-);
+    'SHOW_PAGE_TRACE' =>true,
+	/*
+	 'TOKEN_ON'      =>    true,  // 是否开启令牌验证 默认关闭
+ 'TOKEN_NAME'    =>    '__hash__',    // 令牌验证的表单隐藏字段名称，默认为__hash__
+ 'TOKEN_TYPE'    =>    'md5',  //令牌哈希验证规则 默认为MD5
+ 'TOKEN_RESET'   =>    true,  //令牌验证出错后是否重置令牌 默认为true
+    */
+	);
 
 return $config_1;

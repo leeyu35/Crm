@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+<link rel="stylesheet" type="text/css" href="/Public/css/style.css">
+<script src="/Public/js/jquery-3.1.0.min.js"></script>
+<script src="/Public/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+<span style="position:fixed; top:10px; font-size:18px; background:#999; color:#F00; z-index:999;">余额：{$yue}</span>
+<section id="cd-timeline" class="cd-container">
+	<volist id="history" name="history">
+	<div class="cd-timeline-block">
+		<div class="cd-timeline-img cd-picture">
+			
+		</div>
+
+		<div class="cd-timeline-content">
+			<h2>{$history[mes]}</h2>
+			<span class="cd-date">{$history[date]}</span>
+		</div>
+	</div>
+    </volist>
+    
+	
+</section>
+
+</body>
+</html>

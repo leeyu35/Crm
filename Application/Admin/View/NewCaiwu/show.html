@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+
+<link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+<script src="/Public/js/jquery-3.1.0.min.js"></script>
+<script src="/Public/js/bootstrap.min.js"></script>
+
+<!--引入CSS-->
+<link rel="stylesheet" type="text/css" href="/Public/js/dist/webuploader.css">
+
+<!--引入JS-->
+<style type="text/css">
+.control-label{ text-align:left !important;}
+.bor{ border:1px #999 solid; border-radius:5px; padding:10px; margin-bottom:20px;}
+</style>
+</head>
+
+<body>
+<div class="container" style="width:100%;" >
+<h3 class="bor-left-bull" >该公司下所有合同<small>show Customer</small></h3>
+<br>
+<div class="row">
+	<volist id="list" name="list">
+    	<div class="col-lg-3 ">
+        	<div class="bor">
+            	合同类型：{$list.name}<br>
+				合同编号：{$list.contract_no}<br>
+            	合同余额：{$list[yu_e]?$list[yu_e]:'暂无信息'}&nbsp;<br>
+				 <a href="{:U("Renew/index?id=$list[id]")}" data-toggle="tooltip" data-placement="top" title="续费"><span class="glyphicon glyphicon-transfer"></span></a>&nbsp;|
+        <a  href="{:U("Account/index?contract_id=$list[id]")}" data-toggle="tooltip" data-placement="top" title="账户"><span class="glyphicon glyphicon-list"></span></a>&nbsp;|
+        <a  href="{:U("history?contract_id=$list[id]")}" data-toggle="tooltip" data-placement="top" title="历史记录"><span class="glyphicon glyphicon-time"></span></a>&nbsp;|
+        <a  href="{:U("Backmoney/add2?contract_id=$list[id]&adid=$list[aid]")}" data-toggle="tooltip" data-placement="top" title="添加该合同回款"><span class="glyphicon glyphicon-usd"></span></a>
+        
+            </div>
+        
+        </div>
+    </volist>
+	
+</div>
+
+</div>
+<br>
+<br>
+<script>
+   $(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script>
+</body>
+</html>

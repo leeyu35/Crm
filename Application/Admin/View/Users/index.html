@@ -7,6 +7,9 @@
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
 <script src="/Public/js/bootstrap.min.js"></script>
+<style type="text/css">
+.delete{ color:#F00; font-size:11px;}
+</style>
 </head>
 
 <body>
@@ -45,7 +48,13 @@
     <tr>
     	<td>{$k}</td>
         <td><img src="{$list[image]}" width="50" height="50" class="img-circle"/></td>
-    	<td>{$list[users]}</td>
+    	<td>
+        <if condition="$list[is_delete] eq '1'">
+        	<del>{$list[users]}</del>
+        <else />
+            {$list[users]}
+        </if>
+        {$list[is_delete]==1?'<span class="delete">已删除,不可登录！</span>':''}</td>
     	<td>{$list[name]}</td>
     	<td>{$list[groupname]}</td>
     	<td>{$list[manager]==0?'不是':'是'}</td>

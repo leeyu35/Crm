@@ -34,6 +34,8 @@ class BackmoneyController extends CommonController
                 $this->type=$type;
             }
 
+
+
             //时间条件
             $time_start=I('get.time_start');
             $time_end=I('get.time_end');
@@ -76,6 +78,13 @@ class BackmoneyController extends CommonController
         $this->display();
     }
 
+    public function add2(){
+        //代理公司
+        $agentcompany=M("AgentCompany");
+        $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
+        $this->display();
+    }
+
     public function keyup_adlist(){
         $Blog = R('Contract/keyup_adlist');
         echo $Blog;
@@ -89,6 +98,7 @@ class BackmoneyController extends CommonController
         $Diankuan->create();
         $Diankuan->b_time=strtotime($Diankuan->b_time);
         $Diankuan->ctime=time();
+        /*
         //检查是否有这个客户
         $Customer=M("Customer");
         $co=$Customer->where("advertiser='".I('post.gongsi')."'")->count();
@@ -97,6 +107,7 @@ class BackmoneyController extends CommonController
             $this->error("没有这个公司!");
             exit;
         }
+        */
         if($Diankuan->advertiser=='')
         {
             $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
