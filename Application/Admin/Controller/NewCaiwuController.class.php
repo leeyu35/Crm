@@ -80,7 +80,7 @@ class NewCaiwuController extends CommonController
        $id=I('get.id');
        $hetong=M("contract");
        // $list=$hetong->where("advertiser =$id and isxufei=0")->select();
-        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.yu_e,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->where("a.advertiser =$id and isxufei=0")->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->order("a.ctime desc")->select();
+        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->where("a.advertiser =$id and isxufei=0")->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->order("a.ctime desc")->select();
         $this->list=$list;
 
         $this->display();
@@ -124,8 +124,7 @@ class NewCaiwuController extends CommonController
             }elseif($a['date']=$b['date'])
             {
                 return 0;
-            }
-        });
+         });
         // dump($history);
         $this->yue=$yue;
         $this->history=$history;
