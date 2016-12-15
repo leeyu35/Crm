@@ -89,9 +89,11 @@ class NewCaiwuController extends CommonController
 
     public function history(){
         $contract_id=I('get.contract_id');
+        $ht_on=M("Contract")->field("contract_no")->find($contract_id);
+
         //续费的记录 1预付 2垫付
         $hetong=M("contract");
-        $xflist=$hetong->field('fk_money,payment_time,payment_type')->where("xf_contractid=$contract_id")->order("payment_time asc,id desc")->select();
+        $xflist=$hetong->field('fk_money,payment_time,payment_type')->where("xf_contratcid=$contract_id")->order("payment_time asc,id desc")->select();
         $yue=0;
         foreach ($xflist as $key=>$val)
         {
@@ -114,6 +116,13 @@ class NewCaiwuController extends CommonController
             $history[]=array("date"=>date("Y-m-d",$val[b_time]),"mes"=>"回款".$val['b_money'],"yue"=>$yue+=$val['b_money']);
         }
 
+        //发票
+        $Invoice=M("Invoice");
+        $fplist=$Invoice->field('kp_time,money')->where("contract_no='".$ht_on['contract_no']."' and audit_1=1 and audit_2=1")->select();
+        foreach ($fplist as $key=>$val)
+        {
+            $history[]=array("date"=>date("Y-m-d",$val[kp_time]),"mes"=>"开票".$val['money'],"yue"=>$yue+=0);
+        }
         uasort($history,function ($a,$b){
             if($a['date']>$b['date'])
             {
