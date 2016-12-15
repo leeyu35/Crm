@@ -26,11 +26,11 @@ $config_1= array(
     /* //PDO连接方式*/
 
     'DB_TYPE' => 'pgsql', // 数据库类型
-    'DB_HOST'               =>  'localhost', // 服务器地址
+    'DB_HOST'               =>  'rds455ekt1422z8sh7e2.pg.rds.aliyuncs.com', // 服务器地址
     'DB_NAME'               =>  'crm',          // 数据库名
-    'DB_USER' => 'postgres', // 用户名
-    'DB_PWD' => '123456', // 密码
-    'DB_PORT'               =>  '5432',        // 端口
+    'DB_USER' => 'rdspg', // 用户名
+    'DB_PWD' => 'anmeng', // 密码
+    'DB_PORT'               =>  '3433',        // 端口
     'DB_PREFIX' => 'jd_', // 数据库表前缀
     /*
     'DB_TYPE' => 'mongo', // 数据库类型
