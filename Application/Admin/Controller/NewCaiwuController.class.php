@@ -82,9 +82,17 @@ class NewCaiwuController extends CommonController
        // $list=$hetong->where("advertiser =$id and isxufei=0")->select();
         $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->where("a.advertiser =$id and isxufei=0")->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->order("a.ctime desc")->select();
         $this->list=$list;
+        foreach ($list as $key=>$val)
+        {
+            $zong+=$this->yue($val[id]);
+        }
+        //总余额 （通过zong方法得出）
+        $this->zong=$zong;
+        //客户详细信息
+        $this->customer_info=kehu($id);
 
         $this->display();
-        dump($list);
+       // dump($list);
     }
 
     public function history(){
@@ -99,12 +107,10 @@ class NewCaiwuController extends CommonController
         {
             if($val[payment_type]==1)
             {
-                $history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 付款".$val['fk_money'],"yue"=>$yue+=$val['fk_money']);
-
+                $history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 付款".num_format($val['fk_money']),"yue"=>$yue+=$val['fk_money']);
             }elseif($val[payment_type]==2)
             {
-                $history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 垫款".$val['fk_money'],"yue"=>$yue-=$val['fk_money']);
-
+                $history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 垫款".num_format($val['fk_money']),"yue"=>$yue-=$val['fk_money']);
             }
         }
 
@@ -113,7 +119,7 @@ class NewCaiwuController extends CommonController
         $bkm_list=$backmoney->field('b_money,b_time')->where("contract_id=$contract_id")->select();
         foreach ($bkm_list as $key=>$val)
         {
-            $history[]=array("date"=>date("Y-m-d",$val[b_time]),"mes"=>"回款".$val['b_money'],"yue"=>$yue+=$val['b_money']);
+            $history[]=array("date"=>date("Y-m-d",$val[b_time]),"mes"=>"回款".num_format($val['b_money']),"yue"=>$yue+=$val['b_money']);
         }
 
         //发票
@@ -121,7 +127,7 @@ class NewCaiwuController extends CommonController
         $fplist=$Invoice->field('kp_time,money')->where("contract_no='".$ht_on['contract_no']."' and audit_1=1 and audit_2=1")->select();
         foreach ($fplist as $key=>$val)
         {
-            $history[]=array("date"=>date("Y-m-d",$val[kp_time]),"mes"=>"开票".$val['money'],"yue"=>$yue+=0);
+            $history[]=array("date"=>date("Y-m-d",$val[kp_time]),"mes"=>"开票".num_format($val['money']),"yue"=>$yue+=0);
         }
         uasort($history,function ($a,$b){
             if($a['date']>$b['date'])
@@ -139,5 +145,37 @@ class NewCaiwuController extends CommonController
         $this->yue=$yue;
         $this->history=$history;
        $this->display();
+    }
+
+    //参数 合同ID
+    public function yue($id){
+        $contract_id=$id;
+        //续费的记录 1预付 2垫付
+        $hetong=M("contract");
+        $xflist=$hetong->field('fk_money,payment_time,payment_type')->where("xf_contractid=$contract_id")->order("payment_time asc,id desc")->select();
+        $yue=0;
+        foreach ($xflist as $key=>$val)
+        {
+            if($val[payment_type]==1)
+            {
+                $yue+=$val['fk_money'];
+                //$history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 付款".num_format($val['fk_money']),"yue"=>$yue+=$val['fk_money']);
+            }elseif($val[payment_type]==2)
+            {
+                $yue-=$val['fk_money'];
+                //$history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 垫款".num_format($val['fk_money']),"yue"=>$yue-=$val['fk_money']);
+            }
+        }
+
+        //回款
+        $backmoney=M("Back_money");
+        $bkm_list=$backmoney->field('b_money,b_time')->where("contract_id=$contract_id")->select();
+        foreach ($bkm_list as $key=>$val)
+        {
+            $yue+=$val['b_money'];
+            //$history[]=array("date"=>date("Y-m-d",$val[b_time]),"mes"=>"回款".num_format($val['b_money']),"yue"=>$yue+=$val['b_money']);
+        }
+
+        return $yue;
     }
 }

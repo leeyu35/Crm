@@ -11,8 +11,8 @@
 </head>
 
 <body>
-<span style="position:fixed; top:10px; font-size:18px; background:#999; color:#F00; z-index:999;">余额：{$yue}</span>
-<section id="cd-timeline" class="cd-container">
+<span style="position:fixed; top:10px; font-size:18px; background:#999; color:#F00; z-index:999;">余额：{$yue|num_format}</span>
+<section id="cd-timeline" class="cd-container" style="width:800px;">
 	<volist id="history" name="history">
 	<div class="cd-timeline-block">
 		<div class="cd-timeline-img cd-picture">

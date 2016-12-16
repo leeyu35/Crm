@@ -21,15 +21,22 @@
 
 <body>
 <div class="container" style="width:100%;" >
-<h3 class="bor-left-bull" >该公司下所有合同<small>show Customer</small></h3>
+<h3 class="bor-left-bull" >{$customer_info['advertiser']} <span class="glyphicon glyphicon-share-alt" style="font-size:10px;"></span> 合同列表<small></small></h3>
 <br>
+<div></div>
+<div class="alert alert-danger" role="alert">
+  <a href="#" class="alert-link">金额：{$zong}</a>
+</div>
+<br>
+
 <div class="row">
 	<volist id="list" name="list">
-    	<div class="col-lg-3 ">
+    	<div class="col-sm-3">
         	<div class="bor">
-            	合同类型：{$list.name}<br>
+            	合同类型：{$list.name}<if condition="$list[isguidang] eq 1"><span  data-toggle="tooltip" data-placement="left" title="合同已归档" class="glyphicon glyphicon-folder-close" style="color:#0492d9;"></span></if><br>
+				APP&nbsp;名称： {$list.appname}<br>
 				合同编号：{$list.contract_no}<br>
-            	合同余额：{$list[yu_e]?$list[yu_e]:'暂无信息'}&nbsp;<br>
+            	<!--合同余额：{$list[yu_e]?$list[yu_e]:'暂无信息'}&nbsp;<br>-->
 				 <a href="{:U("Renew/index?id=$list[id]")}" data-toggle="tooltip" data-placement="top" title="续费"><span class="glyphicon glyphicon-transfer"></span></a>&nbsp;|
         <a  href="{:U("Account/index?contract_id=$list[id]")}" data-toggle="tooltip" data-placement="top" title="账户"><span class="glyphicon glyphicon-list"></span></a>&nbsp;|
         <a  href="{:U("history?contract_id=$list[id]")}" data-toggle="tooltip" data-placement="top" title="历史记录"><span class="glyphicon glyphicon-time"></span></a>&nbsp;|
