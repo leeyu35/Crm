@@ -262,6 +262,7 @@ class RenewController extends  CommonController
 
 
 
+
         if($insid=$hetong->add()){
 
             if($insid==1)
@@ -358,8 +359,9 @@ class RenewController extends  CommonController
 
         //显示垫付信息
         $diankuan=M("Diankuan");
-        $this->dinfo=$diankuan->find($info['contract_id']);
 
+        $this->dinfo=$diankuan->where("contract_id=".I('get.id'))->find();
+       
         $this->display();
 
     }
