@@ -73,7 +73,7 @@ $(document).ready(function(e) {
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$k}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}"><a href="{:U("Customer/show?id=$list[aid]")}">{$list[advertiser]}</a></td>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[appname]}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}" align="right">{$list[contract_money]|num_format}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}" align="right">{$list[money]|num_format}&nbsp;&nbsp;&nbsp;&nbsp;</td>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[rebates_proportion]}%</td>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[a_users]}</td>
     	<!--<td>2016年8月15日</td>-->
@@ -104,7 +104,8 @@ $(document).ready(function(e) {
 
         <td>
         <!--<a href="#">发票</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">财务</a><br>-->
-        <a href="{:U("updata?id=$list[id]&yid=$info[id]")}"  data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{:U("delete?id=$list[id]&yid=$info[id]")}" {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>
+        
+       <!-- <a href="{:U("updata?id=$list[id]&yid=$info[id]")}"  data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{:U("delete?id=$list[id]&yid=$info[id]")}" {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>-->
         </td>
     </tr>
     </volist>

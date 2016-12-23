@@ -82,7 +82,7 @@ $("#gongsi").on("blur",function(){
 <form action="{:U('addru')}" method="post" class="form-horizontal" enctype="multipart/form-data"  id="formid" >
 <input type="hidden" name="advertiser" id="advertiser" value="{$Think.get.adid}">
 <input type="hidden" name="submituser" id="submituser" value="{$Think.cookie.u_id}">
-<input type="hidden" name="contract_id" id="advertiser" value="{$Think.get.contract_id}">
+<input type="hidden" name="xf_contractid" id="xf_contractid" value="{$Think.get.contract_id}">
 <h4 class="bor-left-bull" >回款基本信息</h4>
 <hr>
 
@@ -90,7 +90,7 @@ $("#gongsi").on("blur",function(){
   
     
     
-    <label for="inputEmail3" class="col-sm-2 control-label">回款主体</label>
+    <!--<label for="inputEmail3" class="col-sm-2 control-label">回款主体</label>
     <div class="col-sm-3">
       <select  class="form-control" name="b_company" id="b_company">        
         <volist id="agentcompany" name="agentcompany" key="k">
@@ -98,12 +98,9 @@ $("#gongsi").on("blur",function(){
        </volist>
 
       </select>
-    </div>
+    </div>-->
     
-    <label for="inputEmail3" class="col-sm-1 control-label">APP名称或简称</label>
-    <div class="col-sm-2">
-      <input type="text" class="form-control" autocomplete="off" name="appname" id="appname" value="{$info[appname]}" >
-    </div>
+    
     
     
   </div>
@@ -115,18 +112,21 @@ $("#gongsi").on("blur",function(){
   
   
   <div class="form-group">
-  
-    <label for="contract_money" class="col-sm-2 control-label">回款金额</label>
-    <div class="col-sm-3">
+  	<label for="inputEmail3" class="col-sm-2 control-label">APP名称或简称</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" autocomplete="off" name="appname" id="appname" value="{$info[appname]}" >
+    </div>
+    <label for="contract_money" class="col-sm-1 control-label">回款金额</label>
+    <div class="col-sm-2">
       	<div class="input-group">
-        <input type="text" class="form-control" name="b_money" id="b_money">
+        <input type="text" class="form-control" name="money" id="money">
     	<span class="input-group-addon">元</span>
         </div>
     </div>
     
     <label for="inputEmail3" class="col-sm-1 control-label">回款日期</label>
     <div class="col-sm-2">
-    	<input type="text" name="b_time" class="Wdate form-control" id="b_time" onClick="WdatePicker()">
+    	<input type="text" name="payment_time" class="Wdate form-control" id="b_time" onClick="WdatePicker()">
     </div>
     
 

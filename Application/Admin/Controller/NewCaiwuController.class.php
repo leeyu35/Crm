@@ -53,7 +53,7 @@ class NewCaiwuController extends CommonController
         $count      = $coustomer->where("id!=0 and ".$q_where.$where)->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
-        $list=$coustomer->field('id,advertiser,industry,website,product_line,ctime,city,appName,submituser')->where("id!=0 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order('ctime desc')->select();
+        $list=$coustomer->field('id,advertiser,yu_e,huikuan,industry,website,product_line,ctime,city,appName,submituser,type')->where("id!=0 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order('ctime desc')->select();
 
         $contact=M('ContactList');
 
@@ -66,6 +66,7 @@ class NewCaiwuController extends CommonController
             $contact_one=$contact->field('name,tel')->where("customer_id=$val[id]")->find();
             $list[$key]['contact']=$contact_one['name'];
             $list[$key]['tel']=$contact_one['tel'];
+            $list[$key]['yue']=$val['huikuan']-$val['yu_e'];
             //提交人
             $uindo=users_info($val['submituser']);
             $list[$key]['submituser']=$uindo[name];
@@ -80,54 +81,73 @@ class NewCaiwuController extends CommonController
        $id=I('get.id');
        $hetong=M("contract");
        // $list=$hetong->where("advertiser =$id and isxufei=0")->select();
-        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->where("a.advertiser =$id and isxufei=0")->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->order("a.ctime desc")->select();
-        $this->list=$list;
+        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name,a.yu_e,a.huikuan,a.bukuan,a.type')->where("a.advertiser =$id and isxufei=0")->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->order("a.ctime desc")->select();
+
         foreach ($list as $key=>$val)
         {
-            $zong+=$this->yue($val[id]);
+            //$zong+=$this->yue($val[id]);
+            $list[$key]['yue']=$val['huikuan']-$val['yu_e'];
         }
-        //总余额 （通过zong方法得出）
-        $this->zong=$zong;
-        //客户详细信息
-        $this->customer_info=kehu($id);
+        $this->list=$list;
 
+
+        //客户详细信息
+        $customer_info=kehu($id);
+        $this->customer_info=$customer_info;
+        $this->zong=$customer_info[huikuan]-$customer_info[yu_e];
         $this->display();
        // dump($list);
     }
 
     public function history(){
         $contract_id=I('get.contract_id');
-        $ht_on=M("Contract")->field("contract_no")->find($contract_id);
+        $ht_on=M("Contract")->field("contract_no,yu_e,bukuan,huikuan,invoice")->find($contract_id);
 
         //续费的记录 1预付 2垫付
-        $hetong=M("contract");
-        $xflist=$hetong->field('fk_money,payment_time,payment_type')->where("xf_contractid=$contract_id")->order("payment_time asc,id desc")->select();
+        $hetong=M("RenewHuikuan");
+        $xflist=$hetong->field('money,payment_time,payment_type,account,audit_1,audit_2,type')->where("xf_contractid=$contract_id")->order("payment_time asc,id desc")->select();
         $yue=0;
+        $bukuan=0;
+        $account=M("Account");
+
         foreach ($xflist as $key=>$val)
         {
+            //账户名称
+            $account_name=$account->field('a_users')->find($val['account']);
+            $account_str="<p>账户名称：$account_name[a_users]</p>";
+            //审核状态
+
             if($val[payment_type]==1)
             {
-                $history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 付款".num_format($val['fk_money']),"yue"=>$yue+=$val['fk_money']);
+                $history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 付款".num_format($val['money']).$account_str,"yue"=>$yue-=$val['money'],"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
             }elseif($val[payment_type]==2)
             {
-                $history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 垫款".num_format($val['fk_money']),"yue"=>$yue-=$val['fk_money']);
+                $history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 垫款".num_format($val['money']).$account_str,"yue"=>$yue-=$val['money'],"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
+            }elseif($val[payment_type]==3)
+            {
+                $history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 补款".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=$val['money'],"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
+
             }
         }
 
         //回款
-        $backmoney=M("Back_money");
-        $bkm_list=$backmoney->field('b_money,b_time')->where("contract_id=$contract_id")->select();
+        $backmoney=M("RenewHuikuan");
+        $bkm_list=$hetong->field('money,payment_time,payment_type,account,audit_1,audit_2')->where("xf_contractid=$contract_id and is_huikuan=1")->order("payment_time asc,id desc")->select();
+
         foreach ($bkm_list as $key=>$val)
         {
-            $history[]=array("date"=>date("Y-m-d",$val[b_time]),"mes"=>"回款".num_format($val['b_money']),"yue"=>$yue+=$val['b_money']);
+            $history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"回款".num_format($val['money'])."<p></p>","yue"=>$yue+=$val['money'],"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
         }
 
         //发票
         $Invoice=M("Invoice");
-        $fplist=$Invoice->field('kp_time,money')->where("contract_no='".$ht_on['contract_no']."' and audit_1=1 and audit_2=1")->select();
+        $fplist=$Invoice->field('kp_time,money,audit_1,audit_2,ctime')->where("contract_no='".$ht_on['contract_no']."'")->order("ctime desc")->select();
+
+        //echo $Invoice->_sql();
         foreach ($fplist as $key=>$val)
         {
-            $history[]=array("date"=>date("Y-m-d",$val[kp_time]),"mes"=>"开票".num_format($val['money']),"yue"=>$yue+=0);
+            $kptime=$val[kp_time]!=''?date("Y-m-d",$val[kp_time]):'暂无';
+            $history[]=array("date"=>date("Y-m-d",$val[ctime]),"mes"=>"开票".num_format($val['money'])."<p>开票时间：".$kptime."</p>","yue"=>$yue+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
         }
         uasort($history,function ($a,$b){
             if($a['date']>$b['date'])
@@ -142,7 +162,9 @@ class NewCaiwuController extends CommonController
             }
         });
         // dump($history);
-        $this->yue=$yue;
+        $this->yue=$ht_on['huikuan']-$ht_on['yu_e'];
+        $this->bukuan=$ht_on['bukuan'];
+        $this->invoice=$ht_on['invoice'];
         $this->history=$history;
        $this->display();
     }
@@ -158,7 +180,7 @@ class NewCaiwuController extends CommonController
         {
             if($val[payment_type]==1)
             {
-                $yue+=$val['fk_money'];
+                $yue-=$val['fk_money'];
                 //$history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 付款".num_format($val['fk_money']),"yue"=>$yue+=$val['fk_money']);
             }elseif($val[payment_type]==2)
             {
@@ -175,7 +197,6 @@ class NewCaiwuController extends CommonController
             $yue+=$val['b_money'];
             //$history[]=array("date"=>date("Y-m-d",$val[b_time]),"mes"=>"回款".num_format($val['b_money']),"yue"=>$yue+=$val['b_money']);
         }
-
         return $yue;
     }
 }

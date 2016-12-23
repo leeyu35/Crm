@@ -51,6 +51,8 @@ $(document).ready(function(e) {
     	<th>广告主公司名称</th>
         <th>app名称</th>
     	<th>所属行业</th>
+    	<th>余额</th>
+    	<th>总回款金额</th>
        
         <th>联系人</th>
         <th>联系人电话</th>
@@ -64,6 +66,8 @@ $(document).ready(function(e) {
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[advertiser]}</td>
         <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[appname]}</td>
         <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[industry]}</td>
+        <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[yue]|num_format}</td>
+        <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[huikuan]|num_format}</td>
     	
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[contact]}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[tel]}</td>

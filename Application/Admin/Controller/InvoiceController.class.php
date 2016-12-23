@@ -95,6 +95,17 @@ class InvoiceController extends CommonController
 
         $this->display();
     }
+    public function add2(){
+        //代理公司
+        $agentcompany=M("AgentCompany");
+        $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
+        //客户所属
+        $adid=I('get.adid');
+        $this->kehu=kehu($adid);
+        //dump(kehu($adid));
+
+        $this->display();
+    }
     //输入公司名称
     public function keyup_adlist(){
         $Blog = R('Contract/keyup_adlist');
@@ -127,13 +138,13 @@ class InvoiceController extends CommonController
     public function addru(){
 
         $Refund=M("Invoice");
-        $Refund->create();
+        $postdate=$Refund->create();
         $Refund->ctime=time();
         $Refund->users2=cookie('u_id');
         //检查是否有这个客户
         $Customer=M("Customer");
         $co=$Customer->where("advertiser='".I('post.gongsi')."'")->count();
-        if($co==0)
+        if($co==0 and $postdate['invoice_head']=='')
         {
             $this->error("没有这个公司!");
             exit;
@@ -144,6 +155,8 @@ class InvoiceController extends CommonController
             exit;
         }
         if($Refund->add()){
+            //如果申请发票添加成功则改变合同发票总额
+            money_change($postdate['invoice_head'],$postdate['contract_id'],5,$postdate['money']);
             $this->success("申请成功",U("index"));
 
         }else
@@ -242,6 +255,14 @@ class InvoiceController extends CommonController
             }
             if($table->where("id=$id")->setField($type,$shenhe))
             {
+                //如果是审核不通过的话则减去客户总额
+                if($shenhe==2)
+                {
+                    $xfinfo=$table->find($id);
+                    //advertiser,xf_contractid,payment_type,fk_money
+                    money_reduce($xfinfo['invoice_head'],$xfinfo['contract_id'],5,$xfinfo['money']);
+
+                }
                 $this->success('审核成功',U('index'));
                 //修改审核者
                 if($type=='audit_1')

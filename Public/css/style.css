@@ -134,10 +134,11 @@ Main components
 }
 @media only screen and (min-width: 1170px) {
   .cd-timeline-img {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     left: 50%;
-    margin-left: -30px;
+    margin-left: -20px;
+	margin-top:10px;
     /* Force Hardware Acceleration in WebKit */
     -webkit-transform: translateZ(0);
     -webkit-backface-visibility: hidden;

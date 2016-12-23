@@ -32,6 +32,7 @@ class RenewController extends  CommonController
                 $coustomer=M('Customer');
                 $zsql=$coustomer->field("id")->where(" advertiser like '%".I('get.search_text')."%'")->select(false);
                 $where.=" and  a.id!='0' and a.advertiser in($zsql)";
+
             }
             if($type=='contract_no')
             {
@@ -82,10 +83,10 @@ class RenewController extends  CommonController
         $q_where=quan_where(__CONTROLLER__,"a");
         $renew_huikuan=M('RenewHuikuan');
         $contact_id=I('get.id');
-        $count      = $renew_huikuan->field('a.id,a.advertiser,a.money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and a.xf_contractid='$contact_id' and ".$q_where.$where)->count();// 查询满足要求的总记录数
+        $count      = $renew_huikuan->field('a.id,a.advertiser,a.money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.xf_contractid='$contact_id' and ".$q_where.$where)->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
-        $list=$renew_huikuan->field('a.id,a.advertiser as aid,a.users2,a.rebates_proportion,a.account,a.appname,a.money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and a.xf_contractid='$contact_id'  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
+        $list=$renew_huikuan->field('a.id,a.advertiser as aid,a.users2,a.rebates_proportion,a.account,a.appname,a.money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.xf_contractid='$contact_id'  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
         foreach($list as $key => $val)
         {
             //提交人
@@ -117,7 +118,10 @@ class RenewController extends  CommonController
                 $where.=" and  a.id!='0' and a.advertiser in($zsql)";
 
             }
-
+            if($type=='contract_no')
+            {
+                $where.=" and a.id!='0' and a.contract_no like '%".I('get.search_text')."%'";
+            }
             if($type=='appname')
             {
                 $where.=" and a.id!='0' and a.appname like '%".I('get.search_text')."%'";
@@ -126,7 +130,6 @@ class RenewController extends  CommonController
             $this->ser_txt=I('get.search_text');
 
         }
-
         //时间条件
         $time_start=I('get.time_start');
         $time_end=I('get.time_end');
@@ -164,11 +167,11 @@ class RenewController extends  CommonController
         }
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
-        $RenewHuikuan=M('RenewHuikuan');
-        $count      = $RenewHuikuan->field('a.id,a.advertiser,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and ".$q_where.$where)->count();// 查询满足要求的总记录数
+
+        $count      = $hetong->field('a.id,a.advertiser,a.contract_no,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei=1 and ".$q_where.$where)->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
-        $list=$RenewHuikuan->field('a.id,a.advertiser as aid,a.users2,a.xf_contractid,a.submituser,a.rebates_proportion,a.account,a.appname,a.money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
+        $list=$hetong->field('a.id,a.advertiser as aid,a.xf_contractid,a.users2,a.xf_hetonghao,a.submituser,a.rebates_proportion,a.contract_no,a.account,a.appname,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.isxufei=1  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
         //echo $hetong->_sql();
 
         foreach($list as $key => $val)
@@ -233,6 +236,30 @@ class RenewController extends  CommonController
         $hetong->ctime=time();
         $hetong->users2=cookie('u_id');
 
+        
+        if(I('post.payment_type')==2);
+        {
+            // 映射垫款表
+            $dk['d_company']=I('post.agent_company');//代理公司
+            $dk['d_account_name']=$postdate['account'];
+            $dk['d_money']=$postdate['money'];
+            $dk['back_money_time']=strtotime(I('post.back_money_time'));
+            $dk['d_time']=strtotime($postdate['payment_time']);
+            $dk['advertiser']=$postdate['advertiser'];
+            $dk['appname']=$postdate['appname'];
+            $dk['contract_no']=I('post.xf_hetonghao');
+            $dk['ctime']=time();
+            $dk['submituser']=$postdate['submituser'];
+            $dk['ispiao']=I("post.ispiao");
+            $dk['state']=0;
+            $dk['users2']=cookie('u_id');
+            $dk['contract_id']=$postdate['xf_contractid'];
+        }
+
+
+
+
+
 
         if($insid=$hetong->add()){
             //如果续费成功则修改客户出款或者补款余额  I('post.payment_type')
@@ -266,9 +293,25 @@ class RenewController extends  CommonController
                     }
                 }
             }
+            if(I('post.payment_type')==2)
+            {
 
 
-            $this->success("添加成功",U("index?id=".I('post.htid')));
+
+                //映射垫款  添加
+                $diankuan=M("Diankuan");
+
+
+                if($diankuan->add($dk))
+                {
+                    $success_str="并生成垫款一条垫款记录";
+                }else
+                {
+                    $success_str="但生成垫款记录失败，请联系管理员";
+                }
+            }
+
+            $this->success("添加成功 $success_str",U("index?id=".I('post.htid')));
 
         }else
         {
@@ -319,7 +362,11 @@ class RenewController extends  CommonController
         $accountlist=$account->field("id,a_users")->where("contract_id =".I('get.yid'))->select();
         $this->account=$accountlist;
 
-      //  $this->dinfo=$diankuan->where("contract_id=".I('get.id'))->find();
+
+        //显示垫付信息
+        $diankuan=M("Diankuan");
+
+        $this->dinfo=$diankuan->where("contract_id=".I('get.id'))->find();
 
         $this->display();
 
@@ -338,6 +385,26 @@ class RenewController extends  CommonController
         $hetong->payment_time=strtotime($hetong->payment_time);
         $hetong->ctime=I('post.time')+1;
         $hetong->users2=cookie('u_id');
+        if(I('post.payment_type')==2)
+        {
+            // 映射垫款表
+            $dk['d_company']=$postdate['agent_company'];//代理公司
+            $dk['d_account_name']=$postdate['account'];
+            $dk['d_money']=$postdate['fk_money'];
+            $dk['back_money_time']=strtotime(I('post.back_money_time'));
+            $dk['d_time']=strtotime($postdate['payment_time']);
+            $dk['advertiser']=$postdate['advertiser'];
+            $dk['appname']=$postdate['appname'];
+
+            $dk['submituser']=$postdate['submituser'];
+            $dk['ispiao']=I("post.ispiao");
+            $dk['state']=0;
+            $dk['users2']=cookie('u_id');
+        }else
+        {
+            //删除相应垫款记录
+            M("Diankuan")->where("contract_id=$id")->delete();
+        }
 
         if($hetong->where("id=$id")->save())
         {
@@ -366,16 +433,48 @@ class RenewController extends  CommonController
 
                 }
             }
+            //映射垫款  添加
+            if(I('post.payment_type')==2){
+
+
+                $diankuan=M("Diankuan");
+                //先检查是修改还是添加
+                $cou=$diankuan->where("contract_id=$id")->count();
+                if($cou>0)
+                {
+                    if($diankuan->where("contract_id=$id")->save($dk))
+                    {
+                        $success_str="并修改了一条垫款记录";
+                    }else
+                    {
+                        $success_str="但修改垫款记录失败";
+                    }
+                }else
+                {
+                    $dk['contract_no']=I("post.xf_contract_on");
+                    $dk['ctime']=time();
+
+                    if($diankuan->add($dk))
+                    {
+                        $success_str="并生成垫款一条垫款记录";
+                    }else
+                    {
+                        $success_str="但生成垫款记录失败，请联系管理员";
+                    }
+                }
+
+            }
+
 
             if($yid!='')
             {
 
-                $this->success('修改成功',U("index?id=$yid"));
+                $this->success('修改成功'.$success_str,U("index?id=$yid"));
                 //修改审核者
 
             }else
             {
-                $this->success('修改成功',U("index2?shenhe=0"));
+                $this->success('修改成功'.$success_str,U("index2?shenhe=0"));
             }
         }else{
             $this->error('修改失败');
@@ -387,7 +486,7 @@ class RenewController extends  CommonController
     //删除操作
     public function delete(){
         $id=I('get.id');
-        $group=M("RenewHuikuan");
+        $group=M("Contract");
         $yid=I('get.yid');
         if($group->delete($id))
         {
@@ -506,7 +605,10 @@ class RenewController extends  CommonController
         $this->product_line_list=$product_line->field("id,name,title")->order("id asc")->select();
         //原合同
         $this->yinfo=$hetong->find(I('get.yid'));
+        if(I('get.yid2')){
+            $this->yinfo=array("contract_no"=>I('get.yid2'));
 
+        }
         //代理公司
         $agentcompany=M("AgentCompany");
         $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
@@ -620,32 +722,39 @@ class RenewController extends  CommonController
             $where.="and a.product_line =$type3";
             $this->type3=$type3;
         }
-        $hetong=M("RenewHuikuan");
+        $hetong=M("Contract");
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
 
-
-        $list=$hetong->field('a.id,a.advertiser as aid,a.money,a.payment_type,a.payment_time,a.account,a.contract_start,a.contract_end,a.type,a.users2,a.appname,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.id!=0 and ".$q_where.$where)->order("a.ctime desc")->select();
+        if(I('get.yid')=='')
+        {
+            $where1='a.isxufei=1';
+        }else
+        {
+            $info=$hetong->field("a.*,b.advertiser as gongsi,c.name")->join("a left join jd_customer b on a.advertiser=b.id left join jd_product_line c on a.product_line = c.id")->where("a.id=".I('get.yid'))->find();
+            $where1="a.xf_hetonghao='$info[contract_no]'";
+        }
+        $list=$hetong->field('a.id,a.advertiser as aid,a.fk_money,a.agent_company,a.payment_type,a.payment_time,a.account,a.contract_no,a.contract_start,a.contract_end,a.type,a.users2,a.isguidang,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("$where1 and ".$q_where.$where)->order("a.ctime desc")->select();
 
         foreach($list as $key => $val)
         {
-            $Contract=M("Contract")->field('contract_no')->find($val['xf_contractid']);
-
             //公司
             $list2[$key]['advertiser']=$val['advertiser'];
             //合同编号
-            $list2[$key]['contract_no']=$Contract['contract_no'];
+            $list2[$key]['contract_no']=$val['contract_no'];
             //appname
             $list2[$key]['appname']=$val['appname'];
             //账户信息
             $account=account($val['account']);
             $list2[$key]['account']=$account['a_users'];
-
+            //账户名称
+           // $list2[$key]['account']=$val['account'];
             //合同金额
-            $list2[$key]['money']=num_format($val['money']);
+            $list2[$key]['contract_money']=num_format($val['contract_money']);
             //显示百度币
             $list2[$key]['show_money']=num_format($val['show_money']);
-
+            //付款金额
+            $list2[$key]['fk_money']=num_format($val['fk_money']);
             //产品线
             $list2[$key]['product_line']=$val['name'];
             //返点
@@ -661,12 +770,16 @@ class RenewController extends  CommonController
             $list2[$key]['type']=$val['type']==1?'普通合同':'框架合同';
             //保证金
             $list2[$key]['margin']=$val['margin'];
-
+            //合同开始时间
+            $list2[$key]['contract_start']=date("Y-m-d",$val['contract_start']);
+            //合同结束时间
+            $list2[$key]['contract_end']=date("Y-m-d",$val['contract_end']);
             //付款方式
             $list2[$key]['payment_type']=$val['payment_type']==1?'预付':'垫付';
             //付款时间
             $list2[$key]['payment_time']=$val['payment_time']?date("Y-m-d",$val['payment_time']):'';
-
+            //是否归档
+            $list2[$key]['isguidang']=$val['isguidang']==0?'未归档':'已归档';
 
             //销售
             $submitusers=users_info($val[submituser]);
@@ -678,7 +791,7 @@ class RenewController extends  CommonController
         }
 
         $filename="xufei_excel";
-        $headArr=array("公司","合同编号",'APP名称','账户名称','金额','显示百度币','产品线','返点','提交时间','代理公司','合同类型','保证金','付款方式','付款时间','销售','提交人');
+        $headArr=array("公司","合同编号",'APP名称','账户名称','合同金额','显示百度币','付款金额','产品线','返点','提交时间','代理公司','合同类型','保证金','合同开始时间','合同结束时间','付款方式','付款时间','是否归档','销售','提交人');
 
         if(!getExcel($filename,$headArr,$list2))
         {

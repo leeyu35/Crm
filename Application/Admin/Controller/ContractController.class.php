@@ -15,6 +15,8 @@ class ContractController extends CommonController
         $this->product_line_list=$product_line->field("id,name,title")->order("id asc")->select();
 
         $hetong=M("Contract");
+
+
         //搜索条件
         $type=I('get.searchtype');
         if($type!='') {

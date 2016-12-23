@@ -47,7 +47,7 @@
 		
 		//自动换算百度币
 		$("#rebates_proportion").keyup(function(){
-			jr=$("#contract_money").val();	
+			jr=$("#money").val();	
 			bl=$("#rebates_proportion").val();
 			$("#show_money").val((jr*(1+(bl/100))).toFixed(2));
 			
@@ -71,65 +71,66 @@
 				$(".diankuan").hide();
 			}
 		})
-				
+		function findSize(id){
+			var len=$("#fileup")[0].files.length;
+			var fa=true;
+			for (var i=0;i<len;i++)
+			{
+				var size=($("#fileup")[0].files[0].size / 1024).toFixed(2);
+				//alert(size);
+				if(size>2000)
+				{
+					fa=false;
+				}
+			}
+			
+			return fa;
+		}
 		$("#formid").submit(function(){
-		if(!findSize("fileup"))
+		
+		if(findSize("fileup")!=true)
 		{
 			alert('上传的文件可能超出大小限制，请重新选择2M以内图片!');
 			return false;
 		}
-		if($("#gongsi").val()=="")
+		
+		
+		if($("#money").val()=="")
 		{
-			alert("请填写公司名称");
-			$("#gongsi").select();
+			alert("请填写续费金额");
+			$("#money").select();
 			return false;	
 		}	
-		if($("#contract_no").val()=="")
-		{
-			alert("合同编号生成失败!\n请按照公司名称->代理公司->产品线顺序添加，我们将自动生成合同编号！");
-			return false;	
-		}	
-		if($("#contract_money").val()=="")
-		{
-			alert("请填写合同金额");
-			$("#contract_money").select();
-			return false;	
-		}	
+		
+		
+		
 		if($("#rebates_proportion").val()=="")
 		{
 			alert("请填写返点比例");
 			$("#rebates_proportion").select();
 			return false;	
 		}	
+		
 		if($("#show_money").val()=="")
 		{
 			alert("请填写账户显示金额");
 			$("#show_money").select();
 			return false;	
-		}	
-		/*
-		if($("#contract_start").val()=="")
+		}
+		
+		
+		if($("#account").val()=="")
 		{
-			alert("请选择合同开始时间");
+			alert("请选择账户名称，如没有请到合同处账户管理里添加账户信息");
+			$("#account").select();
 			return false;	
 		}	
-		if($("#contract_end").val()=="")
+
+		if($("#payment_type").val()=="")
 		{
-			alert("请选择合同结束时间");
+			alert("请选择付款方式");
 			return false;	
 		}	
-		if($("#payment_time").val()=="")
-		{
-			alert("请选择付款日期");
-			return false;	
-		}	
-		*/
-		if($("#fk_money").val()=="")
-		{
-			alert("请填写付款金额");
-			return false;	
-		}	
-				
 	})
     });
 </script>
@@ -155,6 +156,7 @@
 <input type="hidden" name="xf_contract_on" id="xf_contract_on" value="{$info[xf_hetonghao]}">
 <input type="hidden" name="type" id="type" value="{$info[type]}">
 <input type="hidden" name="time" id="submituser" value="{$info[ctime]}">
+<input type="hidden" name="yid" id="yid" value="{$Think.get.yid}">
 
 <input type="hidden" name="htid" id="htid" value="{$yid}">
 <h4 class="bor-left-bull" >合同基本信息</h4>
@@ -192,10 +194,10 @@
       
     </div>
     
-    <label for="inputEmail3" class="col-sm-1 control-label">合同编号</label>
+    <!--<label for="inputEmail3" class="col-sm-1 control-label">合同编号</label>
     <div class="col-sm-3">
       <input name="contract_no" type="text" class="form-control" id="contract_no" placeholder="自动生成，无需填写" value="{$info[contract_no]}">
-    </div>
+    </div>-->
     </div>
     
     <div class="form-group">
@@ -223,7 +225,7 @@
     
 </div>
 
-<h4 class="bor-left-bull" >购买产品信息</h4>
+<h4 class="bor-left-bull" >续费信息</h4>
 <hr>
 
   <!--<div class="form-group">
@@ -245,10 +247,10 @@
   
   <div class="form-group">
   
-    <label for="contract_money" class="col-sm-2 control-label">合同金额</label>
+    <label for="contract_money" class="col-sm-2 control-label">金额</label>
     <div class="col-sm-3">
       	<div class="input-group">
-        <input type="text" class="form-control" name="contract_money" id="contract_money"  value="{$info[contract_money]}">
+        <input type="text" class="form-control" name="money" id="money"  value="{$info[money]}">
     	<span class="input-group-addon">元</span>
         </div>
     </div>
@@ -270,7 +272,7 @@
     </div>
     
   </div>
-  <div class="form-group">
+  <!--<div class="form-group">
  
     <label for="inputEmail3" class="col-sm-2 control-label">合同有效期</label>
     <div class="col-sm-3">
@@ -288,7 +290,7 @@
    
 
     
-  </div>
+  </div>-->
   <div class="form-group">
   
     <label for="inputEmail3" class="col-sm-2 control-label">账户名称</label>
@@ -318,6 +320,7 @@
       <select  class="form-control" name="payment_type" id="payment_type">
       	<option value="1" {$info[payment_type]=='1'?'selected':''}>预付</option>
       	<option value="2" {$info[payment_type]=='2'?'selected':''}>垫付</option>
+      	<option value="3" {$info[payment_type]=='3'?'selected':''}>补款</option>
       </select>
     </div>
     
@@ -326,16 +329,16 @@
 		<input type="text" name="payment_time" value="{$info[payment_time]!='0'?$info[payment_time]|date='Y-m-d',###:''}" class="Wdate form-control" id="payment_time" onClick="WdatePicker()">
     </div>
     
-    <label for="inputEmail3" class="col-sm-1 control-label">付款金额</label>
+    <!--<label for="inputEmail3" class="col-sm-1 control-label">付款金额</label>
     <div class="col-sm-2"> 
     	<div class="input-group">     
 		<input type="text" name="fk_money" class="form-control" value="{$info[fk_money]}" id="fk_money">
         <span class="input-group-addon">元</span>
         </div>
-    </div>
+    </div>-->
     
   </div>
-  <div class="form-group diankuan" {$info[payment_type]=='1'?'style="display:none"':''} >
+<!--  <div class="form-group diankuan" {$info[payment_type]=='1'?'style="display:none"':''} >
 
     <label for="inputEmail3" class="col-sm-2 control-label">是否开票</label>
     <div class="col-sm-3">
@@ -352,7 +355,7 @@
     <div class="col-sm-2">
     	<input type="text" name="back_money_time" class="Wdate form-control" id="back_money_time" onClick="WdatePicker()" value="{$dinfo[back_money_time]?$dinfo[back_money_time]|date="Y-m-d",###:''}">
     </div>
-  </div>
+  </div>-->
   
  <h4 class="bor-left-bull" >上传附件</h4>
   <hr>

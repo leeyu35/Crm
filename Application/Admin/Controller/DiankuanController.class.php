@@ -493,4 +493,10 @@ class DiankuanController extends CommonController
         };
     }
 
+    public function dc_excel(){
+        //导入PHPExcel类库，因为PHPExcel没有用命名空间，只能inport导入
+       $date=excet_d("./1.xls");
+        dump($date);
+    }
+
 }

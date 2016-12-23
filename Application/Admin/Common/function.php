@@ -486,3 +486,73 @@ function getExcel($fileName,$headArr,$data){
 
      exit;
 }
+//读取excel
+function excet_d($file,$sheet=0){
+    import("Library.Org.Util.PHPExcel",THINK_PATH,".php");
+
+    import("Library.Org.Util.PHPExcel.Writer.Excel2007",THINK_PATH,".php");
+    import("Library.Org.Util.PHPExcel.IOFactory",THINK_PATH,".php");
+
+    $objReader =  \PHPExcel_IOFactory::createReader('Excel2007');//use excel2007 for 2007 format
+
+    $PHPExcel = $objReader->load($file);
+    $currentSheet = $PHPExcel->getSheet($sheet);        //**读取excel文件中的指定工作表*/
+    $allColumn = $currentSheet->getHighestColumn();        //**取得最大的列号*/
+    $allRow = $currentSheet->getHighestRow();        //**取得一共有多少行*/
+    $data = array();
+    for($rowIndex=1;$rowIndex<=$allRow;$rowIndex++){        //循环读取每个单元格的内容。注意行从1开始，列从A开始
+        for($colIndex='A';$colIndex<=$allColumn;$colIndex++){
+            $addr = $colIndex.$rowIndex;
+            $cell = $currentSheet->getCell($addr)->getValue();
+            if($cell instanceof PHPExcel_RichText){ //富文本转换字符串
+                $cell = $cell->__toString();
+            }
+            $data[$rowIndex][$colIndex] = $cell;
+        }
+    }
+    return($data);
+}
+
+//公司和合同余额变动 1公司id,2合同id，3类型:1续费预付，2续费垫付,3续费补款，4回款，5发票。 4 变动值
+function money_change($advertisers_id,$contract_id,$type,$value)
+{
+
+    $advertisers = M("Customer");
+    $contract = M("Contract");
+    //如果是续费操作 则在客户出款字段yu_e上执行加操作
+    if ($type == '1' or $type == '2') {
+        $advertisers->where("id=$advertisers_id")->setInc('yu_e', $value);//更新公司出款值
+        $contract->where("id=$contract_id")->setInc('yu_e', $value);//更新合同出款值
+    } elseif ($type == '3') {
+        $advertisers->where("id=$advertisers_id")->setInc('bukuan', $value);//更新公司补款值
+        $contract->where("id=$contract_id")->setInc('bukuan', $value);//更新合同补款值
+    } elseif ($type == '4') {
+        $advertisers->where("id=$advertisers_id")->setInc('huikuan', $value);//更新公司出款值
+        $contract->where("id=$contract_id")->setInc('huikuan', $value);//跟新合同补款值
+    } elseif ($type == '5')
+    {
+        $contract->where("id=$contract_id")->setInc('invoice', $value);//更新发票总金额值
+    }
+
+}
+
+function money_reduce($advertisers_id,$contract_id,$type,$value)
+{
+    $advertisers = M("Customer");
+    $contract = M("Contract");
+    //如果是续费操作 则在客户出款字段yu_e上执行加操作
+    if ($type == '1' or $type == '2') {
+        $advertisers->where("id=$advertisers_id")->setDec('yu_e', $value);//更新公司出款值
+        $contract->where("id=$contract_id")->setDec('yu_e', $value);//更新合同出款值
+    } elseif ($type == '3') {
+        $advertisers->where("id=$advertisers_id")->setDec('bukuan', $value);//更新公司补款值
+        $contract->where("id=$contract_id")->setDec('bukuan', $value);//更新合同补款值
+    } elseif ($type == '4') {
+        $advertisers->where("id=$advertisers_id")->setDec('huikuan', $value);//更新公司出款值
+        $contract->where("id=$contract_id")->setDec('huikuan', $value);//跟新合同补款值
+    } elseif ($type == '5')
+    {
+        $contract->where("id=$contract_id")->setDec('invoice', $value);//更新发票总金额值
+    }
+
+}
