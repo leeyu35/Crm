@@ -42,12 +42,12 @@ $("#formid").submit(function(){
 			$("#inputEmail3ad").select();
 			return false;	
 		}		
-		if($("#website").val()=="" || $("#website").val()=='http://www.')
+		/*if($("#website").val()=="" || $("#website").val()=='http://www.')
 		{
 			alert("请填写公司网址");
 			$("#website").select();
 			return false;	
-		}
+		}*/
 		if($("#industry").val()=="")
 		{
 			alert("请选择客户所属行业");
@@ -192,27 +192,13 @@ $("#formid").submit(function(){
 
   </div>
   
-  <div class="form-group">
-  
-    <label for="inputEmail3" class="col-sm-2 control-label">是否有APP</label>
-    <div class="col-sm-3">
-    <label class="radio-inline">
-    	<input name="isapp" type="radio" id="inlineRadio1" value="1" {$info['isapp']=='1'?'checked':''} > 有
-    </label>
-    <label class="radio-inline">
-    	<input type="radio" name="isapp" id="inlineRadio2" value="0" {$info['isapp']=='0'?'checked':''} > 没有
-    </label>
-    </div>
-    
-    <label for="inputEmail3" class="col-sm-1 control-label">APP名称</label>
-    <div class="col-sm-3">      
-		<input name="appname" type="text" class="form-control" value="{$info['appname']}" id="inputEmail3">
-    </div>
 
-  </div>
   <div class="form-group">
-  
-    <label for="inputEmail8" class="col-sm-2 control-label">客户所属省</label>
+  <label for="inputEmail3" class="col-sm-2 control-label">APP名称</label>
+    <div class="col-sm-3">      
+		<input name="appname" type="text" class="form-control" value="{$info['appname']}" id="inputEmail3" placeholder="没有填无">
+    </div>
+    <label for="inputEmail8" class="col-sm-1 control-label">客户所属省</label>
     <div class="col-sm-3">
 	<select name="city"  class="form-control" id="inputEmail4">
     <option value="{$info[city]}" selected>{$info[city]}</option>
@@ -254,7 +240,20 @@ $("#formid").submit(function(){
     
     </div>
   </div>
+   <div class="form-group">
   
+    <label for="inputEmail3" class="col-sm-2 control-label">公司地址</label>
+    <div class="col-sm-3">
+      <input name="site" type="text" class="form-control" id="site" value="{$info['site']}">
+    </div>
+    
+    <label for="inputEmail3" class="col-sm-1 control-label">邮寄地址</label>
+    <div class="col-sm-3">      
+		<input name="post_site" type="text" class="form-control"  value="{$info['post_site']}" id="post_site">
+    </div>
+
+  </div> 
+    
   <h4>联系人<small>&nbsp;&nbsp;<a  id="new_contact" style="cursor:pointer;"><span class="glyphicon glyphicon-plus"></span>新增联系人</a></small></h4>
   <hr>
   <div id="contactmain">

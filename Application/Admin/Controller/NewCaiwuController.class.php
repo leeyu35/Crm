@@ -81,7 +81,7 @@ class NewCaiwuController extends CommonController
        $id=I('get.id');
        $hetong=M("contract");
        // $list=$hetong->where("advertiser =$id and isxufei=0")->select();
-        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name,a.yu_e,a.huikuan,a.bukuan,a.type')->where("a.advertiser =$id and isxufei=0")->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->order("a.ctime desc")->select();
+        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name,a.yu_e,a.huikuan,a.invoice,a.bukuan,a.type')->where("a.advertiser =$id and isxufei=0")->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->order("a.ctime desc")->select();
 
         foreach ($list as $key=>$val)
         {
@@ -99,9 +99,11 @@ class NewCaiwuController extends CommonController
        // dump($list);
     }
 
-    public function history(){
-        $contract_id=I('get.contract_id');
-        $ht_on=M("Contract")->field("contract_no,yu_e,bukuan,huikuan,invoice")->find($contract_id);
+    public function history()
+    {
+        $contract_id = I('get.contract_id');
+        $ht_on = M("Contract")->field("contract_no,yu_e,bukuan,huikuan,invoice,id")->find($contract_id);
+        $type = I('get.type');
 
         //续费的记录 1预付 2垫付
         $hetong=M("RenewHuikuan");
@@ -116,17 +118,32 @@ class NewCaiwuController extends CommonController
             $account_name=$account->field('a_users')->find($val['account']);
             $account_str="<p>账户名称：$account_name[a_users]</p>";
             //审核状态
+            if(($val[audit_1]==0 or $val[audit_1]==1) and ($val[audit_2]==0 or $val[audit_2]==1))
+            {
+                $yue+=$val['money'];
+            }
 
             if($val[payment_type]==1)
             {
-                $history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 付款".num_format($val['money']).$account_str,"yue"=>$yue-=$val['money'],"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
+                //续费预付
+                $history_xf[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 付款".num_format($val['money']).$account_str,"yue"=>$yue-=$val['money'],"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
             }elseif($val[payment_type]==2)
             {
-                $history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 垫款".num_format($val['money']).$account_str,"yue"=>$yue-=$val['money'],"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
+                //续费垫付
+                $history_xf[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 垫款".num_format($val['money']).$account_str,"yue"=>$yue-=$val['money'],"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
             }elseif($val[payment_type]==3)
             {
-                $history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 补款".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=$val['money'],"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
+                ////续费补款
+                $history_xf[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 补款".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=$val['money'],"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
 
+            }elseif($val[payment_type]==14)
+            {
+                //续费 退款
+                $history_xf[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 退款".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
+            }elseif($val[payment_type]==15)
+            {
+                //续费 转款
+                $history_xf[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 转款".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
             }
         }
 
@@ -136,19 +153,43 @@ class NewCaiwuController extends CommonController
 
         foreach ($bkm_list as $key=>$val)
         {
-            $history[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"回款".num_format($val['money'])."<p></p>","yue"=>$yue+=$val['money'],"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
+            if(($val[audit_1]==0 or $val[audit_1]==1) and ($val[audit_2]==0 or $val[audit_2]==1))
+            {
+                $yue+=$val['money'];
+            }
+            $history_hk[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"回款".num_format($val['money'])."<p></p>","yue"=>$yue,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
         }
 
         //发票
         $Invoice=M("Invoice");
-        $fplist=$Invoice->field('kp_time,money,audit_1,audit_2,ctime')->where("contract_no='".$ht_on['contract_no']."'")->order("ctime desc")->select();
+        $fplist=$Invoice->field('kp_time,money,audit_1,audit_2,ctime,fp_on')->where("contract_no='".$ht_on['contract_no']."'")->order("ctime desc")->select();
 
         //echo $Invoice->_sql();
         foreach ($fplist as $key=>$val)
         {
+            if(($val[audit_1]==0 or $val[audit_1]==1) and ($val[audit_2]==0 or $val[audit_2]==1))
+            {
+                $yue+=$val['money'];
+            }
             $kptime=$val[kp_time]!=''?date("Y-m-d",$val[kp_time]):'暂无';
-            $history[]=array("date"=>date("Y-m-d",$val[ctime]),"mes"=>"开票".num_format($val['money'])."<p>开票时间：".$kptime."</p>","yue"=>$yue+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
+            $kptime.=$val[fp_on]!=''?'&nbsp&nbsp&nbsp&nbsp发票号:'.$val[fp_on]:'&nbsp&nbsp&nbsp&nbsp发票号：暂无';
+            $history_fp[]=array("date"=>date("Y-m-d",$val[ctime]),"mes"=>"开票".num_format($val['money'])."<p>开票时间：".$kptime."</p>","yue"=>$yue+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
         }
+
+        //根据type给出筛选数据
+        if ($type == 'renew')
+        {
+            $history=$history_xf;
+        }elseif($type=='huikuan')
+        {
+            $history=$history_hk;
+        }elseif($type=='invoice')
+        {
+            $history=$history_fp;
+        }else{
+            $history=array_merge($history_xf,$history_hk,$history_fp);
+        }
+
         uasort($history,function ($a,$b){
             if($a['date']>$b['date'])
             {
@@ -165,7 +206,9 @@ class NewCaiwuController extends CommonController
         $this->yue=$ht_on['huikuan']-$ht_on['yu_e'];
         $this->bukuan=$ht_on['bukuan'];
         $this->invoice=$ht_on['invoice'];
+        $this->contract_id=$ht_on['id'];
         $this->history=$history;
+        $this->sxyue=$yue;
        $this->display();
     }
 

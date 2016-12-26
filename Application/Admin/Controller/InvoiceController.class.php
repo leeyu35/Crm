@@ -96,13 +96,18 @@ class InvoiceController extends CommonController
         $this->display();
     }
     public function add2(){
-        //代理公司
-        $agentcompany=M("AgentCompany");
-        $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
+
+
         //客户所属
         $adid=I('get.adid');
         $this->kehu=kehu($adid);
-        //dump(kehu($adid));
+        //根据合同id 获取 开票主体
+        $hetong=M("Contract");
+        $hetong_agent_company=$hetong->field('agent_company')->find(I('get.contract_id'));
+        $this->main_company=$hetong_agent_company;
+        //税目
+        $p=M("piaotype");
+        $this->smlist=$p->where("advertiser = $hetong_agent_company[agent_company]")->select();
 
         $this->display();
     }
@@ -172,7 +177,12 @@ class InvoiceController extends CommonController
         $Refund=M("Invoice");
         $info=$Refund->find($id);
         $this->info=$info;
-
+        //dump($info);
+        if(($info['audit_1']!='0' and $info['audit_1']!='1') or $info['audit_2']!='0')
+        {
+            $this->error("未审核或者已审核项目不可更改！");
+            exit;
+        }
         //产品线
         $product_line=M("ProductLine");
         $this->product_line_list=$product_line->field("id,name,title")->order("id asc")->select();
@@ -205,11 +215,7 @@ class InvoiceController extends CommonController
         $Customer=M("Customer");
         $co=$Customer->where("advertiser='".I('post.gongsi')."'")->count();
 
-        if($co==0)
-        {
-            $this->error("没有这个公司!");
-            exit;
-        }
+
         $Refund->create();
         $Refund->kp_time=strtotime($Refund->kp_time);
         $Refund->users2=cookie('u_id');

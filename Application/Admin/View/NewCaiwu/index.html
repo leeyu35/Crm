@@ -50,13 +50,14 @@ $(document).ready(function(e) {
     	<th>#</th>
     	<th>广告主公司名称</th>
         <th>app名称</th>
-    	<th>所属行业</th>
-    	<th>余额</th>
+<!--    	<th>所属行业</th>
+-->    	<th>余额</th>
     	<th>总回款金额</th>
+        <th>总续费金额</th>
        
-        <th>联系人</th>
+        <!--<th>联系人</th>
         <th>联系人电话</th>
-        <th>城市</th>
+        <th>城市</th>-->
         <th>提交人</th>
         <th>操作</th>	  
     </tr>
@@ -65,13 +66,14 @@ $(document).ready(function(e) {
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$k}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[advertiser]}</td>
         <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[appname]}</td>
-        <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[industry]}</td>
+        <!--<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[industry]}</td>-->
         <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[yue]|num_format}</td>
+        <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[yu_e]|num_format}</td>
         <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[huikuan]|num_format}</td>
     	
-    	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[contact]}</td>
+    	<!--<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[contact]}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[tel]}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[city]}</td>
+    	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[city]}</td>-->
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[submituser]}</td>
     	<td>
         <a href="{:U("updata?id=$list[id]")}"  data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<a href="{:U("delete?id=$list[id]")}" {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>

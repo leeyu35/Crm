@@ -9,7 +9,7 @@
 namespace Admin\Controller;
 use Think\Controller;
 
-class RenewController extends  CommonController
+class RefundMoneyController extends  CommonController
 {
     //属于某合同续费列表
     public function index(){
@@ -80,12 +80,15 @@ class RenewController extends  CommonController
         }
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
+        //退款条件
+        $where=" and (a.payment_type = 14 or a.payment_type=15)";
+
         $renew_huikuan=M('RenewHuikuan');
         $contact_id=I('get.id');
-        $count      = $renew_huikuan->field('a.id,a.advertiser,a.money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and a.payment_type!=14 and a.payment_type!=15 and a.xf_contractid='$contact_id' and ".$q_where.$where)->count();// 查询满足要求的总记录数
+        $count      = $renew_huikuan->field('a.id,a.advertiser,a.money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and a.xf_contractid='$contact_id' and ".$q_where.$where)->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
-        $list=$renew_huikuan->field('a.id,a.advertiser as aid,a.users2,a.rebates_proportion,a.account,a.appname,a.money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and a.payment_type!=14 and a.payment_type!=15 and a.xf_contractid='$contact_id'  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
+        $list=$renew_huikuan->field('a.id,a.advertiser as aid,a.users2,a.rebates_proportion,a.account,a.appname,a.money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and a.xf_contractid='$contact_id'  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
         foreach($list as $key => $val)
         {
             //提交人
@@ -164,11 +167,13 @@ class RenewController extends  CommonController
         }
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
+        //退款条件
+        $where=" and (a.payment_type = 14 or a.payment_type=15)";
         $RenewHuikuan=M('RenewHuikuan');
-        $count      = $RenewHuikuan->field('a.id,a.advertiser,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and a.payment_type!=14 and a.payment_type!=15 and ".$q_where.$where)->count();// 查询满足要求的总记录数
+        $count      = $RenewHuikuan->field('a.id,a.advertiser,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and ".$q_where.$where)->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
-        $list=$RenewHuikuan->field('a.id,a.advertiser as aid,a.users2,a.xf_contractid,a.submituser,a.rebates_proportion,a.account,a.appname,a.money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and a.payment_type!=14 and a.payment_type!=15  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
+        $list=$RenewHuikuan->field('a.id,a.advertiser as aid,a.users2,a.xf_contractid,a.submituser,a.rebates_proportion,a.account,a.appname,a.money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
         //echo $hetong->_sql();
 
         foreach($list as $key => $val)

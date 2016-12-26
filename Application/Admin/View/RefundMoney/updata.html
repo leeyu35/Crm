@@ -8,11 +8,42 @@
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
 <script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
+<script src="/Public/js/layer/layer.js"></script>
 <script src="/Public/js/hjdfunction.js"></script>
-<script language="javascript">
-	$(document).ready(function(e) { 
 
-		
+<script language="javascript">
+	$(document).ready(function(e) {
+			//alert("X"+xhx+gs+xhx+pr+xhx+str)
+			/*
+		gs=$("#agent_company option:selected").attr("title");
+			pr=$("#product_line option:selected").attr("title");
+			xhx="_";
+			var mydate = new Date();
+
+			 var str = "" + mydate.getFullYear();
+			 if(mydate.getMonth()+1 <10)
+			 {
+				  str += "0"+(mydate.getMonth()+1);
+			 }else
+			 {
+				  str += (mydate.getMonth()+1);
+			 }
+			  
+			   str += mydate.getDate();
+			//动态检查是第几个合同
+			advertiser=$("#advertiser").val();  //公司ID
+			prid=$("#product_line").val(); //产品线ID
+			$.get("{:U('Contract_num')}",{advertiser:advertiser,prid:prid},function(index){
+				num=index;	
+				alert(gs+xhx+pr+xhx+str+num);
+				$("#contract_no").val(gs+xhx+pr+xhx+str+num);
+			})
+			
+			
+				
+			
+			
+		}*/
 		
 		//自动换算百度币
 		$("#rebates_proportion").keyup(function(){
@@ -21,9 +52,7 @@
 			$("#show_money").val((jr*(1+(bl/100))).toFixed(2));
 			
 		})
-		
 		$("input[name='type']").change(function(){
-			
 			if($(this).val()=='2')
 			{
 				$(".bzj").show(200);	
@@ -33,6 +62,15 @@
 			}	
 		})
 		
+		$("#payment_type").change(function(){
+			if($(this).val()==2)
+			{
+				$(".diankuan").show();	
+			}else
+			{
+				$(".diankuan").hide();
+			}
+		})
 		function findSize(id){
 			var len=$("#fileup")[0].files.length;
 			var fa=true;
@@ -48,7 +86,6 @@
 			
 			return fa;
 		}
-				
 		$("#formid").submit(function(){
 		
 		if(findSize("fileup")!=true)
@@ -56,6 +93,7 @@
 			alert('上传的文件可能超出大小限制，请重新选择2M以内图片!');
 			return false;
 		}
+		
 		
 		if($("#money").val()=="")
 		{
@@ -72,6 +110,7 @@
 			$("#rebates_proportion").select();
 			return false;	
 		}	
+		
 		if($("#show_money").val()=="")
 		{
 			alert("请填写账户显示金额");
@@ -93,34 +132,33 @@
 			return false;	
 		}	
 	})
-	
     });
-	
-	
 </script>
 <style type="text/css">
 	#adlist{ margin-left:15px;}
 	#adlist li a{ cursor:pointer;}
-	.diankuan{ display:none;}
-	
+	.bzj{ display:none;}
 </style>
 </head>
 
 <body>
 <span id="hjd"></span>
 <div class="container" style="width:100%;">
-<h3 class="bor-left-bull" >{$info[gongsi]}<span class="glyphicon glyphicon-share-alt"></span>{$info[name]}<span class="glyphicon glyphicon-share-alt"></span>新增续费</h3>
+<h3 class="bor-left-bull" >{$info[gongsi]}<span class="glyphicon glyphicon-share-alt"></span>{$info[name]}<span class="glyphicon glyphicon-share-alt"></span>修改续费</h3>
 <br>
-<form action="{:U('addru')}" method="post" class="form-horizontal" id="formid" enctype="multipart/form-data" >
+<form action="{:U('upru')}" method="post" class="form-horizontal" id="formid" enctype="multipart/form-data">
+<input type="hidden" name="id" id="id" value="{$info[id]}">
 <input type="hidden" name="advertiser" id="advertiser" value="{$info[advertiser]}">
 <input type="hidden" name="submituser" id="submituser" value="{$info[submituser]}">
 <input type="hidden" name="agent_company" id="agent_company" value="{$info[agent_company]}">
 <input type="hidden" name="product_line" id="product_line" value="{$info[product_line]}">
+<input type="hidden" name="xf_contractid" id="xf_contractid" value="{$info[xf_contractid]}">
+<input type="hidden" name="xf_contract_on" id="xf_contract_on" value="{$info[xf_hetonghao]}">
 <input type="hidden" name="type" id="type" value="{$info[type]}">
-<input type="hidden" name="xf_hetonghao" id="xf_hetonghao" value="{$info[contract_no]}">
-<input type="hidden" name="xf_contractid" id="xf_contractid" value="{$info[id]}">
-<input type="hidden" name="htid" id="htid" value="{$info[id]}">
-<input type="hidden" name="isxufei" id="isxufei" value="1">
+<input type="hidden" name="time" id="submituser" value="{$info[ctime]}">
+<input type="hidden" name="yid" id="yid" value="{$Think.get.yid}">
+
+<input type="hidden" name="htid" id="htid" value="{$yid}">
 <h4 class="bor-left-bull" >合同基本信息</h4>
 <hr>
 
@@ -134,13 +172,12 @@
     
     <label for="inputEmail3" class="col-sm-1 control-label">代理公司</label>
     <div class="col-sm-2">
-	 <select  class="form-control" name="agent_company" id="agent_company1" disabled>        
+      <select  class="form-control" name="agent_company" id="agent_company1" disabled>        
         <volist id="agentcompany" name="agentcompany" key="k">
        	<option value="{$agentcompany.id}" title="{$agentcompany.title}"  {$info[agent_company]==$agentcompany[id]?'selected':''}>{$agentcompany.companyname}</option>
        </volist>
 
       </select>
-
     </div>
     
   </div>
@@ -159,7 +196,7 @@
     
     <!--<label for="inputEmail3" class="col-sm-1 control-label">合同编号</label>
     <div class="col-sm-3">
-      <input name="contract_no" type="text" class="form-control" id="contract_no" placeholder="自动生成，无需填写">
+      <input name="contract_no" type="text" class="form-control" id="contract_no" placeholder="自动生成，无需填写" value="{$info[contract_no]}">
     </div>-->
     </div>
     
@@ -168,17 +205,17 @@
     <label for="inputEmail3" class="col-sm-2 control-label">合同类型</label>
     <div class="col-sm-3">
    	    <label class="radio-inline">
-   	      <input name="type" type="radio" id="type_0" value="1" {$info[type]=='1'?'checked':''}  disabled>
+   	      <input name="type" type="radio" id="type_0" value="1" checked disabled>
    	      普通合同</label>
    	    
    	    <label class="radio-inline">
-   	      <input type="radio" name="type" value="2" id="type_1" {$info[type]=='2'?'checked':''} disabled>
+   	      <input type="radio" name="type" value="2" id="type_1" disabled>
    	      框架合同</label>
    
     </div>
     
-    <label for="inputEmail3" class="col-sm-1 control-label" {$info[type]=='1'?'style="display:none;"':''} >保证金</label>
-    <div class="col-sm-3 bzj" {$info[type]=='1'?'style="display:none;"':''}>
+    <label for="inputEmail3" class="col-sm-1 control-label bzj">保证金</label>
+    <div class="col-sm-3 bzj">
       <div class="input-group">
       <input name="margin" type="text" class="form-control" id="margin">
       <span class="input-group-addon">元</span>
@@ -210,10 +247,10 @@
   
   <div class="form-group">
   
-    <label for="contract_money" class="col-sm-2 control-label">续费金额</label>
+    <label for="contract_money" class="col-sm-2 control-label">金额</label>
     <div class="col-sm-3">
       	<div class="input-group">
-        <input type="text" class="form-control" name="money" id="money">
+        <input type="text" class="form-control" name="money" id="money"  value="{$info[money]}">
     	<span class="input-group-addon">元</span>
         </div>
     </div>
@@ -221,7 +258,7 @@
     <label for="rebates_proportion" class="col-sm-1 control-label">返点比例</label>
     <div class="col-sm-1">      
     	<div class="input-group">
-		<input type="text" class="form-control" name="rebates_proportion" autocomplete="off"  style=" width:105px;" id="rebates_proportion">
+		<input type="text" class="form-control" name="rebates_proportion" autocomplete="off"  style=" width:105px;" id="rebates_proportion"  value="{$info[rebates_proportion]}">
     	<span class="input-group-addon">%</span>
         </div>
     </div>
@@ -229,31 +266,28 @@
     <label for="show_money" class="col-sm-2 control-label">账户显示金额</label>
     <div class="col-sm-2">      
 		<div class="input-group">
-        <input type="text" class="form-control" name="show_money" id="show_money">
+        <input type="text" class="form-control" name="show_money" id="show_money" value="{$info[show_money]}">
         <span class="input-group-addon">元</span>
         </div>
     </div>
     
   </div>
-  
-  
   <!--<div class="form-group">
-  
+ 
     <label for="inputEmail3" class="col-sm-2 control-label">合同有效期</label>
     <div class="col-sm-3">
-    	<input id="contract_start" class="Wdate form-control" type="text" name="contract_start" <literal>onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_start\')||\'2020-10-01\'}'})" </literal>value="{$info[contract_start]|date='Y-m-d',###}"/> 
+    	<input id="contract_start" class="Wdate form-control" type="text" value="{$info[contract_start]|date='Y-m-d',###}" name="contract_start"  <literal>onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_start\')||\'2020-10-01\'}'})" </literal>/> 
     </div>
-    <label for="inputEmail3" class="col-sm-1 control-label">结束时间</label>
         <div class="col-sm-2">
-<input id="contract_end" class="Wdate form-control" type="text" name="contract_end" <literal> onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_end\')}',maxDate:'2020-10-01'})"</literal> value="{$info[contract_end]?$info[contract_end]|date='Y-m-d',###:''}"/>
+<input id="contract_end" class="Wdate form-control" type="text" value="{$info[contract_end]?$info[contract_end]|date='Y-m-d',###:''}"  name="contract_end" <literal>onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_end\')}',maxDate:'2020-10-01'})"</literal> />
     </div>
-
-   
     <div  class="col-sm-4 control-label" style="text-align:left;">
     <span class="glyphicon glyphicon-bookmark"></span> 结束时间为空则认为合同截止日期为： 至消费结束
 
     </div>
 
+
+   
 
     
   </div>-->
@@ -264,7 +298,7 @@
     	<select  class="form-control" name="account" id="account" >
         	<option value="">--请选择账户--</option>
         	<volist id="account" name="account">
-        	<option value="{$account[id]}">{$account[a_users]}</option>
+        	<option value="{$account[id]}" {$info[account]==$account[id]?'selected':''} >{$account[a_users]}</option>
             </volist>
         </select>
     </div>
@@ -284,73 +318,116 @@
     <label for="payment_type" class="col-sm-2 control-label">付款方式</label>
     <div class="col-sm-3">
       <select  class="form-control" name="payment_type" id="payment_type">
-      	<option value="" selected>--请选择--</option>
-      	<option value="1">预付</option>
-      	<option value="2">垫付</option>
-      	<option value="3">补款</option>
-
+      	<option value="1" {$info[payment_type]=='1'?'selected':''}>预付</option>
+      	<option value="2" {$info[payment_type]=='2'?'selected':''}>垫付</option>
+      	<option value="3" {$info[payment_type]=='3'?'selected':''}>补款</option>
       </select>
     </div>
     
     <label for="payment_time" class="col-sm-1 control-label">付款日期</label>
-    <div class="col-sm-2">      
-		<input type="text" name="payment_time" class="Wdate form-control" id="payment_time" onClick="WdatePicker()">
+    <div class="col-sm-2">
+		<input type="text" name="payment_time" value="{$info[payment_time]!='0'?$info[payment_time]|date='Y-m-d',###:''}" class="Wdate form-control" id="payment_time" onClick="WdatePicker()">
     </div>
     
     <!--<label for="inputEmail3" class="col-sm-1 control-label">付款金额</label>
     <div class="col-sm-2"> 
     	<div class="input-group">     
-		<input type="text" name="fk_money" class="form-control" id="fk_money">
+		<input type="text" name="fk_money" class="form-control" value="{$info[fk_money]}" id="fk_money">
         <span class="input-group-addon">元</span>
         </div>
     </div>-->
     
   </div>
-  
-  <div class="form-group diankuan">
+<!--  <div class="form-group diankuan" {$info[payment_type]=='1'?'style="display:none"':''} >
 
     <label for="inputEmail3" class="col-sm-2 control-label">是否开票</label>
     <div class="col-sm-3">
      	<label class="radio-inline">
-   	      <input name="ispiao" type="radio" id="type_0" value="0" checked>
+   	      <input name="ispiao" type="radio" id="type_0" value="0" {$dinfo[ispiao]=='0'?'checked':''} >
    	      未开</label>
    	    
    	    <label class="radio-inline">
-   	      <input type="radio" name="ispiao" value="1" id="type_1">
+   	      <input type="radio" name="ispiao" value="1" id="type_1" {$dinfo[ispiao]=='1'?'checked':''}>
    	      已开</label>
     </div>
     
-    <!--<label for="inputEmail3" class="col-sm-1 control-label">预计回款日期</label>
+    <label for="inputEmail3" class="col-sm-1 control-label">预计回款日期</label>
     <div class="col-sm-2">
-    	<input type="text" name="back_money_time" class="Wdate form-control" id="back_money_time" onClick="WdatePicker()">
-    </div>-->
-  </div>
+    	<input type="text" name="back_money_time" class="Wdate form-control" id="back_money_time" onClick="WdatePicker()" value="{$dinfo[back_money_time]?$dinfo[back_money_time]|date="Y-m-d",###:''}">
+    </div>
+  </div>-->
   
-  
-   <h4 class="bor-left-bull" >上传附件</h4>
+ <h4 class="bor-left-bull" >上传附件</h4>
   <hr>
 	<div class="form-group">
   
-    <label for="payment_type" class="col-sm-2 control-label">选择文件</label>
-    <div class="col-sm-3">
-        <input name="file[]" type="file" id="fileup" multiple>
-    </div>
-
     
+     <div class="col-sm-12" id="imgshowtime">
+    	
+      	<volist id="filelist" name="filelist">
+        	<div class="col-sm-1" style="margin-right:5px;">
+        	<img class="shouim" layer-src="{$filelist[file]}" src="{$filelist[file]}"  width="100" height="100" style="border:1px #ccc solid; ">&nbsp;
+				<a href="{:U("defile?id=$filelist[id]")}">删除</a>
+            </div>
+        </volist>
+    </div>
+    
+	<div class="col-sm-12">
+      <br>
+<input name="file[]" type="file" multiple id="fileup">
+    </div>
   </div>
-  <h4 class="bor-left-bull" >续费备注</h4>
+  <h4 class="bor-left-bull" >合同备注</h4>
   <hr>
   <div class="form-group">
    <div class="col-sm-12">      
-		<textarea class="form-control" name="note" id="note" rows="4"></textarea>
+		<textarea class="form-control" name="note" id="note" rows="4">{$info[note]}</textarea>
    </div>
 
    </div>
-	
+  <h4 class="bor-left-bull" >审核状态</h4>
+  <hr>
+	 <div class="form-group">
+    
+       <div class="col-sm-12">
+       <if condition="$info[audit_1] eq 0">
+       		<span class="shno">一级审核未审核</span>
+        	<elseif condition="$info[audit_1] eq 1"/>
+             <span class="shyes">一级审核已审核(审核人：{$users_info3?$users_info3:'默认'})</span>
+            <elseif condition="$info[audit_1] eq 2"/>
+            <span class="shno1">一级审核未通过(审核人：{$users_info3?$users_info3:'默认'})</span>
+       </if>
+       &nbsp;&nbsp;&nbsp;
+       <if condition="$info[audit_2] eq 0">
+       		<span class="shno">二级审核未审核</span>
+            <elseif condition="$info[audit_2] eq 1"/>
+            <span class="shyes">二级审核已审核(审核人：{$users_info4?$users_info4:'默认'})</span>
+            <elseif condition="$info[audit_2] eq 2"/>
+            <span class="shno1">二级审核未通过(审核人：{$users_info4?$users_info4:'默认'})</span>
+       </if>
+       </div>
+    </div>
+
     <div class="form-group">
     
-       <div class="col-sm-2">
-       <button type="submit" class="btn btn-primary">提交续费</button>
+       <div class="col-sm-12">
+        <if condition="($info[audit_1] neq 2) and ($info[audit_2] neq 2)">
+        <button type="submit" class="btn btn-primary">提交合同</button>
+        &nbsp;&nbsp;
+    	<a href="{:U("shenhe?type=audit_1&id=$info[id]&yid=$yid")}" class="btn btn-primary"  {$info[audit_1]!='0'?'style="display:none"':''} >一级审核通过</a>
+    	<a href="{:U("shenhe?type=audit_1&id=$info[id]&ju=1&yid=$yid")}" class="btn btn-danger"  {$info[audit_1]!='0'?'style="display:none"':''} >一级审核不通过</a>
+        &nbsp;&nbsp;
+        <a href="{:U("shenhe?type=audit_2&id=$info[id]&yid=$yid")}" class="btn btn-primary"  {$info[audit_2]!='0'?'style="display:none"':''}>二级审核通过</a>
+      	<a href="{:U("shenhe?type=audit_2&id=$info[id]&ju=1&yid=$yid")}" class="btn btn-danger"  {$info[audit_2]!='0'?'style="display:none"':''} >二级审核不通过</a>
+        <else/>
+        <input type="hidden" name="audit_1" id="audit_1" value="0">
+        <input type="hidden" name="audit_2" id="audit_2" value="0">
+
+        <button type="submit" class="btn btn-primary">重新提交合同</button>
+        
+        </if>
+
+       
        </div>
     </div>
 
@@ -360,6 +437,22 @@
 <br>
 <br>
 <br>
+<script>
+;!function(){
 
+//页面一打开就执行，放入ready是为了layer所需配件（css、扩展模块）加载完毕
+layer.ready(function(){ 
+  //官网欢迎页
+  
+  //使用相册
+  layer.photos({
+    photos: '#imgshowtime'
+  });
+});
+
+
+
+}();
+</script>
 </body>
 </html>

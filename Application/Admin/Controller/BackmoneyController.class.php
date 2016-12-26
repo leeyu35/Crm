@@ -73,10 +73,10 @@ class BackmoneyController extends CommonController
             //权限条件
             $q_where=quan_where(__CONTROLLER__,"a");
 
-            $count      = $Diankuan->field('a.id,a.advertiser,a.money,a.payment_time,a.ctime,b.advertiser,a.audit_1,a.audit_2')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and ".$q_where.$where)->count();// 查询满足要求的总记录数
+            $count      = $Diankuan->field('a.id,a.advertiser,a.money,a.payment_time,a.ctime,b.advertiser,a.audit_1,a.audit_2')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and is_huikuan=1 and ".$q_where.$where)->count();// 查询满足要求的总记录数
             $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
             $show       = $Page->show();// 分页显示输出
-            $list=$Diankuan->field('a.id,a.advertiser as aid,a.appname,a.advertiser,a.money,a.payment_time,a.ctime,a.submituser,b.advertiser,a.audit_1,a.audit_2')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
+            $list=$Diankuan->field('a.id,a.advertiser as aid,a.appname,a.advertiser,a.money,a.payment_time,a.ctime,a.submituser,b.advertiser,a.audit_1,a.audit_2')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0'  and is_huikuan=1 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
             foreach($list as $key => $val)
             {
                 //提交人

@@ -516,7 +516,7 @@ function excet_d($file,$sheet=0){
 //公司和合同余额变动 1公司id,2合同id，3类型:1续费预付，2续费垫付,3续费补款，4回款，5发票。 4 变动值
 function money_change($advertisers_id,$contract_id,$type,$value)
 {
-
+//类型:1续费预付，2续费垫付,3续费补款，4回款，5发票 14 退款  15 转款
     $advertisers = M("Customer");
     $contract = M("Contract");
     //如果是续费操作 则在客户出款字段yu_e上执行加操作
@@ -532,6 +532,16 @@ function money_change($advertisers_id,$contract_id,$type,$value)
     } elseif ($type == '5')
     {
         $contract->where("id=$contract_id")->setInc('invoice', $value);//更新发票总金额值
+    }elseif($type=='14')
+    {
+        //退款 总消耗减  总收款减
+          $advertisers->where("id=$advertisers_id")->setDec('huikuan', $value);//更新公司出款值
+          $contract->where("id=$contract_id")->setDec('huikuan', $value);//跟新合同补款值
+    }elseif($type=='15')
+    {
+        //退款 总消耗减  总收款减
+        $advertisers->where("id=$advertisers_id")->setDec('yu_e', $value);//更新公司出款值
+        $contract->where("id=$contract_id")->setDec('yu_e', $value);//跟新合同补款值
     }
 
 }
@@ -553,6 +563,16 @@ function money_reduce($advertisers_id,$contract_id,$type,$value)
     } elseif ($type == '5')
     {
         $contract->where("id=$contract_id")->setDec('invoice', $value);//更新发票总金额值
+    }elseif($type=='14')
+    {
+        //退款 总消耗减  总收款减
+        $advertisers->where("id=$advertisers_id")->setInc('huikuan', $value);//更新公司出款值
+        $contract->where("id=$contract_id")->setInc('huikuan', $value);//跟新合同补款值
+    }elseif($type=='15')
+    {
+        //退款 总消耗减  总收款减
+        $advertisers->where("id=$advertisers_id")->setInc('yu_e', $value);//更新公司出款值
+        $contract->where("id=$contract_id")->setInc('yu_e', $value);//跟新合同补款值
     }
 
 }

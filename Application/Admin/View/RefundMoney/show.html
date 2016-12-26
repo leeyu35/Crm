@@ -30,7 +30,7 @@
 <input type="hidden" name="id" id="id" value="{$info[id]}">
 <input type="hidden" name="advertiser" id="advertiser" value="{$info[advertiser]}">
 <input type="hidden" name="submituser" id="submituser" value="{$info[submituser]}">
-<h4 class="bor-left-bull" >合同基本信息</h4>
+<!--<h4 class="bor-left-bull" >合同基本信息</h4>
 <hr>
  
    <div class="form-group">
@@ -81,7 +81,7 @@
 <!--    <label for="inputEmail3" class="col-sm-1 control-label">续费编号</label>
     <div class="col-sm-3">
       <label  class="control-label"><strong>{$info[contract_no]}</strong></label>
-    </div>-->
+    </div>
     </div>
     
     <div class="form-group">
@@ -95,12 +95,12 @@
     <div class="col-sm-3 bzj">
       
       <label  class="control-label"><strong>{$info[margin]|num_format}</strong></label>
-    </div>-->
+    </div>
   
     
 </div>
-
-<h4 class="bor-left-bull" >续费信息</h4>
+-->
+<h4 class="bor-left-bull" >退款信息</h4>
 <hr>
 
   <!--<div class="form-group">
@@ -127,15 +127,7 @@
         <label  class="control-label"><strong>{$info[money]|num_format}元</strong></label>
     </div>
     
-    <label for="rebates_proportion" class="col-sm-1 control-label">返点比例</label>
-    <div class="col-sm-1">
-        <label  class="control-label"><strong>{$info[rebates_proportion]}%</strong></label>
-    </div>
-    
-    <label for="show_money" class="col-sm-2 control-label">账户显示金额</label>
-    <div class="col-sm-2">      
-        <label  class="control-label"><strong>{$info[show_money]}元</strong></label>
-    </div>
+   
     
   </div>
  <!-- <div class="form-group">
@@ -169,13 +161,14 @@
   <hr>
 	<div class="form-group">
   
-    <label for="payment_type" class="col-sm-2 control-label">付款方式</label>
+    <label for="payment_type" class="col-sm-2 control-label">退款方式</label>
     <div class="col-sm-3">
       <label  class="control-label"><strong>
       	{$info[payment_type]=='1'?'预付':''}
       	{$info[payment_type]=='2'?'垫付':''}
       	{$info[payment_type]=='3'?'补款':''}
-      	{$info[payment_type]=='14'?'退款':''}
+      	{$info[payment_type]=='14'?'到客户':''}
+      	{$info[payment_type]=='15'?'到总账户':''}
      </strong></label>
     </div>
     
@@ -190,20 +183,7 @@
     </div>-->
     
   </div>
-  <h4 class="bor-left-bull" >附件</h4>
-  <hr>
-	<div class="form-group">
-   <div class="col-sm-12" id="imgshowtime">
-    	
-      	<volist id="filelist" name="filelist">
-        	<div class="col-sm-1" style="padding-right:5px;">
-        	<img class="shouim" layer-src="{$filelist[file]}" src="{$filelist[file]}" width="100" height="100" style="border:1px #ccc solid; ">&nbsp;
-				<a href="{:U("defile?id=$filelist[id]")}">删除</a>
-            </div>
-        </volist>
-    </div>
-    
-  </div>
+ 
   <h4 class="bor-left-bull" >备注</h4>
   <hr>
   <div class="form-group">

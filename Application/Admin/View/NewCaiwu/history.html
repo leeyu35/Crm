@@ -26,13 +26,14 @@
 
 <div class="dropdown">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-    筛选
+    筛选{$sxyue}
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">只看续费</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">只看回款</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">只看发票</a></li>
+   <li role="presentation"><a role="menuitem" tabindex="-1" href="{:U("history?contract_id=$contract_id&type=qb")}">查看全部</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="{:U("history?contract_id=$contract_id&type=renew")}">只看续费</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="{:U("history?contract_id=$contract_id&type=huikuan")}">只看回款</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="{:U("history?contract_id=$contract_id&type=invoice")}">只看发票</a></li>
   </ul>
 </div>
 <section id="cd-timeline" class="cd-container" style="width:800px;">
