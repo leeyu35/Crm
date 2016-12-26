@@ -1,6 +1,8 @@
 <?php
 namespace Admin\Controller;
 use Think\Controller;
+use Think\Model;
+
 /**
  * Created by PhpStorm.
  * User: hjd
@@ -148,6 +150,8 @@ class ContractController extends CommonController
         //代理公司
         $agentcompany=M("AgentCompany");
         $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
+        //所有销售
+        $this->xiaoshou=M('Users')->field('id,name')->where("groupid=2")->select();
         $this->display();
     }
     public function addru(){
@@ -304,7 +308,8 @@ class ContractController extends CommonController
         //显示垫付信息
         $diankuan=M("Diankuan");
         $this->dinfo=$diankuan->find($info['contract_id']);
-
+        //所有销售
+        $this->xiaoshou=M('Users')->field('id,name')->where("groupid=2")->select();
         $this->display();
 
     }
@@ -493,6 +498,8 @@ class ContractController extends CommonController
         //公司名称
         $gs=kehu($info[advertiser]);
         $this->gongsi=$gs[advertiser];
+        //所有销售
+        $this->xiaoshou=M('Users')->field('id,name')->where("groupid=2")->select();
         $this->display();
 
     }

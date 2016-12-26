@@ -142,13 +142,13 @@
 			alert("请选择合同开始时间");
 			return false;	
 		}	
-		/*
-		if($("#contract_end").val()=="")
+		
+		if($("#market").val()=="请选择")
 		{
-			alert("请选择合同结束时间");
+			alert("请选择销售");
 			return false;	
 		}	
-		
+		/*
 		if($("#payment_time").val()=="")
 		{
 			alert("请选择付款日期");
@@ -255,7 +255,12 @@
     </div>
         <label for="inputEmail3" class="col-sm-1 control-label">销售</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" autocomplete="off" name="market" id="appname" value="{$info[market]}" >
+    	<select  class="form-control" name="market" id="market">
+      	<option>请选择</option>
+      	<volist id="xiaoshou" name="xiaoshou" key="k">
+       	<option value="{$xiaoshou.id}" title="{$xiaoshou.name}">{$xiaoshou.name}</option>
+       </volist>
+      </select>
     </div>
 
 

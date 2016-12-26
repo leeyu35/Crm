@@ -42,7 +42,10 @@
      </div>
      <label class="col-sm-1 control-label">销售</label>
      <div class="col-sm-2">
-    	<label  class="control-label"><strong>{$info[market]}</strong></label>
+     <volist id="xiaoshou" name="xiaoshou" key="k">
+               	<label  class="control-label"><strong>{$info[market]==$xiaoshou[id]?"$xiaoshou[name]":""}</strong></label>
+
+       </volist>
      </div>
    </div>
   <div class="form-group">
