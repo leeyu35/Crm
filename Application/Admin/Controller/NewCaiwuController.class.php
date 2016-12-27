@@ -108,6 +108,7 @@ class NewCaiwuController extends CommonController
         //续费的记录 1预付 2垫付
         $hetong=M("RenewHuikuan");
         $xflist=$hetong->field('money,payment_time,payment_type,account,audit_1,audit_2,type')->where("xf_contractid=$contract_id")->order("payment_time asc,id desc")->select();
+
         $yue=0;
         $bukuan=0;
         $account=M("Account");
@@ -186,8 +187,13 @@ class NewCaiwuController extends CommonController
         }elseif($type=='invoice')
         {
             $history=$history_fp;
-        }else{
+        }
+        else{
+            if(empty($history_xf)){$history_xf=array();}
+            if(empty($history_hk)){$history_hk=array();}
+            if(empty($history_fp)){$history_fp=array();}
             $history=array_merge($history_xf,$history_hk,$history_fp);
+
         }
 
         uasort($history,function ($a,$b){
@@ -202,7 +208,8 @@ class NewCaiwuController extends CommonController
                 return 0;
             }
         });
-        // dump($history);
+
+
         $this->yue=$ht_on['huikuan']-$ht_on['yu_e'];
         $this->bukuan=$ht_on['bukuan'];
         $this->invoice=$ht_on['invoice'];
