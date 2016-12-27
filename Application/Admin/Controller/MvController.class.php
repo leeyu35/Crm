@@ -32,11 +32,11 @@ class MvController extends CommonController
             foreach (I('post.kehu') as $key=>$val)
             {
                 $Customer=M("Customer")->where("id=$val")->setField("submituser",$users2);//客户所属权
-
                 $hetong=M("Contract")->where("advertiser=$val")->setField("submituser",$users2);//合同所属权
-                $Diankuan=M("Diankuan")->where("advertiser=$val")->setField("submituser",$users2);//垫款所属权
-                $Refund=M("Refund")->where("advertiser=$val")->setField("submituser",$users2);//退款所属权
+               // $Diankuan=M("Diankuan")->where("advertiser=$val")->setField("submituser",$users2);//垫款所属权
+               // $Refund=M("Refund")->where("advertiser=$val")->setField("submituser",$users2);//退款所属权
                 $Invoice=M("Invoice")->where("invoice_head=$val")->setField("submituser",$users2);//发票所属权
+                $Invoice=M("RenewHuikuan")->where("invoice_head=$val")->setField("submituser",$users2);//续费所属权
                 $RefundInvoice=M("RefundInvoice")->where("invoice_head=$val")->setField("submituser",$users2);//退票所属权
                 $this->success("转移成功");
             }

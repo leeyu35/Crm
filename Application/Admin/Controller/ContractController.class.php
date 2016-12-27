@@ -151,7 +151,7 @@ class ContractController extends CommonController
         $agentcompany=M("AgentCompany");
         $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
         //所有销售
-        $this->xiaoshou=M('Users')->field('id,name')->where("groupid=2 or groupid=15")->select();
+        $this->xiaoshou=M('Users')->field('id,name')->where("groupid=2 or groupid=15  or groupid=9")->select();
         $this->display();
     }
     public function addru(){
@@ -272,7 +272,7 @@ class ContractController extends CommonController
         $prid=I('get.prid');
         $today = strtotime(date('Y-m-d', time()));//获取当天0点
 
-        $max=$hetong->field('contract_no')->where("product_line=$prid and ctime>$today and isxufei=0")->order("ctime desc")->find();
+        $max=$hetong->field('contract_no')->where("product_line=$prid and ctime>$today and isxufei=0 ")->order("ctime desc")->find();
         $maxsun=substr($max['contract_no'],-2,2);
         $num=$maxsun+1;
 
@@ -310,7 +310,7 @@ class ContractController extends CommonController
         $this->dinfo=$diankuan->find($info['contract_id']);
 
         //所有销售
-        $this->xiaoshou=M('Users')->field('id,name')->where("groupid=2 or groupid=15")->select();
+        $this->xiaoshou=M('Users')->field('id,name')->where("groupid=2 or groupid=15 or groupid=9")->select();
         $this->display();
 
     }

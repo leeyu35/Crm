@@ -86,7 +86,7 @@ class AccountController extends CommonController
             $count      = $Refund->field('a.id')->join("a left join __ACCOUNTTYPE__ b on a.type = b.id ")->where("a.id!='0' and ".$q_where.$where)->count();// 查询满足要求的总记录数
             $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
             $show       = $Page->show();// 分页显示输出
-            $list=$Refund->field('a.id,a.appname,a.type,a.promote_url,a.a_users,a.ctime,a.a_password,a.ip,a.fandian,a.tel,a.contract_id,b.name')->join("a left join __ACCOUNTTYPE__ b on a.type = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
+            $list=$Refund->field('a.id,a.appname,a.endtime,a.type,a.promote_url,a.a_users,a.ctime,a.a_password,a.ip,a.fandian,a.tel,a.contract_id,b.name')->join("a left join __ACCOUNTTYPE__ b on a.type = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
             $hetong=M("Contract");
 
             foreach ($list as $key=>$val)
@@ -125,6 +125,24 @@ class AccountController extends CommonController
         echo $Blog;
     }
 
+    //检查账户名称是否被添加过
+    public function keyup_isaddusersname(){
+        //添加账户的时候 判断这个账户之前是否被添加过
+        $a_users=trim(I('post.val'));
+
+        $Refund=M("Account");
+        $is_j=$Refund->where("a_users ='$a_users'")->count();
+
+        if($is_j>0)
+        {
+            $str='<span style="color:#F00">该账户已经存在于某个合同,继续提交将结束之前合同的账户使用权，请谨慎操作</span>';
+        }else
+        {
+            $str='<span style="color:#0F3">该账户可以提交</span>';
+        }
+        echo $str;
+    }
+
     public function no_list(){
         $NOLIST=R('Refund/no_list');
         echo $NOLIST;
@@ -154,12 +172,20 @@ class AccountController extends CommonController
         $list=$Refund->create();
         $Refund->ctime=time();
 
+
+
         if($insertid=$Refund->add()){
+
+
             if($insertid==1)
             {
                 $result = $Refund->query("select currval('jd_account_id_seq')");
                 $insertid=$result[0][currval];
             }
+
+            //添加账户的时候 判断这个账户之前是否被添加过
+            $a_users=I('post.a_users');
+            $Refund->where("a_users ='$a_users' and id !=$insertid")->save(array("endtime"=>time()));
 
             if(I('post.fzrlist')){
                     //循环联系人并且记录
@@ -175,6 +201,9 @@ class AccountController extends CommonController
                     }
                    // $contact->addAll($contact_list);
             }
+
+
+
             if(I('post.for_contract')!=1)
             {
                 $this->success("添加成功",U("index"));

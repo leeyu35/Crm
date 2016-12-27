@@ -61,7 +61,7 @@ $(document).ready(function(e) {
         <th>账户用户名</th>
         <th>账户密码</th>
         <th>主手机号</th>
-        <!--<th>财务管理</th>-->	  
+        <th>到期时间</th>
         <th>操作</th>	  
     </tr>
     <volist id="list" name="list" key="k">
@@ -83,7 +83,14 @@ $(document).ready(function(e) {
         <span style="width:20px; display:inline-block"><a href="" title="回款">回</a></span>|&nbsp;&nbsp;<a href="" title="回款列表">列</a><br>
         <span style="width:20px; display:inline-block"><a href="" title="退款">退</a></span>|&nbsp;&nbsp;<a href="" title="退款列表">列</a><br>  
         </td>-->
-
+		<td>
+            
+        
+        
+        {$list[endtime]=='4092599349'?'无限':''}
+         {$list[endtime]!='4092599349'?$list[endtime]|date="Y-m-d",###:''}
+        
+        </td>
         <td>
         <a href="{:U("updata?id=$list[id]&contract_id=$contract_id")}"  data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<a href="{:U("delete?id=$list[id]&contract_id=$contract_id")}" {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         </td>

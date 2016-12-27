@@ -89,14 +89,23 @@
 			})
 			$("#fzrlist").show();
 		})
-
+		
 		
 		$("#gongsi").on("blur",function(){
 			setTimeout(function () {
 				$("#adlist").hide();
             }, 300);
 		})
-	
+		
+		//动态检查账户名称是否被添加过
+		$("#a_users").keyup(function(){
+			var val=$(this).val();
+			
+			$.post("{:U('keyup_isaddusersname')}",{val:val},function(data){
+					$("#keyup_isaddusersname").html(data);
+			})
+		})
+		
 		$("#formid").submit(function(){
 	
 		if($("#a_users").val()=="")
@@ -105,7 +114,7 @@
 			$("#a_users").select();
 			return false;	
 		}	
-
+		
 				
 	})
     });
@@ -113,7 +122,7 @@
 <style type="text/css">
 	#adlist{ margin-left:15px;}
 	#adlist li a,#fzrlist li a{ cursor:pointer;}
-	.bzj{ display:none;}
+	.bzj{ display:none; }
 </style>
 </head>
 
@@ -240,6 +249,7 @@
     <label for="payment_type" class="col-sm-2 control-label">用户名</label>
     <div class="col-sm-3">
      	<input type="text" name="a_users" class="form-control" id="a_users">
+        <span id="keyup_isaddusersname"></span>
     </div>
     
     <label for="payment_time" class="col-sm-1 control-label">密码</label>
