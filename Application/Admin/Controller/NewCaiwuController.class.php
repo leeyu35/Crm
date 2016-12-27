@@ -108,7 +108,7 @@ class NewCaiwuController extends CommonController
         //续费的记录 1预付 2垫付
         $hetong=M("RenewHuikuan");
         $xflist=$hetong->field('money,payment_time,payment_type,account,audit_1,audit_2,type')->where("xf_contractid=$contract_id and is_huikuan=0")->order("payment_time asc,id desc")->select();
-       
+
         $yue=0;
         $bukuan=0;
         $account=M("Account");
@@ -121,7 +121,6 @@ class NewCaiwuController extends CommonController
             //审核状态
             if(($val[audit_1]==0 or $val[audit_1]==1) and ($val[audit_2]==0 or $val[audit_2]==1))
             {
-                echo $val['money'];
                 $yue_xf+=$val['money'];
             }
 
