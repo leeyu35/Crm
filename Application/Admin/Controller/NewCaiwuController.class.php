@@ -140,11 +140,11 @@ class NewCaiwuController extends CommonController
             }elseif($val[payment_type]==14)
             {
                 //续费 退款
-                $history_xf[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 退款".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
+                $history_xf[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"退款到客户".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
             }elseif($val[payment_type]==15)
             {
                 //续费 转款
-                $history_xf[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 转款".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
+                $history_xf[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"退款到总账户".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
             }
         }
 

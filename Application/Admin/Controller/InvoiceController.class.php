@@ -312,7 +312,7 @@ class InvoiceController extends CommonController
         //开票类型
         $p=M("piaotype");
         $id=I("post.id");
-        
+
 
         $this->piaotype=$p->where("id = $info[type]")->find();
 
