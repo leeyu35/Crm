@@ -160,6 +160,7 @@ class InvoiceController extends CommonController
             $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
             exit;
         }
+
         if($Refund->add()){
             //如果申请发票添加成功则改变合同发票总额
             money_change($postdate['invoice_head'],$postdate['contract_id'],5,$postdate['money']);
@@ -311,7 +312,9 @@ class InvoiceController extends CommonController
         //开票类型
         $p=M("piaotype");
         $id=I("post.id");
-        $this->piaotype=$p->where("advertiser = $info[type]")->find();
+        
+
+        $this->piaotype=$p->where("id = $info[type]")->find();
 
         //公司名称
         $gs=kehu($info[invoice_head]);
