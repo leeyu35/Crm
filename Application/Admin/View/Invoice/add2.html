@@ -112,7 +112,7 @@ $("#gongsi").on("blur",function(){
 <input type="hidden" name="contract_id" id="contract_id" value="{$Think.get.contract_id}">
 <input type="hidden" name="contract_no" id="contract_no" value="{$Think.get.ht_on}">
 <input type="hidden" name="submituser" id="submituser" value="{$kehu[submituser]}">
-<input type="hidden" name="main_company" id="main_company" value="{$main_company}">
+<input type="hidden" name="main_company" id="main_company" value="{$main_company[agent_company]}">
 
 <h4 class="bor-left-bull" >开票基本信息</h4>
 <hr>
@@ -146,7 +146,7 @@ $("#gongsi").on("blur",function(){
       <select  class="form-control" name="type" id="type">
         <option>--请先选择开票主体--</option>
         <volist id="smlist" name="smlist">
-        	<option>{$smlist[name]}</option>
+        	<option value="{$smlist[id]}">{$smlist[name]}</option>
         </volist>
       </select>
     </div>

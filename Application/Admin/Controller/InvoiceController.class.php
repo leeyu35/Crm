@@ -104,6 +104,7 @@ class InvoiceController extends CommonController
         //根据合同id 获取 开票主体
         $hetong=M("Contract");
         $hetong_agent_company=$hetong->field('agent_company')->find(I('get.contract_id'));
+
         $this->main_company=$hetong_agent_company;
         //税目
         $p=M("piaotype");
@@ -310,7 +311,8 @@ class InvoiceController extends CommonController
         //开票类型
         $p=M("piaotype");
         $id=I("post.id");
-        $this->list=$p->where("advertiser = $info[main_company]")->select();
+        $this->piaotype=$p->where("advertiser = $info[type]")->find();
+
         //公司名称
         $gs=kehu($info[invoice_head]);
 
