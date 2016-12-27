@@ -107,8 +107,8 @@ class NewCaiwuController extends CommonController
 
         //续费的记录 1预付 2垫付
         $hetong=M("RenewHuikuan");
-        $xflist=$hetong->field('money,payment_time,payment_type,account,audit_1,audit_2,type')->where("xf_contractid=$contract_id")->order("payment_time asc,id desc")->select();
-
+        $xflist=$hetong->field('money,payment_time,payment_type,account,audit_1,audit_2,type')->where("xf_contractid=$contract_id and is_huikuan=0")->order("payment_time asc,id desc")->select();
+       
         $yue=0;
         $bukuan=0;
         $account=M("Account");
@@ -121,7 +121,8 @@ class NewCaiwuController extends CommonController
             //审核状态
             if(($val[audit_1]==0 or $val[audit_1]==1) and ($val[audit_2]==0 or $val[audit_2]==1))
             {
-                $yue+=$val['money'];
+                echo $val['money'];
+                $yue_xf+=$val['money'];
             }
 
             if($val[payment_type]==1)
@@ -156,7 +157,7 @@ class NewCaiwuController extends CommonController
         {
             if(($val[audit_1]==0 or $val[audit_1]==1) and ($val[audit_2]==0 or $val[audit_2]==1))
             {
-                $yue+=$val['money'];
+                $yue_hk+=$val['money'];
             }
             $history_hk[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"回款".num_format($val['money'])."<p></p>","yue"=>$yue,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2']);
         }
@@ -170,7 +171,7 @@ class NewCaiwuController extends CommonController
         {
             if(($val[audit_1]==0 or $val[audit_1]==1) and ($val[audit_2]==0 or $val[audit_2]==1))
             {
-                $yue+=$val['money'];
+                $yue_fp+=$val['money'];
             }
             $kptime=$val[kp_time]!=''?date("Y-m-d",$val[kp_time]):'暂无';
             $kptime.=$val[fp_on]!=''?'&nbsp&nbsp&nbsp&nbsp发票号:'.$val[fp_on]:'&nbsp&nbsp&nbsp&nbsp发票号：暂无';
@@ -181,12 +182,15 @@ class NewCaiwuController extends CommonController
         if ($type == 'renew')
         {
             $history=$history_xf;
+            $this->sxyue=$yue_xf;
         }elseif($type=='huikuan')
         {
             $history=$history_hk;
+            $this->sxyue=$yue_hk;
         }elseif($type=='invoice')
         {
             $history=$history_fp;
+            $this->sxyue=$yue_fp;
         }
         else{
             if(empty($history_xf)){$history_xf=array();}
@@ -215,7 +219,7 @@ class NewCaiwuController extends CommonController
         $this->invoice=$ht_on['invoice'];
         $this->contract_id=$ht_on['id'];
         $this->history=$history;
-        $this->sxyue=$yue;
+
        $this->display();
     }
 
