@@ -166,7 +166,8 @@ class BackmoneyController extends CommonController
                 }
             }
 
-            $this->success("提交成功",U("index"));
+            $this->success("提交成功",U("NewCaiwu/show?id=".$postdate['advertiser']));
+
 
         }else
         {

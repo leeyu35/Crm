@@ -151,7 +151,7 @@ class ContractController extends CommonController
         $agentcompany=M("AgentCompany");
         $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
         //所有销售
-        $this->xiaoshou=M('Users')->field('id,name')->where("groupid=2")->select();
+        $this->xiaoshou=M('Users')->field('id,name')->where("groupid=2 or group=15")->select();
         $this->display();
     }
     public function addru(){
@@ -308,8 +308,9 @@ class ContractController extends CommonController
         //显示垫付信息
         $diankuan=M("Diankuan");
         $this->dinfo=$diankuan->find($info['contract_id']);
+
         //所有销售
-        $this->xiaoshou=M('Users')->field('id,name')->where("groupid=2")->select();
+        $this->xiaoshou=M('Users')->field('id,name')->where("groupid=2 or group=15")->select();
         $this->display();
 
     }

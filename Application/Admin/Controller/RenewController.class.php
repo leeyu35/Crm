@@ -16,11 +16,12 @@ class RenewController extends  CommonController
         //检查该合同是否已经通过审核
         $hetong=M("Contract");
         $info=$hetong->field("a.*,b.advertiser as gongsi,c.name")->join("a left join jd_customer b on a.advertiser=b.id left join jd_product_line c on a.product_line = c.id")->where("a.id=".I('get.id'))->find();
+        /*
         if($info[audit_1]!='1' or $info[audit_2]!='1')
         {
             $this->error("该合同还未审核，请完成审核再进行操作");
             exit();
-        }
+        }*/
         $this->info=$info;
 
         //搜索条件
@@ -104,7 +105,6 @@ class RenewController extends  CommonController
     public function index2(){
         //检查该合同是否已经通过审核
         $hetong=M("Contract");
-
 
         //搜索条件
         $type=I('get.searchtype');
@@ -268,7 +268,7 @@ class RenewController extends  CommonController
             }
 
 
-            $this->success("添加成功",U("index?id=".I('post.htid')));
+            $this->success("添加成功",U("NewCaiwu/show?id=".$postdate['advertiser']));
 
         }else
         {

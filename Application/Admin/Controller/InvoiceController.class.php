@@ -164,8 +164,8 @@ class InvoiceController extends CommonController
         if($Refund->add()){
             //如果申请发票添加成功则改变合同发票总额
             money_change($postdate['invoice_head'],$postdate['contract_id'],5,$postdate['money']);
-            $this->success("申请成功",U("index"));
-
+            //$this->success("申请成功",U("index"));
+            $this->success("添加成功",U("NewCaiwu/show?id=".$postdate['invoice_head']));
         }else
         {
             $this->error("提交失败");
