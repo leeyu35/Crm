@@ -22,9 +22,7 @@ class BackmoneyController extends CommonController
                     $coustomer=M('Customer');
                     $zsql=$coustomer->field("id")->where(" advertiser like '%".I('get.search_text')."%'")->select(false);
                     $where.=" and  a.id!='0' and a.advertiser in($zsql)";
-
                 }
-
                 $this->ser_txt=I('get.search_text');
                 if($type=='appname')
                 {
@@ -100,6 +98,9 @@ class BackmoneyController extends CommonController
         //代理公司
         $agentcompany=M("AgentCompany");
         $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
+        $contract=M("Contract");
+        $contract_info=$contract->field('id,market,appname')->find(I('get.contract_id'));
+        $this->contract_info=$contract_info;
         $this->display();
     }
 

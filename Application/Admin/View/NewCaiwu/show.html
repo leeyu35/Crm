@@ -36,7 +36,7 @@
             	合同类型：{$list.name} {$list[type] == 1?"( 普 )":"( 框 )"}<if condition="$list[isguidang] eq 1"><span  data-toggle="tooltip" data-placement="left" title="合同已归档" class="glyphicon glyphicon-folder-close" style="color:#0492d9;"></span></if><br>
 				APP&nbsp;名称： {$list.appname}<br>
 				合同编号：{$list.contract_no}<br>
-				补款：{$list.bukuan|num_format}<br>
+				补款：{$list.bukuan|num_format} 回款：123321<br>
                 余额：{$list.yue|num_format}<br>
                 发票：{$list.invoice|num_format}<br>
             	<!--合同余额：{$list[yu_e]?$list[yu_e]:'暂无信息'}&nbsp;<br>-->
@@ -47,8 +47,8 @@
                 <a href="{:U("Renew/add?id=$list[id]")}" data-toggle="tooltip" data-placement="top" title="续费"><span class="glyphicon glyphicon-transfer"></span></a>&nbsp;|
         <a  href="{:U("history?contract_id=$list[id]")}" data-toggle="tooltip" data-placement="top" title="历史记录"><span class="glyphicon glyphicon-time"></span></a>&nbsp;|
         <a  href="{:U("Backmoney/add2?contract_id=$list[id]&adid=$list[aid]")}" data-toggle="tooltip" data-placement="top" title="添加该合同回款"><span class="glyphicon glyphicon-usd"></span></a>&nbsp;|
-        <a  href="{:U("Invoice/add2?contract_id=$list[id]&adid=$list[aid]&ht_on=$list[contract_no]")}" data-toggle="tooltip" data-placement="top" title="添加该合同发票"><span class="glyphicon glyphicon-inbox"></span></a>
-        <a  href="{:U("RefundMoney/add?id=$list[id]")}">退款</a>
+        <a  href="{:U("Invoice/add2?contract_id=$list[id]&adid=$list[aid]&ht_on=$list[contract_no]")}" data-toggle="tooltip" data-placement="top" title="添加该合同发票"><span class="glyphicon glyphicon-inbox"></span></a>&nbsp;|
+        <a  href="{:U("RefundMoney/add?id=$list[id]")}"  data-toggle="tooltip" data-placement="top"  title="退款"><span class="glyphicon glyphicon-share"></span></a>
             </div>
         
         </div>

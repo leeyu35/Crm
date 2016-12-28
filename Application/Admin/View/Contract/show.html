@@ -223,6 +223,7 @@
     
        <div class="col-sm-12">
        <button type="button" class="btn btn-primary" onClick="javascript:history.go(-1)">返回</button>
+       <a href="{:U("updata?id=$info[id]")}" class="btn btn-primary" >修改合同</a>
        	<if condition="($info[audit_1] neq 2) and ($info[audit_2] neq 2)">
         &nbsp;&nbsp;
     	<a href="{:U("shenhe?type=audit_1&id=$info[id]")}" class="btn btn-primary"  {$info[audit_1]!='0'?'style="display:none"':''} >一级审核通过</a>
