@@ -118,6 +118,11 @@ $("#gongsi").on("blur",function(){
     <div class="col-sm-2">
       <input type="text" class="form-control" autocomplete="off" name="appname" id="appname" value="{$info[appname]}" >
     </div>
+    <label for="inputEmail3" class="col-sm-1 control-label">回款日期</label>
+    <div class="col-sm-2">
+    	<input type="text" name="payment_time" class="Wdate form-control" id="b_time" onClick="WdatePicker()">
+    </div>
+    
     <label for="contract_money" class="col-sm-1 control-label">回款金额</label>
     <div class="col-sm-2">
       	<div class="input-group">
@@ -126,10 +131,7 @@ $("#gongsi").on("blur",function(){
         </div>
     </div>
     
-    <label for="inputEmail3" class="col-sm-1 control-label">回款日期</label>
-    <div class="col-sm-2">
-    	<input type="text" name="payment_time" class="Wdate form-control" id="b_time" onClick="WdatePicker()">
-    </div>
+  
     
 
     

@@ -115,8 +115,8 @@ $(document).ready(function(e) {
         </td>
 		<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[submituser]}</td>
         <td>
-        <a href="{:U("Renew/index?id=$list[id]")}" data-toggle="tooltip" data-placement="left" title="续费"><span class="glyphicon glyphicon-transfer"></span></a>&nbsp;|
-        <a  href="{:U("Account/index?contract_id=$list[id]")}"   data-toggle="tooltip" data-placement="left" title="账户"><span class="glyphicon glyphicon-list"></span></a>&nbsp;|
+        <!--<a href="{:U("Renew/index?id=$list[id]")}" data-toggle="tooltip" data-placement="left" title="续费"><span class="glyphicon glyphicon-transfer"></span></a>&nbsp;|
+        <a  href="{:U("Account/index?contract_id=$list[id]")}"   data-toggle="tooltip" data-placement="left" title="账户"><span class="glyphicon glyphicon-list"></span></a>&nbsp;|-->
         <if condition="$list[isguidang] eq 0"></if><!--归档限制 暂时取消-->
         <a href="{:U("updata?id=$list[id]")}"    data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|
         <a href="{:U("delete?id=$list[id]")}" {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>

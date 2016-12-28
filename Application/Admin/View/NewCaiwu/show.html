@@ -26,6 +26,8 @@
 <div></div>
 <div class="alert alert-danger" role="alert">
   <a href="#" class="alert-link">余额：{$zong|num_format}</a>
+  <a href="#" class="alert-link">余总回款：{$customer_info[huikuan]|num_format}</a>&nbsp;&nbsp;
+  <a href="#" class="alert-link">余总消耗: {$customer_info[yu_e]|num_format}</a>&nbsp;&nbsp;
 </div>
 <br>
 
@@ -36,8 +38,11 @@
             	合同类型：{$list.name} {$list[type] == 1?"( 普 )":"( 框 )"}<if condition="$list[isguidang] eq 1"><span  data-toggle="tooltip" data-placement="left" title="合同已归档" class="glyphicon glyphicon-folder-close" style="color:#0492d9;"></span></if><br>
 				APP&nbsp;名称： {$list.appname}<br>
 				合同编号：{$list.contract_no}<br>
-				补款：{$list.bukuan|num_format} 回款：123321<br>
+				补款：{$list.bukuan|num_format}<br>
                 余额：{$list.yue|num_format}<br>
+                总回款：{$list.huikuan|num_format}<br>
+                总续费：{$list.yu_e|num_format}<br>
+
                 发票：{$list.invoice|num_format}<br>
             	<!--合同余额：{$list[yu_e]?$list[yu_e]:'暂无信息'}&nbsp;<br>-->
                 
