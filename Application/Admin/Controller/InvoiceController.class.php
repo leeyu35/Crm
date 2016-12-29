@@ -160,7 +160,11 @@ class InvoiceController extends CommonController
             $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
             exit;
         }
-
+        if($postdate['money']<0)
+        {
+            $this->error('不能输入负数');
+            exit;
+        }
         if($Refund->add()){
             //如果申请发票添加成功则改变合同发票总额
             money_change($postdate['invoice_head'],$postdate['contract_id'],5,$postdate['money']);

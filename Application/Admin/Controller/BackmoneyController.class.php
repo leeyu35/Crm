@@ -134,7 +134,11 @@ class BackmoneyController extends CommonController
             $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
             exit;
         }
-
+        if($postdate['money']<0)
+        {
+            $this->error('不能输入负数');
+            exit;
+        }
 
         if($insid=$Diankuan->add()){
             //如果回款成功则修改客户和合同回款总额

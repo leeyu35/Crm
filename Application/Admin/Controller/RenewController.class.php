@@ -232,7 +232,11 @@ class RenewController extends  CommonController
         $hetong->payment_time=strtotime($hetong->payment_time);
         $hetong->ctime=time();
         $hetong->users2=cookie('u_id');
-
+        if($postdate['money']<0)
+        {
+            $this->error('不能输入负数');
+            exit;
+        }
 
         if($insid=$hetong->add()){
             //如果续费成功则修改客户出款或者补款余额  I('post.payment_type')
