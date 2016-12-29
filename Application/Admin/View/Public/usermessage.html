@@ -114,18 +114,21 @@ document.addEventListener('DOMContentLoaded',function(){
                     <a  href="{:U("Renew/index2?shenhe=0")}"  class="btn btn-primary" >
                     待审核续费 <if condition="$xufei neq 0"> <span class="badge">{$xufei?$xufei:'0'}</span></if>
                     </a>
-                    <a  href="{:U("Diankuan/index?shenhe=0")}" class="btn btn-success">
-                    待审核垫款 <if condition="$diankuan neq 0"> <span class="badge">{$diankuan?$diankuan:'0'}</span></if>
-                    </a><br><br>
-                    <a  href="{:U("Refund/index?shenhe=0")}" class="btn btn-info">
+
+                    <a  href="{:U("RefundMoney/index2?shenhe=0")}" class="btn btn-info">
                     待审核退款 <if condition="$tuikuan neq 0"> <span class="badge">{$tuikuan?$tuikuan:'0'}</span></if>
-                    </a>
+                    </a><br><br>
                     <a href="{:U("Invoice/index?shenhe=0")}" class="btn btn-warning">
                     待审核发票 <if condition="$fapiao neq 0"> <span class="badge">{$fapiao?$fapiao:'0'}</span></if>
                     </a>
-                    <a  href="{:U("RefundInvoice/index?shenhe=0")}"  class="btn btn-danger">
+                    <a href="#" class="btn btn-success">功能暂未开放<span class="badge"></span></a>
+                    <a href="#" class="btn btn-danger">功能暂未开放<span class="badge"></span></a>
+                    <!--<a  href="{:U("Diankuan/index?shenhe=0")}" class="btn btn-success">
+                   待审核垫款 <if condition="$diankuan neq 0"> <span class="badge">{$diankuan?$diankuan:'0'}</span></if>
+                    </a>-->
+                    <!--<a  href="{:U("RefundInvoice/index?shenhe=0")}"  class="btn btn-danger">
                     待审核退票 <if condition="$tuipiao neq 0"> <span class="badge">{$tuipiao?$tuipiao:'0'}</span></if>
-                    </a><br>
+                    </a>--><br>
 <br>
 					<if condition="$huikuan neq ''">
                     <div class="alert alert-danger width96" role="alert">近七天到期应回款：<a href="{:U("Diankuan/index?shenhe=1")}">{$huikuan}</a></div>

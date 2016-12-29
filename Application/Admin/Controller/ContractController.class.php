@@ -471,6 +471,59 @@ class ContractController extends CommonController
         }
     }
 
+    //操作合同归档
+    public function guidang(){
+        $id=I('get.id');
+        if(!is_numeric($id))
+        {
+            $this->error('参数类型错误');
+        }
+        $hetong=M("Contract");
+        $hetong->where("id=$id")->setField('isguidang','1');
+        $this->success('归档成功');
+    }
+    //操作合同归档
+    public function zuofei(){
+        $id=I('get.id');
+        if(!is_numeric($id))
+        {
+            $this->error('参数类型错误');
+        }
+        $hetong=M("Contract");
+        $hetong->where("id=$id")->setField('iszuofei','1');
+        $this->success('已将该合同作废');
+    }
+    //修改合同所属销售
+    public function upmarket(){
+        $id=I('get.id');
+        if(!is_numeric($id))
+        {
+            $this->error('参数类型错误');
+        }
+        $hetong=M("Contract");
+        $info=$hetong->find($id);
+        $this->info=$info;
+        $this->id=$id; //合同id
+        //所有销售
+        $this->xiaoshou=M('Users')->field('id,name')->where("groupid=2 or groupid=15  or groupid=9")->select();
+        $this->display();
+    }
+    //修改合同所属销售返回
+    public function upmarketru(){
+        $hetong=M("Contract");
+
+        $postdate=$hetong->create();
+        if($hetong->where("id=$postdate[id]")->setField('market',$postdate['market']))
+        {
+           echo 1;
+        }else
+        {
+           echo 2;
+        }
+
+
+    }
+
     //查看合同
     public function show(){
         $id=I('get.id');

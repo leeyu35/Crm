@@ -192,6 +192,7 @@ function daiban(){
     $group=$group;
     $group_name=$group['group_name'];
     //垫款
+    /*
     $Diankuan=M("Diankuan");
     switch ($group_name)
     {
@@ -207,7 +208,7 @@ function daiban(){
             echo "";
             break;
 
-    }
+    }*/
     //权限
     $rbac=M("Rbac");
     //获取合同审核权限组并且判断是否有消息
@@ -228,7 +229,7 @@ function daiban(){
         $ht_s2=$hetong->field('id')->where("audit_2 =0  and isxufei=0  and audit_1=1")->count();
         $rest+=$ht_s2;
     }
-
+    $xufeihuikuan=M("RenewHuikuan");
     //续费待审核
     $raac_xhetong=$rbac->field('audit_1,audit_2')->where("module = '/Admin/Renew'")->find();
 
@@ -236,7 +237,7 @@ function daiban(){
     $array=explode(",",$raac_xhetong['audit_1']);
     if(in_array(cookie('u_groupid'),$array))
     {
-        $ht_s1=$hetong->field('id')->where("audit_1 =0 and isxufei=1")->count();
+        $ht_s1=$xufeihuikuan->where("is_huikuan=0 and payment_type!=14 and payment_type!=15  and audit_1 =0")->count();
         $rest+=$ht_s1;
     }
     //二级审核
@@ -244,11 +245,11 @@ function daiban(){
     if(in_array(cookie('u_groupid'),$array1))
     {
 
-        $ht_s2=$hetong->field('id')->where("audit_2 =0  and isxufei=1  and audit_1=1")->count();
+        $ht_s2=$xufeihuikuan->where("is_huikuan=0 and payment_type!=14 and payment_type!=15 and audit_2 =0  and audit_1=1")->count();
 
         $rest+=$ht_s2;
     }
-
+    /*
     //垫款待审核
     $hetong=M("Diankuan");
     $raac_hetong=$rbac->field('audit_1,audit_2')->where("module = '/Admin/Diankuan'")->find();
@@ -266,22 +267,22 @@ function daiban(){
         $ht_s2=$hetong->field('id')->where("audit_2 =0  and audit_1=1")->count();
         $rest+=$ht_s2;
     }
-
+       */
     //退款待审核
-    $hetong=M("Refund");
+
     $raac_hetong=$rbac->field('audit_1,audit_2')->where("module = '/Admin/Refund'")->find();
     //一级审核
     $array=explode(",",$raac_hetong['audit_1']);
     if(in_array(cookie('u_groupid'),$array))
     {
-        $ht_s1=$hetong->field('id')->where("audit_1 =0 ")->count();
+        $ht_s1=$xufeihuikuan->where("(audit_1 =0) and (payment_type=14 or payment_type=15) ")->count();
         $rest+=$ht_s1;
     }
     //二级审核
     $array1=explode(",",$raac_hetong['audit_2']);
     if(in_array(cookie('u_groupid'),$array1))
     {
-        $ht_s2=$hetong->field('id')->where("audit_2 =0  and audit_1=1")->count();
+        $ht_s2=$xufeihuikuan->where("audit_2 =0  and audit_1=1  and (payment_type=14 or payment_type=15)")->count();
         $rest+=$ht_s2;
     }
     //发票待审核

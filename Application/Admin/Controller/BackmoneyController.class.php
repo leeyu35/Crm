@@ -214,7 +214,7 @@ class BackmoneyController extends CommonController
 
         if($Diankuan->where("id=$id")->save())
         {
-
+            money_reduce($postdate['advertiser'],$postdate['xf_contractid'],4,$postdate['money']);
             if($_FILES["file"]['name'][0]!="") {
                 $upload = new \Think\Upload();// 实例化上传类
                 $upload->maxSize = 2097152;// 设置附件上传大小

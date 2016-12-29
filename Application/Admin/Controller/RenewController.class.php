@@ -435,7 +435,7 @@ class RenewController extends  CommonController
                     money_reduce($xfinfo['advertiser'],$xfinfo['xf_contractid'],$xfinfo['payment_type'],$xfinfo['money']);
 
                 }
-
+                /*
                 if($yid!='')
                 {
                     $this->success('审核成功',U("index?id=$yid"));
@@ -444,7 +444,7 @@ class RenewController extends  CommonController
                 }else
                 {
                     $this->success('审核成功',U("index2?shenhe=0"));
-                }
+                }*/
                 if($type=='audit_1')
                 {
                     $table->where("id=$id")->setField('susers1',cookie('u_id'));
@@ -457,6 +457,7 @@ class RenewController extends  CommonController
             {
                 $this->error('审核失败');
             }
+            $this->success('审核成功',U("index2?shenhe=0"));
         }
     }
     //删除图片
