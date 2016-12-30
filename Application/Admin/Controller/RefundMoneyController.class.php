@@ -635,7 +635,8 @@ class RefundMoneyController extends  CommonController
         $hetong=M("RenewHuikuan");
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
-
+        //退款条件
+        $where=" and (a.payment_type = 14 or a.payment_type=15)";
 
         $list=$hetong->field('a.id,a.advertiser as aid,a.money,a.payment_type,a.payment_time,a.account,a.contract_start,a.contract_end,a.type,a.users2,a.appname,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.id!=0 and ".$q_where.$where)->order("a.ctime desc")->select();
 
@@ -675,7 +676,15 @@ class RefundMoneyController extends  CommonController
             $list2[$key]['margin']=$val['margin'];
 
             //付款方式
-            $list2[$key]['payment_type']=$val['payment_type']==1?'预付':'垫付';
+            if($val['payment_type']==14)
+            {
+                $list2[$key]['payment_type']='退款到客户';
+            }
+            if($val['payment_type']==15)
+            {
+                $list2[$key]['payment_type']='退款到总账户';
+            }
+
             //付款时间
             $list2[$key]['payment_time']=$val['payment_time']?date("Y-m-d",$val['payment_time']):'';
 
