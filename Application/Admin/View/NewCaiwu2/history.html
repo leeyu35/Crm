@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+<link rel="stylesheet" type="text/css" href="/Public/css/style.css">
+
+<script src="/Public/js/jquery-3.1.0.min.js"></script>
+<script src="/Public/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<span style="position:fixed; top:10px; font-size:18px; background:#999; color:#F00; z-index:999;">
+余额：{$yue|num_format}<br>
+补款：{$bukuan|num_format}<br>
+发票：{$invoice|num_format}
+
+</span><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+    筛选{$sxyue}
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+   <li role="presentation"><a role="menuitem" tabindex="-1" href="{:U("history?contract_id=$contract_id&type=qb")}">查看全部</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="{:U("history?contract_id=$contract_id&type=renew")}">只看续费</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="{:U("history?contract_id=$contract_id&type=huikuan")}">只看回款</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="{:U("history?contract_id=$contract_id&type=invoice")}">只看发票</a></li>
+  </ul>
+</div>
+<section id="cd-timeline" class="cd-container" style="width:800px;">
+	<volist id="history" name="history">
+	<div class="cd-timeline-block">
+		<div class="cd-timeline-img cd-picture">
+			
+		</div>
+
+		<div class="cd-timeline-content">
+			<h2>{$history[mes]}
+            <if condition="$history[audit_1] eq 1">
+        	<span data-toggle="tooltip" data-placement="top" title="一级审核已通过" class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
+        <elseif condition="$history[audit_1] eq 2"/>
+        	<span data-toggle="tooltip" data-placement="top" title="一级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
+        <elseif condition="$history[audit_1] eq 0"/>
+        	<span data-toggle="tooltip" data-placement="top"  title="一级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
+        </if>
+        
+        
+        <if condition="$history[audit_2] eq 1">
+        	<span data-toggle="tooltip" data-placement="top" title="二级审核已通过"  class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
+        <elseif condition="$history[audit_2] eq 2"/>
+            <span data-toggle="tooltip" data-placement="top" title="二级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
+        <elseif condition="$history[audit_2] eq 0"/>
+        	<span data-toggle="tooltip" data-placement="top" title="二级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
+        </if></h2>
+			<span class="cd-date">{$history[date]}</span>
+		</div>
+	</div>
+    </volist>
+	
+</section>
+<script>
+   $(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script>
+</body>
+</html>

@@ -177,6 +177,7 @@ class AccountController extends CommonController
         if($insertid=$Refund->add()){
 
 
+
             if($insertid==1)
             {
                 $result = $Refund->query("select currval('jd_account_id_seq')");

@@ -522,27 +522,75 @@ function money_change($advertisers_id,$contract_id,$type,$value)
     $contract = M("Contract");
     //如果是续费操作 则在客户出款字段yu_e上执行加操作
     if ($type == '1' or $type == '2') {
-        $advertisers->where("id=$advertisers_id")->setInc('yu_e', $value);//更新公司出款值
-        $contract->where("id=$contract_id")->setInc('yu_e', $value);//更新合同出款值
+        $update1=$advertisers->where("id=$advertisers_id")->setInc('yu_e', $value);//更新公司出款值
+        $update2=$contract->where("id=$contract_id")->setInc('yu_e', $value);//更新合同出款值
+        if($update1!=1)
+        {
+            die('广告续费总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
+        }
+        if($update2!=1)
+        {
+            die('合同续费总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$contract->_sql());
+        }
+
     } elseif ($type == '3') {
-        $advertisers->where("id=$advertisers_id")->setInc('bukuan', $value);//更新公司补款值
-        $contract->where("id=$contract_id")->setInc('bukuan', $value);//更新合同补款值
+        //补款
+        $update1=$advertisers->where("id=$advertisers_id")->setInc('bukuan', $value);//更新公司补款值
+        $update2=$contract->where("id=$contract_id")->setInc('bukuan', $value);//更新合同补款值
+        if($update1!=1)
+        {
+            die('广告补款总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
+        }
+        if($update2!=1)
+        {
+            die('合同补款总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$contract->_sql());
+        }
     } elseif ($type == '4') {
-        $advertisers->where("id=$advertisers_id")->setInc('huikuan', $value);//更新公司出款值
-        $contract->where("id=$contract_id")->setInc('huikuan', $value);//跟新合同补款值
+        //回款
+        $update1=$advertisers->where("id=$advertisers_id")->setInc('huikuan', $value);//更新公司出款值
+        $update2=$contract->where("id=$contract_id")->setInc('huikuan', $value);//跟新合同补款值
+        if($update1!=1)
+        {
+            die('广告回款总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
+        }
+        if($update2!=1)
+        {
+            die('合同回款总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$contract->_sql());
+        }
     } elseif ($type == '5')
     {
-        $contract->where("id=$contract_id")->setInc('invoice', $value);//更新发票总金额值
+        //发票
+        $update1=$contract->where("id=$contract_id")->setInc('invoice', $value);//更新发票总金额值
+        if($update1!=1)
+        {
+            die('合同发票总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
+        }
     }elseif($type=='14')
     {
-        //退款 总消耗减  总收款减
-          $advertisers->where("id=$advertisers_id")->setDec('huikuan', $value);//更新公司出款值
-          $contract->where("id=$contract_id")->setDec('huikuan', $value);//跟新合同补款值
+        //退款到客户  总收款减
+        $update1=$advertisers->where("id=$advertisers_id")->setDec('huikuan', $value);//更新公司出款值
+        $update2=$contract->where("id=$contract_id")->setDec('huikuan', $value);//跟新合同补款值
+        if($update1!=1)
+        {
+            die('广告退款到客户 操作回款总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
+        }
+        if($update2!=1)
+        {
+            die('合同退款到客户 操作回款总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$contract->_sql());
+        }
     }elseif($type=='15')
     {
-        //退款 总消耗减  总收款减
-        $advertisers->where("id=$advertisers_id")->setDec('yu_e', $value);//更新公司出款值
-        $contract->where("id=$contract_id")->setDec('yu_e', $value);//跟新合同补款值
+        //退款到总账户 总消耗减
+        $update1=$advertisers->where("id=$advertisers_id")->setDec('yu_e', $value);//更新公司出款值
+        $update2=$contract->where("id=$contract_id")->setDec('yu_e', $value);//跟新合同补款值
+        if($update1!=1)
+        {
+            die('广告退款到总账户 操作回款总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
+        }
+        if($update2!=1)
+        {
+            die('合同退款到总账户 操作回款总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$contract->_sql());
+        }
     }
 
 }
@@ -553,27 +601,75 @@ function money_reduce($advertisers_id,$contract_id,$type,$value)
     $contract = M("Contract");
     //如果是续费操作 则在客户出款字段yu_e上执行加操作
     if ($type == '1' or $type == '2') {
-        $advertisers->where("id=$advertisers_id")->setDec('yu_e', $value);//更新公司出款值
-        $contract->where("id=$contract_id")->setDec('yu_e', $value);//更新合同出款值
+
+        $update1=$advertisers->where("id=$advertisers_id")->setDec('yu_e', $value);//更新公司出款值
+        $update2=$contract->where("id=$contract_id")->setDec('yu_e', $value);//更新合同出款值
+        if($update1!=1)
+        {
+            die('广告续费总额回滚失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
+        }
+        if($update2!=1)
+        {
+            die('合同续费总额回滚失败，请尽快联系CRM系统管理员<br>sql:'.$contract->_sql());
+        }
     } elseif ($type == '3') {
-        $advertisers->where("id=$advertisers_id")->setDec('bukuan', $value);//更新公司补款值
-        $contract->where("id=$contract_id")->setDec('bukuan', $value);//更新合同补款值
+        //补款
+        $update1=$advertisers->where("id=$advertisers_id")->setDec('bukuan', $value);//更新公司补款值
+        $update2=$contract->where("id=$contract_id")->setDec('bukuan', $value);//更新合同补款值
+        if($update1!=1)
+        {
+            die('广告补款总额回滚失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
+        }
+        if($update2!=1)
+        {
+            die('合同补款总额回滚失败，请尽快联系CRM系统管理员<br>sql:'.$contract->_sql());
+        }
     } elseif ($type == '4') {
-        $advertisers->where("id=$advertisers_id")->setDec('huikuan', $value);//更新公司出款值
-        $contract->where("id=$contract_id")->setDec('huikuan', $value);//跟新合同补款值
+        //回款
+        $update1=$advertisers->where("id=$advertisers_id")->setDec('huikuan', $value);//更新公司出款值
+        $update2=$contract->where("id=$contract_id")->setDec('huikuan', $value);//跟新合同补款值
+        if($update1!=1)
+        {
+            die('广告回款总额回滚失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
+        }
+        if($update2!=1)
+        {
+            die('合同回款总额回滚失败，请尽快联系CRM系统管理员<br>sql:'.$contract->_sql());
+        }
     } elseif ($type == '5')
     {
-        $contract->where("id=$contract_id")->setDec('invoice', $value);//更新发票总金额值
+        //发票
+        $update1=$contract->where("id=$contract_id")->setDec('invoice', $value);//更新发票总金额值
+        if($update1!=1)
+        {
+            die('合同发票总额回滚失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
+        }
     }elseif($type=='14')
     {
-        //退款 总消耗减  总收款减
-        $advertisers->where("id=$advertisers_id")->setInc('huikuan', $value);//更新公司出款值
-        $contract->where("id=$contract_id")->setInc('huikuan', $value);//跟新合同补款值
+        //退款到客户  总收款减
+        $update1=$advertisers->where("id=$advertisers_id")->setInc('huikuan', $value);//更新公司出款值
+        $update2=$contract->where("id=$contract_id")->setInc('huikuan', $value);//跟新合同补款值
+        if($update1!=1)
+        {
+            die('广告退款到客户 操作回款总额回滚失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
+        }
+        if($update2!=1)
+        {
+            die('合同退款到客户 操作回款总额回滚失败，请尽快联系CRM系统管理员<br>sql:'.$contract->_sql());
+        }
     }elseif($type=='15')
     {
-        //退款 总消耗减  总收款减
-        $advertisers->where("id=$advertisers_id")->setInc('yu_e', $value);//更新公司出款值
-        $contract->where("id=$contract_id")->setInc('yu_e', $value);//跟新合同补款值
+        //退款到总账户 总消耗减
+        $update1=$advertisers->where("id=$advertisers_id")->setInc('yu_e', $value);//更新公司出款值
+        $update2=$contract->where("id=$contract_id")->setInc('yu_e', $value);//跟新合同补款值
+        if($update1!=1)
+        {
+            die('广告退款到总账户 操作回款总额回滚失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
+        }
+        if($update2!=1)
+        {
+            die('合同退款到总账户 操作回款总额回滚失败，请尽快联系CRM系统管理员<br>sql:'.$contract->_sql());
+        }
     }
 
 }
