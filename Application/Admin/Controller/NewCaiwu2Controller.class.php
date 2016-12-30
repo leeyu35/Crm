@@ -114,10 +114,13 @@ class NewCaiwu2Controller extends CommonController
         $contract_id = I('get.contract_id');
         $ht_on = M("Contract")->field("contract_no,yu_e,bukuan,huikuan,invoice,id")->find($contract_id);
         $type = I('get.type');
-
+        if($type=='renew')
+        {
+            $renewwhere=' and (payment_type !=14 and payment_type !=15)';
+        }
         //续费的记录 1预付 2垫付
         $hetong=M("RenewHuikuan");
-        $xflist=$hetong->field('money,payment_time,payment_type,account,audit_1,audit_2,type')->where("xf_contractid=$contract_id and is_huikuan=0")->order("payment_time asc,id desc")->select();
+        $xflist=$hetong->field('money,payment_time,payment_type,account,audit_1,audit_2,type')->where("xf_contractid=$contract_id and is_huikuan=0 $renewwhere")->order("payment_time asc,id desc")->select();
 
         $yue=0;
         $bukuan=0;
