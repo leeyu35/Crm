@@ -239,8 +239,7 @@ class RenewController extends  CommonController
         }
 
         if($insid=$hetong->add()){
-            echo $hetong->_sql();
-            exit;
+           
             //如果续费成功则修改客户出款或者补款余额  I('post.payment_type')
             money_change($postdate['advertiser'],$postdate['xf_contractid'],I('post.payment_type'),$postdate['money']);
 
