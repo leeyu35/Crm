@@ -41,7 +41,7 @@ function account_daili($where=""){
 
 
     $tabledata = M("accountdaily", "baiduapi_", "pgsql://rdspg:anmeng@rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com:3432/msdb");//百度消耗
-    $tabledata1=M("accountdaily", "tb_shenma_", "pgsql://rdspg:anmeng@rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com:3432/yushan");//百度消耗
+    $tabledata1=M("accountdaily", "tb_shenma_", "pgsql://rdspg:anmeng@rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com:3432/yushan");//神马消耗
     $account_day_cost = $tabledata->field('appid,date,baidu_cost_total as cost_total,baidu_view_total as view_total ,baidu_click_total as click_total')->where("date>='2017-01-01' and device='all' $where")->group('appid,date,baidu_cost_total,baidu_view_total,baidu_click_total')->select();
     $account_day_cost1= $tabledata1->field('appid,date,cost_total,view_total,click_total')->where("date>='2017-01-01' and device='all' $where")->group('appid,date,cost_total,view_total,click_total')->select();
     $result=array_merge($account_day_cost,$account_day_cost1);

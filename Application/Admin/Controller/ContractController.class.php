@@ -266,6 +266,18 @@ class ContractController extends CommonController
         $this->display();
     }
     public function addru(){
+        //检查是否有这个客户
+        $Customer=M("Customer");
+
+        $co=$Customer->where("id='".I('post.advertiser')."'")->count();
+
+        if($co==0)
+        {
+            $this->error("没有这个公司!");
+            exit;
+        }
+
+
         //合同状态
         /*
          * 查询客户之前是否有签过合同，如果没有签过就是新客 如果有合同就判断从第一个合同开始的三个月内有没有新的产品线合同，如果有就属于老客新开，如果没有或者大于三个月就属于老客户
@@ -324,16 +336,7 @@ class ContractController extends CommonController
 
 
 
-        //检查是否有这个客户
-        $Customer=M("Customer");
 
-        $co=$Customer->where("id='".I('post.advertiser')."'")->count();
-
-        if($co==0)
-        {
-            $this->error("没有这个公司!");
-            exit;
-        }
         //检查合同编号是否重复
         $biaohaocon=$hetong->where("contract_no='".I('post.contract_no')."'")->count();
         if($biaohaocon>0 && I('post.copy')=='')

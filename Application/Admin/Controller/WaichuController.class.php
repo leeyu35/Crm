@@ -73,17 +73,15 @@ class WaichuController extends CommonController
                 $q_where.=" and a.submituser=".cookie('u_id');
             }elseif($my_info[manager]==1)
             {
-                if($my_zu!='销售经理')
-                {
                     $q_where.=" and b.groupid=".cookie('u_groupid');
-                }else
-                {
-                    $q_where.=" and (b.groupid=2 or  b.groupid=9)";
-                }
             }
-            if($my_zu=='超级管理员' or $my_zu=='人事' or $my_zu=='BOSS')
+            if($my_zu=='超级管理员' or $my_zu=='BOSS')
             {
                 $q_where=" a.id !='0'";
+            }
+            if( $my_zu=='人事')
+            {
+                $q_where=" a.id !='0' and a.audit_1=1";
             }
 
             $count      = $Refund->field('a.id,a.bumen,a.zhiwu,a.type,a.starttime,a.endtime,a.ctime,a.audit_1,a.audit_2,b.name')->join("a left join __USERS__ b on a.submituser = b.id ")->where("a.id!='0' and ".$q_where.$where)->count();// 查询满足要求的总记录数

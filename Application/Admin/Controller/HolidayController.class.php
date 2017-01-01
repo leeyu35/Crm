@@ -81,9 +81,13 @@ class HolidayController extends CommonController
                     $q_where.=" and (b.groupid=2 or  b.groupid=9)";
                 }
             }
-            if($my_zu=='超级管理员' or $my_zu=='人事' or $my_zu=='BOSS')
+            if($my_zu=='超级管理员' or $my_zu=='BOSS')
             {
                 $q_where=" a.id !='0'";
+            }
+            if($my_zu=='人事')
+            {
+                $q_where=" a.id !='0' and a.audit_1=1";
             }
 
 
