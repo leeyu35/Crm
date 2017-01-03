@@ -9,7 +9,7 @@ use Think\Model;
  * Date: 2016/8/16
  * Time: 10:02
  */
-class ContractController extends CommonController
+class ContractmjController extends CommonController
 {
     public function index(){
         //产品线
@@ -46,6 +46,7 @@ class ContractController extends CommonController
         }
 
         //合同类型
+        /*
         $httype=I('get.httype');
         if($httype!='')
         {
@@ -64,6 +65,9 @@ class ContractController extends CommonController
             $where.=" and a.type=1  and a.isxufei='0'";
             $this->httype=$httype;
         }
+        */
+
+        $where.=" and a.is_meijie=1";
 
         //时间条件
         $time_start=I('get.time_start');
@@ -125,7 +129,6 @@ class ContractController extends CommonController
             $where.="and a.product_line =$type3";
             $this->type3=$type3;
         }
-        $where.=" and is_meijie = 0 ";
         //echo $where;
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
