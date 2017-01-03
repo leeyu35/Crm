@@ -121,8 +121,6 @@ class UsersController extends CommonController
     //修改用户返回
     public  function upusers(){
         $users=D("Users");
-
-
         if($users->create())
         {
             if($_FILES['image2']['name']!=""){
