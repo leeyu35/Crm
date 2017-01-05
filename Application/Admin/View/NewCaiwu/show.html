@@ -412,7 +412,7 @@
         <div class="col-sm-4 infor-list hjd">
             <div class="infor-list-1">
                 <div class="infor-list-title">
-                    <span class="infor-list-man">销售负责人：{$list[xiaoshou]!=''?$list[xiaoshou]:'暂无'} <a  class="test1" id="{:U("Contract/upmarket?id=$list[id]")}"><span class="glyphicon glyphicon-pencil"  data-toggle="tooltip" data-placement="top" title="修改销售"></span></a></span>
+                    <span class="infor-list-man">销售负责人：{$list[xiaoshou]!=''?$list[xiaoshou]:'暂无'} <a  class="test1" id="{:U("Contract/upmarket?id=$list[id]")}"><i class="iconfont" style="color:#575757" >&#xe630;</i></a></span>
                 </div>
 
                 <div class="infor-list-nav infor-nav-guidang <if condition="$list[iszuofei] eq 1">infor-nav-zuofei</if>" id="{:U("Contract/show?id=$list[id]")}">
@@ -444,29 +444,21 @@
                     <div class="infor-invalidate  <if condition="$list[iszuofei] eq 1">infor-list-remove</if>"></div>
                 </div>
                 <div class="infor-list-bottom infor-bottom-guidang  <if condition="$list[iszuofei] eq 1">infor-bottom-zuofei</if>" >
-
+                    <if condition="$list[iszuofei] eq 0">
                         <a  href="{:U("Account/index?contract_id=$list[id]")}" data-toggle="tooltip" data-placement="top" title="账户"><i class="iconfont">&#xe6dc;</i></a></a>
-
-
                         <a href="{:U("Renew/add?id=$list[id]")}" data-toggle="tooltip" data-placement="top" title="续费"><i class="iconfont">&#xe631;</i></a>
-
-
                         <a  href="{:U("history?contract_id=$list[id]")}" data-toggle="tooltip" data-placement="top" title="历史记录"><i class="iconfont">&#xe602;</i></a>
-
                         <a  href="{:U("Backmoney/add2?contract_id=$list[id]&adid=$list[aid]")}" data-toggle="tooltip" data-placement="top" title="添加该合同回款"><i class="iconfont">&#xe611;</i></a>
-
                         <a  href="{:U("Invoice/add2?contract_id=$list[id]&adid=$list[aid]&ht_on=$list[contract_no]")}" data-toggle="tooltip" data-placement="top" title="添加该合同发票"><i class="iconfont">&#xe622;</i></a>
-
-                    <if condition="$list[isguidang] eq 0">
-
+                        <if condition="$list[isguidang] eq 0">
                         <a href="{:U("Contract/guidang?id=$list[id]")}" onClick="if(confirm('确定要将此合同作归档吗？')){return true}else{return false}" data-toggle="tooltip" data-placement="top"  title="归档"><i class="iconfont">&#xe67d;</i></a>
-
-                    </if>
-
+                        </if>
                         <a  href="{:U("RefundMoney/add?id=$list[id]")}"   data-toggle="tooltip" data-placement="top" title="退款"><i class="iconfont">&#xe603;</i></a>
-
                         <a href="{:U("Contract/zuofei?id=$list[id]")}" onClick="if(confirm('确定要将此合同作废吗？')){return true}else{return false}" data-toggle="tooltip" data-placement="top"  title="作废"><i class="iconfont">&#xe657;</i></a>
-
+                    <else/>
+                        <span style="color: #ccc; font-weight: 700; padding-left: 10px;">该合同已作废！</span>
+                        <a  href="{:U("history?contract_id=$list[id]")}" data-toggle="tooltip" data-placement="top" title="历史记录"><i class="iconfont">&#xe602;</i></a>
+                    </if>
                 </div>
                 <div class="clear"></div>
             </div>
