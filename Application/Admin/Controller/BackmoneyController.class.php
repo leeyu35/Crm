@@ -118,7 +118,7 @@ class BackmoneyController extends CommonController
         $Diankuan->payment_time=strtotime($Diankuan->payment_time);
         $Diankuan->ctime=time();
         $Diankuan->is_huikuan=1;
-        $hetong->users2=cookie('u_id');
+        $Diankuan->users2=cookie('u_id');
         /*
         //检查是否有这个客户
         $Customer=M("Customer");
@@ -215,7 +215,7 @@ class BackmoneyController extends CommonController
         $Diankuan->payment_time=strtotime($Diankuan->payment_time);
 
         $Diankuan->ctime=I('post.time')+1;
-
+        $Diankuan->users2=cookie('u_id');
         if($Diankuan->where("id=$id")->save())
         {
             money_reduce($postdate['advertiser'],$postdate['xf_contractid'],4,$postdate['money']);
