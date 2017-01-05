@@ -671,5 +671,28 @@ function money_reduce($advertisers_id,$contract_id,$type,$value)
             die('合同退款到总账户 操作回款总额回滚失败，请尽快联系CRM系统管理员<br>sql:'.$contract->_sql());
         }
     }
+}
 
+//获取周的开始时间和结束时间参数1 得到几周数据  参数2 从上周几开始计算，周期  参数3 指定开始时间 没有则默认今天
+function teodate_week($to,$zhouji,$strdate=''){
+    //如果没有指定日期则默认当前日期
+    if($strdate=='')
+    {
+        $strdate=date('Y-m-d');
+    }
+    $a=strtotime($strdate);
+    //获取几周日期
+    for($i=0;$i<$to;$i++)
+    {
+        $start=strtotime("last $zhouji -$i week",$a);//起始时间;
+        $array[$i]['start']=date('Y-m-d',$start);
+        $enddate=date("Y-m-d",strtotime("+1 week -1 day",$start));
+        if($enddate > date("Y-m-d"))
+        {
+            $enddate=date("Y-m-d",strtotime("-1 day"));
+        }
+        $array[$i]['end']=$enddate;//结束日期
+    }
+    //echo $a;
+    return $array;
 }

@@ -153,40 +153,29 @@ class AccountsemController extends CommonController
             $list[$key]['semid']=$userslist['uid'];
         }
 
-
+        $zhouar=teodate_week(1,"Thursday"); //获取周日期的开始时间和结束时间
+        dump($list);
+        dump($zhouar);
+        exit;
+        foreach($zhouar as $key=>$val)
+        {
+            $cost=0;
+            // $list[$key]=$conn->field('sum(baidu_cost_total) as cost')->where("appid='$appid' and date>='$val[start]' and date<='$val[end]'")->group('appid')->select();
+            foreach ($list as $dakey=>$daval)
+            {
+                $daval['date']=date("Y-m-d",$daval['date']);
+                if($daval['date'] >=$val['start'] and $daval['date']<=$val['end'])
+                {
+                    $cost=$daval['baidu_cost_total']+$cost;
+                }
+                $list[$key]['cost']=$cost;
+            }
+            unset($cost);
+            $list[$key]['date']=$val[start]."至".$val[end];
+        }
 
 
         dump($list);
     }
-    public function teodate($to,$strdate=''){
-        //如果没有指定日期则默认当前日期
-        if($strdate=='')
-        {
-            $strdate=date('Y-m-d');
-        }
 
-        $a=strtotime($strdate);
-        //获取几周日期
-        for($i=0;$i<$to;$i++)
-        {
-
-            $start=strtotime("last Thursday -$i week",$a);//起始时间;
-
-            $array[$i]['start']=date('Y-m-d',$start);
-
-            $enddate=date("Y-m-d",strtotime("+1 week -1 day",$start));
-            if($enddate > date("Y-m-d"))
-            {
-                $enddate=date("Y-m-d",strtotime("-1 day"));
-            }
-            $array[$i]['end']=$enddate;//结束日期
-
-
-        }
-
-        //echo $a;
-        dump($array);
-
-
-    }
 }

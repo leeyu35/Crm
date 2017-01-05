@@ -1,76 +1,213 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="utf-8">
-<title>无标题文档</title>
-<link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
-<link rel="stylesheet" type="text/css" href="/Public/css/style.css">
-
-<script src="/Public/js/jquery-3.1.0.min.js"></script>
-<script src="/Public/js/bootstrap.min.js"></script>
-
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <title></title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="/Public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Public/fonts/demo.css">
+    <link rel="stylesheet" href="/Public/css/lishijilu.css">
+    <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+    <script src="/Public/js/jquery-3.1.0.min.js"></script>
+    <script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
 </head>
 <body>
-<span style="position:fixed; top:10px; font-size:18px; background:#999; color:#F00; z-index:999;">
-余额：{$yue|num_format}<br>
-补款：{$bukuan|num_format}<br>
-发票：{$invoice|num_format}
-
-</span><br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-    筛选{$sxyue}
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-   <li role="presentation"><a role="menuitem" tabindex="-1" href="{:U("history?contract_id=$contract_id&type=qb")}">查看全部</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="{:U("history?contract_id=$contract_id&type=renew")}">只看续费</a></li>
-    <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="{:U("history?contract_id=$contract_id&type=renew")}">只看补款</a></li>-->
-    <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="{:U("history?contract_id=$contract_id&type=renew")}">只看退款</a></li>-->
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="{:U("history?contract_id=$contract_id&type=huikuan")}">只看回款</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="{:U("history?contract_id=$contract_id&type=invoice")}">只看发票</a></li>
-  </ul>
+<div class="container" style="width:100%;" >
+    <h3 class="bor-left-bull" style="margin-top: 10px; margin-bottom: 10px;">{$customer_info['advertiser']} / 历史记录<small></small></h3>
 </div>
-<section id="cd-timeline" class="cd-container" style="width:800px;">
-	<volist id="history" name="history">
-	<div class="cd-timeline-block">
-		<div class="cd-timeline-img cd-picture">
-			
-		</div>
+<div class="container-fluid" style="margin-bottom:30px;">
+    <div class="row-fluid">
+        <div class="col-xs-12  col-xs-4 col-zdlg-2-5 col-red-border">
+            <div class="list list-1">
+                <div class="pull-left list_left">
+                    <i class="iconfont header-icon">&#xe61a;</i>
+                </div>
+                <div class="pull-left list_right">
+                    <p class="list_name">总余额&nbsp(&nbsp￥&nbsp)</p>
+                    <p class="list_num">{$yue|num_format}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12  col-xs-4 col-zdlg-2-5 col-red-border">
+            <div class="list list-2">
+                <div class="pull-left list_left">
+                    <i class="iconfont header-icon">&#xe631;</i>
+                </div>
+                <div class="pull-left list_right">
+                    <p class="list_name">回款&nbsp(&nbsp￥&nbsp)</p>
+                    <p class="list_num">{$customer_info['huikuan']|num_format}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12  col-xs-4 col-zdlg-2-5 col-red-border">
+            <div class="list list-3">
+                <div class="pull-left list_left">
+                    <i class="iconfont header-icon">&#xe6be;</i>
+                </div>
+                <div class="pull-left list_right">
+                    <p class="list_name">补款&nbsp(&nbsp￥&nbsp)</p>
+                    <p class="list_num">{$bukuan|num_format}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12  col-xs-4 col-zdlg-2-5 col-red-border">
+            <div class="list list-4">
+                <div class="pull-left list_left">
+                    <i class="iconfont header-icon">&#xe611;</i>
+                </div>
+                <div class="pull-left list_right">
+                    <p class="list_name">消耗&nbsp(&nbsp￥&nbsp)</p>
+                    <p class="list_num">{$customer_info['yu_e']|num_format}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12  col-xs-4 col-zdlg-2-5 col-red-border">
+            <div class="list list-5">
+                <div class="pull-left list_left">
+                    <i class="iconfont header-icon">&#xe622;</i>
+                </div>
+                <div class="pull-left list_right">
+                    <p class="list_name">发票&nbsp(&nbsp￥&nbsp)</p>
+                    <p class="list_num">{$invoice|num_format}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 选择信息 -->
+<div class="list-nav container-fluid ">
+    <div class="row" style="background:#e9f1f6;">
+        <div class="col-sm-1 col-nav-border">
 
-		<div class="cd-timeline-content">
-			<h2>{$history[mes]}
-            <if condition="$history[audit_1] eq 1">
-        	<span data-toggle="tooltip" data-placement="top" title="一级审核已通过" class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
-        <elseif condition="$history[audit_1] eq 2"/>
-        	<span data-toggle="tooltip" data-placement="top" title="一级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
-        <elseif condition="$history[audit_1] eq 0"/>
-        	<span data-toggle="tooltip" data-placement="top"  title="一级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
-        </if>
-        
-        
-        <if condition="$history[audit_2] eq 1">
-        	<span data-toggle="tooltip" data-placement="top" title="二级审核已通过"  class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
-        <elseif condition="$history[audit_2] eq 2"/>
-            <span data-toggle="tooltip" data-placement="top" title="二级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
-        <elseif condition="$history[audit_2] eq 0"/>
-        	<span data-toggle="tooltip" data-placement="top" title="二级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
-        </if></h2>
-			<span class="cd-date">{$history[date]}</span>
-		</div>
-	</div>
-    </volist>
-	
-</section>
-<script>
-   $(function () { $("[data-toggle='tooltip']").tooltip(); });
-</script>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                        筛选
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{:U("history?contract_id=$contract_id&type=qb&time_start=$time_start&time_end=$time_end")}">查看全部</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{:U("history?contract_id=$contract_id&type=renew&time_start=$time_start&time_end=$time_end")}">只看续费</a></li>
+                        <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="{:U("history?contract_id=$contract_id&type=renew")}">只看补款</a></li>-->
+                        <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="{:U("history?contract_id=$contract_id&type=renew")}">只看退款</a></li>-->
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{:U("history?contract_id=$contract_id&type=huikuan&time_start=$time_start&time_end=$time_end")}">只看回款</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{:U("history?contract_id=$contract_id&type=invoice&time_start=$time_start&time_end=$time_end")}">只看发票</a></li>
+                    </ul>
+                </div>
+
+        </div>
+        <div class="col-sm-1 col-nav-border">{$sxyue}</div>
+        <div class="col-sm-5 col-nav-border pull-right">
+            <form class="form-inline" method="get">
+
+                <div class="form-group">
+                    <input id="contract_start" class="Wdate form-control" type="text" name="time_start" placeholder="开始时间" value="{$time_start}" <literal>onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_end\')||\'2020-10-01\'}'})"</literal>/>
+                </div>
+                <div class="form-group">
+                    <input id="contract_end" class="Wdate form-control" type="text" name="time_end"  placeholder="结束时间" value="{$time_end}" <literal> onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_start\')}',maxDate:'2020-10-01'})"</literal>/>
+                </div>
+                <div class="form-group text-right">
+                <button type="submit" class="btn btn-primary">搜索</button>
+                    <if condition="($ser_txt neq '') OR ($time_end neq '')">
+                        <a class="btn btn-info" href="{:U("history?contract_id=$contract_id&type=qb")}">清除搜索条件</a>
+                    </if>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- <!-- 表格 -->
+    <div class="list-infor">
+        <table class="tablesorter list-table table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th class="time">时间 </th>
+                <th>操作</th>
+                <th>金额</th>
+                <th style="width:4.3333rem;">说明</th>
+                <th>提交人</th>
+                <th>审核状态</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist id="history" name="history">
+                <tr>
+                    <td>{$history[date]}</td>
+                    <td><p class="list-caozuo
+
+                    <switch name="history.type">
+                        <case value="续费">list-xufei</case>
+                        <case value="补款">list-bukuan</case>
+                        <case value="退款">list-tuikuan</case>
+                        <case value="回款">list-huikuan</case>
+                        <case value="发票">list-fapiao</case>
+
+                        </switch>
+                     <if condition="$history[type] eq '续费'">
+
+                        <elseif condition="$history[audit_1] eq 2"/>
+
+                        <elseif condition="$history[audit_1] eq 0"/>
+
+                        </if>
+                    list-fapiao">{$history[type]}</p></td>
+                    <td>{$history[money]}</td>
+                    <td style="width:4.3333rem;">{$history[mes]}</td>
+                    <td>{$history[submituser]}</td>
+                    <td>
+                        <if condition="$history[audit_1] eq 1">
+                            <span data-toggle="tooltip" data-placement="top" title="一级审核已通过" class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
+                            <elseif condition="$history[audit_1] eq 2"/>
+                            <span data-toggle="tooltip" data-placement="top" title="一级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
+                            <elseif condition="$history[audit_1] eq 0"/>
+                            <span data-toggle="tooltip" data-placement="top"  title="一级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
+                        </if>
+
+
+                        <if condition="$history[audit_2] eq 1">
+                            <span data-toggle="tooltip" data-placement="top" title="二级审核已通过"  class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
+                            <elseif condition="$history[audit_2] eq 2"/>
+                            <span data-toggle="tooltip" data-placement="top" title="二级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
+                            <elseif condition="$history[audit_2] eq 0"/>
+                            <span data-toggle="tooltip" data-placement="top" title="二级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
+                        </if>
+
+                    </td>
+                </tr>
+            </volist>
+
+            </tbody>
+        </table>
+    </div>
+
+
+    <script type="text/javascript" src="/Public/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="/Public/js/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript">
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+                };
+
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+
+        })(document, window);
+        $(function(){
+//排序
+            $(".tablesorter").tablesorter();
+        });
+
+    </script>
+    <script>
+        $(function () { $("[data-toggle='tooltip']").tooltip(); });
+    </script>
 </body>
 </html>
