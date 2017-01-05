@@ -15,7 +15,7 @@ class AccountsemController extends CommonController
     public function account_info($acconut_u){
         $account=M("Account");
         $hetong=M("Contract");
-        // $data=$account->field('')->where('a_users='.$acconut_u)->select();
+       // $data=$account->field('')->where('a_users='.$acconut_u)->select();
         $list=$account->field('a.id,a.appname,a.type,a.contract_id,b.name')->join("a left join __ACCOUNTTYPE__ b on a.type = b.id ")->where("a.a_users like '%".$acconut_u."%'")->order("a.ctime desc")->select();
 
         if(is_array($list[0])){
@@ -137,56 +137,20 @@ class AccountsemController extends CommonController
 
     }
 
-    public function  index2(){
-        $account=M("Account");
-        $hetong=M("Contract");
-        // $data=$account->field('')->where('a_users='.$acconut_u)->select();
-        $list=$account->field('a.id,a.appname,a.type,a.contract_id,b.name,a.appid')->join("a left join __ACCOUNTTYPE__ b on a.type = b.id ")->where("appid !=''")->order("a.ctime desc")->select();
-        //负责人
-        $principal=M("AccountUsers");
-        foreach ($list as $key=>$val)
+    static  function  aa($a,$b){
+
+        if($a['data'][$srot]['cost']>$b['data'][$srot]['cost'])
         {
-            $fzridlist=$principal->field('u_id')->where("account_id = $val[id]")->select(false);
-            $userslist=M("Users")->field('name,id as uid')->where("id in ($fzridlist)")->find();
-
-            $list[$key]['sem']=$userslist['name'];
-            $list[$key]['semid']=$userslist['uid'];
-        }
-
-
-
-
-        dump($list);
-    }
-    public function teodate($to,$strdate=''){
-        //如果没有指定日期则默认当前日期
-        if($strdate=='')
+            return 1;
+        }elseif($a['data'][$srot]['cost']<$b['data'][$srot]['cost'])
         {
-            $strdate=date('Y-m-d');
-        }
-
-        $a=strtotime($strdate);
-        //获取几周日期
-        for($i=0;$i<$to;$i++)
+            return -1;
+        }elseif($a['data'][$srot]['cost']==$b['data'][$srot]['cost'])
         {
-
-            $start=strtotime("last Thursday -$i week",$a);//起始时间;
-
-            $array[$i]['start']=date('Y-m-d',$start);
-
-            $enddate=date("Y-m-d",strtotime("+1 week -1 day",$start));
-            if($enddate > date("Y-m-d"))
-            {
-                $enddate=date("Y-m-d",strtotime("-1 day"));
-            }
-            $array[$i]['end']=$enddate;//结束日期
-
-
+            return 0;
         }
-
-        //echo $a;
-        dump($array);
 
 
     }
+
 }

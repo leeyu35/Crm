@@ -28,6 +28,22 @@
 			$("#gongsi").val(($(this).html()));
 			$("#adlist").hide();
 		})
+        //动态加载appid
+        $("#appid_btn").click(function(){
+            $.post("{:U('account_appid')}",{account_name:$("#a_users").val()},function(data){
+                if(data!=0)
+                {
+                    $("#appid").html(data);
+                }else
+                {
+                    $("#appid").html('');
+                    alert('暂无相匹配的appid');
+
+                }
+
+            })
+        })
+
 		//选择了负责人
 		$("#fzrlist").on("click","a",function(){
 			$("#fuzeren").attr("title",$(this).attr("id"))
@@ -100,10 +116,10 @@
 		//动态检查账户名称是否被添加过
 		$("#a_users").keyup(function(){
 			var val=$(this).val();
-			
 			$.post("{:U('keyup_isaddusersname')}",{val:val},function(data){
 					$("#keyup_isaddusersname").html(data);
 			})
+            $("#appid").html('');
 		})
 		
 		$("#formid").submit(function(){
@@ -113,8 +129,14 @@
 			alert("请填写用户名");
 			$("#a_users").select();
 			return false;	
-		}	
-		
+		}
+
+//		if($("#appid").val()==null)
+//        {
+//            alert('appid不能为空');
+//            return false;
+//        }
+
 				
 	})
     });
@@ -248,7 +270,7 @@
   
     <label for="payment_type" class="col-sm-2 control-label">用户名</label>
     <div class="col-sm-3">
-     	<input type="text" name="a_users" class="form-control" id="a_users">
+     	<input type="text" name="a_users" class="form-control" id="a_users" autocomplete="off">
         <span id="keyup_isaddusersname"></span>
     </div>
     
@@ -256,9 +278,18 @@
     <div class="col-sm-3">      
 		<input type="text" name="a_password" class="form-control" id="a_password">
     </div>
+    </div>
+    <div class="form-group">
+        <label for="payment_type" class="col-sm-2 control-label">AppId</label>
+        <div class="col-sm-3">
+            <select  class="form-control" name="appid" id="appid">
+                <option>--填写账户用户名--</option>
+            </select>
+            <button type="button" class="btn btn-info btn-xs" id="appid_btn" value="匹配账户名对应appid">匹配账户名对应appid</button>
+        </div>
 
-    
-  </div>
+
+    </div>
 
   <h4 class="bor-left-bull" >账户负责人信息</h4>
   <hr>

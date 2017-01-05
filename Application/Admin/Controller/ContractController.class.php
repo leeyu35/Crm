@@ -554,7 +554,7 @@ class ContractController extends CommonController
         $gs=kehu($info[advertiser]);
         $this->gongsi=$gs[advertiser];
         //所有销售
-        $this->xiaoshou=M('Users')->field('id,name')->where("groupid=2")->select();
+        $this->xiaoshou=M('Users')->field('id,name')->where("groupid=2 or groupid=15 or groupid=9")->select();
         $this->display();
 
     }

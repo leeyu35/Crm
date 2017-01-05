@@ -117,7 +117,53 @@ class AccountController extends CommonController
            // dump($hetong_on_name);
             $this->contract_id=$contract_id;
         }
+
+
         $this->display();
+    }
+    public function account_appid(){
+        //获取账户列表及APPID
+        $accountsem_list=hjd_curl('http://www.yushanapp.com/api/get/customer/c03d80f07c144cdab5e881866b92ad9f');
+        if(!is_array($accountsem_list['customers']) or $accountsem_list=='')
+        {
+            $data['code']=403;
+        }
+        foreach ($accountsem_list['customers'] as $key=>$val)
+        {
+            $array_slist[$key]['l_app']=$val['username'];
+            $array_slist[$key]['sem']=$val['sem'];
+            $array_slist[$key]['appid']=$val['appid'];
+            $array_slist[$key]['account']=$val['api_account'];
+        }
+
+        //接收的get 账户名
+       // $account_name=I('post.account_name');
+
+
+       $return_data= array_filter($array_slist,function($var){
+            $account_name=I('post.account_name');
+            if($var['account']==$account_name)
+            {
+                return true;
+            }else{
+                return false;
+            }
+
+        });
+
+        if(!is_array($return_data) or count($return_data)<1)
+        {
+            $string=0;
+        }else{
+            foreach ($return_data as $key=>$val)
+            {
+                $string.="<option value='".$val['appid']."'>$val[appid]</option>";
+            }
+        }
+
+        echo $string;
+
+
     }
 
     public function keyup_adlist(){
@@ -132,6 +178,24 @@ class AccountController extends CommonController
 
         $Refund=M("Account");
         $is_j=$Refund->where("a_users ='$a_users'")->count();
+
+        if($is_j>0)
+        {
+            $str='<span style="color:#F00">该账户已经存在于某个合同,继续提交将结束之前合同的账户使用权，请谨慎操作</span>';
+        }else
+        {
+            $str='<span style="color:#0F3">该账户可以提交</span>';
+        }
+        echo $str;
+    }
+
+    //检查账户名称是否被添加过
+    public function keyup_isaddusersname_up(){
+        //添加账户的时候 判断这个账户之前是否被添加过
+        $a_users=trim(I('post.val'));
+        $thisid=I('post.thisid');
+        $Refund=M("Account");
+        $is_j=$Refund->where("a_users ='$a_users' and endtime='4092599349' and id !=$thisid")->count();
 
         if($is_j>0)
         {
@@ -186,7 +250,7 @@ class AccountController extends CommonController
 
             //添加账户的时候 判断这个账户之前是否被添加过
             $a_users=I('post.a_users');
-            $Refund->where("a_users ='$a_users' and id !=$insertid")->save(array("endtime"=>time()));
+            $Refund->where("a_users ='$a_users' and id !=$insertid and endtime='4092599349'")->save(array("endtime"=>time()));
 
             if(I('post.fzrlist')){
                     //循环联系人并且记录
@@ -249,6 +313,8 @@ class AccountController extends CommonController
         $userslist=M("Users")->field('id,name')->where("id in ($fzridlist)")->select();
         $this->userslist=$userslist;
 
+
+
         $this->display();
 
     }
@@ -260,8 +326,12 @@ class AccountController extends CommonController
 
         $Refund->create();
         $Refund->ctime=$Refund->ctime+1;
+        $Refund->endtime='4092599349'; //默认到期时间为无限
         if($Refund->where("id=$id")->save())
         {
+            //修改账户的时候 判断这个账户之前是否被添加过 如果有并且不等于当前id数据 则变更之前的账户有效期为当前时间
+            $a_users=I('post.a_users');
+            $Refund->where("a_users ='$a_users' and id !=$id and endtime='4092599349'")->save(array("endtime"=>time()));
 
             if(I('post.fzrlist')){
                 //循环联系人并且记录
@@ -363,5 +433,30 @@ class AccountController extends CommonController
 
     }
 
+
+    public function account_xiaohao()
+    {
+        $date=date("Y-m-d",strtotime("-1 day"));//今日日期
+        echo $date;
+        exit;
+        $account_counsumption=M("AccountConsumption");
+        //缓存每个客户具体消费情况 appid ,日期,消费  获取周消费的时候要调用缓存 所以在这里先生存缓存
+        $tabledata = M("accountdaily", "baiduapi_", "pgsql://rdspg:anmeng@rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com:3432/msdb");
+        $account_day_cost = $tabledata->field('appid,date,baidu_cost_total')->select();
+        $count=0;
+        foreach ($account_day_cost as $key => $val)
+        {
+            $data['appid']=$val['appid'];
+            $data['starttime']=strtotime($val['date']);
+            $data['endtime']=strtotime($val['date'] ."23:59:59");
+            $data['baidu_cost_total']=$val['baidu_cost_total'];
+            if($account_counsumption->add($data))
+            {
+                $count++;
+            }
+        }
+        echo "成功载入$count 条记录";
+
+    }
 
 }

@@ -56,9 +56,6 @@ class LinuxTimeController extends Controller
                 // $array_slist[$key]['data']=$accountsem_one['data'];
             }
 
-
-
-
         //缓存数据具体
         if(S('account_data',$array_slist)){
             $data['code']=200;
@@ -67,5 +64,47 @@ class LinuxTimeController extends Controller
         }
 
             $this->ajaxReturn($data);
+    }
+
+    function read_today_account_consumption_data($date=''){
+        if($date=='')
+        {
+            $date=date("Y-m-d",strtotime("-1 day"));//昨日日期
+        }else
+        {
+            $date=$date;
+        }
+
+
+        $account_counsumption=M("AccountConsumption");
+        //缓存每个客户具体消费情况 appid ,日期,消费  获取周消费的时候要调用缓存 所以在这里先生存缓存
+        $tabledata = M("accountdaily", "baiduapi_", "pgsql://rdspg:anmeng@rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com:3432/msdb");
+
+        $account_day_cost = $tabledata->field('appid,date,baidu_cost_total')->where("date='$date'")->select();
+        if(!$account_day_cost)
+        {
+            $data['code']=403;
+            $data['msg']='远程也羽扇数据库连接失败。来自（read_today_account_consumption_data）';
+            return $date;
+        }
+
+        $count=0;
+        foreach ($account_day_cost as $key => $val)
+        {
+            $data2['appid']=$val['appid'];
+            $data2['starttime']=strtotime($val['date']);
+            $data2['endtime']=strtotime($val['date'] ."23:59:59");
+            $data2['baidu_cost_total']=$val['baidu_cost_total'];
+            if($account_counsumption->add($data2))
+            {
+                $count++;
+            }
+        }
+        $data['code']=200;
+        $data['msg']='成功添加'.$count."条记录消费记录。来自（read_today_account_consumption_data）";
+        $this->ajaxReturn($data);
+
+
+
     }
 }

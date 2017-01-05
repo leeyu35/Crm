@@ -33,8 +33,23 @@
 			$("#adlist").hide();
 			//$("#gongsi").html(data);
 		})
-		
-		//选择了负责人
+        //动态加载appid
+        $("#appid_btn").click(function(){
+            $.post("{:U('account_appid')}",{account_name:$("#a_users").val()},function(data){
+                if(data!=0)
+                {
+                    $("#appid").html(data);
+                }else
+                {
+                    $("#appid").html('');
+                    alert('暂无相匹配的appid');
+
+                }
+
+            })
+        })
+
+        //选择了负责人
 		$("#fzrlist").on("click","a",function(){
 			$("#fuzeren").attr("title",$(this).attr("id"))
 			$("#fuzeren").val($(this).html());
@@ -99,7 +114,14 @@ $("#gongsi").on("blur",function(){
 			//alert($("#contract_id").val());
 			//contract_id
 		})
-
+        //动态检查账户名称是否被添加过
+        $("#a_users").keyup(function(){
+            var val=$(this).val();
+            $.post("{:U('keyup_isaddusersname_up')}",{val:val,thisid:{$info[id]}},function(data){
+                $("#keyup_isaddusersname").html(data);
+            })
+            $("#appid").html('');
+        })
 				
 		$("#formid").submit(function(){
 		if($("#a_users").val()=="")
@@ -107,8 +129,12 @@ $("#gongsi").on("blur",function(){
 			alert("请填写用户名");
 			$("#a_users").select();
 			return false;	
-		}	
-
+		}
+//        if($("#appid").val()==null)
+//        {
+//            alert('appid不能为空');
+//            return false;
+//        }
 
 				
 	})
@@ -254,15 +280,26 @@ $("#gongsi").on("blur",function(){
     <label for="payment_type" class="col-sm-2 control-label">用户名</label>
     <div class="col-sm-3">
      	<input type="text" name="a_users" class="form-control" id="a_users" value="{$info[a_users]}">
+        <span id="keyup_isaddusersname"></span>
     </div>
     
     <label for="payment_time" class="col-sm-1 control-label">密码</label>
     <div class="col-sm-3">      
 		<input type="text" name="a_password" class="form-control" id="a_password" value="{$info[a_password]}">
     </div>
-
     
   </div>
+    <div class="form-group">
+        <label for="payment_type" class="col-sm-2 control-label">AppId</label>
+        <div class="col-sm-4">
+            <select  class="form-control" name="appid" id="appid">
+                <option value="{$info[appid]}">{$info[appid]}</option>
+            </select>
+            <button type="button" class="btn btn-info btn-xs" id="appid_btn" value="匹配账户名对应appid">匹配账户名对应appid</button>
+        </div>
+
+
+    </div>
    <h4 class="bor-left-bull" >账户负责人信息</h4>
   <hr>
     <div class="form-group">
