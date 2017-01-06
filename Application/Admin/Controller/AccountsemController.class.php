@@ -141,7 +141,11 @@ class AccountsemController extends CommonController
         $account=M("Account");
         $hetong=M("Contract");
         // $data=$account->field('')->where('a_users='.$acconut_u)->select();
-        $list=$account->field('a.id,a.appname,a.type,a.contract_id,b.name,a.appid')->join("a left join __ACCOUNTTYPE__ b on a.type = b.id ")->where("appid !=''")->order("a.ctime desc")->select();
+        $zhouar=teodate_week(1,"Thursday"); //获取周日期的开始时间和结束时间
+        $yuear=teodate_month();
+        $zuori=Yesterday();
+        dump($zhouar);
+        $list=$account->field('a.id,a.appname,a.a_users,a.type,a.contract_id,b.name,a.appid')->join("a left join __ACCOUNTTYPE__ b on a.type = b.id ")->where("appid !=''")->order("a.ctime desc")->select();
         //负责人
         $principal=M("AccountUsers");
         foreach ($list as $key=>$val)
@@ -151,31 +155,27 @@ class AccountsemController extends CommonController
 
             $list[$key]['sem']=$userslist['name'];
             $list[$key]['semid']=$userslist['uid'];
-        }
-
-        $zhouar=teodate_week(1,"Thursday"); //获取周日期的开始时间和结束时间
-        dump($list);
-        dump($zhouar);
-        exit;
-        foreach($zhouar as $key=>$val)
-        {
-            $cost=0;
-            // $list[$key]=$conn->field('sum(baidu_cost_total) as cost')->where("appid='$appid' and date>='$val[start]' and date<='$val[end]'")->group('appid')->select();
-            foreach ($list as $dakey=>$daval)
-            {
-                $daval['date']=date("Y-m-d",$daval['date']);
-                if($daval['date'] >=$val['start'] and $daval['date']<=$val['end'])
-                {
-                    $cost=$daval['baidu_cost_total']+$cost;
-                }
-                $list[$key]['cost']=$cost;
-            }
-            unset($cost);
-            $list[$key]['date']=$val[start]."至".$val[end];
+            $list[$key]['week_counsumption']=$this->AccountConsumption($val[appid],$zhouar[0]['start'],$zhouar[0]['end']);
+          //  $list[$key]['month_counsumption']=$this->AccountConsumption($val[appid],$yuear['start'],$yuear['end']);
+          //  $list[$key]['zuori_counsumption']=$this->AccountConsumption($val[appid],$zuori['start'],$zuori['end']);
         }
 
 
         dump($list);
+
+
     }
 
+    public function AccountConsumption($appid,$starttime,$endtime){
+        $account_counsumption=M("AccountConsumption");
+        $time_start=strtotime($starttime);
+       // $time_start=strtotime("-1 days",$time_start);
+
+        $time_end=strtotime($endtime);
+
+        //$time_end=strtotime("+1 days",$time_end);
+        $sum=$account_counsumption->where("appid='$appid' and starttime>='$time_start' and endtime<'$time_end'")->sum("baidu_cost_total");
+        echo $account_counsumption->_sql();
+        return $sum;
+    }
 }

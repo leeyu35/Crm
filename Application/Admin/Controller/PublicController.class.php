@@ -125,6 +125,13 @@ class PublicController extends Controller
                 $ht_s2=$xufeihuikuan->where("is_huikuan=0 and payment_type!=14 and payment_type!=15 and audit_2 =0  and audit_1=1")->count();
                 $rest2+=$ht_s2;
             }
+            //三级审核
+            $array2=explode(",",$raac_xhetong['audit_3']);
+            if(in_array(cookie('u_groupid'),$array2))
+            {
+                $ht_s3=$xufeihuikuan->where("is_huikuan=0 and payment_type!=14 and payment_type!=15 and audit_2 =1  and audit_1=1 and audit_3=0")->count();
+                $rest2+=$ht_s3;
+            }
             $this->xufei=$rest2;
             //垫款待审核
 
@@ -146,7 +153,7 @@ class PublicController extends Controller
             }
             $this->diankuan=$rest3;
             //退款待审核
-            $raac_hetong=$rbac->where("module = '/Admin/Refund'")->find();
+            $raac_hetong=$rbac->where("module = '/Admin/RefundMoney'")->find();
             //一级审核
             $array=explode(",",$raac_hetong['audit_1']);
             if(in_array(cookie('u_groupid'),$array))

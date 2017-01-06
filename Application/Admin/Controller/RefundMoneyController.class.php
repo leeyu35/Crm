@@ -168,6 +168,7 @@ class RefundMoneyController extends  CommonController
         }
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
+        //echo $q_where;
         //退款条件
         $where=" and (a.payment_type = 14 or a.payment_type=15)";
         $RenewHuikuan=M('RenewHuikuan');
@@ -513,6 +514,8 @@ class RefundMoneyController extends  CommonController
         //二级审核人
         $submitusers4=users_info($info[susers2]);
         $this->users_info4=$submitusers4['name'];
+
+
         //产品线
         $product_line=M("ProductLine");
         $this->product_line_list=$product_line->field("id,name,title")->order("id asc")->select();

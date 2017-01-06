@@ -233,6 +233,13 @@
             <span class="shno1">二级审核未通过(审核人：{$users_info4?$users_info4:'默认'})</span>
        </if>
 
+         <if condition="$info[audit_3] eq 0">
+               <span class="shno">三级审核未审核</span>
+               <elseif condition="$info[audit_3] eq 1"/>
+               <span class="shyes">三级审核已审核(审核人：{$users_info5?$users_info5:'默认'})</span>
+               <elseif condition="$info[audit_3] eq 2"/>
+               <span class="shno1">三级审核未通过(审核人：{$users_info5?$users_info5:'默认'})</span>
+           </if>
        </div>
     </div>
 
@@ -241,14 +248,18 @@
        <div class="col-sm-12">
        
         <button type="button" class="btn btn-primary" onClick="javascript:history.go(-1)">返回</button>
-       	<if condition="($info[audit_1] neq 2) and ($info[audit_2] neq 2)">
+       	<if condition="($info[audit_1] neq 2) and ($info[audit_2] neq 2) and ($info[audit_3] neq 3)">
         &nbsp;&nbsp;
     	<a href="{:U("shenhe?type=audit_1&id=$info[id]&yid=$yid")}" class="btn btn-primary"  {$info[audit_1]!='0'?'style="display:none"':''} >一级审核通过</a>
     	<a href="{:U("shenhe?type=audit_1&id=$info[id]&ju=1&yid=$yid")}" class="btn btn-danger"  {$info[audit_1]!='0'?'style="display:none"':''} >一级审核不通过</a>
         &nbsp;&nbsp;
         <a href="{:U("shenhe?type=audit_2&id=$info[id]&yid=$yid")}" class="btn btn-primary"  {$info[audit_2]!='0'?'style="display:none"':''}>二级审核通过</a>
       	<a href="{:U("shenhe?type=audit_2&id=$info[id]&ju=1&yid=$yid")}" class="btn btn-danger"  {$info[audit_2]!='0'?'style="display:none"':''} >二级审核不通过</a>
-		</if>
+            &nbsp;&nbsp;
+        <a href="{:U("shenhe?type=audit_3&id=$info[id]&yid=$yid")}" class="btn btn-primary"  {$info[audit_3]!='0'?'style="display:none"':''}>三级审核通过</a>
+        <a href="{:U("shenhe?type=audit_3&id=$info[id]&ju=1&yid=$yid")}" class="btn btn-danger"  {$info[audit_3]!='0'?'style="display:none"':''} >三级审核不通过</a>
+
+        </if>
 
        
        </div>

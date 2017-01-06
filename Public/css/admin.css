@@ -26,6 +26,7 @@ a {blr:expression_r(this.onFocus=this.blur())}
 .bor-left-bull{
 	border-left:2px solid #88B7E0;
 	padding-left:10px;
+
 }
 h4.bor-left-bull{ margin-top:40px;
 	

@@ -69,11 +69,11 @@ class RenewController extends  CommonController
             }
             if($type2=='0')
             {
-                $where.=" and (a.audit_1=0 or a.audit_2=0)";
+                $where.=" and (a.audit_1=0 or a.audit_2=0 or a.audit_3=0)";
             }
             if($type2=='1')
             {
-                $where.=" and a.audit_1=1 and a.audit_2=1";
+                $where.=" and a.audit_1=1 and a.audit_2=1 and a.audit_3=1";
             }
             $this->type2=$type2;
             $this->ser_txt2=I('get.search_text');
@@ -152,11 +152,11 @@ class RenewController extends  CommonController
             }
             if($type2=='0')
             {
-                $where.=" and (a.audit_1=0 or a.audit_2=0)";
+                $where.=" and (a.audit_1=0 or a.audit_2=0 or a.audit_3=0)";
             }
             if($type2=='1')
             {
-                $where.=" and a.audit_1=1 and a.audit_2=1";
+                $where.=" and a.audit_1=1 and a.audit_2=1 and a.audit_3=1";
             }
             $this->type2=$type2;
             $this->ser_txt2=I('get.search_text');
@@ -168,7 +168,7 @@ class RenewController extends  CommonController
         $count      = $RenewHuikuan->field('a.id,a.advertiser,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and a.payment_type!=14 and a.payment_type!=15 and ".$q_where.$where)->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
-        $list=$RenewHuikuan->field('a.id,a.advertiser as aid,a.users2,a.xf_contractid,a.submituser,a.rebates_proportion,a.account,a.appname,a.money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and a.payment_type!=14 and a.payment_type!=15  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
+        $list=$RenewHuikuan->field('a.id,a.advertiser as aid,a.users2,a.xf_contractid,a.submituser,a.rebates_proportion,a.account,a.appname,a.money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.audit_3,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and a.payment_type!=14 and a.payment_type!=15  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
         //echo $hetong->_sql();
 
         foreach($list as $key => $val)
@@ -458,6 +458,10 @@ class RenewController extends  CommonController
                 {
                     $table->where("id=$id")->setField('susers2',cookie('u_id'));
                 }
+                if($type=='audit_3')
+                {
+                    $table->where("id=$id")->setField('susers3',cookie('u_id'));
+                }
             }else
             {
                 $this->error('审核失败');
@@ -507,6 +511,10 @@ class RenewController extends  CommonController
         //二级审核人
         $submitusers4=users_info($info[susers2]);
         $this->users_info4=$submitusers4['name'];
+        //三级审核人
+
+        $submitusers5=users_info($info[susers3]);
+        $this->users_info5=$submitusers5['name'];
         //产品线
         $product_line=M("ProductLine");
         $this->product_line_list=$product_line->field("id,name,title")->order("id asc")->select();

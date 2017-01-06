@@ -171,7 +171,9 @@ label#lblSelect::after {
 	position: relative;
 }
 /*表格*/
-
+.list-table {
+    margin-top: 10px;
+}
 .list-table thead {
 	background: #e9f1f5;
 }
@@ -179,22 +181,27 @@ label#lblSelect::after {
 	background:#e9f1f6;
 }
 .list-table thead tr th {
-	height: 0.4rem;
-	line-height: 0.4rem;
-	border-right: 1px solid #cccccc;
-	text-align: center;
-	padding:0;
-	font-size: 16px;
-	color: black;
-	font-weight: normal;
+    height: 0.4rem;
+    line-height: 0.5rem;
+    border-right: 1px solid #cccccc;
+    text-align: center;
+    padding:0;
+    font-size: 14px;
+    color: black;
+    font-weight: normal;
+    border: none;
 }
 .list-table tbody tr td {
-	width: 1.255rem;
-    height:0.8rem;
+    width: 1.255rem;
+    height: 0.6rem;
+    line-height: 0.4rem;
+    border-right: 1px solid #cccccc;
+    text-align: center;
+    padding:0;
+    border-top: none;
+    border-bottom: none;
+    border-left: none;
     vertical-align: middle;
-	border-right: 1px solid #cccccc;
-	text-align: center;
-	padding:0;
 }
 
 .list-caozuo {
@@ -206,20 +213,20 @@ label#lblSelect::after {
 
 	
 }
-.list-caozuo {
-	background: #ffb400;
+.list-fapiao {
+    background: #b89ace;
 }
 .list-xufei {
-	background: #00acee
+    background: #64b5c9
 }
 .list-huikuan {
-	background: #ee7e3c;
+    background: #64b5c9;
 }
 .list-bukuan {
-	background: #68c7af;
+    background: #e5a972;
 }
 .list-tuikuan {
-	background: #a858f7;
+    background: #e5a972;
 }
 /*排序*/
 table.tablesorter thead tr th .tablesorter-header-inner{

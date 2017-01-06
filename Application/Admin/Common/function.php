@@ -98,6 +98,7 @@ function quan_where($module,$join="",$setype=""){
                 {
                     $array_s1=explode(",",$one['audit_1']);
                     $array_s2=explode(",",$one['audit_2']);
+                    $array_s3=explode(",",$one['audit_3']);
                    // echo cookie('u_groupid');
                    // dump($array_s1);
                     if(in_array(cookie('u_groupid'),$array_s2) and !in_array(cookie('u_groupid'),$array_s1))
@@ -109,10 +110,19 @@ function quan_where($module,$join="",$setype=""){
                             $where.=" and ".$join.".audit_1=1 ";
                         }
                     }
+                    if(in_array(cookie('u_groupid'),$array_s3) and !in_array(cookie('u_groupid'),$array_s1)  and !in_array(cookie('u_groupid'),$array_s2))
+                    {
+                        if($join==""){
+                            $where.=" and audit_1=1  and audit_2=1 ";
+                        }else
+                        {
+                            $where.=" and ".$join.".audit_1=1 and ".$join.".audit_2=1 ";
+                        }
+                    }
                 }
             }
     }
-
+    //echo $where;
     return $where;
 }
 //用户管理权限
@@ -231,7 +241,7 @@ function daiban(){
     }
     $xufeihuikuan=M("RenewHuikuan");
     //续费待审核
-    $raac_xhetong=$rbac->field('audit_1,audit_2')->where("module = '/Admin/Renew'")->find();
+    $raac_xhetong=$rbac->field('audit_1,audit_2,audit_3')->where("module = '/Admin/Renew'")->find();
 
     //一级审核
     $array=explode(",",$raac_xhetong['audit_1']);
@@ -248,6 +258,15 @@ function daiban(){
         $ht_s2=$xufeihuikuan->where("is_huikuan=0 and payment_type!=14 and payment_type!=15 and audit_2 =0  and audit_1=1")->count();
 
         $rest+=$ht_s2;
+    }
+    //三级审核
+    $array2=explode(",",$raac_xhetong['audit_3']);
+    if(in_array(cookie('u_groupid'),$array2))
+    {
+
+        $ht_s3=$xufeihuikuan->where("is_huikuan=0 and payment_type!=14 and payment_type!=15 and audit_2 =1  and audit_1=1 and audit_3=0")->count();
+
+        $rest+=$ht_s3;
     }
     /*
     //垫款待审核
@@ -270,13 +289,14 @@ function daiban(){
        */
     //退款待审核
 
-    $raac_hetong=$rbac->field('audit_1,audit_2')->where("module = '/Admin/Refund'")->find();
+    $raac_hetong=$rbac->field('audit_1,audit_2')->where("module = '/Admin/RefundMoney'")->find();
     //一级审核
     $array=explode(",",$raac_hetong['audit_1']);
     if(in_array(cookie('u_groupid'),$array))
     {
         $ht_s1=$xufeihuikuan->where("(audit_1 =0) and (payment_type=14 or payment_type=15) ")->count();
         $rest+=$ht_s1;
+        //echo $ht_s1;
     }
     //二级审核
     $array1=explode(",",$raac_hetong['audit_2']);
@@ -284,6 +304,7 @@ function daiban(){
     {
         $ht_s2=$xufeihuikuan->where("audit_2 =0  and audit_1=1  and (payment_type=14 or payment_type=15)")->count();
         $rest+=$ht_s2;
+
     }
     //发票待审核
     $hetong=M("Invoice");
@@ -686,13 +707,30 @@ function teodate_week($to,$zhouji,$strdate=''){
     {
         $start=strtotime("last $zhouji -$i week",$a);//起始时间;
         $array[$i]['start']=date('Y-m-d',$start);
-        $enddate=date("Y-m-d",strtotime("+1 week -1 day",$start));
+        $enddate=date("Y-m-d",strtotime("+1 week ",$start));
         if($enddate > date("Y-m-d"))
         {
-            $enddate=date("Y-m-d",strtotime("-1 day"));
+            //$enddate=date("Y-m-d",strtotime("-1 day"));
+            $enddate=date("Y-m-d");
         }
         $array[$i]['end']=$enddate;//结束日期
     }
+    //echo $a;
+    return $array;
+}
+
+//获取月的开始时间和结束时间
+function teodate_month(){
+    $array['start']=date("Y-m-d",mktime(0,0,0,date('m'),1,date('Y')));
+    $enddate=date("Y-m-d");
+    $array['end']=$enddate;//结束日期
+    //echo $a;
+    return $array;
+}
+//获取昨日开始时间和结束时间
+function Yesterday(){
+    $array['start']=date("Y-m-d",mktime(0,0,0,date('m'),date('d')-1,date('Y')));
+    $array['end']=date("Y-m-d",mktime(0,0,0,date('m'),date('d'),date('Y')));
     //echo $a;
     return $array;
 }
