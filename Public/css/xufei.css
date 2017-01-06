@@ -1,0 +1,215 @@
+html{font-family:"微软雅黑",Arial,sans-serif}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,fieldset,input,button,textarea,p,th,td,b,i,strong{padding:0;margin:0;font-family:Microsoft YaHei,sans-serif,Arial;list-style: none;}
+body,html {width: 100%;height: 100%;}
+body{width: 100%;height: 100%;background: #e9f0f6;}
+fieldset,img{border:0}
+a{text-decoration:none;color:#000;outline:none}
+li{list-style:none}
+h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
+input,button,textarea,select,optgroup,option{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit}
+input,button,textarea,select{*font-size:100%}
+.clear:after{
+  display:block;
+  content:"clear";
+  height:0;
+  clear:both;
+  visibility:hidden;
+
+}
+.clear{zoom:1;}
+@font-face {
+ 	font-family: "iconfont";
+	src: url('../fonts/iconfont.eot'); /* IE9*/
+	src: url('../fonts/iconfont.eot#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	url('../fonts/iconfont.woff') format('woff'), /* chrome, firefox */
+	url('../fonts/iconfont.ttf') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+	url('../fonts/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+  color: #6aa7d6;
+}
+
+.box {
+	width: 100%;
+	
+}
+.box-title,.box-list-title{
+	height: 0.53rem;
+	line-height: 0.53rem;
+	position: relative;
+}
+.line {
+	display:inline-block;
+	height: 14px;
+	margin-right:0.1602rem;
+	border: 2px solid #348ccb;
+}
+.title {
+	margin-left: 0.2670rem;
+	display: inline-block;
+}
+.box-list {
+	width: 15.4018rem;
+	margin-left: 0.422rem;
+	background: white;
+
+}
+/*左侧菜单*/
+.col-xs-8 {
+	padding: 0 1.184rem 0 0 ; 
+	font-size: 15px;
+}
+.titlt-right {
+	width: 100px;
+	height: 27px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+
+}
+.titlt-right li{
+	width: 50px;
+	text-align: center;
+	height: 27px;
+	line-height: 27px;
+	border-right: 1px solid #cccccc;
+
+}
+.titlt-right li:last-child {
+	border-right: none;
+}
+.title-xiugai {
+	color:#318dcc;
+	padding-bottom:3px; 
+	border-bottom:3px solid #318dcc;
+}
+.title-shenhe {
+	color:#fd4e4b;
+	padding-bottom:3px; 
+	border-bottom:3px solid #fd4e4b;
+}
+.box-infor-title {
+	height: 0.425rem;
+	line-height: 0.425rem;
+	border-bottom: 1px solid #e5e5e5;
+	color: #6aa7d6;
+	margin-bottom: 10px;
+	font-size: 14px;
+}
+.box-infor {
+	margin:0 0 0 0.2670rem;
+}
+.box-icon-fukuan {
+	transform:rotate(180deg);
+	-ms-transform:rotate(180deg);  
+	-moz-transform:rotate(180deg);  
+	-webkit-transform:rotate(180deg);
+	-o-transform:rotate(180deg); 
+	
+}
+.box-infor-table {
+	margin-left:0.32rem; 
+}
+.box-infor-num {
+	height: 0.434rem;
+	line-height: 0.434rem;
+	margin-top: 0.01rem;
+}
+.box-infor-select {
+	width:100px;
+	height:23px;
+	outline:none;
+	font-size:12px;
+}
+.table thead tr th {
+	font-weight: normal;
+	padding: 0.08rem;
+}
+.table tbody tr td {
+	height: 0.2rem;
+	padding: 0.08rem;
+}
+
+
+
+/*右侧菜单*/
+
+.col-xs-4 {
+	padding: 0;
+}
+.box-right-title {
+	height: 0.425rem;
+	line-height: 0.425rem;
+	border-bottom: 1px solid #e5e5e5;
+	color: #6aa7d6;
+	font-size: 14px;
+}
+.box-right-bor {
+	width: 1rem;
+	height: 1rem;
+	background: #e5e5e5;
+}
+
+.box-right-fujian {
+	width: 1rem;
+	text-align: center;
+	margin:0.2rem 0 0.2rem 0;
+}
+@media (max-width: 768px) { 
+		.box-right-bor {
+		width: 110px;
+
+		height: 110px;
+	}
+} 
+@media (max-width: 615px) { 
+	.box-list {
+	width: 560px;
+
+}
+	.box-list-title {
+		width: 543.8px;
+		height: 30px;
+		line-height: 30px;
+		font-size: 15px;
+	}
+	.box-infor-title {
+		width: 534px;
+		height: 20px;
+		line-height: 20px;
+
+	}
+	.box-infor-num {
+		width: 524px;
+		height: 30px;
+		line-height: 30px;
+	}
+	.table  {
+		width: 524px;
+
+	}
+	.box-infor-select {
+		width:120px;
+		height:26px;
+		outline:none;
+		font-size:12px;
+}
+	.box-right-bor {
+		width: 110px;
+
+		height: 110px;
+	}
+	.box-right-fujian {
+	   width: 120px;
+		text-align: center;
+		margin:0.2rem 0 0.2rem 0;
+	}
+}

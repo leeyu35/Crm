@@ -81,14 +81,20 @@ class NewCaiwuController extends CommonController
        $id=I('get.id');
        $hetong=M("contract");
        // $list=$hetong->where("advertiser =$id and isxufei=0")->select();
-        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.market,a.users2,a.isguidang,a.iszuofei,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name,a.yu_e,a.huikuan,a.invoice,a.bukuan,a.type')->where("a.advertiser =$id and isxufei=0")->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->order("a.ctime desc")->select();
+        $list=$hetong->field('a.id,a.advertiser as aid,a.audit_1,a.audit_2,a.contract_no,a.market,a.users2,a.isguidang,a.iszuofei,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name,a.yu_e,a.huikuan,a.invoice,a.bukuan,a.type')->where("a.advertiser =$id and isxufei=0")->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->order("a.ctime desc")->select();
         foreach ($list as $key=>$val)
         {
             //$zong+=$this->yue($val[id]);
             $list[$key]['yue']=$val['huikuan']-$val['yu_e'];
             //总发票
             $zongfapiao+=$val['invoice'];
-            $userslist=M("Users")->field('name')->find($val[market]);
+            if($val[market]!='')
+            {
+                $userslist=M("Users")->field('name')->find($val[market]);
+            }
+
+
+
             $list[$key]['xiaoshou']=$userslist['name'];
         }
 

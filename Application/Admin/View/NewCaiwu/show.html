@@ -125,10 +125,10 @@
         }
         /*==列表==*/
         .infor-list {
-            height:2.125rem;
+            height:auto;
             padding-right: 10px;
             padding-left: 0;
-            margin-bottom:5%;
+            margin-bottom:2%;
         }
         .label {
             width: 0.75rem;
@@ -330,7 +330,7 @@
 
         }
         }
-        .hjd .infor-list-nav{ color: #FF0000;}
+
     </style>
     <script src="/Public/js/jquery-3.1.0.min.js"></script>
     <script src="/Public/js/bootstrap.min.js"></script>
@@ -338,6 +338,14 @@
     <!--引入CSS-->
     <link rel="stylesheet" type="text/css" href="/Public/js/dist/webuploader.css">
     <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+    <script language="javascript">
+        $(document).ready(function(e) {
+            $(".infor-list-nav").click(function(){
+                url=$(this).attr("id");
+                window.location.href=url;
+            })
+        });
+    </script>
 </head>
 <body>
 <div class="container" style="width:100%;" >
@@ -438,7 +446,27 @@
                         <li><p><span>回&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp款</span> ：<span>{$list.huikuan|num_format}</span></p></li>
                         <li><p><span>续&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp费</span> ：<span>{$list.yu_e|num_format}</span></p></li>
                         <li><p><span>发&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp票</span> ：<span>{$list.invoice|num_format}</span></p></li>
+                        <li>
+                            <p>
+                                <span>审核状态</span></span> ：
+                                <if condition="$list[audit_1] eq 1">
+                                    <span data-toggle="tooltip" data-placement="left" title="一级审核已审核" class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
+                                    <elseif condition="$list[audit_1] eq 2"/>
+                                    <span data-toggle="tooltip" data-placement="left" title="一级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
+                                    <elseif condition="$list[audit_1] eq 0"/>
+                                    <span data-toggle="tooltip" data-placement="left"  title="一级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
+                                </if>
+                                <if condition="$list[audit_2] eq 1">
+                                    <span data-toggle="tooltip" data-placement="left" title="二级审核已审核"  class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
+                                    <elseif condition="$list[audit_2] eq 2"/>
+                                    <span data-toggle="tooltip" data-placement="left" title="二级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
+                                    <elseif condition="$list[audit_2] eq 0"/>
+                                    <span data-toggle="tooltip" data-placement="left" title="二级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
+                                </if>
+                                <span>
+                            </p>
 
+                        </li>
 
                     </ul>
                     <div class="infor-invalidate  <if condition="$list[iszuofei] eq 1">infor-list-remove</if>"></div>
