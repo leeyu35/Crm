@@ -138,14 +138,15 @@ class AccountsemController extends CommonController
     }
 
     public function  index2(){
+        echo date("Y-m-d","4092599349");
         $account=M("Account");
         $hetong=M("Contract");
         // $data=$account->field('')->where('a_users='.$acconut_u)->select();
         $zhouar=teodate_week(1,"Thursday"); //获取周日期的开始时间和结束时间
         $yuear=teodate_month();
         $zuori=Yesterday();
-        dump($zhouar);
-        $list=$account->field('a.id,a.appname,a.a_users,a.type,a.contract_id,b.name,a.appid')->join("a left join __ACCOUNTTYPE__ b on a.type = b.id ")->where("appid !=''")->order("a.ctime desc")->select();
+
+        $list=$account->field('a.id,a.appname,a.a_users,a.type,a.contract_id,b.name,a.appid,a.endtime,a.ctime')->join("a left join __ACCOUNTTYPE__ b on a.type = b.id ")->where("appid !=''")->order("a.ctime desc")->select();
         //负责人
         $principal=M("AccountUsers");
         foreach ($list as $key=>$val)
@@ -155,9 +156,10 @@ class AccountsemController extends CommonController
 
             $list[$key]['sem']=$userslist['name'];
             $list[$key]['semid']=$userslist['uid'];
-            $list[$key]['week_counsumption']=$this->AccountConsumption($val[appid],$zhouar[0]['start'],$zhouar[0]['end']);
-            $list[$key]['month_counsumption']=$this->AccountConsumption($val[appid],$yuear['start'],$yuear['end']);
-            $list[$key]['zuori_counsumption']=$this->AccountConsumption($val[appid],$zuori['start'],$zuori['end']);
+            $list[$key]['week_counsumption']=$this->AccountConsumption($val[appid],$zhouar[0]['start'],$zhouar[0]['end'],$val['ctime'],$val['endtime']);
+            $list[$key]['month_counsumption']=$this->AccountConsumption($val[appid],$yuear['start'],$yuear['end'],$val['ctime'],$val['endtime']);
+            $list[$key]['zuori_counsumption']=$this->AccountConsumption($val[appid],$zuori['start'],$zuori['end'],$val['ctime'],$val['endtime']);
+
         }
 
 
@@ -166,7 +168,7 @@ class AccountsemController extends CommonController
 
     }
 
-    public function AccountConsumption($appid,$starttime,$endtime){
+    public function AccountConsumption($appid,$starttime,$endtime,$account_sracttime){
         $account_counsumption=M("AccountConsumption");
         $time_start=strtotime($starttime);
        // $time_start=strtotime("-1 days",$time_start);
@@ -174,7 +176,7 @@ class AccountsemController extends CommonController
         $time_end=strtotime($endtime);
 
         //$time_end=strtotime("+1 days",$time_end);
-        $sum=$account_counsumption->where("appid='$appid' and starttime>='$time_start' and endtime<'$time_end'")->sum("baidu_cost_total");
+        $sum=$account_counsumption->where("appid='$appid' and starttime>='$time_start' ")->sum("baidu_cost_total");
         //echo $account_counsumption->_sql();
         return $sum;
     }
@@ -185,7 +187,6 @@ class AccountsemController extends CommonController
         $accountsem_list=hjd_curl('http://www.yushanapp.com/api/get/customer/c03d80f07c144cdab5e881866b92ad9f');
         foreach ($accountsem_list['customers'] as $key=>$val)
         {
-
             $array_slist[$key]['appid']=$val['appid'];
             $array_slist[$key]['account']=$val['api_account'];
         }
@@ -198,7 +199,46 @@ class AccountsemController extends CommonController
             echo $account->_sql() . "修改了一条<br>";
            }
         }
+    }
+
+    //获取周消耗数据，全部
+    public function account_cost_all(){
+
+        $account_counsumption=M("AccountConsumption");
+        //缓存每个客户具体消费情况 appid ,日期,消费  获取周消费的时候要调用缓存 所以在这里先生存缓存
+        $tabledata = M("accountdaily", "baiduapi_", "pgsql://rdspg:anmeng@rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com:3432/msdb");
+
+        $account_day_cost = $tabledata->field('appid,date,baidu_cost_total')->select();
+        if(!$account_day_cost)
+        {
+            $data['code']=403;
+            $data['msg']='远程也羽扇数据库连接失败。来自（read_today_account_consumption_data）';
+            return $date;
+        }
+
+        $count=0;
+        foreach ($account_day_cost as $key => $val)
+        {
+            $data2['appid']=$val['appid'];
+            $data2['starttime']=strtotime($val['date']);
+            $data2['endtime']=strtotime($val['date'] ."23:59:59");
+            $data2['baidu_cost_total']=$val['baidu_cost_total'];
+            $data2['date']=$val['date'];
+            $data2['semid']=account_sem_id($val['appid']);
+            $data2['xsid']=account_xs_id($val['appid'],'market');
+            $data2['htid']=account_xs_id($val['appid'],'id');
+            /*
+            if($account_counsumption->add($data2))
+            {
+
+                $count++;
+            }*/
+            dump($data2);
+        }
 
 
+        $data['code']=200;
+        $data['msg']='成功添加'.$count."条记录消费记录。来自（read_today_account_consumption_data）";
+        //$this->ajaxReturn($data);
     }
 }

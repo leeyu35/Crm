@@ -734,3 +734,36 @@ function Yesterday(){
     //echo $a;
     return $array;
 }
+//根据appid 获取 相关账户负责sem id
+function account_sem_id($appid){
+    $account=M("Account");
+    $accountinfo=$account->field('id')->where("appid = '$appid' and endtime='4092599349'")->find();
+
+    if($accountinfo[id]!='')
+    {
+        //负责人
+        $principal=M("AccountUsers");
+        $fzridlist=$principal->field('u_id')->where("account_id = $accountinfo[id]")->select(false);
+        $userslist=M("Users")->field('name,id as uid')->where("id in ($fzridlist)")->find();
+        return $userslist['uid'];
+    }else
+    {
+        return ;
+    }
+
+}
+//根据appID 获取相关账户销售id或者合同id
+function account_xs_id($appid,$field){
+    $account=M("Account");
+    $accountinfo=$account->field('id,contract_id')->where("appid = '$appid' and endtime='4092599349'")->find();
+
+    if($accountinfo[id]!='') {
+        $hetong = M("Contract");
+        $hetonginfo = $hetong->field('id,market')->find($accountinfo['contract_id']);
+        return $hetonginfo[$field];
+    }
+    else
+    {
+        return ;
+    }
+}

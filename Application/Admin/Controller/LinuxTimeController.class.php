@@ -66,6 +66,7 @@ class LinuxTimeController extends Controller
             $this->ajaxReturn($data);
     }
 
+    //获取日消耗数据，如果没有指定日期则默认前一天日期
     function read_today_account_consumption_data($date=''){
         if($date=='')
         {
@@ -97,13 +98,13 @@ class LinuxTimeController extends Controller
             $data2['baidu_cost_total']=$val['baidu_cost_total'];
             if($account_counsumption->add($data2))
             {
+
                 $count++;
             }
         }
         $data['code']=200;
         $data['msg']='成功添加'.$count."条记录消费记录。来自（read_today_account_consumption_data）";
         $this->ajaxReturn($data);
-
 
 
     }
