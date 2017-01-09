@@ -175,7 +175,30 @@ class AccountsemController extends CommonController
 
         //$time_end=strtotime("+1 days",$time_end);
         $sum=$account_counsumption->where("appid='$appid' and starttime>='$time_start' and endtime<'$time_end'")->sum("baidu_cost_total");
-        echo $account_counsumption->_sql();
+        //echo $account_counsumption->_sql();
         return $sum;
+    }
+
+    //匹配账户appid
+    public function appid_set(){
+        //获取账户列表及APPID
+        $accountsem_list=hjd_curl('http://www.yushanapp.com/api/get/customer/c03d80f07c144cdab5e881866b92ad9f');
+        foreach ($accountsem_list['customers'] as $key=>$val)
+        {
+
+            $array_slist[$key]['appid']=$val['appid'];
+            $array_slist[$key]['account']=$val['api_account'];
+        }
+        //dump($array_slist);
+        $account=M("Account");
+        foreach ($array_slist as $key=>$val)
+        {
+           if($account->where("a_users='$val[account]'")->save(array("appid"=>$val['appid'])))
+           {
+            echo $account->_sql() . "修改了一条<br>";
+           }
+        }
+
+
     }
 }
