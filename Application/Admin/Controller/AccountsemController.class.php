@@ -156,8 +156,8 @@ class AccountsemController extends CommonController
             $list[$key]['sem']=$userslist['name'];
             $list[$key]['semid']=$userslist['uid'];
             $list[$key]['week_counsumption']=$this->AccountConsumption($val[appid],$zhouar[0]['start'],$zhouar[0]['end']);
-          //  $list[$key]['month_counsumption']=$this->AccountConsumption($val[appid],$yuear['start'],$yuear['end']);
-          //  $list[$key]['zuori_counsumption']=$this->AccountConsumption($val[appid],$zuori['start'],$zuori['end']);
+            $list[$key]['month_counsumption']=$this->AccountConsumption($val[appid],$yuear['start'],$yuear['end']);
+            $list[$key]['zuori_counsumption']=$this->AccountConsumption($val[appid],$zuori['start'],$zuori['end']);
         }
 
 
