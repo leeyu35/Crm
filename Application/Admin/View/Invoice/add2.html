@@ -55,40 +55,18 @@ $("#gongsi").on("blur",function(){
 
 				
 		$("#formid").submit(function(){
-	
-		if($("#gongsi").val()=="")
-		{
-			alert("请填写公司名称");
-			$("#gongsi").select();
-			return false;	
-		}	
-		if($("#contract_no").val()=="")
-		{
-			alert("请选择合同编号");
-			return false;	
-		}	
-		if($("#money").val()=="")
-		{
-			alert("请填写发票金额");
-			$("#money").select();
-			return false;	
-		}	
-		if($("#r_open_account").val()=="")
-		{
-			alert("请填写退款开户行");
-			$("#r_open_account").select();
-			return false;	
-		}	
-		if($("#main_company").val()=="")
-		{
-			alert("请选择开票主体");
-			return false;	
-		}	
-		if($("#type").val()=="")
-		{
-			alert("请选择发票类型");
-			return false;	
-		}	
+            if($("#money").val()=="")
+            {
+                alert("请填写发票金额");
+                $("#money").select();
+                return false;
+            }
+
+            if($("#type").val()=="")
+            {
+                alert("请选择发票类型");
+                return false;
+            }
 
 
 				
@@ -144,7 +122,7 @@ $("#gongsi").on("blur",function(){
     	<label for="inputEmail1" class="col-sm-2 control-label">税目</label>
     <div class="col-sm-3">
       <select  class="form-control" name="type" id="type">
-        <option>--请选择税目--</option>
+        <option value="">--请选择税目--</option>
         <volist id="smlist" name="smlist">
         	<option value="{$smlist[id]}">{$smlist[name]}</option>
         </volist>
