@@ -1,7 +1,7 @@
 html{font-family:"微软雅黑",Arial,sans-serif}
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,fieldset,input,button,textarea,p,th,td,b,i,strong{padding:0;margin:0;font-family:Microsoft YaHei,sans-serif,Arial;list-style: none;}
 body,html {width: 100%;height: 100%;}
-body{width: 100%;height: 100%;background: #e9f0f6;}
+body{width: 100%;height: 100%;background: #e9f0f6;overflow-x: hidden;}
 fieldset,img{border:0}
 a{text-decoration:none;color:#000;outline:none}
 li{list-style:none}
@@ -27,12 +27,10 @@ input,button,textarea,select{*font-size:100%}
 }
 .iconfont {
   font-family:"iconfont" !important;
-  font-size:16px;
   font-style:normal;
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
-  color: #6aa7d6;
 }
 
 .box {
@@ -40,8 +38,8 @@ input,button,textarea,select{*font-size:100%}
 	
 }
 .box-title,.box-list-title{
-	height: 0.53rem;
-	line-height: 0.53rem;
+	height: 0.4rem;
+	line-height: 0.4rem;
 	position: relative;
 }
 .line {
@@ -80,11 +78,7 @@ input,button,textarea,select{*font-size:100%}
 	text-align: center;
 	height: 27px;
 	line-height: 27px;
-	border-right: 1px solid #cccccc;
 
-}
-.titlt-right li:last-child {
-	border-right: none;
 }
 .title-xiugai {
 	color:#318dcc;
@@ -157,18 +151,140 @@ input,button,textarea,select{*font-size:100%}
 	height: 1rem;
 	background: #e5e5e5;
 }
-
 .box-right-fujian {
 	width: 1rem;
 	text-align: center;
-	margin:0.2rem 0 0.2rem 0;
+	margin:0 0 0.08rem 0;
+	background: rgba(000,000,000,0.5);
+	/*background: #00a0e9;*/
+	height: 20px;
+	line-height: 20px;
+	margin-top: -20px;
+	position: absolute;
+
+
 }
-@media (max-width: 768px) { 
+.box-right-fujian a {
+	color: white;
+	text-decoration: none;
+}
+.box-right-shenhe {
+	width: 100%;
+	margin-top: 15px;
+}
+.box-right-shenhe a {
+	text-decoration: none;
+}
+.box-right-shenhe li {
+	height: 0.4rem;
+	line-height: 0.3rem;
+	font-size: 13px;
+	margin-bottom: 10px;
+}
+.shenhe-title {
+	float: left;
+	width: 0.7rem;
+	height: 0.4rem;
+	line-height: 0.4rem;
+}
+.shenhe-radio,.tg-radio,.wtg-radio {
+	float: left;
+	width: 0.4rem;
+	height: 0.4rem;
+	text-align: center;
+	line-height: 0.4rem;
+}
+.shenhe-select {
+	width: 3rem;
+	height: 0.4rem;
+	line-height: 0.4rem;
+	float: left;
+	border: 1px solid #e5e5e5;
+	/*display: none;*/
+}
+.box-right-yishen .shenhe-select {
+	display: block;
+}
+.shenhe-yes {
+	float: left;
+	width: 1rem;
+	height: 0.4rem;
+	font-size: 12px;
+	margin: 0 0 0 30px;
+	color: #e5e5e5;
+}
+.shenhe-yes p {
+	color: #59ad96;
+}
+.icon {
+	font-size: 19px;
+	color: #e5e5e5;
+}
+.icon-ok {
+	font-size: 19px;
+	color: #59ad96;
+}
+.icon-no {
+	font-size: 19px;
+	color: #e78079;
+}
+.shenhe-no {
+	float: left;
+	width: 1.3rem;
+	height: 0.4rem;
+	color: #e5e5e5;
+}
+.shenhe-no p {
+	color: #e78079;
+}
+@media (max-width: 767px) { 
 		.box-right-bor {
 		width: 110px;
 
 		height: 110px;
 	}
+	.box-right-shenhe li {
+	height: 30px;
+	line-height: 30px;
+	font-size: 13px;
+		margin-bottom: 10px;
+}
+.shenhe-title {
+	float: left;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+}
+.shenhe-radio,.tg-radio,.wtg-radio {
+	float: left;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+}
+.shenhe-select {
+	width: 400px;
+	height: 30px;
+	line-height: 30px;
+	float: left;
+	border: 1px solid #e5e5e5;
+	/*display: none;*/
+}
+.shenhe-yes {
+	float: left;
+	width: 120px;
+	height: 30px;
+	font-size: 12px;
+	margin: 0 0 0 30px;
+	color: #e5e5e5;
+}
+
+.shenhe-no {
+	float: left;
+	width: 150px;
+	height: 30px;
+	color: #e5e5e5;
+}
 } 
 @media (max-width: 615px) { 
 	.box-list {
@@ -212,4 +328,6 @@ input,button,textarea,select{*font-size:100%}
 		text-align: center;
 		margin:0.2rem 0 0.2rem 0;
 	}
+			
+
 }

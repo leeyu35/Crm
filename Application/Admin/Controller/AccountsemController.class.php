@@ -146,7 +146,7 @@ class AccountsemController extends CommonController
         $yuear=teodate_month();
         $zuori=Yesterday();
 
-        $list=$account->field('a.id,a.appname,a.a_users,a.type,a.contract_id,b.name,a.appid,a.endtime,a.ctime')->join("a left join __ACCOUNTTYPE__ b on a.type = b.id ")->where("appid !=''")->order("a.ctime desc")->select();
+        $list=$account->field('a.id,a.appname,a.a_users,a.type,a.contract_id,b.name,a.appid,a.contract_id')->join("a left join __ACCOUNTTYPE__ b on a.type = b.id ")->where("appid !=''")->order("a.ctime desc")->select();
         //负责人
         $principal=M("AccountUsers");
         foreach ($list as $key=>$val)
@@ -156,9 +156,9 @@ class AccountsemController extends CommonController
 
             $list[$key]['sem']=$userslist['name'];
             $list[$key]['semid']=$userslist['uid'];
-            $list[$key]['week_counsumption']=$this->AccountConsumption($val[appid],$zhouar[0]['start'],$zhouar[0]['end'],$val['ctime'],$val['endtime']);
-            $list[$key]['month_counsumption']=$this->AccountConsumption($val[appid],$yuear['start'],$yuear['end'],$val['ctime'],$val['endtime']);
-            $list[$key]['zuori_counsumption']=$this->AccountConsumption($val[appid],$zuori['start'],$zuori['end'],$val['ctime'],$val['endtime']);
+            $list[$key]['week_counsumption']=$this->AccountConsumption($val[appid],$zhouar[0]['start'],$zhouar[0]['end'],$val['contract_id']);
+            $list[$key]['month_counsumption']=$this->AccountConsumption($val[appid],$yuear['start'],$yuear['end'],$val['contract_id']);
+            $list[$key]['zuori_counsumption']=$this->AccountConsumption($val[appid],$zuori['start'],$zuori['end'],$val['contract_id']);
 
         }
 
@@ -168,7 +168,7 @@ class AccountsemController extends CommonController
 
     }
 
-    public function AccountConsumption($appid,$starttime,$endtime,$account_sracttime){
+    public function AccountConsumption($appid,$starttime,$endtime,$account_ht_id){
         $account_counsumption=M("AccountConsumption");
         $time_start=strtotime($starttime);
        // $time_start=strtotime("-1 days",$time_start);
@@ -176,8 +176,8 @@ class AccountsemController extends CommonController
         $time_end=strtotime($endtime);
 
         //$time_end=strtotime("+1 days",$time_end);
-        $sum=$account_counsumption->where("appid='$appid' and starttime>='$time_start' ")->sum("baidu_cost_total");
-        //echo $account_counsumption->_sql();
+        $sum=$account_counsumption->where("appid='$appid' and starttime>='$time_start' and htid='$account_ht_id'")->sum("baidu_cost_total");
+        echo $account_counsumption->_sql()."<br>";
         return $sum;
     }
 
@@ -196,7 +196,7 @@ class AccountsemController extends CommonController
         {
            if($account->where("a_users='$val[account]'")->save(array("appid"=>$val['appid'])))
            {
-            echo $account->_sql() . "修改了一条<br>";
+                echo $account->_sql() . "修改了一条<br>";
            }
         }
     }
@@ -208,7 +208,7 @@ class AccountsemController extends CommonController
         //缓存每个客户具体消费情况 appid ,日期,消费  获取周消费的时候要调用缓存 所以在这里先生存缓存
         $tabledata = M("accountdaily", "baiduapi_", "pgsql://rdspg:anmeng@rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com:3432/msdb");
 
-        $account_day_cost = $tabledata->field('appid,date,baidu_cost_total')->select();
+        $account_day_cost = $tabledata->field('appid,date,baidu_cost_total')->where("date>='2017-01-01'")->select();
         if(!$account_day_cost)
         {
             $data['code']=403;
@@ -227,18 +227,18 @@ class AccountsemController extends CommonController
             $data2['semid']=account_sem_id($val['appid']);
             $data2['xsid']=account_xs_id($val['appid'],'market');
             $data2['htid']=account_xs_id($val['appid'],'id');
-            /*
+
             if($account_counsumption->add($data2))
             {
 
                 $count++;
-            }*/
-            dump($data2);
+            }
+          //  dump($data2);
         }
 
 
         $data['code']=200;
         $data['msg']='成功添加'.$count."条记录消费记录。来自（read_today_account_consumption_data）";
-        //$this->ajaxReturn($data);
+         $this->ajaxReturn($data);
     }
 }

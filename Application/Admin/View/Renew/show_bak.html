@@ -1,0 +1,290 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>续费详情</title>
+
+<link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+<script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
+<script src="/Public/js/jquery-3.1.0.min.js"></script>
+<script src="/Public/js/layer/layer.js"></script>
+
+<style type="text/css">
+	#adlist{ margin-left:15px;}
+	#adlist li a{ cursor:pointer;}
+	
+</style>
+
+<if condition="$info[type] lt 2">
+	<style type="text/css">.bzj{ display:none;}</style>
+</if>
+</head>
+
+<body>
+<span id="hjd"></span>
+<div class="container" style="width:100%;">
+<h3 class="bor-left-bull" >续费详情<small> Renew Info</small></h3>
+<br>
+<form action="{:U('upru')}" method="post" class="form-horizontal" id="formid" >
+<input type="hidden" name="id" id="id" value="{$info[id]}">
+<input type="hidden" name="advertiser" id="advertiser" value="{$info[advertiser]}">
+<input type="hidden" name="submituser" id="submituser" value="{$info[submituser]}">
+<h4 class="bor-left-bull" >合同基本信息</h4>
+<hr>
+ 
+   <div class="form-group">
+  
+    <label class="col-sm-2 control-label">初始合同编号</label>
+    <div class="col-sm-3">
+    	<label  class="control-label"><strong> {$yinfo[contract_no]}</strong></label>
+    </div>
+    <label for="inputEmail3" class="col-sm-1 control-label">客户所属</label>
+    <div class="col-sm-2">
+    <label  class="control-label"><strong>{$users_info}</strong></label>
+      
+    </div>
+     <label for="inputEmail3" class="col-sm-1 control-label">提交人</label>
+    <div class="col-sm-2">
+    <label  class="control-label"><strong>{$users_info2}</strong></label>
+      
+    </div>
+  </div>
+  
+  
+  <div class="form-group">
+    <label class="col-sm-2 control-label">广告主公司名称</label>
+    <div class="col-sm-3">
+    	<label  class="control-label"><strong>{$gongsi}</strong></label>
+    </div>
+    
+    <label for="inputEmail3" class="col-sm-1 control-label">代理公司</label>
+    <div class="col-sm-2">
+        <volist id="agentcompany" name="agentcompany" key="k">
+        <label  class="control-label"><strong>{$yinfo[agent_company]==$agentcompany[id]?"$agentcompany[companyname]":""}</strong></label>
+        </volist>      
+    </div>
+    
+  </div>
+  <div class="form-group">
+  
+    <label for="inputEmail3" class="col-sm-2 control-label">产品线</label>
+    <div class="col-sm-3">
+   
+      	<volist id="product_line_list" name="product_line_list" key="k">
+       	<label  class="control-label"><strong>{$info[product_line]==$product_line_list[id]?"$product_line_list[name]":""}</strong></label>
+       </volist>
+
+      
+    </div>
+    
+<!--    <label for="inputEmail3" class="col-sm-1 control-label">续费编号</label>
+    <div class="col-sm-3">
+      <label  class="control-label"><strong>{$info[contract_no]}</strong></label>
+    </div>-->
+    </div>
+    
+    <div class="form-group">
+  
+    <label for="inputEmail3" class="col-sm-2 control-label">合同类型</label>
+    <div class="col-sm-3">
+   	   <label  class="control-label"><strong> {$info[type]=='1'?'普通合同':'框架合同'}</strong></label>
+    </div>
+    
+   <!-- <label for="inputEmail3" class="col-sm-1 control-label bzj">保证金</label>
+    <div class="col-sm-3 bzj">
+      
+      <label  class="control-label"><strong>{$info[margin]|num_format}</strong></label>
+    </div>-->
+  
+    
+</div>
+
+<h4 class="bor-left-bull" >续费信息</h4>
+<hr>
+
+  <!--<div class="form-group">
+  
+    <label for="inputEmail3" class="col-sm-2 control-label">产品线</label>
+    <div class="col-sm-3">
+      <select  class="form-control">
+      	<option>凌众时代</option>
+      	<option>谋士</option>
+      </select>
+    </div>
+    
+    <label for="inputEmail3" class="col-sm-1 control-label">推广URL</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputEmail3">
+    </div> 
+
+  </div>-->
+  
+  <div class="form-group">
+  
+    <label for="contract_money" class="col-sm-2 control-label">金额</label>
+    <div class="col-sm-3">
+        <label  class="control-label"><strong>{$info[money]|num_format}元</strong></label>
+    </div>
+    
+    <label for="rebates_proportion" class="col-sm-1 control-label">返点比例</label>
+    <div class="col-sm-1">
+        <label  class="control-label"><strong>{$info[rebates_proportion]}%</strong></label>
+    </div>
+    
+    <label for="show_money" class="col-sm-2 control-label">账户显示金额</label>
+    <div class="col-sm-2">      
+        <label  class="control-label"><strong>{$info[show_money]}元</strong></label>
+    </div>
+    
+  </div>
+ <!-- <div class="form-group">
+ 
+    <label for="inputEmail3" class="col-sm-2 control-label">合同有效期</label>
+    <div class="col-sm-4">
+         <label  class="control-label"><strong>{$info[contract_start]|date='Y-m-d',###}</strong></label>
+         到 <label  class="control-label">{$info[contract_end]=='0'?'消费结束':''}<strong>{$info[contract_end]!='0'?$info[contract_end]|date='Y-m-d',###:''}</strong></label>
+    </div>
+   
+   
+
+    
+  </div>-->
+  <div class="form-group">
+  
+    <label for="inputEmail3" class="col-sm-2 control-label">账户名称</label>
+    <div class="col-sm-6">
+      <label  class="control-label"><strong>{$info[a_users]}</strong>  <a href="{:U("Account/show?id=$info[a_id]")}">查看账户详细信息</a></label>
+    </div>
+    
+    <label for="inputEmail3" class="col-sm-1 control-label">APP名称</label>
+    <div class="col-sm-2">
+      <label  class="control-label"><strong>{$info[appname]}</strong></label>
+
+
+    </div>
+    
+  </div>
+  <h4 class="bor-left-bull" >付款信息</h4>
+  <hr>
+	<div class="form-group">
+  
+    <label for="payment_type" class="col-sm-2 control-label">付款方式</label>
+    <div class="col-sm-3">
+      <label  class="control-label"><strong>
+      	{$info[payment_type]=='1'?'预付':''}
+      	{$info[payment_type]=='2'?'垫付':''}
+      	{$info[payment_type]=='3'?'补款':''}
+      	{$info[payment_type]=='14'?'退款':''}
+     </strong></label>
+    </div>
+    
+    <label for="payment_time" class="col-sm-1 control-label">付款日期</label>
+    <div class="col-sm-2">      
+         <label  class="control-label"><strong>{$info[payment_time]!='0'?$info[payment_time]|date='Y-m-d',###:''}</strong></label>
+    </div>
+    
+    <!--<label for="inputEmail3" class="col-sm-1 control-label">付款金额</label>
+    <div class="col-sm-2">
+        <label  class="control-label"><strong>{$info[fk_money]|num_format}元</strong></label>
+    </div>-->
+    
+  </div>
+  <h4 class="bor-left-bull" >附件</h4>
+  <hr>
+	<div class="form-group">
+   <div class="col-sm-12" id="imgshowtime">
+    	
+      	<volist id="filelist" name="filelist">
+        	<div class="col-sm-1" style="padding-right:5px;">
+        	<img class="shouim" layer-src="{$filelist[file]}" src="{$filelist[file]}" width="100" height="100">&nbsp;
+				<a href="{:U("defile?id=$filelist[id]")}">删除</a>
+            </div>
+        </volist>
+    </div>
+    
+  </div>
+  <h4 class="bor-left-bull" >备注</h4>
+  <hr>
+  <div class="form-group">
+   <div class="col-sm-12">      
+		<label  class="control-label"><strong>{$info[note]}</strong></label>
+   </div>
+
+   </div>
+  <h4 class="bor-left-bull" >审核状态</h4>
+  <hr>
+	 <div class="form-group">
+    
+       <div class="col-sm-12">
+       <if condition="$info[audit_1] eq 0">
+       		<span class="shno">一级审核未审核</span>
+        	<elseif condition="$info[audit_1] eq 1"/>
+             <span class="shyes">一级审核已审核(审核人：{$users_info3?$users_info3:'默认'})</span>
+            <elseif condition="$info[audit_1] eq 2"/>
+            <span class="shno1">一级审核未通过(审核人：{$users_info3?$users_info3:'默认'})</span>
+       </if>
+       &nbsp;&nbsp;&nbsp;
+       <if condition="$info[audit_2] eq 0">
+       		<span class="shno">二级审核未审核</span>
+            <elseif condition="$info[audit_2] eq 1"/>
+            <span class="shyes">二级审核已审核(审核人：{$users_info4?$users_info4:'默认'})</span>
+            <elseif condition="$info[audit_2] eq 2"/>
+            <span class="shno1">二级审核未通过(审核人：{$users_info4?$users_info4:'默认'})</span>
+       </if>
+
+         <if condition="$info[audit_3] eq 0">
+               <span class="shno">三级审核未审核</span>
+               <elseif condition="$info[audit_3] eq 1"/>
+               <span class="shyes">三级审核已审核(审核人：{$users_info5?$users_info5:'默认'})</span>
+               <elseif condition="$info[audit_3] eq 2"/>
+               <span class="shno1">三级审核未通过(审核人：{$users_info5?$users_info5:'默认'})</span>
+           </if>
+       </div>
+    </div>
+
+    <div class="form-group">
+    
+       <div class="col-sm-12">
+       
+        <button type="button" class="btn btn-primary" onClick="javascript:history.go(-1)">返回</button>
+       	<if condition="($info[audit_1] neq 2) and ($info[audit_2] neq 2) and ($info[audit_3] neq 3)">
+        &nbsp;&nbsp;
+    	<a href="{:U("shenhe?type=audit_1&id=$info[id]&yid=$yid")}" class="btn btn-primary"  {$info[audit_1]!='0'?'style="display:none"':''} >一级审核通过</a>
+    	<a href="{:U("shenhe?type=audit_1&id=$info[id]&ju=1&yid=$yid")}" class="btn btn-danger"  {$info[audit_1]!='0'?'style="display:none"':''} >一级审核不通过</a>
+        &nbsp;&nbsp;
+        <a href="{:U("shenhe?type=audit_2&id=$info[id]&yid=$yid")}" class="btn btn-primary"  {$info[audit_2]!='0'?'style="display:none"':''}>二级审核通过</a>
+      	<a href="{:U("shenhe?type=audit_2&id=$info[id]&ju=1&yid=$yid")}" class="btn btn-danger"  {$info[audit_2]!='0'?'style="display:none"':''} >二级审核不通过</a>
+            &nbsp;&nbsp;
+        <a href="{:U("shenhe?type=audit_3&id=$info[id]&yid=$yid")}" class="btn btn-primary"  {$info[audit_3]!='0'?'style="display:none"':''}>三级审核通过</a>
+        <a href="{:U("shenhe?type=audit_3&id=$info[id]&ju=1&yid=$yid")}" class="btn btn-danger"  {$info[audit_3]!='0'?'style="display:none"':''} >三级审核不通过</a>
+
+        </if>
+
+       
+       </div>
+    </div>
+
+</form>
+
+</div>
+<br>
+<br>
+<br>
+<script>
+;!function(){
+
+//页面一打开就执行，放入ready是为了layer所需配件（css、扩展模块）加载完毕
+layer.ready(function(){ 
+  //官网欢迎页
+  
+  //使用相册
+  layer.photos({
+    photos: '#imgshowtime'
+  });
+});
+
+}();
+</script>
+</body>
+</html>
