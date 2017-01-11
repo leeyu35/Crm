@@ -666,6 +666,7 @@ class ContractmjController extends CommonController
             $this->type3=$type3;
         }
         $hetong=M("Contract");
+        $where.=" and a.is_meijie=1 and iszuofei=0";
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
 
