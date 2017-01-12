@@ -138,7 +138,8 @@ class AccountsemController extends CommonController
     }
 
     public function  index2(){
-        echo date("Y-m-d","4092599349");
+
+        //echo date("Y-m-d","4092599349");
         $account=M("Account");
         $hetong=M("Contract");
         // $data=$account->field('')->where('a_users='.$acconut_u)->select();
@@ -154,8 +155,8 @@ class AccountsemController extends CommonController
             $fzridlist=$principal->field('u_id')->where("account_id = $val[id]")->select(false);
             $userslist=M("Users")->field('name,id as uid')->where("id in ($fzridlist)")->find();
 
-            $list[$key]['sem']=$userslist['name'];
-            $list[$key]['semid']=$userslist['uid'];
+            $list[$key]['sem']=$userslist['name'];//sem姓名
+            $list[$key]['semid']=$userslist['uid'];//semid
             $list[$key]['week_counsumption']=$this->AccountConsumption($val[appid],$zhouar[0]['start'],$zhouar[0]['end'],$val['contract_id']);
             $list[$key]['month_counsumption']=$this->AccountConsumption($val[appid],$yuear['start'],$yuear['end'],$val['contract_id']);
             $list[$key]['zuori_counsumption']=$this->AccountConsumption($val[appid],$zuori['start'],$zuori['end'],$val['contract_id']);
@@ -177,7 +178,7 @@ class AccountsemController extends CommonController
 
         //$time_end=strtotime("+1 days",$time_end);
         $sum=$account_counsumption->where("appid='$appid' and starttime>='$time_start' and htid='$account_ht_id'")->sum("baidu_cost_total");
-        echo $account_counsumption->_sql()."<br>";
+        //echo $account_counsumption->_sql()."<br>";
         return $sum;
     }
 
@@ -185,11 +186,14 @@ class AccountsemController extends CommonController
     public function appid_set(){
         //获取账户列表及APPID
         $accountsem_list=hjd_curl('http://www.yushanapp.com/api/get/customer/c03d80f07c144cdab5e881866b92ad9f');
+        $i=0;
         foreach ($accountsem_list['customers'] as $key=>$val)
         {
             $array_slist[$key]['appid']=$val['appid'];
             $array_slist[$key]['account']=$val['api_account'];
+            $i++;
         }
+
         //dump($array_slist);
         $account=M("Account");
         foreach ($array_slist as $key=>$val)
@@ -240,5 +244,19 @@ class AccountsemController extends CommonController
         $data['code']=200;
         $data['msg']='成功添加'.$count."条记录消费记录。来自（read_today_account_consumption_data）";
          $this->ajaxReturn($data);
+    }
+    public function xiamu(){
+        $tabledata = M("accountdaily", "baiduapi_", "pgsql://rdspg:anmeng@rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com:3432/msdb");
+        $list=$tabledata->field('appid')->where(" date >= '2017-01-01'")->group("appid")->select();
+        $account=M("Account");
+        foreach ($list as $key=>$val)
+        {
+            $appidacc=$account->where("appid='".$val['appid']."'")->find();
+            if($appidacc!='')
+            {
+               dump($appidacc);
+            }
+            //echo $appidacc."<br>";
+        }
     }
 }

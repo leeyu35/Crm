@@ -96,6 +96,10 @@ class LinuxTimeController extends Controller
             $data2['starttime']=strtotime($val['date']);
             $data2['endtime']=strtotime($val['date'] ."23:59:59");
             $data2['baidu_cost_total']=$val['baidu_cost_total'];
+            $data2['date']=$val['date'];
+            $data2['semid']=account_sem_id($val['appid']);
+            $data2['xsid']=account_xs_id($val['appid'],'market');
+            $data2['htid']=account_xs_id($val['appid'],'id');
             if($account_counsumption->add($data2))
             {
 
@@ -108,4 +112,5 @@ class LinuxTimeController extends Controller
 
 
     }
+
 }
