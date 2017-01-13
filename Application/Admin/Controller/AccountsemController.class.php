@@ -160,7 +160,12 @@ class AccountsemController extends CommonController
             $list[$key]['week_counsumption']=$this->AccountConsumption($val[appid],$zhouar[0]['start'],$zhouar[0]['end'],$val['contract_id']);
             $list[$key]['month_counsumption']=$this->AccountConsumption($val[appid],$yuear['start'],$yuear['end'],$val['contract_id']);
             $list[$key]['zuori_counsumption']=$this->AccountConsumption($val[appid],$zuori['start'],$zuori['end'],$val['contract_id']);
-
+            $list[$key]['week_zhanxian']=$this->Account_zhanxian($val[appid],$zhouar[0]['start'],$zhouar[0]['end'],$val['contract_id']);
+            $list[$key]['month_zhanxian']=$this->Account_zhanxian($val[appid],$yuear['start'],$yuear['end'],$val['contract_id']);
+            $list[$key]['zuori_zhanxian']=$this->Account_zhanxian($val[appid],$zuori['start'],$zuori['end'],$val['contract_id']);
+            $list[$key]['week_dianji']=$this->Account_dianji($val[appid],$zhouar[0]['start'],$zhouar[0]['end'],$val['contract_id']);
+            $list[$key]['month_dianji']=$this->Account_dianji($val[appid],$yuear['start'],$yuear['end'],$val['contract_id']);
+            $list[$key]['zuori_dianji']=$this->Account_dianji($val[appid],$zuori['start'],$zuori['end'],$val['contract_id']);
         }
 
 
@@ -169,18 +174,34 @@ class AccountsemController extends CommonController
 
     }
 
+    // 根据appid 合同id  统计 消耗 条件(开始时间 结束时间)
     public function AccountConsumption($appid,$starttime,$endtime,$account_ht_id){
         $account_counsumption=M("AccountConsumption");
         $time_start=strtotime($starttime);
        // $time_start=strtotime("-1 days",$time_start);
-
-        $time_end=strtotime($endtime);
-
+        $time_end=strtotime($endtime."+1 day");
         //$time_end=strtotime("+1 days",$time_end);
-        $sum=$account_counsumption->where("appid='$appid' and starttime>='$time_start' and htid='$account_ht_id'")->sum("baidu_cost_total");
+        $sum=$account_counsumption->where("appid='$appid' and starttime>='$time_start'  and starttime<'$time_end' and htid='$account_ht_id'")->sum("baidu_cost_total");
         //echo $account_counsumption->_sql()."<br>";
         return $sum;
     }
+    // 根据appid 合同id  统计 展现 条件(开始时间 结束时间)
+    public function Account_zhanxian($appid,$starttime,$endtime,$account_ht_id){
+        $account_counsumption=M("AccountConsumption");
+        $time_start=strtotime($starttime);
+        $time_end=strtotime($endtime."+1 day");
+        $sum=$account_counsumption->where("appid='$appid' and starttime>='$time_start' and starttime<'$time_end'  and htid='$account_ht_id'")->sum("zhanxian");
+        return $sum;
+    }
+    // 根据appid 合同id  统计 点击 条件(开始时间 结束时间)
+    public function Account_dianji($appid,$starttime,$endtime,$account_ht_id){
+        $account_counsumption=M("AccountConsumption");
+        $time_start=strtotime($starttime);
+        $time_end=strtotime($endtime."+1 day");
+        $sum=$account_counsumption->where("appid='$appid' and starttime>='$time_start' and starttime<'$time_end'  and htid='$account_ht_id'")->sum("dianji");
+        return $sum;
+    }
+
 
     //匹配账户appid
     public function appid_set(){
@@ -212,7 +233,7 @@ class AccountsemController extends CommonController
         //缓存每个客户具体消费情况 appid ,日期,消费  获取周消费的时候要调用缓存 所以在这里先生存缓存
         $tabledata = M("accountdaily", "baiduapi_", "pgsql://rdspg:anmeng@rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com:3432/msdb");
 
-        $account_day_cost = $tabledata->field('appid,date,baidu_cost_total')->where("date>='2017-01-01'")->select();
+        $account_day_cost = $tabledata->field('appid,date,baidu_cost_total,baidu_view_total,baidu_click_total')->where("date>='2017-01-01'")->select();
         if(!$account_day_cost)
         {
             $data['code']=403;
@@ -227,6 +248,8 @@ class AccountsemController extends CommonController
             $data2['starttime']=strtotime($val['date']);
             $data2['endtime']=strtotime($val['date'] ."23:59:59");
             $data2['baidu_cost_total']=$val['baidu_cost_total'];
+            $data2['zhanxian']=$val['baidu_view_total'];
+            $data2['dianji']=$val['baidu_click_total'];
             $data2['date']=$val['date'];
             $data2['semid']=account_sem_id($val['appid']);
             $data2['xsid']=account_xs_id($val['appid'],'market');
@@ -246,16 +269,26 @@ class AccountsemController extends CommonController
          $this->ajaxReturn($data);
     }
     public function xiamu(){
+        echo round(0.409999999999999999,2);
+        exit;
         $tabledata = M("accountdaily", "baiduapi_", "pgsql://rdspg:anmeng@rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com:3432/msdb");
         $list=$tabledata->field('appid')->where(" date >= '2017-01-01'")->group("appid")->select();
         $account=M("Account");
+
         foreach ($list as $key=>$val)
         {
             $appidacc=$account->where("appid='".$val['appid']."'")->find();
             if($appidacc!='')
             {
-               dump($appidacc);
+
+                echo "'".$val['appid']."',";
+            }else
+            {
+
+
+                //echo "'".$val['appid']."',";
             }
+
             //echo $appidacc."<br>";
         }
     }

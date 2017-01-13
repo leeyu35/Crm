@@ -364,9 +364,9 @@ function num_format($num){
     if(!is_numeric($num)){
         return false;
     }
-    if($num<0)
+    if($num<1)
     {
-        return $num;
+        return round($num,2);
     }
     if($num==0)
     {
