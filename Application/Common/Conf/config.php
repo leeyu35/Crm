@@ -26,11 +26,11 @@ $config_1= array(
     /* //PDO连接方式*/
 
     'DB_TYPE' => 'pgsql', // 数据库类型
-    'DB_HOST'               =>  'rds455ekt1422z8sh7e2.pg.rds.aliyuncs.com', // 服务器地址
+    'DB_HOST'               =>  'rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com', // 服务器地址
     'DB_NAME'               =>  'crm',          // 数据库名
     'DB_USER' => 'rdspg', // 用户名
     'DB_PWD' => 'anmeng', // 密码
-    'DB_PORT'               =>  '3433',        // 端口
+    'DB_PORT'               =>  '3432',        // 端口
     'DB_PREFIX' => 'jd_', // 数据库表前缀
     /*
     'DB_TYPE' => 'mongo', // 数据库类型
@@ -82,12 +82,31 @@ $config_1= array(
     'URL_ROUTER_ON'   => true,
     'URL_ROUTE_RULES'=>array(
        // 'news/:year/:month/:day' => array('News/archive', 'status=1'),
-        'login'               => 'Public/login',
-        'adminIndex'               => 'Public/index',
+        'login'               => 'Admin/Public/login',
+        'adminIndex'          => 'Admin/Public/index',
         //'sqladmin'               => 'Sqladmin/index',
         //'news/read/:id'          => '/news/:1',
+        array('Api/find_market_week_clientele','Admin/Api/find_market_week_clientele',array('method'=>'get')),//单个销售周新增客户
+        array('Api/find_market_month_clientele','Admin/Api/find_market_month_clientele',array('method'=>'get')),//单个销售月新增客户
+        array('Api/find_market_day_counsumption','Admin/Api/find_market_day_counsumption',array('method'=>'get')),//单个销售的所有客户昨日消耗
+        array('Api/find_market_week_counsumption','Admin/Api/find_market_week_counsumption',array('method'=>'get')),//单个销售的所有客户本周消耗
+        array('Api/find_market_month_counsumption','Admin/Api/find_market_month_counsumption',array('method'=>'get')),//单个销售的所有客户本月消耗
+        array('Api/find_market_week_counsumption_statistics','Admin/Api/find_market_week_counsumption_statistics',array('method'=>'get')),//单个销售的所有客户周消耗趋势图
+        array('Api/find_market_clientele_counsumption','Admin/Api/find_market_clientele_counsumption',array('method'=>'get')),//单个销售的所有客户周消耗趋势图
+        array('Api/contract_week','Admin/Api/contract_week',array('method'=>'get')),//周新增合同
+        array('Api/contract_month','Admin/Api/contract_month',array('method'=>'get')),//月新增合同
+        array('Api/find_market_smonth_counsumption','Admin/Api/find_market_smonth_counsumption',array('method'=>'get')),//单个销售的所有客户上月消耗
+        array('Api/today_day_type','Admin/Api/today_day_type',array('method'=>'get')),// 根据type 返回 本日 回款 续费  垫款数据
+        array('Api/today_month_type','Admin/Api/today_month_type',array('method'=>'get')),// 根据type 返回 本日 回款 续费  垫款数据
+        array('Api/find_sem_day_counsumption','Admin/Api/find_sem_day_counsumption',array('method'=>'get')),//单个销售的所有客户昨日消耗
+        array('Api/find_sem_week_counsumption','Admin/Api/find_sem_week_counsumption',array('method'=>'get')),//单个销售的所有客户本周消耗
+        array('Api/find_sem_month_counsumption','Admin/Api/find_sem_month_counsumption',array('method'=>'get')),//单个销售的所有客户本月消耗
+        array('Api/sem_account_counsumption','Admin/Api/sem_account_counsumption',array('method'=>'get')),//单个销售的所有客户本月消耗
+        array('Api/diankuan_compare','Admin/Api/diankuan_compare',array('method'=>'get')),//单个销售的所有客户本月消耗
+        // array('Api','Admin/Api/index','hjd=1',array('method'=>'get')),
+
     ),
-    'SHOW_PAGE_TRACE' =>true,
+   // 'SHOW_PAGE_TRACE' =>true,
 	/*
 	 'TOKEN_ON'      =>    true,  // 是否开启令牌验证 默认关闭
  'TOKEN_NAME'    =>    '__hash__',    // 令牌验证的表单隐藏字段名称，默认为__hash__
