@@ -701,7 +701,7 @@ function teodate_week($to,$zhouji,$strdate=''){
     {
         $strdate=date('Y-m-d');
     }
-    $a=strtotime($strdate);
+    $a=strtotime($strdate."+1 day"); //因为是获取的上周几 所以给她加一天，比如 今天周一，要获取上周一，则 改认为今天是周二这样去读
     //获取几周日期
     for($i=0;$i<$to;$i++)
     {
@@ -711,7 +711,7 @@ function teodate_week($to,$zhouji,$strdate=''){
         if($enddate > date("Y-m-d"))
         {
             //$enddate=date("Y-m-d",strtotime("-1 day"));
-            $enddate=date("Y-m-d");
+          //  $enddate=date("Y-m-d");
         }
         $array[$i]['end']=$enddate;//结束日期
     }
@@ -723,6 +723,15 @@ function teodate_week($to,$zhouji,$strdate=''){
 function teodate_month(){
     $array['start']=date("Y-m-d",mktime(0,0,0,date('m'),1,date('Y')));
     $enddate=date("Y-m-d");
+    $array['end']=$enddate;//结束日期
+    //echo $a;
+    return $array;
+}
+//获取上月的开始时间和结束时间
+function teodate_smonth(){
+    $array['start']=date("Y-m-d",mktime(0,0,0,date('m')-1,1,date('Y')));
+
+    $enddate=date("Y-m-d",strtotime("+1 month ",strtotime($array['start'])));
     $array['end']=$enddate;//结束日期
     //echo $a;
     return $array;
@@ -753,7 +762,7 @@ function account_sem_id($appid){
 
 }
 //根据appID 获取相关账户销售id或者合同id
-function account_xs_id($appid,$field){
+function  account_xs_id($appid,$field){
     $account=M("Account");
     $accountinfo=$account->field('id,contract_id')->where("appid = '$appid' and endtime='4092599349'")->find();
 

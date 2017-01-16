@@ -143,7 +143,7 @@ class AccountsemController extends CommonController
         $account=M("Account");
         $hetong=M("Contract");
         // $data=$account->field('')->where('a_users='.$acconut_u)->select();
-        $zhouar=teodate_week(1,"Thursday"); //获取周日期的开始时间和结束时间
+        $zhouar=teodate_week(1,"Monday"); //获取周日期的开始时间和结束时间
         $yuear=teodate_month();
         $zuori=Yesterday();
 
