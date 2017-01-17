@@ -228,12 +228,13 @@ class ApiController extends RestController{
             $kehu=M("Customer");
             if(I('type')!='all')
             {
-                $where="market='$id'";
+               
+                $list=$contract->field('advertiser')->where("market='$id'")->DISTINCT('advertiser')->select();
             }else
             {
-                $where=" ";
+                $list=$contract->field('advertiser')->DISTINCT('advertiser')->select();
             }
-            $list=$contract->field('advertiser')->where("$where")->DISTINCT('advertiser')->select();
+
 
             foreach ($list as $key=>$val)
             {
