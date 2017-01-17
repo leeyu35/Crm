@@ -228,7 +228,7 @@ class ApiController extends RestController{
             $kehu=M("Customer");
             if(I('type')!='all')
             {
-               
+
                 $list=$contract->field('advertiser')->where("market='$id'")->DISTINCT('advertiser')->select();
             }else
             {
@@ -261,6 +261,7 @@ class ApiController extends RestController{
             $time_start=strtotime($zhouar[0]['start']);
             $time_end=strtotime($zhouar[0]['end']."+1 day");
             $sum+=$account_counsumption->where("xsid=$xsid and starttime>='$time_start'  and starttime<'$time_end' and htid=$val[id] ")->sum("baidu_cost_total");
+
         }
         return  $sum?$sum:'0';
     }
