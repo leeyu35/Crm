@@ -199,11 +199,9 @@ class ApiController extends RestController{
             $data['mes']='缺少参数';
         }else {
             $account_counsumption=M("AccountConsumption");
-            $zhouar=teodate_week(1,"Monday");//本周开始时间和结束时间
 
-            $time_start=strtotime($zhouar[0]['start']);
-
-            $time_end=strtotime($zhouar[0]['end']."+1 day");
+            $time_start=strtotime(date("Y-m-d")."-7 day");
+            $time_end=strtotime(date("Y-m-d"));
             if(I('type')!='all')
             {
                 $where="xsid=$id";
@@ -211,7 +209,7 @@ class ApiController extends RestController{
             {
                 $where="id != 0";
             }
-            $sum=$account_counsumption->field('date,sum(baidu_cost_total) as baidu_cost_total')->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->group("date")->select();
+            $sum=$account_counsumption->field('date,sum(baidu_cost_total) as baidu_cost_total')->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->group("date")->order("date asc")->select();
             if(!$sum){$sum="0";}
             $data['code'] = 200;
             $data['counsumption'] = $sum;
@@ -235,8 +233,8 @@ class ApiController extends RestController{
             {
                 $where="id != 0";
             }
-            $list=$contract->field('advertiser')->where("$where")->group('advertiser')->select();
-
+            $list=$contract->field('advertiser')->where("$where")->DISTINCT('advertiser')->select();
+            
             foreach ($list as $key=>$val)
             {
                 $khinfo=$kehu->field('advertiser')->find(($val['advertiser']));
@@ -255,9 +253,9 @@ class ApiController extends RestController{
         $contract=M('Contract');
         $account_counsumption=M("AccountConsumption");
         $list=$contract->field('advertiser,id')->where("market='$xsid' and advertiser='$avid'")->select();
+
         foreach ($list as $key=>$val)
         {
-
             $zhouar=teodate_week(1,"Monday");//本周开始时间和结束时间
             $time_start=strtotime($zhouar[0]['start']);
             $time_end=strtotime($zhouar[0]['end']."+1 day");
@@ -511,7 +509,14 @@ class ApiController extends RestController{
             $data['mes']='缺少参数';
         }else {
             $account=M("Account");
-            $sem_acc_id=M("AccountUsers")->field('account_id')->where("u_id='$id'")->select(false);
+            if(I('type')!='all')
+            {
+                $where="u_id=$id";
+            }else
+            {
+                $where="id != 0";
+            }
+            $sem_acc_id=M("AccountUsers")->field('account_id')->where("$where")->select(false);
             $list=$account->field('appname,a_users,appid')->where("id in($sem_acc_id)")->select();
 
             foreach ($list as $key=>$val)
