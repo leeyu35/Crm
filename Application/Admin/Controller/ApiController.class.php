@@ -231,10 +231,10 @@ class ApiController extends RestController{
                 $where="market='$id'";
             }else
             {
-                $where="id != 0";
+                $where=" ";
             }
             $list=$contract->field('advertiser')->where("$where")->DISTINCT('advertiser')->select();
-            
+
             foreach ($list as $key=>$val)
             {
                 $khinfo=$kehu->field('advertiser')->find(($val['advertiser']));
