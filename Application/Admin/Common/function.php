@@ -768,7 +768,7 @@ function  account_xs_id($appid,$field){
 
     if($accountinfo[id]!='') {
         $hetong = M("Contract");
-        $hetonginfo = $hetong->field('id,market')->find($accountinfo['contract_id']);
+        $hetonginfo = $hetong->field('id,market,advertiser')->find($accountinfo['contract_id']);
         return $hetonginfo[$field];
     }
     else

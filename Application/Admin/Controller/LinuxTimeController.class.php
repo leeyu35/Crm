@@ -105,6 +105,7 @@ class LinuxTimeController extends Controller
             $data2['semid']=account_sem_id($val['appid']);
             $data2['xsid']=account_xs_id($val['appid'],'market');
             $data2['htid']=account_xs_id($val['appid'],'id');
+            $data2['avid']=account_xs_id($val['appid'],'advertiser');
             if($account_counsumption->add($data2))
             {
 
