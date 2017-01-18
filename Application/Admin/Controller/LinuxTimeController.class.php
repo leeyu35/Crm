@@ -79,7 +79,8 @@ class LinuxTimeController extends Controller
 
 
         $account_counsumption=M("AccountConsumption");
-        $account_counsumption->where("date='$data'")->delete();
+        $account_counsumption->where("date='$date'")->delete();
+
         //缓存每个客户具体消费情况 appid ,日期,消费  获取周消费的时候要调用缓存 所以在这里先生存缓存
         $tabledata = M("accountdaily", "baiduapi_", "pgsql://rdspg:anmeng@rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com:3432/msdb");
 

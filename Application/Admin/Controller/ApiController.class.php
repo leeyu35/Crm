@@ -405,7 +405,7 @@ class ApiController extends RestController{
 
         foreach ($dk_sm as $key=>$val)
         {
-            $zuijinhk=$backmoney->where("advertiser=$val[id] and is_huikuan=1")->field('payment_time,money')->order("payment_time desc")->limit('0,3')->select();
+            $zuijinhk=$backmoney->where("advertiser=$val[id] and is_huikuan=1")->field('payment_time,money')->order("payment_time desc")->limit('0,5')->select();
             foreach ($zuijinhk as $k=>$v)
             {
                 $zuijinhk[$k]['payment_time']=date("Y-m-d",$v['payment_time']);
