@@ -252,15 +252,15 @@ class ApiController extends RestController{
     //根据销售ID 和 客户id 获取客户的周消费
     private function customer_market_week_clientele($xsid,$avid,$type=0){
         $contract=M('Contract');
-        $account_counsumption=M("AccountConsumption");
+        $account_counsumption=M('AccountConsumption');
         $list=$contract->field('advertiser,id')->where("market='$xsid' and advertiser='$avid'")->select();
 
         foreach ($list as $key=>$val)
         {
-            $zhouar=teodate_week(1,"Monday");//本周开始时间和结束时间
+            $zhouar=teodate_week(1,'Monday');//本周开始时间和结束时间
             $time_start=strtotime($zhouar[0]['start']);
             $time_end=strtotime($zhouar[0]['end']."+1 day");
-            $sum+=$account_counsumption->where("xsid=$xsid and starttime>='$time_start'  and starttime<'$time_end' and htid=$val[id] ")->sum("baidu_cost_total");
+            $sum+=$account_counsumption->where("xsid='$xsid' and starttime>='$time_start'  and starttime<'$time_end' and htid='$val[id]' ")->sum("baidu_cost_total");
 
         }
         return  $sum?$sum:'0';
@@ -268,7 +268,7 @@ class ApiController extends RestController{
     //根据销售ID 和 客户id 获取客户的月消费
     private function customer_market_month_clientele($xsid,$avid,$type=0){
         $contract=M('Contract');
-        $account_counsumption=M("AccountConsumption");
+        $account_counsumption=M('AccountConsumption');
         $list=$contract->field('advertiser,id')->where("market='$xsid' and advertiser='$avid'")->select();
         foreach ($list as $key=>$val)
         {
@@ -276,7 +276,7 @@ class ApiController extends RestController{
             $yuear=teodate_month();//本月开始时间和结束时间
             $time_start=strtotime($yuear['start']);
             $time_end=strtotime($yuear['end']);
-            $sum+=$account_counsumption->where("xsid=$xsid and starttime>='$time_start'  and starttime<'$time_end' and htid=$val[id] ")->sum("baidu_cost_total");
+            $sum+=$account_counsumption->where("xsid='$xsid' and starttime>='$time_start'  and starttime<'$time_end' and htid='$val[id]' ")->sum("baidu_cost_total");
         }
         return  $sum?$sum:'0';
     }
