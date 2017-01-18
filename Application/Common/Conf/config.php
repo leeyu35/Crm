@@ -98,10 +98,10 @@ $config_1= array(
         array('Api/find_market_smonth_counsumption','Admin/Api/find_market_smonth_counsumption',array('method'=>'get')),//单个销售的所有客户上月消耗
         array('Api/today_day_type','Admin/Api/today_day_type',array('method'=>'get')),// 根据type 返回 本日 回款 续费  垫款数据
         array('Api/today_month_type','Admin/Api/today_month_type',array('method'=>'get')),// 根据type 返回 本日 回款 续费  垫款数据
-        array('Api/find_sem_day_counsumption','Admin/Api/find_sem_day_counsumption',array('method'=>'get')),//单个销售的所有客户昨日消耗
-        array('Api/find_sem_week_counsumption','Admin/Api/find_sem_week_counsumption',array('method'=>'get')),//单个销售的所有客户本周消耗
-        array('Api/find_sem_month_counsumption','Admin/Api/find_sem_month_counsumption',array('method'=>'get')),//单个销售的所有客户本月消耗
-        array('Api/sem_account_counsumption','Admin/Api/sem_account_counsumption',array('method'=>'get')),//单个销售的所有客户本月消耗
+        array('Api/find_sem_day_counsumption','Admin/Api/find_sem_day_counsumption',array('method'=>'get')),//单个SEM的所有账户昨日消耗
+        array('Api/find_sem_week_counsumption','Admin/Api/find_sem_week_counsumption',array('method'=>'get')),//单个SEM的所有账户本周消耗
+        array('Api/find_sem_month_counsumption','Admin/Api/find_sem_month_counsumption',array('method'=>'get')),//单个SEM的所有账户本月消耗
+        array('Api/sem_account_counsumption','Admin/Api/sem_account_counsumption',array('method'=>'get')),//单个SEM的所有账户列表消耗
         array('Api/diankuan_compare','Admin/Api/diankuan_compare',array('method'=>'get')),//单个销售的所有客户本月消耗
         // array('Api','Admin/Api/index','hjd=1',array('method'=>'get')),
 
@@ -113,6 +113,12 @@ $config_1= array(
  'TOKEN_TYPE'    =>    'md5',  //令牌哈希验证规则 默认为MD5
  'TOKEN_RESET'   =>    true,  //令牌验证出错后是否重置令牌 默认为true
     */
+    /* 数据缓存设置 */
+
+
+    'DATA_CACHE_TYPE'       =>  'Memcache',  // 数据缓存类型,支持:File|Db|Apc|Memcache|Shmop|Sqlite|Xcache|Apachenote|Eaccelerator
+    'MEMCACHE_HOST' => '127.0.0.1',
+    'MEMCACHE_PORT'	=>	'11211',
 	);
 
 return $config_1;

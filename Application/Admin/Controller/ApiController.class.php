@@ -224,30 +224,36 @@ class ApiController extends RestController{
             $data['code']=400;
             $data['mes']='缺少参数';
         }else {
-            $contract=M('Contract');
-            $kehu=M("Customer");
-            if(I('type')!='all')
-            {
 
-                $list=$contract->field('advertiser')->where("market='$id'")->DISTINCT('advertiser')->select();
-            }else
-            {
-                $list=$contract->field('advertiser')->DISTINCT('advertiser')->select();
+            if(S($id.'_maket_cache')==''){
+                $contract=M('Contract');
+                $kehu=M("Customer");
+                if(I('type')!='all')
+                {
+
+                    $list=$contract->field('advertiser')->where("market='$id'")->DISTINCT('advertiser')->select();
+                }else
+                {
+                    $list=$contract->field('advertiser')->DISTINCT('advertiser')->select();
+                }
+
+                foreach ($list as $key=>$val)
+                {
+                    $khinfo=$kehu->field('advertiser')->find(($val['advertiser']));
+                    $kdata[$key]['advertiser']=$khinfo['advertiser'];
+                    $kdata[$key]['week_counsumption']=$this->customer_market_week_clientele($id,$val['advertiser']);
+                    $kdata[$key]['month_counsumption']=$this->customer_market_month_clientele($id,$val['advertiser']);
+                }
+
+                S($id.'_maket_cache',$kdata,28800);
             }
+                $dddd=S($id.'_maket_cache');
 
-            foreach ($list as $key=>$val)
-            {
-                $khinfo=$kehu->field('advertiser')->find(($val['advertiser']));
-                $kdata[$key]['advertiser']=$khinfo['advertiser'];
-
-                $kdata[$key]['week_counsumption'];
-                $kdata[$key]['week_counsumption']=$this->customer_market_week_clientele($id,$val['advertiser']);
-                $kdata[$key]['month_counsumption']=$this->customer_market_month_clientele($id,$val['advertiser']);
-            }
 
             $data['code'] = 200;
-            $data['data'] = $kdata;
+            $data['data'] = $dddd;
         }
+
         $this->response($data,'json');
 
     }
@@ -257,6 +263,8 @@ class ApiController extends RestController{
         $zhouar=teodate_week(1,'Monday');//本周开始时间和结束时间
         $time_start=strtotime($zhouar[0]['start']);
         $time_end=strtotime($zhouar[0]['end']."+1 day");
+
+
         $sum+=$account_counsumption->where("xsid='$xsid' and starttime>='$time_start'  and starttime<'$time_end' and avid='$avid' ")->sum("baidu_cost_total");
 
         return  $sum?$sum:'0';
