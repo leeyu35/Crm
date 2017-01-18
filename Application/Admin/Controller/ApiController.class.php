@@ -105,7 +105,7 @@ class ApiController extends RestController{
             $sum=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->sum("baidu_cost_total");
             if(!$sum){$sum="0";}
             $data['code'] = 200;
-            $data['counsumption'] = $sum;
+            $data['counsumption'] = number_format($sum);
         }
         $this->response($data,'json');
 
@@ -133,7 +133,7 @@ class ApiController extends RestController{
             $sum=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->sum("baidu_cost_total");
             if(!$sum){$sum="0";}
             $data['code'] = 200;
-            $data['counsumption'] = $sum;
+            $data['counsumption'] = number_format($sum);
         }
         $this->response($data,'json');
     }
@@ -159,7 +159,7 @@ class ApiController extends RestController{
             $sum=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->sum("baidu_cost_total");
             if(!$sum){$sum="0";}
             $data['code'] = 200;
-            $data['counsumption'] = $sum;
+            $data['counsumption'] = number_format($sum);
         }
         $this->response($data,'json');
     }
@@ -186,7 +186,7 @@ class ApiController extends RestController{
             $sum=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->sum("baidu_cost_total");
             if(!$sum){$sum="0";}
             $data['code'] = 200;
-            $data['counsumption'] = $sum;
+            $data['counsumption'] = number_format($sum);
         }
         $this->response($data,'json');
     }
@@ -225,10 +225,10 @@ class ApiController extends RestController{
             $data['mes']='缺少参数';
         }else {
 
-            if(S($id.'_maket_cache')==''){
+            if(S($id.'_maket_cache_'.I('get.type'))==''){
                 $contract=M('Contract');
                 $kehu=M("Customer");
-                if(I('type')!='all')
+                if(I('get.type')!='all')
                 {
 
                     $list=$contract->field('advertiser')->where("market='$id'")->DISTINCT('advertiser')->select();
@@ -241,13 +241,13 @@ class ApiController extends RestController{
                 {
                     $khinfo=$kehu->field('advertiser')->find(($val['advertiser']));
                     $kdata[$key]['advertiser']=$khinfo['advertiser'];
-                    $kdata[$key]['week_counsumption']=$this->customer_market_week_clientele($id,$val['advertiser']);
-                    $kdata[$key]['month_counsumption']=$this->customer_market_month_clientele($id,$val['advertiser']);
+                    $kdata[$key]['week_counsumption']=$this->customer_market_week_clientele($id,$val['advertiser'],I('get.type'));
+                    $kdata[$key]['month_counsumption']=$this->customer_market_month_clientele($id,$val['advertiser'],I('get.type'));
                 }
 
-                S($id.'_maket_cache',$kdata,28800);
+                S($id.'_maket_cache_'.I('get.type'),$kdata,28800);
             }
-                $dddd=S($id.'_maket_cache');
+                $dddd=S($id.'_maket_cache_'.I('get.type'));
 
 
             $data['code'] = 200;
@@ -258,26 +258,39 @@ class ApiController extends RestController{
 
     }
     //根据销售ID 和 客户id 获取客户的周消费
-    private function customer_market_week_clientele($xsid,$avid){
+    private function customer_market_week_clientele($xsid,$avid,$type=0){
         $account_counsumption=M('AccountConsumption');
         $zhouar=teodate_week(1,'Monday');//本周开始时间和结束时间
         $time_start=strtotime($zhouar[0]['start']);
         $time_end=strtotime($zhouar[0]['end']."+1 day");
+        if($type='all')
+        {
+            $where='';
+        }else
+        {
+            $where="xsid='$xsid' and ";
+        }
 
+        $sum+=$account_counsumption->where("$where starttime>='$time_start'  and starttime<'$time_end' and avid='$avid' ")->sum("baidu_cost_total");
 
-        $sum+=$account_counsumption->where("xsid='$xsid' and starttime>='$time_start'  and starttime<'$time_end' and avid='$avid' ")->sum("baidu_cost_total");
-
-        return  $sum?$sum:'0';
+        return  $sum?number_format($sum):'0';
     }
     //根据销售ID 和 客户id 获取客户的月消费
-    private function customer_market_month_clientele($xsid,$avid){
+    private function customer_market_month_clientele($xsid,$avid,$type=0){
         $account_counsumption=M('AccountConsumption');
         $yuear=teodate_month();//本月开始时间和结束时间
         $time_start=strtotime($yuear['start']);
         $time_end=strtotime($yuear['end']);
-        $sum+=$account_counsumption->where("xsid='$xsid' and starttime>='$time_start'  and starttime<'$time_end' and  avid='$avid' ")->sum("baidu_cost_total");
+        if($type='all')
+        {
+            $where='';
+        }else
+        {
+            $where="xsid='$xsid' and ";
+        }
+        $sum+=$account_counsumption->where("$where starttime>='$time_start'  and starttime<'$time_end' and  avid='$avid' ")->sum("baidu_cost_total");
 
-        return  $sum?$sum:'0';
+        return  $sum?number_format($sum):'0';
     }
 
 
@@ -340,14 +353,14 @@ class ApiController extends RestController{
         switch ($type){
             case 'backmoney':
 
-                $data['money']=$sum_hk?$sum_hk:'0';
+                $data['money']=$sum_hk?number_format($sum_hk):'0';
                 break;
             case 'fukuan':
 
-                $data['money']=$sum_fk?$sum_fk:'0';
+                $data['money']=$sum_fk?number_format($sum_fk):'0';
                 break;
             case 'diankuan':
-                $data['money']=$sum_df?$sum_df:'0';
+                $data['money']=$sum_df?number_format($sum_df):'0';
                 break;
         }
         $data['code'] = 200;
@@ -371,11 +384,11 @@ class ApiController extends RestController{
         switch ($type){
             case 'backmoney':
 
-                $data['money']=$sum_hk?$sum_hk:'0';
+                $data['money']=$sum_hk?number_format($sum_hk):'0';
                 break;
             case 'fukuan':
 
-                $data['money']=$sum_fk?$sum_fk:'0';
+                $data['money']=$sum_fk?number_format($sum_fk):'0';
                 break;
             case 'diankuan':
                 $customer=M("Customer");
@@ -388,7 +401,7 @@ class ApiController extends RestController{
                     }
                 }
 
-                $data['money']=$diankuan?-$diankuan:'0';
+                $data['money']=$diankuan?number_format(-$diankuan):'0';
                 break;
         }
         $data['code'] = 200;
@@ -551,6 +564,34 @@ class ApiController extends RestController{
         $sum+=$account_counsumption->where("semid=$semid and starttime>='$time_start'  and starttime<'$time_end' and appid='$appid'")->sum("baidu_cost_total");
 
         return  $sum?$sum:'0';
+    }
+
+    /*
+     * 二级页面接口
+     *
+     * */
+
+    //周新增合同
+    public function contract_week_list(){
+        $customer=M('Contract');
+        $zhouar=teodate_week(1,"Monday");
+
+        $strat=strtotime($zhouar[0]['start']);
+        $end=strtotime($zhouar[0]['end'] . "+1 day");
+        $list=$customer->field(1)->where()->select();
+        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.iszuofei,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("ctime>$strat and ctime<$end ")->order("ctime desc")->select();
+
+        foreach($list as $key => $val)
+        {
+            //提交人
+            $uindo=users_info($val['users2']);
+            $list[$key]['submituser']=$uindo[name];
+        }
+        dump($list);
+        exit;
+        $data['code'] = 200;
+        $data['count'] = $count;
+        $this->response($data,'json');
     }
 }
 
