@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <script language="JavaScript">
+        <if condition="($Think.cookie.u_groupid eq 2) OR ($Think.cookie.u_groupid eq 9) OR ($Think.cookie.u_groupid eq 15)">
+
+        window.location.href="/Public/dist/index/market/page.html";
+        <elseif condition="($Think.cookie.u_groupid eq 6)" />
+        window.location.href="/Public/dist/index/boss/page.html";
+        <else />
+        window.location.href="{:U('Public/usermessage')}";
+
+        </if>
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
