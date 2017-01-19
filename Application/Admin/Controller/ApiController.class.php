@@ -105,7 +105,7 @@ class ApiController extends RestController{
             $sum=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->sum("baidu_cost_total");
             if(!$sum){$sum="0";}
             $data['code'] = 200;
-            $data['counsumption'] = number_format($sum);
+            $data['counsumption'] = number_format($sum,2);
         }
         $this->response($data,'json');
 
@@ -133,7 +133,7 @@ class ApiController extends RestController{
             $sum=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->sum("baidu_cost_total");
             if(!$sum){$sum="0";}
             $data['code'] = 200;
-            $data['counsumption'] = number_format($sum);
+            $data['counsumption'] = number_format($sum,2);
         }
         $this->response($data,'json');
     }
@@ -159,7 +159,7 @@ class ApiController extends RestController{
             $sum=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->sum("baidu_cost_total");
             if(!$sum){$sum="0";}
             $data['code'] = 200;
-            $data['counsumption'] = number_format($sum);
+            $data['counsumption'] = number_format($sum,2);
         }
         $this->response($data,'json');
     }
@@ -186,7 +186,7 @@ class ApiController extends RestController{
             $sum=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->sum("baidu_cost_total");
             if(!$sum){$sum="0";}
             $data['code'] = 200;
-            $data['counsumption'] = number_format($sum);
+            $data['counsumption'] = number_format($sum,2);
         }
         $this->response($data,'json');
     }
@@ -273,7 +273,7 @@ class ApiController extends RestController{
 
         $sum+=$account_counsumption->where("$where starttime>='$time_start'  and starttime<'$time_end' and avid='$avid' ")->sum("baidu_cost_total");
 
-        return  $sum?number_format($sum):'0';
+        return  $sum?number_format($sum,2):'0';
     }
     //根据销售ID 和 客户id 获取客户的月消费
     private function customer_market_month_clientele($xsid,$avid,$type=0){
@@ -290,7 +290,7 @@ class ApiController extends RestController{
         }
         $sum+=$account_counsumption->where("$where starttime>='$time_start'  and starttime<'$time_end' and  avid='$avid' ")->sum("baidu_cost_total");
 
-        return  $sum?number_format($sum):'0';
+        return  $sum?number_format($sum,2):'0';
     }
 
 
@@ -353,14 +353,14 @@ class ApiController extends RestController{
         switch ($type){
             case 'backmoney':
 
-                $data['money']=$sum_hk?number_format($sum_hk):'0';
+                $data['money']=$sum_hk?number_format($sum_hk,2):'0';
                 break;
             case 'fukuan':
 
-                $data['money']=$sum_fk?number_format($sum_fk):'0';
+                $data['money']=$sum_fk?number_format($sum_fk,2):'0';
                 break;
             case 'diankuan':
-                $data['money']=$sum_df?number_format($sum_df):'0';
+                $data['money']=$sum_df?number_format($sum_df,2):'0';
                 break;
         }
         $data['code'] = 200;
@@ -384,11 +384,11 @@ class ApiController extends RestController{
         switch ($type){
             case 'backmoney':
 
-                $data['money']=$sum_hk?number_format($sum_hk):'0';
+                $data['money']=$sum_hk?number_format($sum_hk,2):'0';
                 break;
             case 'fukuan':
 
-                $data['money']=$sum_fk?number_format($sum_fk):'0';
+                $data['money']=$sum_fk?number_format($sum_fk,2):'0';
                 break;
             case 'diankuan':
                 $customer=M("Customer");
@@ -401,7 +401,7 @@ class ApiController extends RestController{
                     }
                 }
 
-                $data['money']=$diankuan?number_format(-$diankuan):'0';
+                $data['money']=$diankuan?number_format(-$diankuan,2):'0';
                 break;
         }
         $data['code'] = 200;

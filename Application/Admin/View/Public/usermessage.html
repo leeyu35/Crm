@@ -7,7 +7,18 @@
     <link rel="stylesheet" href="/Public/css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
 <link rel="stylesheet" type="text/css" href="/Public/css/animate.min.css">
-    
+    <script language="JavaScript">
+        <if condition="($Think.cookie.u_groupid eq 2) OR ($Think.cookie.u_groupid eq 9) OR ($Think.cookie.u_groupid eq 15)">
+
+            window.location.href="/Public/dist/index/market/page.html";
+        <elseif condition="($Think.cookie.u_groupid eq 6)" />
+            window.location.href="/Public/dist/index/boss/page.html";
+        <else />
+            window.location.href="{:U('Public/usermessage')}";
+
+         </if>
+
+    </script>
 <link rel="stylesheet" type="text/css" href="../../../Public/css/stylesheets/simple-calendar.css">
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
 <script src="/Public/js/echarts.js"></script>

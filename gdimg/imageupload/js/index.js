@@ -309,7 +309,7 @@ function btn(){
   $(".new_img").show();
      $.ajax({
        type:'POST',
-       url: 'http://localhost/Admin/Gdimg/upload_ajax.html',
+       url: 'http://c.lzad.cc/Admin/Gdimg/upload_ajax.html',
        data: {
          file: urlData,
          string:text,

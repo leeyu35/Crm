@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title> 销售-首页 - CRM管理后台</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" /> 
+  <meta name="renderer" content="webkit" />
+
+  <link rel="stylesheet" type="text/css" href="../../static/css/dll.css">
+  <script type="text/javascript" src="../../static/js/dll.js"></script>
+  <!--[if lt IE 10]>
+    <script src="../../static/js/xdomain.all.js" slave="cors-proxy.html"></script>
+    <script src="../../static/js/html5shiv.min.js"></script>
+  <![endif]-->
+<link href="../../static/commons/styles.1897797e.css" rel="stylesheet"/><link href="../../index/market/styles.dd5bb109.css" rel="stylesheet"/></head>
+<body>
+  <!--[if lt IE 9]>
+    <script src="../../static/js/respond.min.js"></script>
+  <![endif]-->
+
+<div id="wrapper">
+  <div class="container-fluid">
+    <div class="row" style="padding:0 18px;">
+        <div class="col-md-3 bs-callout bs-callout-info">
+            <div class="infor-box">
+                <p > <i class="glyphicon glyphicon-search text-info"></i>&nbsp;&nbsp;本周新增客户</p>
+                <p class="Week-add infor-num" style="font-size: 29px; font-weight: bold">loading..</p>
+                <p >本月新增客户&nbsp;<i class="mouth-add"></i></p>
+            </div>
+
+        </div>
+        <div class="col-md-3 bs-callout bs-callout-success">
+            <div class="infor-box">
+            <p > <i class="glyphicon glyphicon-dashboard text-success"></i>&nbsp;&nbsp;昨日消耗</p>
+            <p class="yesterday-xiaohao infor-num" style="font-size: 29px; font-weight: bold">loading..</p>
+            <p >昨日消耗总额&nbsp;<i class="yesterday-Allxiaohao"></i></p>
+            </div>
+        </div>
+        <div class="col-md-3 bs-callout bs-callout-dannger">
+            <div class="infor-box">
+                <p > <i class="glyphicon glyphicon-calendar text-danger"></i>&nbsp;&nbsp;本周消耗</p>
+                <p class="week-xiaohao infor-num" style="font-size: 29px; font-weight: bold">loading..</p>
+                <p >本周消耗总额&nbsp;<i class="week-Allxiaohao"></i></p>
+            </div>
+        </div>
+        <div class="col-md-3 bs-callout bs-callout-warning">
+            <div class="infor-box">
+                <p ><i class="glyphicon glyphicon-info-sign text-warning"></i>&nbsp;&nbsp;本月消耗</p>
+                <p class="month-xiaohao infor-num" style="font-size: 29px; font-weight: bold">loading..</p>
+                <p>上月消耗总额&nbsp;<i class="month-Allxiaohao"></i></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 ">
+            <div class="panel panel-success">
+                <div class="panel-heading">近一周客户消耗趋势图</div>
+                <div id="panel-body" >
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-danger">
+                <div class="panel-heading">所有客户</div>
+                <table class="table-hover scrolltable tablesorter table-striped table">
+                    <thead style="display:block; ">
+                    <tr>
+                        <th>#</th>
+                        <th>客户</th>
+                        <th>本周消耗</th>
+                        <th>本月消耗</th>
+                    </tr>
+                    </thead>
+                    <tbody class="market-tbody">
+                            <img class="loading" src="data:image/gif;base64,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">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+<script type="text/javascript" src="../../static/commons/bundle.1897797e.js"></script><script type="text/javascript" src="../../index/market/entry.dd5bb109.js"></script></body>
+</html>
