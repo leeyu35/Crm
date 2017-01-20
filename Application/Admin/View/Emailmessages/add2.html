@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+    <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+    <script src="/Public/js/jquery-3.1.0.min.js"></script>
+    <script src="/Public/js/bootstrap.min.js"></script>
+    <!-- include summernote -->
+    <link rel="stylesheet" href="/Public/js/summernote/summernote.css">
+    <script type="text/javascript" src="/Public/js/summernote/summernote.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $('.summernote').summernote({
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['Font Style',['fontname']],
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']],
+                    ['Insert',['link','table','hr']],
+
+                ],
+                height: 200
+            });
+
+
+        });
+    </script>
+    <script language="javascript">
+        $(document).ready(function(e) {
+
+//选择了负责人
+
+            $("#fzrlist").on("click","li",function(){
+
+                name=$(this).find("a").html();
+                id=$(this).find("a").attr("id");
+
+                $(".fzrlist").append('<span class="btn btn-danger btn-sm">'+name+" <a class=\"glyphicon glyphicon-trash\"></a></span> ");
+                $("#fzrlsitwz").append('<input type="hidden" class="fzrlist" name="fzrlist[]" value="'+id+'">');
+                $("#fzrlist").hide();
+                $("#fuzeren").val("");
+            })
+
+            //删除已选负责人
+            $(".fzrlist").on("click","span",function(){
+                $(".fzrlist").eq($(this).index()).remove();
+                $(this).remove();
+            })
+
+            //动态加载员工姓名
+            $("#fuzeren").keyup(function(){
+                //$("#hjd").html($("#hjd").html()+"1");
+                val=$(this).val();
+
+                $.post("{:U('keyup_fzrlist')}",{val:val},function(data){
+                    //alert(data);
+                    if(data!='')
+                    {
+                        $("#fzrlist").html(data);
+                    }else{
+                        $("#fzrlist").html("");
+                    }
+                })
+                $("#fzrlist").show();
+            })
+        });
+    </script>
+    <style type="text/css">
+        .glyphicon-trash{ color: #fff;}
+    </style>
+</head>
+
+<body>
+<div class="container" style="width:100%;">
+    <h3 class="bor-left-bull" ><span class="glyphicon glyphicon-envelope"></span>&nbsp;发送短信</h3>
+    <hr>
+    <form action="{:U("addru2")}" method="post" enctype="multipart/form-data" id="addusers" class="form-horizontal">
+    <span id="fzrlsitwz"></span>
+
+
+
+    <div class="form-group" style="position: relative;">
+
+        <label for="inputEmail3" class="col-sm-1 control-label">收件人</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" autocomplete="off" name="fuzeren" id="fuzeren" placeholder="输入姓氏我们将自动匹配"  >
+            <ul class="dropdown-menu email_mes" id="fzrlist" style="left: 13px;">
+            </ul>
+        </div>
+
+
+    </div>
+
+    <div class="form-group" >
+        <label for="exampleInputPassword1"  class="col-lg-1 control-label">已选收件人</label>
+        <div class="col-lg-10">
+            <span class="fzrlist"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1" class="col-lg-1 control-label">内容</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" name="content" id="title" placeholder="内容50字为一条短信，50以上分为两条或多条" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputPassword1" class="col-lg-1 control-label">特殊选项</label>
+        <div class="col-lg-10">
+            <label class="radio-inline">
+                <input type="radio" name="type" id="inlineRadio1" value="users" checked> 发送给已选收件人
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="type" id="inlineRadio2" value="group"> 发送给<{$my_info[name]}>
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="type" id="inlineRadio3" value="all"> 发送给公司全部人员
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+            <button type="submit" class="btn btn-primary" style="width:150px;">提交</button>
+        </div>
+    </div>
+
+    </form>
+</div>
+<br>
+<br>
+<br>
+
+</body>
+</html>

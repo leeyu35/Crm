@@ -427,3 +427,8 @@ color:#0d4680;
 }
 .checkbox_bo{ position:relative; top:-2px;}
 
+.email_mes{ width: 300px;}
+.email_mes li{ padding-left: 10px; color: #CCCCCC; overflow: hidden;}
+.email_mes li:hover{background-color: #f5f5f5; cursor: pointer;}
+.email_mes li img{ float: left; position: relative; top:4px;}
+.email_mes li  a{ display: inline-block; width: auto; padding: 0; line-height: 30px; padding-left: 10px; padding-right: 3px; color: #000000;}

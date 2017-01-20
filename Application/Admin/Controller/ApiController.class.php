@@ -575,11 +575,10 @@ class ApiController extends RestController{
     public function contract_week_list(){
         $customer=M('Contract');
         $zhouar=teodate_week(1,"Monday");
-
         $strat=strtotime($zhouar[0]['start']);
         $end=strtotime($zhouar[0]['end'] . "+1 day");
-        $list=$customer->field(1)->where()->select();
-        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.iszuofei,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("ctime>$strat and ctime<$end ")->order("ctime desc")->select();
+        $list=$customer->select();
+        $list=$customer->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.iszuofei,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.ctime>'$strat' and a.ctime<'$end' ")->order("ctime desc")->select();
 
         foreach($list as $key => $val)
         {
