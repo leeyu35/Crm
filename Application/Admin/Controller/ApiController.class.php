@@ -577,7 +577,7 @@ class ApiController extends RestController{
         $zhouar=teodate_week(1,"Monday");
         $strat=strtotime($zhouar[0]['start']);
         $end=strtotime($zhouar[0]['end'] . "+1 day");
-        $list=$customer->select();
+        //$list=$customer->select();
         $list=$customer->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.iszuofei,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.ctime>'$strat' and a.ctime<'$end' ")->order("ctime desc")->select();
 
         foreach($list as $key => $val)
@@ -588,8 +588,7 @@ class ApiController extends RestController{
         }
 
         $data['code'] = 200;
-        $data['count'] = $list;
-        $data['data'] = $count;
+        $data['data'] = $list;
         $this->response($data,'json');
     }
 
@@ -599,10 +598,37 @@ class ApiController extends RestController{
         $zuori = Yesterday();//昨日开始时间和结束时间
         $time_start=strtotime($zuori['start']);
         $time_end=strtotime($zuori['end']."+1 day");
+        $users=M("Users");
 
+        $xiaohaolist=$xiaohao->field("xiaohao.baidu_cost_total,xiaohao.appid,zhanghu.a_users,gongsi.advertiser,xiaohao.xsid,xiaohao.semid")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='$time_start'  and xiaohao.starttime<'$time_end'")->select();
+        foreach ($xiaohaolist as $key=>$val)
+        {
+            if($val['xsid'])
+            {
+                $xs=$users->field('name')->find($val['xsid']);
+            }else
+            {
+                $xs['name']='';
+            }
+            if($val['semid'])
+            {
+                $sem=$users->field('name')->find($val['semid']);
+            }else
+            {
+                $sem['name']='';
+            }
 
-        $xiaohaolist=$xiaohao->where("starttime>='$time_start'  and starttime<'$time_end'")->select();
-        dump($xiaohaolist);
+            $xiaohaolist[$key]['a_users']=$val['a_users']?$val['a_users']:'';
+            $xiaohaolist[$key]['advertiser']=$val['advertiser']?$val['advertiser']:'';
+            $xiaohaolist[$key]['xsid']=$val['xsid']?$val['xsid']:'';
+            $xiaohaolist[$key]['semid']=$val['semid']?$val['semid']:'';
+            $xiaohaolist[$key]['market']=$xs['name']?$xs['name']:'';
+            $xiaohaolist[$key]['sem']=$sem['name']?$sem['name']:'';
+        }
+
+        $data['code'] = 200;
+        $data['data'] = $xiaohaolist;
+        $this->response($data,'json');
     }
 }
 
