@@ -103,6 +103,8 @@ $config_1= array(
         array('Api/find_sem_month_counsumption','Admin/Api/find_sem_month_counsumption',array('method'=>'get')),//单个SEM的所有账户本月消耗
         array('Api/sem_account_counsumption','Admin/Api/sem_account_counsumption',array('method'=>'get')),//单个SEM的所有账户列表消耗
         array('Api/diankuan_compare','Admin/Api/diankuan_compare',array('method'=>'get')),//单个销售的所有客户本月消耗
+        array('Api/contract_week_list','Admin/Api/contract_week_list',array('method'=>'get')),//周新增合同
+        array('Api/yesterday_counsumption_list','Admin/Api/yesterday_counsumption_list',array('method'=>'get')),//周新增合同
         // array('Api','Admin/Api/index','hjd=1',array('method'=>'get')),
 
     ),

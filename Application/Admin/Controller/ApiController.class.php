@@ -586,11 +586,23 @@ class ApiController extends RestController{
             $uindo=users_info($val['users2']);
             $list[$key]['submituser']=$uindo[name];
         }
-        dump($list);
-        exit;
+
         $data['code'] = 200;
-        $data['count'] = $count;
+        $data['count'] = $list;
+        $data['data'] = $count;
         $this->response($data,'json');
+    }
+
+    //昨日消耗
+    public function yesterday_counsumption_list(){
+        $xiaohao=M("AccountConsumption");
+        $zuori = Yesterday();//昨日开始时间和结束时间
+        $time_start=strtotime($zuori['start']);
+        $time_end=strtotime($zuori['end']."+1 day");
+
+
+        $xiaohaolist=$xiaohao->where("starttime>='$time_start'  and starttime<'$time_end'")->select();
+        dump($xiaohaolist);
     }
 }
 
