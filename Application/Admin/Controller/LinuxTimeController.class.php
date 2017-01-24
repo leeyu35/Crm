@@ -84,7 +84,7 @@ class LinuxTimeController extends Controller
         //缓存每个客户具体消费情况 appid ,日期,消费  获取周消费的时候要调用缓存 所以在这里先生存缓存
         $tabledata = M("accountdaily", "baiduapi_", "pgsql://rdspg:anmeng@rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com:3432/msdb");
 
-        $account_day_cost = $tabledata->field('appid,date,baidu_cost_total,baidu_click_total')->where("date='$date'")->select();
+        $account_day_cost = $tabledata->field('appid,date,baidu_cost_total,baidu_click_total')->where("date='$date' and device='all'")->select();
         if(!$account_day_cost)
         {
             $data['code']=403;
