@@ -241,7 +241,7 @@ class RenewController extends  CommonController
         if($insid=$hetong->add()){
 
             //如果续费成功则修改客户出款或者补款余额  I('post.payment_type')
-            money_change($postdate['advertiser'],$postdate['xf_contractid'],I('post.payment_type'),$postdate['money']);
+            money_change($postdate['advertiser'],$postdate['xf_contractid'],I('post.payment_type'),$postdate['money'],$postdate['account']);
 
             if($insid==1)
             {
@@ -437,7 +437,7 @@ class RenewController extends  CommonController
                 {
                     $xfinfo=$table->find($id);
                     //advertiser,xf_contractid,payment_type,fk_money
-                    money_reduce($xfinfo['advertiser'],$xfinfo['xf_contractid'],$xfinfo['payment_type'],$xfinfo['money']);
+                    money_reduce($xfinfo['advertiser'],$xfinfo['xf_contractid'],$xfinfo['payment_type'],$xfinfo['money'],$xfinfo['account']);
 
                 }
                 /*

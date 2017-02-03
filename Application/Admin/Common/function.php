@@ -536,7 +536,7 @@ function excet_d($file,$sheet=0){
 }
 
 //公司和合同余额变动 1公司id,2合同id，3类型:1续费预付，2续费垫付,3续费补款，4回款，5发票。 4 变动值
-function money_change($advertisers_id,$contract_id,$type,$value)
+function money_change($advertisers_id,$contract_id,$type,$value,$accountid='')
 {
 //类型:1续费预付，2续费垫付,3续费补款，4回款，5发票 14 退款  15 转款
     $advertisers = M("Customer");
@@ -550,14 +550,18 @@ function money_change($advertisers_id,$contract_id,$type,$value)
             die('广告续费总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
         }else
         {
-            crm_record(cookie('u_name').'操作了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的续费操作，该公司总消耗加'.$value);
+            $str=cookie('u_name').'操作了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.' 账户ID是'.$accountid.' 的续费操作，该公司总消耗加'.$value;
+            crm_record($str);
+            money_record($contract_id,$advertisers_id,$type,$str,$value,1);
         }
         if($update2!=1)
         {
             die('合同续费总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$contract->_sql());
         }else
         {
-            crm_record(cookie('u_name').'操作了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的续费操作，该合同总消耗加'.$value);
+            $str=cookie('u_name').'操作了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.' 账户ID是'.$accountid.' 的续费操作，该合同总消耗加'.$value;
+            crm_record($str);
+          // money_record($contract_id,$advertisers_id,$type,$str,$value,1);
         }
 
     } elseif ($type == '3') {
@@ -569,7 +573,9 @@ function money_change($advertisers_id,$contract_id,$type,$value)
             die('广告补款总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
         }else
         {
-            crm_record(cookie('u_name').'操作了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的补款操作，该公司总补款加'.$value);
+            $str=cookie('u_name').'操作了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的补款操作，该公司总补款加'.$value;
+            crm_record($str);
+            money_record($contract_id,$advertisers_id,$type,$str,$value,1);
         }
         if($update2!=1)
         {
@@ -587,7 +593,9 @@ function money_change($advertisers_id,$contract_id,$type,$value)
             die('广告回款总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
         }else
         {
-            crm_record(cookie('u_name').'操作了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的回款操作，该公司总回款加'.$value);
+            $str=cookie('u_name').'操作了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的回款操作，该公司总回款加'.$value;
+            crm_record($str);
+            money_record($contract_id,$advertisers_id,$type,$str,$value,1);
         }
         if($update2!=1)
         {
@@ -606,7 +614,9 @@ function money_change($advertisers_id,$contract_id,$type,$value)
             die('合同发票总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
         }else
         {
-            crm_record(cookie('u_name').'操作了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的发票操作，该公司总发票加'.$value);
+            $str=cookie('u_name').'操作了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的发票操作，该公司总发票加'.$value;
+            crm_record($str);
+            money_record($contract_id,$advertisers_id,$type,$str,$value,1);
         }
     }elseif($type=='14')
     {
@@ -618,7 +628,9 @@ function money_change($advertisers_id,$contract_id,$type,$value)
             die('广告退款到客户 操作回款总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
         }else
         {
-            crm_record(cookie('u_name').'操作了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的退款到客户操作，该公司总回款减'.$value);
+            $str=cookie('u_name').'操作了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的退款到客户操作，该公司总回款减'.$value;
+            crm_record($str);
+            money_record($contract_id,$advertisers_id,$type,$str,$value,1);
         }
         if($update2!=1)
         {
@@ -637,7 +649,9 @@ function money_change($advertisers_id,$contract_id,$type,$value)
             die('广告退款到总账户 操作回款总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
         }else
         {
-            crm_record(cookie('u_name').'操作了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的退款到总账户操作，该公司总消耗减'.$value);
+            $str=cookie('u_name').'操作了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的退款到总账户操作，该公司总消耗减'.$value;
+            crm_record($str);
+            money_record($contract_id,$advertisers_id,$type,$str,$value,1);
         }
         if($update2!=1)
         {
@@ -650,10 +664,11 @@ function money_change($advertisers_id,$contract_id,$type,$value)
 
 }
 
-function money_reduce($advertisers_id,$contract_id,$type,$value)
+function money_reduce($advertisers_id,$contract_id,$type,$value,$accountid='')
 {
     $advertisers = M("Customer");
     $contract = M("Contract");
+
     //如果是续费操作 则在客户出款字段yu_e上执行加操作
     if ($type == '1' or $type == '2') {
 
@@ -664,14 +679,16 @@ function money_reduce($advertisers_id,$contract_id,$type,$value)
             die('广告续费总额回滚失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
         }else
         {
-            crm_record(cookie('u_name').'驳回了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的续费操作，该公司总消耗减'.$value);
+            $str=cookie('u_name').'驳回了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.' 账户ID是'.$accountid.' 的续费操作，该公司总消耗减'.$value;
+            crm_record($str);
+            money_record($contract_id,$advertisers_id,$type,$str,$value,1);
         }
         if($update2!=1)
         {
             die('合同续费总额回滚失败，请尽快联系CRM系统管理员<br>sql:'.$contract->_sql());
         }else
         {
-            crm_record(cookie('u_name').'驳回了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的续费操作，该合同总消耗减'.$value);
+            crm_record(cookie('u_name').'驳回了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.' 账户ID是'.$accountid.' 的续费操作，该合同总消耗减'.$value);
         }
     } elseif ($type == '3') {
         //补款
@@ -682,7 +699,9 @@ function money_reduce($advertisers_id,$contract_id,$type,$value)
             die('广告补款总额回滚失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
         }else
         {
-            crm_record(cookie('u_name').'驳回了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的补款操作，该公司总补款减'.$value);
+            $str=cookie('u_name').'驳回了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的补款操作，该公司总补款减'.$value;
+            crm_record($str);
+            money_record($contract_id,$advertisers_id,$type,$str,$value,1);
         }
         if($update2!=1)
         {
@@ -700,7 +719,9 @@ function money_reduce($advertisers_id,$contract_id,$type,$value)
             die('广告回款总额回滚失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
         }else
         {
-            crm_record(cookie('u_name').'驳回了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的回款操作，该公司总回款减'.$value);
+            $str=cookie('u_name').'驳回了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的回款操作，该公司总回款减'.$value;
+            crm_record($str);
+            money_record($contract_id,$advertisers_id,$type,$str,$value,1);
         }
         if($update2!=1)
         {
@@ -713,12 +734,15 @@ function money_reduce($advertisers_id,$contract_id,$type,$value)
     {
         //发票
         $update1=$contract->where("id=$contract_id")->setDec('invoice', $value);//更新发票总金额值
+
         if($update1!=1)
         {
             die('合同发票总额回滚失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
         }else
         {
-            crm_record(cookie('u_name').'驳回了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的发票操作，该公司总发票减'.$value);
+            $str=cookie('u_name').'驳回了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的发票操作，该公司总发票减'.$value;
+            crm_record($str);
+            money_record($contract_id,$advertisers_id,$type,$str,$value,1);
         }
     }elseif($type=='14')
     {
@@ -730,7 +754,9 @@ function money_reduce($advertisers_id,$contract_id,$type,$value)
             die('广告退款到客户 操作回款总额回滚失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
         }else
         {
-            crm_record(cookie('u_name').'驳回了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的退款到客户操作，该公司总回款加'.$value);
+            $str=cookie('u_name').'驳回了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的退款到客户操作，该公司总回款加'.$value;
+            crm_record($str);
+            money_record($contract_id,$advertisers_id,$type,$str,$value,1);
         }
         if($update2!=1)
         {
@@ -749,7 +775,10 @@ function money_reduce($advertisers_id,$contract_id,$type,$value)
             die('广告退款到总账户 操作回款总额回滚失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
         }else
         {
-            crm_record(cookie('u_name').'驳回了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的退款到总账户操作，该公司总消耗加'.$value);
+
+            $str=cookie('u_name').'驳回了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的退款到总账户操作，该公司总消耗加'.$value;
+            crm_record($str);
+            money_record($contract_id,$advertisers_id,$type,$str,$value,1);
         }
         if($update2!=1)
         {
@@ -759,6 +788,39 @@ function money_reduce($advertisers_id,$contract_id,$type,$value)
             crm_record(cookie('u_name').'驳回了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的退款到总账户操作，该合同总消耗加'.$value);
         }
     }
+}
+
+function money_record($contract_id,$advertisers_id,$type,$str,$cmoney,$jiaorjian){
+    $money_hisory=M("MoneyHistory");
+    $data['htid']=$contract_id;
+    $data['adid']=$advertisers_id;
+    $data['mes']=$str;
+    $data['ctime']=time();
+    $data['type']=$type;
+    $data['cmoney']=$cmoney;
+    $data['date']=date("Y-m-d H:i:s");
+    $adinfo=M('Customer')->field('yu_e,huikuan,bukuan')->find($advertisers_id);
+    if($type=='1' or $type=='2' or $type == '4' or $type == '14' or $type == '15')
+    {
+        //客户总余额
+        $data['balance']=$adinfo['huikuan']-$adinfo['yu_e'];
+    }
+    if($type=='3')
+    {
+        //客户总余额
+        $data['bukuan']=$adinfo['bukuan'];
+    }if($type=='5')
+    {
+        $invoice=M("Invoice");
+        $sum=$invoice->where("invoice_head=$advertisers_id and audit_1 != 2 and audit_2 !=2")->sum("money");
+
+        //客户总余额
+        $data['invoice']=$sum;
+    }
+
+
+    $money_hisory->add($data);
+
 }
 
 //获取周的开始时间和结束时间参数1 得到几周数据  参数2 从上周几开始计算，周期  参数3 指定开始时间 没有则默认今天
