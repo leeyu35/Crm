@@ -317,7 +317,34 @@
     </div>
 </div>
 </div>
+<div class="form-group">
 
+    <div class="col-sm-12">
+        <if condition="$info[audit_1] eq 0">
+            <span class="shno">一级审核未审核</span>
+            <elseif condition="$info[audit_1] eq 1"/>
+            <span class="shyes">一级审核已审核(审核人：{$users_info3?$users_info3:'默认'})</span>
+            <elseif condition="$info[audit_1] eq 2"/>
+            <span class="shno1">一级审核未通过(审核人：{$users_info3?$users_info3:'默认'})</span>
+        </if>
+        &nbsp;&nbsp;&nbsp;
+        <if condition="$info[audit_2] eq 0">
+            <span class="shno">二级审核未审核</span>
+            <elseif condition="$info[audit_2] eq 1"/>
+            <span class="shyes">二级审核已审核(审核人：{$users_info4?$users_info4:'默认'})</span>
+            <elseif condition="$info[audit_2] eq 2"/>
+            <span class="shno1">二级审核未通过(审核人：{$users_info4?$users_info4:'默认'})</span>
+        </if>
+
+        <if condition="$info[audit_3] eq 0">
+            <span class="shno">三级审核未审核</span>
+            <elseif condition="$info[audit_3] eq 1"/>
+            <span class="shyes">三级审核已审核(审核人：{$users_info5?$users_info5:'默认'})</span>
+            <elseif condition="$info[audit_3] eq 2"/>
+            <span class="shno1">三级审核未通过(审核人：{$users_info5?$users_info5:'默认'})</span>
+        </if>
+    </div>
+</div>
 </div>
 <script type="text/javascript">
     (function (doc, win) {
