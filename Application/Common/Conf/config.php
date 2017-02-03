@@ -26,11 +26,19 @@ $config_1= array(
     /* //PDO连接方式*/
 
     'DB_TYPE' => 'pgsql', // 数据库类型
-    'DB_HOST'               =>  'rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com', // 服务器地址
+    'DB_HOST'               =>  'rds455ekt1422z8sh7e2.pg.rds.aliyuncs.com', // 服务器地址
     'DB_NAME'               =>  'crm',          // 数据库名
     'DB_USER' => 'rdspg', // 用户名
     'DB_PWD' => 'anmeng', // 密码
-    'DB_PORT'               =>  '3432',        // 端口
+    'DB_PORT'               =>  '3433',        // 端口
+    'DB_PREFIX' => 'jd_', // 数据库表前缀
+    /*
+    'DB_TYPE' => 'pgsql', // 数据库类型
+    'DB_HOST'               =>  'localhost', // 服务器地址
+    'DB_NAME'               =>  'crm',          // 数据库名
+    'DB_USER' => 'postgres', // 用户名
+    'DB_PWD' => '123456', // 密码
+    'DB_PORT'               =>  '5432',        // 端口
     'DB_PREFIX' => 'jd_', // 数据库表前缀
     /*
     'DB_TYPE' => 'mongo', // 数据库类型
@@ -86,6 +94,7 @@ $config_1= array(
         'adminIndex'          => 'Admin/Public/index',
         //'sqladmin'               => 'Sqladmin/index',
         //'news/read/:id'          => '/news/:1',
+        //销售接口
         array('Api/find_market_week_clientele','Admin/Api/find_market_week_clientele',array('method'=>'get')),//单个销售周新增客户
         array('Api/find_market_month_clientele','Admin/Api/find_market_month_clientele',array('method'=>'get')),//单个销售月新增客户
         array('Api/find_market_day_counsumption','Admin/Api/find_market_day_counsumption',array('method'=>'get')),//单个销售的所有客户昨日消耗
@@ -93,19 +102,36 @@ $config_1= array(
         array('Api/find_market_month_counsumption','Admin/Api/find_market_month_counsumption',array('method'=>'get')),//单个销售的所有客户本月消耗
         array('Api/find_market_week_counsumption_statistics','Admin/Api/find_market_week_counsumption_statistics',array('method'=>'get')),//单个销售的所有客户周消耗趋势图
         array('Api/find_market_clientele_counsumption','Admin/Api/find_market_clientele_counsumption',array('method'=>'get')),//单个销售的所有客户周消耗趋势图
+        //boss接口
         array('Api/contract_week','Admin/Api/contract_week',array('method'=>'get')),//周新增合同
         array('Api/contract_month','Admin/Api/contract_month',array('method'=>'get')),//月新增合同
         array('Api/find_market_smonth_counsumption','Admin/Api/find_market_smonth_counsumption',array('method'=>'get')),//单个销售的所有客户上月消耗
         array('Api/today_day_type','Admin/Api/today_day_type',array('method'=>'get')),// 根据type 返回 本日 回款 续费  垫款数据
         array('Api/today_month_type','Admin/Api/today_month_type',array('method'=>'get')),// 根据type 返回 本日 回款 续费  垫款数据
+        array('Api/boss_money_type_list','Admin/Api/boss_money_type_list',array('method'=>'get')),// 根据type，date  返回 本日 或者本月 回款 续费  垫款 补款 数据列表
+        //sem 接口
         array('Api/find_sem_day_counsumption','Admin/Api/find_sem_day_counsumption',array('method'=>'get')),//单个SEM的所有账户昨日消耗
         array('Api/find_sem_week_counsumption','Admin/Api/find_sem_week_counsumption',array('method'=>'get')),//单个SEM的所有账户本周消耗
         array('Api/find_sem_month_counsumption','Admin/Api/find_sem_month_counsumption',array('method'=>'get')),//单个SEM的所有账户本月消耗
         array('Api/sem_account_counsumption','Admin/Api/sem_account_counsumption',array('method'=>'get')),//单个SEM的所有账户列表消耗
+
         array('Api/diankuan_compare','Admin/Api/diankuan_compare',array('method'=>'get')),//单个销售的所有客户本月消耗
-        array('Api/contract_week_list','Admin/Api/contract_week_list',array('method'=>'get')),//周新增合同
-        array('Api/yesterday_counsumption_list','Admin/Api/yesterday_counsumption_list',array('method'=>'get')),//周新增合同
-        // array('Api','Admin/Api/index','hjd=1',array('method'=>'get')),
+        array('Api/contract_date_list','Admin/Api/contract_date_list',array('method'=>'get')),//周新增合同
+        array('Api/SpecifyDate_counsumption_list','Admin/Api/SpecifyDate_counsumption_list',array('method'=>'get')),//根据日期获取所有账户的日月周消耗
+        //合同详情
+        array('Api/company_contract_list','Admin/Api/company_contract_list',array('method'=>'get')),//根据公司id 列出公司所有合同
+        array('Api/customer_info','Admin/Api/customer_info',array('method'=>'get')),//根据公司id 列出公司详情（客户详情）
+        array('Api/customer_date_counsumption_line','Admin/Api/customer_date_counsumption_line',array('method'=>'get')),//根据公司id type 给出数据
+
+        //账户详情
+
+        //部门消耗
+        array('Api/sem_list','Admin/Api/sem_list',array('method'=>'get')),//sem 列表
+        array('Api/market_list','Admin/Api/market_list',array('method'=>'get')),//销售列表
+
+
+
+    // array('Api','Admin/Api/index','hjd=1',array('method'=>'get')),
 
     ),
    // 'SHOW_PAGE_TRACE' =>true,
