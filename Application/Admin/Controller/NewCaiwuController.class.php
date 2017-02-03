@@ -256,6 +256,7 @@ class NewCaiwuController extends CommonController
         $this->bukuan=$ht_on['bukuan'];
         $this->invoice=$ht_on['invoice'];
         $this->contract_id=$ht_on['id'];
+        $this->xiaohao=$ht_on['yu_e'];
         $this->history=$history;
 
         //客户详细信息
