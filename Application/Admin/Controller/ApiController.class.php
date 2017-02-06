@@ -190,18 +190,16 @@ class ApiController extends RestController{
         }
         $this->response($data,'json');
     }
-    //根据销售id 获取销售本周所属客户消耗数据列表
+    //根据销售id 获取销售本周|本年|本日|所属客户消耗数据列表
     public function find_market_week_counsumption_statistics(){
         $id=I('get.usersid');
+        $date_type=I('get.datetype');
         if($id=='')
         {
             $data['code']=400;
             $data['mes']='缺少参数';
         }else {
             $account_counsumption=M("AccountConsumption");
-
-            $time_start=strtotime(date("Y-m-d")."-7 day");
-            $time_end=strtotime(date("Y-m-d"));
             if(I('type')!='all')
             {
                 $where="xsid=$id";
@@ -209,13 +207,51 @@ class ApiController extends RestController{
             {
                 $where="id != 0";
             }
+
+            if ($date_type == 'day') {
+                //最近七天
+                $j7=date_daye_j7();
+                $list=$account_counsumption->field('date,sum(baidu_cost_total) as consumption')->where("$where and starttime>='$j7[start]'  and starttime<'$j7[end]' ")->group('date')->order("date asc")->select();
+
+            } elseif ($date_type == 'week') {
+                //最近四周
+                $zhouar = teodate_week(4, 'Monday');//本周开始时间和结束时间
+                foreach ($zhouar as $key=>$val)
+                {
+                    $time_start = strtotime($val['start']);
+                    $time_end = strtotime($val['end'] . "+1 day");
+                    $Consumption=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->sum('baidu_cost_total');
+                    $list[$key]['date']=$val['start'];
+                    $list[$key]['consumption']=$Consumption?$Consumption:'';
+                }
+
+            } elseif ($date_type == 'month') {
+                //最近12个月
+                $yuear = teodate_month_12(12);//本月开始时间和结束时间
+                foreach ($yuear as $key=>$val)
+                {
+                    $time_start = strtotime($val['start']);
+                    $time_end = strtotime($val['end'] . "+1 day");
+                    $Consumption=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end'")->sum('baidu_cost_total');
+                    $list[$key]['date']=$val['start'];
+                    $list[$key]['consumption']=$Consumption?$Consumption:'';
+                }
+
+            }
+
+            $time_start=strtotime(date("Y-m-d")."-7 day");
+            $time_end=strtotime(date("Y-m-d"));
+
             $sum=$account_counsumption->field('date,sum(baidu_cost_total) as baidu_cost_total')->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->group("date")->order("date asc")->select();
+
             if(!$sum){$sum="0";}
             $data['code'] = 200;
-            $data['counsumption'] = $sum;
+            $data['counsumption'] = $list;
         }
         $this->response($data,'json');
     }
+
+
     //根据销售id 获取该每个客户的周消耗 和 月消耗
     public function find_market_clientele_counsumption(){
         $id=I('get.usersid');
