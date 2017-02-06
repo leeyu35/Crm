@@ -838,17 +838,19 @@ function teodate_week($to,$zhouji,$strdate=''){
 
     }
     */
+    $bb=0;
     for($i=$to;$i>=1;$i--)
     {
         $start=strtotime("last $zhouji -$i week",$a);//起始时间;
-        $array[$i]['start']=date('Y-m-d',$start);
+        $array[$bb]['start']=date('Y-m-d',$start);
         $enddate=date("Y-m-d",strtotime("+1 week ",$start));
         if($enddate > date("Y-m-d"))
         {
             //$enddate=date("Yq-m-d",strtotime("-1 day"));
             //  $enddate=date("Y-m-d");
         }
-        $array[$i]['end']=$enddate;//结束日期
+        $array[$bb]['end']=$enddate;//结束日期
+        $bb++;
     }
 
     //echo $a;
