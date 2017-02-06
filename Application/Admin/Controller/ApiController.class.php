@@ -360,18 +360,28 @@ class ApiController extends RestController{
 
         $strat=strtotime($zhouar[0]['start']);
         $end=strtotime($zhouar[0]['end'] . "+1 day");
-        $count=$customer->field(1)->where("ctime>$strat and ctime<$end ")->count('id');
+        if(I('get.usersid')!='')
+        {
+            $where=" and market='".I('get.usersid')."'";
+        }
+
+        $count=$customer->field(1)->where("ctime>$strat and ctime<$end $where ")->count('id');
+
         $data['code'] = 200;
         $data['count'] = $count;
         $this->response($data,'json');
     }
-    //周新增合同
+    //月新增合同
     public function contract_month(){
         $customer=M('Contract');
         $zhouar=teodate_month();
         $strat=strtotime($zhouar['start']);
         $end=strtotime($zhouar['end'] . "+1 day");
-        $count=$customer->field(1)->where("ctime>$strat and ctime<$end ")->count('id');
+        if(I('get.usersid')!='')
+        {
+            $where=" and market='".I('get.usersid')."'";
+        }
+        $count=$customer->field(1)->where("ctime>$strat and ctime<$end.$where")->count('id');
         $data['code'] = 200;
         $data['count'] = $count;
         $this->response($data,'json');
@@ -727,7 +737,7 @@ class ApiController extends RestController{
             $where=" and xiaohao.xsid=".I('get.usersid');
         }
 
-        $xiaohaolist=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,zhanghu.a_users,gongsi.id as avid,gongsi.advertiser,xiaohao.xsid,xiaohao.semid")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='$time_start'  and xiaohao.starttime<'$time_end' $where")->group("xiaohao.appid,gongsi.id,gongsi.advertiser,zhanghu.a_users,xiaohao.xsid,xiaohao.semid")->order("baidu_cost_total desc")->select();
+        $xiaohaolist=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,zhanghu.a_users,zhanghu.appname,gongsi.id as avid,gongsi.advertiser,xiaohao.xsid,xiaohao.semid")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='$time_start'  and xiaohao.starttime<'$time_end' $where")->group("xiaohao.appid,gongsi.id,gongsi.advertiser,zhanghu.a_users,xiaohao.xsid,xiaohao.semid,zhanghu.appname")->order("baidu_cost_total desc")->select();
 
 
         foreach ($xiaohaolist as $key=>$val)
@@ -753,6 +763,7 @@ class ApiController extends RestController{
             $xiaohaolist[$key]['semid']=$val['semid']?$val['semid']:'';
             $xiaohaolist[$key]['market']=$xs['name']?$xs['name']:'';
             $xiaohaolist[$key]['sem']=$sem['name']?$sem['name']:'';
+
             //$xiaohaolist[$key]['baidu_cost_total']=number_format($val['baidu_cost_total']);
         }
 
@@ -898,6 +909,45 @@ class ApiController extends RestController{
         $data['data'] = $info;
         $this->response($data,'json');
     }
+    //账户详情的折线图
+    public function account_date_counsumption_line(){
+        $account_id=I('get.id');
+        $appid=M("Account")->field('appid')->find($account_id);
+        $type = I('get.type');
+        $xiaohao = M("AccountConsumption");
+        if ($type == 'day') {
+            //最近七天
+            $j7=date_daye_j7();
+            $list=$xiaohao->field('date,sum(baidu_cost_total) as consumption')->where("starttime>='$j7[start]'  and starttime<'$j7[end]' and appid='$appid[appid]'")->group('date')->order("date asc")->select();
+
+        } elseif ($type == 'week') {
+            $zhouar = teodate_week(4, 'Monday');//本周开始时间和结束时间
+            foreach ($zhouar as $key=>$val)
+            {
+                $time_start = strtotime($val['start']);
+                $time_end = strtotime($val['end'] . "+1 day");
+                $Consumption=$xiaohao->where("starttime>='$time_start'  and starttime<'$time_end' and appid='$appid[appid]' ")->sum('baidu_cost_total');
+                $list[$key]['date']=$val['start'];
+                $list[$key]['consumption']=$Consumption?$Consumption:0;
+            }
+
+        } elseif ($type == 'month') {
+            $yuear = teodate_month_12(12);//本月开始时间和结束时间
+            foreach ($yuear as $key=>$val)
+            {
+                $time_start = strtotime($val['start']);
+                $time_end = strtotime($val['end'] . "+1 day");
+                $Consumption=$xiaohao->where("starttime>='$time_start'  and starttime<'$time_end' and appid='$appid[appid]'")->sum('baidu_cost_total');
+                $list[$key]['date']=$val['start'];
+                $list[$key]['consumption']=$Consumption?$Consumption:0;
+            }
+
+        }
+        $data['code'] = 200;
+        $data['data'] = $list;
+        $this->response($data,'json');
+    }
+
 
     /*
      * 部门消耗 -2017年1月23日10:17:50
@@ -943,6 +993,7 @@ class ApiController extends RestController{
         $this->response($data,'json');
     }
 
+
     public function account_info()
     {
         $id = I('get.id');
@@ -953,6 +1004,7 @@ class ApiController extends RestController{
             exit;
         }
     }
+
 }
 
 
