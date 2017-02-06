@@ -832,7 +832,13 @@ function teodate_week($to,$zhouji,$strdate=''){
     }
     $a=strtotime($strdate."+1 day"); //因为是获取的上周几 所以给她加一天，比如 今天周一，要获取上周一，则 改认为今天是周二这样去读
     //获取几周日期
+    /*
     for($i=0;$i<$to;$i++)
+    {
+
+    }
+    */
+    for($i=$to;$i>=1;$i--)
     {
         $start=strtotime("last $zhouji -$i week",$a);//起始时间;
         $array[$i]['start']=date('Y-m-d',$start);
@@ -840,11 +846,13 @@ function teodate_week($to,$zhouji,$strdate=''){
         if($enddate > date("Y-m-d"))
         {
             //$enddate=date("Yq-m-d",strtotime("-1 day"));
-          //  $enddate=date("Y-m-d");
+            //  $enddate=date("Y-m-d");
         }
         $array[$i]['end']=$enddate;//结束日期
     }
+
     //echo $a;
+
     return $array;
 }
 function date_daye_j7(){
