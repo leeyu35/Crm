@@ -212,7 +212,10 @@ class ApiController extends RestController{
                 //最近七天
                 $j7=date_daye_j7();
                 $list=$account_counsumption->field('date,sum(baidu_cost_total) as consumption')->where("$where and starttime>='$j7[start]'  and starttime<'$j7[end]' ")->group('date')->order("date asc")->select();
-
+                foreach ($zhouar as $key=>$val)
+                {
+                    $list[$key]['consumption']=$Consumption?number_format($Consumption,2):0;
+                }
             } elseif ($date_type == 'week') {
                 //最近四周
                 $zhouar = teodate_week(4, 'Monday');//本周开始时间和结束时间
@@ -222,7 +225,7 @@ class ApiController extends RestController{
                     $time_end = strtotime($val['end'] . "+1 day");
                     $Consumption=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->sum('baidu_cost_total');
                     $list[$key]['date']=$val['start'];
-                    $list[$key]['consumption']=$Consumption?$Consumption:'';
+                    $list[$key]['consumption']=$Consumption?number_format($Consumption,2):0;
                 }
 
             } elseif ($date_type == 'month') {
@@ -234,7 +237,7 @@ class ApiController extends RestController{
                     $time_end = strtotime($val['end'] . "+1 day");
                     $Consumption=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end'")->sum('baidu_cost_total');
                     $list[$key]['date']=$val['start'];
-                    $list[$key]['consumption']=$Consumption?$Consumption:'';
+                    $list[$key]['consumption']=$Consumption?number_format($Consumption,2):0;
                 }
 
             }
@@ -473,16 +476,13 @@ class ApiController extends RestController{
             case 'backmoney':
                 //本月总回款
                 $list=$backmoney->where(" payment_time >='$start' and is_huikuan=1 and audit_1!=2 and audit_2!=2")->select();
-
                 break;
             case 'fukuan':
-
                 $list=$backmoney->where(" payment_time >='$start' and (payment_type=1 or payment_type=2) and audit_1!=2 and audit_2!=2")->select();
                 break;
             case 'bukuan':
                 $list=$backmoney->where("payment_type=3 and audit_1!=2 and audit_2!=2")->select();
                 break;
-
         }
         dump($list);
     }
@@ -839,7 +839,10 @@ class ApiController extends RestController{
             //最近七天
             $j7=date_daye_j7();
             $list=$xiaohao->field('date,sum(baidu_cost_total) as consumption')->where("starttime>='$j7[start]'  and starttime<'$j7[end]' and avid=$avid")->group('date')->order("date asc")->select();
-
+            foreach ($zhouar as $key=>$val)
+            {
+                $list[$key]['consumption']=$Consumption?number_format($Consumption,2):0;
+            }
         } elseif ($type == 'week') {
             $zhouar = teodate_week(4, 'Monday');//本周开始时间和结束时间
             foreach ($zhouar as $key=>$val)
@@ -848,7 +851,7 @@ class ApiController extends RestController{
                 $time_end = strtotime($val['end'] . "+1 day");
                 $Consumption=$xiaohao->where("starttime>='$time_start'  and starttime<'$time_end' and avid=$avid")->sum('baidu_cost_total');
                 $list[$key]['date']=$val['start'];
-                $list[$key]['consumption']=$Consumption?$Consumption:'';
+                $list[$key]['consumption']=$Consumption?number_format($Consumption,2):0;
             }
 
         } elseif ($type == 'month') {
@@ -859,7 +862,7 @@ class ApiController extends RestController{
                 $time_end = strtotime($val['end'] . "+1 day");
                 $Consumption=$xiaohao->where("starttime>='$time_start'  and starttime<'$time_end' and avid=$avid")->sum('baidu_cost_total');
                 $list[$key]['date']=$val['start'];
-                $list[$key]['consumption']=$Consumption?$Consumption:'';
+                $list[$key]['consumption']=$Consumption?number_format($Consumption,2):0;
             }
 
         }
