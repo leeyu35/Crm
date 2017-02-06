@@ -212,10 +212,7 @@ class ApiController extends RestController{
                 //最近七天
                 $j7=date_daye_j7();
                 $list=$account_counsumption->field('date,sum(baidu_cost_total) as consumption')->where("$where and starttime>='$j7[start]'  and starttime<'$j7[end]' ")->group('date')->order("date asc")->select();
-                foreach ($zhouar as $key=>$val)
-                {
-                    $list[$key]['consumption']=$Consumption?number_format($Consumption,2):0;
-                }
+
             } elseif ($date_type == 'week') {
                 //最近四周
                 $zhouar = teodate_week(4, 'Monday');//本周开始时间和结束时间
@@ -225,7 +222,7 @@ class ApiController extends RestController{
                     $time_end = strtotime($val['end'] . "+1 day");
                     $Consumption=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->sum('baidu_cost_total');
                     $list[$key]['date']=$val['start'];
-                    $list[$key]['consumption']=$Consumption?number_format($Consumption,2):0;
+                    $list[$key]['consumption']=$Consumption?$Consumption:0;
                 }
 
             } elseif ($date_type == 'month') {
@@ -237,17 +234,18 @@ class ApiController extends RestController{
                     $time_end = strtotime($val['end'] . "+1 day");
                     $Consumption=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end'")->sum('baidu_cost_total');
                     $list[$key]['date']=$val['start'];
-                    $list[$key]['consumption']=$Consumption?number_format($Consumption,2):0;
+                    $list[$key]['consumption']=$Consumption?$Consumption:0;
                 }
 
             }
-
+            /*
             $time_start=strtotime(date("Y-m-d")."-7 day");
             $time_end=strtotime(date("Y-m-d"));
 
             $sum=$account_counsumption->field('date,sum(baidu_cost_total) as baidu_cost_total')->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->group("date")->order("date asc")->select();
 
             if(!$sum){$sum="0";}
+           */
             $data['code'] = 200;
             $data['counsumption'] = $list;
         }
@@ -475,16 +473,28 @@ class ApiController extends RestController{
         switch ($type){
             case 'backmoney':
                 //本月总回款
-                $list=$backmoney->where(" payment_time >='$start' and is_huikuan=1 and audit_1!=2 and audit_2!=2")->select();
+                $list=$backmoney->field('id,advertiser,money,payment_time,account,market,ctime')->where(" payment_time >='$start' and is_huikuan=1 and audit_1!=2 and audit_2!=2")->select();
                 break;
             case 'fukuan':
-                $list=$backmoney->where(" payment_time >='$start' and (payment_type=1 or payment_type=2) and audit_1!=2 and audit_2!=2")->select();
+                $list=$backmoney->field('id,advertiser,money,payment_time,account,market,ctime')->where(" payment_time >='$start' and (payment_type=1 or payment_type=2) and audit_1!=2 and audit_2!=2")->select();
                 break;
             case 'bukuan':
-                $list=$backmoney->where("payment_type=3 and audit_1!=2 and audit_2!=2")->select();
+                $list=$backmoney->field('id,advertiser,money,payment_time,account,market,ctime')->where("payment_type=3 and audit_1!=2 and audit_2!=2")->select();
                 break;
         }
-        dump($list);
+        foreach ($list as $key=>$val)
+        {
+            $K=kehu($val['advertiser']);
+            $account=M('Account')->field('a_users')->find($val['account']?$val['account']:'');
+            $list[$key]['advertisername']=$K['advertiser'];
+            $list[$key]['account_name']=$account['a_users'];
+            $list[$key]['ctime']=date("Y-m-d",$val['ctime']);
+            $list[$key]['payment_time']=date("Y-m-d",$val['payment_time']);
+            $list[$key]['money']=number_format($val['money'],2);
+        }
+        $data['code'] = 200;
+        $data['data'] = $list;
+        $this->response($data,'json');
     }
 
 
@@ -500,13 +510,13 @@ class ApiController extends RestController{
             foreach ($zuijinhk as $k=>$v)
             {
                 $zuijinhk[$k]['payment_time']=date("Y-m-d",$v['payment_time']);
-                $zuijinhk[$k]['money']=number_format($v['money']);
+                $zuijinhk[$k]['money']=number_format($v['money'],2);
                 //number_format
             }
             $dk_sm[$key]['huikuan_record']=$zuijinhk;
-            $dk_sm[$key]['yu_e']=number_format($val['yu_e']);
-            $dk_sm[$key]['huikuan']=number_format($val['huikuan']);
-            $dk_sm[$key]['yue']=number_format($val['yue']);
+            $dk_sm[$key]['yu_e']=number_format($val['yu_e'],2);
+            $dk_sm[$key]['huikuan']=number_format($val['huikuan'],2);
+            $dk_sm[$key]['yue']=number_format($val['yue'],2);
         }
         $data['code'] = 200;
         $data['diankuan_huikuan_record'] = $dk_sm;
@@ -539,7 +549,7 @@ class ApiController extends RestController{
             $sum=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->sum("baidu_cost_total");
             if(!$sum){$sum="0";}
             $data['code'] = 200;
-            $data['counsumption'] = number_format($sum);
+            $data['counsumption'] = number_format($sum,2);
         }
         $this->response($data,'json');
 
@@ -567,7 +577,7 @@ class ApiController extends RestController{
             $sum=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->sum("baidu_cost_total");
             if(!$sum){$sum="0";}
             $data['code'] = 200;
-            $data['counsumption'] = number_format($sum);
+            $data['counsumption'] = number_format($sum,2);
         }
         $this->response($data,'json');
     }
@@ -594,7 +604,7 @@ class ApiController extends RestController{
 
             if(!$sum){$sum="0";}
             $data['code'] = 200;
-            $data['counsumption'] = number_format($sum);
+            $data['counsumption'] = number_format($sum,2);
         }
         $this->response($data,'json');
     }
@@ -636,7 +646,7 @@ class ApiController extends RestController{
         $time_end=strtotime($zhouar[0]['end']."+1 day");
         $sum+=$account_counsumption->where("semid=$semid and starttime>='$time_start'  and starttime<'$time_end' and appid='$appid'")->sum("baidu_cost_total");
 
-        return  $sum?number_format($sum):'0';
+        return  $sum?number_format($sum,2):'0';
     }
     //根据appid semID 获取账户月消费
     private function sem_month_counsumption($appid,$semid){
@@ -647,7 +657,7 @@ class ApiController extends RestController{
         $time_end=strtotime($yuear['end']);
         $sum+=$account_counsumption->where("semid=$semid and starttime>='$time_start'  and starttime<'$time_end' and appid='$appid'")->sum("baidu_cost_total");
 
-        return  $sum?number_format($sum):'0';
+        return  $sum?number_format($sum,2):'0';
     }
 
     /*
@@ -712,8 +722,12 @@ class ApiController extends RestController{
         }
 
         $users=M("Users");
+        if(I('get.usersid')!='')
+        {
+            $where=" and xiaohao.xsid=".I('get.usersid');
+        }
 
-        $xiaohaolist=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,zhanghu.a_users,gongsi.advertiser,xiaohao.xsid,xiaohao.semid")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='$time_start'  and xiaohao.starttime<'$time_end'")->group("xiaohao.appid,gongsi.advertiser,zhanghu.a_users,xiaohao.xsid,xiaohao.semid")->order("baidu_cost_total desc")->select();
+        $xiaohaolist=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,zhanghu.a_users,gongsi.id as avid,gongsi.advertiser,xiaohao.xsid,xiaohao.semid")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='$time_start'  and xiaohao.starttime<'$time_end' $where")->group("xiaohao.appid,gongsi.id,gongsi.advertiser,zhanghu.a_users,xiaohao.xsid,xiaohao.semid")->order("baidu_cost_total desc")->select();
 
 
         foreach ($xiaohaolist as $key=>$val)
@@ -839,10 +853,7 @@ class ApiController extends RestController{
             //最近七天
             $j7=date_daye_j7();
             $list=$xiaohao->field('date,sum(baidu_cost_total) as consumption')->where("starttime>='$j7[start]'  and starttime<'$j7[end]' and avid=$avid")->group('date')->order("date asc")->select();
-            foreach ($zhouar as $key=>$val)
-            {
-                $list[$key]['consumption']=$Consumption?number_format($Consumption,2):0;
-            }
+
         } elseif ($type == 'week') {
             $zhouar = teodate_week(4, 'Monday');//本周开始时间和结束时间
             foreach ($zhouar as $key=>$val)
@@ -851,7 +862,7 @@ class ApiController extends RestController{
                 $time_end = strtotime($val['end'] . "+1 day");
                 $Consumption=$xiaohao->where("starttime>='$time_start'  and starttime<'$time_end' and avid=$avid")->sum('baidu_cost_total');
                 $list[$key]['date']=$val['start'];
-                $list[$key]['consumption']=$Consumption?number_format($Consumption,2):0;
+                $list[$key]['consumption']=$Consumption?$Consumption:0;
             }
 
         } elseif ($type == 'month') {
@@ -862,7 +873,7 @@ class ApiController extends RestController{
                 $time_end = strtotime($val['end'] . "+1 day");
                 $Consumption=$xiaohao->where("starttime>='$time_start'  and starttime<'$time_end' and avid=$avid")->sum('baidu_cost_total');
                 $list[$key]['date']=$val['start'];
-                $list[$key]['consumption']=$Consumption?number_format($Consumption,2):0;
+                $list[$key]['consumption']=$Consumption?$Consumption:0;
             }
 
         }
