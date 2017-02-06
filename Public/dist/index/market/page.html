@@ -13,7 +13,7 @@
     <script src="../../static/js/xdomain.all.js" slave="cors-proxy.html"></script>
     <script src="../../static/js/html5shiv.min.js"></script>
   <![endif]-->
-<link href="../../static/commons/styles.d7091990.css" rel="stylesheet"/><link href="../../index/market/styles.b5b4fa89.css" rel="stylesheet"/></head>
+<link href="../../static/commons/styles.fe77f493.css" rel="stylesheet"/><link href="../../index/market/styles.288a1c8c.css" rel="stylesheet"/></head>
 <body>
   <!--[if lt IE 9]>
     <script src="../../static/js/respond.min.js"></script>
@@ -21,68 +21,111 @@
 
 <div id="wrapper">
   <div class="container-fluid">
-    <div class="row" style="padding:0 18px;">
-        <div class="col-md-3 bs-callout bs-callout-info">
-            <div class="infor-box">
-                <p > <i class="glyphicon glyphicon-search text-info"></i>&nbsp;&nbsp;本周新增客户</p>
-                <p class="Week-add infor-num" style="font-size: 29px; font-weight: bold">loading..</p>
-                <p >本月新增客户&nbsp;<i class="mouth-add"></i></p>
+    <div class="row col-row-title">
+        <div class=" col-md-3 col-sm-titl">
+            <div class=" col-sm-box col-sm-line-1">
+                <a href="../hetongliebiao/page.html?week">
+                    <p>本周新增合同</p>
+                    <h2 class="Week-add">loading..</h2>
+                </a>
+                <a href="../hetongliebiao/page.html?month">
+                    <p>本月新增合同&nbsp;<i class="mouth-add"></i></p>
+                </a>
             </div>
+            <img class="col-sm-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjc3RkY4NEU3RTIxNjExRTZCREJDQTgyQTgyM0Y4Mzg4IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjc3RkY4NEU4RTIxNjExRTZCREJDQTgyQTgyM0Y4Mzg4Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NzdGRjg0RTVFMjE2MTFFNkJEQkNBODJBODIzRjgzODgiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NzdGRjg0RTZFMjE2MTFFNkJEQkNBODJBODIzRjgzODgiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz42lWDVAAAGP0lEQVR42uxc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" alt="">
+        </div>
+        <div class=" col-md-3 col-sm-titl ">
+            <a href="../xiaohaoliebiao/page.html?yesterday">
+                <div class=" col-sm-box col-sm-line-2">
+                    <p>昨日消耗</p>
+                    <h2 class="yesterday-xiaohao">loading..</h2>
+                    <p>昨日消耗总额&nbsp;<i class="yesterday-xiaohao"></i></p>
+                </div>
+            </a>
+            <img class="col-sm-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjc3QTc4RDlFRTIxNjExRTZBN0IyQjA0NzgzMTU0NzQ1IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjc3QTc4RDlGRTIxNjExRTZBN0IyQjA0NzgzMTU0NzQ1Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NzdBNzhEOUNFMjE2MTFFNkE3QjJCMDQ3ODMxNTQ3NDUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NzdBNzhEOURFMjE2MTFFNkE3QjJCMDQ3ODMxNTQ3NDUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz70pY3nAAAFE0lEQVR42uxcTWwbRRgdj6cJTZomLYQK+nNDKlQVPbRIQUICrnDtAYkLAgkhofbACaFKLSDUCxcqTpVaVbQXxAGEgAs3xIED3LggVPUnTWkS0jZxWse1nX6f/Vb9ull7d+3M7ozXT3qKvbG9M2/n+5vdGTN38iOVMQxxK3EE3EIsEzWxhL+MJrEB1gSrxHrWDbYN7vg4OAZRkkCD/PknQv9jkVYF130ViTs2SZwQo2Mz2z0J8khbIS5jlHkhEo+WJ2FSWYBNdQq8T1zC6HJSJBZlOsI0sgS3YTdG1AJEc0KkMsTZrtwBX6i9MMEFmGRuIm0j7oJQLmI72ngLfitTkUoYPVPKfXDQeAamuNBLJDQ9Cvtszr6nF0yhzXNp86y0oZmTv30eCiR91T70w4pIo3CGRvkNg36MbrZIrPwehx10LxF5T9IRpRMqP0gChYUy/YpUgpM2ajBhkHyW+hHpaY+ddBpfO92rSBMoIIuAKSSdqUQqYxQVCbs6uRXdxczKBROp3MnsdIdKekIVE9zvsSQiTati46k4kcYLEM2SlC5j3UTaqYbYoIMO5Qtbh/q0MCYtSoo0OdTmMUzKtDwoP3yIaFwi/YpwPYtj3xPPWIp088R1I4aXD3lRDSJxe1/BsRcsnUsjkFW0iGo+YJF4jPiXOPa/xfONS5807pGvOEU8TvzO8kgKLKzlk5hbPBCHL+g54gz80CdwrrMWz8m6GONJ8vgc8axq3/W4SPwMxz/MIrk0KsVcb044Svwcr08Qv834/KMum9qLxE+J+4k3ie8R/82hHSMuinQAEexVvP+a+FWO7Wn5JFfyo5eJHxBfwvvf4HuuRnz2S+Ih1b4b+w3xwqCKxGnH68TXiG+I4z+g0393+e6b4vWMZZG0UZv/gJXEDuJhCLINZcVB4vOhMugf4o/En4g3EvzuHH6LsWQ79TAq5nZKn3if+E7Ecc6SfyH+TvyTeDniM0dUewLsAfEP1cdTIX2iZGDXtoS6BAEqKCku48o3E4zAi+L9eeLpnERqFbhNi37pOpjaWUZU5Hmhyf6oodxD+Bmi+3mKZHIUiUuML1R7NpQfBP0Y8zeuoW7gGPOYtp1BbhSAo+DPLotkC28R30WawY77bdWeOIsyoTVHy6Oasdw4ThT34vVu5Eu1Dn5n3VGR1vgKVy2eYFG8bjgaJOJQZZHqlk3OZ7Au9aAkWR3qEYl7StRttkSSSWA5VCeGZ0Tlex2TTO7IKNFclZntPfiLzc68b4oLUAuZdXihzO1QpFsW7QnPY19R7UeNg3NYSSKD9pXEosDp0BUqOu6q9nKLx4b18lCXDSJtsP21wFEN0dKh2slBLg312aiD7qZgQVENW1TU1O1CwUVaDB+IEokLz5WCCrQS5Zc73QSY97TO6geNTlaku3xhvmAi3VIdFgvqmKF3tyAC3VHtmxUqrUiB2Q16tFuLC1ZxIvFEWOo1qx6B+3VDxUz46YQ/NDuAjryBfsUOgKS3uGsDJlQgUC3Jh3VK270+AKZXRz8Sz+2nfViClb/msTOvov21NF/SfVyJOx6G+Z4sodcFyOtIDziFd3mvEpkYZ75XSYAKaj3Xdr0J4MSuN8GV+g/Zed77J0nf49T+SXL2gJ0iP9HGc+V5PF/AbbjdrcTIWyRpghVld083iaaoM73Z000O+SqcZi+7A3bDAwQN73cHlJGwIkwgWKrBKxFG1KP1LcEek1r4uqZ6dBs+t30mHwowAGe6D9la4tmcAAAAAElFTkSuQmCC"/>
 
         </div>
-        <div class="col-md-3 bs-callout bs-callout-success">
-            <div class="infor-box">
-            <p > <i class="glyphicon glyphicon-dashboard text-success"></i>&nbsp;&nbsp;昨日消耗</p>
-            <p class="yesterday-xiaohao infor-num" style="font-size: 29px; font-weight: bold">loading..</p>
-            <p >昨日消耗总额&nbsp;<i class="yesterday-Allxiaohao"></i></p>
-            </div>
+        <div class=" col-md-3 col-sm-titl">
+            <a href="../xiaohaoliebiao/page.html?week">
+                <div class=" col-sm-box col-sm-line-3">
+                    <p>本周消耗</p>
+                    <h2 class="week-xiaohao">loading..</h2>
+                    <p >本周消耗总额&nbsp;<i class="week-xiaohao"></i></p>
+                </div>
+            </a>
+            <img class="col-sm-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjc3NEI4NTQ4RTIxNjExRTZCNTY0RUIyQzM2RkE0OUI0IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjc3NEI4NTQ5RTIxNjExRTZCNTY0RUIyQzM2RkE0OUI0Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6Nzc0Qjg1NDZFMjE2MTFFNkI1NjRFQjJDMzZGQTQ5QjQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6Nzc0Qjg1NDdFMjE2MTFFNkI1NjRFQjJDMzZGQTQ5QjQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7LqvI3AAAE8klEQVR42uxcS4wMQRiu7ul9zVoWu1ivi4uDSBxECOHkwEUiIvE4IUIkDhyIm8RJQpwEBwcSTjhIECGEkHB29SZY1q599e7Ow//vfi2ldx7dM13VUz3zJV92erdmu+rr//+r/qrqsnbevig0wyG2EZvBJmIKtKVyOWIWnCCOg6PEjO4Kq4ZFbAfTECUIbJDLt/r+xqKNEIfBvKkiccNmETt8FhIFmvC/Z8HSBol/iK4pIrHFzIFL6QC7aSfIrtgH66pJkViU7gKuoRNch0WwqF6IVhMipSDOTFE74Ae1BC7YC5eMTSSON/MVxJyowA9uBvE74pZWkSxYT6eoffAD7IEr9lbSEzoVCrsw5thTCTpR569hx1lh3YQHf0sNFEiOVUvRDiUitSAYOsJsOGhHS9QisfKL0ZMlASm0pzkqkZyECeQXyqlWJAuDM0ckEw7aZ1Uj0rwwvmsoWjDWq0ikDiSQ9YCZaG8okRxYUT1hXrGwUkyk7gQG6qA5aCCR0qVML+HoQPvLitQl6htd5URKG5xyRJm6pEuJNFc0ME0H26dglFOu54hXyw3UahRtskfJXV7UY6Kt0oPIGigU6+HKlmQp6NGGEtDTWbJI7SL6Kdi84SLZ0OU/kRqYjv9ESjf0KC0SB+8mAxvAvc954k3iCkX3YG0c2+DB4wniFuIq4g2FqVQri2TqfNFy6TNPwy5QdJ8WW4RcOVCEjcTZIcrziscy6fot8YOiujU7It6pWXb1a8SVxH7iZuJAme/wdOt9TG1wPOLNEVfE1N4lFWiKW6RNEIjBi4dHiadLlGeXugeBjhAfaqhjyhbxruP3+a53I+frKVC2BxbEMfSQJoEmRXJiFmmb9PklXG0reEZM7QrhMq+J+5B4HiY+1lhHy4kxSz9A3E68RbxEfI/fryeeJJ6Syq7Fz/3EZ5rradkx5ViricfRK52UBGI8hyXd8X3nQgwCTeagLFJO803ZZa7j854S5c76ru/GZPF5ByLpWBnhTQpriLtwfZD4q0T5n8S9xHXEF8SPMYmUZZEyinM3nnDrQtft3Yc3jz8J8N1XYJzI2kLPxvEdvgfxUJiDCVvhSFX40gZTMc4ijanuQokPEHi/ES8T3xgk0hjHJFfxTbyFgGP4nDPMklwvJk1ouqFpArEuGS8lGRENFMKIkPK2YQU3sKQhgKkY9ouUUySSqch5InlzSZy/8WsFUa7ieg/gEW6oUjS+1zvMFESFQS+vlSfcBiIW6Slxg5ja4aoDUb/C8W+GVBbJRaCKag3uqMGuNioPjfwTbn2NDm0SvwrFDbnLc+tcINc/JLKLTFHUM34W64H81jRYpwINFhpYF1sEqPqVTAORRbtFUJE4n/tRZyL9EEXm1uwypjdQJwL9KRVi7ADqjiVcIG7f9yCpQzHwsPyL0Hw2iEZk0L58NSJ5/+hzAgN5Fu0qawBBl7jHEyaUJ1Cg+X07pO9+SoDrZdCOwLE27GYJVv6jwamLi/qHWiGyq3gS/YYJ1F+pJ1S6gSuP4QFPKfAbh7X8AmEWddV+Vok/16m1U2/kQWLsp954T+obRudxn58kx56aOj/JwyiCIh/Fwztp22IQh+vwW0T88o+KTaVDoMoz3WTkpDzTmDPdZJN3ETQrOR2wFBJzOqDcEw5JLuDAyngXbTOuvQ2uKV+sy6HLzmBsMwbhtQ5o/wowAASs/cTYjYAVAAAAAElFTkSuQmCC"/>
         </div>
-        <div class="col-md-3 bs-callout bs-callout-dannger">
-            <div class="infor-box">
-                <p > <i class="glyphicon glyphicon-calendar text-danger"></i>&nbsp;&nbsp;本周消耗</p>
-                <p class="week-xiaohao infor-num" style="font-size: 29px; font-weight: bold">loading..</p>
-                <p >本周消耗总额&nbsp;<i class="week-Allxiaohao"></i></p>
-            </div>
+        <div class=" col-md-3 col-sm-titl">
+            <a href="../xiaohaoliebiao/page.html?month">
+                <div class=" col-sm-box col-sm-line-4">
+                    <p>本月消耗</p>
+                    <h2  class="month-xiaohao">loading..</h2>
+                    <p>上月消耗总额&nbsp;<i class="month-Allxiaohao"></i></p>
+                </div>
+            </a>
+            <img class="col-sm-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjc2RjQ2M0U3RTIxNjExRTY5NEQ1QjNCODk4RTMzNzcwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjc2RjQ2M0U4RTIxNjExRTY5NEQ1QjNCODk4RTMzNzcwIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NzZGNDYzRTVFMjE2MTFFNjk0RDVCM0I4OThFMzM3NzAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NzZGNDYzRTZFMjE2MTFFNjk0RDVCM0I4OThFMzM3NzAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz61gUj+AAAFcklEQVR42uycT2wUVRzH374ObXdrSwv9EylSAoRwwEQjISYGjMbEgzF68O/Jgxy4GSFcQAgHo/EiByHcm541SgjxojHaBDUkRoGoQWOqVWmbBlpot3+m6++3/Q59HWd2Z3bfznuzwy/55s3O7LZvPvN+v/d7b95M7tDFyyJhc0h5Uiu0gdRCkqQcSrYVkgstKiqSlpOucKONT7wDKgBKFJMQf7/dd4wh3VVUSiskPrGNpE6ldeis90aIW9osaQatLBWQuLVshkslYeyq3dA8aRqty0pIDKUvwDWSNK7DIFrUJKBZAakFcLqEPcYX6iG44CRc0hikB0gDAGWjdaGONxG3EoWUQ+vpFvYbdxoPwhUna+kJnRrBbjEce2qxboAaj5tnxe2aOfnblkJAnrWh/q2NgtSGYOiIdJuD82jTDYnJb7U4QNfSI2+NCkpGJN9MgFRQg1E8oxqkHIK0I5rTHIDK1QOpP8VBOk6sHagVUicGkFmwrkojBlnBX/tFtqw/LKzICj9oyRgkGdYwZMhIulNk03icV4gCqU9k23qrQeow1JvtiJMBN9jawSEU0iZDFXvXso5iUxikNpHclKtqQ6THMJ1hi+VVj5K+XMGEvYpyj2WxqdsPKWcIEqcZr2H7cQt7upwKqWAoL3pWCZJDFuZNHSqkDkMVeVrZHrQwHTAOiVvuM6TfSJ8jWO60FRKPVzYYqMALAPMe6Rz27bcMUpmNNDgVcgTlN6QxbD9pocu1S0OZbheGP6P4zHdal0gHLITUKg252nMoP1X2fY3mveM+pFV7C+UXyr6vLE0qyzEp6fyIg3MP6ZJYf+v5Gsotvu9vM+yGLY4BSG+iPOvb/w/KR337OX/6EBm5GxDbekP+z5RYXTChBZJMGJLXKm4EnBTbwYDhAcM4STrt654vVYB0Q4l9dWXejqhyOyWGvU16Hi0zaFGCi3SDj18I+RuX0WK49Yxj316Ur5M+EGtrjl4BoN+RkPo94orOZKmkCVRfxKEFL4P5KOTYl4DEcesT7HtEOX6C9A62D6N8SWhe2RYEaUVTXDpOOiUqL23J4XjYoqrvUD4BSFy/faSrAPEy6QzpYbF6r2yk0YCYj4MK6wre9S4d/hn1eQqfewCKk87zpB9Iw5jruUV6P4EY6kpR51I53VeNdB3BWiijgTxiEbe0XYhFwyKZ9dxlSEuWJW9/KNs9ShxjO6ocG0moPkuOhZB+QS+5nbQb+35EOUH6jDRHup1QfRYZ0oJlkL5F+SJAsf2kHD+WcH3KkIqWQbqG1v0G8qoxoWk9do1WlAh+Nrmci6SygNHAqMG6lNl4Q5K7lrWm75Xt6wbrUeZiK6QrAbMDxiHNWZYvXUVZQm9nKmdbB6mkaVpBW7BEJedFwg8AKjbrDbHUaZIZy1xuwnDPey8PUyEtwO1ssV8ByoTNqxfIv0ZwWgSs9DJkPKFmahHHtH+qRLU5UMxbAOljg/FwXW8fNHU7JbJt/zt/GeKPsxkFdCcoLssKPYubMUBuWEch4/6giW0iLCeTVZKp2xkBNFMpxMgIdItNDojzw5uVvlANEqflfxscGjTa+LzGRZWHl2XEP/RXEwZyV0R8aDnqLe7FJgPl4nwiTV3LmL77ZxO43jLOI/LcftzFEtyixlIczBdQ/8U4P5J1XIm0pQczABTbE2p9ALmEbpNTeNsfIFwRht5VoiacDMq2t96o9ZusN47qeJSde4p/4X6m35+kTndMCU2TiDqf95+Hz/NiB76HnzcEZxqjeW3WiJci3IEa+U43f8zxxpmpeaebelWLGP8VxNpDwDqWRC/BlVL/dkC1J/ROxvuf3Mp47VErPnvvmZRKq3PRSrzb8MbeM/mfAAMANLIeM50NQUEAAAAASUVORK5CYII="/>
         </div>
-        <div class="col-md-3 bs-callout bs-callout-warning">
-            <div class="infor-box">
-                <p ><i class="glyphicon glyphicon-info-sign text-warning"></i>&nbsp;&nbsp;本月消耗</p>
-                <p class="month-xiaohao infor-num" style="font-size: 29px; font-weight: bold">loading..</p>
-                <p>上月消耗总额&nbsp;<i class="month-Allxiaohao"></i></p>
-            </div>
-        </div>
+
     </div>
-
-    <div class="row">
-        <div class="col-md-8 ">
-            <div class="panel panel-success">
-                <div class="panel-heading">近一周客户消耗趋势图</div>
-                <div id="panel-body" >
+    <div class="row col-row-tongji">
+        <div class="col-md-7 col-sm-tongji">
+            <div class="col-left-tongji">
+                <div class="col-right-title">
+                    <a href="">
+                        <p class="pull-left">&nbsp;&nbsp;<i class="iconfont">&#x3596;</i>&nbsp;&nbsp;总消耗统计表</p>
+                    </a>
+                </div>
+                <div class="col-sm-12" style="text-align: right;">
+                                <span class="xiaohao1" style="color: #e78074;">
+                                    <span class="xiaohao1-1" style="border: 1px solid #e78074;">
+                                        <span class="xiaohao1-2" style="background: #e78074;"></span>
+                                    </span>
+                                    日消耗
+                                </span>
+                                <span class="xiaohao2" style="color: #62b49d;">
+                                    <span class="xiaohao1-1" style="border: 1px solid #62b49d;">
+                                        <span class="xiaohao1-2" style="background: #62b49d;"></span>
+                                    </span>
+                                    周消耗
+                                </span>
+                                <span class="xiaohao3" style="color: #63b5ca;">
+                                    <span class="xiaohao1-1" style="border: 1px solid #63b5ca;">
+                                        <span class="xiaohao1-2" style="background: #63b5ca;"></span>
+                                    </span>
+                                    月消耗
+                                </span>
+                </div>
+                <div class="col-sm-12" id="panel-body" >
 
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="panel panel-danger">
-                <div class="panel-heading">所有客户</div>
-                <table class="table-hover scrolltable tablesorter table-striped table">
-                    <thead style="display:block; ">
-                    <tr>
-                        <th>#</th>
-                        <th>客户</th>
-                        <th>本周消耗</th>
-                        <th>本月消耗</th>
-                    </tr>
-                    </thead>
-                    <tbody class="market-tbody">
-                            <img class="loading" src="data:image/gif;base64,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">
-                    </tbody>
-                </table>
+        <div class="col-md-5 col-sm-tongji">
+            <div class="col-right-tongji">
+                <div class="col-right-title">
+                    <a href="">
+                        <p class="pull-left">&nbsp;&nbsp;<i class="iconfont">&#xe6dc;</i>&nbsp;&nbsp;所有客户</p>
+                    </a>
+                </div>
+                <div class="col-right-table">
+                    <table class="table table-hover scrolltable tablesorter table-striped ">
+                        <thead >
+                        <tr>
+                            <th>#</th>
+                            <th>客户</th>
+                            <th>本周消耗</th>
+                            <th>本月消耗</th>
+                        </tr>
+                        </thead>
+                        <tbody class="market-tbody">
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
-
 </div>
-<script type="text/javascript" src="../../static/commons/bundle.d7091990.js"></script><script type="text/javascript" src="../../index/market/entry.b5b4fa89.js"></script></body>
+<script type="text/javascript" src="../../static/commons/bundle.fe77f493.js"></script><script type="text/javascript" src="../../index/market/entry.288a1c8c.js"></script></body>
 </html>
