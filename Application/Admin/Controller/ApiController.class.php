@@ -239,7 +239,8 @@ class ApiController extends RestController{
 
                 foreach ($list as $key=>$val)
                 {
-                    $khinfo=$kehu->field('advertiser')->find(($val['advertiser']));
+                    $khinfo=$kehu->field('advertiser,id')->find(($val['advertiser']));
+                    $kdata[$key]['id']=$khinfo['id'];
                     $kdata[$key]['advertiser']=$khinfo['advertiser'];
                     $kdata[$key]['week_counsumption']=$this->customer_market_week_clientele($id,$val['advertiser'],I('get.type'));
                     $kdata[$key]['month_counsumption']=$this->customer_market_month_clientele($id,$val['advertiser'],I('get.type'));
