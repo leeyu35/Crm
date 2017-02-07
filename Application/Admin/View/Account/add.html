@@ -8,139 +8,140 @@
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
 <script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
-<script language="javascript">
-	$(document).ready(function(e) {
-		//动态加载公司名称
-		$("#gongsi").keyup(function(){
-			//$("#hjd").html($("#hjd").html()+"1");
-			val=$(this).val();
-			$.post("{:U('keyup_adlist')}",{val:val},function(data){
-					$("#adlist").html(data);
-			})
-			$("#adlist").show();
-		})
-		//x选择了公司
-		$("#adlist").on("click","a",function(){
-			
-			$.post("{:U('no_list')}",{id:$(this).attr("id")},function(data){
-					$("#contract_no").html(data);
-			})
-			$("#gongsi").val(($(this).html()));
-			$("#adlist").hide();
-		})
-        //动态加载appid
-        $("#appid_btn").click(function(){
-            $.post("{:U('account_appid')}",{account_name:$("#a_users").val()},function(data){
-                if(data!=0)
+    <script language="javascript">
+        $(document).ready(function(e) {
+            var btn = 1;//全局判断是否点击
+            //动态加载公司名称
+            $("#gongsi").keyup(function(){
+                //$("#hjd").html($("#hjd").html()+"1");
+                val=$(this).val();
+                $.post("/Admin/Account/keyup_adlist.html",{val:val},function(data){
+                    $("#adlist").html(data);
+                })
+                $("#adlist").show();
+            })
+            //x选择了公司
+            $("#adlist").on("click","a",function(){
+
+                $.post("/Admin/Account/no_list.html",{id:$(this).attr("id")},function(data){
+                    $("#contract_no").html(data);
+                })
+                $("#gongsi").val(($(this).html()));
+                $("#adlist").hide();
+            })
+            //动态加载appid
+            $("#appid_btn").click(function(){
+                $.post("/Admin/Account/account_appid.html",{account_name:$("#a_users").val()},function(data){
+                    if(data!=0)
+                    {
+                        $("#appid").html(data);
+                    }else
+                    {
+                        $("#appid").html('');
+                        alert('暂无相匹配的appid');
+
+                    }
+                })
+                btn = 0;
+               
+            })
+
+            //选择了负责人
+            $("#fzrlist").on("click","a",function(){
+                $("#fuzeren").attr("title",$(this).attr("id"))
+                $("#fuzeren").val($(this).html());
+                $("#fzrlist").hide();
+            })
+            //点击新增负责人
+            $("#add_fzr").on("click",function(){
+                if($("#fuzeren").val()=="")
                 {
-                    $("#appid").html(data);
+                    alert('负责人姓名不能为空');
+                    $("#fuzeren").select();
+                    return false;
                 }else
                 {
-                    $("#appid").html('');
-                    alert('暂无相匹配的appid');
+                    $.get("/Admin/Account/isfzr.html",{val:$("#fuzeren").val()},function(data){
+                        if(data==0)
+                        {
+                            alert("没有这个人员哦~");
+                            $("#fuzeren").select();
+                            return false;
+                        }else
+                        {
+                            name=$("#fuzeren").val();
+                            id=$("#fuzeren").attr("title");
+                            $(".fzrlist").append('<span class="btn btn-danger">'+name+" x</span> ");
+                            $("#fzrlsitwz").append('<input type="hidden" class="fzrlist" name="fzrlist[]" value="'+id+'">');
+
+                        }
+                    })
 
                 }
 
             })
-        })
+            //删除已选负责人
+            $(".fzrlist").on("click","span",function(){
+                $(".fzrlist").eq($(this).index()).remove();
+                $(this).remove();
+            })
 
-		//选择了负责人
-		$("#fzrlist").on("click","a",function(){
-			$("#fuzeren").attr("title",$(this).attr("id"))
-			$("#fuzeren").val($(this).html());
-			$("#fzrlist").hide();
-		})
-		//点击新增负责人
-		$("#add_fzr").on("click",function(){
-			if($("#fuzeren").val()=="")
-			{
-				alert('负责人姓名不能为空');
-				$("#fuzeren").select();
-				return false;	
-			}else
-			{
-				$.get("{:U("isfzr")}",{val:$("#fuzeren").val()},function(data){
-						if(data==0)
-						{
-							alert("没有这个人员哦~");
-							$("#fuzeren").select();
-							return false;
-						}else
-						{
-							name=$("#fuzeren").val();
-							id=$("#fuzeren").attr("title");
-							$(".fzrlist").append('<span class="btn btn-danger">'+name+" x</span> ");
-							$("#fzrlsitwz").append('<input type="hidden" class="fzrlist" name="fzrlist[]" value="'+id+'">');
-							
-						}
-				})	
-			
-			}
-			
-		})
-		//删除已选负责人
-		$(".fzrlist").on("click","span",function(){
-			$(".fzrlist").eq($(this).index()).remove();
-			$(this).remove();
-		})
-		
-		$("#contract_no").on("change",function(){
-			a=$("#contract_no").find("option:selected").attr("id");
-			//alert($(this).val())
-			
-			$("#contract_id").val(a);
-			//alert($("#contract_id").val());
-			//contract_id
-		})
-		
-		//动态加载员工姓名
-		$("#fuzeren").keyup(function(){
-			//$("#hjd").html($("#hjd").html()+"1");
-			val=$(this).val();
-			$.post("{:U('keyup_fzrlist')}",{val:val},function(data){
-					if(data!='')
-					{
-						$("#fzrlist").html(data);
-					}
-			})
-			$("#fzrlist").show();
-		})
-		
-		
-		$("#gongsi").on("blur",function(){
-			setTimeout(function () {
-				$("#adlist").hide();
-            }, 300);
-		})
-		
-		//动态检查账户名称是否被添加过
-		$("#a_users").keyup(function(){
-			var val=$(this).val();
-			$.post("{:U('keyup_isaddusersname')}",{val:val},function(data){
-					$("#keyup_isaddusersname").html(data);
-			})
-            $("#appid").html('');
-		})
-		
-		$("#formid").submit(function(){
-	
-		if($("#a_users").val()=="")
-		{
-			alert("请填写用户名");
-			$("#a_users").select();
-			return false;	
-		}
+            $("#contract_no").on("change",function(){
+                a=$("#contract_no").find("option:selected").attr("id");
+                //alert($(this).val())
 
-//		if($("#appid").val()==null)
-//        {
-//            alert('appid不能为空');
-//            return false;
-//        }
+                $("#contract_id").val(a);
+                //alert($("#contract_id").val());
+                //contract_id
+            })
 
-				
-	})
-    });
-</script>
+            //动态加载员工姓名
+            $("#fuzeren").keyup(function(){
+                //$("#hjd").html($("#hjd").html()+"1");
+                val=$(this).val();
+                $.post("/Admin/Account/keyup_fzrlist.html",{val:val},function(data){
+                    if(data!='')
+                    {
+                        $("#fzrlist").html(data);
+                    }
+                })
+                $("#fzrlist").show();
+            })
+
+
+            $("#gongsi").on("blur",function(){
+                setTimeout(function () {
+                    $("#adlist").hide();
+                }, 300);
+            })
+
+            //动态检查账户名称是否被添加过
+            $("#a_users").keyup(function(){
+                var val=$(this).val();
+                $.post("/Admin/Account/keyup_isaddusersname.html",{val:val},function(data){
+                    $("#keyup_isaddusersname").html(data);
+                })
+                $("#appid").html('');
+            })
+            $("#formid").submit(function() {
+                if($("#a_users").val()=="") {
+                    alert("请填写用户名");
+                    $("#a_users").select();
+                    return false;
+                }
+                //点击匹配，后提交
+                if(btn != 0) {
+                    alert("请先进行匹配账户");
+                    return false;
+                }
+                //		if($("#appid").val()==null)
+                //        {
+                //            alert('appid不能为空');
+                //            return false;
+                //        }
+            })
+        });
+    </script>
 <style type="text/css">
 	#adlist{ margin-left:15px;}
 	#adlist li a,#fzrlist li a{ cursor:pointer;}

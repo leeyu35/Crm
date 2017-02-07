@@ -216,6 +216,7 @@ class ApiController extends RestController{
             } elseif ($date_type == 'week') {
                 //最近四周
                 $zhouar = teodate_week(4, 'Monday');//本周开始时间和结束时间
+
                 foreach ($zhouar as $key=>$val)
                 {
                     $time_start = strtotime($val['start']);
@@ -249,6 +250,7 @@ class ApiController extends RestController{
             $data['code'] = 200;
             $data['counsumption'] = $list;
         }
+
         $this->response($data,'json');
     }
 
@@ -854,7 +856,7 @@ class ApiController extends RestController{
 
     }
     //公司的日周月消耗
-    //昨日消耗列表
+
     public function customer_date_counsumption_line()
     {
         $avid=I('get.id');
@@ -867,6 +869,7 @@ class ApiController extends RestController{
 
         } elseif ($type == 'week') {
             $zhouar = teodate_week(4, 'Monday');//本周开始时间和结束时间
+
             foreach ($zhouar as $key=>$val)
             {
                 $time_start = strtotime($val['start']);
@@ -948,7 +951,39 @@ class ApiController extends RestController{
         $this->response($data,'json');
     }
 
+    //账户详情
+    public function account_info()
+    {
+        $id = I('get.id');
+        if ($id == '') {
+            $data['code'] = 400;
+            $data['mes'] = '参数错误';
+            $this->response($data, 'json');
+            exit;
+        }else
+        {
+            //账户所属合同
+            $account_id=I('get.id');
+            $info=M("Account")->find($account_id);
+            //合同号
+            $hetong=M("Contract")->field('contract_no')->find($info['contract_id']);
+            //账户负责人
+            $fzr=M("Account_users")->field("b.name")->join(" a left join jd_users b on a.u_id = b.id ")->where("account_id=$id")->find();
 
+            //公司名称
+            $ad=M("Customer")->field('advertiser')->find($info['advertiser']);
+            $info2['appname']=$info['appname'];
+            $info2['a_users']=$info['a_users'];
+            $info2['contract_no']=$hetong['contract_no'];
+            $info2['advertiser']=$ad['advertiser'];
+            $info2['sem']=$fzr['name'];
+            $info2['appid']=$info['appid'];
+
+        }
+        $data['code'] = 200;
+        $data['data'] = $info2;
+        $this->response($data,'json');
+    }
     /*
      * 部门消耗 -2017年1月23日10:17:50
      *
@@ -994,16 +1029,7 @@ class ApiController extends RestController{
     }
 
 
-    public function account_info()
-    {
-        $id = I('get.id');
-        if ($id == '') {
-            $data['code'] = 400;
-            $data['mes'] = '参数错误';
-            $this->response($data, 'json');
-            exit;
-        }
-    }
+
 
 }
 
