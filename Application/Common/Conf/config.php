@@ -129,7 +129,8 @@ $config_1= array(
         //部门消耗
         array('Api/sem_list','Admin/Api/sem_list',array('method'=>'get')),//sem 列表
         array('Api/market_list','Admin/Api/market_list',array('method'=>'get')),//销售列表
-
+        array('Api/sem_account_counsumption_3_line_list','Admin/Api/sem_account_counsumption_3_line_list',array('method'=>'get')),//某个sem 所有账户三 日周月消耗
+        array('Api/sem_account_counsumption_3_line','Admin/Api/sem_account_counsumption_3_line',array('method'=>'get')),//某个sem 所有账户三 日周月消耗方法
 
 
     // array('Api','Admin/Api/index','hjd=1',array('method'=>'get')),

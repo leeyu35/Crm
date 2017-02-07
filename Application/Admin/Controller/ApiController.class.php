@@ -695,10 +695,10 @@ class ApiController extends RestController{
         {
             $yuear=teodate_month();//本月开始时间和结束时间
             $time_start=strtotime($yuear['start']);
-            $time_end=strtotime($yuear['end']);
+            $time_end=strtotime($yuear['end']."+1 day");
         }
         $list=$customer->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.iszuofei,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.ctime>'$time_start' and a.ctime<'$time_end' ")->order("ctime desc")->select();
-
+        
         foreach($list as $key => $val)
         {
             //提交人
@@ -1006,6 +1006,77 @@ class ApiController extends RestController{
     $data['code'] = 200;
     $data['data'] = $list;
     $this->response($data,'json');
+    }
+    //某个sem 所有账户三 日周月消耗
+    public function sem_account_counsumption_3_line_list(){
+        $id=I('get.id');//semid
+        $type=I('get.type');//type
+        $name=users_info($id);
+
+        $account=M("Account");
+        $idin=M("AccountUsers")->field('account_id')->where("u_id=$id")->select(false);
+        $list=$account->field('id,a_users')->where("id in($idin)")->select();
+        foreach ($list as $key=>$val)
+        {
+            if($type=='day')
+            {
+                $list[$key]['counsumption']=hjd_curl("http://localhost/Api/sem_account_counsumption_3_line?id=$val[id]&type=day");
+            }elseif($type=='week')
+            {
+                $list[$key]['counsumption']=hjd_curl("http://localhost/Api/sem_account_counsumption_3_line?id=$val[id]&type=week");
+            }else
+            {
+                $list[$key]['counsumption']=hjd_curl("http://localhost/Api/sem_account_counsumption_3_line?id=$val[id]&type=month");
+            }
+
+          //  $list[$key]['week']=hjd_curl("http://localhost/Api/sem_account_counsumption_3_line?id=$val[id]&type=week");
+          //  $list[$key]['month']=hjd_curl("http://localhost/Api/sem_account_counsumption_3_line?id=$val[id]&type=month");
+        }
+        $data['code'] = 200;
+        $data['data'] = $list;
+        $data['name'] = $name['name'];
+        $this->response($data,'json');
+
+    }
+
+    public function sem_account_counsumption_3_line(){
+        $account_id=I('get.id');
+        $appid=M("Account")->field('appid')->find($account_id);
+        $type = I('get.type');
+        $xiaohao = M("AccountConsumption");
+        if ($type == 'day') {
+            //最近七天
+            $j7['start']=$time_start=strtotime(date("Y-m-d")."-3 day");
+            $j7['end']=$time_end=strtotime(date("Y-m-d"));
+
+            $list=$xiaohao->field('date,sum(baidu_cost_total) as consumption')->where("starttime>='$j7[start]'  and starttime<'$j7[end]' and appid='$appid[appid]'")->group('date')->order("date asc")->select();
+
+        } elseif ($type == 'week') {
+            $zhouar = teodate_week(3, 'Monday');//本周开始时间和结束时间
+            foreach ($zhouar as $key=>$val)
+            {
+                $time_start = strtotime($val['start']);
+                $time_end = strtotime($val['end'] . "+1 day");
+                $Consumption=$xiaohao->where("starttime>='$time_start'  and starttime<'$time_end' and appid='$appid[appid]' ")->sum('baidu_cost_total');
+                $list[$key]['date']=$val['start'];
+                $list[$key]['consumption']=$Consumption?$Consumption:0;
+            }
+
+        } elseif ($type == 'month') {
+            $yuear = teodate_month_12(3);//本月开始时间和结束时间
+            foreach ($yuear as $key=>$val)
+            {
+                $time_start = strtotime($val['start']);
+                $time_end = strtotime($val['end'] . "+1 day");
+                $Consumption=$xiaohao->where("starttime>='$time_start'  and starttime<'$time_end' and appid='$appid[appid]'")->sum('baidu_cost_total');
+                $list[$key]['date']=$val['start'];
+                $list[$key]['consumption']=$Consumption?$Consumption:0;
+            }
+
+        }
+        $data['code'] = 200;
+        $data['data'] = $list;
+        $this->response($data,'json');
     }
 
     //销售部门
