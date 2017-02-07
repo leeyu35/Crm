@@ -838,10 +838,10 @@ function teodate_week($to,$zhouji,$strdate=''){
 
     }
     */
-    $bb=0;
-    for($i=$to;$i>=1;$i--)
+    $bb=1;
+    for($i=$to;$i>0;$i--)
     {
-        $start=strtotime("last $zhouji -$i week",$a);//起始时间;
+        $start=strtotime("this $zhouji -$i week",$a);//起始时间;
         $array[$bb]['start']=date('Y-m-d',$start);
         $enddate=date("Y-m-d",strtotime("+1 week ",$start));
         if($enddate > date("Y-m-d"))
@@ -857,6 +857,34 @@ function teodate_week($to,$zhouji,$strdate=''){
 
     return $array;
 }
+function teodate_week2($to,$zhouji,$strdate=''){
+    //如果没有指定日期则默认当前日期
+    if($strdate=='')
+    {
+        $strdate=date('Y-m-d');
+    }
+    $a=strtotime($strdate."+1 day"); //因为是获取的上周几 所以给她加一天，比如 今天周一，要获取上周一，则 改认为今天是周二这样去读
+    //获取几周日期
+
+    for($i=0;$i<$to;$i++)
+    {
+        $start=strtotime("last $zhouji -$i week",$a);//起始时间;
+        $array[$i]['start']=date('Y-m-d',$start);
+        $enddate=date("Y-m-d",strtotime("+1 week ",$start));
+        if($enddate > date("Y-m-d"))
+        {
+            //$enddate=date("Yq-m-d",strtotime("-1 day"));
+            //  $enddate=date("Y-m-d");
+        }
+        $array[$i]['end']=$enddate;//结束日期
+    }
+
+
+    //echo $a;
+
+    return $array;
+}
+
 function date_daye_j7(){
     $array['start']=$time_start=strtotime(date("Y-m-d")."-7 day");
     $array['end']=$time_end=strtotime(date("Y-m-d"));

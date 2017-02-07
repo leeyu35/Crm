@@ -576,7 +576,9 @@ class ApiController extends RestController{
             $data['mes']='缺少参数';
         }else {
             $account_counsumption=M("AccountConsumption");
-            $zhouar=teodate_week(1,"Monday");//本周开始时间和结束时间
+            $zhouar=teodate_week2(1,"Monday");//本周开始时间和结束时间
+
+
             $time_start=strtotime($zhouar[0]['start']);
             $time_end=strtotime($zhouar[0]['end']."+1 day");
             if(I('type')!='all')
@@ -587,6 +589,7 @@ class ApiController extends RestController{
                 $where="id != 0";
             }
             $sum=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->sum("baidu_cost_total");
+
             if(!$sum){$sum="0";}
             $data['code'] = 200;
             $data['counsumption'] = number_format($sum,2);
@@ -603,6 +606,7 @@ class ApiController extends RestController{
         }else {
             $account_counsumption=M("AccountConsumption");
             $yuear=teodate_month();//本月开始时间和结束时间
+
             $time_start=strtotime($yuear['start']);
             $time_end=strtotime($yuear['end']);
             if(I('type')!='all')
@@ -653,7 +657,7 @@ class ApiController extends RestController{
     private function sem_week_counsumption($appid,$semid){
 
         $account_counsumption=M("AccountConsumption");
-        $zhouar=teodate_week(1,"Monday");//本周开始时间和结束时间
+        $zhouar=teodate_week2(1,"Monday");//本周开始时间和结束时间
         $time_start=strtotime($zhouar[0]['start']);
         $time_end=strtotime($zhouar[0]['end']."+1 day");
         $sum+=$account_counsumption->where("semid=$semid and starttime>='$time_start'  and starttime<'$time_end' and appid='$appid'")->sum("baidu_cost_total");
@@ -688,7 +692,7 @@ class ApiController extends RestController{
             $time_end=strtotime($zuori['end']."+1 day");
         }elseif ($type=='week')
         {
-            $zhouar=teodate_week(1,'Monday');//本周开始时间和结束时间
+            $zhouar=teodate_week2(1,'Monday');//本周开始时间和结束时间
             $time_start=strtotime($zhouar[0]['start']);
             $time_end=strtotime($zhouar[0]['end']."+1 day");
         }elseif($type=='month')
@@ -698,7 +702,7 @@ class ApiController extends RestController{
             $time_end=strtotime($yuear['end']."+1 day");
         }
         $list=$customer->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.iszuofei,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.ctime>'$time_start' and a.ctime<'$time_end' ")->order("ctime desc")->select();
-        
+
         foreach($list as $key => $val)
         {
             //提交人
@@ -723,7 +727,7 @@ class ApiController extends RestController{
             $time_end=strtotime($zuori['end']."+1 day");
         }elseif ($type=='week')
         {
-            $zhouar=teodate_week(1,'Monday');//本周开始时间和结束时间
+            $zhouar=teodate_week2(1,'Monday');//本周开始时间和结束时间
             $time_start=strtotime($zhouar[0]['start']);
             $time_end=strtotime($zhouar[0]['end']."+1 day");
         }elseif($type=='month')
@@ -841,7 +845,7 @@ class ApiController extends RestController{
             $time_end=strtotime($zuori['end']."+1 day");
         }elseif ($type=='week')
         {
-            $zhouar=teodate_week(1,'Monday');//本周开始时间和结束时间
+            $zhouar=teodate_week2(1,'Monday');//本周开始时间和结束时间
             $time_start=strtotime($zhouar[0]['start']);
             $time_end=strtotime($zhouar[0]['end']."+1 day");
         }elseif($type=='month')
@@ -868,7 +872,7 @@ class ApiController extends RestController{
             $list=$xiaohao->field('date,sum(baidu_cost_total) as consumption')->where("starttime>='$j7[start]'  and starttime<'$j7[end]' and avid=$avid")->group('date')->order("date asc")->select();
 
         } elseif ($type == 'week') {
-            $zhouar = teodate_week(4, 'Monday');//本周开始时间和结束时间
+            $zhouar = teodate_week(4, 'Monday');//本周开始时间和结束时间 正序
 
             foreach ($zhouar as $key=>$val)
             {
@@ -1003,6 +1007,7 @@ class ApiController extends RestController{
         $list[$key]['month_counsumption']=$month['counsumption'];
 
     }
+
     $data['code'] = 200;
     $data['data'] = $list;
     $this->response($data,'json');
@@ -1053,6 +1058,7 @@ class ApiController extends RestController{
 
         } elseif ($type == 'week') {
             $zhouar = teodate_week(3, 'Monday');//本周开始时间和结束时间
+
             foreach ($zhouar as $key=>$val)
             {
                 $time_start = strtotime($val['start']);
