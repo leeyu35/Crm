@@ -360,14 +360,14 @@ class ApiController extends RestController{
         $customer=M('Contract');
         $zhouar=teodate_week(1,"Monday");
 
-        $strat=strtotime($zhouar[0]['start']);
-        $end=strtotime($zhouar[0]['end'] . "+1 day");
+        $strat=strtotime($zhouar[1]['start']);
+        $end=strtotime($zhouar[1]['end'] . "+1 day");
         if(I('get.usersid')!='')
         {
             $where=" and market='".I('get.usersid')."'";
         }
-
-        $count=$customer->field(1)->where("ctime>$strat and ctime<$end $where ")->count('id');
+        
+        $count=$customer->field(1)->where("ctime>$strat and ctime<$end.$where ")->count('id');
 
         $data['code'] = 200;
         $data['count'] = $count;

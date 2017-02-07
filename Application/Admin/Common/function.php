@@ -847,7 +847,7 @@ function teodate_week($to,$zhouji,$strdate=''){
         if($enddate > date("Y-m-d"))
         {
             //$enddate=date("Yq-m-d",strtotime("-1 day"));
-            //  $enddate=date("Y-m-d");
+            //$enddate=date("Y-m-d");
         }
         $array[$bb]['end']=$enddate;//结束日期
         $bb++;
