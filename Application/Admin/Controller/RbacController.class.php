@@ -29,6 +29,9 @@ class RbacController extends CommonController
             if($val['audit_3']){
                 $list[$key]['audit_3']=group_name($val['audit_3']);
             }
+            if($val['audit_4']){
+                $list[$key]['audit_4']=group_name($val['audit_4']);
+            }
             if($val['add_']){
                 $list[$key]['add_']=group_name($val['add_']);
             }
@@ -65,6 +68,8 @@ class RbacController extends CommonController
     $data['title']=I('post.title');
     $data['audit_1']=implode(',',I('post.audit_1'));
     $data['audit_2']=implode(',',I('post.audit_2'));
+    $data['audit_3']=implode(',',I('post.audit_3'));
+    $data['audit_4']=implode(',',I('post.audit_4'));
     $data['add_']=implode(',',I('post.add_'));
     $data['update_']=implode(',',I('post.update_'));
     $data['delete_']=implode(',',I('post.delete_'));
@@ -100,6 +105,7 @@ class RbacController extends CommonController
         $data['audit_1']=implode(',',I('post.audit_1'));
         $data['audit_2']=implode(',',I('post.audit_2'));
         $data['audit_3']=implode(',',I('post.audit_3'));
+        $data['audit_4']=implode(',',I('post.audit_4'));
         $data['add_']=implode(',',I('post.add_'));
         $data['update_']=implode(',',I('post.update_'));
         $data['delete_']=implode(',',I('post.delete_'));

@@ -58,6 +58,16 @@
     </volist>
   </div>
 
+  <div class="form-group">
+    <label>四级权限审核人：</label>
+    <volist id="grouplist9" name="grouplist">
+      <label class="checkbox-inline">
+        <input type="checkbox" id="inlineCheckbox1" name="audit_4[]" value="{$grouplist9.id}" <in name="grouplist9.id" value="$info[audit_4]">
+        checked
+      </in>>{$grouplist9.group_name}
+      </label>
+    </volist>
+  </div>
 
   <div class="form-group">
     <label>新增权限持有人：</label>

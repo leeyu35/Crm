@@ -179,6 +179,17 @@
 
                         </if>
 
+                        <if condition="($history[type] eq '续费') OR ($history[type] eq '补款')">
+                            <if condition="$history[audit_4] eq 1">
+                                <span data-toggle="tooltip" data-placement="top" title="四级审核已通过"  class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
+                                <elseif condition="$history[audit_4] eq 2"/>
+                                <span data-toggle="tooltip" data-placement="top" title="四级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
+                                <elseif condition="$history[audit_4] eq 0"/>
+                                <span data-toggle="tooltip" data-placement="top" title="四级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
+                            </if>
+
+
+                        </if>
 
                     </td>
                 </tr>

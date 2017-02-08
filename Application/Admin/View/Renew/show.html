@@ -303,6 +303,40 @@
                                         </a>
                                     </div>
                                 </li>
+
+                                <li class="box-right-sanshen">
+                                    <div class="shenhe-title">
+                                        <p class="shenhe-text"><b>四审</b></p>
+                                    </div>
+
+                                    <a href="javascript:;" class="san-shenhe"><div class="shenhe-radio" style="margin-right
+                                            :15px;">
+                                        <if condition="($info[audit_4] eq 0)">
+                                            <i class="iconfont icon-select icon">&#xe604;</i>
+                                            <elseif condition="($info[audit_4] eq 1)"/>
+                                            <i class="iconfont icon-select icon  icon-ok">&#xe607;</i>
+                                            <elseif condition="($info[audit_4] eq 2)"/>
+                                            <i class="iconfont icon-select icon  icon-no">&#xe629;</i>
+                                        </if>
+                                    </div>
+                                    </a>
+                                    <div class="shenhe-select" {$info[audit_4]!='0'?'style="display:none"':''}>
+                                    <a href="javascript:;"  class="zp_cl" id="{:U("shenhe?type=audit_4&id=$info[id]&yid=$yid")}"><div class="shenhe-yes">
+                                        <div class="tg-radio">
+                                            <i class="iconfont icon icon-ok">&#xe607;</i>
+                                        </div>
+                                        <p>通过</p>
+                                    </div>
+                                    </a>
+                                    <a href="javascript:;"   class="zp_cl" id="{:U("shenhe?type=audit_4&id=$info[id]&ju=1&yid=$yid")}"><div class="shenhe-no">
+                                        <div class="wtg-radio">
+                                            <i class="iconfont icon icon-no">&#xe629;</i>
+                                        </div>
+                                        <p>未通过</p>
+                                    </div>
+                                    </a>
+                            </div>
+                            </li>
                             </ul>
                             <div class="clear"></div>
                         </div>
@@ -342,6 +376,14 @@
             <span class="shyes">三级审核已审核(审核人：{$users_info5?$users_info5:'默认'})</span>
             <elseif condition="$info[audit_3] eq 2"/>
             <span class="shno1">三级审核未通过(审核人：{$users_info5?$users_info5:'默认'})</span>
+        </if>
+
+        <if condition="$info[audit_4] eq 0">
+            <span class="shno">四级审核未审核</span>
+            <elseif condition="$info[audit_4] eq 1"/>
+            <span class="shyes">四级审核已审核(审核人：{$users_info6?$users_info6:'默认'})</span>
+            <elseif condition="$info[audit_4] eq 2"/>
+            <span class="shno1">四级审核未通过(审核人：{$users_info6?$users_info6:'默认'})</span>
         </if>
     </div>
 </div>
