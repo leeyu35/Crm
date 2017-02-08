@@ -366,7 +366,7 @@ class ApiController extends RestController{
         {
             $where=" and market='".I('get.usersid')."'";
         }
-        
+
         $count=$customer->field(1)->where("ctime>$strat and ctime<$end.$where ")->count('id');
 
         $data['code'] = 200;
@@ -698,6 +698,7 @@ class ApiController extends RestController{
         }elseif($type=='month')
         {
             $yuear=teodate_month();//本月开始时间和结束时间
+
             $time_start=strtotime($yuear['start']);
             $time_end=strtotime($yuear['end']."+1 day");
         }
@@ -1037,6 +1038,7 @@ class ApiController extends RestController{
           //  $list[$key]['week']=hjd_curl("http://localhost/Api/sem_account_counsumption_3_line?id=$val[id]&type=week");
           //  $list[$key]['month']=hjd_curl("http://localhost/Api/sem_account_counsumption_3_line?id=$val[id]&type=month");
         }
+
         $data['code'] = 200;
         $data['data'] = $list;
         $data['name'] = $name['name'];
@@ -1070,6 +1072,7 @@ class ApiController extends RestController{
 
         } elseif ($type == 'month') {
             $yuear = teodate_month_12(3);//本月开始时间和结束时间
+
             foreach ($yuear as $key=>$val)
             {
                 $time_start = strtotime($val['start']);
@@ -1082,6 +1085,7 @@ class ApiController extends RestController{
         }
         $data['code'] = 200;
         $data['data'] = $list;
+
         $this->response($data,'json');
     }
 

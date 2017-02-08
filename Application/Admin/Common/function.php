@@ -838,7 +838,7 @@ function teodate_week($to,$zhouji,$strdate=''){
 
     }
     */
-    $bb=1;
+    $bb=0;
     for($i=$to;$i>0;$i--)
     {
         $start=strtotime("this $zhouji -$i week",$a);//起始时间;
