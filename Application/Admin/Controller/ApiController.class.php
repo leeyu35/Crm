@@ -1174,6 +1174,7 @@ class ApiController extends RestController{
             $name=users_info($id);
             $data['code'] = 200;
             $data['data'] = $list;
+            $data['name'] = $name['name'];
             $this->response($data,'json');
         }
 
