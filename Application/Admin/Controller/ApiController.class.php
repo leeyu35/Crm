@@ -1170,14 +1170,15 @@ class ApiController extends RestController{
             $this->response($data,'json');
         }else {
             $contract=M("Contract");
-            $list=$contract->field('id,contract_no,advertiser')->where("market='$id'")->select();
+            $list=$contract->field('id,contract_no,advertiser,ctime')->where("market='$id'")->select();
             $name=users_info($id);
             foreach ($list as $key=>$val)
             {
                 $gongsi=kehu($val['advertiser']);
                 $list[$key]['advertiser']=$gongsi['advertiser'];
+                $list[$key]['advertiser']=date("Y-m-d",$val['ctime']);
             }
-        
+
             $data['code'] = 200;
             $data['data'] = $list;
             $data['name'] = $name['name'];
