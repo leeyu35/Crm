@@ -519,8 +519,8 @@ class RenewController extends  CommonController
         $submitusers5=users_info($info[susers3]);
         $this->users_info5=$submitusers5['name'];
         //四级审核人
-        $submitusers6=users_info($info[susers3]);
-        $this->users_info6=$submitusers5['name'];
+        $submitusers6=users_info($info[susers4]);
+        $this->users_info6=$submitusers6['name'];
         //产品线
         $product_line=M("ProductLine");
         $this->product_line_list=$product_line->field("id,name,title")->order("id asc")->select();
