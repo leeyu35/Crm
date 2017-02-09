@@ -1174,10 +1174,10 @@ class ApiController extends RestController{
             $name=users_info($id);
             foreach ($list as $key=>$val)
             {
-                $gongsi=kehu($list['advertiser']);
+                $gongsi=kehu($val['advertiser']);
                 $list[$key]['advertiser']=$gongsi['advertiser'];
             }
-
+        
             $data['code'] = 200;
             $data['data'] = $list;
             $data['name'] = $name['name'];
