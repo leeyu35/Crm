@@ -519,17 +519,33 @@ class ApiController extends RestController{
         foreach ($dk_sm as $key=>$val)
         {
             $zuijinhk=$backmoney->where("advertiser=$val[id] and is_huikuan=1")->field('payment_time,money')->order("payment_time desc")->limit('0,5')->select();
+
             foreach ($zuijinhk as $k=>$v)
             {
                 $zuijinhk[$k]['payment_time']=date("Y-m-d",$v['payment_time']);
                 $zuijinhk[$k]['money']=number_format($v['money'],2);
                 //number_format
             }
+
+            usort($zuijinhk,function($a,$b){
+                if($a>$b)
+                {
+                    return 1;
+                }elseif($a<$b)
+                {
+                    return -1;
+                }elseif($a==$b)
+                {
+                    return 0;
+                }
+            });
+
             $dk_sm[$key]['huikuan_record']=$zuijinhk;
             $dk_sm[$key]['yu_e']=number_format($val['yu_e'],2);
             $dk_sm[$key]['huikuan']=number_format($val['huikuan'],2);
             $dk_sm[$key]['yue']=number_format($val['yue'],2);
         }
+      
         $data['code'] = 200;
         $data['diankuan_huikuan_record'] = $dk_sm;
         $this->response($data,'json');
