@@ -501,24 +501,28 @@ class ApiController extends RestController{
         switch ($type){
             case 'backmoney':
                 //本月总回款
-                $list=$backmoney->field('id,advertiser,money,payment_time,account,market,ctime,appname')->where(" payment_time >='$start' and is_huikuan=1 and audit_1!=2 and audit_2!=2")->select();
+                $list=$backmoney->field('id,advertiser,money,payment_time,account,market,ctime,appname,users2')->where(" payment_time >='$start' and is_huikuan=1 and audit_1!=2 and audit_2!=2")->select();
                 break;
             case 'fukuan':
-                $list=$backmoney->field('id,advertiser,money,payment_time,account,market,ctime,appname')->where(" payment_time >='$start' and (payment_type=1 or payment_type=2) and audit_1!=2 and audit_2!=2")->select();
+                $list=$backmoney->field('id,advertiser,money,payment_time,account,market,ctime,appname,users2')->where(" payment_time >='$start' and (payment_type=1 or payment_type=2) and audit_1!=2 and audit_2!=2")->select();
                 break;
             case 'bukuan':
-                $list=$backmoney->field('id,advertiser,money,payment_time,account,market,ctime,appname')->where("payment_type=3 and audit_1!=2 and audit_2!=2")->select();
+                $list=$backmoney->field('id,advertiser,money,payment_time,account,market,ctime,appname,users2')->where("payment_type=3 and audit_1!=2 and audit_2!=2")->select();
                 break;
         }
         foreach ($list as $key=>$val)
         {
-            $K=kehu($val['advertiser']);
+            $K=kehu($val['advertiser']);//公司名称
+            $market=users_info($val['market']);//销售名称
+            $shangwu=users_info($val['users2']);//销售名称
             $account=M('Account')->field('a_users')->find($val['account']?$val['account']:'');
             $list[$key]['advertisername']=$K['advertiser'];
             $list[$key]['account_name']=$account['a_users'];
             $list[$key]['ctime']=date("Y-m-d",$val['ctime']);
             $list[$key]['payment_time']=date("Y-m-d",$val['payment_time']);
             $list[$key]['money']=number_format($val['money'],2);
+            $list[$key]['market']=$market['name'];
+            $list[$key]['business']=$shangwu['name'];
         }
         $data['code'] = 200;
         $data['data'] = $list;
