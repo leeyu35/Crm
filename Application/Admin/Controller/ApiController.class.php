@@ -1186,8 +1186,45 @@ class ApiController extends RestController{
         }
 
     }
+    //根据合同id 获取合同的日周月消耗
+    public function contract_date_counsumption_line()
+    {
+        $contractid=I('get.id');
+        $type = I('get.type');
+        $xiaohao = M("AccountConsumption");
+        if ($type == 'day') {
+            //最近七天
+            $j7=date_daye_j7();
+            $list=$xiaohao->field('date,sum(baidu_cost_total) as consumption')->where("starttime>='$j7[start]'  and starttime<'$j7[end]' and htid=$contractid")->group('date')->order("date asc")->select();
 
+        } elseif ($type == 'week') {
+            $zhouar = teodate_week(4, 'Monday');//本周开始时间和结束时间 正序
 
+            foreach ($zhouar as $key=>$val)
+            {
+                $time_start = strtotime($val['start']);
+                $time_end = strtotime($val['end'] . "+1 day");
+                $Consumption=$xiaohao->where("starttime>='$time_start'  and starttime<'$time_end' and htid=$contractid")->sum('baidu_cost_total');
+                $list[$key]['date']=$val['start'];
+                $list[$key]['consumption']=$Consumption?$Consumption:0;
+            }
+
+        } elseif ($type == 'month') {
+            $yuear = teodate_month_12(12);//本月开始时间和结束时间
+            foreach ($yuear as $key=>$val)
+            {
+                $time_start = strtotime($val['start']);
+                $time_end = strtotime($val['end'] . "+1 day");
+                $Consumption=$xiaohao->where("starttime>='$time_start'  and starttime<'$time_end' and htid=$contractid")->sum('baidu_cost_total');
+                $list[$key]['date']=$val['start'];
+                $list[$key]['consumption']=$Consumption?$Consumption:0;
+            }
+
+        }
+        $data['code'] = 200;
+        $data['data'] = $list;
+        $this->response($data,'json');
+    }
 
 }
 
