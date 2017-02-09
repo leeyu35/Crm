@@ -501,13 +501,13 @@ class ApiController extends RestController{
         switch ($type){
             case 'backmoney':
                 //本月总回款
-                $list=$backmoney->field('id,advertiser,money,payment_time,account,market,ctime')->where(" payment_time >='$start' and is_huikuan=1 and audit_1!=2 and audit_2!=2")->select();
+                $list=$backmoney->field('id,advertiser,money,payment_time,account,market,ctime,appname')->where(" payment_time >='$start' and is_huikuan=1 and audit_1!=2 and audit_2!=2")->select();
                 break;
             case 'fukuan':
-                $list=$backmoney->field('id,advertiser,money,payment_time,account,market,ctime')->where(" payment_time >='$start' and (payment_type=1 or payment_type=2) and audit_1!=2 and audit_2!=2")->select();
+                $list=$backmoney->field('id,advertiser,money,payment_time,account,market,ctime,appname')->where(" payment_time >='$start' and (payment_type=1 or payment_type=2) and audit_1!=2 and audit_2!=2")->select();
                 break;
             case 'bukuan':
-                $list=$backmoney->field('id,advertiser,money,payment_time,account,market,ctime')->where("payment_type=3 and audit_1!=2 and audit_2!=2")->select();
+                $list=$backmoney->field('id,advertiser,money,payment_time,account,market,ctime,appname')->where("payment_type=3 and audit_1!=2 and audit_2!=2")->select();
                 break;
         }
         foreach ($list as $key=>$val)
