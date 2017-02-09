@@ -1141,7 +1141,7 @@ class ApiController extends RestController{
                 $c_day=hjd_curl("http://localhost/Api/contract_day?usersid=$val[id]");
                 $list[$key]['counsumption']=$day['counsumption'];
                 $list[$key]['contract']=$c_day['count'];
-            }elseif($ytpe=='week')
+            }elseif($type=='week')
             {
                 $week=hjd_curl("http://localhost/Api/find_market_week_counsumption?usersid=$val[id]");
                 $c_week=hjd_curl("http://localhost/Api/contract_week?usersid=$val[id]");
