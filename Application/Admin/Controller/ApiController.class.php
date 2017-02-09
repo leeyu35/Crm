@@ -388,6 +388,22 @@ class ApiController extends RestController{
         $data['count'] = $count;
         $this->response($data,'json');
     }
+    //日新增合同
+    public function contract_day(){
+        $customer=M('Contract');
+        $zhouar=Yesterday();
+        $strat=strtotime($zhouar['start']);
+        $end=strtotime($zhouar['end'] . "+1 day");
+        if(I('get.usersid')!='')
+        {
+            $where=" and market='".I('get.usersid')."'";
+        }
+        $count=$customer->field(1)->where("ctime>$strat and ctime<$end.$where")->count('id');
+        $data['code'] = 200;
+        $data['count'] = $count;
+        $this->response($data,'json');
+    }
+
     //今日款项 根据type 返回 本日 回款 续费  垫款数据
     public function today_day_type()
     {
@@ -545,7 +561,7 @@ class ApiController extends RestController{
             $dk_sm[$key]['huikuan']=number_format($val['huikuan'],2);
             $dk_sm[$key]['yue']=number_format($val['yue'],2);
         }
-      
+
         $data['code'] = 200;
         $data['diankuan_huikuan_record'] = $dk_sm;
         $this->response($data,'json');
@@ -1110,21 +1126,58 @@ class ApiController extends RestController{
     {
         $users = M("Users");
         $list = $users->field('id,name')->where('groupid in(15,9,2) and is_delete!=1')->select();
+        $type=I('get.type');
         foreach ($list as $key => $val)
         {
-            $day=hjd_curl("http://localhost/Api/find_market_day_counsumption?usersid=$val[id]");
-            $week=hjd_curl("http://localhost/Api/find_market_week_counsumption?usersid=$val[id]");
-            $month=hjd_curl("http://localhost/Api/find_market_month_counsumption?usersid=$val[id]");
-            $list[$key]['day_counsumption']=$day['counsumption'];
-            $list[$key]['week_counsumption']=$week['counsumption'];
-            $list[$key]['month_counsumption']=$month['counsumption'];
+            if($type=='day')
+            {
+                //日消耗和日新增合同
+                $day=hjd_curl("http://localhost/Api/find_market_day_counsumption?usersid=$val[id]");
+                $c_day=hjd_curl("http://localhost/Api/contract_day?usersid=$val[id]");
+                $list[$key]['counsumption']=$day['counsumption'];
+                $list[$key]['contract']=$c_day['count'];
+            }elseif($ytpe=='week')
+            {
+                $week=hjd_curl("http://localhost/Api/find_market_week_counsumption?usersid=$val[id]");
+                $c_week=hjd_curl("http://localhost/Api/contract_week?usersid=$val[id]");
+                $list[$key]['counsumption']=$week['counsumption'];
+                $list[$key]['contract']=$c_week['count'];
+            }elseif($type=='month')
+            {
+                $month=hjd_curl("http://localhost/Api/find_market_month_counsumption?usersid=$val[id]");
+                $c_month=hjd_curl("http://localhost/Api/contract_month?usersid=$val[id]");
+                $list[$key]['counsumption']=$month['counsumption'];
+                $list[$key]['contract']=$c_month['count'];
+            }
+
+
+
+
 
         }
         $data['code'] = 200;
         $data['data'] = $list;
-        $this->response($data,'json');
+
     }
 
+    //点击销售进入的销售客户列表页面
+    public function find_marker_contract_counsumption_list(){
+        $id=I('get.usersid');
+        if($id=='')
+        {
+            $data['code']=400;
+            $data['mes']='缺少参数';
+            $this->response($data,'json');
+        }else {
+            $contract=M("Contract");
+            $list=$contract->field('id,contract_no,advertiser')->where("market='$id'")->select();
+            $name=users_info($id);
+            $data['code'] = 200;
+            $data['data'] = $list;
+            $this->response($data,'json');
+        }
+
+    }
 
 
 

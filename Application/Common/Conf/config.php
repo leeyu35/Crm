@@ -105,6 +105,7 @@ $config_1= array(
         //boss接口
         array('Api/contract_week','Admin/Api/contract_week',array('method'=>'get')),//周新增合同
         array('Api/contract_month','Admin/Api/contract_month',array('method'=>'get')),//月新增合同
+        array('Api/contract_day','Admin/Api/contract_day',array('method'=>'get')),//昨日新增合同
         array('Api/find_market_smonth_counsumption','Admin/Api/find_market_smonth_counsumption',array('method'=>'get')),//单个销售的所有客户上月消耗
         array('Api/today_day_type','Admin/Api/today_day_type',array('method'=>'get')),// 根据type 返回 本日 回款 续费  垫款数据
         array('Api/today_month_type','Admin/Api/today_month_type',array('method'=>'get')),// 根据type 返回 本月 回款 续费  垫款数据
@@ -115,7 +116,7 @@ $config_1= array(
         array('Api/find_sem_month_counsumption','Admin/Api/find_sem_month_counsumption',array('method'=>'get')),//单个SEM的所有账户本月消耗
         array('Api/sem_account_counsumption','Admin/Api/sem_account_counsumption',array('method'=>'get')),//单个SEM的所有账户列表消耗
 
-        array('Api/diankuan_compare','Admin/Api/diankuan_compare',array('method'=>'get')),//垫款列表页——欠款公司最高的20条，并取得她的近三次回款记录
+        array('Api/diankuan_compare','Admin/Api/diankuan_compare',array('method'=>'get')),//垫款列表页——欠款公司最高的20条，并取得她的近五次回款记录
         array('Api/contract_date_list','Admin/Api/contract_date_list',array('method'=>'get')),//周新增合同
         array('Api/SpecifyDate_counsumption_list','Admin/Api/SpecifyDate_counsumption_list',array('method'=>'get')),//根据日期获取所有账户的日月周消耗
         //合同详情
@@ -129,6 +130,8 @@ $config_1= array(
         //部门消耗
         array('Api/sem_list','Admin/Api/sem_list',array('method'=>'get')),//sem 列表
         array('Api/market_list','Admin/Api/market_list',array('method'=>'get')),//销售列表
+        array('Api/find_marker_contract_counsumption_list','Admin/Api/find_marker_contract_counsumption_list',array('method'=>'get')),//一个销售的合同列表
+
         array('Api/sem_account_counsumption_3_line_list','Admin/Api/sem_account_counsumption_3_line_list',array('method'=>'get')),//某个sem 所有账户三 日周月消耗
         array('Api/sem_account_counsumption_3_line','Admin/Api/sem_account_counsumption_3_line',array('method'=>'get')),//某个sem 所有账户三 日周月消耗方法
 
