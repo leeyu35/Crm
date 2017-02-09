@@ -1176,7 +1176,7 @@ class ApiController extends RestController{
             {
                 $gongsi=kehu($val['advertiser']);
                 $list[$key]['advertiser']=$gongsi['advertiser'];
-                $list[$key]['advertiser']=date("Y-m-d",$val['ctime']);
+                $list[$key]['ctime']=date("Y-m-d",$val['ctime']);
             }
 
             $data['code'] = 200;
