@@ -1172,6 +1172,12 @@ class ApiController extends RestController{
             $contract=M("Contract");
             $list=$contract->field('id,contract_no,advertiser')->where("market='$id'")->select();
             $name=users_info($id);
+            foreach ($list as $key=>$val)
+            {
+                $gongsi=kehu($list['advertiser']);
+                $list[$key]['advertiser']=$gongsi;
+            }
+
             $data['code'] = 200;
             $data['data'] = $list;
             $data['name'] = $name['name'];
