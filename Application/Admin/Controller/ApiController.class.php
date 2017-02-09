@@ -768,8 +768,13 @@ class ApiController extends RestController{
             $yuear=teodate_month();//本月开始时间和结束时间
             $time_start=strtotime($yuear['start']);
             $time_end=strtotime($yuear['end']);
+        }elseif($type=='smonth')
+        {
+            $yuear=teodate_smonth();//本月开始时间和结束时间
+            $time_start=strtotime($yuear['start']);
+            $time_end=strtotime($yuear['end']);
         }
-
+       
         $users=M("Users");
         if(I('get.usersid')!='')
         {
