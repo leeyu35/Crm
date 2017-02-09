@@ -530,7 +530,7 @@ class ApiController extends RestController{
     public function diankuan_compare(){
         $customer=M("Customer");//公司
         $backmoney=M("RenewHuikuan");//续费回款表
-        $dk_sm=$customer->field('id,advertiser,yu_e,huikuan,huikuan-yu_e as yue')->order("yue asc")->select();
+        $dk_sm=$customer->field('id,advertiser,yu_e,huikuan,huikuan-yu_e as yue')->where("yue < 0")->order("yue asc")->select();
 
         foreach ($dk_sm as $key=>$val)
         {
