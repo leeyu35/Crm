@@ -738,13 +738,15 @@ class ApiController extends RestController{
             $time_start=strtotime($yuear['start']);
             $time_end=strtotime($yuear['end']."+1 day");
         }
-        $list=$customer->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.iszuofei,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.ctime>'$time_start' and a.ctime<'$time_end' ")->order("ctime desc")->select();
+        $list=$customer->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.iszuofei,a.appname,a.market,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.ctime>'$time_start' and a.ctime<'$time_end' ")->order("ctime desc")->select();
 
         foreach($list as $key => $val)
         {
             //提交人
             $uindo=users_info($val['users2']);
+            $market=users_info("market");
             $list[$key]['submituser']=$uindo[name];
+            $list[$key]['market']=$market;
             $list[$key]['ctime']=date("Y-m-d",$val['ctime']);
         }
 
