@@ -1162,7 +1162,7 @@ class ApiController extends RestController{
         }
         $data['code'] = 200;
         $data['data'] = $list;
-
+        $this->response($data,'json');
     }
 
     //点击销售进入的销售客户列表页面
