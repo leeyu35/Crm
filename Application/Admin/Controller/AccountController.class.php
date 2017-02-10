@@ -123,19 +123,20 @@ class AccountController extends CommonController
     }
     public function account_appid(){
         //获取账户列表及APPID
-        $accountsem_list=hjd_curl('http://www.yushanapp.com/api/get/customer/c03d80f07c144cdab5e881866b92ad9f');
-        if(!is_array($accountsem_list['customers']) or $accountsem_list=='')
+        $accountsem_list=hjd_curl('http://123.57.136.122:12007/api/data-baidu/accounts/inuse');
+        if(!is_array($accountsem_list['data']) or $accountsem_list=='')
         {
             $data['code']=403;
         }
-        foreach ($accountsem_list['customers'] as $key=>$val)
+        foreach ($accountsem_list['data'] as $key=>$val)
         {
-            $array_slist[$key]['l_app']=$val['username'];
-            $array_slist[$key]['sem']=$val['sem'];
+            $array_slist[$key]['l_app']=$val['name'];
+          //  $array_slist[$key]['sem']=$val['sem'];
             $array_slist[$key]['appid']=$val['appid'];
-            $array_slist[$key]['account']=$val['api_account'];
+            $array_slist[$key]['account']=$val['accountName'];
         }
 
+        dump($array_slist);
         //接收的get 账户名
        // $account_name=I('post.account_name');
 

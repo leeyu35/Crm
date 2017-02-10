@@ -507,7 +507,7 @@ class ApiController extends RestController{
                 $list=$backmoney->field('id,advertiser,money,payment_time,account,market,ctime,appname,users2')->where(" payment_time >='$start' and (payment_type=1 or payment_type=2) and audit_1!=2 and audit_2!=2")->select();
                 break;
             case 'bukuan':
-                $list=$backmoney->field('id,advertiser,money,payment_time,account,market,ctime,appname,users2')->where("payment_type=3 and audit_1!=2 and audit_2!=2")->select();
+                $list=$backmoney->field('id,advertiser,money,payment_time,account,market,ctime,appname,users2,note')->where("payment_type=3 and audit_1!=2 and audit_2!=2")->select();
                 break;
         }
         foreach ($list as $key=>$val)
@@ -523,6 +523,7 @@ class ApiController extends RestController{
             $list[$key]['money']=number_format($val['money'],2);
             $list[$key]['market']=$market['name'];
             $list[$key]['business']=$shangwu['name'];
+            $list[$key]['business']=$val['note']?$val['note']:'';
         }
         $data['code'] = 200;
         $data['data'] = $list;
