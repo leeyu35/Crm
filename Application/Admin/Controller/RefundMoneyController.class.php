@@ -533,8 +533,10 @@ class RefundMoneyController extends  CommonController
         $filelist=$file->where("type=4 and yid=$id")->select();
         $this->filelist=$filelist;
 
+        //infi
+        $avinfo=kehu($info['advertiser']);
 
-
+        $this->avinfo=$avinfo;
         $this->display();
 
     }

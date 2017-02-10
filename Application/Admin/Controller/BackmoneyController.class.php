@@ -348,7 +348,7 @@ class BackmoneyController extends CommonController
         //公司名称
         $gs=kehu($info[advertiser]);
         $this->gongsi=$gs[advertiser];
-
+        $this->avinfo=$gs;
         //文件
         $file=M("File");
         $filelist=$file->where("type=3 and yid=$id")->select();

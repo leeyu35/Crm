@@ -21,64 +21,32 @@
 			$("#show_money").val((jr*(1+(bl/100))).toFixed(2));
 			
 		})
-		
-		$("input[name='type']").change(function(){
+
+        $("#payment_type").change(function(){
 			
-			if($(this).val()=='2')
+			if($(this).val()=='15')
 			{
-				$(".bzj").show(200);	
+				$(".tkdzzh").show(200);
 			}else
 			{
-				$(".bzj").hide(100);	
+				$(".tkdzzh").hide(100);
 			}	
 		})
 		
-		function findSize(id){
-			var len=$("#fileup")[0].files.length;
-			var fa=true;
-			for (var i=0;i<len;i++)
-			{
-				var size=($("#fileup")[0].files[0].size / 1024).toFixed(2);
-				//alert(size);
-				if(size>2000)
-				{
-					fa=false;
-				}
-			}
-			
-			return fa;
-		}
+
 				
 		$("#formid").submit(function(){
-		
-		if(findSize("fileup")!=true)
-		{
-			alert('上传的文件可能超出大小限制，请重新选择2M以内图片!');
-			return false;
-		}
+
 		
 		if($("#money").val()=="")
 		{
-			alert("请填写续费金额");
+			alert("请填写退款金额");
 			$("#money").select();
 			return false;	
 		}	
 		
 		
-		
-		if($("#rebates_proportion").val()=="")
-		{
-			alert("请填写返点比例");
-			$("#rebates_proportion").select();
-			return false;	
-		}	
-		if($("#show_money").val()=="")
-		{
-			alert("请填写账户显示金额");
-			$("#show_money").select();
-			return false;	
-		}
-		
+
 		
 		if($("#account").val()=="")
 		{
@@ -102,6 +70,7 @@
 	#adlist{ margin-left:15px;}
 	#adlist li a{ cursor:pointer;}
 	.diankuan{ display:none;}
+    .tkdzzh{ display:none;}
 	
 </style>
 </head>
@@ -163,8 +132,28 @@
       <input name="contract_no" type="text" class="form-control" id="contract_no" placeholder="自动生成，无需填写">
     </div>-->
     </div>
-    
-    
+
+    <h4 class="bor-left-bull" >退款方式及时间</h4>
+    <hr>
+    <div class="form-group">
+
+        <label for="payment_type" class="col-sm-2 control-label">退款方式</label>
+        <div class="col-sm-3">
+            <select  class="form-control" name="payment_type" id="payment_type">
+                <option value="" selected>--请选择--</option>
+                <option value="14">到客户</option>
+                <option value="15">到总账户</option>
+
+            </select>
+        </div>
+
+        <label for="payment_time" class="col-sm-1 control-label">退款日期</label>
+        <div class="col-sm-2">
+            <input type="text" name="payment_time" class="Wdate form-control" id="payment_time" onClick="WdatePicker()">
+        </div>
+
+
+    </div>
 
 <h4 class="bor-left-bull" >退款信息</h4>
 <hr>
@@ -180,12 +169,24 @@
     	<span class="input-group-addon">元</span>
         </div>
     </div>
-    <label for="inputEmail3" class="col-sm-1 control-label">APP名称</label>
-    <div class="col-sm-2">
-      <input type="text" class="form-control" autocomplete="off" name="appname" id="appname" value="{$info[appname]}" >
+
+      <label for="rebates_proportion" class="col-sm-1 control-label tkdzzh">返点比例</label>
+      <div class="col-sm-1 tkdzzh">
+          <div class="input-group">
+              <input type="text" class="form-control" name="rebates_proportion" autocomplete="off"  style=" width:105px;" id="rebates_proportion">
+              <span class="input-group-addon">%</span>
+          </div>
+      </div>
+
+      <label for="show_money" class="col-sm-2 control-label tkdzzh">账户显示金额</label>
+      <div class="col-sm-2 tkdzzh">
+          <div class="input-group">
+              <input type="text" class="form-control" name="show_money" id="show_money">
+              <span class="input-group-addon">元</span>
+          </div>
+      </div>
 
 
-    </div>
 
     
   </div>
@@ -202,38 +203,15 @@
             </volist>
         </select>
     </div>
-    
-    
-    
-  </div>
-  <h4 class="bor-left-bull" >付款信息</h4>
-  <hr>
-	<div class="form-group">
-  
-    <label for="payment_type" class="col-sm-2 control-label">退款方式</label>
-    <div class="col-sm-3">
-      <select  class="form-control" name="payment_type" id="payment_type">
-      	<option value="" selected>--请选择--</option>
-      	<option value="14">到客户</option>
-      	<option value="15">到总账户</option>
 
-      </select>
-    </div>
-    
-    <label for="payment_time" class="col-sm-1 control-label">付款日期</label>
-    <div class="col-sm-2">      
-		<input type="text" name="payment_time" class="Wdate form-control" id="payment_time" onClick="WdatePicker()">
-    </div>
-    
-    <!--<label for="inputEmail3" class="col-sm-1 control-label">付款金额</label>
-    <div class="col-sm-2"> 
-    	<div class="input-group">     
-		<input type="text" name="fk_money" class="form-control" id="fk_money">
-        <span class="input-group-addon">元</span>
-        </div>
-    </div>-->
-    
+      <label for="inputEmail3" class="col-sm-1 control-label">APP名称</label>
+      <div class="col-sm-2">
+          <input type="text" class="form-control" autocomplete="off" name="appname" id="appname" value="{$info[appname]}" >
+      </div>
+
+
   </div>
+
   
   <div class="form-group diankuan">
 
