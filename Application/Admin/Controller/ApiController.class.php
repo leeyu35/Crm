@@ -745,8 +745,8 @@ class ApiController extends RestController{
             //提交人
             $uindo=users_info($val['users2']);
             $market=users_info($val['market']);
-            $list[$key]['submituser']=$uindo[name];
-            $list[$key]['market']=$market;
+            $list[$key]['submituser']=$uindo['name'];
+            $list[$key]['market']=$market['name'];
             $list[$key]['ctime']=date("Y-m-d",$val['ctime']);
         }
 
