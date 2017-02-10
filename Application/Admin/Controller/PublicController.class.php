@@ -140,7 +140,7 @@ class PublicController extends Controller
                 $ht_s4=$xufeihuikuan->where("is_huikuan=0 and payment_type!=14 and payment_type!=15 and audit_2 =1  and audit_1=1 and audit_3=1 and audit_4=0")->count();
                 $rest2+=$ht_s4;
             }
-           
+
             $this->xufei=$rest2;
             //垫款待审核
 
