@@ -128,6 +128,7 @@ $config_1= array(
         array('Api/account_date_counsumption_line','Admin/Api/account_date_counsumption_line',array('method'=>'get')),//根据账户id type 给出数据折线图
         array('Api/account_info','Admin/Api/account_info',array('method'=>'get')),//根据账户id 给出账户详细信息
         array('Api/account_chongzhi_recode','Admin/Api/account_chongzhi_recode',array('method'=>'get')),//根据账户ID获取最近8次充值记录
+        array('Api/account_list_acinfo','Admin/Api/account_list_acinfo',array('method'=>'get')),//根据账户ID获取最近8次充值记录
 
         //部门消耗
         array('Api/sem_list','Admin/Api/sem_list',array('method'=>'get')),//sem 列表

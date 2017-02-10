@@ -1015,6 +1015,13 @@ class ApiController extends RestController{
             $this->response($data,'json');
         }
     }
+    //账户的list
+    public function account_list_acinfo(){
+
+        $uid=I('get.usersid');
+        $uinfo=users_info($uid);
+        dump($uinfo);
+    }
     //账户详情
     public function account_info()
     {

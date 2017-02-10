@@ -99,6 +99,7 @@ function quan_where($module,$join="",$setype=""){
                     $array_s1=explode(",",$one['audit_1']);
                     $array_s2=explode(",",$one['audit_2']);
                     $array_s3=explode(",",$one['audit_3']);
+                    $array_s4=explode(",",$one['audit_4']);
                    // echo cookie('u_groupid');
                    // dump($array_s1);
                     if(in_array(cookie('u_groupid'),$array_s2) and !in_array(cookie('u_groupid'),$array_s1))
@@ -117,6 +118,15 @@ function quan_where($module,$join="",$setype=""){
                         }else
                         {
                             $where.=" and ".$join.".audit_1=1 and ".$join.".audit_2=1 ";
+                        }
+                    }
+                    if(in_array(cookie('u_groupid'),$array_s4) and !in_array(cookie('u_groupid'),$array_s1)  and !in_array(cookie('u_groupid'),$array_s2)  and !in_array(cookie('u_groupid'),$array_s3))
+                    {
+                        if($join==""){
+                            $where.=" and audit_1=1  and audit_2=1 and audit_3=1 ";
+                        }else
+                        {
+                            $where.=" and ".$join.".audit_1=1 and ".$join.".audit_2=1  and ".$join.".audit_3=1 ";
                         }
                     }
                 }
@@ -267,6 +277,16 @@ function daiban(){
         $ht_s3=$xufeihuikuan->where("is_huikuan=0 and payment_type!=14 and payment_type!=15 and audit_2 =1  and audit_1=1 and audit_3=0")->count();
 
         $rest+=$ht_s3;
+    }
+
+    //四级审核
+    $array3=explode(",",$raac_xhetong['audit_4']);
+    if(in_array(cookie('u_groupid'),$array3))
+    {
+
+        $ht_s4=$xufeihuikuan->where("is_huikuan=0 and payment_type!=14 and payment_type!=15 and audit_2 =1  and audit_1=1 and audit_3=1 and audit_4=0")->count();
+
+        $rest+=$ht_s4;
     }
     /*
     //垫款待审核
