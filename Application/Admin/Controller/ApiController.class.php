@@ -746,7 +746,7 @@ class ApiController extends RestController{
             $uindo=users_info($val['users2']);
             $market=users_info($val['market']);
             $list[$key]['submituser']=$uindo['name'];
-            $list[$key]['market']=$market['name'];
+            $list[$key]['marketname']=$market['name'];
             $list[$key]['ctime']=date("Y-m-d",$val['ctime']);
         }
 
@@ -998,7 +998,23 @@ class ApiController extends RestController{
         $data['data'] = $list;
         $this->response($data,'json');
     }
-
+    //账户充值记录
+    public function account_chongzhi_recode(){
+        $id = I('get.id');
+        if ($id == '') {
+            $data['code'] = 400;
+            $data['mes'] = '参数错误';
+            $this->response($data, 'json');
+            exit;
+        }else
+        {
+            $renew_hk=M("RenewHuikuan");
+            $list=$renew_hk->field('id,money,payment_time')->where("account=$id")->order("payment_time desc")->select();
+            $data['code'] = 200;
+            $data['data'] = $list;
+            $this->response($data,'json');
+        }
+    }
     //账户详情
     public function account_info()
     {
