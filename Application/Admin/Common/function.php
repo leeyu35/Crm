@@ -288,6 +288,7 @@ function daiban(){
 
         $rest+=$ht_s4;
     }
+
     /*
     //垫款待审核
     $hetong=M("Diankuan");
