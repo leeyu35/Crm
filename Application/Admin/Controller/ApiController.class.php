@@ -1209,6 +1209,9 @@ class ApiController extends RestController{
             $this->response($data,'json');
         }else {
             $contract=M("Contract");
+            $consumption=M("AccountConsumption");
+            $yesday=strtotime(date("Y-m-d")." -1 day");
+
             $list=$contract->field('id,contract_no,advertiser,ctime')->where("market='$id'")->select();
             $name=users_info($id);
             foreach ($list as $key=>$val)
@@ -1216,8 +1219,14 @@ class ApiController extends RestController{
                 $gongsi=kehu($val['advertiser']);
                 $list[$key]['advertiser']=$gongsi['advertiser'];
                 $list[$key]['ctime']=date("Y-m-d",$val['ctime']);
-            }
 
+                //合同昨日消耗
+                $sum2=$consumption->where("starttime>='$yesday' and htid=$val[id]")->sum("baidu_cost_total");
+
+                $list[$key]['consumption']=$sum2;
+
+            }
+           
             $data['code'] = 200;
             $data['data'] = $list;
             $data['name'] = $name['name'];
