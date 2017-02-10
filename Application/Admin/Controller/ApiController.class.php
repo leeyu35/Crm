@@ -1010,6 +1010,10 @@ class ApiController extends RestController{
         {
             $renew_hk=M("RenewHuikuan");
             $list=$renew_hk->field('id,money,payment_time')->where("account=$id")->order("payment_time desc")->select();
+            foreach ($list as $key=>$val)
+            {
+                $list[$key]['payment_time']=date("Y-m-d",$val['payment_time']);
+            }
             $data['code'] = 200;
             $data['data'] = $list;
             $this->response($data,'json');
