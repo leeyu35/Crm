@@ -1226,7 +1226,7 @@ class ApiController extends RestController{
                 $list[$key]['consumption']=$sum2;
 
             }
-           
+
             $data['code'] = 200;
             $data['data'] = $list;
             $data['name'] = $name['name'];
