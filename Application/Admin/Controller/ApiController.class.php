@@ -1067,16 +1067,26 @@ class ApiController extends RestController{
     //sem 部门
     public function sem_list()
     {
+    $type=I('get.type')
     $users = M("Users");
     $list = $users->field('id,name')->where('groupid=10 and is_delete!=1')->select();
     foreach ($list as $key => $val)
     {
-        $day=hjd_curl("http://localhost/Api/find_sem_day_counsumption?usersid=$val[id]");
-        $week=hjd_curl("http://localhost/Api/find_sem_week_counsumption?usersid=$val[id]");
-        $month=hjd_curl("http://localhost/Api/find_sem_month_counsumption?usersid=$val[id]");
-        $list[$key]['day_counsumption']=$day['counsumption'];
-        $list[$key]['week_counsumption']=$week['counsumption'];
-        $list[$key]['month_counsumption']=$month['counsumption'];
+        if($type=='day')
+        {
+            $day=hjd_curl("http://localhost/Api/find_sem_day_counsumption?usersid=$val[id]");
+            $list[$key]['counsumption']=$day['counsumption'];
+        }elseif($type=='week')
+        {
+            $week=hjd_curl("http://localhost/Api/find_sem_week_counsumption?usersid=$val[id]");
+            $list[$key]['counsumption']=$week['counsumption'];
+        }elseif($type=='month')
+        {
+            $month=hjd_curl("http://localhost/Api/find_sem_month_counsumption?usersid=$val[id]");
+            $list[$key]['month_counsumption']=$month['counsumption'];
+        }
+
+
 
     }
 

@@ -3,13 +3,15 @@
 <head>
 
     <script language="JavaScript">
-        <if condition="($Think.cookie.u_groupid eq 2) OR ($Think.cookie.u_groupid eq 9) OR ($Think.cookie.u_groupid eq 15)">
 
-        window.location.href="/Public/dist/index/market/page.html";
+        <if condition="($Think.cookie.u_groupid eq 2) OR ($Think.cookie.u_groupid eq 9) OR ($Think.cookie.u_groupid eq 15)">
+            window.location.href="/Public/dist/index/market/page.html"; //销售
         <elseif condition="($Think.cookie.u_groupid eq 6) or ($Think.cookie.u_groupid eq 4)" />
-        window.location.href="/Public/dist/index/boss/page.html";
+            window.location.href="/Public/dist/index/boss/page.html"; //boss
+        <elseif condition="($Think.cookie.u_groupid eq 10)" />
+            window.location.href="/Public/dist/index/sem/page.html";//sem
         <else />
-        window.location.href="{:U('Public/usermessage')}";
+            window.location.href="{:U('Public/usermessage')}";//其他
 
         </if>
 
