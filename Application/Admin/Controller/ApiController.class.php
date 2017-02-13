@@ -1067,7 +1067,7 @@ class ApiController extends RestController{
     //sem 部门
     public function sem_list()
     {
-    $type=I('get.type')
+    $type=I('get.type');
     $users = M("Users");
     $list = $users->field('id,name')->where('groupid=10 and is_delete!=1')->select();
     foreach ($list as $key => $val)
