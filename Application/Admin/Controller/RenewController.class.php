@@ -79,6 +79,7 @@ class RenewController extends  CommonController
             $this->ser_txt2=I('get.search_text');
 
         }
+
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
         $renew_huikuan=M('RenewHuikuan');
@@ -133,7 +134,7 @@ class RenewController extends  CommonController
         if($time_start!="" and $time_end!="")
         {
             $time_start=strtotime($time_start);
-            $time_start=strtotime("-1 days",$time_start);
+
 
             $time_end=strtotime($time_end);
             $time_end=strtotime("+1 days",$time_end);
@@ -162,6 +163,8 @@ class RenewController extends  CommonController
             $this->ser_txt2=I('get.search_text');
 
         }
+
+
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
         $RenewHuikuan=M('RenewHuikuan');
@@ -586,7 +589,7 @@ class RenewController extends  CommonController
         if($time_start!="" and $time_end!="")
         {
             $time_start=strtotime($time_start);
-            $time_start=strtotime("-1 days",$time_start);
+
             $time_end=strtotime($time_end);
             $time_end=strtotime("+1 days",$time_end);
 
