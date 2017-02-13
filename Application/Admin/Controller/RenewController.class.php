@@ -573,6 +573,7 @@ class RenewController extends  CommonController
         }
 
         //合同类型
+        /*
         $httype=I('get.httype');
         if($httype!='')
         {
@@ -582,7 +583,7 @@ class RenewController extends  CommonController
         {
             $where.=" and a.type=1 ";
             $this->httype=$httype;
-        }
+        }*/
         //时间条件
         $time_start=I('get.time_start');
         $time_end=I('get.time_end');
