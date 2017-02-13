@@ -1083,7 +1083,7 @@ class ApiController extends RestController{
         }elseif($type=='month')
         {
             $month=hjd_curl("http://localhost/Api/find_sem_month_counsumption?usersid=$val[id]");
-            $list[$key]['month_counsumption']=$month['counsumption'];
+            $list[$key]['counsumption']=$month['counsumption'];
         }
 
 
