@@ -95,6 +95,12 @@ class ApiController extends RestController{
             $zuori = Yesterday();//昨日开始时间和结束时间
             $time_start=strtotime($zuori['start']);
             $time_end=strtotime($zuori['end']."+1 day");
+
+            $qianri=Qianday();
+            $time_start2=strtotime($qianri['start']);
+            $time_end2=strtotime($qianri['end']);
+
+
             if(I('type')!='all')
             {
                 $where="xsid=$id";
@@ -103,9 +109,14 @@ class ApiController extends RestController{
                 $where="id != 0";
             }
             $sum=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->sum("baidu_cost_total");
+            $qsum=$account_counsumption->where("$where and starttime>='$time_start2'  and starttime<'$time_end2' ")->sum("baidu_cost_total");
+
             if(!$sum){$sum="0";}
+            if(!$qsum){$qsum="0";}
             $data['code'] = 200;
             $data['counsumption'] = number_format($sum,2);
+            $data['qounsumption'] = number_format($qsum,2);
+            $data['percentage']=number_format($sum/$qsum,2);
         }
         $this->response($data,'json');
 
@@ -123,6 +134,8 @@ class ApiController extends RestController{
             $zhouar=teodate_week(1,"Monday");//本周开始时间和结束时间
             $time_start=strtotime($zhouar[0]['start']);
             $time_end=strtotime($zhouar[0]['end']."+1 day");
+            $shangzhou=shangzhou();
+
             if(I('type')!='all')
             {
                 $where="xsid=$id";
@@ -131,9 +144,14 @@ class ApiController extends RestController{
                 $where="id != 0";
             }
             $sum=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->sum("baidu_cost_total");
+            $ssum=$account_counsumption->where("$where and starttime>='$shangzhou[start]'  and starttime<'$shangzhou[end]' ")->sum("baidu_cost_total");
+
             if(!$sum){$sum="0";}
+            if(!$ssum){$ssum="0";}
             $data['code'] = 200;
             $data['counsumption'] = number_format($sum,2);
+            $data['qounsumption'] = number_format($ssum,2);
+            $data['percentage']=number_format($sum/$ssum,2);
         }
         $this->response($data,'json');
     }
@@ -149,6 +167,10 @@ class ApiController extends RestController{
             $yuear=teodate_month();//本月开始时间和结束时间
             $time_start=strtotime($yuear['start']);
             $time_end=strtotime($yuear['end']);
+
+            $yuear2=teodate_smonth();//本月开始时间和结束时间
+            $time_start2=strtotime($yuear2['start']);
+            $time_end2=strtotime($yuear2['end']);
             if(I('type')!='all')
             {
                 $where="xsid=$id";
@@ -157,9 +179,13 @@ class ApiController extends RestController{
                 $where="id != 0";
             }
             $sum=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->sum("baidu_cost_total");
+            $ssum=$account_counsumption->where("$where and starttime>='$time_start2'  and starttime<'$time_end2' ")->sum("baidu_cost_total");
             if(!$sum){$sum="0";}
+            if(!$ssum){$ssum="0";}
             $data['code'] = 200;
             $data['counsumption'] = number_format($sum,2);
+            $data['qounsumption'] = number_format($ssum,2);
+            $data['percentage']=number_format($sum/$ssum,2);
         }
         $this->response($data,'json');
     }
@@ -220,7 +246,7 @@ class ApiController extends RestController{
                 foreach ($zhouar as $key=>$val)
                 {
                     $time_start = strtotime($val['start']);
-                    $time_end = strtotime($val['end'] . "+1 day");
+                    $time_end = strtotime($val['end']);
                     $Consumption=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->sum('baidu_cost_total');
                     $list[$key]['date']=$val['start'];
                     $list[$key]['consumption']=$Consumption?$Consumption:0;
@@ -229,10 +255,11 @@ class ApiController extends RestController{
             } elseif ($date_type == 'month') {
                 //最近12个月
                 $yuear = teodate_month_12(12);//本月开始时间和结束时间
+
                 foreach ($yuear as $key=>$val)
                 {
                     $time_start = strtotime($val['start']);
-                    $time_end = strtotime($val['end'] . "+1 day");
+                    $time_end = strtotime($val['end']);
                     $Consumption=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end'")->sum('baidu_cost_total');
                     $list[$key]['date']=$val['start'];
                     $list[$key]['consumption']=$Consumption?$Consumption:0;

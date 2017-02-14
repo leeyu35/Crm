@@ -905,7 +905,11 @@ function teodate_week2($to,$zhouji,$strdate=''){
 
     return $array;
 }
-
+function shangzhou(){
+    $array['start']=mktime(0,0,0,date('m'),date('d')-date('w')+1-7,date('Y'));
+    $array['end']=mktime(23,59,59,date('m'),date('d')-date('w')+7-7,date('Y'));
+    return $array;
+}
 function date_daye_j7(){
     $array['start']=$time_start=strtotime(date("Y-m-d")."-7 day");
     $array['end']=$time_end=strtotime(date("Y-m-d"));
@@ -935,7 +939,13 @@ function Yesterday(){
     //echo $a;
     return $array;
 }
-
+//获取前日开始时间和结束时间
+function Qianday(){
+    $array['start']=date("Y-m-d",mktime(0,0,0,date('m'),date('d')-2,date('Y')));
+    $array['end']=date("Y-m-d",mktime(0,0,0,date('m'),date('d')-1,date('Y')));
+    //echo $a;
+    return $array;
+}
 //获取12个月的开始时间和结束时间参数1 得到几月数据  参数2 从上周几开始计算，周期  参数3 指定开始时间 没有则默认今天
 function teodate_month_12($to,$strdate=''){
     //如果没有指定日期则默认当前日期
@@ -1000,4 +1010,83 @@ function  account_xs_id($appid,$field){
     {
         return ;
     }
+}
+
+  function nianjia($uid){
+    $users=users_info(cookie('u_id'));
+    //首先先算我是不是正式员工
+
+      $m=date("m");
+
+    if($users['istrue']==1)
+    {
+        //算我的工龄
+        $a=date("Y-m-d",$users['jobtime']);//工作时间
+        $c=date("Y-m-d",$users['intime']);//入职时间
+        $b=date("Y-m-d");
+
+        //入职是否满一年
+        if(strtotime($a."+1 year") < strtotime($b))
+        {
+            $ca3=date_diff(date_create($c),date_create($b));//入职时间和现在时间差值
+            $nianjia=$nianjia+5+$ca3->y;
+            echo $nianjia;
+            //echo $gongling."<br>";
+            $nianjiazhouqi=12/round($nianjia,1);//年假周期  12个月 除以 工龄
+
+
+            $nianjia=$m/round($nianjiazhouqi,1);
+            $ca4=date_diff(date_create(date("Y-m-d",$users['njuptime'])),date_create($b));
+            dump($ca4);
+            echo $nianjiazhouqi;
+            echo '<br>'.$ca4->m/$nianjiazhouqi;
+            /*
+            if($ca4->m/$nianjiazhouqi>0.5)
+            {
+                $User = M("Users"); // 实例化User对象
+                $User->where("id=$uid")->setInc('niajia',0.5); // 用户的积分加3
+                $User-> where("id=$uid")->setField('njuptime',time());
+            }*/
+
+        }else
+        {
+            //入职时间不满一年
+            $nianjia=0;
+        }
+
+        /*
+ $ca3=date_diff(date_create($c),date_create($b));//入职时间和现在时间差值
+
+        $niangjia1=((floor($nianjia)+1)-0.5); //年假整天+1天 - 0.5 天
+        $niangjia2=round($nianjia,1);//产生的年假天数     取一位小数点
+        if($niangjia2>=$niangjia1)//如果产生的年假天数 大于年假的0.5天
+        {
+
+            $nianjia=$niangjia1;
+        }else
+        {
+
+            $nianjia=floor($nianjia);
+        }
+
+
+        $nianjia=$nianjia+$ca3->y;
+        */
+
+
+
+        $ca2=date_diff(date_create($c),date_create($b));//入职时间和现在时间差值
+        //echo $gongling."<br>";
+        $nianjiazhouqi=12/round($nianjia,1);//年假周期  12个月 除以 工龄
+
+
+        $nianjia=$m/round($nianjiazhouqi,1);
+
+
+    }else
+    {
+        $nianjia= 0;
+    }
+
+    return $nianjia;
 }
