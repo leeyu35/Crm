@@ -115,6 +115,72 @@ class LinuxTimeController extends Controller
         $data['code']=200;
         $data['msg']='成功添加'.$count."条记录消费记录。来自（read_today_account_consumption_data）";
         $this->ajaxReturn($data);
+    }
+
+
+    function nianjia()
+    {
+        $users=M("Users");
+        $list=$users->field('id,name,nianjia')->where("is_delete!=1")->select();
+
+
+        foreach ($list as $key=>$val)
+        {
+             nianjia($val['id']);
+            /*
+            $benniannianjiatianshu=round(nianjia($val['id'],date("Y-m-d")),1);
+
+            if($benniannianjiatianshu>floor($benniannianjiatianshu)+1-0.5)
+            {
+                $bnianjia=floor($benniannianjiatianshu)+1-0.5;
+            }else
+            {
+                $bnianjia=floor($benniannianjiatianshu);
+            }
+
+            $qnianjia=nianjia($val['id'],date("Y-m-d",strtotime(date('Y-m-d')."-1 day")));
+
+            //echo strtotime(date('Y-m-d')."-1 day");
+
+
+            $jnhqn=$bnianjia+$qnianjia;
+
+
+            //今年请年假的天数
+            $qstart=strtotime(date("Y")."-01-01"."-1 year");
+            $jstart=strtotime(date("Y")."-01-01");
+            $Holiday=M("Holiday");
+            //去年请的年假天数
+            $qqingjia_nianjia=$Holiday->where("starttime>$qstart and starttime<$jstart and audit_1!=2 and audit_2!=2 and type='年假' and submituser=$val[id]")->sum("day");
+            //今年请的年假天数
+            $jqingjia_nianjia=$Holiday->where("starttime>$jstart and audit_1!=2 and audit_2!=2 and type='年假' and submituser=$val[id]")->sum("day");
+            $jqnqjts=$qqingjia_nianjia+$jqingjia_nianjia;
+                echo $jqnqjts;
+            //剩余年假
+            $shengyunianjia=$jnhqn-$jqnqjts;
+            //判断是否为1月1号 如果是 则清零前年的年假
+
+            /*
+            if(date("m-d")=='01-01')
+            {
+                echo $jnhqn.'-----------'.$val['nianjia'];
+                if($jnhqn<$val['nianjia'])
+                {
+                    echo 1;
+                    $shengyunianjia=$qnianjia; //如果计算年假小于数据库 年假 则年假天数等于去年年假天数；
+                }else
+                {
+                    echo 2;
+                    $shengyunianjia=$val['nianjia'];
+                }
+            }
+            */
+
+           // echo $val[name].$shengyunianjia."<br>";
+
+
+           // $users->where("id=$val[id]")->setField('nianjia',$shengyunianjia);
+        }
 
 
     }

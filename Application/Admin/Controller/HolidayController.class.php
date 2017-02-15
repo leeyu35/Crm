@@ -38,7 +38,6 @@ class HolidayController extends CommonController
             if($time_start!="" and $time_end!="")
             {
                 $time_start=strtotime($time_start);
-                $time_start=strtotime("-1 days",$time_start);
                 $time_end=strtotime($time_end);
                 $time_end=strtotime("+1 days",$time_end);
                 $where.=" and a.ctime > $time_start and a.ctime < $time_end";
@@ -99,21 +98,39 @@ class HolidayController extends CommonController
 
     }
     public function add(){
+        // echo '我要算我的年假';
+        $usersinfo=users_info(cookie("u_id"));
+        $this->nianjia=$usersinfo['nianjia'];
         $this->display();
     }
+
 
     //添加返回
     public function addru(){
 
         $Refund=M("Holiday");
         $vo=$Refund->create();
+        $usersinfo=users_info(cookie("u_id"));
 
+
+        if(I('post.type')=='年假')
+        {
+           if($usersinfo['nianjia']<I('post.day'))
+           {
+               $this->error('您的年假余额不足，请重新提交');
+               exit;
+           }
+        }
 
         $Refund->starttime=strtotime($Refund->starttime);
         $Refund->endtime=strtotime($Refund->endtime);
         $Refund->ctime=time();
         if($Refund->add()){
-
+            if(I('post.type')=='年假')
+            {
+                $User=M('Users');
+                $User->where("id=".cookie("u_id"))->setDec('nianjia',I('post.day')); // 年假加0.5
+            }
             $this->success("申请成功,请等待审核",U("index"));
 
         }else
@@ -165,6 +182,16 @@ class HolidayController extends CommonController
             }
             if($table->where("id=$id")->setField($type,$shenhe))
             {
+                if($shenhe=='2')
+                {
+                    $qjinfo=$table->find("$id");
+
+                    if($qjinfo['type']=='年假')
+                    {
+                        $User=M('Users');
+                        $User->where("id=".$qjinfo['submituser'])->setInc('nianjia',$qjinfo['day']); // 年假加0.5
+                    }
+                }
                 //修改审核者
                 if($type=='audit_1')
                 {

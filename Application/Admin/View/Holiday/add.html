@@ -44,6 +44,11 @@
 			return false;	
 		}
 
+        if($("#type").val=='年假' && $("#day").val()>({$jnnj}+{$qnnj}))
+        {
+            alert('请假天数超过您的年假剩余天数，请重写请假天数');
+            return false;
+        }
 				
 	})
     });
@@ -114,9 +119,9 @@
     </div>
 
    </literal>
-	    <label for="inputEmail3" class="col-sm-1 control-label">说明</label>
+	    <label for="inputEmail3" class="col-sm-1 control-label">请假天数</label>
     <div class="col-sm-3">
-      <input name="shuoming" type="text" class="form-control" id="shuoming" placeholder="如果是请半天请在此说明">
+      <input name="day" type="text" class="form-control" id="day" placeholder="如果是半天则填写0.5">
     </div>
     
   </div>
@@ -130,8 +135,11 @@
    </div>
 
    </div>
-	<div class="form-group">
-    	<div class="col-sm-12">  注：1病假需出具医院证明。2请假必须通过审核才算生效（提交后为未审核状态）。3提交后不可更改</div>
+    <div class="form-group">
+        <div class="col-sm-12">  注：1病假需出具医院证明。2请假必须通过审核才算生效（提交后为未审核状态）。3提交后不可更改</div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12"> 剩余年假天数：{$nianjia}  注意：本年一月一号会清除前年剩余年假</div>
     </div>
     <div class="form-group">
     

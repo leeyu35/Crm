@@ -71,6 +71,9 @@ class UsersController extends CommonController
            }
 
             $users->image=$image;
+            $users->jobtime=strtotime($users->jobtime);
+            $users->intime=strtotime($users->intime);
+
            if($users->add())
            {
 
@@ -152,7 +155,8 @@ class UsersController extends CommonController
 
                 $users->password=I('post.jpassword');
             }
-
+            $users->jobtime=strtotime($users->jobtime);
+            $users->intime=strtotime($users->intime);
             if($users->save())
             {
                 $this->success("修改成功",U('index'));

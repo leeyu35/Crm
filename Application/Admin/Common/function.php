@@ -1020,6 +1020,7 @@ function  account_xs_id($appid,$field){
 
     if($users['istrue']==1)
     {
+
         //算我的工龄
         $a=date("Y-m-d",$users['jobtime']);//工作时间
         $c=date("Y-m-d",$users['intime']);//入职时间
@@ -1030,28 +1031,49 @@ function  account_xs_id($appid,$field){
         {
             $ca3=date_diff(date_create($c),date_create($b));//入职时间和现在时间差值
             $nianjia=$nianjia+5+$ca3->y;
-            echo $nianjia;
+
             //echo $gongling."<br>";
             $nianjiazhouqi=12/round($nianjia,1);//年假周期  12个月 除以 工龄
 
 
             $nianjia=$m/round($nianjiazhouqi,1);
+
             $ca4=date_diff(date_create(date("Y-m-d",$users['njuptime'])),date_create($b));
-            dump($ca4);
-            echo $nianjiazhouqi;
-            echo '<br>'.$ca4->m/$nianjiazhouqi;
-            /*
-            if($ca4->m/$nianjiazhouqi>0.5)
+
+            $nianjiazhouqi=$nianjiazhouqi/2;
+            $nianjiazjts=round($ca4->m/$nianjiazhouqi)*0.5;
+
+            $User = M("Users"); // 实例化User对象
+            $User->where("id=$uid")->setInc('nianjia',$nianjiazjts); // 年假加0.5
+            $User->where("id=$uid")->setField('njuptime',time());
+
+            $md=date("m-d");
+            if($md=='01-01')
             {
-                $User = M("Users"); // 实例化User对象
-                $User->where("id=$uid")->setInc('niajia',0.5); // 用户的积分加3
-                $User-> where("id=$uid")->setField('njuptime',time());
-            }*/
+                $b=strtotime(date("Y-m-d")." -1 years");
+
+
+                //算出去年应有年假
+                if(strtotime($a."+1 year") < $b)
+                {
+                    $ca3=date_diff(date_create($c),date_create(date("Y-m-d",$b)));//入职时间和现在时间差值
+
+                    $nianjia=5+$ca3->y;
+                    if($nianjia<$users['nianjia'])
+                    {
+                        $User->where("id=$uid")->setField('nianjia',$nianjia); //
+                    }else{
+                        $User->where("id=$uid")->setField('nianjia',$users['nianjia']); //
+                    }
+                    $User->where("id=$uid")->setField('njuptime',time());
+                }
+            }
 
         }else
         {
             //入职时间不满一年
             $nianjia=0;
+
         }
 
         /*

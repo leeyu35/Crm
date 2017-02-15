@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
+  <script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
 <script language="javascript">
 $(document).ready(function(e) {
     //$("#password1").val(" ");
@@ -48,6 +49,27 @@ $(document).ready(function(e) {
     <label for="exampleInputEmail1">邮箱</label>
     <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{$info['email']}"  required>
   </div>
+
+  <in  name="Think.cookie.u_groupid" value='6,1,12'>
+  <div class="form-group">
+  <label for="exampleInputEmail1">工作时间</label>
+  <input type="text" name="jobtime" class="Wdate form-control" id="payment_time" value="{$info['jobtime']?$info['jobtime']|date="Y-m-d",###:''}" onClick="WdatePicker()">
+</div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">入职时间</label>
+    <input type="text" name="intime" class="Wdate form-control" id="payment_time2" value="{$info['intime']?$info['intime']|date="Y-m-d",###:''}"  onClick="WdatePicker()">
+  </div>
+  <div class="form-group">
+    <label for="blankRadio">是否为正式员工</label><br>
+    <label>
+      <input type="radio" name="istrue" id="blankRadio1"  {$info[istrue]==1?'checked':''}  value="1"> 是
+    </label>&nbsp;&nbsp;
+    <label>
+      <input type="radio" name="istrue" id="blankRadio2"  {$info[istrue]==0?'checked':''}  value="0"> 不是
+    </label>
+  </div>
+  </in>
+
   <div class="form-group">
     <label for="exampleInputFile">头像</label>
     <input type="file" name="image2" id="image">

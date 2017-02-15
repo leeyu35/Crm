@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
+  <script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
 </head>
 
 <body>
@@ -34,11 +35,27 @@
     <label for="exampleInputEmail1">手机号</label>
     <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" required>
   </div>
-    <div class="form-group">
+  <div class="form-group">
     <label for="exampleInputEmail1">邮箱</label>
     <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
   </div>
-
+  <div class="form-group">
+  <label for="exampleInputEmail1">工作时间</label>
+    <input type="text" name="jobtime" class="Wdate form-control" id="payment_time" onClick="WdatePicker()">
+  </div>
+  <div class="form-group">
+  <label for="exampleInputEmail1">入职时间</label>
+  <input type="text" name="intime" class="Wdate form-control" id="payment_time2" onClick="WdatePicker()">
+  </div>
+  <div class="form-group">
+    <label for="blankRadio">是否为正式员工</label><br>
+    <label>
+      <input type="radio" name="istrue" id="blankRadio1" checked  value="1"> 是
+    </label>&nbsp;&nbsp;
+    <label>
+      <input type="radio" name="istrue" id="blankRadio2" value="0"> 不是
+    </label>
+  </div>
   <div class="form-group">
     <label for="exampleInputFile">头像</label>
     <input type="file" name="image" id="image">

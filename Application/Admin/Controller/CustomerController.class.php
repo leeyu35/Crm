@@ -11,7 +11,9 @@ use Think\Controller;
 class CustomerController extends CommonController
 {
     public function index(){
+
         $coustomer=M('Customer');
+
         //搜索条件
         $type=I('get.searchtype');
         if($type!='')
@@ -45,14 +47,18 @@ class CustomerController extends CommonController
             $this->time_start=I('get.time_start');
             $this->time_end=I('get.time_end');
         }
+
         //权限条件
         $q_where=quan_where(__CONTROLLER__);
 
         $count      = $coustomer->where("id!=0 and ".$q_where.$where)->count();// 查询满足要求的总记录数
+        exit;
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
+
         $list=$coustomer->field('id,advertiser,industry,website,product_line,ctime,city,appName,submituser')->where("id!=0 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order('ctime desc')->select();
-       //echo $coustomer->_sql();
+
+        //echo $coustomer->_sql();
         $contact=M('ContactList');
 
         foreach($list as $key => $val)
@@ -68,6 +74,7 @@ class CustomerController extends CommonController
             $uindo=users_info($val['submituser']);
             $list[$key]['submituser']=$uindo[name];
         }
+
         $this->list=$list;
         $this->assign('page',$show);// 赋值分页输出
         $this->display();
