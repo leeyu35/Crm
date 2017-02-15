@@ -70,9 +70,13 @@ class RefundInvoiceController extends CommonController
                 $this->ser_txt2=I('get.search_text');
 
             }
+
+
             //权限条件
-            $q_where=quan_where(__CONTROLLER__,"a");
+            $q_where=quan_where("/Admin/".CONTROLLER_NAME,"a");
+
             $count      = $Refund->field('a.id,a.invoice_head,a.contract_no,a.money,a.ctime,a.audit_1,a.audit_2,b.advertiser')->join("a left join __CUSTOMER__ b on a.invoice_head = b.id ")->where("a.id!='0' and ".$q_where.$where)->count();// 查询满足要求的总记录数
+
             $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
             $show       = $Page->show();// 分页显示输出
             $list=$Refund->field('a.id,a.invoice_head as aid,a.users2,a.appname,a.invoice_head,a.contract_no,a.money,a.ctime,a.audit_1,a.audit_2,b.advertiser')->join("a left join __CUSTOMER__ b on a.invoice_head = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
@@ -350,7 +354,7 @@ class RefundInvoiceController extends CommonController
 
         }
         //权限条件
-        $q_where=quan_where(__CONTROLLER__,"a");
+        $q_where=quan_where("/Admin/".CONTROLLER_NAME,"a");
 
         $list=$Refund->field('a.id,a.invoice_head as aid,a.users2,a.appname,a.submituser,a.is_kuayue,a.is_renzheng,a.invoice_head,a.contract_no,a.money,a.ctime,a.audit_1,a.audit_2,b.advertiser')->join("a left join __CUSTOMER__ b on a.invoice_head = b.id ")->where("a.id!='0' and ".$q_where.$where)->order("a.ctime desc")->select();
 

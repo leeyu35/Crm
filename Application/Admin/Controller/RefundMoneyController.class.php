@@ -80,7 +80,8 @@ class RefundMoneyController extends  CommonController
 
         }
         //权限条件
-        $q_where=quan_where(__CONTROLLER__,"a");
+        $q_where=quan_where("/Admin/".CONTROLLER_NAME,"a");
+
         //退款条件
         $where.=" and (a.payment_type = 14 or a.payment_type=15)";
 
@@ -167,7 +168,7 @@ class RefundMoneyController extends  CommonController
 
         }
         //权限条件
-        $q_where=quan_where(__CONTROLLER__,"a");
+        $q_where=quan_where("/Admin/".CONTROLLER_NAME,"a");
         //echo $q_where;
         //退款条件
         $where=" and (a.payment_type = 14 or a.payment_type=15)";
@@ -639,7 +640,7 @@ class RefundMoneyController extends  CommonController
         }
         $hetong=M("RenewHuikuan");
         //权限条件
-        $q_where=quan_where(__CONTROLLER__,"a");
+        $q_where=quan_where("/Admin/".CONTROLLER_NAME,"a");
         //退款条件
         $where.=" and (a.payment_type = 14 or a.payment_type=15)";
 

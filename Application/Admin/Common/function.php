@@ -62,6 +62,7 @@ function group_name_find($id){
 function quan_where($module,$join="",$setype=""){
 
     $rbac=M("Rbac");
+
     $one=$rbac->where("module ~* '$module'")->find();
 
     if($one!="") {
@@ -139,7 +140,7 @@ function quan_where($module,$join="",$setype=""){
 function quan_users_where($module,$join=""){
 
     $rbac=M("Rbac");
-    $one=$rbac->where("module='$module'")->find();
+    $one=$rbac->where("module ~* '$module'")->find();
     if($one!="") {
         $array=explode(",",$one['index_show']);
         if(in_array(cookie('u_groupid'),$array))
@@ -157,7 +158,7 @@ function quan_users_where($module,$join=""){
 
 function shenhe($module,$type){
     $rbac=M("Rbac");
-    $one=$rbac->where("module='$module'")->find();
+    $one=$rbac->where("module ~* '$module'")->find();
     if($one!="") {
         $array=explode(",",$one[$type]);
         if(in_array(cookie('u_groupid'),$array))
