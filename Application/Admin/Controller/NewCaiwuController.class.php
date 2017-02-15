@@ -51,7 +51,7 @@ class NewCaiwuController extends CommonController
         $q_where=quan_where(__CONTROLLER__);
 
         $count      = $coustomer->where("id!=0 and ".$q_where.$where)->count();// 查询满足要求的总记录数
-       
+
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
         $list=$coustomer->field('id,advertiser,yu_e,huikuan,industry,website,product_line,ctime,city,appName,submituser,type')->where("id!=0 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order('ctime desc')->select();
@@ -101,12 +101,25 @@ class NewCaiwuController extends CommonController
 
         $this->list=$list;
 
+        //该客户未审核回款
+        $backmoney=M("RenewHuikuan");
+        $wshhuikuan=$backmoney->field('money')->where("is_huikuan=1 and advertiser=$id and (audit_1=0 or audit_1=1) and audit_2=0")->sum("money");
+        //未审核续费
+        $wshxufei=$backmoney->field('money')->where("advertiser=$id  and is_huikuan=0 and (payment_type !=14 and payment_type !=15 and payment_type !=3) and (audit_1=0 or audit_1=1) and (audit_2=0 or audit_2=1) and (audit_3=0 or audit_3=1) and audit_4=0")->sum("money");
+
+
 
         //客户详细信息
         $customer_info=kehu($id);
         $this->customer_info=$customer_info;
         $this->zong=$customer_info[huikuan]-$customer_info[yu_e];
         $this->zongfapiao=$zongfapiao;
+
+        //已审核的余额
+        $zyue=($customer_info['huikuan']-$wshhuikuan)-($customer_info['yu_e']-$wshxufei);
+        $this->wshhuikuan=$wshhuikuan;
+        $this->wshxufei=$wshxufei;
+        $this->zyue=$zyue;
         $this->display();
        // dump($list);
     }
@@ -258,6 +271,7 @@ class NewCaiwuController extends CommonController
         $this->invoice=$ht_on['invoice'];
         $this->contract_id=$ht_on['id'];
         $this->xiaohao=$ht_on['yu_e'];
+        $this->huikuan=$ht_on['huikuan'];
         $this->history=$history;
 
         //客户详细信息
