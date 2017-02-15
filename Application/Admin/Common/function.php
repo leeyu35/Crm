@@ -62,7 +62,7 @@ function group_name_find($id){
 function quan_where($module,$join="",$setype=""){
 
     $rbac=M("Rbac");
-    $one=$rbac->where("module='$module'")->find();
+    $one=$rbac->where("module ~* '$module'")->find();
 
     if($one!="") {
             $array=explode(",",$one['index_show']);
