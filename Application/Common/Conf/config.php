@@ -24,7 +24,6 @@ $config_1= array(
     'DB_SLAVE_NO'           =>  '', // 指定从服务器序号
     */
     /* //PDO连接方式*/
-
     'DB_TYPE' => 'pgsql', // 数据库类型
     'DB_HOST'               =>  'rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com', // 服务器地址
     'DB_NAME'               =>  'crm',          // 数据库名
@@ -40,18 +39,19 @@ $config_1= array(
     'DB_PWD' => '123456', // 密码
     'DB_PORT'               =>  '5432',        // 端口
     'DB_PREFIX' => 'jd_', // 数据库表前缀
-    /*
-    'DB_TYPE' => 'mongo', // 数据库类型
-    'DB_HOST'               =>  '101.200.174.136', // 服务器地址
-    'DB_NAME'               =>  'yushan',          // 数据库名
-    'DB_USER' => 'yushan', // 用户名
-    'DB_PWD' => 'yushan', // 密码
-    'DB_PORT'               =>  '10222',        // 端口
-    'DB_PREFIX' => '', // 数据库表前缀
 
-    //'DB_DSN' => 'pgsql:host=localhost;port=5432;dbname=crm;',
+   /*
+   'DB_TYPE' => 'mongo', // 数据库类型
+   'DB_HOST'               =>  '101.200.174.136', // 服务器地址
+   'DB_NAME'               =>  'yushan',          // 数据库名
+   'DB_USER' => 'yushan', // 用户名
+   'DB_PWD' => 'yushan', // 密码
+   'DB_PORT'               =>  '10222',        // 端口
+   'DB_PREFIX' => '', // 数据库表前缀
 
-    /* URL设置 */
+   //'DB_DSN' => 'pgsql:host=localhost;port=5432;dbname=crm;',
+
+   /* URL设置 */
     'URL_CASE_INSENSITIVE'  =>  true,   // 默认false 表示URL区分大小写 true则表示不区分大小写
     'URL_MODEL'             =>  2,       // URL访问模式,可选参数0、1、2、3,代表以下四种模式：
     // 0 (普通模式); 1 (PATHINFO 模式); 2 (REWRITE  模式); 3 (兼容模式)  默认为PATHINFO 模式
@@ -82,7 +82,7 @@ $config_1= array(
     'DEFAULT_AJAX_RETURN'   =>  'JSON',  // 默认AJAX 数据返回格式,可选JSON XML ...
     'DEFAULT_JSONP_HANDLER' =>  'jsonpReturn', // 默认JSONP格式返回的处理方法
     'DEFAULT_FILTER'        =>  'htmlspecialchars', // 默认参数过滤方法 用于I函数...
-
+    //'URL_CASE_INSENSITIVE' =>true,
     /*我的设置*/
     'Portrait'              => '/Uploads/portrait/wu.png', //默认头像地址
     'Upload_path'           =>'/Uploads',
@@ -138,12 +138,12 @@ $config_1= array(
 
         array('Api/sem_account_counsumption_3_line_list','Admin/Api/sem_account_counsumption_3_line_list',array('method'=>'get')),//某个sem 所有账户三 日周月消耗
         array('Api/sem_account_counsumption_3_line','Admin/Api/sem_account_counsumption_3_line',array('method'=>'get')),//某个sem 所有账户三 日周月消耗方法
-
+        array("Api/diankuan_excel","Admin/Api/diankuan_excel",array('method'=>'get'))
 
     // array('Api','Admin/Api/index','hjd=1',array('method'=>'get')),
 
     ),
-   // 'SHOW_PAGE_TRACE' =>true,
+    //'SHOW_PAGE_TRACE' =>true,
 	/*
 	 'TOKEN_ON'      =>    true,  // 是否开启令牌验证 默认关闭
  'TOKEN_NAME'    =>    '__hash__',    // 令牌验证的表单隐藏字段名称，默认为__hash__
