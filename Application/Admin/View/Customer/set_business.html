@@ -8,12 +8,17 @@
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
 <script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
 <script src="/Public/js/bootstrap.min.js"></script>
+    <script src="/Public/js/layer/layer.js"></script>
 <script language="javascript">
 $(document).ready(function(e) {
     $(".htshow").click(function(){
 		url=$(this).attr("id");
 		window.location.href=url;
 	})
+    $(".infor-list-nav").click(function(){
+        url=$(this).attr("id");
+        window.location.href=url;
+    })
 });
 </script>
 </head>
@@ -43,7 +48,7 @@ $(document).ready(function(e) {
   	<if condition="($ser_txt neq '') OR ($time_end neq '')">
   		<a class="btn btn-info" href="{:U('index')}">清除搜索条件</a>
 	</if>
-    <a href="{:U("set_business")}" class="btn btn-primary">分配商务</a>
+
 </form>
 </div>
 <table class="table table-hover  table-striped">
@@ -57,8 +62,7 @@ $(document).ready(function(e) {
         <th>联系人电话</th>
         <th>城市</th>
         <th>创建时间</th>
-        <th>提交人</th>
-        <th>附件</th>	  
+        <th>负责商务</th>
         <th>操作</th>	  
     </tr>
     <volist id="list" name="list" key="k">
@@ -72,12 +76,9 @@ $(document).ready(function(e) {
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[tel]}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[city]}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[ctime]|date="Y-m-d",###}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[submituser]}</td>
-        <td>
-        <span><a href="{:U("addim?id=$list[id]")}" data-toggle="tooltip" data-placement="left" title="新增附件"><span class="glyphicon glyphicon-plus"></span></a></span>&nbsp;|&nbsp;<a href="{:U("showim?id=$list[id]")}" data-toggle="tooltip" data-placement="left" title="查看附件"><span class="glyphicon glyphicon-zoom-in"></span></a><br>
-        </td>
+        <td>{$list[business]?$list[business]:'暂无'}</td>
     	<td>
-        <a href="{:U("updata?id=$list[id]")}"  data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<a href="{:U("delete?id=$list[id]")}" {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>
+        <a  id="{:U("Customer/upbusiness?id=$list[id]")}" data-toggle="tooltip" data-placement="left" title="修改负责商务"  class="test1"><span class="glyphicon glyphicon-pencil"></span></a>
         </td>
     </tr>
     </volist>
@@ -85,9 +86,37 @@ $(document).ready(function(e) {
 {$page}
 
 </div>
-<script>
-   $(function () { $("[data-toggle='tooltip']").tooltip(); });
-</script>
 
+<script type="text/javascript">
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+            };
+
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+</script>
+<script>
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+    $('.test1').on('click', function(){
+        layer.open({
+            type: 2,
+            title: '修改该合同所属销售',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['380px', '220px'],
+            content: $(this).attr("id"), //iframe的url
+            end: function () {
+                location.reload();
+            }
+        });
+    });
+</script>
 </body>
 </html>

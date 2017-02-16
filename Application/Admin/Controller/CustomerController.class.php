@@ -56,7 +56,7 @@ class CustomerController extends CommonController
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
 
-        $list=$coustomer->field('id,advertiser,industry,website,product_line,ctime,city,appName,submituser')->where("id!=0 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order('ctime desc')->select();
+        $list=$coustomer->field('id,advertiser,business,industry,website,product_line,ctime,city,appName,submituser')->where("id!=0 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order('ctime desc')->select();
 
         //echo $coustomer->_sql();
         $contact=M('ContactList');
@@ -312,5 +312,124 @@ class CustomerController extends CommonController
         {
             $this->error("删除失败");
         }
+    }
+
+    //分配商务
+    public  function set_business(){
+        \Think\Log::record('测试日志信息');
+        $coustomer=M('Customer');
+        //只有商务组经理才能执行
+        $myusersinfo=users_info(cookie("u_id"));
+       // dump($myusersinfo);
+
+        if($myusersinfo['groupid']!='1' and $myusersinfo['groupid']!='3')
+        {
+
+            $this->error('You have no legal power~');
+            exit;
+        }
+        if($myusersinfo['groupid']=='3' and $myusersinfo['manager']==0)
+        {
+            $this->error('You have no legal power~');
+            exit;
+        }
+        //搜索条件
+        $type=I('get.searchtype');
+        if($type!='')
+        {
+            if($type=='advertiser')
+            {
+                $where=" and advertiser like '%".I('get.search_text')."%'";
+            }
+            if($type=='name' or $type=='tel')
+            {
+                //联系人
+                $contact=M('ContactList');
+                $se_idlist=$contact->where("$type like '%".I('get.search_text')."%'")->field("customer_id")->select(false);
+
+                $where=" and id in($se_idlist)";
+            }
+
+            $this->type=$type;
+            $this->ser_txt=I('get.search_text');
+
+        }
+        //时间条件
+        $time_start=I('get.time_start');
+        $time_end=I('get.time_end');
+        if($time_start!="" and $time_end!="")
+        {
+            $time_start=strtotime($time_start);
+            $time_end=strtotime($time_end);
+
+            $where.=" and ctime > $time_start and ctime < $time_end";
+            $this->time_start=I('get.time_start');
+            $this->time_end=I('get.time_end');
+        }
+
+        //权限条件
+        $q_where=quan_where(__CONTROLLER__);
+
+        $count      = $coustomer->where("id!=0 and ".$q_where.$where)->count();// 查询满足要求的总记录数
+
+        $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        $show       = $Page->show();// 分页显示输出
+
+        $list=$coustomer->field('id,advertiser,industry,website,business,product_line,ctime,city,appName,submituser')->where("id!=0 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order('ctime desc')->select();
+
+        //echo $coustomer->_sql();
+        $contact=M('ContactList');
+
+        foreach($list as $key => $val)
+        {
+            //产品线
+            // $lin=product_line($val['product_line']);
+            // $list[$key]['product_lin']=$lin;
+            //取第一位联系人
+            $contact_one=$contact->field('name,tel')->where("customer_id=$val[id]")->find();
+            $list[$key]['contact']=$contact_one['name'];
+            $list[$key]['tel']=$contact_one['tel'];
+            //提交人
+            $uindo=users_info($val['submituser']);
+            $list[$key]['submituser']=$uindo[name];
+            //商务
+            $uindo=users_info($val['business']);
+            $list[$key]['business']=$uindo[name];
+        }
+
+        $this->list=$list;
+        $this->assign('page',$show);// 赋值分页输出
+        $this->display();
+    }
+
+    //修改合同所属销售
+    public function upbusiness(){
+        $id=I('get.id');
+        if(!is_numeric($id))
+        {
+            $this->error('参数类型错误');
+        }
+        $hetong=M("Customer");
+        $info=$hetong->find($id);
+        $this->info=$info;
+        $this->id=$id; //合同id
+        //所有销售
+        $this->xiaoshou=M('Users')->field('id,name')->where("groupid=3 and is_delete!=1")->select();
+        $this->display();
+    }
+    //修改合同所属销售返回
+    public function upbusinessru(){
+        $hetong=M("Customer");
+
+        $postdate=$hetong->create();
+        if($hetong->where("id=$postdate[id]")->setField('business',$postdate['business']))
+        {
+            echo 1;
+        }else
+        {
+            echo 2;
+        }
+
+
     }
 }
