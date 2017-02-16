@@ -649,7 +649,7 @@ class RenewController extends  CommonController
         $q_where=quan_where(__CONTROLLER__,"a");
 
 
-        $list=$hetong->field('a.id,a.advertiser as aid,a.xf_contractid,a.money,a.payment_type,a.payment_time,a.account,a.contract_start,a.contract_end,a.type,a.users2,a.appname,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.id!=0 and ".$q_where.$where)->order("a.ctime desc")->select();
+        $list=$hetong->field('a.id,a.advertiser as aid,a.xf_contractid,a.money,a.payment_type,a.payment_time,a.note,a.account,a.contract_start,a.contract_end,a.type,a.users2,a.appname,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.id!=0 and ".$q_where.$where)->order("a.ctime desc")->select();
 
         foreach($list as $key => $val)
         {
@@ -699,10 +699,13 @@ class RenewController extends  CommonController
             //提交人
             $uindo=users_info($val['users2']);
             $list2[$key]['submituser']=$uindo[name];
+
+            //备注
+            $list2[$key]['note']=$val['note'];
         }
 
         $filename="xufei_excel";
-        $headArr=array("公司","合同编号",'APP名称','账户名称','金额','显示百度币','产品线','返点','提交时间','代理公司','合同类型','保证金','付款方式','付款时间','销售','提交人');
+        $headArr=array("公司","合同编号",'APP名称','账户名称','金额','显示百度币','产品线','返点','提交时间','代理公司','合同类型','保证金','付款方式','付款时间','销售','提交人','备注');
 
         if(!getExcel($filename,$headArr,$list2))
         {
