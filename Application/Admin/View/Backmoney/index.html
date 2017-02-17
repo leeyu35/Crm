@@ -41,9 +41,10 @@ $(document).ready(function(e) {
 <input id="contract_end" class="Wdate form-control" type="text" name="time_end"  placeholder="结束时间" value="{$time_end}" <literal> onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_start\')}',maxDate:'2020-10-01'})"</literal>/>
     </div>
       <select  class="form-control" name="shenhe">
-     	<option value="k"   {$type2=='k'?'selected':''} >审核状态</option>
-     	<option value="0"  {$type2=='0'?'selected':''}>未审核</option>
-     	<option value="1"  {$type2=='1'?'selected':''}>已审核</option>
+          <option value="k"   {$type2=='k'?'selected':''} >审核状态</option>
+          <option value="0"  {$type2=='0'?'selected':''}>未审核</option>
+          <option value="1"  {$type2=='1'?'selected':''}>已通过</option>
+          <option value="2"  {$type2=='2'?'selected':''}>未通过</option>
   </select>
   <button type="submit" class="btn btn-primary">搜索</button>
   	<if condition="($ser_txt neq '') OR ($time_end neq '')">

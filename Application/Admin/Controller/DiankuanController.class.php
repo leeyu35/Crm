@@ -64,11 +64,15 @@ class DiankuanController extends  CommonController
             }
             if($type2=='0')
             {
-                $where.=" and (a.audit_1=0 or a.audit_2=0)";
+                $where.=" and (a.audit_1=0 or a.audit_2=0) and a.audit_1!=2 and a.audit_2!=2";
             }
             if($type2=='1')
             {
                 $where.=" and a.audit_1=1 and a.audit_2=1";
+            }
+            if($type2=='2')
+            {
+                $where.=" and (a.audit_1=2 or a.audit_2=2)";
             }
             $this->type2=$type2;
             $this->ser_txt2=I('get.search_text');
@@ -504,11 +508,15 @@ class DiankuanController extends  CommonController
             }
             if($type2=='0')
             {
-                $where.=" and (a.audit_1=0 or a.audit_2=0)";
+                $where.=" and (a.audit_1=0 or a.audit_2=0) and a.audit_1!=2 and a.audit_2!=2";
             }
             if($type2=='1')
             {
                 $where.=" and a.audit_1=1 and a.audit_2=1";
+            }
+            if($type2=='2')
+            {
+                $where.=" and (a.audit_1=2 or a.audit_2=2)";
             }
             $this->type2=$type2;
             $this->ser_txt2=I('get.search_text');

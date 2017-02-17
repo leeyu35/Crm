@@ -57,11 +57,15 @@ class BackmoneyController extends CommonController
                 }
                 if($type2=='0')
                 {
-                    $where.=" and (a.audit_1=0 or a.audit_2=0)";
+                    $where.=" and (a.audit_1=0 or a.audit_2=0) and a.audit_1!=2 and a.audit_2!=2";
                 }
                 if($type2=='1')
                 {
                     $where.=" and a.audit_1=1 and a.audit_2=1";
+                }
+                if($type2=='2')
+                {
+                    $where.=" and (a.audit_1=2 or a.audit_2=2)";
                 }
                 $this->type2=$type2;
                 $this->ser_txt2=I('get.search_text');
@@ -411,11 +415,34 @@ class BackmoneyController extends CommonController
         }
         //回款主体
 
+        //审核条件
+        $type2=I('get.shenhe');
+        if($type2!='')
+        {
+            if($type2=='k')
+            {
+                $where.=" and a.id!='0' ";
+            }
+            if($type2=='0')
+            {
+                $where.=" and (a.audit_1=0 or a.audit_2=0) and a.audit_1!=2 and a.audit_2!=2";
+            }
+            if($type2=='1')
+            {
+                $where.=" and a.audit_1=1 and a.audit_2=1";
+            }
+            if($type2=='2')
+            {
+                $where.=" and (a.audit_1=2 or a.audit_2=2)";
+            }
+            $this->type2=$type2;
+            $this->ser_txt2=I('get.search_text');
 
+        }
 
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
-        $list=$Diankuan->field('a.id,a.advertiser as aid,a.appname,a.advertiser,a.money,a.payment_time,a.ctime,a.submituser,b.advertiser,a.xf_contractid')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
+        $list=$Diankuan->field('a.id,a.advertiser as aid,a.appname,a.advertiser,a.money,a.payment_time,a.ctime,a.submituser,b.advertiser,a.xf_contractid')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.is_huikuan=1 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
 
         //主体公司
         $agentcompany=M("AgentCompany");
