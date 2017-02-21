@@ -264,7 +264,7 @@
     <div class="col-sm-2">
         <select  class="form-control" name="prlin_id" id="prlin_id">
             <volist id="contract_line" name="contract_line" key="k">
-                <option value="{$contract_line.id}" title="{$contract_line.name}">{$contract_line.name}</option>
+                <option value="{$contract_line.product_line}" title="{$contract_line.name}">{$contract_line.name}</option>
             </volist>
 
         </select>

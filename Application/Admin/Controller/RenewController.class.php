@@ -203,7 +203,7 @@ class RenewController extends  CommonController
 
         //账户
         $account=M("Account");
-        $accountlist=$account->field("a.id,a.a_users,a.prlin_id,c.name")->join("a left join __CONTRACT_RELEVANCE__ b on a.prlin_id=b.id left join __PRODUCT_LINE__ c on b.product_line=c.id")->where("a.contract_id =".I('get.id'))->select();
+        $accountlist=$account->field("a.id,a.a_users,a.prlin_id,b.name")->join("a left join __PRODUCT_LINE__ b on a.prlin_id=b.id")->where("a.contract_id =".I('get.id'))->select();
 
         $this->account=$accountlist;
         $this->display();
