@@ -1113,3 +1113,10 @@ function  account_xs_id($appid,$field){
 
     return $nianjia;
 }
+//根据合同id获取合同关联表
+function contract_prlin($contrct_id){
+    //合同关联表
+    $contract_relevance=M("ContractRelevance");
+    $conlin_list=$contract_relevance->field("a.*,b.name")->join(" a left join __PRODUCT_LINE__ b on a.product_line=b.id")->where("a.contract_id=$contrct_id")->select();
+    return $conlin_list;
+}

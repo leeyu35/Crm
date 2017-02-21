@@ -316,23 +316,31 @@ class CustomerController extends CommonController
 
     //分配商务
     public  function set_business(){
-        \Think\Log::record('测试日志信息');
+
         $coustomer=M('Customer');
+
+
         //只有商务组经理才能执行
         $myusersinfo=users_info(cookie("u_id"));
        // dump($myusersinfo);
-
+        $this->swzs=1;
+        $wslist = M('Users')->field('id,name')->where("groupid=3 and is_delete!=1")->select();
+        $this->wslist = $wslist;
         if($myusersinfo['groupid']!='1' and $myusersinfo['groupid']!='3')
         {
 
             $this->error('You have no legal power~');
+            $this->swzs=0;
             exit;
         }
         if($myusersinfo['groupid']=='3' and $myusersinfo['manager']==0)
         {
             $this->error('You have no legal power~');
+            $this->swzs=0;
             exit;
         }
+
+
         //搜索条件
         $type=I('get.searchtype');
         if($type!='')
@@ -366,7 +374,12 @@ class CustomerController extends CommonController
             $this->time_start=I('get.time_start');
             $this->time_end=I('get.time_end');
         }
-
+        //商务条件
+        if (I("get.business") != "")
+        {
+            $where.=" and business = ".I("get.business");
+            $this->business=I('get.business');
+        }
         //权限条件
         $q_where=quan_where(__CONTROLLER__);
 

@@ -69,18 +69,22 @@ class RefundMoneyController extends  CommonController
             }
             if($type2=='0')
             {
-                $where.=" and (a.audit_1=0 or a.audit_2=0)";
+                $where.=" and (a.audit_1=0 or a.audit_2=0) and a.audit_1!=2 and a.audit_2!=2";
             }
             if($type2=='1')
             {
                 $where.=" and a.audit_1=1 and a.audit_2=1";
+            }
+            if($type2=='2')
+            {
+                $where.=" and (a.audit_1=2 or a.audit_2=2)";
             }
             $this->type2=$type2;
             $this->ser_txt2=I('get.search_text');
 
         }
         //权限条件
-        $q_where=quan_where("/Admin/".CONTROLLER_NAME,"a");
+        $q_where=quan_where(__CONTROLLER__,"a");
 
         //退款条件
         $where.=" and (a.payment_type = 14 or a.payment_type=15)";
@@ -157,11 +161,15 @@ class RefundMoneyController extends  CommonController
             }
             if($type2=='0')
             {
-                $where.=" and (a.audit_1=0 or a.audit_2=0)";
+                $where.=" and (a.audit_1=0 or a.audit_2=0) and a.audit_1!=2 and a.audit_2!=2";
             }
             if($type2=='1')
             {
                 $where.=" and a.audit_1=1 and a.audit_2=1";
+            }
+            if($type2=='2')
+            {
+                $where.=" and (a.audit_1=2 or a.audit_2=2)";
             }
             $this->type2=$type2;
             $this->ser_txt2=I('get.search_text');
@@ -172,7 +180,7 @@ class RefundMoneyController extends  CommonController
         $q_where=quan_where(__CONTROLLER__,"a");
 
         //退款条件
-        $where=" and (a.payment_type = 14 or a.payment_type=15)";
+        $where.=" and (a.payment_type = 14 or a.payment_type=15)";
         $RenewHuikuan=M('RenewHuikuan');
         $count      = $RenewHuikuan->field('a.id,a.advertiser,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and ".$q_where.$where)->count();// 查询满足要求的总记录数
 
@@ -604,11 +612,15 @@ class RefundMoneyController extends  CommonController
             }
             if($type2=='0')
             {
-                $where.=" and (a.audit_1=0 or a.audit_2=0)";
+                $where.=" and (a.audit_1=0 or a.audit_2=0) and a.audit_1!=2 and a.audit_2!=2";
             }
             if($type2=='1')
             {
                 $where.=" and a.audit_1=1 and a.audit_2=1";
+            }
+            if($type2=='2')
+            {
+                $where.=" and (a.audit_1=2 or a.audit_2=2)";
             }
             $this->type2=$type2;
             $this->ser_txt2=I('get.search_text');

@@ -35,3 +35,5 @@ function hjd_curl($url){
     curl_close($ch);
     return $response;
 }
+
+

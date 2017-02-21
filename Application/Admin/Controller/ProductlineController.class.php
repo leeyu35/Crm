@@ -14,7 +14,11 @@ class ProductlineController extends CommonController
         public function index(){
             $Diankuan=M("ProductLine");
 
-            $list=$Diankuan->field("id,name,title")->order("id asc")->select();
+            $list=$Diankuan->field("id,name,title")->where("parent_id=0")->order("id asc")->select();
+            foreach ($list as $key=>$val)
+            {
+                $list[$key]['erji']=$Diankuan->field("id,name,title")->where("parent_id=$val[id]")->order("id asc")->select();
+            }
 
             $this->list=$list;
             $this->assign('page',$show);// 赋值分页输出
@@ -22,6 +26,10 @@ class ProductlineController extends CommonController
 
     }
     public function add(){
+        //父类
+        $Diankuan=M("ProductLine");
+        $list=$Diankuan->field("id,name,title")->where("parent_id=0")->order("id asc")->select();
+        $this->list=$list;
         $this->display();
     }
 
@@ -54,7 +62,10 @@ class ProductlineController extends CommonController
         $info=$Diankuan->find($id);
         $this->info=$info;
 
-
+        //父类
+        $Diankuan=M("ProductLine");
+        $list=$Diankuan->field("id,name,title")->where("parent_id=0")->order("id asc")->select();
+        $this->list=$list;
 
         $this->display();
 
@@ -66,7 +77,6 @@ class ProductlineController extends CommonController
         $Diankuan->create();
         if($Diankuan->where("id=$id")->save())
         {
-
             $this->success('修改成功',U('index'));
         }else{
             $this->error('修改失败');

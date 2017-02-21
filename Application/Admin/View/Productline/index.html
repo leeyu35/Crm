@@ -32,6 +32,7 @@
         <th>操作</th>	  
     </tr>
     <volist id="list" name="list" key="k">
+
     <tr>
     	<td class="htshow">{$k}</td>
     	<td class="htshow" >{$list[name]}</td>
@@ -41,6 +42,23 @@
         <a href="{:U("updata?id=$list[id]&yid=$info[id]")}"  data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<a href="{:U("delete?id=$list[id]&yid=$info[id]")}"  {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         </td>
     </tr>
+        <IF condition="$list[erji][0]!=''">
+            <volist id="erji" name="list[erji]" key="k2">
+
+                <tr>
+                    <td class="htshow"> &nbsp&nbsp&nbsp&nbsp{$k2}</td>
+                    <td class="htshow" >&nbsp&nbsp&nbsp&nbsp{$erji[name]}</td>
+                    <td class="htshow" >&nbsp&nbsp&nbsp&nbsp{$erji[title]}</td>
+
+                    <td>
+                        <a href="{:U("updata?id=$list[id]&yid=$info[id]")}"  data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<a href="{:U("delete?id=$list[id]&yid=$info[id]")}"  {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+
+            </volist>
+
+        </IF>
+
     </volist>
 </table>
 

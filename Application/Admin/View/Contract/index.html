@@ -18,8 +18,7 @@ $(document).ready(function(e) {
 });
 </script>
     <style type="text/css">
-        .zuofei{ text-decoration:line-through; color: #CCCCCC}
-
+        .zuofei{ text-decoration:line-through; color: #CCCCCC;}
     </style>
 </head>
 <body>
@@ -41,15 +40,23 @@ $(document).ready(function(e) {
   </div>
   
   <select  class="form-control" name="shenhe">
-     	<option value="k"   {$type2=='k'?'selected':''} >审核状态</option>
-     	<option value="0"  {$type2=='0'?'selected':''}>未审核</option>
-     	<option value="1"  {$type2=='1'?'selected':''}>已审核</option>
+      <option value="k"   {$type2=='k'?'selected':''} >审核状态</option>
+      <option value="0"  {$type2=='0'?'selected':''}>未审核</option>
+      <option value="1"  {$type2=='1'?'selected':''}>已通过</option>
+      <option value="2"  {$type2=='2'?'selected':''}>未通过</option>
   </select>
   <select  class="form-control" name="pr_line">
   		
      	<option value="">产品线</option>
   		<volist id="product_line_list" name="product_line_list">
         	<option value="{$product_line_list['id']}" {$product_line_list[id]==$type3?'selected':''} >{$product_line_list[name]}</option>
+            <IF condition="$product_line_list[erji][0]!=''">
+
+                <volist id="erji" name="product_line_list[erji]" key="k2">
+                    <option value="{$erji['id']}"  >&nbsp;&nbsp;&nbsp;&nbsp;{$erji[name]}</option>
+                </volist>
+
+            </IF>
         </volist>
   </select>
   <select  class="form-control" name="guidang">
@@ -75,10 +82,8 @@ $(document).ready(function(e) {
     	<th>#</th>
     	<th>广告主公司名称</th>
     	<th>APP名称或简称</th>
-        <th>合同金额</th>
-        <!--<th>账户显示金额</th>-->
-        <th>返点</th>
-        <th>产品线</th>
+
+        <th>产品线-合同金额</th>
         <th>创建时间</th>
         <th>状态</th>
         <th>提交人</th>
@@ -90,11 +95,12 @@ $(document).ready(function(e) {
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$k}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}"><a href="{:U("Customer/show?id=$list[aid]")}">{$list[advertiser]}</a> <if condition="$list[isguidang] eq 1"><span  data-toggle="tooltip" data-placement="left" title="合同已归档" class="glyphicon glyphicon-folder-close" style="color:#0492d9;"></span></if></td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[appname]}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]")}" align="right">{$list[contract_money]|num_format}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[rebates_proportion]}%</td>
-    	<!--<td>{$list[show_money]}</td>
-    	<td>2016年8月15日</td>-->
-    	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[name]}</td>
+    	<td class="htshow" id="{:U("show?id=$list[id]")}" align="right">
+            <volist id="a" name="list['prduct_line']">
+                <span style="display: block">{$a.name}-{$a.money|num_format}</span>
+            </volist>
+            &nbsp;</td>
+
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[ctime]|date="y-m-d",###}</td>
        <!-- <td>
         <span style="width:20px; display:inline-block"><a href="" title="垫款">垫</a></span>|&nbsp;&nbsp;<a href="" title="垫款列表">列</a><br>
@@ -122,8 +128,11 @@ $(document).ready(function(e) {
         <td>
         <!--<a href="{:U("Renew/index?id=$list[id]")}" data-toggle="tooltip" data-placement="left" title="续费"><span class="glyphicon glyphicon-transfer"></span></a>&nbsp;|
         <a  href="{:U("Account/index?contract_id=$list[id]")}"   data-toggle="tooltip" data-placement="left" title="账户"><span class="glyphicon glyphicon-list"></span></a>&nbsp;|-->
-        <if condition="$list[isguidang] eq 0"></if><!--归档限制 暂时取消-->
-        <a href="{:U("updata?id=$list[id]")}"    data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|
+        <if condition="$list[parent_id] eq 0">
+
+            <a href="{:U("Contract/add?parent_id=$list[id]")}" data-toggle="tooltip" data-placement="left" title="添加子合同"><span class="glyphicon glyphicon-retweet"></span></a>&nbsp;|
+        </if>
+            <!--<a href="{:U("updata?id=$list[id]")}"    data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;-->
         <a href="{:U("delete?id=$list[id]")}" {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         
         </td>

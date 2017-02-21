@@ -9,7 +9,7 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Public/css/bootstrap.min.css">
     <link rel="stylesheet" href="/Public/fonts/demo.css">
     <style>
         html{font-family:"微软雅黑",Arial,sans-serif}
@@ -352,6 +352,7 @@
     </style>
 </head>
 <body>
+
 <div class="container" style="width:100%;" >
 <h3 class="bor-left-bull" style="margin-top: 10px; margin-bottom: 10px;">{$customer_info['advertiser']} / 合同列表<small></small></h3>
 </div>
@@ -432,7 +433,11 @@
                     <ul style="margin:0 0 10px 4px;">
                         <li >
                             <p>
-                                <span>合同类型</span> ：<span>{$list.name}</span>&nbsp;&nbsp;<span class="infor-list-type infor-list-kuangjia  <if condition="$list[iszuofei] eq 1">infor-list-putong</if>"> {$list[type] == 1?"普通":"框架"}</span>
+                                <span>合同类型</span> ：
+                                <volist id="a" name="list['prduct_line']">
+                                    <span>{$a.name} </span>&nbsp;
+                                </volist>
+                           &nbsp;<span class="infor-list-type infor-list-kuangjia  <if condition="$list[iszuofei] eq 1">infor-list-putong</if>"> {$list[type] == 1?"普通":"框架"}</span>
                             </p>
                         </li>
                         <li>
@@ -452,7 +457,7 @@
                         <li><p><span>发&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp票</span> ：<span>{$list.invoice|num_format}</span></p></li>
                         <li>
                             <p>
-                                <span>审核状态</span></span> ：
+                                <span>审核状态</span> ：
                                 <if condition="$list[audit_1] eq 1">
                                     <span data-toggle="tooltip" data-placement="left" title="一级审核已审核" class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
                                     <elseif condition="$list[audit_1] eq 2"/>

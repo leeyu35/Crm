@@ -10,7 +10,46 @@
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
 <script language="javascript">
 	$(document).ready(function(e) {
-		//动态加载公司名称
+
+        $("#new_contact").click(function(){
+            $("#contactmain").append('<div class="form-group"><div class="col-sm-2">{$jsstr}</div><div class="col-sm-2"><input type="text" name="money[]" class="form-control money" id="inputEmail333" required="required"></div><div class="col-sm-2 fandian"><input type="text" name="fandian[]"  class="form-control fandian" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="xianshijine[]"  class="form-control xianshijine" id="inputEmail3"></div>')})
+
+        //换算账户下显示金额
+//        $(document).on("keyup",".fandian",function(){
+//
+//            money=$(this).parent().siblings().find(".money").val();
+//
+//            fandian=$(this).parent().siblings().find(".fandian").val();
+//            alert(money);
+//            xianshijine=$(this).parent().siblings().find(".xianshijine").val(money*(1+(fandian/100)).toFixed(2));
+//
+//        })
+        var num = 0;
+        var b = 0;
+        $(document).on("keyup",".money",function(){
+            b = 1 + (Number($(this).parent().next().find(".fandian").val())/100);
+            num = Number($(this).val())*b;
+            $(this).parent().next().next().find(".xianshijine").val(num).toFixed(2);
+
+        });
+        $(document).on("keyup",".fandian",function(){
+            b = 1 + (Number($(this).val())/100);
+            num = Number($(this).parent().prev().find(".money").val())*b;
+            $(this).parent().next().find(".xianshijine").val(num).toFixed(2);
+        });
+        /*
+        $(".fandian").keyup(function(){
+
+            jr=$("#contract_money").val();
+            bl=$("#rebates_proportion").val();
+            //alert(1+(bl/100));
+
+            $("#show_money").val((jr*(1+(bl/100))).toFixed(2));
+
+        })*/
+
+
+        //动态加载公司名称
 		$("#gongsi").keyup(function(){
 			//$("#hjd").html($("#hjd").html()+"1");
 			val=$(this).val();
@@ -22,10 +61,11 @@
 		var io=0;
 		
 		$("#adlist").on("click","a",function(){
-			
+
 			$("#advertiser").val($(this).attr("id"));
 			$("#submituser").val($(this).attr("title"));
-			$("#gongsi").val(($(this).html()));
+			$("#gongsi").val(($(this).html().substr(0,$(this).html().length-3)));
+
 			$("#adlist").hide();
 			
 			//$("#gongsi").html(data);
@@ -38,17 +78,25 @@
 		})
 		
 		//生成合同编号
-        $("#product_line").change(function(){
+        $("#agent_company").change(function(){
+
+            if($("#agent_company").val()=='0')
+            {
+                alert('请选择代理公司');
+                return false;
+            }
 			bianhao();
 		})
+        /*
 		$("#agent_company").change(function(){
 			bianhao();
 		})
-		
+		*/
 		function bianhao(){
-			
+
 		gs=$("#agent_company option:selected").attr("title");
-			pr=$("#product_line option:selected").attr("title");
+
+			pr={$Think.cookie.u_id};
 			xhx="_";
 			var mydate = new Date();
 
@@ -62,9 +110,11 @@
 			 }
 			  
 			   str += mydate.getDate();
+
 			//动态检查是第几个合同
 			advertiser=$("#advertiser").val();  //公司ID
-			prid=$("#product_line").val(); //产品线ID
+
+			prid=0;
 			$.get("{:U('Contract_num')}",{advertiser:advertiser,prid:prid},function(index){
 				num=index;	
 				$("#contract_no").val(gs+xhx+pr+xhx+str+num);
@@ -116,7 +166,7 @@
 		}	
 		if($("#contract_no").val()=="")
 		{
-			alert("合同编号生成失败!\n请按照公司名称->代理公司->产品线顺序添加，我们将自动生成合同编号！");
+			alert("合同编号生成失败!\n请按照公司名称->代理公司 我们将自动生成合同编号！");
 			return false;	
 		}	
 		if($("#contract_money").val()=="")
@@ -154,14 +204,14 @@
 			alert("请选择付款日期");
 			return false;	
 		}
-		*/	
+
 		if($("#fk_money").val()=="")
 		{
 			alert("请填写付款金额");
 			return false;	
-		}	
-				
-	})
+		}
+            */
+        })
     });
 </script>
 <style type="text/css">
@@ -175,11 +225,15 @@
 <body>
 <span id="hjd"></span>
 <div class="container" style="width:100%;">
-<h3 class="bor-left-bull" >新增合同<small>New contract</small></h3>
+    <h3 class="bor-left-bull" >新增合同 <if condition="$Think.get.parent_id neq ''">子合同</if><small>New contract</small></h3>
 <br>
 <form action="{:U('addru')}" method="post" class="form-horizontal" id="formid" >
 <input type="hidden" name="advertiser" id="advertiser">
 <input type="hidden" name="submituser" id="submituser">
+<if condition="$Think.get.parent_id neq ''">
+    <input type="hidden" name="parent_id" id="parent_id" value="{$Think.get.parent_id}">
+
+</if>
 <h4 class="bor-left-bull" >合同基本信息</h4>
 <hr>
 
@@ -195,32 +249,24 @@
     
     <label for="inputEmail3" class="col-sm-1 control-label">代理公司</label>
     <div class="col-sm-2">
-      <select  class="form-control" name="agent_company" id="agent_company">        
+      <select  class="form-control" name="agent_company" id="agent_company">
+          <option value="0" title="0">请选择代理公司</option>
         <volist id="agentcompany" name="agentcompany" key="k">
        	<option value="{$agentcompany.id}" title="{$agentcompany.title}">{$agentcompany.companyname}</option>
        </volist>
-
       </select>
     </div>
     
   </div>
   <div class="form-group">
   
-    <label for="inputEmail3" class="col-sm-2 control-label">产品线</label>
+    <label for="inputEmail3" class="col-sm-2 control-label">合同编号</label>
     <div class="col-sm-3">
-    <select  class="form-control" name="product_line" id="product_line">
-      	<option>请选择</option>
-      	<volist id="product_line_list" name="product_line_list" key="k">
-       	<option value="{$product_line_list.id}" title="{$product_line_list.title}">{$product_line_list.name}</option>
-       </volist>
-      </select>
-      
+
+        <input name="contract_no" type="text" class="form-control" id="contract_no" placeholder="自动生成，无需填写">
     </div>
     
-    <label for="inputEmail3" class="col-sm-1 control-label">合同编号</label>
-    <div class="col-sm-3">
-      <input name="contract_no" type="text" class="form-control" id="contract_no" placeholder="自动生成，无需填写">
-    </div>
+
     </div>
     
     <div class="form-group">
@@ -266,8 +312,38 @@
 
     
   </div>
-<h4 class="bor-left-bull" >购买产品信息</h4>
-<hr>
+    <h4  class="bor-left-bull" >购买产品信息<small>&nbsp;&nbsp;<a  id="new_contact" style="cursor:pointer;"><span class="glyphicon glyphicon-plus"></span>新增</a></small></h4>
+    <hr>
+    <div id="contactmain">
+        <div class="form-group">
+
+
+            <div class="col-sm-2">
+                <label for="inputEmail3" class="control-label">产品线</label>
+                {$jsstr}
+            </div>
+            <div class="col-sm-2">
+                <label for="inputEmail3" class="control-label">金额</label>
+                <input type="text" class="form-control money" name="money[]" id="inputEmail333" required>
+            </div>
+
+            <div class="col-sm-2">
+                <label for="inputEmail3" class="control-label">返点</label>
+                <input type="text" class="form-control fandian" name="fandian[]" id="inputEmail3" >
+            </div>
+
+            <div class="col-sm-2">
+                <label for="inputEmail3" class="control-label">账户显示金额</label>
+                <input type="text" class="form-control xianshijine" name="xianshijine[]" id="inputEmail3">
+            </div>
+
+
+
+
+        </div>
+
+        </div>
+
 
   <!--<div class="form-group">
   
@@ -284,7 +360,7 @@
       <input type="text" class="form-control" id="inputEmail3">
     </div> 
 
-  </div>-->
+  </div>
   
   <div class="form-group">
   
@@ -312,7 +388,8 @@
         </div>
     </div>
     
-  </div>
+  </div>-->
+    <hr>
   <div class="form-group">
   <literal>
     <label for="inputEmail3" class="col-sm-2 control-label">合同有效期</label>

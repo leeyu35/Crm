@@ -12,41 +12,59 @@ use Think\Controller;
 
 class NewCaiwuController extends CommonController
 {
-    public function index(){
-        $coustomer=M('Customer');
+    public function index()
+    {
+        $coustomer = M('Customer');
+        $myusersinfo = users_info(cookie("u_id"));
+
+
+        if ($myusersinfo['groupid'] == '1' or $myusersinfo['groupid'] == '3') {
+            $wslist = M('Users')->field('id,name')->where("groupid=3 and is_delete!=1")->select();
+            $this->wslist = $wslist;
+            $this->swzs=1;
+            if ($myusersinfo['groupid'] == '3' and $myusersinfo['manager'] == 0) {
+                $where.="and business=".cookie("u_id");
+                $this->swzs=0;
+            }
+        }
+
         //搜索条件
-        $type=I('get.searchtype');
-        if($type!='')
-        {
-            if($type=='advertiser')
-            {
-                $where=" and advertiser like '%".I('get.search_text')."%'";
+        $type = I('get.searchtype');
+        if ($type != '') {
+            if ($type == 'advertiser') {
+                $where = " and advertiser like '%" . I('get.search_text') . "%'";
             }
-            if($type=='name' or $type=='tel')
-            {
+            if ($type == 'name' or $type == 'tel') {
                 //联系人
-                $contact=M('ContactList');
-                $se_idlist=$contact->where("$type like '%".I('get.search_text')."%'")->field("customer_id")->select(false);
+                $contact = M('ContactList');
+                $se_idlist = $contact->where("$type like '%" . I('get.search_text') . "%'")->field("customer_id")->select(false);
 
-                $where=" and id in($se_idlist)";
+                $where = " and id in($se_idlist)";
             }
 
-            $this->type=$type;
-            $this->ser_txt=I('get.search_text');
+            $this->type = $type;
+            $this->ser_txt = I('get.search_text');
 
         }
         //时间条件
-        $time_start=I('get.time_start');
-        $time_end=I('get.time_end');
-        if($time_start!="" and $time_end!="")
-        {
-            $time_start=strtotime($time_start);
-            $time_end=strtotime($time_end);
+        $time_start = I('get.time_start');
+        $time_end = I('get.time_end');
+        if ($time_start != "" and $time_end != "") {
+            $time_start = strtotime($time_start);
+            $time_end = strtotime($time_end);
 
-            $where.=" and ctime > $time_start and ctime < $time_end";
-            $this->time_start=I('get.time_start');
-            $this->time_end=I('get.time_end');
+            $where .= " and ctime > $time_start and ctime < $time_end";
+            $this->time_start = I('get.time_start');
+            $this->time_end = I('get.time_end');
+
         }
+        //商务条件
+        if (I("get.business") != "")
+        {
+            $where.=" and business = ".I("get.business");
+            $this->business=I('get.business');
+        }
+
         //权限条件
         $q_where=quan_where(__CONTROLLER__);
 
@@ -54,7 +72,7 @@ class NewCaiwuController extends CommonController
 
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
-        $list=$coustomer->field('id,advertiser,yu_e,huikuan,industry,website,product_line,ctime,city,appName,submituser,type')->where("id!=0 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order('ctime desc')->select();
+        $list=$coustomer->field('id,advertiser,yu_e,huikuan,industry,website,product_line,ctime,city,appName,submituser,type,customer_type')->where("id!=0 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order('ctime desc')->select();
 
         $contact=M('ContactList');
 
@@ -71,6 +89,7 @@ class NewCaiwuController extends CommonController
             //提交人
             $uindo=users_info($val['submituser']);
             $list[$key]['submituser']=$uindo[name];
+
         }
         $this->list=$list;
         $this->assign('page',$show);// 赋值分页输出
@@ -97,6 +116,8 @@ class NewCaiwuController extends CommonController
 
 
             $list[$key]['xiaoshou']=$userslist['name'];
+            //产品线
+            $list[$key]['prduct_line']=contract_prlin($val['id']);
         }
 
         $this->list=$list;

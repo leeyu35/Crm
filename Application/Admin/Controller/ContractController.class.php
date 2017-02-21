@@ -14,8 +14,12 @@ class ContractController extends CommonController
     public function index(){
         //产品线
         $product_line=M("ProductLine");
-        $this->product_line_list=$product_line->field("id,name,title")->order("id asc")->select();
-
+        $product_line_list=$product_line->field("id,name,title")->where("parent_id=0")->order("id asc")->select();
+        foreach ($product_line_list as $key=>$val)
+        {
+            $product_line_list[$key]['erji']=$product_line->field("id,name,title")->where("parent_id=$val[id]")->order("id asc")->select();
+        }
+        $this->product_line_list=$product_line_list;
         $hetong=M("Contract");
 
 
@@ -89,11 +93,15 @@ class ContractController extends CommonController
             }
             if($type2=='0')
             {
-                $where.=" and (a.audit_1=0 or a.audit_2=0)";
+                $where.=" and (a.audit_1=0 or a.audit_2=0) and a.audit_1!=2 and a.audit_2!=2";
             }
             if($type2=='1')
             {
                 $where.=" and a.audit_1=1 and a.audit_2=1";
+            }
+            if($type2=='2')
+            {
+                $where.=" and (a.audit_1=2 or a.audit_2=2)";
             }
             $this->type2=$type2;
             $this->ser_txt2=I('get.search_text');
@@ -118,11 +126,14 @@ class ContractController extends CommonController
             $this->type4=$type4;
 
         }
-
+        //产品线条件
         $type3=I('get.pr_line');
         if($type3!='')
         {
-            $where.="and a.product_line =$type3";
+            $contract_relevance=M('ContractRelevance');
+            $zsql=$contract_relevance->field("contract_id")->where("product_line=$type3")->select(false);
+            $where.=" and  a.id in($zsql)";
+
             $this->type3=$type3;
         }
         $where.=" and is_meijie = 0 ";
@@ -133,14 +144,16 @@ class ContractController extends CommonController
 
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
-        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.users2,a.isguidang,a.iszuofei,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where($q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
-        
+        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.parent_id,a.users2,a.isguidang,a.iszuofei,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where($q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
+
         foreach($list as $key => $val)
         {
             //提交人
             $uindo=users_info($val['users2']);
             $list[$key]['submituser']=$uindo[name];
+            $list[$key]['prduct_line']=contract_prlin($val['id']);
         }
+
         $this->list=$list;
         $this->assign('page',$show);// 赋值分页输出
         $this->display();
@@ -148,17 +161,40 @@ class ContractController extends CommonController
     public function add(){
         //产品线
         $product_line=M("ProductLine");
-        $this->product_line_list=$product_line->field("id,name,title")->order("id asc")->select();
+        $product_line_list=$product_line->field("id,name,title")->where("parent_id=0")->order("id asc")->select();
+        foreach ($product_line_list as $key=>$val)
+        {
+            $product_line_list[$key]['erji']=$product_line->field("id,name,title")->where("parent_id=$val[id]")->order("id asc")->select();
+        }
+        $this->product_line_list=$product_line_list;
         //代理公司
         $agentcompany=M("AgentCompany");
         $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
         //所有销售
         $this->xiaoshou=M('Users')->field('id,name')->where("groupid=2 or groupid=15  or groupid=9")->select();
+
+        //产品线JS字符串
+        $jsstr='<select  class="form-control product_line" name="product_line[]" id="product_line"><option>请选择</option>';
+        foreach ($product_line_list as $key=>$value)
+        {
+            $jsstr.='<option value="'.$value[id].'" title="'.$value[title].'">'.$value['name'].'</option>';
+
+            foreach ($value['erji'] as $k=>$v)
+            {
+
+                $jsstr.='<option value="'.$v[id].'" title="'.$v[title].'">&nbsp&nbsp&nbsp&nbsp'.$v['name'].'</option>';
+
+            }
+        }
+
+        $jsstr.='</select>';
+        $this->jsstr=$jsstr;
         $this->display();
     }
     public function addru(){
         $hetong=M("Contract");
         $postdate=$hetong->create();
+
         $hetong->contract_start=strtotime($hetong->contract_start);
         $hetong->contract_end=strtotime($hetong->contract_end);
         $hetong->payment_time=strtotime($hetong->payment_time);
@@ -166,7 +202,9 @@ class ContractController extends CommonController
         $hetong->users2=cookie('u_id');
         //检查是否有这个客户
         $Customer=M("Customer");
-        $co=$Customer->where("advertiser='".I('post.gongsi')."'")->count();
+
+        $co=$Customer->where("id='".I('post.advertiser')."'")->count();
+
         if($co==0)
         {
             $this->error("没有这个公司!");
@@ -179,59 +217,30 @@ class ContractController extends CommonController
             $this->error("合同编号重复!");
             exit;
         }
-        /*
-        if(I('post.payment_type')==2);
-        {
-            // 映射垫款表
-            $dk['d_company']=$postdate['agent_company'];//代理公司
-            $dk['d_account_name']=' ';
-            $dk['note']=' ';
-            $dk['d_money']=$postdate['fk_money'];
-            $dk['back_money_time']=strtotime(I('post.back_money_time'));
-            $dk['d_time']=strtotime($postdate['payment_time']);
-            $dk['advertiser']=$postdate['advertiser'];
-            $dk['appname']=$postdate['appname'];
-            $dk['contract_no']=$postdate['contract_no'];
-            $dk['ctime']=time();
-            $dk['submituser']=$postdate['submituser'];
-            $dk['ispiao']=I("post.ispiao");
-            $dk['state']=0;
-            $dk['users2']=cookie('u_id');
-        }
 
-        */
         if($hetong->advertiser=='')
         {
             $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
             exit;
         }
          if($insid=$hetong->add()){
-             /*
-              * 添加合同生成垫款记录，已取消此功能，2016年11月15日（由王秋月建议）。如果要改回 取消模板注释和此注释即可
              if($insid==1)
              {
                  $result = $hetong->query("select currval('jd_contract_id_seq')");
                  $insid=$result[0][currval];
              }
-
-             if(I('post.payment_type')==2)
+             $contract_relevance=M("ContractRelevance");
+             //循环联系人并且记录
+             foreach (I('post.product_line') as $key => $val)
              {
-
-
-                 $dk['contract_id']=$insid;
-                 //映射垫款  添加
-                 $diankuan=M("Diankuan");
-
-
-                 if($diankuan->add($dk))
-                 {
-                     $success_str="并生成垫款一条垫款记录";
-                 }else
-                 {
-                     $success_str="但生成垫款记录失败，请联系管理员";
-                 }
+                 $contact_list[]=array("product_line"=>I('post.product_line')[$key],"money"=>I('post.money')[$key],"fandian"=>I('post.fandian')[$key],"xianshijine"=>I('post.xianshijine')[$key],"advertiser"=>I('post.advertiser')[$key],"contract_id"=>$insid);
              }
-             */
+
+             foreach($contact_list as $key=>$val)
+             {
+                 $contract_relevance->add($contact_list[$key]);
+             }
+
              $this->success("添加成功".$success_str,U("index"));
 
          }else
@@ -256,11 +265,18 @@ class ContractController extends CommonController
         }
 
 
-        $list=$Customer->field("id,advertiser,submituser")->where("id!=0 and advertiser like '%$val%' and ".$q_where)->select();
+        $list=$Customer->field("id,advertiser,submituser,customer_type")->where("id!=0 and advertiser like '%$val%' and ".$q_where)->select();
 
         foreach ($list as $key=>$val)
         {
-            $str.="<li><a id='".$val[id]."' title='".$val[submituser]."'>$val[advertiser]</a></li>";
+            if($val['customer_type']=='1')
+            {
+                $khyupe='-直接';
+            }else
+            {
+                $khyupe='-渠道';
+            }
+            $str.="<li><a id='".$val[id]."' title='".$val[submituser]."'>$val[advertiser]$khyupe</a></li>";
         }
         echo $str;
       //  echo "<li><a id="">$val</a></li>";
@@ -273,8 +289,8 @@ class ContractController extends CommonController
         $advertiser=I('get.advertiser');
         $prid=I('get.prid');
         $today = strtotime(date('Y-m-d', time()));//获取当天0点
-
-        $max=$hetong->field('contract_no')->where("product_line=$prid and ctime>$today and isxufei=0 ")->order("ctime desc")->find();
+        $uid=cookie("u_id");
+        $max=$hetong->field('contract_no')->where("submituser=$uid and ctime>$today and isxufei=0 ")->order("ctime desc")->find();
         $maxsun=substr($max['contract_no'],-2,2);
         $num=$maxsun+1;
 
@@ -426,10 +442,13 @@ class ContractController extends CommonController
     }
 
     public function delete(){
+
     $id=I('get.id');
+
     $group=M("Contract");
     if($group->delete($id))
     {
+        M("ContractRelevance")->where("contract_id=$id")->delete();
         $this->success("删除成功",U('index'));
     }else
     {
@@ -528,6 +547,7 @@ class ContractController extends CommonController
 
     //查看合同
     public function show(){
+
         $id=I('get.id');
         $hetong=M("Contract");
         $info=$hetong->find($id);
@@ -545,8 +565,8 @@ class ContractController extends CommonController
         $submitusers4=users_info($info[susers2]);
         $this->users_info4=$submitusers4['name'];
         //产品线
-        $product_line=M("ProductLine");
-        $this->product_line_list=$product_line->field("id,name,title")->order("id asc")->select();
+        $product_line=contract_prlin($id);
+        $this->product_line=$product_line;
 
         //代理公司
         $agentcompany=M("AgentCompany");
@@ -556,6 +576,19 @@ class ContractController extends CommonController
         $this->gongsi=$gs[advertiser];
         //所有销售
         $this->xiaoshou=M('Users')->field('id,name')->where("groupid=2 or groupid=15 or groupid=9")->select();
+        //查询是否有关于该合同的子合同
+        $zicontract=$hetong->field("id,advertiser,contract_no,appname,market")->where("parent_id=$id")->select();
+        foreach($zicontract as $key=>$val)
+        {
+            $gs=kehu($val[advertiser]);
+            $zicontract[$key]['advertiser']=$gs[advertiser];
+            //二级审核人
+            $makert=users_info($info[market]);
+            $zicontract[$key]['market']=$makert['name'];
+
+        }
+        $this->zicontract=$zicontract;
+
         $this->display();
 
     }
@@ -627,11 +660,15 @@ class ContractController extends CommonController
             }
             if($type2=='0')
             {
-                $where.=" and (a.audit_1=0 or a.audit_2=0)";
+                $where.=" and (a.audit_1=0 or a.audit_2=0) and a.audit_1!=2 and a.audit_2!=2";
             }
             if($type2=='1')
             {
                 $where.=" and a.audit_1=1 and a.audit_2=1";
+            }
+            if($type2=='2')
+            {
+                $where.=" and (a.audit_1=2 or a.audit_2=2)";
             }
             $this->type2=$type2;
             $this->ser_txt2=I('get.search_text');
@@ -668,12 +705,22 @@ class ContractController extends CommonController
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
 
-        $list=$hetong->field('a.id,a.advertiser as aid,a.fk_money,a.payment_time,a.agent_company,a.contract_no,a.contract_start,a.contract_end,a.type,a.users2,a.isguidang,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where($q_where.$where)->order("a.ctime desc")->select();
+        $list=$hetong->field('a.id,a.advertiser as aid,a.fk_money,a.payment_time,a.agent_company,a.contract_no,a.contract_start,a.contract_end,a.type,a.users2,a.isguidang,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,a.market,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where($q_where.$where)->order("a.ctime desc")->select();
 
         foreach($list as $key => $val)
         {
-
-
+            $c_prin="";
+            $c_money="";
+            $c_fandian="";
+            $c_showmoney="";
+            $prlin=contract_prlin($val['id']);
+            foreach ($prlin as $k=>$v)
+            {
+                $c_prin[]=$v['name'];
+                $c_money[]=$v['money'];
+                $c_fandian[]=$v['fandian'];
+                $c_showmoney[]=$v['xianshijine'];
+            }
 
             //公司
             $list2[$key]['advertiser']=$val['advertiser'];
@@ -682,15 +729,14 @@ class ContractController extends CommonController
             //appname
             $list2[$key]['appname']=$val['appname'];
             //合同金额
-            $list2[$key]['contract_money']=num_format($val['contract_money']);
+            $list2[$key]['contract_money']=implode("|",$c_money);
             //显示百度币
-            $list2[$key]['show_money']=num_format($val['show_money']);
-            //付款金额
-            $list2[$key]['fk_money']=num_format($val['fk_money']);
+            $list2[$key]['show_money']=implode("|",$c_showmoney);
+
             //产品线
-            $list2[$key]['product_line']=$val['name'];
+            $list2[$key]['product_line']=implode("|",$c_prin);
             //返点
-            $list2[$key]['rebates_proportion']=$val['rebates_proportion'];
+            $list2[$key]['rebates_proportion']=implode("|",$c_fandian);
 
             //提交时间
             $list2[$key]['ctime']=date("Y-m-d H:i:s",$val['ctime']);
@@ -714,7 +760,7 @@ class ContractController extends CommonController
             $list2[$key]['isguidang']=$val['isguidang']==0?'未归档':'已归档';
 
             //销售
-            $submitusers=users_info($val[submituser]);
+            $submitusers=users_info($val[market]);
             $list2[$key]['submitusers2']=$submitusers['name'];
 
             //提交人
@@ -725,12 +771,27 @@ class ContractController extends CommonController
 
 
         $filename="hetong_excel";
-        $headArr=array("公司","合同编号",'APP名称','合同金额','显示百度币','付款金额','产品线','返点','提交时间','代理公司','合同类型','保证金','合同开始时间','合同结束时间','付款方式','付款时间','是否归档','销售','提交人');
+        $headArr=array("公司","合同编号",'APP名称','合同金额','显示百度币','产品线','返点','提交时间','代理公司','合同类型','保证金','合同开始时间','合同结束时间','付款方式','付款时间','是否归档','销售','提交人');
         if(!getExcel($filename,$headArr,$list2))
         {
             $this->error('没有数据可导出');
         };
     }
 
+    public function mvprlin(){
+        $contract=M("Contract");
+        $conpr=M("ContractRelevance");
+        $list=$contract->field("advertiser,product_line,id,contract_money,show_money,rebates_proportion")->select();
 
+        foreach ($list as $key=>$val)
+        {
+            $data['advertiser']=$val['advertiser'];
+            $data['contract_id']=$val['id'];
+            $data['product_line']=$val['product_line'];
+            $data['money']=$val['contract_money'];
+            $data['xianshijine']=$val['show_money'];
+            $data['fandian']=$val['rebates_proportion'];
+            echo $conpr->add($data)."<br>";
+        }
+    }
 }

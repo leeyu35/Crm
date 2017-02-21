@@ -120,6 +120,8 @@ class AccountController extends CommonController
             $this->contract_id=$contract_id;
         }
 
+        //合同产品线列表
+        $this->contract_line=contract_prlin($contract_id);
 
         $this->display();
     }
@@ -138,7 +140,7 @@ class AccountController extends CommonController
             $array_slist[$key]['account']=$val['accountName'];
         }
 
-        dump($array_slist);
+
         //接收的get 账户名
        // $account_name=I('post.account_name');
 
@@ -244,7 +246,6 @@ class AccountController extends CommonController
         if($insertid=$Refund->add()){
 
 
-
             if($insertid==1)
             {
                 $result = $Refund->query("select currval('jd_account_id_seq')");
@@ -315,7 +316,12 @@ class AccountController extends CommonController
         $fzridlist=$principal->field('u_id')->where("account_id = $id")->select(false);
         $userslist=M("Users")->field('id,name')->where("id in ($fzridlist)")->select();
         $this->userslist=$userslist;
+        //账户选择的产品线
 
+        $contract_gl=M("ContractRelevance")->find($info[prlin_id]);
+        $this->contract_gl=$contract_gl;
+        //合同产品线列表
+        $this->contract_line=contract_prlin($info['contract_id']);
 
 
         $this->display();
@@ -419,6 +425,11 @@ class AccountController extends CommonController
 
         $Accounttype=M("Accounttype");
         $this->accounttype=$Accounttype->field("id,name")->order("id asc")->select();
+
+        //产品线
+        $findpr=M("ContractRelevance")->field('product_line')->find($info['prlin_id']);
+        $product_line=M("ProductLine")->field('name')->find($findpr['product_line']);
+        $this->product_line=$product_line;
         $this->display();
 
     }
@@ -462,4 +473,14 @@ class AccountController extends CommonController
 
     }
 
+    public function account_cont_lin(){
+        $ac=M("Account");
+        $account=$ac->select();
+        $contract_relevance=M("ContractRelevance");
+        foreach ($account as $key=>$val)
+        {
+            $one=$contract_relevance->where("contract_id=".$val['contract_id'])->find();
+            $ac->where('id='.$val['id'])->setField('prlin_id',$one['product_line']);
+        }
+    }
 }

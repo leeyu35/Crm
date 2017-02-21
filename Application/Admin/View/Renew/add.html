@@ -15,7 +15,7 @@
 		
 		
 		//自动换算百度币
-		$("#rebates_proportion").keyup(function(){
+		$("#rebates_proportion,#money").keyup(function(){
 			jr=$("#money").val();	
 			bl=$("#rebates_proportion").val();
 			$("#show_money").val((jr*(1+(bl/100))).toFixed(2));
@@ -93,7 +93,14 @@
 			return false;	
 		}	
 	})
-	
+        $("#account").change(function(){
+            $.get("{:U("Renew/contract_account_fandian")}",{acid:$(this).val(),htid:{$info[id]}},function(data){
+                $("#rebates_proportion").val(data);
+                jr=$("#money").val();
+                bl=$("#rebates_proportion").val();
+                $("#show_money").val((jr*(1+(bl/100))).toFixed(2));
+            })
+        })
     });
 	
 	
@@ -208,7 +215,26 @@
     </div> 
 
   </div>-->
-  
+    <div class="form-group">
+
+        <label for="inputEmail3" class="col-sm-2 control-label">账户名称</label>
+        <div class="col-sm-3">
+            <select  class="form-control" name="account" id="account" >
+                <option value="">--请选择账户--</option>
+                <volist id="account" name="account">
+                    <option value="{$account[id]}">{$account[a_users]}-{$account[name]}</option>
+                </volist>
+            </select>
+        </div>
+
+        <label for="inputEmail3" class="col-sm-1 control-label">APP名称</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" autocomplete="off" name="appname" id="appname" value="{$info[appname]}" >
+
+
+        </div>
+
+    </div>
   <div class="form-group">
   
     <label for="contract_money" class="col-sm-2 control-label">续费金额</label>
@@ -258,26 +284,7 @@
 
     
   </div>-->
-  <div class="form-group">
-  
-    <label for="inputEmail3" class="col-sm-2 control-label">账户名称</label>
-    <div class="col-sm-3">
-    	<select  class="form-control" name="account" id="account" >
-        	<option value="">--请选择账户--</option>
-        	<volist id="account" name="account">
-        	<option value="{$account[id]}">{$account[a_users]}</option>
-            </volist>
-        </select>
-    </div>
-    
-    <label for="inputEmail3" class="col-sm-1 control-label">APP名称</label>
-    <div class="col-sm-2">
-      <input type="text" class="form-control" autocomplete="off" name="appname" id="appname" value="{$info[appname]}" >
 
-
-    </div>
-    
-  </div>
   <h4 class="bor-left-bull" >付款信息</h4>
   <hr>
 	<div class="form-group">

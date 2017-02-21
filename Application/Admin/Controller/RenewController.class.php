@@ -183,6 +183,7 @@ class RenewController extends  CommonController
             $account=account($val['account']);
             $list[$key]['a_users']=$account['a_users'];
             $list[$key]['a_id']=$account['id'];
+
         }
         $this->list=$list;
         $this->assign('page',$show);// 赋值分页输出
@@ -199,10 +200,10 @@ class RenewController extends  CommonController
         //代理公司
         $agentcompany=M("AgentCompany");
         $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
+
         //账户
         $account=M("Account");
-        $accountlist=$account->field("id,a_users")->where("contract_id =".I('get.id'))->select();
-
+        $accountlist=$account->field("a.id,a.a_users,a.prlin_id,c.name")->join("a left join __CONTRACT_RELEVANCE__ b on a.prlin_id=b.id left join __PRODUCT_LINE__ c on b.product_line=c.id")->where("a.contract_id =".I('get.id'))->select();
 
         $this->account=$accountlist;
         $this->display();
@@ -713,5 +714,14 @@ class RenewController extends  CommonController
         };
     }
 
+    public function contract_account_fandian(){
+        $prlin=M("ContractRelevance");
+        $contract_id=I("get.htid");
+        $acid=I('get.acid');
+        $account_info=M("Account")->field("prlin_id")->find($acid);
+        $one=$prlin->where("id=".$account_info['prlin_id'])->find();
+        //echo $prlin->_sql();
+        echo $one['fandian'];
+    }
 
 }
