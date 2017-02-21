@@ -719,8 +719,8 @@ class RenewController extends  CommonController
         $contract_id=I("get.htid");
         $acid=I('get.acid');
         $account_info=M("Account")->field("prlin_id")->find($acid);
-        $one=$prlin->where("id=".$account_info['prlin_id'])->find();
-        //echo $prlin->_sql();
+        $one=$prlin->where("contract_id=$contract_id and product_line=".$account_info['prlin_id'])->find();
+     
         echo $one['fandian'];
     }
 
