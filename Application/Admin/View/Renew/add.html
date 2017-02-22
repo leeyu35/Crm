@@ -9,6 +9,9 @@
 <script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
 <script src="/Public/js/hjdfunction.js"></script>
+<script src="/Public/js/jquery.validate.min.js"></script>
+<script src="/Public/js/messages_zh.js"></script>
+
 <script language="javascript">
 	$(document).ready(function(e) { 
 
@@ -91,7 +94,14 @@
 		{
 			alert("请选择付款方式");
 			return false;	
-		}	
+		}
+
+        if(!$.isNumeric($('#money').val()))
+        {
+            alert("续费金额不是数字");
+            return false;
+        }
+
 	})
         $("#account").change(function(){
             $.get("{:U("Renew/contract_account_fandian")}",{acid:$(this).val(),htid:{$info[id]}},function(data){
@@ -101,6 +111,9 @@
                 $("#show_money").val((jr*(1+(bl/100))).toFixed(2));
             })
         })
+
+
+
     });
 	
 	
@@ -129,6 +142,7 @@
 <input type="hidden" name="htid" id="htid" value="{$info[id]}">
 <input type="hidden" name="isxufei" id="isxufei" value="1">
 <input type="hidden" name="market" id="isxufei" value="{$info[market]}">
+
 <h4 class="bor-left-bull" >合同基本信息</h4>
 <hr>
 
@@ -229,9 +243,7 @@
 
         <label for="inputEmail3" class="col-sm-1 control-label">APP名称</label>
         <div class="col-sm-2">
-            <input type="text" class="form-control" autocomplete="off" name="appname" id="appname" value="{$info[appname]}" >
-
-
+            <input type="text" class="form-control" autocomplete="off" name="appname" id="appname" value="{$info[appname]}" required>
         </div>
 
     </div>
@@ -240,7 +252,7 @@
     <label for="contract_money" class="col-sm-2 control-label">续费金额</label>
     <div class="col-sm-3">
       	<div class="input-group">
-        <input type="text" class="form-control" name="money" id="money">
+        <input type="text" class="form-control" name="money" id="money"	>
     	<span class="input-group-addon">元</span>
         </div>
     </div>

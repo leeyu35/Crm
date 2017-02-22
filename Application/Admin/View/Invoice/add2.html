@@ -61,7 +61,11 @@ $("#gongsi").on("blur",function(){
                 $("#money").select();
                 return false;
             }
-
+            if(!$.isNumeric($('#money').val()))
+            {
+                alert("金额不是数字");
+                return false;
+            }
             if($("#type").val()=="")
             {
                 alert("请选择发票类型");

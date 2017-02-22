@@ -720,7 +720,7 @@ class RenewController extends  CommonController
         $acid=I('get.acid');
         $account_info=M("Account")->field("prlin_id")->find($acid);
         $one=$prlin->where("contract_id=$contract_id and product_line=".$account_info['prlin_id'])->find();
-     
+
         echo $one['fandian'];
     }
 
