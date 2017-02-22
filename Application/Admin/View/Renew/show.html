@@ -10,6 +10,7 @@
     <script src="/Public/js/jquery-3.1.0.min.js"></script>
     <script src="/Public/js/layer/layer.js"></script>
     <script type="text/javascript">
+        var flag=0;
         (function (doc, win) {
             var docEl = doc.documentElement,
                 resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
@@ -415,7 +416,12 @@
             }, function(){
 
                 //layer.msg('提交成功', {icon: 1});
-                window.location.href=ID;
+                if(flag==0)
+                {
+                    flag=1;
+                    window.location.href=ID;
+                }
+
 
                 $(".shenhe-select").hide();
             }, function(){

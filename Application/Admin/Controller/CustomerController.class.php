@@ -445,4 +445,83 @@ class CustomerController extends CommonController
 
 
     }
+
+
+    public function excel(){
+
+        $coustomer=M('Customer');
+
+        //搜索条件
+        $type=I('get.searchtype');
+        if($type!='')
+        {
+            if($type=='advertiser')
+            {
+                $where=" and advertiser like '%".I('get.search_text')."%'";
+            }
+            if($type=='name' or $type=='tel')
+            {
+                //联系人
+                $contact=M('ContactList');
+                $se_idlist=$contact->where("$type like '%".I('get.search_text')."%'")->field("customer_id")->select(false);
+
+                $where=" and id in($se_idlist)";
+            }
+
+            $this->type=$type;
+            $this->ser_txt=I('get.search_text');
+
+        }
+        //时间条件
+        $time_start=I('get.time_start');
+        $time_end=I('get.time_end');
+        if($time_start!="" and $time_end!="")
+        {
+            $time_start=strtotime($time_start);
+            $time_end=strtotime($time_end);
+
+            $where.=" and ctime > $time_start and ctime < $time_end";
+            $this->time_start=I('get.time_start');
+            $this->time_end=I('get.time_end');
+        }
+
+        //权限条件
+        $q_where=quan_where(__CONTROLLER__);
+
+
+        $list=$coustomer->field('id,advertiser,industry,website,ctime,city,appName,submituser,business,customer_type,yu_e,huikuan,bukuan')->where("id!=0 and ".$q_where.$where)->order('ctime desc')->select();
+
+        //echo $coustomer->_sql();
+        $contact=M('ContactList');
+
+        foreach($list as $key => $val)
+        {
+            //产品线
+            // $lin=product_line($val['product_line']);
+            // $list[$key]['product_lin']=$lin;
+
+            //提交人
+            $uindo=users_info($val['submituser']);
+            $list[$key]['submituser']=$uindo[name];
+            //所属商务
+            $uindo=users_info($val['business']);
+            $list[$key]['business']=$uindo[name];
+            //客户余额
+            $list[$key]['yue']=$val['huikuan']-$val['yu_e'];
+            //客户创建时间
+            $list[$key]['ctime']=Date("Y-m-d",$val['ctime']);
+            //客户类型
+            $list[$key]['customer_type']==1?$list[$key]['customer_type']='直接客户':$list[$key]['customer_type']='渠道客户';
+            //取第一位联系人
+            $contact_one=$contact->field('name,tel')->where("customer_id=$val[id]")->find();
+            $list[$key]['contact']=$contact_one['name'];
+            $list[$key]['tel']=$contact_one['tel'];
+        }
+        $filename="kehu_excel";
+        $headArr=array("id","公司名称",'行业','网址','创建时间','城市','APP名称','提交人','商务','客户类型','总消耗','总回款','总补款','余额','联系人','联系人电话');
+        if(!getExcel($filename,$headArr,$list))
+        {
+            $this->error('没有数据可导出');
+        };
+    }
 }

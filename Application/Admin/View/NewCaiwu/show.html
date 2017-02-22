@@ -262,6 +262,17 @@
             background:url(/Public/images/images/zuofei.png) no-repeat;
             background-size:100% 100%;
         }
+        /*结束图标*/
+        .infor-list-remove2 {
+            width: 0.7rem;
+            height: 0.7rem;
+            border-radius: 50%;
+            position: absolute;
+            right: 0.1rem;
+            bottom:  0.1rem;
+            background:url(/Public/images/images/jieshu.png) no-repeat;
+            background-size:100% 100%;
+        }
         .infor-list-grey {
             position: absolute;
             top: 0;
@@ -309,6 +320,16 @@
             right: 0.1rem;
             bottom:  0.1rem;
             background:url(/Public/images/images/zuofei.png) no-repeat;
+            background-size:100% 100%;
+        }
+        .infor-list-remove2 {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            position: absolute;
+            right: 0.1rem;
+            bottom:  0.1rem;
+            background:url(/Public/images/images/jieshu.png) no-repeat;
             background-size:100% 100%;
         }
         .infor-list-nav ul li {
@@ -478,7 +499,7 @@
                         </li>
 
                     </ul>
-                    <div class="infor-invalidate  <if condition="$list[iszuofei] eq 1">infor-list-remove</if>"></div>
+                    <div class="infor-invalidate  <if condition="$list[iszuofei] eq 1">infor-list-remove</if> <if condition="$list[iszuofei] eq 2">infor-list-remove2</if>"></div>
                 </div>
                 <div class="infor-list-bottom infor-bottom-guidang  <if condition="$list[iszuofei] eq 1">infor-bottom-zuofei</if>" >
                     <if condition="$list[iszuofei] eq 0">
@@ -492,11 +513,16 @@
                         </if>
                         <a  href="{:U("RefundMoney/add?id=$list[id]")}"   data-toggle="tooltip" data-placement="top" title="退款"><i class="iconfont">&#xe603;</i></a>
                         <a href="{:U("Contract/zuofei?id=$list[id]")}" onClick="if(confirm('确定要将此合同作废吗？')){return true}else{return false}" data-toggle="tooltip" data-placement="top"  title="作废"><i class="iconfont">&#xe657;</i></a>
-                    <else/>
+                        <a href="{:U("Contract/zuofei?id=$list[id]&type=2")}" onClick="if(confirm('确定要将此合同结束吗？')){return true}else{return false}" data-toggle="tooltip" data-placement="top"  title="结束合同"><i class="iconfont">&#xe628;</i></a>
+                        <elseif condition="$list[iszuofei] eq 1"/>
                         <span style="color: #ccc; font-weight: 700; padding-left: 10px;">该合同已作废！</span>
                         <a  href="{:U("history?contract_id=$list[id]")}" data-toggle="tooltip" data-placement="top" title="历史记录"><i class="iconfont">&#xe602;</i></a>
+                        <elseif condition="$list[iszuofei] eq 2"/>
+                        <span style="color: #ccc; font-weight: 700; padding-left: 10px;">该合同已结束！</span>
+                        <a  href="{:U("history?contract_id=$list[id]")}" data-toggle="tooltip" data-placement="top" title="历史记录"><i class="iconfont">&#xe602;</i></a>
+
                     </if>
-                </div>
+                                       </div>
                 <div class="clear"></div>
             </div>
         </div>

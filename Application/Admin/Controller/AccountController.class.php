@@ -100,6 +100,8 @@ class AccountController extends CommonController
             $this->list=$list;
 
             $this->assign('page',$show);// 赋值分页输出
+
+
             $this->display();
 
     }
@@ -482,5 +484,101 @@ class AccountController extends CommonController
             $one=$contract_relevance->where("contract_id=".$val['contract_id'])->find();
             $ac->where('id='.$val['id'])->setField('prlin_id',$one['product_line']);
         }
+    }
+
+    public function excel(){
+        $Refund=M("Account");
+        //搜索条件
+        $type=I('get.searchtype');
+        if($type!='')
+        {
+            if($type=='advertiser')
+            {
+                $where.=" and  a.id!='0' and a.appname like '%".I('get.search_text')."%'";
+            }
+            if ($type == 'gongsi') {
+                //客户表
+                $coustomer = M('Customer');
+                //查询like 搜索文字的客户公司名称
+                $zsql = $coustomer->field("id")->where(" advertiser like '%" . I('get.search_text') . "%'")->select(false);
+                //查询所有 带搜索文字客户公司名称 的合同id,
+                $hetong=M("Contract");
+                $ht_search_text=$hetong->field('id')->where("advertiser in($zsql)")->select(false);
+                //c查询合同id 等于 带搜索文字客户公司名称的合同id
+                $where .= " and  a.id!='0' and a.contract_id in($ht_search_text)";
+
+            }
+            $this->type=$type;
+            $this->ser_txt=I('get.search_text');
+
+        }
+        //时间条件
+        $time_start=I('get.time_start');
+        $time_end=I('get.time_end');
+        if($time_start!="" and $time_end!="")
+        {
+            $time_start=strtotime($time_start);
+            $time_end=strtotime($time_end);
+            $time_end=strtotime("+1 days",$time_end);
+
+            $where.=" and a.ctime > $time_start and a.ctime < $time_end";
+            $this->time_start=I('get.time_start');
+            $this->time_end=I('get.time_end');
+        }
+        //审核条件
+        $type2=I('get.shenhe');
+        if($type2!='')
+        {
+            if($type2=='k')
+            {
+                $where.=" and a.id!='0' ";
+            }
+            if($type2=='0')
+            {
+                $where.=" and a.audit_1=0 and a.audit_2=0";
+            }
+            if($type2=='1')
+            {
+                $where.=" and a.audit_1=1 and a.audit_2=1";
+            }
+            $this->type2=$type2;
+            $this->ser_txt2=I('get.search_text');
+
+        }
+        //从合同列表点击过来
+        $contract_id=I('get.contract_id');
+        if($contract_id!='')
+        {
+            $where.=' and contract_id='.$contract_id;
+            ////合同编号
+            $hetong=M("Contract");
+            $hetong_on_name=$hetong->field('a.contract_no,b.advertiser,b.id')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("a.id =".$contract_id)->find();
+            $this->hetong=$hetong_on_name;
+            $this->contract_id=$contract_id;
+        }
+
+        //权限条件
+        $q_where=quan_where(__CONTROLLER__,"a");
+
+        $list=$Refund->field('a.id,a.appname,a.endtime,a.type,a.promote_url,a.a_users,a.a_password,a.ctime,a.tel,a.contract_id,b.name,a.appid')->join("a left join __ACCOUNTTYPE__ b on a.type = b.id ")->where("a.id!='0' and ".$q_where.$where)->order("a.ctime desc")->select();
+
+        $hetong=M("Contract");
+
+        foreach ($list as $key=>$val)
+        {
+            $ht=$hetong->field('a.contract_no,b.advertiser')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("a.id =".$val['contract_id'])->find();
+            $list[$key]['advertiser']=$ht['advertiser'];
+            $list[$key]['contract_no']=$ht['contract_no'];
+            $list[$key]['endtime']=$val['endtime']=='4092599349'?'无限':date("Y-m-d",$val[endtime]);
+            $list[$key]['ctime']=date("Y-m-d",$val[ctime]);
+            unset($list[$key]['contract_id']);
+            unset($list[$key]['type']);
+        }
+        $filename="account_excel";
+        $headArr=array("id","app名称",'结束时间','推广URL','用户名','密码','创建时间','手机号','类型','app id','公司名称','合同号');
+        if(!getExcel($filename,$headArr,$list))
+        {
+            $this->error('没有数据可导出');
+        };
     }
 }

@@ -75,7 +75,7 @@ class NewCaiwuController extends CommonController
         $list=$coustomer->field('id,advertiser,yu_e,huikuan,industry,website,product_line,ctime,city,appName,submituser,type,customer_type')->where("id!=0 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order('ctime desc')->select();
 
         $contact=M('ContactList');
-
+        $hetong=M("contract");
         foreach($list as $key => $val)
         {
             //产品线
@@ -86,6 +86,10 @@ class NewCaiwuController extends CommonController
             $list[$key]['contact']=$contact_one['name'];
             $list[$key]['tel']=$contact_one['tel'];
             $list[$key]['yue']=$val['huikuan']-$val['yu_e'];
+            //发票
+            $fap=$hetong->field('a.id,a.advertiser as aid,a.audit_1,a.audit_2,a.contract_no,a.market,a.users2,a.isguidang,a.iszuofei,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name,a.yu_e,a.huikuan,a.invoice,a.bukuan,a.type')->where("a.advertiser =$val[id] and isxufei=0")->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->order("a.ctime desc")->select();
+
+            $list[$key]['invoice']=$hetong->field('invoice')->where("advertiser =$val[id] ")->sum("invoice");
             //提交人
             $uindo=users_info($val['submituser']);
             $list[$key]['submituser']=$uindo[name];
@@ -102,6 +106,7 @@ class NewCaiwuController extends CommonController
        $hetong=M("contract");
        // $list=$hetong->where("advertiser =$id and isxufei=0")->select();
         $list=$hetong->field('a.id,a.advertiser as aid,a.audit_1,a.audit_2,a.contract_no,a.market,a.users2,a.isguidang,a.iszuofei,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name,a.yu_e,a.huikuan,a.invoice,a.bukuan,a.type')->where("a.advertiser =$id and isxufei=0")->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->order("a.ctime desc")->select();
+
         foreach ($list as $key=>$val)
         {
             //$zong+=$this->yue($val[id]);
@@ -176,7 +181,7 @@ class NewCaiwuController extends CommonController
 
         //续费的记录 1预付 2垫付
         $hetong=M("RenewHuikuan");
-        $xflist=$hetong->field('money,payment_time,payment_type,account,audit_1,audit_2,audit_3,audit_4,type,users2')->where("xf_contractid=$contract_id and is_huikuan=0 $renewwhere $xf_where")->order("payment_time asc,id desc")->select();
+        $xflist=$hetong->field('money,payment_time,payment_type,account,audit_1,audit_2,audit_3,audit_4,type,users2,rebates_proportion')->where("xf_contractid=$contract_id and is_huikuan=0 $renewwhere $xf_where")->order("payment_time asc,id desc")->select();
 
         $yue=0;
         $bukuan=0;
@@ -186,7 +191,7 @@ class NewCaiwuController extends CommonController
         {
             //账户名称
             $account_name=$account->field('a_users')->find($val['account']);
-            $account_str="<p>账户名称：$account_name[a_users]</p>";
+            $account_str="<p>账户名称：$account_name[a_users] 返点：$val[rebates_proportion]</p> ";
             //审核状态
             if(($val[audit_1]!=2) and ($val[audit_2]!=2) and ($val[audit_3]!=2)and ($val[audit_4]!=2))
             {

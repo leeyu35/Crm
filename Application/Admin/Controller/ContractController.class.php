@@ -511,8 +511,17 @@ class ContractController extends CommonController
             $this->error('参数类型错误');
         }
         $hetong=M("Contract");
-        $hetong->where("id=$id")->setField('iszuofei','1');
-        $this->success('已将该合同作废');
+        if(I("get.type")==2)
+        {
+            $type=2;
+            $str='已将该合同结束';
+        }else
+        {
+            $type=1;
+            $str='已将该合同作废';
+        }
+        $hetong->where("id=$id")->setField('iszuofei',$type);
+        $this->success($str);
     }
     //修改合同所属销售
     public function upmarket(){

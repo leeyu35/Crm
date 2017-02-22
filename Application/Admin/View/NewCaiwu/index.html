@@ -63,6 +63,7 @@ $(document).ready(function(e) {
 <!--    	<th>所属行业</th>
 -->    	<th>余额</th>
     	<th>总回款金额</th>
+        <th>总发票</th>
         <th>总续费金额</th>
        
         <!--<th>联系人</th>
@@ -79,6 +80,7 @@ $(document).ready(function(e) {
         <!--<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[industry]}</td>-->
         <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[yue]|num_format}</td>
         <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[huikuan]|num_format}</td>
+        <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[invoice]|num_format}</td>
         <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[yu_e]|num_format}</td>
     	
     	<!--<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[contact]}</td>

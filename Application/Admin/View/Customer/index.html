@@ -82,7 +82,10 @@ $(document).ready(function(e) {
     </tr>
     </volist>
 </table>
-{$page}
+<div class="row">
+    <div class="col-sm-10">{$page}</div>
+    <div class="col-sm-2 text-right"><a href="{:U("excel?searchtype=$type&search_text=$ser_txt&shenhe=$type2&pr_line=$type3&guidang=$type4&time_start=$time_start&time_end=$time_end&httype=$httype&yid=$info[id]")}" style=" margin-top:20px;"  type="button" class="btn btn-primary  btn-sm"><span class="glyphicon glyphicon-save"></span> 导出Excel</a>
+</div>
 
 </div>
 <script>
