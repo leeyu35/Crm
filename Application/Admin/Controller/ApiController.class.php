@@ -1350,6 +1350,51 @@ class ApiController extends RestController{
             $this->error('没有数据可导出');
         };
     }
+
+    //手动添加数据
+    public  function consumption_manual(){
+
+        $appid=I('get.appid');//APPID
+        $date=I('get.dates');//日期
+
+        $account_counsumption=M("AccountConsumption");
+        $account_counsumption->where("appid ='$appid' and date in ($date)")->delete();
+
+        $where="and appid='$appid' and date in ($date)";
+        $account_day_cost = account_daili($where);//消耗数据  百度-神马 合并封装
+        if(!$account_day_cost)
+        {
+            $data['code']=403;
+            $data['msg']='远程也羽扇数据库连接失败。来自（read_today_account_consumption_data）';
+            return $date;
+        }
+
+        $count=0;
+        foreach ($account_day_cost as $key => $val)
+        {
+            $data2['appid']=$val['appid'];
+            $data2['starttime']=strtotime($val['date']);
+            $data2['endtime']=strtotime($val['date'] ."23:59:59");
+            $data2['baidu_cost_total']=$val['cost_total'];
+            $data2['zhanxian']=$val['view_total'];
+            $data2['dianji']=$val['click_total'];
+            $data2['date']=$val['date'];
+            $data2['semid']=account_sem_id($val['appid']);
+            $data2['xsid']=account_xs_id($val['appid'],'market');
+            $data2['htid']=account_xs_id($val['appid'],'id');
+            $data2['avid']=account_xs_id($val['appid'],'advertiser');
+            if($account_counsumption->add($data2))
+            {
+
+                $count++;
+            }
+        }
+        $data['code']=200;
+        $data['msg']='成功添加'.$count."条记录消费记录。来自（read_today_account_consumption_data）";
+        $this->ajaxReturn($data);
+
+
+    }
 }
 
 

@@ -24,20 +24,31 @@ $config_1= array(
     'DB_SLAVE_NO'           =>  '', // 指定从服务器序号
     */
     /* //PDO连接方式*/
+    /*
+     * 线上
+   'DB_TYPE' => 'pgsql', // 数据库类型
+   'DB_HOST'               =>  'rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com', // 服务器地址
+   'DB_NAME'               =>  'crm',          // 数据库名
+   'DB_USER' => 'rdspg', // 用户名
+   'DB_PWD' => 'anmeng', // 密码
+   'DB_PORT'               =>  '3432',        // 端口
+   'DB_PREFIX' => 'jd_', // 数据库表前缀
+
+    本地
+   'DB_TYPE' => 'pgsql', // 数据库类型
+   'DB_HOST'               =>  'localhost', // 服务器地址
+   'DB_NAME'               =>  'crm',          // 数据库名
+   'DB_USER' => 'postgres', // 用户名
+   'DB_PWD' => '123456', // 密码
+   'DB_PORT'               =>  '5432',        // 端口
+   'DB_PREFIX' => 'jd_', // 数据库表前缀
+*/
     'DB_TYPE' => 'pgsql', // 数据库类型
     'DB_HOST'               =>  'rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com', // 服务器地址
     'DB_NAME'               =>  'crm',          // 数据库名
     'DB_USER' => 'rdspg', // 用户名
     'DB_PWD' => 'anmeng', // 密码
     'DB_PORT'               =>  '3432',        // 端口
-    'DB_PREFIX' => 'jd_', // 数据库表前缀
- /*
-    'DB_TYPE' => 'pgsql', // 数据库类型
-    'DB_HOST'               =>  'localhost', // 服务器地址
-    'DB_NAME'               =>  'crm',          // 数据库名
-    'DB_USER' => 'postgres', // 用户名
-    'DB_PWD' => '123456', // 密码
-    'DB_PORT'               =>  '5432',        // 端口
     'DB_PREFIX' => 'jd_', // 数据库表前缀
 
    /*
@@ -138,21 +149,22 @@ $config_1= array(
 
         array('Api/sem_account_counsumption_3_line_list','Admin/Api/sem_account_counsumption_3_line_list',array('method'=>'get')),//某个sem 所有账户三 日周月消耗
         array('Api/sem_account_counsumption_3_line','Admin/Api/sem_account_counsumption_3_line',array('method'=>'get')),//某个sem 所有账户三 日周月消耗方法
-        array("Api/diankuan_excel","Admin/Api/diankuan_excel",array('method'=>'get'))
+        array("Api/diankuan_excel","Admin/Api/diankuan_excel",array('method'=>'get')),//垫款导出表格
+        array("Api/consumption_manual","Admin/Api/consumption_manual",array('method'=>'get')),//垫款导出表格
 
     // array('Api','Admin/Api/index','hjd=1',array('method'=>'get')),
 
     ),
-    //'SHOW_PAGE_TRACE' =>true,
-	/*
+    'SHOW_PAGE_TRACE' =>true,
+    'LOG_RECORD' => true, // 开启日志记录
+    'LOG_LEVEL'  =>'EMERG,ALERT,CRIT,ERR', // 只记录EMERG ALERT CRIT ERR 错误
+
 	 'TOKEN_ON'      =>    true,  // 是否开启令牌验证 默认关闭
  'TOKEN_NAME'    =>    '__hash__',    // 令牌验证的表单隐藏字段名称，默认为__hash__
  'TOKEN_TYPE'    =>    'md5',  //令牌哈希验证规则 默认为MD5
  'TOKEN_RESET'   =>    true,  //令牌验证出错后是否重置令牌 默认为true
-    */
+
     /* 数据缓存设置 */
-
-
     'DATA_CACHE_TYPE'       =>  'Memcache',  // 数据缓存类型,支持:File|Db|Apc|Memcache|Shmop|Sqlite|Xcache|Apachenote|Eaccelerator
     'MEMCACHE_HOST' => '127.0.0.1',
     'MEMCACHE_PORT'	=>	'11211',

@@ -80,11 +80,9 @@ class LinuxTimeController extends Controller
 
         $account_counsumption=M("AccountConsumption");
         $account_counsumption->where("date='$date'")->delete();
-
+        $where=" and date='$date'";
         //缓存每个客户具体消费情况 appid ,日期,消费  获取周消费的时候要调用缓存 所以在这里先生存缓存
-        $tabledata = M("accountdaily", "baiduapi_", "pgsql://rdspg:anmeng@rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com:3432/msdb");
-
-        $account_day_cost = $tabledata->field('appid,date,baidu_cost_total,baidu_view_total,baidu_click_total')->where("date='$date' and device='all'")->group('appid,date,baidu_cost_total,baidu_view_total,baidu_click_total')->select();
+        $account_day_cost = account_daili($where);//消耗数据  百度-神马 合并封装
         if(!$account_day_cost)
         {
             $data['code']=403;
@@ -98,9 +96,9 @@ class LinuxTimeController extends Controller
             $data2['appid']=$val['appid'];
             $data2['starttime']=strtotime($val['date']);
             $data2['endtime']=strtotime($val['date'] ."23:59:59");
-            $data2['baidu_cost_total']=$val['baidu_cost_total'];
-            $data2['zhanxian']=$val['baidu_view_total'];
-            $data2['dianji']=$val['baidu_click_total'];
+            $data2['baidu_cost_total']=$val['cost_total'];
+            $data2['zhanxian']=$val['view_total'];
+            $data2['dianji']=$val['click_total'];
             $data2['date']=$val['date'];
             $data2['semid']=account_sem_id($val['appid']);
             $data2['xsid']=account_xs_id($val['appid'],'market');
