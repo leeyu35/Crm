@@ -680,7 +680,8 @@ class RenewController extends  CommonController
             $list2[$key]['ctime']=date("Y-m-d H:i:s",$val['ctime']);
             //代理公司
             $agentcompany=M("AgentCompany");
-            $aagentcompany=$agentcompany->field("companyname")->find($val[agent_company]);
+            $confind=M("Contract")->field('agent_company')->find($list['xc_contractid']);
+            $aagentcompany=$agentcompany->field("companyname")->find($confind[agent_company]);
             $list2[$key]['daili']=$aagentcompany['companyname'];
             //合同类型
             $list2[$key]['type']=$val['type']==1?'普通合同':'框架合同';
