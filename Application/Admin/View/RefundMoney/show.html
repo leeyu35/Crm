@@ -241,7 +241,31 @@
 		<label  class="control-label"><strong>{$info[note]}</strong></label>
    </div>
 
+
    </div>
+    <h4 class="bor-left-bull" >金额变动描述</h4>
+    <hr>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <label  class="control-label"><strong>
+                <if condition="$info[payment_type] eq 14">
+                    退款前回款：{$avinfo[huikuan]}&nbsp&nbsp&nbsp&nbsp
+                    退款后回款：{$avinfo[huikuan]-$info[money]}&nbsp&nbsp&nbsp&nbsp
+                    现有余额：{$avinfo[huikuan]-$avinfo[yu_e]}&nbsp&nbsp&nbsp&nbsp
+                    退款后余额：{$avinfo[huikuan]-$info[money]-$avinfo[yu_e]}
+                    <elseif condition="$info[payment_type] eq 15"/>
+                    退款前续费：{$avinfo[yu_e]}&nbsp&nbsp&nbsp&nbsp
+                    退款后续费：{$avinfo[yu_e]-$info[money]}&nbsp&nbsp&nbsp&nbsp
+                    现有余额：{$avinfo[huikuan]-$avinfo[yu_e]}&nbsp&nbsp&nbsp&nbsp
+                    退款后余额：{$avinfo[huikuan]-($avinfo[yu_e]-$info[money])}
+                </if>
+
+            </strong></label>
+        </div>
+
+
+    </div>
+
   <h4 class="bor-left-bull" >审核状态</h4>
   <hr>
 	 <div class="form-group">

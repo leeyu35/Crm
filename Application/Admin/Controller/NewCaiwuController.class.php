@@ -118,8 +118,6 @@ class NewCaiwuController extends CommonController
                 $userslist=M("Users")->field('name')->find($val[market]);
             }
 
-
-
             $list[$key]['xiaoshou']=$userslist['name'];
             //产品线
             $list[$key]['prduct_line']=contract_prlin($val['id']);
@@ -336,5 +334,69 @@ class NewCaiwuController extends CommonController
             //$history[]=array("date"=>date("Y-m-d",$val[b_time]),"mes"=>"回款".num_format($val['b_money']),"yue"=>$yue+=$val['b_money']);
         }
         return $yue;
+    }
+
+    public function money_record(){
+        $id=I('get.id');
+        $this->id=$id;
+        $hetong=M("contract");
+        // $list=$hetong->where("advertiser =$id and isxufei=0")->select();
+        $list=$hetong->field('a.id,a.advertiser as aid,a.audit_1,a.audit_2,a.contract_no,a.market,a.users2,a.isguidang,a.iszuofei,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name,a.yu_e,a.huikuan,a.invoice,a.bukuan,a.type')->where("a.advertiser =$id and isxufei=0")->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->order("a.ctime desc")->select();
+
+        foreach ($list as $key=>$val)
+        {
+            //$zong+=$this->yue($val[id]);
+            $list[$key]['yue']=$val['huikuan']-$val['yu_e'];
+            //总发票
+            $zongfapiao+=$val['invoice'];
+
+        }
+
+
+
+        //该客户未审核回款
+        $backmoney=M("RenewHuikuan");
+        $wshhuikuan=$backmoney->field('money')->where("is_huikuan=1 and advertiser=$id and (audit_1=0 or audit_1=1) and audit_2=0")->sum("money");
+        //未审核续费
+        $wshxufei=$backmoney->field('money')->where("advertiser=$id  and is_huikuan=0 and (payment_type !=14 and payment_type !=15 and payment_type !=3) and (audit_1=0 or audit_1=1) and (audit_2=0 or audit_2=1) and (audit_3=0 or audit_3=1) and audit_4=0")->sum("money");
+
+
+
+        //客户详细信息
+        $customer_info=kehu($id);
+        $this->customer_info=$customer_info;
+        $this->zong=$customer_info[huikuan]-$customer_info[yu_e];
+        $this->zongfapiao=$zongfapiao;
+
+        //已审核的余额
+        $zyue=($customer_info['huikuan']-$wshhuikuan)-($customer_info['yu_e']-$wshxufei);
+        $this->wshhuikuan=$wshhuikuan;
+        $this->wshxufei=$wshxufei;
+        $this->zyue=$zyue;
+
+        //时间条件
+        $time_start=I('get.time_start');
+        $time_end=I('get.time_end');
+        if($time_start!="" and $time_end!="")
+        {
+            $time_start=strtotime($time_start);
+
+            $time_end=strtotime($time_end);
+
+
+            $where.=" and ctime >= $time_start and ctime <= $time_end";
+
+
+
+
+            $this->time_start=I('get.time_start');
+            $this->time_end=I('get.time_end');
+        }
+
+        $money_record=M("MoneyHistory");
+        $list=$money_record->where("adid=$id $where")->select();
+        $this->list=$list;
+
+        $this->display();
     }
 }

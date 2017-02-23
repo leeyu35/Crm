@@ -88,6 +88,7 @@ $(document).ready(function(e) {
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[city]}</td>-->
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[submituser]}</td>
     	<td>
+        <a href="{:U("money_record?id=$list[id]")}"  data-toggle="tooltip" data-placement="left" title="金额记录" > <span class="glyphicon glyphicon-list-alt"></span></a>
         <a href="{:U("updata?id=$list[id]")}"  data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<a href="{:U("delete?id=$list[id]")}" {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         </td>
     </tr>
