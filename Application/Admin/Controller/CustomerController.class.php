@@ -434,8 +434,8 @@ class CustomerController extends CommonController
     public function upbusinessru(){
         $hetong=M("Customer");
 
-        $postdate=$hetong->create();
-        if($hetong->where("id=$postdate[id]")->setField('business',$postdate['business']))
+
+        if($hetong->where("id=".I("post.id"))->setField('business',I("post.business")))
         {
             echo 1;
         }else

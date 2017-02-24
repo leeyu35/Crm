@@ -708,7 +708,7 @@ class RenewController extends  CommonController
             //备注
             $list2[$key]['note']=$val['note'];
         }
-   
+
         $filename="xufei_excel";
         $headArr=array("公司","合同编号",'APP名称','账户名称','金额','显示百度币','产品线','返点','提交时间','代理公司','合同类型','保证金','付款方式','付款时间','销售','提交人','备注');
 
