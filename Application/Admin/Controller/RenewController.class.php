@@ -654,6 +654,7 @@ class RenewController extends  CommonController
 
         foreach($list as $key => $val)
         {
+
             $Contract=M("Contract")->field('contract_no')->find($val['xf_contractid']);
 
             //公司
@@ -680,7 +681,8 @@ class RenewController extends  CommonController
             $list2[$key]['ctime']=date("Y-m-d H:i:s",$val['ctime']);
             //代理公司
             $agentcompany=M("AgentCompany");
-            $confind=M("Contract")->field('agent_company')->find($list['xc_contractid']);
+
+            $confind=M("Contract")->field('agent_company')->find($val['xc_contractid']);
             $aagentcompany=$agentcompany->field("companyname")->find($confind[agent_company]);
             $list2[$key]['daili']=$aagentcompany['companyname'];
             //合同类型
@@ -705,7 +707,7 @@ class RenewController extends  CommonController
             //备注
             $list2[$key]['note']=$val['note'];
         }
-
+       
         $filename="xufei_excel";
         $headArr=array("公司","合同编号",'APP名称','账户名称','金额','显示百度币','产品线','返点','提交时间','代理公司','合同类型','保证金','付款方式','付款时间','销售','提交人','备注');
 
