@@ -42,6 +42,7 @@
         <th>所属职位</th>
         <th>是否经理</th>
         <th>创建时间</th>
+        <th>年假剩余天数</th>
         <th>操作</th>	  
     </tr>
     <volist id="list" name="list" key="k">
@@ -59,6 +60,7 @@
     	<td>{$list[groupname]}</td>
     	<td>{$list[manager]==0?'不是':'是'}</td>
     	<td>{$list[ctime]|date="Y-m-d",###}</td>
+        <td>{$list[nianjia]}</td>
     	<td><a href="{:U("updata?id=$list[id]")}"  data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{:U("delete?id=$list[id]")}"  {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a></td>
     </tr>
     </volist>
