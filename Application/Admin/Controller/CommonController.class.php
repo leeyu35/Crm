@@ -96,6 +96,12 @@ class CommonController extends Controller
         $this->web_title=C('WEB_NAME');
         $this->confirm='onClick="if(confirm(\'确定要删除吗\')){return true}else{return false}"';
     }
+    //设置分页
+    public function set_page(){
+        cookie('page_sum',I('get.pagesum'));
+
+        echo 1;
+    }
 
 
 
