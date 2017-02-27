@@ -530,8 +530,11 @@ class RenewController extends  CommonController
         $product_line=M("ProductLine");
         $this->product_line_list=$product_line->field("id,name,title")->order("id asc")->select();
         //原合同
-        $this->yinfo=$hetong->find(I('get.yid'));
-
+        $yinfo=$hetong->find(I('get.yid'));
+        $this->yinfo=$yinfo;
+        //销售
+        $market=users_info($yinfo[market]);
+        $this->market=$market;
         //代理公司
         $agentcompany=M("AgentCompany");
         $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
