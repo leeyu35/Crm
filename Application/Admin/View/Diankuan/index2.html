@@ -9,8 +9,10 @@
 <script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
 <script src="/Public/js/bootstrap.min.js"></script>
     <script language="JavaScript" src="/Public/js/main.js"></script>
+    <script src="/Public/js/jquery.tablesorter.min.js" type="text/javascript"></script>
 <script language="javascript">
 $(document).ready(function(e) {
+    $(".hjdtab").tablesorter();
     $(".htshow").click(function(){
 		url=$(this).attr("id");
 		window.location.href=url;
@@ -54,7 +56,8 @@ $(document).ready(function(e) {
    <!--<a class="btn btn-primary pull-right" href="{:U("add?id=$info[id]")}">新增续费</a>-->
 </form>
 </div>
-<table class="table table-hover table-striped">
+<table class="table table-hover table-striped hjdtab">
+    <thead>
 	<tr>
     	<th>#</th>
     	<th>广告主公司名称</th>
@@ -70,6 +73,8 @@ $(document).ready(function(e) {
         <th>提交人</th>
         <th>操作</th>	  
     </tr>
+    </thead>
+    <tbody>
     <volist id="list" name="list" key="k">
     <tr>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$k}</td>
@@ -108,6 +113,7 @@ $(document).ready(function(e) {
         <!--<a href="{:U("updata?id=$list[id]&yid=$list[xf_contractid]")}"  data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{:U("delete?id=$list[id]&yid=$info[id]")}" {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>-->
         </td>
     </tr>
+    </volist>
     </volist>
 </table>
 <div class="row">

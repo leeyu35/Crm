@@ -8,13 +8,16 @@
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
 <script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
 <script src="/Public/js/bootstrap.min.js"></script>
-    <script language="JavaScript" src="/Public/js/main.js"></script>
+<script language="JavaScript" src="/Public/js/main.js"></script>
+<script src="/Public/js/jquery.tablesorter.min.js" type="text/javascript"></script>
 <script language="javascript">
 $(document).ready(function(e) {
+    $(".hjdtab").tablesorter();
     $(".htshow").click(function(){
 		url=$(this).attr("id");
 		window.location.href=url;
 	});
+
 
 });
 </script>
@@ -55,11 +58,12 @@ $(document).ready(function(e) {
    <!--<a class="btn btn-primary pull-right" href="{:U("add?id=$info[id]")}">新增续费</a>-->
 </form>
 </div>
-<table class="table table-hover table-striped">
-	<tr>
-    	<th>#</th>
-    	<th>广告主公司名称</th>
-    	<th>APP名称或简称</th>
+<table class="table table-hover table-striped hjdtab" id="tablesorter">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>广告主公司名称</th>
+        <th>APP名称或简称</th>
         <th>金额</th>
         <th>返点</th>
         <th>账户</th>
@@ -67,65 +71,69 @@ $(document).ready(function(e) {
         <th>产品线</th>
         <th>创建时间</th>
         <th>状态</th>
-        <!--<th>财务管理</th>-->	  
+        <!--<th>财务管理</th>-->
         <th>提交人</th>
-        <th>操作</th>	  
+        <th>操作</th>
     </tr>
+    </thead>
+	<tbody>
     <volist id="list" name="list" key="k">
-    <tr>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$k}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}"><a href="{:U("Customer/show?id=$list[aid]")}">{$list[advertiser]}</a></td>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$list[appname]}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}" align="right">{$list[money]|num_format}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-        <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$list[rebates_proportion]}%</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$list[a_users]}</td>
-    	<!--<td>2016年8月15日</td>-->
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$list[name]}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$list[ctime]|date="y-m-d",###}</td>
-       <!-- <td>
-        <span style="width:20px; display:inline-block"><a href="" title="垫款">垫</a></span>|&nbsp;&nbsp;<a href="" title="垫款列表">列</a><br>
-        <span style="width:20px; display:inline-block"><a href="" title="回款">回</a></span>|&nbsp;&nbsp;<a href="" title="回款列表">列</a><br>
-        <span style="width:20px; display:inline-block"><a href="" title="退款">退</a></span>|&nbsp;&nbsp;<a href="" title="退款列表">列</a><br>  
-        </td>-->
-    	<td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">
-        <if condition="$list[audit_1] eq 1">
-        	<span data-toggle="tooltip" data-placement="left" title="一级审核已审核" class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
-        <elseif condition="$list[audit_1] eq 2"/>
-        	<span data-toggle="tooltip" data-placement="left" title="一级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
-        <elseif condition="$list[audit_1] eq 0"/>
-        	<span data-toggle="tooltip" data-placement="left"  title="一级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
-        </if>
-        <if condition="$list[audit_2] eq 1">
-        	<span data-toggle="tooltip" data-placement="left" title="二级审核已审核"  class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
-        <elseif condition="$list[audit_2] eq 2"/>
-            <span data-toggle="tooltip" data-placement="left" title="二级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
-        <elseif condition="$list[audit_2] eq 0"/>
-        	<span data-toggle="tooltip" data-placement="left" title="二级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
-        </if>
+        <tr>
+            <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$k}</td>
+            <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}"><a href="{:U("Customer/show?id=$list[aid]")}">{$list[advertiser]}</a></td>
+            <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$list[appname]}</td>
+            <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}" align="right">{$list[money]|num_format}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$list[rebates_proportion]}%</td>
+            <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$list[a_users]}</td>
+            <!--<td>2016年8月15日</td>-->
+            <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$list[name]}</td>
+            <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$list[ctime]|date="y-m-d",###}</td>
+            <!-- <td>
+             <span style="width:20px; display:inline-block"><a href="" title="垫款">垫</a></span>|&nbsp;&nbsp;<a href="" title="垫款列表">列</a><br>
+             <span style="width:20px; display:inline-block"><a href="" title="回款">回</a></span>|&nbsp;&nbsp;<a href="" title="回款列表">列</a><br>
+             <span style="width:20px; display:inline-block"><a href="" title="退款">退</a></span>|&nbsp;&nbsp;<a href="" title="退款列表">列</a><br>
+             </td>-->
+            <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">
+                <if condition="$list[audit_1] eq 1">
+                    <span data-toggle="tooltip" data-placement="left" title="一级审核已审核" class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
+                    <elseif condition="$list[audit_1] eq 2"/>
+                    <span data-toggle="tooltip" data-placement="left" title="一级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
+                    <elseif condition="$list[audit_1] eq 0"/>
+                    <span data-toggle="tooltip" data-placement="left"  title="一级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
+                </if>
+                <if condition="$list[audit_2] eq 1">
+                    <span data-toggle="tooltip" data-placement="left" title="二级审核已审核"  class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
+                    <elseif condition="$list[audit_2] eq 2"/>
+                    <span data-toggle="tooltip" data-placement="left" title="二级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
+                    <elseif condition="$list[audit_2] eq 0"/>
+                    <span data-toggle="tooltip" data-placement="left" title="二级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
+                </if>
 
-        <if condition="$list[audit_3] eq 1">
-            <span data-toggle="tooltip" data-placement="left" title="三级审核已审核"  class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
-            <elseif condition="$list[audit_3] eq 2"/>
-            <span data-toggle="tooltip" data-placement="left" title="三级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
-            <elseif condition="$list[audit_3] eq 0"/>
-            <span data-toggle="tooltip" data-placement="left" title="三级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
-        </if>
+                <if condition="$list[audit_3] eq 1">
+                    <span data-toggle="tooltip" data-placement="left" title="三级审核已审核"  class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
+                    <elseif condition="$list[audit_3] eq 2"/>
+                    <span data-toggle="tooltip" data-placement="left" title="三级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
+                    <elseif condition="$list[audit_3] eq 0"/>
+                    <span data-toggle="tooltip" data-placement="left" title="三级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
+                </if>
 
-        <if condition="$list[audit_4] eq 1">
-            <span data-toggle="tooltip" data-placement="left" title="四级审核已审核"  class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
-            <elseif condition="$list[audit_4] eq 2"/>
-            <span data-toggle="tooltip" data-placement="left" title="四级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
-            <elseif condition="$list[audit_4] eq 0"/>
-            <span data-toggle="tooltip" data-placement="left" title="四级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
-        </if>
-        </td>
-        <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$list[submituser]}</td>
-        <td>
-        <!--<a href="#">发票</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">财务</a><br>-->
-        <!--<a href="{:U("updata?id=$list[id]&yid=$list[xf_contractid]")}"  data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{:U("delete?id=$list[id]&yid=$info[id]")}" {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>-->
-        </td>
-    </tr>
+                <if condition="$list[audit_4] eq 1">
+                    <span data-toggle="tooltip" data-placement="left" title="四级审核已审核"  class="glyphicon glyphicon-ok" ></span><span class="shyes"></span>
+                    <elseif condition="$list[audit_4] eq 2"/>
+                    <span data-toggle="tooltip" data-placement="left" title="四级审核审核未通过" class="glyphicon glyphicon-remove" ></span>
+                    <elseif condition="$list[audit_4] eq 0"/>
+                    <span data-toggle="tooltip" data-placement="left" title="四级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
+                </if>
+            </td>
+            <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$list[submituser]}</td>
+            <td>
+                <!--<a href="#">发票</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">财务</a><br>-->
+                <!--<a href="{:U("updata?id=$list[id]&yid=$list[xf_contractid]")}"  data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{:U("delete?id=$list[id]&yid=$info[id]")}" {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>-->
+            </td>
+        </tr>
     </volist>
+    </tbody>
+
 </table>
 <div class="row">
 	<div class="col-sm-8">{$page}</div>
