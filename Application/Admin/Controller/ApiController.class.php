@@ -801,13 +801,11 @@ class ApiController extends RestController{
         if($type=='yesterday')
         {
             $zuori = Yesterday();//昨日开始时间和结束时间
-
             $time_start=strtotime($zuori['start']);
             $time_end=strtotime($zuori['end']."+1 day");
         }elseif ($type=='week')
         {
             $zhouar=teodate_week2(1,'Monday');//本周开始时间和结束时间
-
             $time_start=strtotime($zhouar[0]['start']);
             $time_end=strtotime($zhouar[0]['end']);
         }elseif($type=='month')
@@ -818,9 +816,13 @@ class ApiController extends RestController{
             $time_end=strtotime($yuear['end']);
         }elseif($type=='smonth')
         {
-            $yuear=teodate_smonth();//本月开始时间和结束时间
+            $yuear=teodate_smonth();//上月开始时间和结束时间
             $time_start=strtotime($yuear['start']);
             $time_end=strtotime($yuear['end']);
+        }elseif ($type=='custom')
+        {
+            $time_start=strtotime(I('get.start'));
+            $time_end=strtotime(I('get.end'));
         }
 
         $users=M("Users");
@@ -829,7 +831,7 @@ class ApiController extends RestController{
             $where=" and xiaohao.xsid=".I('get.usersid');
         }
 
-        $xiaohaolist=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,zhanghu.a_users,zhanghu.appname,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser,xiaohao.xsid,xiaohao.semid")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='$time_start'  and xiaohao.starttime<'$time_end' $where")->group("xiaohao.appid,gongsi.id,gongsi.advertiser,zhanghu.a_users,xiaohao.xsid,xiaohao.semid,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
+        $xiaohaolist=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,xiaohao.htid,zhanghu.a_users,zhanghu.appname,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser,xiaohao.xsid,xiaohao.semid")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='$time_start'  and xiaohao.starttime<'$time_end' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,xiaohao.xsid,xiaohao.semid,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
 
 
         foreach ($xiaohaolist as $key=>$val)
@@ -855,10 +857,34 @@ class ApiController extends RestController{
             $xiaohaolist[$key]['semid']=$val['semid']?$val['semid']:'';
             $xiaohaolist[$key]['market']=$xs['name']?$xs['name']:'';
             $xiaohaolist[$key]['sem']=$sem['name']?$sem['name']:'';
-
+            //主体
+            $htinfo=M('Contract')->field('agent_company')->find($val['htid']);
+            $zhuti=M("AgentCompany")->field('companyname')->find($htinfo['agent_company']);
+            $xiaohaolist[$key]['zt_company']=$zhuti['companyname']?$zhuti['companyname']:'';
             //$xiaohaolist[$key]['baidu_cost_total']=number_format($val['baidu_cost_total']);
         }
+        //表格导出
+        if(I('get.excel')=='1')
+        {
+            foreach ($xiaohaolist as $key=>$val)
+            {
+                $excel[$key]['a_users']=$val['a_users'];
+                $excel[$key]['appname']=$val['appname'];
+                $excel[$key]['advertiser']=$val['advertiser'];
+                $excel[$key]['baidu_cost_total']=$val['baidu_cost_total'];
+                $excel[$key]['sem']=$val['sem'];
+                $excel[$key]['market']=$val['market'];
+                $excel[$key]['zt_company']=$val['zt_company'];
+            }
 
+            $filename="xiaohao_excel";
+            $headArr=array("账户","APP名称",'公司名称','消耗','SEM','销售','代理公司');
+
+            if(!getExcel($filename,$headArr,$excel))
+            {
+                $this->error('没有数据可导出');
+            };
+        }
         $data['code'] = 200;
         $data['data'] = $xiaohaolist;
         $this->response($data,'json');
