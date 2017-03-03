@@ -794,7 +794,7 @@ class ApiController extends RestController{
         $this->response($data,'json');
     }
 
-    //昨日消耗列表
+    //根据时间段展示消耗列表
     public function SpecifyDate_counsumption_list(){
         $type=I('get.type');
         $xiaohao=M("AccountConsumption");
@@ -1421,6 +1421,27 @@ class ApiController extends RestController{
 
 
     }
+
+    //已回款续费根据客户ID 获取客户的已回款续费列表
+    public function customer_yihuikuanxufei(){
+        $id=I('get.id');
+        $Yihuikuanxufei=M("Yihuikuanxufei");
+        $list=$Yihuikuanxufei->field('a.money,a.time,a.xf_id,b.advertiser')->join("a left join __CUSTOMER__ b on a.avid = b.id ")->where("a.avid=$id")->order("a.time desc")->select();
+        foreach($list as $key => $val)
+        {
+            //产品线
+            $xfinfo=M("RenewHuikuan")->field('account')->find($val['xf_id']);
+            $account=M("Account")->field('prlin_id')->find($xfinfo['account']);
+            $prlin=M('ProductLine')->field('name')->find($account['prlin_id']);
+            $list[$key]['prlin']=$prlin['name'];
+            $list[$key]['time']=date("Y-m-d",$val['time']);
+        }
+        $data['code'] = 200;
+        $data['data'] = $list;
+        $this->response($data,'json');
+
+    }
+
 }
 
 
