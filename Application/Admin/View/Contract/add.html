@@ -197,7 +197,12 @@
 		{
 			alert("请选择销售");
 			return false;	
-		}	
+		}
+		if($("#mht_id").val()=="0")
+            {
+                alert("请选择媒介合同");
+                return false;
+            }
 		/*
 		if($("#payment_time").val()=="")
 		{
@@ -265,8 +270,16 @@
 
         <input name="contract_no" type="text" class="form-control" id="contract_no" placeholder="自动生成，无需填写">
     </div>
-    
 
+      <label for="inputEmail3" class="col-sm-1 control-label">媒介合同</label>
+      <div class="col-sm-3">
+          <select  class="form-control" name="mht_id" id="mht_id">
+              <option value="0" title="0">请选择媒介合同</option>
+              <volist id="meijielist" name="meijielist" key="k">
+                  <option value="{$meijielist.id}" title="{$meijielist.title}">{$meijielist.advertiser}</option>
+              </volist>
+          </select>
+      </div>
     </div>
     
     <div class="form-group">

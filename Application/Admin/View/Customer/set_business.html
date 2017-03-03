@@ -26,6 +26,7 @@ $(document).ready(function(e) {
             return false;
         }
         id=$(this).attr("id");
+        set_type={$set_type};
         $.get("{:U("upusers")}",{id:id,users:us,type:'{$set_type}'},function (date) {
           if(date=='1')
           {

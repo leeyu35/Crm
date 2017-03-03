@@ -189,23 +189,20 @@ class ContractController extends CommonController
 
         $jsstr.='</select>';
         $this->jsstr=$jsstr;
+
+        //所有销售
+        $this->meijielist=M("Contract")->field('a.id,a.contract_no,b.advertiser')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("is_meijie=1")->select();
+
         $this->display();
     }
     public function addru(){
-        $hetong=M("Contract");
-        $postdate=$hetong->create();
-
-        $hetong->contract_start=strtotime($hetong->contract_start);
-        $hetong->contract_end=strtotime($hetong->contract_end);
-        $hetong->payment_time=strtotime($hetong->payment_time);
-        $hetong->ctime=time();
-        $hetong->users2=cookie('u_id');
         //合同状态
         /*
          * 查询客户之前是否有签过合同，如果没有签过就是新客 如果有合同就判断从第一个合同开始的三个月内有没有新的产品线合同，如果有就属于老客新开，如果没有或者大于三个月就属于老客户
          * 每次回款的时候更新合同的状态，如果大于一年则是老客户
          */
-        $newke=$hetong->where("advertiser=".I('post.advertiser'))->order("contract_start asc")->find();
+
+        $newke=M("Contract")->field('contract_start')->where("advertiser=".I('post.advertiser'))->order("contract_start asc")->find();
 
         if($newke)
         {
@@ -225,21 +222,33 @@ class ContractController extends CommonController
                 $result=array_diff($avpr,I('post.product_line'));
                 if(count($result)>0)
                 {
-                    $hetong->contract_state=3;
+                    $contract_state=3;
                 }else
                 {
-                    $hetong->contract_state=2;
+                    $contract_state=2;
                 }
 
             }else
             {
 
-                $hetong->contract_state=2;
+                $contract_state=2;
             }
 
         }else{
-            $hetong->contract_state=1;
+            $contract_state=1;
         }
+
+
+
+        $hetong=M("Contract");
+        $postdate=$hetong->create();
+
+        $hetong->contract_start=strtotime($hetong->contract_start);
+        $hetong->contract_end=strtotime($hetong->contract_end);
+        $hetong->payment_time=strtotime($hetong->payment_time);
+        $hetong->ctime=time();
+        $hetong->users2=cookie('u_id');
+        $hetong->contract_state=$contract_state;
 
 
 
@@ -268,6 +277,7 @@ class ContractController extends CommonController
             $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
             exit;
         }
+
          if($insid=$hetong->add()){
              if($insid==1)
              {
@@ -343,6 +353,7 @@ class ContractController extends CommonController
         $today = strtotime(date('Y-m-d', time()));//获取当天0点
         $uid=cookie("u_id");
         $max=$hetong->field('contract_no')->where("submituser=$uid and ctime>$today and isxufei=0 ")->order("ctime desc")->find();
+
         $maxsun=substr($max['contract_no'],-2,2);
         $num=$maxsun+1;
 
