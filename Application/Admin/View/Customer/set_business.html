@@ -19,18 +19,30 @@ $(document).ready(function(e) {
         url=$(this).attr("id");
         window.location.href=url;
     })
-    $(".set_go").click(function () {
+    $(document).on("click",".set_go",function(){
         us=$(".shangwu").val();
         if(us==''){
             alert('没有选择人员');
             return false;
         }
         id=$(this).attr("id");
-        set_type={$set_type};
+        set_type='{$set_type}';
+        var $This = $(this)
+        var options=$(".shangwu option:selected");
         $.get("{:U("upusers")}",{id:id,users:us,type:'{$set_type}'},function (date) {
+
           if(date=='1')
           {
-              location.reload();
+              if(set_type=='market')
+              {
+
+                  $This.parent("td").prev().prev().text(options.text());
+              }else if(set_type=='business')
+              {
+
+                  $This.parent("td").prev().text(options.text());
+              }
+
           }
         })
     })
