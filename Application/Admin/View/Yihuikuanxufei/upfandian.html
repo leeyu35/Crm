@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>修改返点</title>
+
+    <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+    <script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
+    <script src="/Public/js/jquery-3.1.0.min.js"></script>
+    <script src="/Public/js/layer/layer.js"></script>
+
+
+</head>
+
+<body>
+
+<div class="container" style="width:100%;">
+    <form action="{:U('upfandianru')}" method="post" class="form-horizontal" id="formid" >
+        <input type="hidden" name="id" id="id" value="{$id}">
+        <br>
+        <h4 class="bor-left-bull" >修改个人返点</h4>
+        <hr>
+
+        <div class="form-group">
+
+
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="fandian" id="fandian" value="{$info['gr_fandian']}">
+            </div>
+
+
+        </div>
+
+
+        <div class="form-group">
+
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary" id="submit1">提交</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+<script language="javascript">
+    $(document).ready(function(e) {
+        var index = parent.layer.getFrameIndex(window.name); //获取当前窗体索引
+
+//        $('#submit1').on('click', function(event){
+
+//            event.preventDefault();
+//            event.preventDefault;
+//            setTimeout(function () {
+//                parent.layer.close(index); //执行关闭
+//            },5000)
+
+//        });//你可能需要修改上面的"submit"提交为button提交
+
+        $("#formid").submit(function(){
+            $.post("{:U('upfandianru')}",{id:{$id},fandian:$("#fandian").val()},function (date) {
+
+                if(date==1)
+                {
+                    parent.layer.close(index); //执行关闭
+                }else
+                {
+                    alert('修改失败');
+                }
+            })
+            return false;
+        })
+    })
+
+</script>
+
+</body>
+</html>

@@ -144,7 +144,7 @@ class ContractController extends CommonController
 
         $Page       = new \Think\Page($count,cookie('page_sum')?cookie('page_sum'):50);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
-        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.parent_id,a.users2,a.isguidang,a.iszuofei,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where($q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
+        $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.mht_id,a.parent_id,a.users2,a.isguidang,a.iszuofei,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where($q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
 
         foreach($list as $key => $val)
         {
@@ -200,6 +200,51 @@ class ContractController extends CommonController
         $hetong->payment_time=strtotime($hetong->payment_time);
         $hetong->ctime=time();
         $hetong->users2=cookie('u_id');
+        //合同状态
+        /*
+         * 查询客户之前是否有签过合同，如果没有签过就是新客 如果有合同就判断从第一个合同开始的三个月内有没有新的产品线合同，如果有就属于老客新开，如果没有或者大于三个月就属于老客户
+         * 每次回款的时候更新合同的状态，如果大于一年则是老客户
+         */
+        $newke=$hetong->where("advertiser=".I('post.advertiser'))->order("contract_start asc")->find();
+
+        if($newke)
+        {
+            $a=date("Y-m-d",$newke['contract_start']);//第一个合同开始时间
+            $b=date("Y-m-d");
+
+            if(strtotime($b)<strtotime($a."+3 month"))
+            {
+                $arr=I('post.product_line');
+                $printid=implode(",",$arr);
+                //查询这个公司所签所有的产品线
+                $htguanlian=M("ContractRelevance")->field('product_line')->where("advertiser=".I('post.advertiser'))->select();
+                foreach($htguanlian as $k=>$v){
+                    $avpr[]=$v['product_line'];
+                }
+
+                $result=array_diff($avpr,I('post.product_line'));
+                if(count($result)>0)
+                {
+                    $hetong->contract_state=3;
+                }else
+                {
+                    $hetong->contract_state=2;
+                }
+
+            }else
+            {
+
+                $hetong->contract_state=2;
+            }
+
+        }else{
+            $hetong->contract_state=1;
+        }
+
+
+
+
+
         //检查是否有这个客户
         $Customer=M("Customer");
 
@@ -249,7 +294,7 @@ class ContractController extends CommonController
          }
 
     }
-    public function keyup_adlist(){
+    public function keyup_adlist($type=''){
 
         $val=I('post.val');
         $Customer=M("Customer");
@@ -263,18 +308,25 @@ class ContractController extends CommonController
         {
             $q_where=quan_where(__CONTROLLER__,$json='',$setype);
         }
+        if($type!='')
+        {
+            $where=' and customer_type=3';
+        }
 
-
-        $list=$Customer->field("id,advertiser,submituser,customer_type")->where("id!=0 and advertiser like '%$val%' and ".$q_where)->select();
+        $list=$Customer->field("id,advertiser,submituser,customer_type")->where("id!=0 and advertiser like '%$val%' and ".$q_where.$where)->select();
 
         foreach ($list as $key=>$val)
         {
             if($val['customer_type']=='1')
             {
                 $khyupe='-直接';
-            }else
+            }elseif($val['customer_type']=='2')
             {
                 $khyupe='-渠道';
+            }
+            elseif($val['customer_type']=='3')
+            {
+                $khyupe='-媒体';
             }
             $str.="<li><a id='".$val[id]."' title='".$val[submituser]."'>$val[advertiser]$khyupe</a></li>";
         }
@@ -543,7 +595,7 @@ class ContractController extends CommonController
         $hetong=M("Contract");
 
         $postdate=$hetong->create();
-        if($hetong->where("id=$postdate[id]")->setField('market',$postdate['market']))
+        if($hetong->where("id=".I('post.id'))->setField('market',I('post.market')))
         {
            echo 1;
         }else
@@ -802,5 +854,37 @@ class ContractController extends CommonController
             $data['fandian']=$val['rebates_proportion'];
             echo $conpr->add($data)."<br>";
         }
+    }
+
+    public function upmeijie(){
+        $id=I('get.id');
+        if(!is_numeric($id))
+        {
+            $this->error('参数类型错误');
+        }
+        $hetong=M("Contract");
+        $info=$hetong->find($id);
+
+        $this->info=$info;
+        $this->id=$id; //合同id
+        //所有销售
+        $this->xiaoshou=$hetong->field('a.id,a.contract_no,b.advertiser')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("is_meijie=1")->select();
+        $this->display();
+    }
+
+    //修改合同所属销售返回
+    public function upbusinessru(){
+
+        $hetong=M("Contract");
+        if($hetong->where("id=".I("post.id"))->setField('mht_id',I("post.mht_id")))
+        {
+
+            echo 1;
+        }else
+        {
+            echo 2;
+        }
+
+
     }
 }

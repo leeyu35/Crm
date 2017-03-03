@@ -243,6 +243,31 @@ class RenewController extends  CommonController
             exit;
         }
 
+        //计算续费成本，从合同id读出该合同所属的媒介合同返点，用续费显示金额 除 媒介返点比例
+        $yhtinfo=M("Contract")->field('huikuan,yu_e,mht_id')->find(I('post.xf_contractid'));
+        $mjhtinfo=M("Contract")->field('rebates_proportion')->find($yhtinfo['mht_id']);
+        $fandian=($mjhtinfo['rebates_proportion']+100)/100; //媒体返点
+        $hetong->xf_cost=I('post.show_money')/$fandian; //续费成本
+        $kehuinfo=kehu(I('post.advertiser'));//客户信息
+        $kehuyue=$yhtinfo['huikuan']-$yhtinfo['yu_e'];//客户合同余额
+        if($kehuyue<0){
+            //客户余额小于0 则 这笔续费的欠额为 填写金额
+            $hetong->xf_qiane=I('post.money');
+        }else{
+            //客户余额大于0 则 这笔续费的欠额为 客户余额-填写金额
+            $hetong->xf_qiane=$kehuyue-I('post.money');
+        }
+        //如果是负数则转成正数。因为是欠款 正负数都为正
+        if($hetong->xf_qiane<0)
+        {
+            $hetong->xf_qiane=-$hetong->xf_qiane;
+        }
+        if(I('post.payment_type')=='3')
+        {
+            $hetong->xf_qiane=null;
+            $hetong->xf_cost=null;
+        }
+
         if($insid=$hetong->add()){
 
             //如果续费成功则修改客户出款或者补款余额  I('post.payment_type')
@@ -691,12 +716,23 @@ class RenewController extends  CommonController
             $aagentcompany=$agentcompany->field("companyname")->find($confind[agent_company]);
             $list2[$key]['daili']=$aagentcompany['companyname'];
             //合同类型
+
             $list2[$key]['type']=$val['type']==1?'普通合同':'框架合同';
             //保证金
             $list2[$key]['margin']=$val['margin'];
 
             //付款方式
-            $list2[$key]['payment_type']=$val['payment_type']==1?'预付':'垫付';
+            if($val['payment_type']==1)
+            {
+                $list2[$key]['payment_type']='预付';
+            }elseif($val['payment_type']==2)
+            {
+                $list2[$key]['payment_type']='垫付';
+            }elseif($val['payment_type']==3)
+            {
+                $list2[$key]['payment_type']='补款';
+            }
+
             //付款时间
             $list2[$key]['payment_time']=$val['payment_time']?date("Y-m-d",$val['payment_time']):'';
 

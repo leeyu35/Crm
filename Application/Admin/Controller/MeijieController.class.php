@@ -8,7 +8,7 @@
 namespace Admin\Controller;
 use Think\Controller;
 
-class CustomerController extends CommonController
+class MeijieController extends CommonController
 {
     public function index(){
 
@@ -51,12 +51,12 @@ class CustomerController extends CommonController
         //权限条件
         $q_where=quan_where(__CONTROLLER__);
 
-        $count      = $coustomer->where("id!=0 and ".$q_where.$where)->count();// 查询满足要求的总记录数
+        $count      = $coustomer->where("customer_type=3 and ".$q_where.$where)->count();// 查询满足要求的总记录数
 
         $Page       = new \Think\Page($count,cookie('page_sum')?cookie('page_sum'):50);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
 
-        $list=$coustomer->field('id,advertiser,business,industry,website,product_line,ctime,city,appName,submituser')->where("id!=0 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order('ctime desc')->select();
+        $list=$coustomer->field('id,advertiser,business,industry,website,product_line,ctime,city,appName,submituser')->where("customer_type=3 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order('ctime desc')->select();
 
         //echo $coustomer->_sql();
         $contact=M('ContactList');
@@ -324,8 +324,8 @@ class CustomerController extends CommonController
         $myusersinfo=users_info(cookie("u_id"));
        // dump($myusersinfo);
         $this->swzs=1;
-        $wslist = M('Users')->field('id,name')->where("(groupid=2 or groupid=9 or groupid=15) and is_delete!=1")->select();
-
+        $wslist = M('Users')->field('id,name')->where("groupid=3 and is_delete!=1")->select();
+        $this->wslist = $wslist;
         if($myusersinfo['groupid']!='1' and $myusersinfo['groupid']!='3')
         {
 
@@ -377,36 +377,15 @@ class CustomerController extends CommonController
         //商务条件
         if (I("get.business") != "")
         {
-            if(I('get.set_type')=='market')
-            {
-                $servach='submituser';
-            }elseif(I('get.set_type')=='business')
-            {
-                $servach='business';
-            }
-            $where.=" and $servach = ".I("get.business");
+            $where.=" and business = ".I("get.business");
             $this->business=I('get.business');
         }
-
         //权限条件
         $q_where=quan_where(__CONTROLLER__);
 
-        $this->set_type='market';
-        //筛选有合同的客户
-        if(!I('get.set_market'))
-        {
-            $contact_avid=M("Contract")->field('advertiser')->group('advertiser')->select(false);
-            $where.=" and id in($contact_avid)";
-            $this->set_type='business';
-            $wslist = M('Users')->field('id,name')->where("groupid=3 and is_delete!=1")->select();
-        }
-
-
-
-
         $count      = $coustomer->where("id!=0 and ".$q_where.$where)->count();// 查询满足要求的总记录数
 
-        $Page       = new \Think\Page($count,1000);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
 
         $list=$coustomer->field('id,advertiser,industry,website,business,product_line,ctime,city,appName,submituser')->where("id!=0 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order('ctime desc')->select();
@@ -432,9 +411,7 @@ class CustomerController extends CommonController
         }
 
         $this->list=$list;
-        $this->wslist = $wslist;
         $this->assign('page',$show);// 赋值分页输出
-
         $this->display();
     }
 
@@ -468,31 +445,7 @@ class CustomerController extends CommonController
 
 
     }
-    //修改合同所属销售返回
-    public function upusers(){
-        $hetong=M("Customer");
-        if(I('get.type')=='business')
-        {
-            $ziduan='business';
-        }
-        if(I('get.type')=='market')
-        {
-            $ziduan='submituser';
-        }
-        if($hetong->where("id=".I("get.id"))->setField($ziduan,I("get.users")))
-        {
-            if(I('get.type')=='market')
-            {
-                M('Contract')->where('advertiser='.I('get.id'))->save(array("market"=>I('get.users')));
-            }
-            echo 1;
-        }else
-        {
-            echo 2;
-        }
 
-
-    }
 
     public function excel(){
 
@@ -536,7 +489,7 @@ class CustomerController extends CommonController
         $q_where=quan_where(__CONTROLLER__);
 
 
-        $list=$coustomer->field('id,advertiser,industry,website,ctime,city,appName,submituser,business,customer_type,yu_e,huikuan,bukuan')->where("id!=0 and ".$q_where.$where)->order('ctime desc')->select();
+        $list=$coustomer->field('id,advertiser,ctime,submituser')->where("customer_type=3  and ".$q_where.$where)->order('ctime desc')->select();
 
         //echo $coustomer->_sql();
         $contact=M('ContactList');
@@ -550,25 +503,384 @@ class CustomerController extends CommonController
             //提交人
             $uindo=users_info($val['submituser']);
             $list[$key]['submituser']=$uindo[name];
-            //所属商务
-            $uindo=users_info($val['business']);
-            $list[$key]['business']=$uindo[name];
-            //客户余额
-            $list[$key]['yue']=$val['huikuan']-$val['yu_e'];
+
             //客户创建时间
             $list[$key]['ctime']=Date("Y-m-d",$val['ctime']);
             //客户类型
-            $list[$key]['customer_type']==1?$list[$key]['customer_type']='直接客户':$list[$key]['customer_type']='渠道客户';
-            //取第一位联系人
-            $contact_one=$contact->field('name,tel')->where("customer_id=$val[id]")->find();
-            $list[$key]['contact']=$contact_one['name'];
-            $list[$key]['tel']=$contact_one['tel'];
+
         }
         $filename="kehu_excel";
-        $headArr=array("id","公司名称",'行业','网址','创建时间','城市','APP名称','提交人','商务','客户类型','总消耗','总回款','总补款','余额','联系人','联系人电话');
+        $headArr=array("id","公司名称",'创建时间','提交人');
         if(!getExcel($filename,$headArr,$list))
         {
             $this->error('没有数据可导出');
         };
+    }
+
+    //媒介合同列表
+    public function contract(){
+            //产品线
+            $product_line=M("ProductLine");
+            $product_line_list=$product_line->field("id,name,title")->where("parent_id=0")->order("id asc")->select();
+            foreach ($product_line_list as $key=>$val)
+            {
+                $product_line_list[$key]['erji']=$product_line->field("id,name,title")->where("parent_id=$val[id]")->order("id asc")->select();
+            }
+            $this->product_line_list=$product_line_list;
+            $hetong=M("Contract");
+
+
+            //搜索条件
+            $type=I('get.searchtype');
+            if($type!='') {
+                if ($type == 'advertiser') {
+                    $coustomer = M('Customer');
+                    $zsql = $coustomer->field("id")->where(" advertiser like '%" . I('get.search_text') . "%'")->select(false);
+                    $where .= " and  a.id!='0' and a.advertiser in($zsql)";
+
+                }
+                if ($type == 'contract_no') {
+                    $where .= " and a.id!='0' and a.contract_no like '%" . I('get.search_text') . "%'";
+                }
+                if ($type == 'appname') {
+                    $where .= " and a.id!='0' and a.appname like '%" . I('get.search_text') . "%'";
+                }
+                if ($type == 'submitname')
+                {
+                    $coustomer=M('Users');
+                    $zsql=$coustomer->field("id")->where(" name like '%".I('get.search_text')."%'")->select(false);
+                    $where.=" and  a.id!='0' and a.submituser in($zsql)";
+                }
+                $this->type=$type;
+                $this->ser_txt=I('get.search_text');
+
+            }
+
+            //合同类型
+            $httype=I('get.httype');
+            if($httype!='')
+            {
+                if($httype!=3)
+                {
+                    $where.=" and a.type=2  and a.isxufei='0'";
+                    $this->httype=$httype;
+                }else
+                {
+                    $where.=" and a.isxufei='0'";
+                }
+
+            }else
+            {
+
+                $where.=" and a.type=1  and a.isxufei='0'";
+                $this->httype=$httype;
+            }
+
+            //时间条件
+            $time_start=I('get.time_start');
+            $time_end=I('get.time_end');
+            if($time_start!="" and $time_end!="")
+            {
+                $time_start=strtotime($time_start);
+                $time_start=strtotime("-1 days",$time_start);
+                $time_end=strtotime($time_end);
+                $time_end=strtotime("+1 days",$time_end);
+
+                $where.=" and a.ctime >= $time_start and a.ctime <= $time_end";
+                $this->time_start=I('get.time_start');
+                $this->time_end=I('get.time_end');
+            }
+            //审核条件
+            $type2=I('get.shenhe');
+            if($type2!='')
+            {
+                if($type2=='k')
+                {
+                    $where.=" and a.id!='0' ";
+                }
+                if($type2=='0')
+                {
+                    $where.=" and (a.audit_1=0 or a.audit_2=0) and a.audit_1!=2 and a.audit_2!=2";
+                }
+                if($type2=='1')
+                {
+                    $where.=" and a.audit_1=1 and a.audit_2=1";
+                }
+                if($type2=='2')
+                {
+                    $where.=" and (a.audit_1=2 or a.audit_2=2)";
+                }
+                $this->type2=$type2;
+                $this->ser_txt2=I('get.search_text');
+
+            }
+            //归档条件
+            $type4=I('get.guidang');
+            if($type4!='')
+            {
+                if($type4=='k')
+                {
+                    $where.=" and a.id!='0' ";
+                }
+                if($type4=='0')
+                {
+                    $where.=" and a.isguidang=0 ";
+                }
+                if($type4=='1')
+                {
+                    $where.=" and a.isguidang=1 ";
+                }
+                $this->type4=$type4;
+
+            }
+            //产品线条件
+            $type3=I('get.pr_line');
+            if($type3!='')
+            {
+                $contract_relevance=M('ContractRelevance');
+                $zsql=$contract_relevance->field("contract_id")->where("product_line=$type3")->select(false);
+                $where.=" and  a.id in($zsql)";
+
+                $this->type3=$type3;
+            }
+            $where.=" and is_meijie = 1 ";
+            //echo $where;
+            //权限条件
+            $q_where=quan_where(__CONTROLLER__,"a");
+            $count      = $hetong->field('a.id,a.advertiser,a.contract_no,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where($q_where.$where)->count();// 查询满足要求的总记录数
+
+            $Page       = new \Think\Page($count,cookie('page_sum')?cookie('page_sum'):50);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+            $show       = $Page->show();// 分页显示输出
+            $list=$hetong->field('a.id,a.advertiser as aid,a.contract_no,a.parent_id,a.users2,a.isguidang,a.iszuofei,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where($q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
+
+            foreach($list as $key => $val)
+            {
+                //提交人
+                $uindo=users_info($val['users2']);
+                $list[$key]['submituser']=$uindo[name];
+                $list[$key]['prduct_line']=contract_prlin($val['id']);
+            }
+
+            $this->list=$list;
+            $this->assign('page',$show);// 赋值分页输出
+            $this->display();
+
+    }
+
+    public function addcontract(){
+        //产品线
+        $product_line=M("ProductLine");
+        $product_line_list=$product_line->field("id,name,title")->where("parent_id=0")->order("id asc")->select();
+        foreach ($product_line_list as $key=>$val)
+        {
+            $product_line_list[$key]['erji']=$product_line->field("id,name,title")->where("parent_id=$val[id]")->order("id asc")->select();
+        }
+        $this->product_line_list=$product_line_list;
+        //代理公司
+        $agentcompany=M("AgentCompany");
+        $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
+        //所有销售
+        $this->xiaoshou=M('Users')->field('id,name')->where("groupid=2 or groupid=15  or groupid=9")->select();
+
+        //产品线JS字符串
+        $jsstr='<select  class="form-control product_line" name="product_line" id="product_line"><option>请选择</option>';
+        foreach ($product_line_list as $key=>$value)
+        {
+            $jsstr.='<option value="'.$value[id].'" title="'.$value[title].'">'.$value['name'].'</option>';
+
+            foreach ($value['erji'] as $k=>$v)
+            {
+
+                $jsstr.='<option value="'.$v[id].'" title="'.$v[title].'">&nbsp&nbsp&nbsp&nbsp'.$v['name'].'</option>';
+
+            }
+        }
+
+        $jsstr.='</select>';
+        $this->jsstr=$jsstr;
+        $this->display();
+    }
+
+    //输入公司名称
+    public function keyup_adlist(){
+        $Blog = R('Contract/keyup_adlist',array('3'));
+        echo $Blog;
+    }
+
+    //添加媒介合同返回
+    public function addru_contract(){
+
+        $hetong=M("Contract");
+        $postdate=$hetong->create();
+
+        $hetong->contract_start=strtotime($hetong->contract_start);
+        $hetong->contract_end=strtotime($hetong->contract_end);
+        $hetong->payment_time=strtotime($hetong->payment_time);
+        $hetong->ctime=time();
+        $hetong->users2=cookie('u_id');
+        //检查是否有这个客户
+        $Customer=M("Customer");
+
+        $co=$Customer->where("id='".I('post.advertiser')."'")->count();
+
+        if($co==0)
+        {
+            $this->error("没有这个公司!");
+            exit;
+        }
+        //检查合同编号是否重复
+        $biaohaocon=$hetong->where("contract_no='".I('post.contract_no')."'")->count();
+        if($biaohaocon>0)
+        {
+            $this->error("合同编号重复!");
+            exit;
+        }
+
+        if($hetong->advertiser=='')
+        {
+            $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
+            exit;
+        }
+        if($insid=$hetong->add()){
+
+
+            $this->success("添加成功".$success_str,U("contract"));
+
+        }else
+        {
+            $this->error("添加失败");
+        }
+    }
+
+    //查看合同
+    public function showcontract(){
+
+        $id=I('get.id');
+        $hetong=M("Contract");
+        $info=$hetong->find($id);
+        $this->info=$info;
+        //销售
+        $submitusers=users_info($info[submituser]);
+        $this->users_info=$submitusers['name'];
+        //提交人
+        $submitusers2=users_info($info[users2]);
+        $this->users_info2=$submitusers2['name'];
+        //一级审核人
+        $submitusers3=users_info($info[susers1]);
+        $this->users_info3=$submitusers3['name'];
+        //二级审核人
+        $submitusers4=users_info($info[susers2]);
+        $this->users_info4=$submitusers4['name'];
+        //产品线
+        $product_line=M("ProductLine");
+        $this->product_line_list=$product_line->field("id,name,title")->order("id asc")->select();
+
+        //代理公司
+        $agentcompany=M("AgentCompany");
+        $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
+        //公司名称
+        $gs=kehu($info[advertiser]);
+        $this->gongsi=$gs[advertiser];
+        //所有销售
+        $this->xiaoshou=M('Users')->field('id,name')->where("groupid=2 or groupid=15 or groupid=9")->select();
+        //查询是否有关于该合同的子合同
+        $zicontract=$hetong->field("id,advertiser,contract_no,appname,market")->where("parent_id=$id")->select();
+        foreach($zicontract as $key=>$val)
+        {
+            $gs=kehu($val[advertiser]);
+            $zicontract[$key]['advertiser']=$gs[advertiser];
+            //二级审核人
+            $makert=users_info($info[market]);
+            $zicontract[$key]['market']=$makert['name'];
+
+        }
+        $this->zicontract=$zicontract;
+
+        $this->display();
+
+    }
+    //修改操作
+    public  function updatacontract(){
+        $id=I('get.id');
+        $hetong=M("Contract");
+        $info=$hetong->find($id);
+        $this->info=$info;
+
+        //产品线
+        $product_line=M("ProductLine");
+        $this->product_line_list=$product_line->field("id,name,title")->order("id asc")->select();
+        //代理公司
+        $agentcompany=M("AgentCompany");
+        $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
+        //公司名称
+        $gs=kehu($info[advertiser]);
+        $this->gongsi=$gs[advertiser];
+        //一级审核人
+        $submitusers3=users_info($info[susers1]);
+        $this->users_info3=$submitusers3['name'];
+        //二级审核人
+        $submitusers4=users_info($info[susers2]);
+        $this->users_info4=$submitusers4['name'];
+        //显示垫付信息
+        $diankuan=M("Diankuan");
+        $this->dinfo=$diankuan->find($info['contract_id']);
+
+        //所有销售
+        $this->xiaoshou=M('Users')->field('id,name')->where("groupid=2 or groupid=15 or groupid=9")->select();
+        $this->display();
+
+    }
+
+    //修改返回
+    public function uprucontract(){
+        $id=I('post.id');
+        $hetong=M("Contract");
+        //检查是否有这个客户
+        //检查是否有这个客户
+        $Customer=M("Customer");
+        $co=$Customer->where("advertiser='".I('post.gongsi')."'")->count();
+        if($co==0)
+        {
+            $this->error("没有这个公司!");
+            exit;
+        }
+        //检查合同编号是否重复
+        $biaohaocon=$hetong->where("contract_no='".I('post.contract_no')."'")->count();
+        if($biaohaocon>1)
+        {
+            $this->error("合同编号重复!");
+            exit;
+        }
+        //判断合同归档的时候是否已经审核过
+        if(I('post.isguidang')==1)
+        {
+            //
+            $het=$hetong->field('audit_1,audit_2')->find($id);
+            if($het['audit_1']!=1 or $het['audit_2']!=1)
+            {
+                $this->error('此合同还未全部通过审核，无法操作归档');
+                exit;
+            }
+        }
+
+        $postdate=$hetong->create();
+        if($hetong->advertiser=='')
+        {
+            $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
+            exit;
+        }
+        $hetong->contract_start=strtotime($hetong->contract_start);
+        $hetong->contract_end=strtotime($hetong->contract_end);
+        $hetong->payment_time=strtotime($hetong->payment_time);
+        $hetong->users2=cookie('u_id');
+
+        if($hetong->where("id=$id")->save())
+        {
+            $this->success('修改成功'.$success_str,U('contract'));
+        }else{
+            $this->error('修改失败');
+        }
+
+
     }
 }

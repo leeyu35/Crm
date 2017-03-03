@@ -8,8 +8,6 @@
 namespace Admin\Controller;
 use Think\Controller;
 
-
-
 class NewCaiwu2Controller extends CommonController
 {
     public function index(){

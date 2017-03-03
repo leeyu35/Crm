@@ -105,7 +105,17 @@ class BackmoneyController extends CommonController
         $agentcompany=M("AgentCompany");
         $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
         $contract=M("Contract");
-        $contract_info=$contract->field('id,market,appname')->find(I('get.contract_id'));
+        $contract_info=$contract->field('id,market,appname,mht_id')->find(I('get.contract_id'));
+        $xufeilist=M("RenewHuikuan")->field('a.*,b.a_users')->join(" a left join jd_account b on a.account=b.id")->where('a.xf_contractid='.I('get.contract_id').' and (a.payment_type=1 or a.payment_type=2) and a.xf_qiane>0')->select();
+
+        //媒体合同信息
+        $mt_contract_info=$contract->field("id,rebates_proportion,dl_fandian")->find($contract_info['mht_id']);
+        $this->mt_contract_info=$mt_contract_info;
+
+
+
+        $this->xufeilist=$xufeilist;
+
         $this->contract_info=$contract_info;
         $this->display();
     }
@@ -125,16 +135,19 @@ class BackmoneyController extends CommonController
         $Diankuan->ctime=time();
         $Diankuan->is_huikuan=1;
         $Diankuan->users2=cookie('u_id');
-        /*
-        //检查是否有这个客户
-        $Customer=M("Customer");
-        $co=$Customer->where("advertiser='".I('post.gongsi')."'")->count();
-        if($co==0)
+
+        //查看合同是否满一年如果满一年就合同状态就改为2（老客户）
+        $contract_time=M("Contract")->field('contract_start')->find(I('post.xf_contractid'));
+
+
+        $a=date("Y-m-d",$contract_time['contract_start']);//合同开始时间
+        $b=date("Y-m-d");
+        if(strtotime($b)>strtotime($a."+1 year"))
         {
-            $this->error("没有这个公司!");
-            exit;
+            M("Contract")->where('id='.I('post.xf_contractid'))->setField('contract_state','2');
         }
-        */
+
+
         if($Diankuan->advertiser=='')
         {
             $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
@@ -154,6 +167,46 @@ class BackmoneyController extends CommonController
                 $result = $Diankuan->query("select currval('jd_renew_huikuan_id_seq')");
                 $insid=$result[0][currval];
             }
+
+            if(I('post.xf_id')){
+                //循环联系人并且记录
+                foreach (I('post.xf_id') as $key => $val)
+                {
+                    //续费返点
+                    $xf_fd=(I('post.xf_fandian')[$key]+100)/100;
+                    //实付金额
+                    $shifu=(I('post.pmoney')[$key]*$xf_fd)/((I('post.mt_fandian')+100)/100);
+                    //销售返点  一年以上% 一年以下20%
+                    //查询客户合同状态 新客20% 老客5%  老客新开10% 合同状态:1新客，2 老客，3 老客新开
+                    $xf_htid=M("RenewHuikuan")->field('xf_contractid')->find(I('post.xf_id'));
+                    $contract_state=M("Contract")->field('contract_state')->find($xf_htid);
+
+                    if($contract_state['contract_state']=='1')
+                    {
+                        $xs_fandian=20;
+                    }elseif($contract_state['contract_state']=='2')
+                    {
+                        $xs_fandian=5;
+                    }elseif($contract_state['contract_state']=='3')
+                    {
+                        $xs_fandian=10;
+                    }
+                    $yhkxf_list[]=array("xf_id"=>I('post.xf_id')[$key],"hk_id"=>$insid,"money"=>I('post.pmoney')[$key],"mt_fandian"=>I('post.mt_fandian'),"xs_fandian"=>$xs_fandian,"dl_fandian"=>I('post.dl_fandian'),"xf_fandian"=>I('post.xf_fandian')[$key],"shifu_money"=>$shifu,"time"=>time(),"avid"=>I('post.advertiser'),"xsid"=>I('post.market'));
+                }
+                //联系人表
+                $Yihuikuanxufei=M("Yihuikuanxufei");
+                foreach($yhkxf_list as $key=>$val)
+                {
+                    if($val['money']!=0) {
+                        //如果平款成功
+                        if ($Yihuikuanxufei->add($yhkxf_list[$key])) {
+                            M("RenewHuikuan")->where('id=' . $val['xf_id'])->setDec('xf_qiane', $val['money']);
+                        }
+                    }
+                }
+                //$contact->addAll($contact_list);
+            }
+
             if($_FILES["file"]['name'][0]!="") {
                 $upload = new \Think\Upload();// 实例化上传类
                 $upload->maxSize = 2097152;// 设置附件上传大小
@@ -297,7 +350,17 @@ class BackmoneyController extends CommonController
                     $xfinfo=$table->find($id);
                     //advertiser,xf_contractid,payment_type,fk_money
                     money_reduce($xfinfo['advertiser'],$xfinfo['xf_contractid'],4,$xfinfo['money']);
-
+                    //已回款续费列表加
+                    $yihuikuanxufei=M("Yihuikuanxufei");
+                    //读取属于这笔回款的已回款续费列表
+                    $yhkxflist=$yihuikuanxufei->where("hk_id=$id")->select();
+                    foreach ($yhkxflist as $key=>$val)
+                    {
+                        //把续费的欠额回滚
+                        M("RenewHuikuan")->where('id='.$val['xf_id'])->setInc('xf_qiane',$val['money']);
+                        //删除已回款续费记录
+                        $yihuikuanxufei->delete($val[id]);
+                    }
                 }
 
 

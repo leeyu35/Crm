@@ -84,6 +84,7 @@ class DiankuanController extends  CommonController
         $where.=" and (a.payment_type = 2)";
         $RenewHuikuan=M('RenewHuikuan');
         $count      = $RenewHuikuan->field('a.id,a.advertiser,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and ".$q_where.$where)->count();// 查询满足要求的总记录数
+
         $Page       = new \Think\Page($count,cookie('page_sum')?cookie('page_sum'):50);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
         $list=$RenewHuikuan->field('a.id,a.payment_type,a.advertiser as aid,a.users2,a.xf_contractid,a.submituser,a.rebates_proportion,a.account,a.appname,a.money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("ctime desc")->select();
@@ -452,6 +453,10 @@ class DiankuanController extends  CommonController
     }
 
     public function excel(){
+        //检查该合同是否已经通过审核
+            $hetong=M("RenewHuikuan");
+
+
         //搜索条件
         $type=I('get.searchtype');
         if($type!='')
@@ -463,10 +468,7 @@ class DiankuanController extends  CommonController
                 $where.=" and  a.id!='0' and a.advertiser in($zsql)";
 
             }
-            if($type=='contract_no')
-            {
-                $where.=" and a.id!='0' and a.contract_no like '%".I('get.search_text')."%'";
-            }
+
             if($type=='appname')
             {
                 $where.=" and a.id!='0' and a.appname like '%".I('get.search_text')."%'";
@@ -476,17 +478,6 @@ class DiankuanController extends  CommonController
 
         }
 
-        //合同类型
-        $httype=I('get.httype');
-        if($httype!='')
-        {
-            $where.=" and a.type=2 ";
-            $this->httype=$httype;
-        }else
-        {
-            $where.=" and a.type=1 ";
-            $this->httype=$httype;
-        }
         //时间条件
         $time_start=I('get.time_start');
         $time_end=I('get.time_end');
@@ -494,10 +485,11 @@ class DiankuanController extends  CommonController
         {
             $time_start=strtotime($time_start);
             $time_start=strtotime("-1 days",$time_start);
+
             $time_end=strtotime($time_end);
             $time_end=strtotime("+1 days",$time_end);
 
-            $where.=" and a.ctime >= $time_start and a.ctime <= $time_end";
+            $where.=" and a.ctime > $time_start and a.ctime < $time_end";
             $this->time_start=I('get.time_start');
             $this->time_end=I('get.time_end');
         }
@@ -525,39 +517,12 @@ class DiankuanController extends  CommonController
             $this->ser_txt2=I('get.search_text');
 
         }
-        //归档条件
-        $type4=I('get.guidang');
-        if($type4!='')
-        {
-            if($type4=='k')
-            {
-                $where.=" and a.id!='0' ";
-            }
-            if($type4=='0')
-            {
-                $where.=" and a.isguidang=0 ";
-            }
-            if($type4=='1')
-            {
-                $where.=" and a.isguidang=1 ";
-            }
-            $this->type4=$type4;
-
-        }
-
-        $type3=I('get.pr_line');
-        if($type3!='')
-        {
-            $where.="and a.product_line =$type3";
-            $this->type3=$type3;
-        }
-        $hetong=M("RenewHuikuan");
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
         //退款条件
         $where.=" and (a.payment_type = 2)";
 
-        $list=$hetong->field('a.id,a.advertiser as aid,a.money,a.payment_type,a.payment_time,a.account,a.contract_start,a.contract_end,a.type,a.users2,a.appname,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.id!=0 and ".$q_where.$where)->order("a.ctime desc")->select();
+        $list=$hetong->field('a.id,a.payment_type,a.advertiser as aid,a.users2,a.xf_contractid,a.submituser,a.rebates_proportion,a.account,a.appname,a.money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0  and ".$q_where.$where)->order("ctime desc")->select();
 
         foreach($list as $key => $val)
         {
@@ -595,15 +560,7 @@ class DiankuanController extends  CommonController
             $list2[$key]['margin']=$val['margin'];
 
             //付款方式
-            if($val['payment_type']==14)
-            {
-                $list2[$key]['payment_type']='退款到客户';
-            }
-            if($val['payment_type']==15)
-            {
-                $list2[$key]['payment_type']='退款到总账户';
-            }
-
+            $list2[$key]['payment_type']=$val['payment_type']==1?'预付':'垫付';
             //付款时间
             $list2[$key]['payment_time']=$val['payment_time']?date("Y-m-d",$val['payment_time']):'';
 

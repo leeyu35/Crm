@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+
+<link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+<script src="/Public/js/jquery-3.1.0.min.js"></script>
+<!--引入CSS-->
+<link rel="stylesheet" type="text/css" href="/Public/js/dist/webuploader.css">
+
+<!--引入JS-->
+<script src="/Public/js/dist/webuploader.js"></script>
+<script language="javascript">
+$(document).ready(function(e) {
+    $("#new_contact").click(function(){
+    $("#contactmain").append('<div class="form-group"><div class="col-sm-2"><input type="text" class="form-control" name="name[]" id="inputEmail3" required></div><div class="col-sm-2"><input type="text" name="tel[]" class="form-control" id="inputEmail333" required="required"></div><div class="col-sm-2"><input type="text" name="qq[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="weixin[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="email[]"  class="form-control" id="inputEmail3"></div><div class="col-sm-2"><input type="text" name="position[]"  class="form-control" id="inputEmail3"></div></div>')})
+	
+	
+$("#formid").submit(function(){
+		if($("#inputEmail3ad").val()=="")
+		{
+			alert("请填写公司名称");
+			$("#inputEmail3ad").select();
+			return false;	
+		}		
+		/*if($("#website").val()=="" || $("#website").val()=='http://www.')
+		{
+			alert("请填写公司网址");
+			$("#website").select();
+			return false;	
+		}*/
+		if($("#industry").val()=="")
+		{
+			alert("请选择客户所属行业");
+		
+			return false;	
+		}
+		
+		if($("#inputEmail8se").val()=="")
+		{
+			alert("请选择客户所属省份");
+		
+			return false;	
+		}	
+		
+	})
+	
+});
+
+
+</script>
+</head>
+
+<body>
+<div class="container" style="width:100%;">
+<h3 class="bor-left-bull" >新增客户<small>New Customer</small></h3>
+<form action="{:U('addru')}" method="post" class="form-horizontal" id="formid" >
+<!--<h4>客户基本信息</h4>-->
+<hr>
+
+  <div class="form-group">
+  
+    <label for="inputEmail3ad" class="col-sm-2 control-label">媒体名称</label>
+    <div class="col-sm-3">
+      <input name="advertiser" type="text" class="form-control" id="inputEmail3ad">
+    </div>
+    
+    <label for="inputEmail4" class="col-sm-1 control-label">客户类型</label>
+    <div class="col-sm-3">
+      <select name="type"  class="form-control" id="inputEmail4">
+      	<option value="1">公司</option>
+      	<option value="2">个人</option>
+      </select>
+    </div> 
+
+  </div>
+
+
+
+  
+
+
+
+
+  <div class="form-group">
+
+    <label for="inputEmail3" class="col-sm-2 control-label">类型</label>
+    <div class="col-sm-3">
+      <label class="radio-inline">
+        <input name="customer_type" type="radio" id="type_0" value="3" checked="">
+         媒介客户</label>
+    </div>
+
+
+  </div>
+
+
+
+   <hr>
+	<div class="form-group">
+  
+   <div class="col-sm-2">
+   <button type="submit" class="btn btn-primary" style="width:150px;" >提交</button>
+   </div>
+   </div>
+
+</form>
+<script>
+inputEmail333.oninput=function(){
+  inputEmail333.setCustomValidity("");
+};
+inputEmail333.oninvalid=function(){
+  inputEmail333.setCustomValidity("请填写客户联系方式");
+};
+</script>
+</div>
+<br>
+<br>
+
+</body>
+</html>

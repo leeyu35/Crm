@@ -19,6 +19,20 @@ $(document).ready(function(e) {
         url=$(this).attr("id");
         window.location.href=url;
     })
+    $(".set_go").click(function () {
+        us=$(".shangwu").val();
+        if(us==''){
+            alert('没有选择人员');
+            return false;
+        }
+        id=$(this).attr("id");
+        $.get("{:U("upusers")}",{id:id,users:us,type:'{$set_type}'},function (date) {
+          if(date=='1')
+          {
+              location.reload();
+          }
+        })
+    })
 });
 </script>
 </head>
@@ -27,6 +41,7 @@ $(document).ready(function(e) {
 <h3  class="bor-left-bull" >客户列表<small>Customer list</small></h3>
 <div class="form-group">
 <form class="form-inline" method="get">
+    <input type="hidden" name="set_type" value="{$set_type}">
   <div class="form-group">
      <select  class="form-control" name="searchtype">
      	<option value="advertiser" {$type=='advertiser'?'selected':''} >广告主公司名称</option>
@@ -45,7 +60,7 @@ $(document).ready(function(e) {
 <input id="contract_end" class="Wdate form-control" type="text" name="time_end"  placeholder="结束时间" value="{$time_end}" <literal> onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_start\')}',maxDate:'2020-10-01'})"</literal>/>
     </div>
     <select class="form-control shangwu" name="business" {$swzs!=1?' style="display: none" ':''} >
-    <option value="">全部商务</option>
+    <option value="">全部人员</option>
     <volist id="xiaoshou" name="wslist" >
 
         <option value="{$xiaoshou.id}" {$xiaoshou[id] == $business ?"selected":""} >{$xiaoshou.name}</option>
@@ -67,8 +82,9 @@ $(document).ready(function(e) {
        
         <th>联系人</th>
         <th>联系人电话</th>
-        <th>城市</th>
+
         <th>创建时间</th>
+        <th>负责销售</th>
         <th>负责商务</th>
         <th>操作</th>	  
     </tr>
@@ -81,11 +97,13 @@ $(document).ready(function(e) {
     	
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[contact]}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[tel]}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[city]}</td>
+
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[ctime]|date="Y-m-d",###}</td>
+        <td>{$list[submituser]?$list[submituser]:'暂无'}</td>
         <td>{$list[business]?$list[business]:'暂无'}</td>
     	<td>
         <a  id="{:U("Customer/upbusiness?id=$list[id]")}" data-toggle="tooltip" data-placement="left" title="修改负责商务"  class="test1"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a id="{$list[id]}"  class="glyphicon glyphicon-flag set_go" data-toggle="tooltip" data-placement="left" title="直接设置" ></a>
         </td>
     </tr>
     </volist>
