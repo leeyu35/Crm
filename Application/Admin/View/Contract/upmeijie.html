@@ -29,7 +29,7 @@
                 <select  class="form-control" name="mht_id" id="market">
                     <option>请选择</option>
                     <volist id="xiaoshou" name="xiaoshou" key="k">
-                        <option  {$info[mht_id]==$xiaoshou[id]?'selected':''} value="{$xiaoshou.id}" title="{$xiaoshou.advertiser}">{$xiaoshou.advertiser}</option>
+                        <option  {$info[mht_id]==$xiaoshou[id]?'selected':''} value="{$xiaoshou.id}" title="{$xiaoshou.advertiser}">{$xiaoshou.title}</option>
                     </volist>
                 </select>
             </div>

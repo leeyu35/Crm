@@ -879,7 +879,7 @@ class ContractController extends CommonController
         $this->info=$info;
         $this->id=$id; //合同id
         //所有销售
-        $this->xiaoshou=$hetong->field('a.id,a.contract_no,b.advertiser')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("is_meijie=1")->select();
+        $this->xiaoshou=$hetong->field('a.id,a.contract_no,b.advertiser,a.title')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("is_meijie=1")->select();
         $this->display();
     }
 
