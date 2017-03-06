@@ -572,7 +572,7 @@ class MeijieController extends CommonController
             }else
             {
 
-                $where.=" and a.type=1  and a.isxufei='0'";
+                $where.=" and a.isxufei='0'";
                 $this->httype=$httype;
             }
 
