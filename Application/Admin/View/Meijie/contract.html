@@ -85,7 +85,7 @@ $(document).ready(function(e) {
 	<tr>
     	<th>#</th>
     	<th>广告主公司名称</th>
-    	<th>APP名称或简称</th>
+    	<th>标题</th>
 
         <th>产品线-合同金额</th>
         <th>创建时间</th>
@@ -100,7 +100,7 @@ $(document).ready(function(e) {
     <tr {$list[iszuofei] == '1'?"class='zuofei'":""}>
     	<td class="htshow" id="{:U("showcontract?id=$list[id]")}">{$k}</td>
     	<td class="htshow" id="{:U("showcontract?id=$list[id]")}">{$list[advertiser]} <if condition="$list[isguidang] eq 1"><span  data-toggle="tooltip" data-placement="left" title="合同已归档" class="glyphicon glyphicon-folder-close" style="color:#0492d9;"></span></if></td>
-    	<td class="htshow" id="{:U("showcontract?id=$list[id]")}">{$list[appname]}</td>
+    	<td class="htshow" id="{:U("showcontract?id=$list[id]")}">{$list[title]}</td>
     	<td class="htshow" id="{:U("showcontract?id=$list[id]")}" align="right">
             <volist id="a" name="list['prduct_line']">
                 <span style="display: block">{$a.name}-{$a.money|num_format}</span>

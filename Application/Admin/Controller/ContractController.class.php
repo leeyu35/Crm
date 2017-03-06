@@ -191,7 +191,7 @@ class ContractController extends CommonController
         $this->jsstr=$jsstr;
 
         //所有销售
-        $this->meijielist=M("Contract")->field('a.id,a.contract_no,b.advertiser')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("is_meijie=1")->select();
+        $this->meijielist=M("Contract")->field('a.id,a.contract_no,b.advertiser,a.title')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("is_meijie=1")->select();
 
         $this->display();
     }
