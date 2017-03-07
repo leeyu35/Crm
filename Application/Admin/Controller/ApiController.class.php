@@ -574,7 +574,7 @@ class ApiController extends RestController{
         foreach ($dk_sm as $key=>$val)
         {
             $zuijinhk=$backmoney->where("advertiser=$val[id] and is_huikuan=1")->field('payment_time,money')->order("payment_time desc")->limit('0,5')->select();
-            
+
             foreach ($zuijinhk as $k=>$v)
             {
                 $zuijinhk[$k]['payment_time']=date("Y-m-d",$v['payment_time']);
@@ -604,8 +604,7 @@ class ApiController extends RestController{
             $dk_sm[$key]['market']=$u['name'];
 
         }
-        dump($dk_sm);
-        exit;
+
         $data['code'] = 200;
         $data['diankuan_huikuan_record'] = $dk_sm;
         $this->response($data,'json');
@@ -1366,15 +1365,18 @@ class ApiController extends RestController{
 
     public function diankuan_excel(){
         $customer=M("Customer");
-        $dk_sm=$customer->query("select a.* from (SELECT id,advertiser,yu_e,huikuan,huikuan-yu_e as yue FROM jd_customer) a where a.yue<0 order by a.yue asc");
+        $dk_sm=$customer->query("select a.* from (SELECT id,advertiser,submituser,yu_e,huikuan,huikuan-yu_e as yue FROM jd_customer) a where a.yue<0 order by a.yue asc");
 
         foreach ($dk_sm as $key=>$value)
         {
             $list2[$key]["advertiser"]=$value["advertiser"];
             $list2[$key]["yue"]=-$value["yue"];
+            //公司负责销售
+            $u=users_info($val['submituser']);
+            $list2[$key]['market']=$u['name'];
         }
         $filename="diankuan_excel";
-        $headArr=array("公司名称","垫款总额");
+        $headArr=array("公司名称","垫款总额","销售");
 
         if(!getExcel($filename,$headArr,$list2))
         {
