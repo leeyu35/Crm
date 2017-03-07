@@ -570,11 +570,11 @@ class ApiController extends RestController{
         $customer=M("Customer");//公司
         $backmoney=M("RenewHuikuan");//续费回款表
         //$dk_sm=$customer->field('id,advertiser,yu_e,huikuan,huikuan-yu_e as yue')->order("yue asc")->select();
-        $dk_sm=$customer->query("select a.* from (SELECT id,advertiser,yu_e,huikuan,huikuan-yu_e as yue FROM jd_customer) a where a.yue<0 order by a.yue asc");
+        $dk_sm=$customer->query("select a.* from (SELECT id,advertiser,submituser,yu_e,huikuan,huikuan-yu_e as yue FROM jd_customer) a where a.yue<0 order by a.yue asc");
         foreach ($dk_sm as $key=>$val)
         {
             $zuijinhk=$backmoney->where("advertiser=$val[id] and is_huikuan=1")->field('payment_time,money')->order("payment_time desc")->limit('0,5')->select();
-
+            
             foreach ($zuijinhk as $k=>$v)
             {
                 $zuijinhk[$k]['payment_time']=date("Y-m-d",$v['payment_time']);
@@ -599,8 +599,13 @@ class ApiController extends RestController{
             $dk_sm[$key]['yu_e']=number_format($val['yu_e'],2);
             $dk_sm[$key]['huikuan']=number_format($val['huikuan'],2);
             $dk_sm[$key]['yue']=number_format($val['yue'],2);
-        }
+            //公司负责销售
+            $u=users_info($val['submituser']);
+            $dk_sm[$key]['market']=$u['name'];
 
+        }
+        dump($dk_sm);
+        exit;
         $data['code'] = 200;
         $data['diankuan_huikuan_record'] = $dk_sm;
         $this->response($data,'json');
