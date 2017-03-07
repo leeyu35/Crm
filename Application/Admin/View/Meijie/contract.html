@@ -102,9 +102,7 @@ $(document).ready(function(e) {
     	<td class="htshow" id="{:U("showcontract?id=$list[id]")}">{$list[advertiser]} <if condition="$list[isguidang] eq 1"><span  data-toggle="tooltip" data-placement="left" title="合同已归档" class="glyphicon glyphicon-folder-close" style="color:#0492d9;"></span></if></td>
     	<td class="htshow" id="{:U("showcontract?id=$list[id]")}">{$list[title]}</td>
     	<td class="htshow" id="{:U("showcontract?id=$list[id]")}" align="right">
-            <volist id="a" name="list['prduct_line']">
-                <span style="display: block">{$a.name}-{$a.money|num_format}</span>
-            </volist>
+            {$list[name]}/{$list[contract_money]}
          </td>
 
     	<td class="htshow" id="{:U("showcontract?id=$list[id]")}">{$list[ctime]|date="y-m-d",###}</td>

@@ -1441,7 +1441,29 @@ class ApiController extends RestController{
         $this->response($data,'json');
 
     }
-
+    //修改合同所属销售返回
+    public function upusers()
+    {
+        $hetong = M("Customer");
+        if (I('get.type') == 'business') {
+            $ziduan = 'business';
+        }
+        if (I('get.type') == 'market') {
+            $ziduan = 'submituser';
+        }
+        if ($hetong->where("id=" . I("get.id"))->setField($ziduan, I("get.users"))) {
+            if (I('get.type') == 'market') {
+                M('Contract')->where('advertiser=' . I('get.id'))->save(array("market" => I('get.users')));
+            }
+            $data['code'] = 200;
+            $data['mes'] = 'success';
+        }else
+        {
+            $data['code'] = 400;
+            $data['mes'] = 'false';
+        }
+        $this->response($data, 'json');
+    }
 }
 
 

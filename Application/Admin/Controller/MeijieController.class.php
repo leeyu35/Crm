@@ -639,7 +639,7 @@ class MeijieController extends CommonController
             {
                 $contract_relevance=M('ContractRelevance');
                 $zsql=$contract_relevance->field("contract_id")->where("product_line=$type3")->select(false);
-                $where.=" and  a.id in($zsql)";
+                $where.=" and  a.product_line ='$type3'";
 
                 $this->type3=$type3;
             }
