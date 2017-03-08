@@ -30,6 +30,13 @@ class CustomerController extends CommonController
 
                 $where=" and id in($se_idlist)";
             }
+            if($type=='users')
+            {
+                //销售或商务
+                $users=M('Users');
+                $zsql=$users->field("id")->where(" name like '%".I('get.search_text')."%'")->select(false);
+                $where.=" and  id!='0' and (submituser in($zsql) or business in ($zsql))";
+            }
 
             $this->type=$type;
             $this->ser_txt=I('get.search_text');
@@ -50,6 +57,17 @@ class CustomerController extends CommonController
 
         //权限条件
         $q_where=quan_where(__CONTROLLER__);
+
+        //部门权限sush4 ：1超级管理员 2销售 3商务 4财务 5媒介 6boss 9销售经理  10优化师 11技术部 12 人事 13运营 14会计 15APP销售 16 设计
+
+        $usinfo=users_info(cookie("u_id"));
+
+        if($usinfo['groupid']=='1' or $usinfo['manager']=='1')
+        {
+            $this->type4_show=1;
+
+        }
+
 
         $count      = $coustomer->where("id!=0 and ".$q_where.$where)->count();// 查询满足要求的总记录数
 
@@ -513,6 +531,13 @@ class CustomerController extends CommonController
                 $se_idlist=$contact->where("$type like '%".I('get.search_text')."%'")->field("customer_id")->select(false);
 
                 $where=" and id in($se_idlist)";
+            }
+            if($type=='users')
+            {
+                //销售或商务
+                $users=M('Users');
+                $zsql=$users->field("id")->where(" name like '%".I('get.search_text')."%'")->select(false);
+                $where.=" and  id!='0' and (submituser in($zsql) or business in ($zsql))";
             }
 
             $this->type=$type;

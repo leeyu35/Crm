@@ -13,7 +13,7 @@
     <script src="../../static/js/xdomain.all.js" slave="cors-proxy.html"></script>
     <script src="../../static/js/html5shiv.min.js"></script>
   <![endif]-->
-<link href="../../static/commons/styles.7c1258aa.css" rel="stylesheet"/><link href="../../index/xiaohaoliebiao/styles.65fd9c9b.css" rel="stylesheet"/></head>
+<link href="../../static/commons/styles.0b594f40.css" rel="stylesheet"/><link href="../../index/xiaohaoliebiao/styles.092c2629.css" rel="stylesheet"/></head>
 <body>
   <!--[if lt IE 9]>
     <script src="../../static/js/respond.min.js"></script>
@@ -32,7 +32,17 @@
                         <div class="box-table-title xiaohao-title">
                             昨日消耗
                         </div>
-                        <table class="table table-border">
+                            <div class="col-xs-12" style="margin-bottom: 30px;">
+                                <div class="col-xs-12">
+                                    开始
+                                    <input type="text" readonly style="width: 150px;display: inline-block;height:30px;margin-left: 20px;margin-right: 20px;" name="birthday1" class="birthday1 form-control" />
+                                    结束
+                                    <input type="text" readonly style="width: 150px;display: inline-block;height:30px;margin-left: 20px;margin-right: 20px;" name="birthday2" class="birthday2 form-control" />
+                                    <button class="keep">查看</button>
+                                    <button class="export-excel daochu" id="export" data-table="#stats">导出</button>
+                                </div>
+                            </div>
+                        <table class="table table-border tb" id="stats">
                             <thead class="box-table-thead">
                             <tr>
                                 <th>账户名称</th>
@@ -55,5 +65,5 @@
     </div>
 </div>
 </div>
-<script type="text/javascript" src="../../static/commons/bundle.7c1258aa.js"></script><script type="text/javascript" src="../../index/xiaohaoliebiao/entry.65fd9c9b.js"></script></body>
+<script type="text/javascript" src="../../static/commons/bundle.0b594f40.js"></script><script type="text/javascript" src="../../index/xiaohaoliebiao/entry.092c2629.js"></script></body>
 </html>

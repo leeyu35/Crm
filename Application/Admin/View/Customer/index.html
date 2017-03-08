@@ -29,7 +29,10 @@ $(document).ready(function(e) {
      <select  class="form-control" name="searchtype">
      	<option value="advertiser" {$type=='advertiser'?'selected':''} >广告主公司名称</option>
      	<option value="name"  {$type=='name'?'selected':''}>联系人</option>
-        <option value="tel"  {$ser_txt=='tel'?'selected':''}>电话</option>
+        <option value="tel"  {$type=='tel'?'selected':''}>电话</option>
+         <if condition="$type4_show eq '1'">
+             <option value="users"  {$type=='users'?'selected':''}>销售及商务</option>
+         </if>
      </select>
   </div>
   <div class="form-group">

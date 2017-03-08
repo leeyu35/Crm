@@ -38,12 +38,16 @@ class ContractController extends CommonController
             if ($type == 'appname') {
                 $where .= " and a.id!='0' and a.appname like '%" . I('get.search_text') . "%'";
             }
-            if ($type == 'submitname')
+            if($type=='users')
             {
-                $coustomer=M('Users');
-                $zsql=$coustomer->field("id")->where(" name like '%".I('get.search_text')."%'")->select(false);
-                $where.=" and  a.id!='0' and a.submituser in($zsql)";
+                //销售或商务
+                $users=M('Users');
+                $zsql=$users->field("id")->where(" name like '%".I('get.search_text')."%'")->select(false);
+                $adveritiser=M("Customer")->field('id')->where("submituser in($zsql) or business in ($zsql)")->select(false);
+
+                $where.=" and  a.id!='0' and a.advertiser in($adveritiser) ";
             }
+
             $this->type=$type;
             $this->ser_txt=I('get.search_text');
 
@@ -140,6 +144,17 @@ class ContractController extends CommonController
         //echo $where;
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
+        //部门权限sush4 ：1超级管理员 2销售 3商务 4财务 5媒介 6boss 9销售经理  10优化师 11技术部 12 人事 13运营 14会计 15APP销售 16 设计
+
+        $usinfo=users_info(cookie("u_id"));
+
+        if($usinfo['groupid']=='1' or $usinfo['manager']=='1')
+        {
+            $this->type4_show=1;
+
+        }
+
+
         $count      = $hetong->field('a.id,a.advertiser,a.contract_no,a.contract_money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where($q_where.$where)->count();// 查询满足要求的总记录数
 
         $Page       = new \Think\Page($count,cookie('page_sum')?cookie('page_sum'):50);// 实例化分页类 传入总记录数和每页显示的记录数(25)
@@ -152,6 +167,14 @@ class ContractController extends CommonController
             $uindo=users_info($val['users2']);
             $list[$key]['submituser']=$uindo[name];
             $list[$key]['prduct_line']=contract_prlin($val['id']);
+            //媒介合同
+            $mthttile=$hetong->field('title')->find($val['mht_id']);
+            $list[$key]['title']=$mthttile['title'];
+            //负责商务
+            $kehuinfo=kehu($val['aid']);
+            $users=users_info($kehuinfo['business']);
+            $list[$key]['business']=$users['name'];
+
         }
 
         $this->list=$list;

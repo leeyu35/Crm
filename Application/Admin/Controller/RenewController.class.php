@@ -123,6 +123,15 @@ class RenewController extends  CommonController
             {
                 $where.=" and a.id!='0' and a.appname like '%".I('get.search_text')."%'";
             }
+            if($type=='users')
+            {
+                //销售或商务
+                $users=M('Users');
+                $zsql=$users->field("id")->where(" name like '%".I('get.search_text')."%'")->select(false);
+                $adveritiser=M("Customer")->field('id')->where("submituser in($zsql) or business in ($zsql)")->select(false);
+
+                $where.=" and  a.id!='0' and a.advertiser in($adveritiser) ";
+            }
             $this->type=$type;
             $this->ser_txt=I('get.search_text');
 
@@ -153,11 +162,15 @@ class RenewController extends  CommonController
             }
             if($type2=='0')
             {
-                $where.=" and (a.audit_1=0 or a.audit_2=0 or a.audit_3=0 or a.audit_4=0)";
+                $where.=" and (a.audit_1=0 or a.audit_2=0 or a.audit_3=0 or a.audit_4=0) and a.audit_1!=2 and a.audit_2!=2 and a.audit_3!=2 and a.audit_4!=2 ";
             }
             if($type2=='1')
             {
                 $where.=" and a.audit_1=1 and a.audit_2=1 and a.audit_3=1 and a.audit_4=1";
+            }
+            if($type2=='2')
+            {
+                $where.="  and (a.audit_1=2 or a.audit_2=2 or a.audit_3=2 or a.audit_4=2)";
             }
             $this->type2=$type2;
             $this->ser_txt2=I('get.search_text');
@@ -167,6 +180,15 @@ class RenewController extends  CommonController
 
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
+        //部门权限sush4 ：1超级管理员 2销售 3商务 4财务 5媒介 6boss 9销售经理  10优化师 11技术部 12 人事 13运营 14会计 15APP销售 16 设计
+
+        $usinfo=users_info(cookie("u_id"));
+
+        if($usinfo['groupid']=='1' or $usinfo['manager']=='1')
+        {
+            $this->type4_show=1;
+
+        }
         $RenewHuikuan=M('RenewHuikuan');
         $count      = $RenewHuikuan->field('a.id,a.advertiser,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and a.payment_type!=14 and a.payment_type!=15 and ".$q_where.$where)->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,cookie('page_sum')?cookie('page_sum'):50);// 实例化分页类 传入总记录数和每页显示的记录数(25)

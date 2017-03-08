@@ -11,6 +11,22 @@
     <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
     <script src="/Public/js/jquery-3.1.0.min.js"></script>
     <script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
+    <script src="/Public/js/jquery.table2excel.min.js"></script>
+    <script language="JavaScript">
+        window.onload=function(){
+            $("#daochu").click(function(){
+                $("#tabel").table2excel({
+                    exclude: ".noExl",
+                    // 导出的Excel文档的名称
+                    name: "Excel Document Name",
+                    // Excel文件的名称
+                    filename: "表格导出"
+                });
+            });
+
+        }
+
+    </script>
 </head>
 <body>
 <div class="container" style="width:100%;" >
@@ -120,7 +136,7 @@
 
     <!-- <!-- 表格 -->
     <div class="list-infor">
-        <table class="tablesorter list-table table table-hover table-bordered">
+        <table class="tablesorter list-table table table-hover table-bordered"  id="tabel">
             <thead>
             <tr>
                 <th class="time">时间 </th>
@@ -198,6 +214,7 @@
 
             </tbody>
         </table>
+        <div><button id="daochu">导出</button></div>
     </div>
 
 
