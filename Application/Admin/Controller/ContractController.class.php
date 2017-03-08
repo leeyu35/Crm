@@ -148,7 +148,7 @@ class ContractController extends CommonController
 
         $usinfo=users_info(cookie("u_id"));
 
-        if($usinfo['groupid']=='1' or $usinfo['manager']=='1')
+        if($usinfo['groupid']=='1'  or $usinfo['groupid']=='6' or $usinfo['manager']=='1')
         {
             $this->type4_show=1;
 
@@ -745,6 +745,7 @@ class ContractController extends CommonController
             $this->time_start=I('get.time_start');
             $this->time_end=I('get.time_end');
         }
+        //审核条件
         //审核条件
         $type2=I('get.shenhe');
         if($type2!='')

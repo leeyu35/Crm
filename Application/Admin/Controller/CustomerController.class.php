@@ -62,7 +62,7 @@ class CustomerController extends CommonController
 
         $usinfo=users_info(cookie("u_id"));
 
-        if($usinfo['groupid']=='1' or $usinfo['manager']=='1')
+        if($usinfo['groupid']=='1'  or $usinfo['groupid']=='6' or $usinfo['manager']=='1')
         {
             $this->type4_show=1;
 

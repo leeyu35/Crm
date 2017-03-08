@@ -184,7 +184,7 @@ class RenewController extends  CommonController
 
         $usinfo=users_info(cookie("u_id"));
 
-        if($usinfo['groupid']=='1' or $usinfo['manager']=='1')
+        if($usinfo['groupid']=='1' or $usinfo['groupid']=='6' or $usinfo['manager']=='1')
         {
             $this->type4_show=1;
 
@@ -618,7 +618,15 @@ class RenewController extends  CommonController
             if($type=='appname')
             {
                 $where.=" and a.id!='0' and a.appname like '%".I('get.search_text')."%'";
-            }
+            }if($type=='users')
+        {
+            //销售或商务
+            $users=M('Users');
+            $zsql=$users->field("id")->where(" name like '%".I('get.search_text')."%'")->select(false);
+            $adveritiser=M("Customer")->field('id')->where("submituser in($zsql) or business in ($zsql)")->select(false);
+
+            $where.=" and  a.id!='0' and a.advertiser in($adveritiser) ";
+        }
             $this->type=$type;
             $this->ser_txt=I('get.search_text');
 
@@ -660,11 +668,15 @@ class RenewController extends  CommonController
             }
             if($type2=='0')
             {
-                $where.=" and (a.audit_1=0 or a.audit_2=0 or a.audit_3=0  or a.audit_4=0)";
+                $where.=" and (a.audit_1=0 or a.audit_2=0 or a.audit_3=0 or a.audit_4=0) and a.audit_1!=2 and a.audit_2!=2 and a.audit_3!=2 and a.audit_4!=2 ";
             }
             if($type2=='1')
             {
                 $where.=" and a.audit_1=1 and a.audit_2=1 and a.audit_3=1 and a.audit_4=1";
+            }
+            if($type2=='2')
+            {
+                $where.="  and (a.audit_1=2 or a.audit_2=2 or a.audit_3=2 or a.audit_4=2)";
             }
             $this->type2=$type2;
             $this->ser_txt2=I('get.search_text');
