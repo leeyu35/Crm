@@ -57,7 +57,15 @@ class PublicController extends Controller
             }
             $this->web_title=C('WEB_NAME');
             $this->sessionuid=cookie("u_id");
-            $this->name=cookie('u_name');
+
+            if($usinfo['groupid']=='1'  or $usinfo['groupid']=='6' or $usinfo['manager']=='1')
+            {
+                $this->name='';
+            }else
+            {
+                $this->name=cookie('u_name');
+            }
+
             $this->daiban=daiban();
             $this->display();
         }

@@ -65,7 +65,6 @@ class CustomerController extends CommonController
         if($usinfo['groupid']=='1'  or $usinfo['groupid']=='6' or $usinfo['manager']=='1')
         {
             $this->type4_show=1;
-
         }
 
 
