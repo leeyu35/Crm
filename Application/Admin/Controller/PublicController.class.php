@@ -57,6 +57,7 @@ class PublicController extends Controller
             }
             $this->web_title=C('WEB_NAME');
             $this->sessionuid=cookie("u_id");
+            $this->name=cookie('u_name');
             $this->daiban=daiban();
             $this->display();
         }

@@ -18,6 +18,7 @@ class NewCaiwuController extends CommonController
         $myusersinfo = users_info(cookie("u_id"));
 
 
+        /*
         if ($myusersinfo['groupid'] == '1' or $myusersinfo['groupid'] == '3') {
             $wslist = M('Users')->field('id,name')->where("groupid=3 and is_delete!=1")->select();
             $this->wslist = $wslist;
@@ -26,7 +27,7 @@ class NewCaiwuController extends CommonController
                 $where.="and business=".cookie("u_id");
                 $this->swzs=0;
             }
-        }
+        }*/
 
         //搜索条件
         $type = I('get.searchtype');

@@ -215,7 +215,7 @@
             <div class="liebiao" id="{:U('Customer/add')}">
                 <a >新客户意向</a>
             </div>
-            <div class="liebiao" id="{:U('Customer/index')}">
+            <div class="liebiao" id="{:U("Customer/index?searchtype=users&search_text=$name")}">
                 <a  >客户列表</a>
             </div>
             <div class="liebiao" id="{:U('Mv/index')}">
@@ -233,16 +233,16 @@
             <div class="liebiao" id="{:U('Contract/add')}" >
                 <a>新合同意向</a>
             </div>
-            <div class="liebiao" id="{:U('Contract/index')}">
+            <div class="liebiao" id="{:U("Contract/index?searchtype=users&search_text=$name")}">
                 <a >合同列表</a>
             </div>
-            <div class="liebiao" id="{:U('Contract/index?httype=2')}">
+            <div class="liebiao" id="{:U("Contract/index?httype=2&searchtype=users&search_text=$name")}">
                 <a >框架合同列表</a>
             </div>
-            <div class="liebiao" id="{:U('Renew/index2?shenhe=k')}">
+            <div class="liebiao" id="{:U("Renew/index2?shenhe=k&searchtype=users&search_text=$name")}">
                 <a >续费列表</a>
             </div>
-            <div class="liebiao" id="{:U('NewCaiwu/index')}">
+            <div class="liebiao" id="{:U("NewCaiwu/index?searchtype=users&search_text=$name")}">
                 <a >客户控制台</a>
             </div>
             <div class="liebiao" id="{:U('Meijie/contract')}">
