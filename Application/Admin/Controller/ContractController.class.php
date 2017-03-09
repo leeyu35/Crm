@@ -973,4 +973,12 @@ class ContractController extends CommonController
 
 
     }
+
+    //ajax 媒介合同产品线
+    public function meijie_prlin(){
+        $id=I('get.id');
+        $meijie=M("Contract");
+        $info=$meijie->field('product_line')->find($id);
+        echo $info['product_line'];
+    }
 }

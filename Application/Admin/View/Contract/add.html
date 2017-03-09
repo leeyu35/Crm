@@ -217,6 +217,17 @@
 		}
             */
         })
+
+        //动态加载公司名称
+        $("#mht_id").change(function(){
+            //获取媒介合同产品线
+
+            $.get("{:U('meijie_prlin')}",{id:$(this).val()},function(data){
+                $("#product_line").val(data);
+            })
+
+
+        })
     });
 </script>
 <style type="text/css">
@@ -325,7 +336,7 @@
 
     
   </div>
-    <h4  class="bor-left-bull" >购买产品信息<small>&nbsp;&nbsp;<a  id="new_contact" style="cursor:pointer;"><span class="glyphicon glyphicon-plus"></span>新增</a></small></h4>
+    <h4  class="bor-left-bull" >购买产品信息<small>&nbsp;&nbsp;<!--<a  id="new_contact" style="cursor:pointer;"><span class="glyphicon glyphicon-plus"></span>新增</a></small> --></h4>
     <hr>
     <div id="contactmain">
         <div class="form-group">
