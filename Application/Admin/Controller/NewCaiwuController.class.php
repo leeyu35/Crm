@@ -95,7 +95,7 @@ class NewCaiwuController extends CommonController
                 }
                 $q_where='id!=0';
             }
-            if($usinfo['groupid']=='3')
+            if($usinfo['groupid']=='3' and $usinfo['manager']!='1')
             {
                 $where.=' and business='.$usinfo[id];
             }

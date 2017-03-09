@@ -196,12 +196,10 @@ class RenewController extends  CommonController
                 }
                 $q_where='a.id!=0';
             }
-            if($usinfo['groupid']=='3')
+            if($usinfo['groupid']=='3' and $usinfo['manager']!='1')
             {
-                $adveritiser=M("Customer")->field('id')->where(" business = $usinfo[id]")->select(false);
-
-                $where.=" and  a.id!='0' and a.advertiser in($adveritiser) ";
-
+                    $adveritiser = M("Customer")->field('id')->where(" business = $usinfo[id]")->select(false);
+                    $where .= " and  a.id!='0' and a.advertiser in($adveritiser) ";
             }
 
         }else
@@ -209,11 +207,8 @@ class RenewController extends  CommonController
             $this->type4_show=1;
         }
 
-        if($usinfo['groupid']=='1' or $usinfo['groupid']=='6' or $usinfo['manager']=='1')
-        {
-            $this->type4_show=1;
 
-        }
+
         $RenewHuikuan=M('RenewHuikuan');
         $count      = $RenewHuikuan->field('a.id,a.advertiser,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and a.payment_type!=14 and a.payment_type!=15 and ".$q_where.$where)->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,cookie('page_sum')?cookie('page_sum'):50);// 实例化分页类 传入总记录数和每页显示的记录数(25)
@@ -752,12 +747,10 @@ class RenewController extends  CommonController
                 }
                 $q_where='a.id!=0';
             }
-            if($usinfo['groupid']=='3')
+            if($usinfo['groupid']=='3' and $usinfo['manager']!='1')
             {
-                $adveritiser=M("Customer")->field('id')->where(" business = $usinfo[id]")->select(false);
-
-                $where.=" and  a.id!='0' and a.advertiser in($adveritiser) ";
-
+                    $adveritiser = M("Customer")->field('id')->where(" business = $usinfo[id]")->select(false);
+                    $where .= " and  a.id!='0' and a.advertiser in($adveritiser) ";
             }
 
         }else

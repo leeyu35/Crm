@@ -162,12 +162,10 @@ class ContractController extends CommonController
                 }
                 $q_where='a.id!=0';
             }
-            if($usinfo['groupid']=='3')
+            if($usinfo['groupid']=='3' and $usinfo['manager']!='1')
             {
-                $adveritiser=M("Customer")->field('id')->where(" business = $usinfo[id]")->select(false);
-
-                $where.=" and  a.id!='0' and a.advertiser in($adveritiser) ";
-
+                    $adveritiser=M("Customer")->field('id')->where(" business = $usinfo[id]")->select(false);
+                    $where.=" and  a.id!='0' and a.advertiser in($adveritiser) ";
             }
 
         }else
@@ -839,12 +837,10 @@ class ContractController extends CommonController
                 }
                 $q_where='a.id!=0';
             }
-            if($usinfo['groupid']=='3')
+            if($usinfo['groupid']=='3'  and $usinfo['manager']!='1')
             {
-                $adveritiser=M("Customer")->field('id')->where(" business = $usinfo[id]")->select(false);
-
-                $where.=" and  a.id!='0' and a.advertiser in($adveritiser) ";
-
+                    $adveritiser=M("Customer")->field('id')->where(" business = $usinfo[id]")->select(false);
+                    $where.=" and  a.id!='0' and a.advertiser in($adveritiser) ";
             }
 
         }else
