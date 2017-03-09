@@ -34,6 +34,7 @@ class CustomerController extends CommonController
             {
                 //销售或商务
                 $users=M('Users');
+
                 $zsql=$users->field("id")->where(" name like '%".I('get.search_text')."%'")->select(false);
                 $where.=" and  id!='0' and (submituser in($zsql) or business in ($zsql))";
             }
@@ -62,11 +63,30 @@ class CustomerController extends CommonController
 
         $usinfo=users_info(cookie("u_id"));
 
-        if($usinfo['groupid']=='1'  or $usinfo['groupid']=='6' or $usinfo['manager']=='1')
+        if($usinfo['groupid']=='2'  or $usinfo['groupid']=='3' or $usinfo['groupid']=='15')
+        {
+
+            if($usinfo['manager']=='1')
+            {
+
+                $this->type4_show=1;
+
+                if($usinfo['groupid']=='2' or $usinfo['groupid']=='15')
+                {
+                    $userswe=M("Users")->field('id')->where("groupid=$usinfo[groupid]")->select(false);
+                    $where.=" and submituser in($userswe)";
+                }
+                $q_where='id!=0';
+            }
+            if($usinfo['groupid']=='3' and $usinfo['manager']!='1')
+            {
+             $where.=' and business='.$usinfo[id];
+            }
+
+        }else
         {
             $this->type4_show=1;
         }
-
 
         $count      = $coustomer->where("id!=0 and ".$q_where.$where)->count();// 查询满足要求的总记录数
 
@@ -558,7 +578,31 @@ class CustomerController extends CommonController
 
         //权限条件
         $q_where=quan_where(__CONTROLLER__);
+        $usinfo=users_info(cookie("u_id"));
 
+        if($usinfo['groupid']=='2'  or $usinfo['groupid']=='3' or $usinfo['groupid']=='15')
+        {
+            if($usinfo['manager']=='1')
+            {
+
+                $this->type4_show=1;
+
+                if($usinfo['groupid']=='2' or $usinfo['groupid']=='15')
+                {
+                    $userswe=M("Users")->field('id')->where("groupid=$usinfo[groupid]")->select(false);
+                    $where.=" and submituser in($userswe)";
+                }
+                $q_where='id!=0';
+            }
+            if($usinfo['groupid']=='3')
+            {
+                $where.=' and business='.$usinfo[id];
+            }
+
+        }else
+        {
+            $this->type4_show=1;
+        }
 
         $list=$coustomer->field('id,advertiser,industry,website,ctime,city,appName,submituser,business,customer_type,yu_e,huikuan,bukuan')->where("id!=0 and ".$q_where.$where)->order('ctime desc')->select();
 

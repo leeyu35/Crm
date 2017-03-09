@@ -181,8 +181,33 @@ class RenewController extends  CommonController
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
         //部门权限sush4 ：1超级管理员 2销售 3商务 4财务 5媒介 6boss 9销售经理  10优化师 11技术部 12 人事 13运营 14会计 15APP销售 16 设计
-
         $usinfo=users_info(cookie("u_id"));
+
+        if($usinfo['groupid']=='2'  or $usinfo['groupid']=='3' or $usinfo['groupid']=='15')
+        {
+            if($usinfo['manager']=='1')
+            {
+                $this->type4_show=1;
+
+                if($usinfo['groupid']=='2' or $usinfo['groupid']=='15')
+                {
+                    $userswe=M("Users")->field('id')->where("groupid=$usinfo[groupid]")->select(false);
+                    $where.=" and a.market in($userswe)";
+                }
+                $q_where='a.id!=0';
+            }
+            if($usinfo['groupid']=='3')
+            {
+                $adveritiser=M("Customer")->field('id')->where(" business = $usinfo[id]")->select(false);
+
+                $where.=" and  a.id!='0' and a.advertiser in($adveritiser) ";
+
+            }
+
+        }else
+        {
+            $this->type4_show=1;
+        }
 
         if($usinfo['groupid']=='1' or $usinfo['groupid']=='6' or $usinfo['manager']=='1')
         {
@@ -711,7 +736,34 @@ class RenewController extends  CommonController
         $hetong=M("RenewHuikuan");
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
+        //部门权限sush4 ：1超级管理员 2销售 3商务 4财务 5媒介 6boss 9销售经理  10优化师 11技术部 12 人事 13运营 14会计 15APP销售 16 设计
+        $usinfo=users_info(cookie("u_id"));
 
+        if($usinfo['groupid']=='2'  or $usinfo['groupid']=='3' or $usinfo['groupid']=='15')
+        {
+            if($usinfo['manager']=='1')
+            {
+                $this->type4_show=1;
+
+                if($usinfo['groupid']=='2' or $usinfo['groupid']=='15')
+                {
+                    $userswe=M("Users")->field('id')->where("groupid=$usinfo[groupid]")->select(false);
+                    $where.=" and a.market in($userswe)";
+                }
+                $q_where='a.id!=0';
+            }
+            if($usinfo['groupid']=='3')
+            {
+                $adveritiser=M("Customer")->field('id')->where(" business = $usinfo[id]")->select(false);
+
+                $where.=" and  a.id!='0' and a.advertiser in($adveritiser) ";
+
+            }
+
+        }else
+        {
+            $this->type4_show=1;
+        }
 
         $list=$hetong->field('a.id,a.advertiser as aid,a.xf_contractid,a.money,a.payment_type,a.payment_time,a.note,a.account,a.contract_start,a.contract_end,a.type,a.users2,a.appname,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and a.payment_type!=14 and a.payment_type!=15 and  ".$q_where.$where)->order("a.ctime desc")->select();
 

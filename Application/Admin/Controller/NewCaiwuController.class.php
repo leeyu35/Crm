@@ -81,12 +81,29 @@ class NewCaiwuController extends CommonController
 
         $usinfo=users_info(cookie("u_id"));
 
-        if($usinfo['groupid']=='1' or $usinfo['groupid']=='6' or $usinfo['manager']=='1')
+        if($usinfo['groupid']=='2'  or $usinfo['groupid']=='3' or $usinfo['groupid']=='15')
+        {
+            if($usinfo['manager']=='1')
+            {
+
+                $this->type4_show=1;
+
+                if($usinfo['groupid']=='2' or $usinfo['groupid']=='15')
+                {
+                    $userswe=M("Users")->field('id')->where("groupid=$usinfo[groupid]")->select(false);
+                    $where.=" and submituser in($userswe)";
+                }
+                $q_where='id!=0';
+            }
+            if($usinfo['groupid']=='3')
+            {
+                $where.=' and business='.$usinfo[id];
+            }
+
+        }else
         {
             $this->type4_show=1;
-
         }
-
         $count      = $coustomer->where("id!=0 and ".$q_where.$where)->count();// 查询满足要求的总记录数
 
         $Page       = new \Think\Page($count,cookie('page_sum')?cookie('page_sum'):50);// 实例化分页类 传入总记录数和每页显示的记录数(25)
