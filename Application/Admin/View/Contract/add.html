@@ -246,6 +246,7 @@
 <form action="{:U('addru')}" method="post" class="form-horizontal" id="formid" >
 <input type="hidden" name="advertiser" id="advertiser">
 <input type="hidden" name="submituser" id="submituser">
+<input type="hidden" name="market" value="{Think.cookie.u_id}">
 <if condition="$Think.get.parent_id neq ''">
     <input type="hidden" name="parent_id" id="parent_id" value="{$Think.get.parent_id}">
 
@@ -323,15 +324,16 @@
     <div class="col-sm-3">
       <input type="text" class="form-control" autocomplete="off" name="appname" id="appname" value="{$info[appname]}" >
     </div>
-        <label for="inputEmail3" class="col-sm-1 control-label">销售</label>
-    <div class="col-sm-3">
-    	<select  class="form-control" name="market" id="market">
-      	<option>请选择</option>
-      	<volist id="xiaoshou" name="xiaoshou" key="k">
-       	<option value="{$xiaoshou.id}" title="{$xiaoshou.name}">{$xiaoshou.name}</option>
-       </volist>
-      </select>
-    </div>
+
+        <!--<label for="inputEmail3" class="col-sm-1 control-label">销售</label>-->
+    <!--<div class="col-sm-3">-->
+    	<!--<select  class="form-control" name="market" id="market">-->
+      	<!--<option>请选择</option>-->
+      	<!--<volist id="xiaoshou" name="xiaoshou" key="k">-->
+       	<!--<option value="{$xiaoshou.id}" title="{$xiaoshou.name}">{$xiaoshou.name}</option>-->
+       <!--</volist>-->
+      <!--</select>-->
+    <!--</div>-->
 
 
     
