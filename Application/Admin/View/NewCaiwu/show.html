@@ -514,6 +514,7 @@
                         <a  href="{:U("RefundMoney/add?id=$list[id]")}"   data-toggle="tooltip" data-placement="top" title="退款"><i class="iconfont">&#xe603;</i></a>
                         <a href="{:U("Contract/zuofei?id=$list[id]")}" onClick="if(confirm('确定要将此合同作废吗？')){return true}else{return false}" data-toggle="tooltip" data-placement="top"  title="作废"><i class="iconfont">&#xe657;</i></a>
                         <a href="{:U("Contract/zuofei?id=$list[id]&type=2")}" onClick="if(confirm('确定要将此合同结束吗？')){return true}else{return false}" data-toggle="tooltip" data-placement="top"  title="结束合同"><i class="iconfont">&#xe628;</i></a>
+                        <a href="{:U("Contract/add?id=$list[id]&type=copy")}"><span class="glyphicon glyphicon-duplicate" style="color: #fff;"  data-toggle="tooltip" data-placement="top" title="复制合同"></span></a>
                         <elseif condition="$list[iszuofei] eq 1"/>
                         <span style="color: #ccc; font-weight: 700; padding-left: 10px;">该合同已作废！</span>
                         <a  href="{:U("history?contract_id=$list[id]")}" data-toggle="tooltip" data-placement="top" title="历史记录"><i class="iconfont">&#xe602;</i></a>

@@ -244,12 +244,21 @@
     <h3 class="bor-left-bull" >新增合同 <if condition="$Think.get.parent_id neq ''">子合同</if><small>New contract</small></h3>
 <br>
 <form action="{:U('addru')}" method="post" class="form-horizontal" id="formid" >
-<input type="hidden" name="advertiser" id="advertiser">
-<input type="hidden" name="submituser" id="submituser">
-<input type="hidden" name="market" value="{$Think.cookie.u_id}">
+<input type="hidden" name="advertiser" id="advertiser" value="{$data[advertiser]}">
+<input type="hidden" name="submituser" id="submituser"  value="{$data[submituser]}">
+<input type="hidden" name="market" value="{$Think.cookie.u_id}" >
 <if condition="$Think.get.parent_id neq ''">
     <input type="hidden" name="parent_id" id="parent_id" value="{$Think.get.parent_id}">
 
+</if>
+<if condition="$data[parent_id] neq ''">
+    <input type="hidden" name="parent_id" id="parent_id" value="{$data[parent_id]}">
+
+</if>
+<if condition="$data[id] neq ''">
+    <input type="hidden" name="copy" id="copy" value="1">
+    <input type="hidden" name="type" id="type" value="{$data[type]}">
+    <input type="hidden" name="margin" id="margin" value="{$data[margin]}">
 </if>
 <h4 class="bor-left-bull" >合同基本信息</h4>
 <hr>
@@ -258,7 +267,7 @@
   
     <label for="inputEmail3" class="col-sm-2 control-label">广告主公司名称</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" autocomplete="off" name="gongsi" id="gongsi" placeholder="输入客户名称前几个字我们将自动匹配">
+      <input type="text" class="form-control" autocomplete="off" name="gongsi" id="gongsi" value="{$gongsiname[advertiser]}" placeholder="输入客户名称前几个字我们将自动匹配">
     <ul class="dropdown-menu" id="adlist">
 
     </ul>
@@ -268,8 +277,12 @@
     <div class="col-sm-2">
       <select  class="form-control" name="agent_company" id="agent_company">
           <option value="0" title="0">请选择代理公司</option>
+
         <volist id="agentcompany" name="agentcompany" key="k">
-       	<option value="{$agentcompany.id}" title="{$agentcompany.title}">{$agentcompany.companyname}</option>
+       	<option value="{$agentcompany.id}" title="{$agentcompany.title}"
+            <if condition="$data[agent_company] neq ''">
+            {$data[agent_company]==$agentcompany[id]?'selected':''}
+        </if>>{$agentcompany.companyname}</option>
        </volist>
       </select>
     </div>
@@ -280,7 +293,7 @@
     <label for="inputEmail3" class="col-sm-2 control-label">合同编号</label>
     <div class="col-sm-3">
 
-        <input name="contract_no" type="text" class="form-control" id="contract_no" placeholder="自动生成，无需填写">
+        <input name="contract_no" type="text" class="form-control" id="contract_no" placeholder="自动生成，无需填写"  <if condition="$data[contract_no] neq ''"> value="{$data[contract_no]}"</if>>
     </div>
 
       <label for="inputEmail3" class="col-sm-1 control-label">媒介合同</label>
@@ -288,24 +301,32 @@
           <select  class="form-control" name="mht_id" id="mht_id">
               <option value="0" title="0">请选择媒介合同</option>
               <volist id="meijielist" name="meijielist" key="k">
-                  <option value="{$meijielist.id}" title="{$meijielist.title}">{$meijielist.title}</option>
+                  <option value="{$meijielist.id}" title="{$meijielist.title}"
+                  <if condition="$data[mht_id] neq ''">
+                      {$data[mht_id]==$meijielist[id]?'selected':''}
+                  </if>
+                  >{$meijielist.title}</option>
               </volist>
           </select>
       </div>
     </div>
-    
+    <if condition="$data[type] eq ''">
+
+
     <div class="form-group">
   
     <label for="inputEmail3" class="col-sm-2 control-label">合同类型</label>
     <div class="col-sm-3">
+
    	    <label class="radio-inline">
-   	      <input name="type" type="radio" id="type_0" value="1" checked>
+
+   	      <input name="type" type="radio" id="type_0" value="1" checked >
    	      普通合同</label>
-   	    
+
    	    <label class="radio-inline">
    	      <input type="radio" name="type" value="2" id="type_1">
    	      框架合同</label>
-   
+
     </div>
     
     <label for="inputEmail3" class="col-sm-1 control-label bzj">保证金</label>
@@ -318,11 +339,12 @@
   
     
 </div>
+    </if>
 <div class="form-group">
   
     <label for="inputEmail3" class="col-sm-2 control-label">APP名称或简称</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" autocomplete="off" name="appname" id="appname" value="{$info[appname]}" >
+      <input type="text" class="form-control" autocomplete="off" name="appname" id="appname" value="{$data[appname]}" >
     </div>
 
         <!--<label for="inputEmail3" class="col-sm-1 control-label">销售</label>-->
@@ -350,17 +372,17 @@
             </div>
             <div class="col-sm-2">
                 <label for="inputEmail3" class="control-label">金额</label>
-                <input type="text" class="form-control money" name="money[]" id="inputEmail333" required>
+                <input type="text" class="form-control money" name="money[]" id="inputEmail333" required  <if condition="$htgl[money] neq ''"> value="{$htgl[money]}"</if>>
             </div>
 
             <div class="col-sm-2">
                 <label for="inputEmail3" class="control-label">返点</label>
-                <input type="text" class="form-control fandian" name="fandian[]" id="inputEmail3" >
+                <input type="text" class="form-control fandian" name="fandian[]" id="inputEmail3" <if condition="$htgl[fandian] neq ''"> value="{$htgl[fandian]}"</if> >
             </div>
 
             <div class="col-sm-2">
                 <label for="inputEmail3" class="control-label">账户显示金额</label>
-                <input type="text" class="form-control xianshijine" name="xianshijine[]" id="inputEmail3">
+                <input type="text" class="form-control xianshijine" name="xianshijine[]" id="inputEmail3" <if condition="$htgl[xianshijine] neq ''"> value="{$htgl[xianshijine]}"</if>>
             </div>
 
 
@@ -417,20 +439,20 @@
   </div>-->
     <hr>
   <div class="form-group">
-  <literal>
+
     <label for="inputEmail3" class="col-sm-2 control-label">合同有效期</label>
     <div class="col-sm-2">
-    	<input id="contract_start" class="Wdate form-control" type="text" name="contract_start" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_end\')||\'2020-10-01\'}'})"/> 
+    	<input id="contract_start" class="Wdate form-control" type="text" name="contract_start"   <literal>onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'contract_end\')||\'2020-10-01\'}'})"</literal> <if condition="$data[contract_start] neq ''"> value="{$data[contract_start]|date='Y-m-d',###}"</if>/>
     </div>
         <div class="col-sm-2">
-<input id="contract_end" class="Wdate form-control" type="text" name="contract_end" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_start\')}',maxDate:'2020-10-01'})"/>
+<input id="contract_end" class="Wdate form-control" type="text" name="contract_end" <literal> onFocus="WdatePicker({minDate:'#F{$dp.$D(\'contract_start\')}',maxDate:'2020-10-01'})"</literal> <if condition="$data[contract_end] neq ''"> value="{$data[contract_end]|date='Y-m-d',###}"</if>/>
     </div>
     <div  class="col-sm-4 control-label" style="text-align:left;">
     <span class="glyphicon glyphicon-bookmark"></span> 结束时间为空则认为合同截止日期为： 至消费结束
 
     </div>
 
-   </literal>
+
 
     
   </div>
@@ -442,14 +464,18 @@
     <label for="payment_type" class="col-sm-2 control-label">付款方式</label>
     <div class="col-sm-3">
       <select  class="form-control" name="payment_type" id="payment_type">
-      	<option value="1">预付</option>
-      	<option value="2">垫付</option>
+      	<option value="1" <if condition="$data[payment_type] neq ''">
+          {$data[payment_type]=='1'?'selected':''}
+      </if>>预付</option>
+      	<option value="2"  <if condition="$data[payment_type] neq ''">
+          {$data[payment_type]=='2'?'selected':''}
+      </if>>垫付</option>
       </select>
     </div>
     
     <label for="payment_time" class="col-sm-1 control-label">付款日期</label>
     <div class="col-sm-2">      
-		<input type="text" name="payment_time" class="Wdate form-control" id="payment_time" onClick="WdatePicker()">
+		<input type="text" name="payment_time" class="Wdate form-control" id="payment_time" onClick="WdatePicker()" <if condition="$data[payment_time] neq ''"> value="{$data[payment_time]|date='Y-m-d',###}"</if>>
     </div>
     
     </div>
@@ -487,7 +513,7 @@
   <hr>
   <div class="form-group">
    <div class="col-sm-12">      
-		<textarea class="form-control" name="note" id="note" rows="4"></textarea>
+		<textarea class="form-control" name="note" id="note" rows="4"> <if condition="$data[note] neq ''"> {$data[note]}</if></textarea>
    </div>
 
    </div>

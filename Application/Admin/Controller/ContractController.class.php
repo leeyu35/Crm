@@ -200,6 +200,19 @@ class ContractController extends CommonController
         $this->display();
     }
     public function add(){
+        //如果是复制合同
+        if(I('get.type')=='copy')
+        {
+            $id=I('get.id');
+            $contract=M("Contract")->find($id);
+            $this->gongsiname=M("Customer")->field('advertiser')->find($contract['advertiser']);
+            $this->data=$contract;
+            $mtht_info=M("Contract")->field('product_line')->find($contract['mht_id']);
+            $this->htgl=M("ContractRelevance")->where("contract_id=$id")->find();
+
+
+        }
+
         //产品线
         $product_line=M("ProductLine");
         $product_line_list=$product_line->field("id,name,title")->where("parent_id=0")->order("id asc")->select();
@@ -218,18 +231,34 @@ class ContractController extends CommonController
         $jsstr='<select  class="form-control product_line" name="product_line[]" id="product_line"><option>请选择</option>';
         foreach ($product_line_list as $key=>$value)
         {
-            $jsstr.='<option value="'.$value[id].'" title="'.$value[title].'">'.$value['name'].'</option>';
+
+            if($mtht_info!='' && $value['id']==$mtht_info['product_line'])
+            {
+                $jsstr.='<option value="'.$value[id].'" title="'.$value[title].'" selected>'.$value['name'].'</option>';
+            }else
+            {
+                $jsstr.='<option value="'.$value[id].'" title="'.$value[title].'" >'.$value['name'].'</option>';
+            }
+
+
 
             foreach ($value['erji'] as $k=>$v)
             {
+                if($mtht_info!='' && $v['id']==$mtht_info['product_line'])
+                {
+                    $jsstr.='<option value="'.$v[id].'" title="'.$v[title].'" selected>&nbsp&nbsp&nbsp&nbsp'.$v['name'].'</option>';
+                }else
+                {
+                    $jsstr.='<option value="'.$v[id].'" title="'.$v[title].'" >&nbsp&nbsp&nbsp&nbsp'.$v['name'].'</option>';
+                }
 
-                $jsstr.='<option value="'.$v[id].'" title="'.$v[title].'">&nbsp&nbsp&nbsp&nbsp'.$v['name'].'</option>';
 
             }
         }
 
         $jsstr.='</select>';
         $this->jsstr=$jsstr;
+
 
         //所有销售
         $this->meijielist=M("Contract")->field('a.id,a.contract_no,b.advertiser,a.title')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("is_meijie=1")->select();
@@ -307,7 +336,7 @@ class ContractController extends CommonController
         }
         //检查合同编号是否重复
         $biaohaocon=$hetong->where("contract_no='".I('post.contract_no')."'")->count();
-        if($biaohaocon>0)
+        if($biaohaocon>0 && I('post.copy')=='')
         {
             $this->error("合同编号重复!");
             exit;
