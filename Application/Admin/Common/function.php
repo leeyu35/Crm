@@ -1017,7 +1017,7 @@ function  account_xs_id($appid,$field){
     $users=users_info($uid);
     //首先先算我是不是正式员工
 
-      
+
     $m=date("m");
 
     if($users['istrue']==1)
