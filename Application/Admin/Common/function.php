@@ -1014,10 +1014,11 @@ function  account_xs_id($appid,$field){
 }
 
   function nianjia($uid){
-    $users=users_info(cookie('u_id'));
+    $users=users_info($uid);
     //首先先算我是不是正式员工
 
-      $m=date("m");
+      
+    $m=date("m");
 
     if($users['istrue']==1)
     {
@@ -1030,44 +1031,59 @@ function  account_xs_id($appid,$field){
         //入职是否满一年
         if(strtotime($a."+1 year") < strtotime($b))
         {
+
+
+
+
             $ca3=date_diff(date_create($c),date_create($b));//入职时间和现在时间差值
             $nianjia=$nianjia+5+$ca3->y;
 
             //echo $gongling."<br>";
             $nianjiazhouqi=12/round($nianjia,1);//年假周期  12个月 除以 工龄
 
+            $nianjiazhouqi=$nianjiazhouqi/2;
+
 
             $nianjia=$m/round($nianjiazhouqi,1);
 
-            $ca4=date_diff(date_create(date("Y-m-d",$users['njuptime'])),date_create($b));
+            $nianjia=floor($nianjia);
 
-            $nianjiazhouqi=$nianjiazhouqi/2;
-            $nianjiazjts=round($ca4->m/$nianjiazhouqi)*0.5;
+            $snianjia=floor(date("m",$users['njuptime'])/round($nianjiazhouqi,1));
+
+
+            if($nianjia-$snianjia>0)
+            {
+                $nianjiazjts=($nianjia-$snianjia)*0.5;
+            }
 
             $User = M("Users"); // 实例化User对象
-            $User->where("id=$uid")->setInc('nianjia',$nianjiazjts); // 年假加0.5
-            $User->where("id=$uid")->setField('njuptime',time());
-
+            if($nianjiazjts>0)
+            {
+                $User = M("Users"); // 实例化User对象
+                $User->where("id=$uid")->setInc('nianjia',$nianjiazjts); // 年假加0.5
+                $User->where("id=$uid")->setField('njuptime',time());
+            }
             $md=date("m-d");
             if($md=='01-01')
             {
                 $b=strtotime(date("Y-m-d")." -1 years");
 
+                $yjjj=floor(1/$nianjiazhouqi)*0.5;//1月应有年假
 
                 //算出去年应有年假
                 if(strtotime($a."+1 year") < $b)
                 {
                     $ca3=date_diff(date_create($c),date_create(date("Y-m-d",$b)));//入职时间和现在时间差值
-
                     $nianjia=5+$ca3->y;
                     if($nianjia<$users['nianjia'])
                     {
-                        $User->where("id=$uid")->setField('nianjia',$nianjia); //
+                        $User->where("id=$uid")->setField('nianjia',$nianjia+$yjjj); //
                     }else{
-                        $User->where("id=$uid")->setField('nianjia',$users['nianjia']); //
+                        $User->where("id=$uid")->setField('nianjia',$users['nianjia']+$yjjj); //
                     }
-                    $User->where("id=$uid")->setField('njuptime',time());
+
                 }
+                $User->where("id=$uid")->setField('njuptime',time());
             }
 
         }else
