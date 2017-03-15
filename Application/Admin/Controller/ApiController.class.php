@@ -1471,6 +1471,24 @@ class ApiController extends RestController{
         }
         $this->response($data, 'json');
     }
+
+
+    /*
+     * 账户服务类型
+     * 130001 页面+优化
+     * 130002 页面
+     * 130003 优化
+     * 130004 无服务
+     *
+     * */
+    public function account_server_type(){
+        $account=M('Account');
+        $zi=$account->field('appid')->where("appid!=''")->select(false);
+        $tabledata = M("third_account", "tb_", "pgsql://rdspg:anmeng@rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com:3432/yushan");//百度消耗
+        $list=$tabledata->where("service_type!=0 and appid in ($zi)")->select();
+        echo $tabledata->_sql();
+        dump($list);
+    }
 }
 
 
