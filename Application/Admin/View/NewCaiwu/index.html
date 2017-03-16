@@ -85,7 +85,7 @@ $(document).ready(function(e) {
     <volist id="list" name="list" key="k">
     <tr>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$k}</td>
-        <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[advertiser]}<span style="border:1px #00a2d4 solid; margin-left: 5px; font-size: 10px; color: #00a2d4; border-radius: 3px; padding-left: 2px; padding-right: 2px;">{$list[customer_type]==1?'直':'框'}</span></td>
+        <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[advertiser]}<span style="border:1px #00a2d4 solid; margin-left: 5px; font-size: 10px; color: #00a2d4; border-radius: 3px; padding-left: 2px; padding-right: 2px;">{$list[customer_type]==1?'直':'渠'}</span></td>
         <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[appname]}</td>
         <!--<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[industry]}</td>-->
         <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[yue]|num_format}</td>

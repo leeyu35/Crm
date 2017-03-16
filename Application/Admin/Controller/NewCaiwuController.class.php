@@ -333,6 +333,7 @@ class NewCaiwuController extends CommonController
         $this->xiaohao=$ht_on['yu_e'];
         $this->huikuan=$ht_on['huikuan'];
         $this->history=$history;
+        $this->type=$type;
 
         //客户详细信息
         $customer_info=kehu($ht_on['advertiser']);
@@ -434,5 +435,210 @@ class NewCaiwuController extends CommonController
         $this->list=$list;
 
         $this->display();
+    }
+
+    public function excel(){
+        $contract_id = I('get.contract_id');
+        $ht_on = M("Contract")->field("contract_no,yu_e,bukuan,huikuan,invoice,id,advertiser")->find($contract_id);
+        $type = I('get.type');
+
+        if($type=='renew')
+        {
+            $renewwhere=' and (payment_type !=14 and payment_type !=15)';
+        }
+        //时间条件
+        $time_start=I('get.time_start');
+        $time_end=I('get.time_end');
+        if($time_start!="" and $time_end!="")
+        {
+            $time_start=strtotime($time_start);
+            $time_start=strtotime("-1 days",$time_start);
+            $time_end=strtotime($time_end);
+            $time_end=strtotime("+1 days",$time_end);
+
+            $xf_where.=" and payment_time > $time_start and payment_time < $time_end";
+            $fp_where.=" and ctime > $time_start and ctime < $time_end";
+
+
+
+            $this->time_start=I('get.time_start');
+            $this->time_end=I('get.time_end');
+        }
+
+        //续费的记录 1预付 2垫付
+        $hetong=M("RenewHuikuan");
+        $xflist=$hetong->field('money,payment_time,payment_type,account,audit_1,audit_2,audit_3,audit_4,type,users2,rebates_proportion')->where("xf_contractid=$contract_id and is_huikuan=0 $renewwhere $xf_where")->order("payment_time asc,id desc")->select();
+
+        $yue=0;
+        $bukuan=0;
+        $account=M("Account");
+
+        foreach ($xflist as $key=>$val)
+        {
+            //账户名称
+            $account_name=$account->field('a_users')->find($val['account']);
+            $account_str="<p>账户名称：$account_name[a_users] 返点：$val[rebates_proportion]</p> ";
+            //审核状态
+            if(($val[audit_1]!=2) and ($val[audit_2]!=2) and ($val[audit_3]!=2)and ($val[audit_4]!=2))
+            {
+                $yue_xf+=$val['money'];
+            }
+
+            if($val[payment_type]==1)
+            {
+                //续费预付
+                $history_xf[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 付款".num_format($val['money']).$account_str,"yue"=>$yue-=$val['money'],"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'续费',"submitusers"=>$val['users2'],"money"=>"-".$val['money'],"audit_3"=>$val['audit_3'],"audit_4"=>$val['audit_4']);
+            }elseif($val[payment_type]==2)
+            {
+                //续费垫付
+                $history_xf[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 垫款".num_format($val['money']).$account_str,"yue"=>$yue-=$val['money'],"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'续费',"submitusers"=>$val['users2'],"money"=>"-".$val['money'],"audit_3"=>$val['audit_3'],"audit_4"=>$val['audit_4']);
+            }elseif($val[payment_type]==3)
+            {
+                ////续费补款
+                $history_xf[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"续费 补款".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=$val['money'],"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'补款',"submitusers"=>$val['users2'],"money"=>$val['money'],"audit_3"=>$val['audit_3'],"audit_4"=>$val['audit_4']);
+
+            }elseif($val[payment_type]==14)
+            {
+                //续费 退款
+                $history_xf[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"退款到客户".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'退款',"submitusers"=>$val['users2'],"money"=>"-".$val['money']);
+            }elseif($val[payment_type]==15)
+            {
+                //续费 转款
+                $history_xf[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"退款到总账户".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'退款',"submitusers"=>$val['users2'],"money"=>"+".$val['money']);
+            }
+        }
+
+        //回款
+        $backmoney=M("RenewHuikuan");
+        $bkm_list=$hetong->field('money,payment_time,payment_type,account,audit_1,audit_2,users2')->where("xf_contractid=$contract_id and is_huikuan=1 $xf_where")->order("payment_time asc,id desc")->select();
+
+        foreach ($bkm_list as $key=>$val)
+        {
+            if(($val[audit_1]==0 or $val[audit_1]==1) and ($val[audit_2]==0 or $val[audit_2]==1))
+            {
+                $yue_hk+=$val['money'];
+            }
+            $history_hk[]=array("date"=>date("Y-m-d",$val[payment_time]),"mes"=>"回款".num_format($val['money'])."<p></p>","yue"=>$yue,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'回款',"submitusers"=>$val['users2'],"money"=>"+".$val['money']);
+        }
+
+        //发票
+        $Invoice=M("Invoice");
+        $fplist=$Invoice->field('kp_time,money,audit_1,audit_2,ctime,fp_on,users2')->where("contract_no='".$ht_on['contract_no']."' $fp_where")->order("ctime desc")->select();
+
+        //echo $Invoice->_sql();
+        foreach ($fplist as $key=>$val)
+        {
+            if(($val[audit_1]==0 or $val[audit_1]==1) and ($val[audit_2]==0 or $val[audit_2]==1))
+            {
+                $yue_fp+=$val['money'];
+            }
+            $kptime=$val[kp_time]!=''?date("Y-m-d",$val[kp_time]):'暂无';
+            $kptime.=$val[fp_on]!=''?'&nbsp&nbsp&nbsp&nbsp发票号:'.$val[fp_on]:'&nbsp&nbsp&nbsp&nbsp发票号：暂无';
+            $history_fp[]=array("date"=>date("Y-m-d",$val[ctime]),"mes"=>"开票".num_format($val['money'])."<p>开票时间：".$kptime."</p>","yue"=>$yue+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'发票',"submitusers"=>$val['users2'],"money"=>$val['money']);
+        }
+
+        //根据type给出筛选数据
+        if ($type == 'renew')
+        {
+            $history=$history_xf;
+            $this->sxyue=$yue_xf;
+        }elseif($type=='huikuan')
+        {
+            $history=$history_hk;
+            $this->sxyue=$yue_hk;
+        }elseif($type=='invoice')
+        {
+            $history=$history_fp;
+            $this->sxyue=$yue_fp;
+        }
+        else{
+            if(empty($history_xf)){$history_xf=array();}
+            if(empty($history_hk)){$history_hk=array();}
+            if(empty($history_fp)){$history_fp=array();}
+            $history=array_merge($history_xf,$history_hk,$history_fp);
+
+        }
+        foreach($history as $key => $val) {
+            //提交人
+            $uindo = users_info($val['submitusers']);
+            $history[$key]['submituser'] = $uindo[name];
+        }
+
+        uasort($history,function ($a,$b){
+            if($a['date']>$b['date'])
+            {
+                return -1;
+            }elseif($a['date']<$b['date'])
+            {
+                return 1;
+            }elseif($a['date']==$b['date'])
+            {
+                return 0;
+            }
+        });
+
+
+        foreach ($history as $key=>$value){
+            $list2[$key]['time']=date("Y-m-d H:i:s",$value['date']);
+            $list2[$key]['type']=$value['type'];
+            $list2[$key]['money']=$value['money'];
+            $list2[$key]['shuoming']=$value['mes'];
+            $list2[$key]['submituser']=$value['submituser'];
+            if($value['audit_1']==0)
+            {
+                $list2[$key]['audit_1']='未审核';
+            }elseif($value['audit_1']==1)
+            {
+                $list2[$key]['audit_1']='已审核';
+            }elseif($value['audit_1']==2)
+            {
+                $list2[$key]['audit_1']='未通过';
+            }
+
+            if($value['audit_2']==0)
+            {
+                $list2[$key]['audit_2']='未审核';
+            }elseif($value['audit_2']==1)
+            {
+                $list2[$key]['audit_2']='已审核';
+            }elseif($value['audit_2']==2)
+            {
+                $list2[$key]['audit_2']='未通过';
+            }
+
+            if($value['audit_3']==0)
+            {
+                $list2[$key]['audit_3']='未审核';
+            }elseif($value['audit_3']==1)
+            {
+                $list2[$key]['audit_3']='已审核';
+            }elseif($value['audit_3']==2)
+            {
+                $list2[$key]['audit_3']='未通过';
+            }
+
+            if($value['audit_4']==0)
+            {
+                $list2[$key]['audit_4']='未审核';
+            }elseif($value['audit_4']==1)
+            {
+                $list2[$key]['audit_4']='已审核';
+            }elseif($value['audit_4']==2)
+            {
+                $list2[$key]['audit_4']='未通过';
+            }
+
+        }
+        //客户详细信息
+        $customer_info=kehu($ht_on['advertiser']);
+        $this->customer_info=$customer_info;
+
+        $filename=$customer_info['advertiser']."的历史记录";
+        $headArr=array("时间",'操作',"金额",'说明','提交人','一级审核','二级审核','三级审核','四级审核');
+        if(!getExcel($filename,$headArr,$list2))
+        {
+            $this->error('没有数据可导出');
+        };
+
     }
 }
