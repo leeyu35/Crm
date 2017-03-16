@@ -21,6 +21,10 @@ class AccountController extends CommonController
                 {
                     $where.=" and  a.id!='0' and a.appname like '%".I('get.search_text')."%'";
                 }
+                if($type=='a_users')
+                {
+                    $where.=" and  a.id!='0' and a.a_users like '%".I('get.search_text')."%'";
+                }
                 if ($type == 'gongsi') {
                     //客户表
                     $coustomer = M('Customer');
@@ -113,7 +117,6 @@ class AccountController extends CommonController
         $contract_id=I('get.contract_id');
         if($contract_id!='')
         {
-
             ////合同编号
             $hetong=M("Contract");
             $hetong_on_name=$hetong->field('a.contract_no,b.advertiser,b.id')->join(" a left join __CUSTOMER__ b on a.advertiser=b.id")->where("a.id =".$contract_id)->find();
@@ -124,6 +127,9 @@ class AccountController extends CommonController
 
         //合同产品线列表
         $this->contract_line=contract_prlin($contract_id);
+
+        //渠道客户列表
+        $this->customer=M("customer")->field('id,advertiser')->where("customer_type=2")->select();
 
         $this->display();
     }
@@ -240,6 +246,7 @@ class AccountController extends CommonController
     public function addru(){
 
         $Refund=M("Account");
+
         $list=$Refund->create();
         $Refund->ctime=time();
 
@@ -273,10 +280,42 @@ class AccountController extends CommonController
                    // $contact->addAll($contact_list);
             }
 
+            //产品线
+            $prlin=M("ProductLine")->find(I('post.prlin_id'));
+            //渠道
+            $qudao=M("Customer")->find(I('post.qudao'));
 
+            $url = "http://sem.yushanapp.com/sem/createhu";
+
+            $post_data = array (
+                "name"=>I('post.appname'),
+                "account_type" =>$prlin['yushan_type'],
+                "account_name" =>I('post.a_users'),
+                "account_password" =>I('post.a_password'),
+                "account_appid" =>'no token',
+                "account_status" =>'1',
+                "fd_rate"=>I('post.fandian'),
+                "view_type"=>'120001',
+                "server_type"=>I('post.server_type'),
+                "qudao_id" => $qudao['yushan_id'],
+            );
+
+            $yushan_data=hjd_post_curl($url,$post_data);
+
+            $yushan_id=$yushan_data->data->appid;
+            if($yushan_id!='')
+            {
+                $Refund->where('id='.$insertid)->setField('appid',$yushan_id);
+
+            }else
+            {
+                die('oh~no！添加账户 与 羽扇平台数据同步失败，请联系CRM技术管理人员！！！');
+            }
 
             if(I('post.for_contract')!=1)
             {
+
+
                 $this->success("添加成功",U("index"));
             }else{
                 $this->success("添加成功",U("index?contract_id=".I('post.contract_id')));
@@ -324,6 +363,8 @@ class AccountController extends CommonController
         $this->contract_gl=$contract_gl;
         //合同产品线列表
         $this->contract_line=contract_prlin($info['contract_id']);
+        //渠道客户列表
+        $this->customer=M("customer")->field('id,advertiser')->where("customer_type=2")->select();
 
 
         $this->display();
@@ -367,6 +408,40 @@ class AccountController extends CommonController
                     $contact->add($contact_list[$key]);
                 }
             }
+
+            //产品线
+            $prlin=M("ProductLine")->find(I('post.prlin_id'));
+
+
+            //渠道
+            $qudao=M("Customer")->find(I('post.qudao'));
+
+            $url = "http://sem.yushanapp.com/sem/setzhxx";
+
+            $post_data = array (
+                "name"=>I('post.appname'),
+                "type" =>$prlin['yushan_type'],
+                "account_name" =>I('post.a_users'),
+                "account_password" =>I('post.a_password'),
+                "account_appid" =>'notoken',
+                "account_status" =>'1',
+                "fd_rate"=>I('post.fandian'),
+                "view_type"=>'120001',
+                "fwlx"=>I('post.server_type'),
+                "qudao_id" => $qudao['yushan_id'],
+                "appid"=>I('post.appid'),
+            );
+
+            $yushan_data=hjd_post_curl($url,$post_data);
+
+            $yushan_id=$yushan_data->data;
+            if($yushan_id!='ok')
+            {
+                die('oh~no！修改账户 与 羽扇平台数据同步失败，请联系CRM技术管理人员！！！');
+            }
+
+
+
             if(I('post.for_contract')!=1)
             {
                 $this->success("修改成功",U("index"));
@@ -432,6 +507,10 @@ class AccountController extends CommonController
         $findpr=M("ContractRelevance")->field('product_line')->find($info['prlin_id']);
         $product_line=M("ProductLine")->field('name')->find($findpr['product_line']);
         $this->product_line=$product_line;
+        //渠道客户列表
+        $this->customer=M("customer")->field('id,advertiser')->where("customer_type=2")->select();
+
+
         $this->display();
 
     }

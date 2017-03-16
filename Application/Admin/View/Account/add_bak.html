@@ -128,7 +128,11 @@
                     $("#a_users").select();
                     return false;
                 }
-
+                //点击匹配，后提交
+                if(btn != 0) {
+                    alert("请先进行匹配账户");
+                    return false;
+                }
                 //		if($("#appid").val()==null)
                 //        {
                 //            alert('appid不能为空');
@@ -183,26 +187,12 @@
     <div class="col-sm-3">
       <input type="text" class="form-control" autocomplete="off" name="appname" id="appname">
     </div>
-    <!--
-      <label for="inputEmail3" class="col-sm-1 control-label">账户类型</label>
-      <div class="col-sm-2">
-          <select  class="form-control" name="type" id="type">
-              <volist id="accounttype" name="accounttype" key="k">
-                  <option value="{$accounttype.id}" title="{$accounttype.name}">{$accounttype.name}</option>
-              </volist>
-
-          </select>
-      </div>
-    -->
-
-    <label for="inputEmail3" class="col-sm-1 control-label">服务类型</label>
+    
+    <label for="inputEmail3" class="col-sm-1 control-label">账户类型</label>
     <div class="col-sm-2">
-      <select  class="form-control" name="server_type" id="server_type">
-          <option value="130001">优化服务+页面</option>
-          <option value="130002">页面</option>
-          <option value="130003">优化服务服务</option>
-          <option value="130004">无服务</option>
-
+      <select  class="form-control" name="type" id="type">        
+        <volist id="accounttype" name="accounttype" key="k">
+       	<option value="{$accounttype.id}" title="{$accounttype.name}">{$accounttype.name}</option>
        </volist>
 
       </select>
@@ -281,23 +271,7 @@
     </div>
     
   </div>
-    <div class="form-group">
-        <label for="contract_money" class="col-sm-2 control-label">返点</label>
-        <div class="col-sm-3">
-            <input type="text" class="form-control" name="fandian" id="fandian" value="{$contract_line[fandian]}">
-        </div>
-
-        <label for="inputEmail3" class="col-sm-1 control-label">渠道</label>
-        <div class="col-sm-2">
-            <select  class="form-control" name="qudao" id="qudao">
-                <option value="0">不是渠道</option>
-                <volist id="customer" name="customer" key="k">
-                    <option value="{$customer.id}"">{$customer.advertiser}</option>
-                </volist>
-
-            </select>
-        </div>
-    </div>
+  
   <h4 class="bor-left-bull" >账户账号信息</h4>
   <hr>
 	<div class="form-group">
@@ -313,8 +287,42 @@
 		<input type="text" name="a_password" class="form-control" id="a_password">
     </div>
     </div>
+    <div class="form-group">
+        <label for="payment_type" class="col-sm-2 control-label">AppId</label>
+        <div class="col-sm-3">
+            <select  class="form-control" name="appid" id="appid">
+                <option value="">--填写账户用户名--</option>
+            </select>
+            <button type="button" class="btn btn-info btn-xs" id="appid_btn" value="匹配账户名对应appid">匹配账户名对应appid</button>
+        </div>
 
 
+    </div>
+
+  <h4 class="bor-left-bull" >账户负责人信息</h4>
+  <hr>
+    <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">负责人</label>
+
+	<div class="col-sm-3">
+     <div class="input-group">
+    <input type="text" class="form-control" autocomplete="off" name="fuzeren" id="fuzeren" placeholder="输入姓氏我们将自动匹配" >
+    <ul class="dropdown-menu" id="fzrlist">
+	  
+    </ul>
+      <span class="input-group-btn">
+        <button class="btn btn-success" type="button" id="add_fzr">新增</button>
+      </span>
+      </div>
+   </div>
+   <div class="col-sm-7">
+   		 <div class="input-group">
+   		<span class="btn btn-danger">已选负责人</span> <span class="fzrlist"></span>
+        </div>
+   </div>
+   </div>
+ 
+ 
   <h4 class="bor-left-bull" >备注</h4>
   <hr>
   <div class="form-group">

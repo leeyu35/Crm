@@ -157,6 +157,7 @@ $("#gongsi").on("blur",function(){
 <input type="hidden" name="submituser" id="submituser" value="{$info[submituser]}">
 <input type="hidden" name="contract_id" id="contract_id" value="{$info[contract_id]}">
 <input type="hidden" name="ctime" id="ctime" value="{$info[ctime]}">
+    <input type="hidden" name="appid" id="appid" value="{$info[appid]}">
 {$contract_id?'<input type="hidden" name="for_contract" id="for_contract" value="1">':''}
 <span id="fzrlsitwz">
     <volist id="userslist1" name="userslist">
@@ -194,16 +195,19 @@ $("#gongsi").on("blur",function(){
     <div class="col-sm-3">
       <input type="text" class="form-control" autocomplete="off" name="appname" id="appname" value="{$info[appname]}">
     </div>
-    
-    <label for="inputEmail3" class="col-sm-1 control-label">账户类型</label>
-    <div class="col-sm-2">
-      <select  class="form-control" name="type" id="type">        
-        <volist id="accounttype" name="accounttype" key="k">
-       	<option value="{$accounttype.id}" title="{$accounttype.name}" {$info[fandian]==$accounttype[id]?'selected':''} >{$accounttype.name}</option>
-       </volist>
 
-      </select>
-    </div>
+      <label for="inputEmail3" class="col-sm-1 control-label">服务类型</label>
+      <div class="col-sm-2">
+          <select  class="form-control" name="server_type" id="server_type">
+              <option value="130001" {$info[server_type]=='130001'?'selected':''}>优化服务+页面</option>
+              <option value="130002" {$info[server_type]=='130002'?'selected':''}>页面</option>
+              <option value="130003" {$info[server_type]=='130003'?'selected':''}>优化服务服务</option>
+              <option value="130004" {$info[server_type]=='130004'?'selected':''}>无服务</option>
+
+              </volist>
+
+          </select>
+      </div>
     
   </div>
   <div class="form-group">
@@ -272,7 +276,7 @@ $("#gongsi").on("blur",function(){
        <div class="col-sm-2">
            <select  class="form-control" name="prlin_id" id="prlin_id">
                <volist id="contract_line" name="contract_line" key="k">
-                   <option value="{$contract_line.id}" title="{$contract_line.name}" {$contract_line[product_line]==$contract_gl[product_line]?'selected':''}>{$contract_line.name}</option>
+                   <option value="{$contract_line.product_line}" title="{$contract_line.name}" {$contract_line[product_line]==$contract_gl[product_line]?'selected':''}>{$contract_line.name}</option>
                </volist>
 
            </select>
@@ -280,7 +284,27 @@ $("#gongsi").on("blur",function(){
 
     
   </div>
-  
+    <div class="form-group">
+        <label for="contract_money" class="col-sm-2 control-label">返点</label>
+        <div class="col-sm-2">
+
+            <input type="text" name="fandian" class="form-control" id="fandian" value="{$info[fandian]}">
+        </div>
+
+        <label for="inputEmail3" class="col-sm-1 control-label">渠道</label>
+        <div class="col-sm-2">
+            <select  class="form-control" name="qudao" id="qudao">
+                <option value="0" {$info[qudao]==0?'selected':''}>不是渠道</option>
+
+                <volist id="customer" name="customer" key="k">
+                    <option value="{$customer.id}" {$info[qudao]==$customer[id]?'selected':''}>{$customer.advertiser}</option>
+
+
+                </volist>
+
+            </select>
+        </div>
+    </div>
   <h4 class="bor-left-bull" >账户账号信息</h4>
   <hr>
 	<div class="form-group">
@@ -297,17 +321,8 @@ $("#gongsi").on("blur",function(){
     </div>
     
   </div>
-    <div class="form-group">
-        <label for="payment_type" class="col-sm-2 control-label">AppId</label>
-        <div class="col-sm-4">
-            <select  class="form-control" name="appid" id="appid">
-                <option value="{$info[appid]}">{$info[appid]}</option>
-            </select>
-            <button type="button" class="btn btn-info btn-xs" id="appid_btn" value="匹配账户名对应appid">匹配账户名对应appid</button>
-        </div>
 
-
-    </div>
+    <!--
    <h4 class="bor-left-bull" >账户负责人信息</h4>
   <hr>
     <div class="form-group">
@@ -334,7 +349,7 @@ $("#gongsi").on("blur",function(){
         </div>
    </div>
    </div>
-
+-->
   <h4 class="bor-left-bull" >退款备注</h4>
   <hr>
   <div class="form-group">

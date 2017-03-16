@@ -36,6 +36,32 @@ function hjd_curl($url){
     return $response;
 }
 
+function hjd_post_curl($url,$postdate){
+    $data_string=json_encode($postdate);
+
+
+    //$data_string='{"content":"<p>\u65e0\u60c5\u4e8c\u4e03\u989d<br><\/p>","template":"default","title":"123\u9a71\u868a\u5668\u6587","to":"2885430949@qq.com"}';
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json; charset=utf-8',
+            'Content-Length: ' . strlen($data_string))
+    );
+    ob_start();
+    $response=curl_exec($ch);
+    $return_content = ob_get_contents();
+    ob_end_clean();
+    if ($response  === FALSE) {
+        echo "cURL 具体出错信息: " . curl_error($ch);
+        exit;
+    }
+    $return_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $obj=json_decode($return_content);
+    return $obj;
+}
+
 function account_daili($where=""){
     //如果有条件则先删除CRM消耗  所符合条件的数据
 

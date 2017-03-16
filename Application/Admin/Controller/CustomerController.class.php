@@ -132,6 +132,8 @@ class CustomerController extends CommonController
         $product_line=implode(",",$lin);
         */
         $Customer=D("Customer");
+
+
         if($Customer->create()) {
             //$Customer->product_line=$product_line;
             $Customer->submituser=cookie('u_id');
@@ -159,6 +161,32 @@ class CustomerController extends CommonController
                         $contact->add($contact_list[$key]);
                     }
                     //$contact->addAll($contact_list);
+                }
+
+
+                if(I('post.customer_type')=='2'){
+
+                    $url = "http://sem.yushanapp.com/sem/createsem";
+
+                    $post_data = array (
+                        "name"=>I('post.advertiser'),
+                        "password" =>md5('123456'),
+                        "email" => '123@qq.com',
+                        "phone" => '12345678910',
+                        "realname"=>I('post.advertiser'),
+                        "type"=>'100004',
+                    );
+
+                    $yushan_data=hjd_post_curl($url,$post_data);
+                    $yushan_id=$yushan_data->data->id;
+                    if($yushan_id!='')
+                    {
+                        $Customer->where('id='.$insertid)->setField('yushan_id',$yushan_id);
+
+                    }else
+                    {
+                        die('oh~no！添加渠道客户 与 羽扇平台数据同步失败，请联系CRM技术管理人员！！！');
+                    }
                 }
 
                 $this->success("添加成功",U("index"));
