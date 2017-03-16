@@ -835,11 +835,34 @@ class ApiController extends RestController{
             $where=" and xiaohao.xsid=".I('get.usersid');
         }
 
+        //对比日期
+        $a=date("Y-m-d",$time_start);
+        $b=date("Y-m-d",$time_end);
+        $diff=date_diff(date_create($a),date_create($b));
+        $bidui_start_time=strtotime(date("Y-m-d",$time_start)." -{$diff->d} day");
+
         $xiaohaolist=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,xiaohao.htid,zhanghu.a_users,zhanghu.appname,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser,xiaohao.xsid,xiaohao.semid")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='$time_start'  and xiaohao.starttime<'$time_end' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,xiaohao.xsid,xiaohao.semid,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
+        $xiaohaolist_db=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,xiaohao.htid,zhanghu.a_users,zhanghu.appname,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser,xiaohao.xsid,xiaohao.semid")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='$bidui_start_time'  and xiaohao.starttime<'$time_start' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,xiaohao.xsid,xiaohao.semid,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
 
+        /*
+        */
 
-        foreach ($xiaohaolist as $key=>$val)
-        {
+        foreach ($xiaohaolist as $key=>$val) {
+            
+            foreach ($xiaohaolist_db as $k => $v)
+            {
+                if($v['appid']==$val['appid'])
+                {
+                    if($diff->d > 15)
+                    {
+                        $xiaohaolist[$key]['contrast']='';
+                    }
+                    else{
+                        $xiaohaolist[$key]['contrast']=$v['baidu_cost_total'];
+                    }
+                }
+
+            }
             if($val['xsid'])
             {
                 $xs=$users->field('name')->find($val['xsid']);
@@ -865,22 +888,7 @@ class ApiController extends RestController{
             $htinfo=M('Contract')->field('agent_company')->find($val['htid']);
             $zhuti=M("AgentCompany")->field('companyname')->find($htinfo['agent_company']);
             $xiaohaolist[$key]['zt_company']=$zhuti['companyname']?$zhuti['companyname']:'';
-            //对比数据
-            $a=date("Y-m-d",$time_start);
-            $b=date("Y-m-d",$time_end);
 
-            $diff=date_diff(date_create($a),date_create($b));
-            $bidui_start_time=strtotime(date("Y-m-d",$time_start)." -{$diff->d} day");
-
-            if($diff->d > 15)
-            {
-                $xiaohaolist[$key]['contrast']='';
-            }
-            else{
-                $dbdate=$xiaohao->field("baidu_cost_total")->where("appid='$val[appid]' and starttime>='$bidui_start_time'  and starttime<'$time_start' $where")->sum('baidu_cost_total' );
-
-                $xiaohaolist[$key]['contrast']=$dbdate;
-            }
 
 
 
