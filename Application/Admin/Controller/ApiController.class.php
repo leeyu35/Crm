@@ -806,7 +806,7 @@ class ApiController extends RestController{
         {
             $zuori = Yesterday();//昨日开始时间和结束时间
             $time_start=strtotime($zuori['start']);
-            $time_end=strtotime($zuori['end']."+1 day");
+            $time_end=strtotime($zuori['end']);
         }elseif ($type=='week')
         {
             $zhouar=teodate_week2(1,'Monday');//本周开始时间和结束时间
@@ -865,6 +865,25 @@ class ApiController extends RestController{
             $htinfo=M('Contract')->field('agent_company')->find($val['htid']);
             $zhuti=M("AgentCompany")->field('companyname')->find($htinfo['agent_company']);
             $xiaohaolist[$key]['zt_company']=$zhuti['companyname']?$zhuti['companyname']:'';
+            //对比数据
+            $a=date("Y-m-d",$time_start);
+            $b=date("Y-m-d",$time_end);
+
+            $diff=date_diff(date_create($a),date_create($b));
+            $bidui_start_time=strtotime(date("Y-m-d",$time_start)." -{$diff->d} day");
+
+            if($diff->d > 15)
+            {
+                $xiaohaolist[$key]['contrast']='';
+            }
+            else{
+                $dbdate=$xiaohao->field("baidu_cost_total")->where("appid='$val[appid]' and starttime>='$bidui_start_time'  and starttime<'$time_start' $where")->sum('baidu_cost_total' );
+
+                $xiaohaolist[$key]['contrast']=$dbdate;
+            }
+
+
+
             //$xiaohaolist[$key]['baidu_cost_total']=number_format($val['baidu_cost_total']);
         }
         //表格导出
@@ -889,6 +908,7 @@ class ApiController extends RestController{
                 $this->error('没有数据可导出');
             };
         }
+
         $data['code'] = 200;
         $data['data'] = $xiaohaolist;
         $this->response($data,'json');
