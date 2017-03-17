@@ -579,7 +579,7 @@ class NewCaiwuController extends CommonController
 
 
         foreach ($history as $key=>$value){
-            $list2[$key]['time']=date("Y-m-d H:i:s",$value['date']);
+            $list2[$key]['time']=$value['date'];
             $list2[$key]['type']=$value['type'];
             $list2[$key]['money']=$value['money'];
             $list2[$key]['shuoming']=$value['mes'];
