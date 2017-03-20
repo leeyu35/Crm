@@ -297,7 +297,7 @@ $("#gongsi").on("blur",function(){
                 <option value="0" {$info[qudao]==0?'selected':''}>不是渠道</option>
 
                 <volist id="customer" name="customer" key="k">
-                    <option value="{$customer.id}" {$info[qudao]==$customer[id]?'selected':''}>{$customer.advertiser}</option>
+                    <option value="{$customer.id}" {$info[qudao]==$customer[id]?'selected':''}>{$customer.appname}</option>
 
 
                 </volist>

@@ -129,7 +129,7 @@ class AccountController extends CommonController
         $this->contract_line=contract_prlin($contract_id);
 
         //渠道客户列表
-        $this->customer=M("customer")->field('id,advertiser')->where("customer_type=2")->select();
+        $this->customer=M("customer")->field('id,advertiser,appname')->where("customer_type=2")->select();
 
         $this->display();
     }
@@ -364,7 +364,7 @@ class AccountController extends CommonController
         //合同产品线列表
         $this->contract_line=contract_prlin($info['contract_id']);
         //渠道客户列表
-        $this->customer=M("customer")->field('id,advertiser')->where("customer_type=2")->select();
+        $this->customer=M("customer")->field('id,advertiser,appname')->where("customer_type=2")->select();
 
 
         $this->display();
@@ -508,7 +508,7 @@ class AccountController extends CommonController
         $product_line=M("ProductLine")->field('name')->find($findpr['product_line']);
         $this->product_line=$product_line;
         //渠道客户列表
-        $this->customer=M("customer")->field('id,advertiser')->where("customer_type=2")->select();
+        $this->customer=M("customer")->field('id,advertiser,appname')->where("customer_type=2")->select();
 
 
         $this->display();
