@@ -1148,7 +1148,7 @@ class ApiController extends RestController{
             $account_id=I('get.id');
             $info=M("Account")->find($account_id);
             //合同号
-            $hetong=M("Contract")->field('contract_no')->find($info['contract_id']);
+            $hetong=M("Contract")->field('contract_no,advertiser')->find($info['contract_id']);
             //账户负责人
             $fzr=M("Account_users")->field("b.name")->join(" a left join jd_users b on a.u_id = b.id ")->where("account_id=$id")->find();
 
