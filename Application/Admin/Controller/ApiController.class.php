@@ -842,6 +842,7 @@ class ApiController extends RestController{
         $bidui_start_time=strtotime(date("Y-m-d",$time_start)." -{$diff->d} day");
 
         $xiaohaolist=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,xiaohao.htid,zhanghu.a_users,zhanghu.appname,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser,xiaohao.xsid,xiaohao.semid")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='$time_start'  and xiaohao.starttime<'$time_end' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,xiaohao.xsid,xiaohao.semid,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
+
         $xiaohaolist_db=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,xiaohao.htid,zhanghu.a_users,zhanghu.appname,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser,xiaohao.xsid,xiaohao.semid")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='$bidui_start_time'  and xiaohao.starttime<'$time_start' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,xiaohao.xsid,xiaohao.semid,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
 
         /*
@@ -1152,7 +1153,7 @@ class ApiController extends RestController{
             $fzr=M("Account_users")->field("b.name")->join(" a left join jd_users b on a.u_id = b.id ")->where("account_id=$id")->find();
 
             //公司名称
-            $ad=M("Customer")->field('advertiser')->find($info['advertiser']);
+            $ad=M("Customer")->field('advertiser')->find($hetong['advertiser']);
             $info2['appname']=$info['appname'];
             $info2['a_users']=$info['a_users'];
             $info2['contract_no']=$hetong['contract_no'];
@@ -1516,6 +1517,117 @@ class ApiController extends RestController{
         $list=$tabledata->where("service_type!=0 and appid in ($zi)")->select();
         echo $tabledata->_sql();
         dump($list);
+    }
+
+    /*
+     * 消耗列表 日：今天和15日比对  周：传入日期和倒数7周数据  月:本年度月份消耗
+     * 2017年3月17日15:00:31   --hjd
+     *
+     * */
+    public function consume_list_to_date(){
+        $type=I('get.type');//type
+        $time_start=strtotime(I('get.start'));//开始时间
+        $time_end=strtotime(I('get.end'));//结束时间
+        $xiaohao=M("AccountConsumption");
+        $users=M("Users");
+        if($type=='day')
+        {
+            $datear=day_15();
+        }elseif($type=='week')
+        {
+            $datear=teodate_week(8,"Monday",I('get.start')); //获取周日期的开始时间和结束时间
+        }elseif($type=='month')
+        {
+            $datear=teodate_month_12(date("m"));//获取本年月份
+        }
+        if(I('get.usersid')!='')
+        {
+            $where=" and xiaohao.xsid=".I('get.usersid');
+        }
+
+        foreach ($datear as $k=>$v)
+        {
+            $zhouqi[$k]=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,xiaohao.htid,zhanghu.a_users,zhanghu.appname,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser,xiaohao.xsid,xiaohao.semid")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='".strtotime($v[start])."'  and xiaohao.starttime<'".strtotime($v[end])."' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,xiaohao.xsid,xiaohao.semid,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
+
+            //$xiaohaolist=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,xiaohao.htid,zhanghu.a_users,zhanghu.appname,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser,xiaohao.xsid,xiaohao.semid")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='$time_start'  and xiaohao.starttime<'$time_end' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,xiaohao.xsid,xiaohao.semid,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
+
+        }
+
+        foreach ($datear as $dakey=>$daval)
+        {
+
+
+
+        foreach ($zhouqi[$dakey] as $key=>$val)
+        {
+            if($val['xsid'])
+            {
+                $xs=$users->field('name')->find($val['xsid']);
+            }else
+            {
+                $xs['name']='';
+            }
+            if($val['semid'])
+            {
+                $sem=$users->field('name')->find($val['semid']);
+            }else
+            {
+                $sem['name']='';
+            }
+
+            $zhouqi[$dakey][$key]['a_users']=$val['a_users']?$val['a_users']:'';
+            $zhouqi[$dakey][$key]['advertiser']=$val['advertiser']?$val['advertiser']:'';
+            $zhouqi[$dakey][$key]['xsid']=$val['xsid']?$val['xsid']:'';
+            $zhouqi[$dakey][$key]['semid']=$val['semid']?$val['semid']:'';
+            $zhouqi[$dakey][$key]['market']=$xs['name']?$xs['name']:'';
+            $zhouqi[$dakey][$key]['sem']=$sem['name']?$sem['name']:'';
+
+            //主体
+
+            $htinfo=M('Contract')->field('agent_company')->find($val['htid']);
+            $zhuti=M("AgentCompany")->field('companyname')->find($htinfo['agent_company']);
+            $xiaohaolist[$key]['zt_company']=$zhuti['companyname']?$zhuti['companyname']:'';
+
+            foreach ($datear as $k=>$v)
+            {
+                foreach ($zhouqi[$k] as $k1=>$v1)
+                {
+                    if($val['appid']==$v1['appid'] and $val['xsid']==$v1['xsid'])
+                    {
+                        $zhouqi[$dakey][$key]['xiaohao_date'][$v[start]."到".$v[end]]=$v1['baidu_cost_total'];
+                    }
+                }
+            }
+
+        }
+
+        }
+        /*
+        for ($i=count($zhouqi)-1;$i>=0;$i--)
+        {
+            foreach ($zhouqi[$i] as $k1=>$v1)
+            {
+               // $zhouqi[$i][$k1]['xiaohao_date'][$daval[start]."到".$daval[end]]=$this->serach($zhouqi);
+            }
+        }*/
+
+
+        dump($zhouqi[count($datear)-1]);
+        exit;
+        //dump($zhouqi);
+        foreach ($datear as $ka=>$va)
+        {
+            for ($i=count($zhouqi)-1;$i>=0;$i--)
+            {
+                foreach ($zhouqi[$i] as $k1=>$v1)
+                {
+                    $zhouqi[$i][$k1]['xiaohao_date'][$va[start]."到".$va[end]]=$this->serach($zhouqi);
+                }
+            }
+        }
+        dump($zhouqi);
+        exit;
+        dump($xiaohaolist);
     }
 }
 
