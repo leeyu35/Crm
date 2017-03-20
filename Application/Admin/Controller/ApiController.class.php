@@ -1547,8 +1547,8 @@ class ApiController extends RestController{
 
         foreach ($datear as $k=>$v)
         {
-            $zhouqi[$k]=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,zhanghu.a_users,zhanghu.appname,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='".strtotime($v[start])."'  and xiaohao.starttime<'".strtotime($v[end])."' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
-            dump($xiaohao->_sql());
+            $zhouqi[$k]=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,zhanghu.a_users,zhanghu.appname,gongsi.submituser as marketid,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='".strtotime($v[start])."'  and xiaohao.starttime<'".strtotime($v[end])."' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
+            $date_top[]=$v['start']."到".$v['end'];
             //$xiaohaolist=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,xiaohao.htid,zhanghu.a_users,zhanghu.appname,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser,xiaohao.xsid,xiaohao.semid")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='$time_start'  and xiaohao.starttime<'$time_end' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,xiaohao.xsid,xiaohao.semid,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
 
         }
@@ -1561,27 +1561,29 @@ class ApiController extends RestController{
         foreach ($zhouqi[$dakey] as $key=>$val)
         {
 
-            if($val['xsid'])
+            if($val['marketid'])
             {
-                $xs=$users->field('name')->find($val['xsid']);
+                $xs=$users->field('name')->find($val['marketid']);
             }else
             {
                 $xs['name']='';
             }
+            /*
             if($val['semid'])
             {
                 $sem=$users->field('name')->find($val['semid']);
             }else
             {
                 $sem['name']='';
-            }
+            }*/
 
             $zhouqi[$dakey][$key]['a_users']=$val['a_users']?$val['a_users']:'';
             $zhouqi[$dakey][$key]['advertiser']=$val['advertiser']?$val['advertiser']:'';
             $zhouqi[$dakey][$key]['xsid']=$val['xsid']?$val['xsid']:'';
-            $zhouqi[$dakey][$key]['semid']=$val['semid']?$val['semid']:'';
+           // $zhouqi[$dakey][$key]['semid']=$val['semid']?$val['semid']:'';
             $zhouqi[$dakey][$key]['market']=$xs['name']?$xs['name']:'';
-            $zhouqi[$dakey][$key]['sem']=$sem['name']?$sem['name']:'';
+            $zhouqi[$dakey][$key]['date_to']=$date_top;
+           // $zhouqi[$dakey][$key]['sem']=$sem['name']?$sem['name']:'';
 
             //主体
             /*
@@ -1611,24 +1613,11 @@ class ApiController extends RestController{
                // $zhouqi[$i][$k1]['xiaohao_date'][$daval[start]."到".$daval[end]]=$this->serach($zhouqi);
             }
         }*/
+        $data['code'] = 200;
+        $data['data'] = $zhouqi[count($datear)-1];
+        $this->response($data,'json');
 
 
-        dump($zhouqi[count($datear)-1]);
-        exit;
-        //dump($zhouqi);
-        foreach ($datear as $ka=>$va)
-        {
-            for ($i=count($zhouqi)-1;$i>=0;$i--)
-            {
-                foreach ($zhouqi[$i] as $k1=>$v1)
-                {
-                    $zhouqi[$i][$k1]['xiaohao_date'][$va[start]."到".$va[end]]=$this->serach($zhouqi);
-                }
-            }
-        }
-        dump($zhouqi);
-        exit;
-        dump($xiaohaolist);
     }
 }
 

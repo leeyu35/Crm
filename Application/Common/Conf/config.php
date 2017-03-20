@@ -152,7 +152,9 @@ $config_1= array(
         array('Api/sem_account_counsumption_3_line','Admin/Api/sem_account_counsumption_3_line',array('method'=>'get')),//某个sem 所有账户三 日周月消耗方法
         array("Api/diankuan_excel","Admin/Api/diankuan_excel",array('method'=>'get')),//垫款导出表格
         array("Api/consumption_manual","Admin/Api/consumption_manual",array('method'=>'get')),//垫款导出表格
-
+        array("Api/upusers","Admin/Api/upusers",array('method'=>'get')),//修改用户
+        array("Api/account_server_type","Admin/Api/account_server_type",array('method'=>'get')),
+        array("ApI/consume_list_to_date","Admin/Api/consume_list_to_date",array('method'=>'get')),
     // array('Api','Admin/Api/index','hjd=1',array('method'=>'get')),
 
     ),
@@ -160,10 +162,10 @@ $config_1= array(
     'LOG_RECORD' => true, // 开启日志记录
     'LOG_LEVEL'  =>'EMERG,ALERT,CRIT,ERR', // 只记录EMERG ALERT CRIT ERR 错误
 
-	 'TOKEN_ON'      =>    true,  // 是否开启令牌验证 默认关闭
- 'TOKEN_NAME'    =>    '__hash__',    // 令牌验证的表单隐藏字段名称，默认为__hash__
- 'TOKEN_TYPE'    =>    'md5',  //令牌哈希验证规则 默认为MD5
- 'TOKEN_RESET'   =>    true,  //令牌验证出错后是否重置令牌 默认为true
+	'TOKEN_ON'      =>    false,  // 是否开启令牌验证 默认关闭
+     'TOKEN_NAME'    =>    '__hash__',    // 令牌验证的表单隐藏字段名称，默认为__hash__
+     'TOKEN_TYPE'    =>    'md5',  //令牌哈希验证规则 默认为MD5
+     'TOKEN_RESET'   =>    true,  //令牌验证出错后是否重置令牌 默认为true
 
     /* 数据缓存设置 */
     'DATA_CACHE_TYPE'       =>  'Memcache',  // 数据缓存类型,支持:File|Db|Apc|Memcache|Shmop|Sqlite|Xcache|Apachenote|Eaccelerator

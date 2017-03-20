@@ -1136,3 +1136,24 @@ function contract_prlin($contrct_id){
     $conlin_list=$contract_relevance->field("a.*,b.name")->join(" a left join __PRODUCT_LINE__ b on a.product_line=b.id")->where("a.contract_id=$contrct_id")->select();
     return $conlin_list;
 }
+
+//获取传入时间倒15天日期 开始时间和结束时间
+function day_15($start_time){
+    //如果没有指定日期则默认当前日期
+    if($strdate=='')
+    {
+        $strdate=date('Y-m-d');
+    }
+    //加一天
+    $strdate=date("Y-m-d",strtotime($strdate." +1 day"));
+    for ($i=1;$i<=15;$i++)
+    {
+
+          $array[$i-1]['start']=date("Y-m-d",strtotime($strdate." -$i day"));
+        $array[$i-1]['end']=date("Y-m-d",strtotime($array[$i-1]['start']." +1 day"));
+    }
+
+    $b=strtotime($strdate." -14 day");
+    return $array;
+
+}
