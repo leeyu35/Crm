@@ -1547,8 +1547,8 @@ class ApiController extends RestController{
 
         foreach ($datear as $k=>$v)
         {
-            $zhouqi[$k]=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,xiaohao.htid,zhanghu.a_users,zhanghu.appname,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser,xiaohao.xsid,xiaohao.semid")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='".strtotime($v[start])."'  and xiaohao.starttime<'".strtotime($v[end])."' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,xiaohao.xsid,xiaohao.semid,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
-
+            $zhouqi[$k]=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,zhanghu.a_users,zhanghu.appname,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='".strtotime($v[start])."'  and xiaohao.starttime<'".strtotime($v[end])."' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
+            dump($xiaohao->_sql());
             //$xiaohaolist=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,xiaohao.htid,zhanghu.a_users,zhanghu.appname,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser,xiaohao.xsid,xiaohao.semid")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='$time_start'  and xiaohao.starttime<'$time_end' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,xiaohao.xsid,xiaohao.semid,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
 
         }
@@ -1560,6 +1560,7 @@ class ApiController extends RestController{
 
         foreach ($zhouqi[$dakey] as $key=>$val)
         {
+
             if($val['xsid'])
             {
                 $xs=$users->field('name')->find($val['xsid']);
@@ -1583,11 +1584,11 @@ class ApiController extends RestController{
             $zhouqi[$dakey][$key]['sem']=$sem['name']?$sem['name']:'';
 
             //主体
-
+            /*
             $htinfo=M('Contract')->field('agent_company')->find($val['htid']);
             $zhuti=M("AgentCompany")->field('companyname')->find($htinfo['agent_company']);
             $xiaohaolist[$key]['zt_company']=$zhuti['companyname']?$zhuti['companyname']:'';
-
+            */
             foreach ($datear as $k=>$v)
             {
                 foreach ($zhouqi[$k] as $k1=>$v1)

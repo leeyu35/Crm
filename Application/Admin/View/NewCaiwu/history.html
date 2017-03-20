@@ -125,9 +125,10 @@
             <thead>
             <tr>
                 <th class="time">时间 </th>
+                <th>创建时间 </th>
                 <th>操作</th>
                 <th>金额</th>
-                <th style="width:4.3333rem;">说明</th>
+                <th>说明</th>
                 <th>提交人</th>
                 <th>审核状态</th>
             </tr>
@@ -136,6 +137,7 @@
             <volist id="history" name="history">
                 <tr>
                     <td>{$history[date]}</td>
+                    <td>{$history[ctime]}</td>
                     <td><p class="list-caozuo
 
                     <switch name="history.type">
