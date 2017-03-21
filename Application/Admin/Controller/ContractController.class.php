@@ -425,10 +425,10 @@ class ContractController extends CommonController
         $prid=I('get.prid');
         $today = strtotime(date('Y-m-d', time()));//获取当天0点
         $uid=cookie("u_id");
-        $max=$hetong->field('contract_no')->where("submituser=$uid and ctime>$today and isxufei=0 ")->order("ctime desc")->find();
+        $max=$hetong->where("submituser=$uid and ctime>$today and isxufei=0 ")->count();
 
-        $maxsun=substr($max['contract_no'],-2,2);
-        $num=$maxsun+1;
+
+        $num=$max+1;
 
         if($num<10)
         {
