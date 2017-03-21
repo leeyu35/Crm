@@ -1650,8 +1650,7 @@ class ApiController extends RestController{
                 $this->error('没有数据可导出');
             };
         }
-        dump($date);
-        exit;
+        
         $data['code'] = 200;
         $data['data'] = $zhouqi[count($datear)-1];
         $this->response($data,'json');
