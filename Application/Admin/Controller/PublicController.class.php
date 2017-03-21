@@ -186,6 +186,14 @@ class PublicController extends Controller
                 $ht_s2=$xufeihuikuan->where("audit_2 =0  and audit_1=1  and (payment_type=14 or payment_type=15)")->count();
                 $rest4+=$ht_s2;
             }
+
+            //三级审核
+            $array1=explode(",",$raac_hetong['audit_3']);
+            if(in_array(cookie('u_groupid'),$array1))
+            {
+                $ht_s2=$xufeihuikuan->where("audit_3 =0  and audit_1=1 and audit_2=1  and (payment_type=14 or payment_type=15)")->count();
+                $rest4+=$ht_s2;
+            }
             $this->tuikuan=$rest4;
 
             //发票待审核

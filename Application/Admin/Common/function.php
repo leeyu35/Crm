@@ -328,6 +328,14 @@ function daiban(){
         $rest+=$ht_s2;
 
     }
+    //二级审核
+    $array1=explode(",",$raac_hetong['audit_3']);
+    if(in_array(cookie('u_groupid'),$array1))
+    {
+        $ht_s2=$xufeihuikuan->where("audit_3 =0  and audit_1=1  and audit_2=1  and (payment_type=14 or payment_type=15)")->count();
+        $rest+=$ht_s2;
+
+    }
     //发票待审核
     $hetong=M("Invoice");
     $raac_hetong=$rbac->field('audit_1,audit_2')->where("module = '/Admin/Invoice'")->find();
