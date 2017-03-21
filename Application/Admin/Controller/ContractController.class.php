@@ -192,6 +192,7 @@ class ContractController extends CommonController
             $kehuinfo=kehu($val['aid']);
             $users=users_info($kehuinfo['business']);
             $list[$key]['business']=$users['name'];
+            $list[$key]['customer_type']=$kehuinfo['customer_type'];
 
         }
 
@@ -733,6 +734,12 @@ class ContractController extends CommonController
 
         }
         $this->zicontract=$zicontract;
+
+        //负责商务
+        $kehuinfo=kehu($info[advertiser]);
+        $users=users_info($kehuinfo['business']);
+        $this->business=$users['name'];
+        $this->customer_type=$kehuinfo['customer_type'];
 
         $this->display();
 

@@ -102,7 +102,7 @@ $(document).ready(function(e) {
     <volist id="list" name="list" key="k">
     <tr {$list[iszuofei] == '1'?"class='zuofei'":""}>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$k}</td>
-    	<td class="htshow" id="{:U("show?id=$list[id]")}"><a href="{:U("Customer/show?id=$list[aid]")}">{$list[advertiser]}</a> <if condition="$list[isguidang] eq 1"><span  data-toggle="tooltip" data-placement="left" title="合同已归档" class="glyphicon glyphicon-folder-close" style="color:#0492d9;"></span></if></td>
+    	<td class="htshow" id="{:U("show?id=$list[id]")}"><a href="{:U("Customer/show?id=$list[aid]")}">{$list[advertiser]}<span style="border:1px #00a2d4 solid; margin-left: 5px; font-size: 10px; color: #00a2d4; border-radius: 3px; padding-left: 2px; padding-right: 2px;">{$list[customer_type]==1?'直':'渠'}</span></a> <if condition="$list[isguidang] eq 1"><span  data-toggle="tooltip" data-placement="left" title="合同已归档" class="glyphicon glyphicon-folder-close" style="color:#0492d9;"></span></if></td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[appname]}</td>
     	<!--<td class="htshow" id="{:U("show?id=$list[id]")}" align="right">-->
             <!--<volist id="a" name="list['prduct_line']">-->
