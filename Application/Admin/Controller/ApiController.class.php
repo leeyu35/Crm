@@ -1208,7 +1208,7 @@ class ApiController extends RestController{
 
         $account=M("Account");
         $idin=M("AccountUsers")->field('account_id')->where("u_id=$id")->select(false);
-        $list=$account->field('id,a_users')->where("id in($idin)")->select();
+        $list=$account->field('id,a_users,appname')->where("id in($idin)")->select();
         foreach ($list as $key=>$val)
         {
             if($type=='day')
@@ -1613,6 +1613,45 @@ class ApiController extends RestController{
                // $zhouqi[$i][$k1]['xiaohao_date'][$daval[start]."到".$daval[end]]=$this->serach($zhouqi);
             }
         }*/
+        $date=$zhouqi[count($datear)-1];
+
+        //表格导出
+        if(I('get.excel')=='1')
+        {
+            foreach ($date as $key=>$val)
+            {
+                $excel[$key]['a_users']=$val['a_users'];
+                $excel[$key]['appname']=$val['appname'];
+                $excel[$key]['advertiser']=$val['advertiser'];
+                $excel[$key]['market']=$val['market'];
+                foreach ($val['date_to'] as $k=>$v)
+                {
+                    $excel[$key][$v]=0; //默认全部为零
+                    foreach ($val['xiaohao_date'] as $k2=>$v2)
+                    {
+                        if($v==$k2)
+                        {
+                            $excel[$key][$v]=$v2; //修改相对应的值
+                        }
+                    }
+                }
+
+            }
+
+            $filename="消耗_excel";
+            $riqi_tablelalab=$date[0]['date_to'];
+            $headArr=array("账户","APP名称",'公司名称','销售');
+
+            $headArr=array_merge($headArr,$riqi_tablelalab);
+
+
+            if(!getExcel($filename,$headArr,$excel))
+            {
+                $this->error('没有数据可导出');
+            };
+        }
+        dump($date);
+        exit;
         $data['code'] = 200;
         $data['data'] = $zhouqi[count($datear)-1];
         $this->response($data,'json');
