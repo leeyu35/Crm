@@ -124,12 +124,16 @@ $("#gongsi").on("blur",function(){
         })
 				
 		$("#formid").submit(function(){
-		if($("#a_users").val()=="")
-		{
-			alert("请填写用户名");
-			$("#a_users").select();
-			return false;	
-		}
+            if($("#fandian").val()<0 || $("#fandian").val()>100 ) {
+                alert("返点只能填写0-100之间的数字");
+                $("#fandian").select();
+                return false;
+            }
+            if($("#a_users").val()=="") {
+                alert("请填写用户名");
+                $("#a_users").select();
+                return false;
+            }
 //        if($("#appid").val()==null)
 //        {
 //            alert('appid不能为空');
@@ -288,7 +292,7 @@ $("#gongsi").on("blur",function(){
         <label for="contract_money" class="col-sm-2 control-label">返点</label>
         <div class="col-sm-2">
 
-            <input type="text" name="fandian" class="form-control" id="fandian" value="{$info[fandian]}">
+            <input type="number" name="fandian" class="form-control" id="fandian" value="{$info[fandian]}">
         </div>
 
         <label for="inputEmail3" class="col-sm-1 control-label">渠道</label>

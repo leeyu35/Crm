@@ -123,11 +123,17 @@
                 $("#appid").html('');
             })
             $("#formid").submit(function() {
+                if($("#fandian").val()<0 || $("#fandian").val()>100 ) {
+                    alert("返点只能填写0-100之间的数字");
+                    $("#fandian").select();
+                    return false;
+                }
                 if($("#a_users").val()=="") {
                     alert("请填写用户名");
                     $("#a_users").select();
                     return false;
                 }
+
 
                 //		if($("#appid").val()==null)
                 //        {
@@ -285,7 +291,7 @@
     <div class="form-group">
         <label for="contract_money" class="col-sm-2 control-label">返点</label>
         <div class="col-sm-3">
-            <input type="text" class="form-control" name="fandian" id="fandian" value="{$contract_line[fandian]}">
+            <input type="number" class="form-control" name="fandian" id="fandian" value="0">
         </div>
 
         <label for="inputEmail3" class="col-sm-1 control-label">渠道</label>
