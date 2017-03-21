@@ -504,11 +504,12 @@ class AccountController extends CommonController
         $this->accounttype=$Accounttype->field("id,name")->order("id asc")->select();
 
         //产品线
-        $findpr=M("ContractRelevance")->field('product_line')->find($info['prlin_id']);
-        $product_line=M("ProductLine")->field('name')->find($findpr['product_line']);
+
+        $product_line=M("ProductLine")->field('name')->find($info['prlin_id']);
         $this->product_line=$product_line;
         //渠道客户列表
         $this->customer=M("customer")->field('id,advertiser,appname')->where("customer_type=2")->select();
+        //合同产品线列表
 
 
         $this->display();

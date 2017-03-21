@@ -203,7 +203,7 @@ $("#gongsi").on("blur",function(){
               <option value="130002" {$info[server_type]=='130002'?'selected':''}>页面</option>
               <option value="130003" {$info[server_type]=='130003'?'selected':''}>优化服务服务</option>
               <option value="130004" {$info[server_type]=='130004'?'selected':''}>无服务</option>
-
+              <option value="130005" {$info[server_type]=='130005'?'selected':''}>监督</option>
               </volist>
 
           </select>
@@ -278,7 +278,7 @@ $("#gongsi").on("blur",function(){
                <volist id="contract_line" name="contract_line" key="k">
                    <option value="{$contract_line.product_line}" title="{$contract_line.name}" {$contract_line[product_line]==$contract_gl[product_line]?'selected':''}>{$contract_line.name}</option>
                </volist>
-
+ 
            </select>
        </div>
 
