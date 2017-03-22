@@ -1666,9 +1666,15 @@ class ApiController extends RestController{
         $account=M("Account");
         $users=M("Users");
         $sem=$users->where("name='$users_name'")->find();
-        dump($sem);
-        $account_find=$account->where("appid='$apid'")->find();
-        //if($sem['id']=='' or $account->save(array(""))->where("appid='$appid'"))
+        $account_find=$account->where("appid='$appid'")->find();
+
+        if($sem['id']=='' or $account_find['id']=='')
+        {
+
+            $data['code'] = 500;
+            $data['msg'] = 'Because I couldn\'t find the user or account , So the synchronization failure';
+            $this->response($data,'json');
+        }
 
     }
 }
