@@ -1658,6 +1658,19 @@ class ApiController extends RestController{
 
 
     }
+
+    //分配优化师同步
+    public function set_account_users(){
+        $appid=I('get.appid');
+        $users_name=I('get.name');
+        $account=M("Account");
+        $users=M("Users");
+        $sem=$users->where("name='$users_name'")->find();
+        dump($sem);
+        $account_find=$account->where("appid='$apid'")->find();
+        if($sem['id']=='' or $account->save(array(""))->where("appid='$appid'"))
+
+    }
 }
 
 
