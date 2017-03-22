@@ -100,8 +100,16 @@
      	 <label  class="control-label"><strong>{$info[appname]}</strong></label>
     </div>
    </div>
-    
-   <h4  class="bor-left-bull" >开票资料 <a href="{:U("Customer/showim?id=$info[invoice_head]")}" target="_blank">客户资质</a></h4>
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">收支类型</label>
+        <div class="col-sm-2">
+            <label  class="control-label"><strong>{$info[shouzhi]=='1'?'开出发票':'收到发票'}</strong></label>
+        </div>
+
+
+    </div>
+
+    <h4  class="bor-left-bull" >开票资料 <a href="{:U("Customer/showim?id=$info[invoice_head]")}" target="_blank">客户资质</a></h4>
   <hr>
   <div class="form-group">
   

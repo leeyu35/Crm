@@ -568,6 +568,12 @@ function excet_d($file,$sheet=0){
 //公司和合同余额变动 1公司id,2合同id，3类型:1续费预付，2续费垫付,3续费补款，4回款，5发票。 4 变动值
 function money_change($advertisers_id,$contract_id,$type,$value,$accountid='')
 {
+    $kehu=kehu($advertisers_id);
+    if($kehu['customer_type']==3)
+    {
+        return;
+    }
+
 //类型:1续费预付，2续费垫付,3续费补款，4回款，5发票 14 退款  15 转款
     $advertisers = M("Customer");
     $contract = M("Contract");
@@ -696,6 +702,11 @@ function money_change($advertisers_id,$contract_id,$type,$value,$accountid='')
 
 function money_reduce($advertisers_id,$contract_id,$type,$value,$accountid='')
 {
+    $kehu=kehu($advertisers_id);
+    if($kehu['customer_type']==3)
+    {
+        return;
+    }
     $advertisers = M("Customer");
     $contract = M("Contract");
 
@@ -1049,15 +1060,14 @@ function  account_xs_id($appid,$field){
             //echo $gongling."<br>";
             $nianjiazhouqi=12/round($nianjia,1);//年假周期  12个月 除以 工龄
 
-            $nianjiazhouqi=$nianjiazhouqi/2;
+            $nianjiazhouqi=$nianjiazhouqi/2; //0.5天的周期
 
 
-            $nianjia=$m/round($nianjiazhouqi,1);
-
+            //$nianjia=$m/round($nianjiazhouqi,1);
+            $nianjia=$m/$nianjiazhouqi;
             $nianjia=floor($nianjia);
 
             $snianjia=floor(date("m",$users['njuptime'])/round($nianjiazhouqi,1));
-
 
             if($nianjia-$snianjia>0)
             {
@@ -1153,12 +1163,12 @@ function day_15($start_time){
         $strdate=date('Y-m-d');
     }
     //加一天
-    $strdate=date("Y-m-d",strtotime($strdate." +1 day"));
-    for ($i=1;$i<=15;$i++)
-    {
+    $strdate=date("Y-m-d",strtotime($strdate." -16 day"));
 
-          $array[$i-1]['start']=date("Y-m-d",strtotime($strdate." -$i day"));
-        $array[$i-1]['end']=date("Y-m-d",strtotime($array[$i-1]['start']." +1 day"));
+    for ($i=0;$i<=15;$i++)
+    {
+        $array[$i]['start']=date("Y-m-d",strtotime($strdate." +$i day"));
+        $array[$i]['end']=date("Y-m-d",strtotime($array[$i]['start']." +1 day"));
     }
 
     $b=strtotime($strdate." -14 day");

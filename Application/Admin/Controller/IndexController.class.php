@@ -22,7 +22,8 @@ class IndexController extends Controller {
         $this->display();
     }
     public function hjd(){
-        echo "hjd";
-        $this->success('hello',U("index"));
+
+        nianjia(25);
     }
+
 }

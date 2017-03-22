@@ -1545,6 +1545,7 @@ class ApiController extends RestController{
             $where=" and xiaohao.xsid=".I('get.usersid');
         }
 
+
         foreach ($datear as $k=>$v)
         {
             $zhouqi[$k]=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,zhanghu.a_users,zhanghu.appname,gongsi.submituser as marketid,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='".strtotime($v[start])."'  and xiaohao.starttime<'".strtotime($v[end])."' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
@@ -1650,7 +1651,7 @@ class ApiController extends RestController{
                 $this->error('没有数据可导出');
             };
         }
-        
+
         $data['code'] = 200;
         $data['data'] = $zhouqi[count($datear)-1];
         $this->response($data,'json');
