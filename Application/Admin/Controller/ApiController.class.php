@@ -1598,7 +1598,7 @@ class ApiController extends RestController{
                 {
                     if($val['appid']==$v1['appid'] and $val['xsid']==$v1['xsid'])
                     {
-                        $zhouqi[$dakey][$key]['xiaohao_date'][$v[start]."到".$v[end]]=$v1['baidu_cost_total'];
+                        $zhouqi[$dakey][$key]['xiaohao_date'][$v[start]."到".$v[end]]=round($v1['baidu_cost_total'],2);
                     }
                 }
             }
