@@ -1668,7 +1668,7 @@ class ApiController extends RestController{
         $sem=$users->where("name='$users_name'")->find();
         dump($sem);
         $account_find=$account->where("appid='$apid'")->find();
-        if($sem['id']=='' or $account->save(array(""))->where("appid='$appid'"))
+        //if($sem['id']=='' or $account->save(array(""))->where("appid='$appid'"))
 
     }
 }
