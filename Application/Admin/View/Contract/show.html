@@ -44,14 +44,14 @@
      </div>
      <label class="col-sm-1 control-label">负责商务</label>
      <div class="col-sm-2">
-               	<label  class="control-label"><strong>{$business}</strong></label>
+        <label  class="control-label"><strong>{$business}</strong></label>
      </div>
    </div>
   <div class="form-group">
   
     <label class="col-sm-2 control-label">广告主公司名称</label>
     <div class="col-sm-3">
-    	<label  class="control-label"><strong>{$gongsi}<span style="border:1px #00a2d4 solid; margin-left: 5px; font-size: 10px; color: #00a2d4; border-radius: 3px; padding-left: 2px; padding-right: 2px;">{$customer_type==1?'直':'渠'}</span></strong></label>
+    	<label  class="control-label"><strong>{$gongsi}<span style="border:1px #00a2d4 solid; margin-left: 5px; font-size: 10px; color: #00a2d4; border-radius: 3px; padding-left: 2px; padding-right: 2px;">{$customer_type==1?'直':''}{$customer_type==2?'渠':''}{$customer_type==3?'媒':''}</span></strong></label>
     </div>
     
     <label for="inputEmail3" class="col-sm-1 control-label">代理公司</label>
