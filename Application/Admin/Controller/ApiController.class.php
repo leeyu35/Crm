@@ -1674,7 +1674,23 @@ class ApiController extends RestController{
             $data['code'] = 500;
             $data['msg'] = 'Because I couldn\'t find the user or account , So the synchronization failure';
             $this->response($data,'json');
+            exie;
         }
+        $account_sem_set=M("AccountUsers");
+        if($account_sem_set->where("account_id=$account_find[id]")->setField('u_id',$sem['id']))
+        {
+            $data['code'] = 200;
+            $data['msg'] = 'success';
+            $this->response($data,'json');
+        }else
+        {
+            $data['code'] = 500;
+            $data['msg'] = 'Unknown reason! Synchronization failure! ';
+            $this->response($data,'json');
+            exie;
+        }
+
+
 
     }
 }
