@@ -171,7 +171,7 @@ $("#formid").submit(function(){
   <div class="form-group">
   <label for="inputEmail7" class="col-sm-2 control-label">APP名称或简称</label>
     <div class="col-sm-3">      
-		<input name="appname" type="text" class="form-control" id="inputEmail7"  placeholder="没有填无">
+		<input name="appname" type="text" class="form-control" id="inputEmail7"  placeholder="没有则填公司名称">
     </div>
 
     <label for="inputEmail8se" class="col-sm-1 control-label">客户所属省</label>
@@ -230,15 +230,15 @@ $("#formid").submit(function(){
 
   </div>
   <div class="form-group">
-
+    {$Think[get][customer_type]}
     <label for="inputEmail3" class="col-sm-2 control-label">直接客户 & 渠道客户</label>
     <div class="col-sm-3">
       <label class="radio-inline">
-        <input name="customer_type" type="radio" id="type_0" value="1" checked="">
+        <input name="customer_type" type="radio" id="type_0" value="1" {$customer_type=='1'?'checked':''}>
         直接客户</label>
 
       <label class="radio-inline">
-        <input type="radio" name="customer_type" value="2" id="type_1">
+        <input type="radio" name="customer_type" value="2" id="type_1" {$customer_type=='2'?'checked':''}>
         渠道客户</label>
     </div>
 

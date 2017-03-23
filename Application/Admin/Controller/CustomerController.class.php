@@ -119,6 +119,7 @@ class CustomerController extends CommonController
     //新增客户信息
     public function add(){
         $product_line=M("ProductLine");
+        $this->customer_type=I('get.customer_type');
         $this->product_line_list=$product_line->field("id,name")->order("id asc")->select();
         $this->display();
 
