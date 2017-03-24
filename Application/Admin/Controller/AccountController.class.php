@@ -249,6 +249,10 @@ class AccountController extends CommonController
 
         $list=$Refund->create();
         $Refund->ctime=time();
+        $advertiser=I('post.advertiser');
+
+
+
 
 
 
@@ -260,6 +264,11 @@ class AccountController extends CommonController
                 $result = $Refund->query("select currval('jd_account_id_seq')");
                 $insertid=$result[0][currval];
             }
+
+            //获取相同账户
+            $acc_copy=$Refund->where("a_users ='".I('post.a_users')."' and endtime='4092599349'"." and id !=$insertid")->find();
+
+            $hetong=M("Contract")->find($acc_copy['contract_id']);
 
             //添加账户的时候 判断这个账户之前是否被添加过
             $a_users=I('post.a_users');
@@ -299,19 +308,21 @@ class AccountController extends CommonController
                 "server_type"=>I('post.server_type'),
                 "qudao_id" => $qudao['yushan_id'],
             );
+            //账户所属公司不等于原账户公司
 
-            $yushan_data=hjd_post_curl($url,$post_data);
+            if($hetong[advertiser]!=$advertiser){
+                $yushan_data=hjd_post_curl($url,$post_data);
 
-            $yushan_id=$yushan_data->data->appid;
-            if($yushan_id!='')
-            {
-                $Refund->where('id='.$insertid)->setField('appid',$yushan_id);
+                $yushan_id=$yushan_data->data->appid;
+                if($yushan_id!='')
+                {
+                    $Refund->where('id='.$insertid)->setField('appid',$yushan_id);
 
-            }else
-            {
-                die('oh~no！添加账户 与 羽扇平台数据同步失败，请联系CRM技术管理人员！！！');
+                }else
+                {
+                    die('oh~no！添加账户 与 羽扇平台数据同步失败，请联系CRM技术管理人员！！！');
+                }
             }
-
             if(I('post.for_contract')!=1)
             {
 

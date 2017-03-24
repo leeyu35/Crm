@@ -383,7 +383,7 @@
 
             <div class="col-sm-2">
                 <label for="inputEmail3" class="control-label">返点</label>
-                <input type="text" class="form-control fandian" name="fandian[]" id="inputEmail3" autocomplete="off" <if condition="$htgl[fandian] neq ''" > value="{$htgl[fandian]}"</if> >
+                <input type="text" class="form-control fandian" name="fandian[]" id="inputEmail3" autocomplete="off" <if condition="$htgl[fandian] neq ''" > value="{$htgl[fandian]}"<else/> value="0"</if> >
             </div>
 
             <div class="col-sm-2">
@@ -523,7 +523,20 @@
    </div>
 
    </div>
-	
+    <if condition="$data[id] neq ''">
+	<h4>复制合同账户</h4>
+    <hr>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <volist id="account_list" name="account_list">
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox1" name="account_list[]" value="{$account_list[id]}"> {$account_list['a_users']}
+            </label>
+            </volist>
+        </div>
+
+    </div>
+    </if>
     <div class="form-group">
     
        <div class="col-sm-2">

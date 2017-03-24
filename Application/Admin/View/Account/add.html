@@ -158,6 +158,7 @@
 <form action="{:U('addru')}" method="post" class="form-horizontal" id="formid" >
 <input type="hidden" name="submituser" id="submituser" value="{$Think.cookie.u_id}">
 <input type="hidden" name="contract_id" id="contract_id" value="{$contract_id}">
+    <input type="hidden" name="advertiser" id="advertiser" value="{$hetong.id}">
 {$contract_id?'<input type="hidden" name="for_contract" id="for_contract" value="1">':''}
 <span id="fzrlsitwz"></span>
 <h4 class="bor-left-bull" >账户基本信息</h4>

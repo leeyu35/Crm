@@ -211,6 +211,10 @@ class ContractController extends CommonController
             $mtht_info=M("Contract")->field('product_line')->find($contract['mht_id']);
             $this->htgl=M("ContractRelevance")->where("contract_id=$id")->find();
 
+            //读取复制的合同的所有账户
+            $account=M("Account");
+            $this->account_list=$account->where("contract_id=$id and endtime='4092599349'")->select();
+
 
         }
 
@@ -266,17 +270,20 @@ class ContractController extends CommonController
 
         $this->display();
     }
-    public function addru(){
+    public function addru()
+    {
         //检查是否有这个客户
-        $Customer=M("Customer");
+        $Customer = M("Customer");
 
-        $co=$Customer->where("id='".I('post.advertiser')."'")->count();
+        $co = $Customer->where("id='" . I('post.advertiser') . "'")->count();
 
-        if($co==0)
-        {
+        if ($co == 0) {
             $this->error("没有这个公司!");
             exit;
         }
+
+
+        //$set=M("Account")->where("id in()")
 
 
         //合同状态
@@ -368,6 +375,19 @@ class ContractController extends CommonController
              foreach($contact_list as $key=>$val)
              {
                  $contract_relevance->add($contact_list[$key]);
+             }
+
+             //复制账户
+             if (count(I('post.account_list')) > 0 && is_array(I('post.account_list'))) {
+                 foreach (I('post.account_list') as $key=>$val)
+                 {
+                     $set=M("Account")->find($val);
+                     unset($set[id]);
+                     unset($set[contract_id]);
+                     $set['contract_id']=$insid;
+                     if(M("Account")->add($set)){}else{die("复制账户出错，请联系CRM管理员");}
+                     if(M("Account")->where("id=$val")->setField('endtime',time())){}else{die("复制账户修改结束时间出错，请联系CRM管理员");}
+                 }
              }
 
              $this->success("添加成功".$success_str,U("index"));
