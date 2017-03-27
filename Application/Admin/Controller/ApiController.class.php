@@ -1690,8 +1690,19 @@ class ApiController extends RestController{
             exie;
         }
 
+    }
 
+    //根据appid 获取所属销售
+    public function get_appid_markert(){
+        $appid=I("get.appid");
+        $appid=str_replace(",","','",$appid);
 
+        $account=M("Account");
+        $account_info=$account->field('a.appid,a.contract_id,b.advertiser,c.submituser,d.name')->join("a left join __CONTRACT__ b  on b.id=a.contract_id left join __CUSTOMER__ c  on c.id=b.advertiser left join __USERS__ d on d.id=c.submituser")->where("a.appid in ('$appid') and a.endtime='4092599349'")->select();
+        $data['code'] = 200;
+        $data['msg'] = 'success!';
+        $data['date'] = $account_info;
+        $this->response($data,'json');
     }
 }
 

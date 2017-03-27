@@ -50,7 +50,6 @@ $config_1= array(
     'DB_PWD' => 'anmeng', // 密码
     'DB_PORT'               =>  '3432',        // 端口
     'DB_PREFIX' => 'jd_', // 数据库表前缀
-
    /*
    'DB_TYPE' => 'mongo', // 数据库类型
    'DB_HOST'               =>  '101.200.174.136', // 服务器地址
@@ -154,7 +153,10 @@ $config_1= array(
         array("Api/consumption_manual","Admin/Api/consumption_manual",array('method'=>'get')),//垫款导出表格
         array("Api/upusers","Admin/Api/upusers",array('method'=>'get')),//修改用户
         array("Api/account_server_type","Admin/Api/account_server_type",array('method'=>'get')),
-        array("ApI/consume_list_to_date","Admin/Api/consume_list_to_date",array('method'=>'get')),
+        array("Api/consume_list_to_date","Admin/Api/consume_list_to_date",array('method'=>'get')),
+        array("Api/set_account_users","Admin/Api/set_account_users",array('method'=>'get')),
+        array("Api/get_appid_markert","Admin/Api/get_appid_markert",array('method'=>'get')),
+
     // array('Api','Admin/Api/index','hjd=1',array('method'=>'get')),
 
     ),
