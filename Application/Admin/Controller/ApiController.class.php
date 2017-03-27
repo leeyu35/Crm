@@ -1694,7 +1694,7 @@ class ApiController extends RestController{
 
     //根据appid 获取所属销售
     public function get_appid_markert(){
-        $appid=I("get.appid");
+        $appid=I("post.appid");
         $appid=str_replace(",","','",$appid);
 
         $account=M("Account");
