@@ -1548,11 +1548,13 @@ class ApiController extends RestController{
 
         foreach ($datear as $k=>$v)
         {
-            $zhouqi[$k]=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,zhanghu.a_users,zhanghu.appname,gongsi.submituser as marketid,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='".strtotime($v[start])."'  and xiaohao.starttime<'".strtotime($v[end])."' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
+            $zhouqi[$k]=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,zhanghu.a_users,zhanghu.endtime,zhanghu.appname,gongsi.submituser as marketid,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='".strtotime($v[start])."'  and xiaohao.starttime<'".strtotime($v[end])."' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
+
             $date_top[]=$v['start']."到".$v['end'];
             //$xiaohaolist=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,xiaohao.htid,zhanghu.a_users,zhanghu.appname,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser,xiaohao.xsid,xiaohao.semid")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='$time_start'  and xiaohao.starttime<'$time_end' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,xiaohao.xsid,xiaohao.semid,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
 
         }
+
 
         foreach ($datear as $dakey=>$daval)
         {
@@ -1561,6 +1563,7 @@ class ApiController extends RestController{
 
         foreach ($zhouqi[$dakey] as $key=>$val)
         {
+
 
             if($val['marketid'])
             {
@@ -1600,6 +1603,8 @@ class ApiController extends RestController{
                     {
                         $zhouqi[$dakey][$key]['xiaohao_date'][$v[start]."到".$v[end]]=round($v1['baidu_cost_total'],2);
                     }
+
+
                 }
             }
 
@@ -1653,12 +1658,33 @@ class ApiController extends RestController{
         }
 
         $data['code'] = 200;
-        $data['data'] = $zhouqi[count($datear)-1];
+        //去重
+        $as=$this->array_unset($zhouqi[count($datear)-1],'appid');
+        $data['data']=$as;
+
         $this->response($data,'json');
 
 
     }
+//二维数组去除特定键的重复项
+    public function array_unset($arr,$key){   //$arr->传入数组   $key->判断的key值
+        //建立一个目标数组
+        $res = array();
+        foreach ($arr as $value) {
+            //查看有没有重复项
 
+            if(isset($res[$value[$key]]) and $value['endtime']!='4092599349'){
+
+                //有：销毁
+                unset($value[$key]);
+
+            }
+            else{
+                $res[$value[$key]] = $value;
+            }
+        }
+        return $res;
+    }
     //分配优化师同步
     public function set_account_users(){
         $appid=I('get.appid');
@@ -1666,7 +1692,7 @@ class ApiController extends RestController{
         $account=M("Account");
         $users=M("Users");
         $sem=$users->where("name='$users_name'")->find();
-        $account_find=$account->where("appid='$appid'")->find();
+        $account_find=$account->where("appid='$appid' and endtime='4092599349'")->find();
 
         if($sem['id']=='' or $account_find['id']=='')
         {
