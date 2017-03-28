@@ -549,6 +549,11 @@ class RefundMoneyController extends  CommonController
         $avinfo=kehu($info['advertiser']);
 
         $this->avinfo=$avinfo;
+
+        //完成操作人
+        $accomplish_users=users_info($info[accomplish_users]);
+        $this->accomplish_users=$accomplish_users['name'];
+
         $this->display();
 
     }

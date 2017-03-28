@@ -355,11 +355,15 @@
         </div>
 
     </div>
-</div>
-</div>
-<div class="form-group">
 
-    <div class="col-sm-12">
+</div>
+
+</div>
+
+</div>
+
+<div  style="background: #fff; width: 15.4018rem; padding: 10px; margin-left: 0.422rem;" class="shenhe_states">
+
         <if condition="$info[audit_1] eq 0">
             <span class="shno">一级审核未审核</span>
             <elseif condition="$info[audit_1] eq 1"/>
@@ -391,9 +395,14 @@
             <elseif condition="$info[audit_4] eq 2"/>
             <span class="shno1">四级审核未通过(审核人：{$users_info6?$users_info6:'默认'})</span>
         </if>
-    </div>
+
+        <if condition="$info[is_accomplish] eq 0">
+            <a href="{:U("is_accomplish?id=$info[id]&type=renew")}" class=" btn btn-success btn-sm">点击完成</a>
+        <elseif condition="$info[is_accomplish] eq 1"/>
+            <button class="btn btn-info btn-sm">已完成({$accomplish_users})</button>
+        </if>
 </div>
-</div>
+
 <script type="text/javascript">
     (function (doc, win) {
         var docEl = doc.documentElement,

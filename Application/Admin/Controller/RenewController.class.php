@@ -615,8 +615,9 @@ class RenewController extends  CommonController
         $filelist=$file->where("type=4 and yid=$id")->select();
         $this->filelist=$filelist;
 
-
-
+        //完成操作人
+        $accomplish_users=users_info($info[accomplish_users]);
+        $this->accomplish_users=$accomplish_users['name'];
         $this->display();
 
     }
@@ -852,6 +853,29 @@ class RenewController extends  CommonController
         $one=$prlin->where("contract_id=$contract_id and product_line=".$account_info['prlin_id'])->find();
 
         echo $one['fandian'];
+    }
+
+    public function is_accomplish(){
+        $id=I('get.id');
+
+
+        if(I('get.type')=='renew' && cookie("u_groupid")!=5){
+            $this->success('sorry，您不是媒介部门成员，无法对续费进行完成操作~~~!');
+            exit;
+        }
+        if(I('get.type')=='renew' && cookie("u_groupid")!=5){
+            $this->success('sorry，您不是媒介部门成员，无法对续费进行完成操作~~~!');
+            exit;
+        }
+
+
+        if(M("RenewHuikuan")->where("id=$id")->setField("accomplish_users",cookie("u_id"))) {
+            M("RenewHuikuan")->where("id=$id")->setField("is_accomplish",'1');
+            $this->success('操作成功', U("index2"));
+        }else
+        {
+            $this->success('操作失败');
+        }
     }
 
 }

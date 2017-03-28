@@ -293,6 +293,11 @@
                <elseif condition="$info[audit_3] eq 2"/>
                <span class="shno1">三级审核未通过(审核人：{$users_info5?$users_info5:'默认'})</span>
            </if>
+           <if condition="$info[is_accomplish] eq 0">
+               <span class="shno">此退款还未完成</span>
+               <elseif condition="$info[is_accomplish] eq 1"/>
+               <span class="shyes">此退款已完成(操作人：{$accomplish_users?$accomplish_users:'默认'})</span>
+           </if>
        </div>
     </div>
 
@@ -313,8 +318,11 @@
         <a href="{:U("shenhe?type=audit_3&id=$info[id]&ju=1&yid=$yid")}" class="btn btn-danger"  {$info[audit_3]!='0'?'style="display:none"':''} >三级审核不通过</a>
 
         </if>
-
-       
+           <if condition="$info[is_accomplish] eq 0">
+               <a href="{:U("Renew/is_accomplish?id=$info[id]&type=renew")}" class=" btn btn-success">点击完成</a>
+           <elseif condition="$info[is_accomplish] eq 1"/>
+               <button class="btn btn-info">已完成({$accomplish_users})</button>
+           </if>
        </div>
     </div>
 
