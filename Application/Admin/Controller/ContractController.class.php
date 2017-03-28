@@ -1020,12 +1020,14 @@ class ContractController extends CommonController
         if($hetong->where("id=".I("post.id"))->setField('mht_id',I("post.mht_id")))
         {
             //修改合同产品线
-                //查询媒介合同所属产品线
-                $mj_info=$hetong->field('product_line')->find(I("post.mht_id"));
+            //查询媒介合同所属产品线
+            $mj_info=$hetong->field('product_line')->find(I("post.mht_id"));
             $hetong_guanlian=M("ContractRelevance")->where("contract_id=".I("post.id"))->save(array('product_line'=>$mj_info['product_line']));
             //修改合同下所有账户产品线
             $hetong_account=M("Account")->where("contract_id=".I("post.id"))->save(array('prlin_id'=>$mj_info['product_line']));
 
+            //修改合同下所有续费
+            $hetong_account=M("RenewHuikuan")->where("xf_contractid=".I("post.id"))->save(array('product_line'=>$mj_info['product_line']));
             echo 1;
         }else
         {

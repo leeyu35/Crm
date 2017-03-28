@@ -331,3 +331,5 @@ input,button,textarea,select{*font-size:100%}
 			
 
 }
+
+.shenhe_states span{ border:1px #ccc solid; padding: 5px; border-radius: 5px; padding-left:8px; padding-right:8px; }
