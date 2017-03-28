@@ -1658,7 +1658,7 @@ class ApiController extends RestController{
         }
 
         $data['code'] = 200;
-        //去重
+
         $as=$this->array_unset($zhouqi[count($datear)-1],'appid');
         $data['data']=$as;
 
@@ -1683,7 +1683,13 @@ class ApiController extends RestController{
                 $res[$value[$key]] = $value;
             }
         }
-        return $res;
+
+        foreach ($res as $k1=>$v1)
+        {
+            $ar[]=$v1;
+        }
+
+        return $ar;
     }
     //分配优化师同步
     public function set_account_users(){
