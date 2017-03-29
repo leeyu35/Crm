@@ -529,7 +529,9 @@ class RefundMoneyController extends  CommonController
         //二级审核人
         $submitusers4=users_info($info[susers2]);
         $this->users_info4=$submitusers4['name'];
-
+        //三级审核人
+        $submitusers5=users_info($info[susers3]);
+        $this->users_info5=$submitusers5['name'];
 
         //产品线
         $product_line=M("ProductLine");
