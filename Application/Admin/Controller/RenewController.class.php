@@ -538,6 +538,10 @@ class RenewController extends  CommonController
                 if($type=='audit_4')
                 {
                     $table->where("id=$id")->setField('susers4',cookie('u_id'));
+                    if($shenhe==1){
+                        M("RenewHuikuan")->where("id=$id")->setField("accomplish_users",cookie("u_id"));
+                        M("RenewHuikuan")->where("id=$id")->setField("is_accomplish",'1');
+                    }
                 }
             }else
             {
