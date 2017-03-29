@@ -427,7 +427,7 @@ class AccountController extends CommonController
             //渠道
             $qudao=M("Customer")->find(I('post.qudao'));
 
-            $url = "http://sem.yushanapp.com/sem/setzhxx";
+            $url = "http://sem.yushanapp.com/sem/setzhxxcrm";
 
             $post_data = array (
                 "name"=>I('post.appname'),
