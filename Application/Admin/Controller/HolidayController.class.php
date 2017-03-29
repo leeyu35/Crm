@@ -66,6 +66,7 @@ class HolidayController extends CommonController
             }
             //权限条件
             $q_where=quan_where(__CONTROLLER__,"a");
+
             $my_info=users_info(cookie('u_id'));//我的信息
             $my_zu=group_name_find($my_info['groupid']);//我的组信息
             if($my_info[manager]!=1 and $my_zu!='超级管理员' and $my_zu!='BOSS' and $my_zu!='人事')

@@ -635,6 +635,7 @@ class ApiController extends RestController{
                 $where="id != 0";
             }
             $sum=$account_counsumption->where("$where and starttime>='$time_start'  and starttime<'$time_end' ")->sum("baidu_cost_total");
+
             if(!$sum){$sum="0";}
             $data['code'] = 200;
             $data['counsumption'] = number_format($sum,2);
@@ -653,8 +654,6 @@ class ApiController extends RestController{
         }else {
             $account_counsumption=M("AccountConsumption");
             $zhouar=teodate_week2(1,"Monday");//本周开始时间和结束时间
-
-
             $time_start=strtotime($zhouar[0]['start']);
             $time_end=strtotime($zhouar[0]['end']);
             if(I('type')!='all')
@@ -1209,17 +1208,18 @@ class ApiController extends RestController{
         $account=M("Account");
         $idin=M("AccountUsers")->field('account_id')->where("u_id=$id")->select(false);
         $list=$account->field('id,a_users,appname')->where("id in($idin)")->select();
+
         foreach ($list as $key=>$val)
         {
             if($type=='day')
             {
-                $list[$key]['counsumption']=hjd_curl("http://localhost/Api/sem_account_counsumption_3_line?id=$val[id]&type=day");
+                $list[$key]['counsumption']=hjd_curl("http://localhost/Api/sem_account_counsumption_3_line?id=$val[id]&type=day&semid=$id");
             }elseif($type=='week')
             {
-                $list[$key]['counsumption']=hjd_curl("http://localhost/Api/sem_account_counsumption_3_line?id=$val[id]&type=week");
+                $list[$key]['counsumption']=hjd_curl("http://localhost/Api/sem_account_counsumption_3_line?id=$val[id]&type=week&semid=$id");
             }else
             {
-                $list[$key]['counsumption']=hjd_curl("http://localhost/Api/sem_account_counsumption_3_line?id=$val[id]&type=month");
+                $list[$key]['counsumption']=hjd_curl("http://localhost/Api/sem_account_counsumption_3_line?id=$val[id]&type=month&semid=$id");
             }
 
           //  $list[$key]['week']=hjd_curl("http://localhost/Api/sem_account_counsumption_3_line?id=$val[id]&type=week");
@@ -1237,13 +1237,13 @@ class ApiController extends RestController{
         $account_id=I('get.id');
         $appid=M("Account")->field('appid')->find($account_id);
         $type = I('get.type');
+        $semid=I('get.semid');
         $xiaohao = M("AccountConsumption");
         if ($type == 'day') {
             //最近七天
             $j7['start']=$time_start=strtotime(date("Y-m-d")."-3 day");
             $j7['end']=$time_end=strtotime(date("Y-m-d"));
-
-            $list=$xiaohao->field('date,sum(baidu_cost_total) as consumption')->where("starttime>='$j7[start]'  and starttime<'$j7[end]' and appid='$appid[appid]'")->group('date')->order("date asc")->select();
+            $list=$xiaohao->field('date,sum(baidu_cost_total) as consumption')->where("starttime>='$j7[start]'  and starttime<'$j7[end]' and appid='$appid[appid]' and semid='$semid'")->group('date')->order("date asc")->select();
 
         } elseif ($type == 'week') {
             $zhouar = teodate_week(3, 'Monday');//本周开始时间和结束时间
@@ -1252,7 +1252,7 @@ class ApiController extends RestController{
             {
                 $time_start = strtotime($val['start']);
                 $time_end = strtotime($val['end']);
-                $Consumption=$xiaohao->where("starttime>='$time_start'  and starttime<'$time_end' and appid='$appid[appid]' ")->sum('baidu_cost_total');
+                $Consumption=$xiaohao->where("starttime>='$time_start'  and starttime<'$time_end' and appid='$appid[appid]' and semid='$semid'")->sum('baidu_cost_total');
                 $list[$key]['date']=$val['start'];
                 $list[$key]['consumption']=$Consumption?$Consumption:0;
             }
@@ -1264,7 +1264,7 @@ class ApiController extends RestController{
             {
                 $time_start = strtotime($val['start']);
                 $time_end = strtotime($val['end']);
-                $Consumption=$xiaohao->where("starttime>='$time_start'  and starttime<'$time_end' and appid='$appid[appid]'")->sum('baidu_cost_total');
+                $Consumption=$xiaohao->where("starttime>='$time_start'  and starttime<'$time_end' and appid='$appid[appid]' and semid='$semid'")->sum('baidu_cost_total');
                 $list[$key]['date']=$val['start'];
                 $list[$key]['consumption']=$Consumption?$Consumption:0;
             }

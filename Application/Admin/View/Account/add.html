@@ -123,6 +123,12 @@
                 $("#appid").html('');
             })
             $("#formid").submit(function() {
+                /*
+                var pattern = /^[\u4E00-\u9FA5]{1,6}$/;
+                a=pattern.test($("#a_users").val());
+alert(a);
+
+                return false;*/
                 if($("#fandian").val()<0 || $("#fandian").val()>100 ) {
                     alert("返点只能填写0-100之间的数字");
                     $("#fandian").select();
