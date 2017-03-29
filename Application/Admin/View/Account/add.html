@@ -123,12 +123,12 @@
                 $("#appid").html('');
             })
             $("#formid").submit(function() {
-                /*
-                var pattern = /^[\u4E00-\u9FA5]{1,6}$/;
-                a=pattern.test($("#a_users").val());
-alert(a);
 
-                return false;*/
+                var pattern = /^[\u4E00-\u9FA5a-zA-Z0-9_-]*$/;
+                users_yan=pattern.test($("#a_users").val());
+                password_yan=pattern.test($("#a_password").val());
+
+
                 if($("#fandian").val()<0 || $("#fandian").val()>100 ) {
                     alert("返点只能填写0-100之间的数字");
                     $("#fandian").select();
@@ -140,7 +140,20 @@ alert(a);
                     return false;
                 }
 
+                if(!users_yan)
+                {
+                    alert("账户名错误，请检查是否存在特殊字符");
+                    $("#a_users").select();
+                    return false;
+                }
+                if(!password_yan)
+                {
+                    alert("密码设置错误，请简称是否存在特殊字符");
+                    $("#a_password").select();
+                    return false;
+                }
 
+             
                 //		if($("#appid").val()==null)
                 //        {
                 //            alert('appid不能为空');
