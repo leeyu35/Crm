@@ -84,7 +84,7 @@ $(document).ready(function(e) {
     <volist id="list" name="list" key="k">
         <tr>
             <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$k}</td>
-            <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}"><a href="{:U("Customer/show?id=$list[aid]")}">{$list[advertiser]}</a></td>
+            <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}"  {$list[is_accomplish]==1?'style="border-left: 2px #00CC00 solid;"':''}><a href="{:U("Customer/show?id=$list[aid]")}">{$list[advertiser]}</a></td>
             <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$list[appname]}</td>
             <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}" align="right">{$list[money]|num_format}&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$list[rebates_proportion]}%</td>
