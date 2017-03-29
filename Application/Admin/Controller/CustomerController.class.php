@@ -550,6 +550,7 @@ class CustomerController extends CommonController
             if(I('get.type')=='market')
             {
                 M('Contract')->where('advertiser='.I('get.id'))->save(array("market"=>I('get.users')));
+                M('Contract')->where('advertiser='.I('get.id'))->save(array("submituser"=>I('get.users')));
             }
             echo 1;
         }else
