@@ -309,18 +309,17 @@ class AccountController extends CommonController
                 "qudao_id" => $qudao['yushan_id'],
             );
             //账户所属公司不等于原账户公司
+            if(I('post.state')==0) {
+                if ($hetong[advertiser] != $advertiser) {
+                    $yushan_data = hjd_post_curl($url, $post_data);
 
-            if($hetong[advertiser]!=$advertiser){
-                $yushan_data=hjd_post_curl($url,$post_data);
+                    $yushan_id = $yushan_data->data->appid;
+                    if ($yushan_id != '') {
+                        $Refund->where('id=' . $insertid)->setField('appid', $yushan_id);
 
-                $yushan_id=$yushan_data->data->appid;
-                if($yushan_id!='')
-                {
-                    $Refund->where('id='.$insertid)->setField('appid',$yushan_id);
-
-                }else
-                {
-                    die('oh~no！添加账户 与 羽扇平台数据同步失败，请联系CRM技术管理人员！！！');
+                    } else {
+                        die('oh~no！添加账户 与 羽扇平台数据同步失败，请联系CRM技术管理人员！！！');
+                    }
                 }
             }
             if(I('post.for_contract')!=1)
@@ -386,10 +385,11 @@ class AccountController extends CommonController
         $id=(int)I('post.id');
         $Refund=M("Account");
 
-
         $Refund->create();
         $Refund->ctime=$Refund->ctime+1;
         $Refund->endtime='4092599349'; //默认到期时间为无限
+        $isjiugaixin= I('post.isjiugaixin');
+
         if($Refund->where("id=$id")->save())
         {
             //修改账户的时候 判断这个账户之前是否被添加过 如果有并且不等于当前id数据 则变更之前的账户有效期为当前时间
@@ -427,30 +427,65 @@ class AccountController extends CommonController
             //渠道
             $qudao=M("Customer")->find(I('post.qudao'));
 
-            $url = "http://sem.yushanapp.com/sem/setzhxxcrm";
 
-            $post_data = array (
-                "name"=>I('post.appname'),
-                "type" =>$prlin['yushan_type'],
-                "account_name" =>I('post.a_users'),
-                "account_password" =>I('post.a_password'),
-                "account_appid" =>'notoken',
-                "account_status" =>'1',
-                "fd_rate"=>I('post.fandian')/100,
-                "view_type"=>'120001',
-                "fwlx"=>I('post.server_type'),
-                "qudao_id" => $qudao['yushan_id'],
-                "appid"=>I('post.appid'),
-            );
-
-            $yushan_data=hjd_post_curl($url,$post_data);
-
-            $yushan_id=$yushan_data->data;
-            if($yushan_id!='ok')
+            if(I('post.state')==0)
             {
-                die('oh~no！修改账户 与 羽扇平台数据同步失败，请联系CRM技术管理人员！！！');
+                $url = "http://sem.yushanapp.com/sem/setzhxxcrm";
+                $post_data = array (
+                    "name"=>I('post.appname'),
+                    "type" =>$prlin['yushan_type'],
+                    "account_name" =>I('post.a_users'),
+                    "account_password" =>I('post.a_password'),
+                    "account_appid" =>'notoken',
+                    "account_status" =>'1',
+                    "fd_rate"=>I('post.fandian')/100,
+                    "view_type"=>'120001',
+                    "fwlx"=>I('post.server_type'),
+                    "qudao_id" => $qudao['yushan_id'],
+                    "appid"=>I('post.appid'),
+                );
+                $yushan_data=hjd_post_curl($url,$post_data);
+                $yushan_id=$yushan_data->data;
+                if($yushan_id!='ok')
+                {
+                    die('oh~no！修改账户 与 羽扇平台数据同步失败，请联系CRM技术管理人员！！！');
+                }
             }
+            //如果是临时账户改为正式账户 改了用户名的
+            if($isjiugaixin==1)
+            {
 
+                $url = "http://sem.yushanapp.com/sem/createhu";
+
+                $post_data = array (
+                    "name"=>I('post.appname'),
+                    "account_type" =>$prlin['yushan_type'],
+                    "account_name" =>I('post.a_users'),
+                    "account_password" =>I('post.a_password'),
+                    "account_appid" =>'no token',
+                    "account_status" =>'1',
+                    "fd_rate"=>I('post.fandian')/100,
+                    "view_type"=>'120001',
+                    "server_type"=>I('post.server_type'),
+                    "qudao_id" => $qudao['yushan_id'],
+                );
+                //账户所属公司不等于原账户公司
+
+
+                    $yushan_data=hjd_post_curl($url,$post_data);
+
+                    $yushan_id=$yushan_data->data->appid;
+                    if($yushan_id!='')
+                    {
+                        $Refund->where('id='.$id)->setField('appid',$yushan_id);
+
+                    }else
+                    {
+                        dump($yushan_data);
+                        die('oh~no！添加账户 与 羽扇平台数据同步失败，请联系CRM技术管理人员！！！');
+                    }
+
+            }
 
 
             if(I('post.for_contract')!=1)

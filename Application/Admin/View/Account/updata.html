@@ -10,6 +10,8 @@
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
 <script language="javascript">
 	$(document).ready(function(e) {
+	    //账户名默认值
+        var iaccount = $("#a_users").val();
 		//动态加载公司名称
 		$("#gongsi").keyup(function(){
 			//$("#hjd").html($("#hjd").html()+"1");
@@ -137,13 +139,34 @@ $("#gongsi").on("blur",function(){
                 $("#a_users").select();
                 return false;
             }
+            if($("#a_password").val()=="") {
+                alert("请填写密码");
+                $("#a_password").select();
+                return false;
+            }
             if(!password_yan)
             {
                 alert("密码设置错误，请简称是否存在特殊字符");
                 $("#a_password").select();
                 return false;
             }
+            //判断账户更改
 
+            if(iaccount != $("#a_users").val()){
+                if($('input:radio[name="state"]:checked').val() == "1"){
+                    alert("临时账户不可更改账户名称");
+                    return false
+                }else {
+                    if(!users_yan){
+                        alert("账户名称格式错误，请简称是否存在特殊字符");
+                        $("#a_users").select();
+                        return false;
+                    }else
+                    {
+                        $("#isjiugaixin").val(1);
+                    }
+                }
+            }
 //        if($("#appid").val()==null)
 //        {
 //            alert('appid不能为空');
@@ -172,6 +195,7 @@ $("#gongsi").on("blur",function(){
 <input type="hidden" name="contract_id" id="contract_id" value="{$info[contract_id]}">
 <input type="hidden" name="ctime" id="ctime" value="{$info[ctime]}">
     <input type="hidden" name="appid" id="appid" value="{$info[appid]}">
+    <input type="hidden" name="isjiugaixin" id="isjiugaixin" value="0">
 {$contract_id?'<input type="hidden" name="for_contract" id="for_contract" value="1">':''}
 <span id="fzrlsitwz">
     <volist id="userslist1" name="userslist">
@@ -326,13 +350,33 @@ $("#gongsi").on("blur",function(){
             返点只能为数字，不需要加%，如返点为20% 则填20 即可
         </div>
     </div>
+
+    <div class="form-group">
+
+        <label for="inputEmail3" class="col-sm-2 control-label">是否为临时账户</label>
+        <div class="col-sm-3">
+            <label class="radio-inline">
+                <input type="radio" name="state" value="0" id="type_1" {$info[state]=='0'?'checked':''}>
+                正式账户</label>
+            <label class="radio-inline">
+                <input name="state" type="radio" id="type_0" value="1" {$info[state]=='1'?'checked':''}>
+                临时账户</label>
+
+
+
+        </div>
+
+
+
+    </div>
+
   <h4 class="bor-left-bull" >账户账号信息</h4>
   <hr>
 	<div class="form-group">
 
     <label for="payment_type" class="col-sm-2 control-label">用户名</label>
     <div class="col-sm-3">
-     	<input type="text" name="a_usersx" class="form-control" id="a_users" value="{$info[a_users]}" disabled>
+     	<input type="text" name="a_users" class="form-control" id="a_users" value="{$info[a_users]}" {$info[state]=='1'?'':'disabled'}>
         <span id="keyup_isaddusersname"></span>
     </div>
     
