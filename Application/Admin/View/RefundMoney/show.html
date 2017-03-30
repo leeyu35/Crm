@@ -319,7 +319,7 @@
 
         </if>
            <if condition="$info[is_accomplish] eq 0">
-               <a href="{:U("Renew/is_accomplish?id=$info[id]&type=renew")}" class=" btn btn-success">点击完成</a>
+               <a href="{:U("Renew/is_accomplish?id=$info[id]&type=tuikuan")}" class=" btn btn-success">点击完成</a>
            <elseif condition="$info[is_accomplish] eq 1"/>
                <button class="btn btn-info">已完成({$accomplish_users})</button>
            </if>

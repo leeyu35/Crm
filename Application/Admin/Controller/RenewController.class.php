@@ -421,7 +421,6 @@ class RenewController extends  CommonController
         {
             //如果修改续费成功则修改客户出款或者补款余额  I('post.payment_type') 修改只可在审核不通过的情况下
             money_change($postdate['advertiser'],$postdate['xf_contractid'],I('post.payment_type'),$postdate['money']);
-
             if($_FILES["file"]['name'][0]!="") {
                 $upload = new \Think\Upload();// 实例化上传类
                 $upload->maxSize = 2097152;// 设置附件上传大小
@@ -866,8 +865,8 @@ class RenewController extends  CommonController
             $this->success('sorry，您不是媒介部门成员，无法对续费进行完成操作~~~!');
             exit;
         }
-        if(I('get.type')=='renew' && cookie("u_groupid")!=5){
-            $this->success('sorry，您不是媒介部门成员，无法对续费进行完成操作~~~!');
+        if(I('get.type')=='tuikuan' && cookie("u_groupid")!=4){
+            $this->success('sorry，您不是财务部门成员，无法对退款进行完成操作~~~!');
             exit;
         }
 
