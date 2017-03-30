@@ -13,16 +13,12 @@
 <script src="/Public/js/messages_zh.js"></script>
 
 <script language="javascript">
-	$(document).ready(function(e) { 
-
-		
-		
+	$(document).ready(function(e) {
 		//自动换算百度币
 		$("#rebates_proportion,#money").keyup(function(){
 			jr=$("#money").val();	
 			bl=$("#rebates_proportion").val();
 			$("#show_money").val((jr*(1+(bl/100))).toFixed(2));
-			
 		})
 		
 		$("input[name='type']").change(function(){
@@ -151,7 +147,6 @@
     <label for="inputEmail3" class="col-sm-2 control-label">广告主公司名称</label>
     <div class="col-sm-3">
       <input type="text" class="form-control" autocomplete="off" name="gongsi" id="gongsi" value="{$info[gongsi]}" disabled>
-
     </div>
     
     <label for="inputEmail3" class="col-sm-1 control-label">代理公司</label>

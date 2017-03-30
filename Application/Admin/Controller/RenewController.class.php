@@ -247,7 +247,7 @@ class RenewController extends  CommonController
 
         //账户
         $account=M("Account");
-        $accountlist=$account->field("a.id,a.a_users,a.prlin_id,b.name")->join("a left join __PRODUCT_LINE__ b on a.prlin_id=b.id")->where("a.contract_id =".I('get.id'))->select();
+        $accountlist=$account->field("a.id,a.a_users,a.prlin_id,b.name")->join("a left join __PRODUCT_LINE__ b on a.prlin_id=b.id")->where("a.contract_id =".I('get.id')." and entime='4092599349'")->select();
 
         $this->account=$accountlist;
         $this->display();
@@ -394,7 +394,7 @@ class RenewController extends  CommonController
 
         //账户
         $account=M("Account");
-        $accountlist=$account->field("id,a_users")->where("contract_id =".I('get.yid'))->select();
+        $accountlist=$account->field("id,a_users")->where("contract_id =".I('get.yid')." and entime='4092599349'")->select();
         $this->account=$accountlist;
 
       //  $this->dinfo=$diankuan->where("contract_id=".I('get.id'))->find();
