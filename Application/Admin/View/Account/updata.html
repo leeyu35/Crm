@@ -10,7 +10,6 @@
 <script src="/Public/js/jquery-3.1.0.min.js"></script>
 <script language="javascript">
 	$(document).ready(function(e) {
-				
 		//动态加载公司名称
 		$("#gongsi").keyup(function(){
 			//$("#hjd").html($("#hjd").html()+"1");
@@ -124,6 +123,10 @@ $("#gongsi").on("blur",function(){
         })
 				
 		$("#formid").submit(function(){
+            var pattern = /^[\u4E00-\u9FA5a-zA-Z0-9_-]*$/;
+            users_yan=pattern.test($("#a_users").val());
+            password_yan=pattern.test($("#a_password").val());
+
             if($("#fandian").val()<0 || $("#fandian").val()>100 ) {
                 alert("返点只能填写0-100之间的数字");
                 $("#fandian").select();
@@ -134,6 +137,13 @@ $("#gongsi").on("blur",function(){
                 $("#a_users").select();
                 return false;
             }
+            if(!password_yan)
+            {
+                alert("密码设置错误，请简称是否存在特殊字符");
+                $("#a_password").select();
+                return false;
+            }
+
 //        if($("#appid").val()==null)
 //        {
 //            alert('appid不能为空');
@@ -319,10 +329,10 @@ $("#gongsi").on("blur",function(){
   <h4 class="bor-left-bull" >账户账号信息</h4>
   <hr>
 	<div class="form-group">
-  
+
     <label for="payment_type" class="col-sm-2 control-label">用户名</label>
     <div class="col-sm-3">
-     	<input type="text" name="a_users" class="form-control" id="a_users" value="{$info[a_users]}">
+     	<input type="text" name="a_usersx" class="form-control" id="a_users" value="{$info[a_users]}" disabled>
         <span id="keyup_isaddusersname"></span>
     </div>
     

@@ -29,13 +29,14 @@
         $(document).on("keyup",".money",function(){
             b = 1 + (Number($(this).parent().next().find(".fandian").val())/100);
             num = Number($(this).val())*b;
-            $(this).parent().next().next().find(".xianshijine").val(num).toFixed(2);
+            $(this).parent().next().next().find(".xianshijine").val(num.toFixed(2));
 
         });
         $(document).on("keyup",".fandian",function(){
             b = 1 + (Number($(this).val())/100);
             num = Number($(this).parent().prev().find(".money").val())*b;
-            $(this).parent().next().find(".xianshijine").val(num).toFixed(2);
+
+           $(this).parent().next().find(".xianshijine").val(num.toFixed(2));
         });
         /*
         $(".fandian").keyup(function(){
