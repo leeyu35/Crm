@@ -860,6 +860,13 @@ class RenewController extends  CommonController
     public function is_accomplish(){
         $id=I('get.id');
 
+        if(I('get.type')=='renew')
+        {
+            $url=U("Renew/index2");
+        }elseif(I('get.type')=='tuikuan')
+        {
+            $url=U("RefundMoney/index2");
+        }
 
         if(I('get.type')=='renew' && cookie("u_groupid")!=5){
             $this->success('sorry，您不是媒介部门成员，无法对续费进行完成操作~~~!');
@@ -873,7 +880,7 @@ class RenewController extends  CommonController
 
         if(M("RenewHuikuan")->where("id=$id")->setField("accomplish_users",cookie("u_id"))) {
             M("RenewHuikuan")->where("id=$id")->setField("is_accomplish",'1');
-            $this->success('操作成功', U("index2"));
+            $this->success('操作成功', $url);
         }else
         {
             $this->success('操作失败');
