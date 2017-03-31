@@ -429,9 +429,107 @@ class RefundMoneyController extends  CommonController
     }
     //审核操作
     public function shenhe(){
+
         $type=I('get.type');
         $id=I('get.id');
         $yid=I('get.yid');
+        $table=M("RenewHuikuan");
+        $info=$table->find($id);
+
+        //14 到客户 15 到总账户
+        if($info[payment_type]==15)
+        {
+
+            //退款合同详细信息
+            $contract=M("Contract");
+            $coninfo=$contract->field('mht_id')->find($info['xf_contractid']);
+
+            $mht_info=$contract->find($coninfo['mht_id']);
+            if(empty($mht_info)) {
+                die('非常抱歉，没有媒介合同，无法判断您是否有权限审核该退款，请联系CRM系统管理员！');
+                exit();
+            }
+
+            if($mht_info['state']==2 or $mht_info['state']==3)
+            {
+              if(cookie('u_groupid')!=5)
+              {
+                  $this->error('sorry,退款到总账户并且是拼框套壳的，只能由媒介操作审核。您未拥有该权限!');
+                  exit;
+              }else
+              {
+                  if(I('get.ju')!=''){
+                      $shenhe=2;
+                  }else
+                  {
+                      $shenhe=1;
+                      $data['is_accomplish']=1;
+                      $data['accomplish_users']=cookie("u_id");
+                  }
+                  $data['audit_1']=$shenhe;
+                  $data['audit_2']=$shenhe;
+                  $data['audit_3']=$shenhe;
+                  $data['susers1']=cookie("u_id");
+                  $data['susers2']=cookie("u_id");
+                  $data['susers3']=cookie("u_id");
+
+
+              }
+
+            }
+            elseif($mht_info['state']==1)
+            {
+
+                /*
+                echo '退款到总账户 直开 飞';
+                exit;
+                */
+                if($type=='audit_1' and cookie("u_id")==22)
+                {
+                    if(I('get.ju')!=''){
+                        $shenhe=2;
+                    }else
+                    {
+                        $shenhe=1;
+                    }
+                    $data['audit_1']=$shenhe;
+                    $data['susers1']=cookie("u_id");
+                }elseif(($type=='audit_2'  or $type=='audit_3') and cookie("u_id")==21)
+                {
+                    if(I('get.ju')!=''){
+                        $shenhe=2;
+                    }else
+                    {
+                        $shenhe=1;
+                    }
+
+                    $data['audit_2']=$shenhe;
+                    $data['audit_3']=$shenhe;
+                    $data['susers2']=cookie("u_id");
+                    $data['susers3']=cookie("u_id");
+                }else
+                {
+                    $this->error('sorry,退款到总账户并且是直开的，只能由刘哥（刘亚军）一级审核，望哥（西望）二级审核。您未拥有该权限!');
+                    exit();
+                }
+            }
+
+            if($table->where("id=$id")->save($data))
+            {
+                if($shenhe==2)
+                {
+                    $xfinfo=$table->find($id);
+                    //advertiser,xf_contractid,payment_type,fk_money
+                    money_reduce($xfinfo['advertiser'],$xfinfo['xf_contractid'],$xfinfo['payment_type'],$xfinfo['money']);
+                }
+                $this->success('审核成功');
+            }else
+            {
+                $this->error('审核失败');
+            }
+            exit;
+        }
+        //dump($info);
 
         //检查是否有权限执行审核操作
         $ispw=shenhe(__CONTROLLER__,$type);
