@@ -215,7 +215,7 @@ class NewCaiwuController extends CommonController
 
         //续费的记录 1预付 2垫付
         $hetong=M("RenewHuikuan");
-        $xflist=$hetong->field('money,payment_time,payment_type,account,audit_1,audit_2,audit_3,audit_4,type,users2,rebates_proportion,ctime')->where("xf_contractid=$contract_id and is_huikuan=0 $renewwhere $xf_where")->order("payment_time asc,id desc")->select();
+        $xflist=$hetong->field('money,payment_time,payment_type,account,audit_1,audit_2,audit_3,audit_4,type,users2,rebates_proportion,ctime,xf_qiane')->where("xf_contractid=$contract_id and is_huikuan=0 $renewwhere $xf_where")->order("payment_time asc,id desc")->select();
 
         $yue=0;
         $bukuan=0;
@@ -225,7 +225,7 @@ class NewCaiwuController extends CommonController
         {
             //账户名称
             $account_name=$account->field('a_users')->find($val['account']);
-            $account_str="<p>账户名称：$account_name[a_users] 返点：$val[rebates_proportion]</p> ";
+            $account_str="<p>账户名称：$account_name[a_users] 返点：$val[rebates_proportion] 续费欠额:$val[xf_qiane]</p> ";
             //审核状态
             if(($val[audit_1]!=2) and ($val[audit_2]!=2) and ($val[audit_3]!=2)and ($val[audit_4]!=2))
             {
