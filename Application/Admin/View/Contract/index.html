@@ -138,7 +138,7 @@ $(document).ready(function(e) {
         <td>
         <!--<a href="{:U("Renew/index?id=$list[id]")}" data-toggle="tooltip" data-placement="left" title="续费"><span class="glyphicon glyphicon-transfer"></span></a>&nbsp;|
         <a  href="{:U("Account/index?contract_id=$list[id]")}"   data-toggle="tooltip" data-placement="left" title="账户"><span class="glyphicon glyphicon-list"></span></a>&nbsp;|-->
-        <a  class="test1" id="{:U("upmeijie?id=$list[id]")}">媒</a>
+        <!--<a  class="test1" id="{:U("upmeijie?id=$list[id]")}">媒</a>-->
         <if condition="$list[parent_id] eq 0">
             <a href="{:U("Contract/add?parent_id=$list[id]")}" data-toggle="tooltip" data-placement="left" title="添加子合同"><span class="glyphicon glyphicon-retweet"></span></a>&nbsp;|
         </if>

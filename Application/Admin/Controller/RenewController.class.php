@@ -285,6 +285,12 @@ class RenewController extends  CommonController
             $this->error('不能输入负数');
             exit;
         }
+        $contract_mthiid=M("Contract")->field('mht_id')->find(I('post.xf_contractid'));
+        if(empty($contract_mthiid['mht_id']))
+        {
+            $this->error('此续费的合同没有选择媒介合同，故而提交续费失败。');
+            exit;
+        }
 
         //计算续费成本，从合同id读出该合同所属的媒介合同返点，用续费显示金额 除 媒介返点比例
         $yhtinfo=M("Contract")->field('huikuan,yu_e,mht_id')->find(I('post.xf_contractid'));
