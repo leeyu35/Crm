@@ -266,7 +266,7 @@ class NewCaiwuController extends CommonController
             {
                 $yue_hk+=$val['money'];
             }
-            $history_hk[]=array("date"=>date("Y-m-d",$val[payment_time]),"ctime"=>date("Y-m-d",$val[ctime]),"mes"=>"回款".num_format($val['money']."回款余额".$val['backmoney_yue'])."<p></p>","yue"=>$yue,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'回款',"submitusers"=>$val['users2'],"money"=>"+".$val['money']);
+            $history_hk[]=array("date"=>date("Y-m-d",$val[payment_time]),"ctime"=>date("Y-m-d",$val[ctime]),"mes"=>"回款".num_format($val['money'])."回款余额".num_format($val['backmoney_yue'])."<p></p>","yue"=>$yue,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'回款',"submitusers"=>$val['users2'],"money"=>"+".$val['money']);
         }
 
         //发票
