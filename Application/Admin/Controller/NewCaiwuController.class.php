@@ -258,7 +258,7 @@ class NewCaiwuController extends CommonController
 
         //回款
         $backmoney=M("RenewHuikuan");
-        $bkm_list=$hetong->field('money,payment_time,payment_type,account,audit_1,audit_2,users2,ctime')->where("xf_contractid=$contract_id and is_huikuan=1 $xf_where")->order("payment_time asc,id desc")->select();
+        $bkm_list=$hetong->field('money,payment_time,payment_type,account,audit_1,audit_2,users2,ctime,backmoney_yue')->where("xf_contractid=$contract_id and is_huikuan=1 $xf_where")->order("payment_time asc,id desc")->select();
 
         foreach ($bkm_list as $key=>$val)
         {
@@ -266,7 +266,7 @@ class NewCaiwuController extends CommonController
             {
                 $yue_hk+=$val['money'];
             }
-            $history_hk[]=array("date"=>date("Y-m-d",$val[payment_time]),"ctime"=>date("Y-m-d",$val[ctime]),"mes"=>"回款".num_format($val['money'])."<p></p>","yue"=>$yue,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'回款',"submitusers"=>$val['users2'],"money"=>"+".$val['money']);
+            $history_hk[]=array("date"=>date("Y-m-d",$val[payment_time]),"ctime"=>date("Y-m-d",$val[ctime]),"mes"=>"回款".num_format($val['money']."回款余额".$val['backmoney_yue'])."<p></p>","yue"=>$yue,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'回款',"submitusers"=>$val['users2'],"money"=>"+".$val['money']);
         }
 
         //发票
