@@ -198,6 +198,10 @@ class BackmoneyController extends CommonController
                     {
                         $xs_fandian=10;
                     }
+                    if(cookie("u_id")==114 or cookie("u_id")==115 or cookie("u_id")==113)
+                    {
+                        $xs_fandian=0;
+                    }
                     $yhkxf_list[]=array("xf_id"=>I('post.xf_id')[$key],"hk_id"=>$insid,"money"=>I('post.pmoney')[$key],"mt_fandian"=>I('post.mt_fandian'),"xs_fandian"=>$xs_fandian,"dl_fandian"=>I('post.dl_fandian'),"xf_fandian"=>I('post.xf_fandian')[$key],"shifu_money"=>$shifu,"time"=>time(),"avid"=>I('post.advertiser'),"xsid"=>I('post.market'));
                 }
                 //联系人表
