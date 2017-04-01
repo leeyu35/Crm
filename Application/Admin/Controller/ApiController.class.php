@@ -1713,7 +1713,7 @@ class ApiController extends RestController{
         if($select<1) {
             $date['account_id'] = $account_find[id];
             $date['u_id'] = $sem['id'];
-            if ($account_sem_set->add($data))
+            if ($account_sem_set->add($date))
             {
                 $data['code'] = 200;
                 $data['msg'] = 'success';
