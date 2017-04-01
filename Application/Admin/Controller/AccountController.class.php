@@ -428,31 +428,9 @@ class AccountController extends CommonController
             $qudao=M("Customer")->find(I('post.qudao'));
 
 
-            if(I('post.state')==0)
-            {
-                $url = "http://sem.yushanapp.com/sem/setzhxxcrm";
-                $post_data = array (
-                    "name"=>I('post.appname'),
-                    "type" =>$prlin['yushan_type'],
-                    "account_name" =>I('post.a_users'),
-                    "account_password" =>I('post.a_password'),
-                    "account_appid" =>'notoken',
-                    "account_status" =>'1',
-                    "fd_rate"=>I('post.fandian')/100,
-                    "view_type"=>'120001',
-                    "fwlx"=>I('post.server_type'),
-                    "qudao_id" => $qudao['yushan_id'],
-                    "appid"=>I('post.appid'),
-                );
-                $yushan_data=hjd_post_curl($url,$post_data);
-                $yushan_id=$yushan_data->data;
-                if($yushan_id!='ok')
-                {
-                    die('oh~no！修改账户 与 羽扇平台数据同步失败，请联系CRM技术管理人员！！！');
-                }
-            }
+
             //如果是临时账户改为正式账户 改了用户名的
-            if($isjiugaixin==1)
+            if(I('post.state')==='0')
             {
 
                 $url = "http://sem.yushanapp.com/sem/createhu";
@@ -485,6 +463,32 @@ class AccountController extends CommonController
                         die('oh~no！添加账户 与 羽扇平台数据同步失败，请联系CRM技术管理人员！！！');
                     }
 
+            }elseif(empty(I('post.state')))
+            {
+
+                $url = "http://sem.yushanapp.com/sem/setzhxxcrm";
+                $post_data = array (
+                    "name"=>I('post.appname'),
+                    "type" =>$prlin['yushan_type'],
+                    "account_name" =>I('post.a_users'),
+                    "account_password" =>I('post.a_password'),
+                    "account_appid" =>'notoken',
+                    "account_status" =>'1',
+                    "fd_rate"=>I('post.fandian')/100,
+                    "view_type"=>'120001',
+                    "fwlx"=>I('post.server_type'),
+                    "qudao_id" => $qudao['yushan_id'],
+                    "appid"=>I('post.appid'),
+                );
+
+                $yushan_data=hjd_post_curl($url,$post_data);
+                $yushan_id=$yushan_data->data;
+
+                if($yushan_id!='ok')
+                {
+
+                    die('oh~no！修改账户 与 羽扇平台数据同步失败，请联系CRM技术管理人员！！！');
+                }
             }
 
 
