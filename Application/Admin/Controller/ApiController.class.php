@@ -1709,18 +1709,39 @@ class ApiController extends RestController{
             exie;
         }
         $account_sem_set=M("AccountUsers");
-        if($account_sem_set->where("account_id=$account_find[id]")->setField('u_id',$sem['id']))
-        {
-            $data['code'] = 200;
-            $data['msg'] = 'success';
-            $this->response($data,'json');
-        }else
-        {
-            $data['code'] = 500;
-            $data['msg'] = 'Unknown reason! Synchronization failure! ';
-            $this->response($data,'json');
-            exie;
+        $select=$account_sem_set->where("account_id=$account_find[id]")->count();
+        if($select<1) {
+            $date['account_id'] = $account_find[id];
+            $date['u_id'] = $sem['id'];
+            if ($account_sem_set->add($data))
+            {
+                $data['code'] = 200;
+                $data['msg'] = 'success';
+                $this->response($data,'json');
+            }else
+            {
+                $data['code'] = 500;
+                $data['msg'] = 'Unknown reason! Synchronization failure! account add error! ';
+                $this->response($data,'json');
+                exie;
+            }
+        }else{
+
+            if($account_sem_set->where("account_id=$account_find[id]")->setField('u_id',$sem['id']))
+            {
+                $data['code'] = 200;
+                $data['msg'] = 'success';
+                $this->response($data,'json');
+            }else
+            {
+                $data['code'] = 500;
+                $data['msg'] = 'Unknown reason! Synchronization failure! ';
+                $this->response($data,'json');
+                exie;
+            }
+
         }
+
 
     }
 
