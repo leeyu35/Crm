@@ -1175,3 +1175,97 @@ function day_15($start_time){
     return $array;
 
 }
+
+//续费对回款消耗
+function renew_huikuan($xf_insid,$xf_money,$xf_contractid,$xf_fandian,$advertiser,$xsid){
+    $huikuan=M("RenewHuikuan");
+    //此合同回款列表
+    $backmoney=$huikuan->where("is_huikuan=1 and xf_contractid='$xf_contractid' and audit_2!=2 and audit_1!=2 and backmoney_yue >0")->order("payment_time asc")->select();
+
+
+    //计算续费成本
+    //要续费合同
+    $yhtinfo=M("Contract")->field('huikuan,yu_e,mht_id,contract_state')->find(I('post.xf_contractid'));
+    //媒介合同信息
+    $mjhtinfo=M("Contract")->field('rebates_proportion,dl_fandian')->find($yhtinfo['mht_id']);
+    //销售提成
+    if($yhtinfo['contract_state']=='1')
+    {
+        $xs_fandian=20;
+    }elseif($yhtinfo['contract_state']=='2')
+    {
+        $xs_fandian=5;
+    }elseif($yhtinfo['contract_state']=='3')
+    {
+        $xs_fandian=10;
+    }
+    if(cookie("u_id")==114 or cookie("u_id")==115 or cookie("u_id")==113)
+    {
+        $xs_fandian=0;
+    }
+    $yixufeihuikuan_date['mt_fandian']=$mjhtinfo['rebates_proportion'];
+    $yixufeihuikuan_date['dl_fandian']=$mjhtinfo['dl_fandian'];
+    $yixufeihuikuan_date['xf_fandian']=$xf_fandian;
+    $yixufeihuikuan_date['gr_fandian']=0;
+    $yixufeihuikuan_date['xs_fandian']=$xs_fandian;
+    $yixufeihuikuan_date['avid']=$advertiser;
+    $yixufeihuikuan_date['xsid']=$xsid;
+    $yixufeihuikuan_date['xf_id']=$xf_insid;
+    $yixufeihuikuan_date['xs_tc']=0;
+    $xf_fd=(I('post.rebates_proportion')+100)/100;
+
+
+
+    //如果没有回款则返回全部续费金额
+    if(count($backmoney)<1)
+    {
+        return $xf_money;
+    }
+    foreach ($backmoney as $key=>$value)
+    {
+        //如果回款金额 大于 续费金额 （余额大于续费金额）停止循环并返回续费欠额为0
+        if($value['backmoney_yue']-$xf_money>0)
+        {
+            //设置回款余额
+            $huikuan->where("id=$value[id]")->setField('backmoney_yue',$value['money']-$xf_money);
+            //增加已回款续费记录
+            $yixufeihuikuan_date['hk_id']=$value['id'];
+            $yixufeihuikuan_date['time']=$value['payment_time'];
+            $yixufeihuikuan_date['money']=$xf_money;
+            $shifu=($yixufeihuikuan_date['money']*$xf_fd)/(($mjhtinfo['rebates_proportion']+100)/100);
+            $yixufeihuikuan_date['shifu_money']=$shifu;
+
+            M("Yihuikuanxufei")->add($yixufeihuikuan_date);
+
+            $xf_money=0;
+            //修改续费欠额
+            M("RenewHuikuan")->where("id=$xf_insid")->setField('xf_qiane',$xf_money);
+            //到此结束
+            return $xf_money;
+            exit;
+        }else
+        {
+            //如果回款金额 小于 续费金额  （此回款余额不足以抹平此续费）则继续执行循环 并把此回款的余额为0
+
+            //回款余额减续费金额 肯定为负数，则负数
+            $xf_money=$value['backmoney_yue']-$xf_money;
+            $xf_money=-$xf_money;
+
+            //增加已回款续费记录
+            $yixufeihuikuan_date['hk_id']=$value['id'];
+            $yixufeihuikuan_date['time']=$value['payment_time'];
+            $yixufeihuikuan_date['money']=$value['money'];
+            $shifu=($yixufeihuikuan_date['money']*$xf_fd)/(($mjhtinfo['rebates_proportion']+100)/100);
+            $yixufeihuikuan_date['shifu_money']=$shifu;
+            M("Yihuikuanxufei")->add($yixufeihuikuan_date);
+
+            //设置回款余额
+            $huikuan->where("id=$value[id]")->setField('backmoney_yue','0');
+            //$xf_money=$value['money']-$xf_money;
+        }
+    }
+
+    //修改续费欠额
+    M("RenewHuikuan")->where("id=$xf_insid")->setField('xf_qiane',$xf_money);
+
+}

@@ -124,7 +124,7 @@
             })
             $("#formid").submit(function() {
 
-                var pattern = /^[\u4E00-\u9FA5a-zA-Z0-9_-]*$/;
+                var pattern = /^[\u4E00-\u9FA5a-zA-Z0-9_\-@\.]*$/;
                 users_yan=pattern.test($("#a_users").val());
                 password_yan=pattern.test($("#a_password").val());
 

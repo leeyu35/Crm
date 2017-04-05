@@ -107,7 +107,6 @@ class RenewController extends  CommonController
     public function index2(){
         //检查该合同是否已经通过审核
         $hetong=M("Contract");
-
         //搜索条件
         $type=I('get.searchtype');
         if($type!='')
@@ -202,6 +201,13 @@ class RenewController extends  CommonController
                     $adveritiser = M("Customer")->field('id')->where(" business = $usinfo[id]")->select(false);
                     $where .= " and  a.id!='0' and a.advertiser in($adveritiser) ";
             }
+            //如果是销售并且不是经理的
+            if(($usinfo['groupid']=='2' or $usinfo['groupid']=='15') and $usinfo['manager']=='0')
+            {
+                $adveritiser = M("Customer")->field('id')->where("submituser = $usinfo[id]")->select(false);
+                $q_where=' a.id!=0';
+                $where .= " and a.id!='0' and a.advertiser in($adveritiser) ";
+            }
 
         }else
         {
@@ -209,7 +215,7 @@ class RenewController extends  CommonController
         }
 
 
-
+       
         $RenewHuikuan=M('RenewHuikuan');
         $count      = $RenewHuikuan->field('a.id,a.advertiser,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and a.payment_type!=14 and a.payment_type!=15 and ".$q_where.$where)->count();// 查询满足要求的总记录数
 
@@ -248,8 +254,9 @@ class RenewController extends  CommonController
         //账户
         $account=M("Account");
         $accountlist=$account->field("a.id,a.a_users,a.prlin_id,b.name")->join("a left join __PRODUCT_LINE__ b on a.prlin_id=b.id")->where("a.contract_id =".I('get.id')." and endtime='4092599349'")->select();
-
         $this->account=$accountlist;
+
+
         $this->display();
 
     }
@@ -292,12 +299,21 @@ class RenewController extends  CommonController
             exit;
         }
 
+        $xf_qiane=I('post.money');
+
+
+        //默认续费欠额为全款
+        $hetong->xf_qiane=I('post.money');
+
+
+
         //计算续费成本，从合同id读出该合同所属的媒介合同返点，用续费显示金额 除 媒介返点比例
-        $yhtinfo=M("Contract")->field('huikuan,yu_e,mht_id')->find(I('post.xf_contractid'));
-        $mjhtinfo=M("Contract")->field('rebates_proportion')->find($yhtinfo['mht_id']);
+        $yhtinfo=M("Contract")->field('huikuan,yu_e,mht_id,contract_state')->find(I('post.xf_contractid'));
+        $mjhtinfo=M("Contract")->field('rebates_proportion,dl_fandian')->find($yhtinfo['mht_id']);
         $fandian=($mjhtinfo['rebates_proportion']+100)/100; //媒体返点
         $hetong->xf_cost=I('post.show_money')/$fandian; //续费成本
         $kehuinfo=kehu(I('post.advertiser'));//客户信息
+        /*
         $kehuyue=$yhtinfo['huikuan']-$yhtinfo['yu_e'];//客户合同余额
         if($kehuyue<0){
             //客户余额小于0 则 这笔续费的欠额为 填写金额
@@ -305,28 +321,67 @@ class RenewController extends  CommonController
         }else{
             //客户余额大于0 则 这笔续费的欠额为 客户余额-填写金额
             $hetong->xf_qiane=$kehuyue-I('post.money');
+
+            if($hetong->xf_qiane>0)
+            {
+                $hetong->xf_qiane=0;
+                $yixufeihuikuan_date['money']=I('post.money');
+            }else
+            {
+                $yixufeihuikuan_date['money']=I('post.money')-($hetong->xf_qiane*-1);
+            }
         }
         //如果是负数则转成正数。因为是欠款 正负数都为正
         if($hetong->xf_qiane<0)
         {
             $hetong->xf_qiane=-$hetong->xf_qiane;
         }
-        if(I('post.payment_type')=='3')
-        {
-            $hetong->xf_qiane=null;
-            $hetong->xf_cost=null;
-        }
+
+
+        $xf_htid=M("RenewHuikuan")->find(I('post.xf_id'));
+
+
+        $yixufeihuikuan_date['mt_fandian']=$mjhtinfo['rebates_proportion'];
+        $yixufeihuikuan_date['dl_fandian']=$mjhtinfo['dl_fandian'];
+        $yixufeihuikuan_date['xf_fandian']=I('post.rebates_proportion');
+        $yixufeihuikuan_date['gr_fandian']=0;
+        $yixufeihuikuan_date['xs_fandian']=$xs_fandian;
+        $yixufeihuikuan_date['avid']=I('post.advertiser');
+        $yixufeihuikuan_date['xsid']=I('post.market');
+
+        $xf_fd=(I('post.rebates_proportion')+100)/100;
+        $shifu=($yixufeihuikuan_date['money']*$xf_fd)/(($mjhtinfo['rebates_proportion']+100)/100);
+        $yixufeihuikuan_date['shifu_money']=$shifu;
+
+
+
+        echo $shifu;
+      // $yixufeihuikuan_date['money']=
+        dump($_POST);
+        dump($yixufeihuikuan_date);
+        */
 
         if($insid=$hetong->add()){
 
-            //如果续费成功则修改客户出款或者补款余额  I('post.payment_type')
-            money_change($postdate['advertiser'],$postdate['xf_contractid'],I('post.payment_type'),$postdate['money'],$postdate['account']);
+            if(I('post.payment_type')=='3')
+            {
+                $hetong->xf_qiane=null;
+                $hetong->xf_cost=null;
+            }elseif(I('post.payment_type')=='1' or I('post.payment_type')=='2'){
+                //如果续费成功则修改客户出款或者补款余额  I('post.payment_type')
+                money_change($postdate['advertiser'],$postdate['xf_contractid'],I('post.payment_type'),$postdate['money'],$postdate['account']);
+
+            }
 
             if($insid==1)
             {
                 $result = $hetong->query("select currval('jd_renew_huikuan_id_seq')");
                 $insid=$result[0][currval];
             }
+
+
+            //添加已续费回款并且修改续费欠额 和 回款的余额
+            renew_huikuan($insid,$xf_qiane,I('post.xf_contractid'),I('post.rebates_proportion'),I('post.advertiser'),I('post.market'));
 
             //dump($_FILES["file"]);
             if($_FILES["file"]['name'][0]!="") {
@@ -350,7 +405,6 @@ class RenewController extends  CommonController
                     }
                 }
             }
-
 
             $this->success("添加成功",U("NewCaiwu/show?id=".$postdate['advertiser']));
 
@@ -517,6 +571,17 @@ class RenewController extends  CommonController
                     //advertiser,xf_contractid,payment_type,fk_money
                     money_reduce($xfinfo['advertiser'],$xfinfo['xf_contractid'],$xfinfo['payment_type'],$xfinfo['money'],$xfinfo['account']);
 
+                    //回滚已回款续费 1包含本续费的回款 回滚 2，续费欠额回滚  3，已回款续费删除
+                    $yihuikuanxufei=M("Yihuikuanxufei")->where("xf_id=$id")->select();
+                    foreach ($yihuikuanxufei as $key=>$val)
+                    {
+                        //回款回滚
+                        M("RenewHuikuan")->where("id=$val[hk_id]")->setInc('backmoney_yue',$val['money']);
+                        //续费回滚
+                        M("RenewHuikuan")->where("id=$val[xf_id]")->setField('xf_qiane',$xfinfo['money']);
+                        //删除已回款续费记录
+                        M("Yihuikuanxufei")->delete($val[id]);
+                    }
                 }
                 /*
                 if($yid!='')

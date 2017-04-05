@@ -106,7 +106,7 @@ class BackmoneyController extends CommonController
         $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
         $contract=M("Contract");
         $contract_info=$contract->field('id,market,appname,mht_id')->find(I('get.contract_id'));
-        $xufeilist=M("RenewHuikuan")->field('a.*,b.a_users')->join(" a left join jd_account b on a.account=b.id")->where('a.xf_contractid='.I('get.contract_id').' and (a.payment_type=1 or a.payment_type=2) and a.xf_qiane>0')->select();
+        $xufeilist=M("RenewHuikuan")->field('a.*,b.a_users')->join(" a left join jd_account b on a.account=b.id")->where('a.xf_contractid='.I('get.contract_id').' and (a.payment_type=1 or a.payment_type=2) and a.xf_qiane>0 and a.audit_1!=2 and a.audit_2!=2 and a.audit_3!=2  and a.audit_4!=2')->select();
 
         //媒体合同信息
         $mt_contract_info=$contract->field("id,rebates_proportion,dl_fandian")->find($contract_info['mht_id']);
