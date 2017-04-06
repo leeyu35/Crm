@@ -1527,6 +1527,7 @@ class ApiController extends RestController{
      * */
     public function consume_list_to_date(){
         $type=I('get.type');//type
+        $view_type=I('get.view_type');//显示类型 1百度币 2客户消耗 3公司消耗
         $time_start=strtotime(I('get.start'));//开始时间
         $time_end=strtotime(I('get.end'));//结束时间
         $xiaohao=M("AccountConsumption");
@@ -1550,7 +1551,6 @@ class ApiController extends RestController{
         foreach ($datear as $k=>$v)
         {
             $zhouqi[$k]=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,SUM (xiaohao.baidu_cost_total/(1+xiaohao.xf_fandian)) AS kehu_xiaohao,SUM ((xiaohao.baidu_cost_total/(1+xiaohao.xf_fandian))/(1+xiaohao.mt_fandian)) AS chengben_xiaohao,xiaohao.appid,zhanghu.a_users,zhanghu.endtime,zhanghu.appname,gongsi.submituser as marketid,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='".strtotime($v[start])."'  and xiaohao.starttime<'".strtotime($v[end])."' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
-
             $date_top[]=$v['start']."到".$v['end'];
             //$xiaohaolist=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,xiaohao.htid,zhanghu.a_users,zhanghu.appname,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser,xiaohao.xsid,xiaohao.semid")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='$time_start'  and xiaohao.starttime<'$time_end' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,xiaohao.xsid,xiaohao.semid,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
 
@@ -1602,7 +1602,17 @@ class ApiController extends RestController{
                 {
                     if($val['appid']==$v1['appid'] and $val['xsid']==$v1['xsid'])
                     {
-                        $zhouqi[$dakey][$key]['xiaohao_date'][$v[start]."到".$v[end]]=round($v1['baidu_cost_total'],2);
+                        if($view_type==1)
+                        {
+                            $dateview='baidu_cost_total';
+                        }elseif($view_type==2)
+                        {
+                            $dateview='kehu_xiaohao';
+                        }elseif($view_type==3)
+                        {
+                            $dateview='chengben_xiaohao';
+                        }
+                        $zhouqi[$dakey][$key]['xiaohao_date'][$v[start]."到".$v[end]]=round($v1[$dateview],2);
                     }
                 }
             }
