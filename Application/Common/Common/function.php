@@ -64,8 +64,6 @@ function hjd_post_curl($url,$postdate){
 
 function account_daili($where=""){
     //如果有条件则先删除CRM消耗  所符合条件的数据
-
-
     $tabledata = M("accountdaily", "baiduapi_", "pgsql://rdspg:anmeng@rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com:3432/msdb");//百度消耗
 
     $tabledata1=M("accountdaily", "tb_shenma_", "pgsql://rdspg:anmeng@rds455ekt1422z8sh7e2o.pg.rds.aliyuncs.com:3432/yushan");//神马消耗

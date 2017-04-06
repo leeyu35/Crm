@@ -1549,7 +1549,7 @@ class ApiController extends RestController{
 
         foreach ($datear as $k=>$v)
         {
-            $zhouqi[$k]=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,zhanghu.a_users,zhanghu.endtime,zhanghu.appname,gongsi.submituser as marketid,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='".strtotime($v[start])."'  and xiaohao.starttime<'".strtotime($v[end])."' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
+            $zhouqi[$k]=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,SUM (xiaohao.baidu_cost_total/(1+xiaohao.xf_fandian)) AS kehu_xiaohao,SUM ((xiaohao.baidu_cost_total/(1+xiaohao.xf_fandian))/(1+xiaohao.mt_fandian)) AS chengben_xiaohao,xiaohao.appid,zhanghu.a_users,zhanghu.endtime,zhanghu.appname,gongsi.submituser as marketid,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='".strtotime($v[start])."'  and xiaohao.starttime<'".strtotime($v[end])."' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
 
             $date_top[]=$v['start']."到".$v['end'];
             //$xiaohaolist=$xiaohao->field("sum(xiaohao.baidu_cost_total) as baidu_cost_total,xiaohao.appid,xiaohao.htid,zhanghu.a_users,zhanghu.appname,zhanghu.id as account_id,gongsi.id as avid,gongsi.advertiser,xiaohao.xsid,xiaohao.semid")->join("xiaohao left join jd_account zhanghu on xiaohao.appid=zhanghu.appid left join jd_customer gongsi on xiaohao.avid=gongsi.id")->where("xiaohao.starttime>='$time_start'  and xiaohao.starttime<'$time_end' $where")->group("xiaohao.appid,gongsi.id,xiaohao.htid,gongsi.advertiser,zhanghu.a_users,xiaohao.xsid,xiaohao.semid,zhanghu.appname,zhanghu.id")->order("baidu_cost_total desc")->select();
@@ -1604,8 +1604,6 @@ class ApiController extends RestController{
                     {
                         $zhouqi[$dakey][$key]['xiaohao_date'][$v[start]."到".$v[end]]=round($v1['baidu_cost_total'],2);
                     }
-
-
                 }
             }
 

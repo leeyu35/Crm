@@ -109,7 +109,6 @@ class LinuxTimeController extends Controller
             $data2['mt_fandian']=account_xs_id($val['appid'],'mt_fandian');
             if($account_counsumption->add($data2))
             {
-
                 $count++;
             }
         }
