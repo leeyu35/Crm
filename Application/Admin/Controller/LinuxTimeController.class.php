@@ -83,6 +83,7 @@ class LinuxTimeController extends Controller
         $where=" and date='$date'";
         //缓存每个客户具体消费情况 appid ,日期,消费  获取周消费的时候要调用缓存 所以在这里先生存缓存
         $account_day_cost = account_daili($where);//消耗数据  百度-神马 合并封装
+
         if(!$account_day_cost)
         {
             $data['code']=403;
@@ -104,6 +105,8 @@ class LinuxTimeController extends Controller
             $data2['xsid']=account_xs_id($val['appid'],'market');
             $data2['htid']=account_xs_id($val['appid'],'id');
             $data2['avid']=account_xs_id($val['appid'],'advertiser');
+            $data2['xf_fandian']=$val['fandian'];
+            $data2['mt_fandian']=account_xs_id($val['appid'],'mt_fandian');
             if($account_counsumption->add($data2))
             {
 

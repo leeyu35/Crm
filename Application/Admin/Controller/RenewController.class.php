@@ -215,7 +215,7 @@ class RenewController extends  CommonController
         }
 
 
-       
+
         $RenewHuikuan=M('RenewHuikuan');
         $count      = $RenewHuikuan->field('a.id,a.advertiser,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and a.payment_type!=14 and a.payment_type!=15 and ".$q_where.$where)->count();// 查询满足要求的总记录数
 

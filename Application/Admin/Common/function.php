@@ -1016,21 +1016,35 @@ function account_sem_id($appid){
 
 
 
-//根据appID 获取相关账户销售id或者合同id
+//根据appID 获取相关账户销售id或者合同id 或者媒介返点
 function  account_xs_id($appid,$field){
+
     $account=M("Account");
     $accountinfo=$account->field('id,contract_id')->where("appid = '$appid' and endtime='4092599349'")->find();
 
     if($accountinfo[id]!='') {
         $hetong = M("Contract");
-        $hetonginfo = $hetong->field('id,market,advertiser')->find($accountinfo['contract_id']);
-        return $hetonginfo[$field];
+        $hetonginfo = $hetong->field('id,market,advertiser,mht_id')->find($accountinfo['contract_id']);
+        if($field=='mt_fandian')
+        {
+            $mjinfo=$hetong->field('rebates_proportion')->find($hetonginfo['mht_id']);
+            if(empty($mjinfo['rebates_proportion']))
+            {
+                $mjinfo['rebates_proportion']=0;
+            }
+            return $mjinfo['rebates_proportion']/100;
+        }else{
+            return $hetonginfo[$field];
+        }
+
     }
     else
     {
         return ;
     }
 }
+
+
 
   function nianjia($uid){
     $users=users_info($uid);

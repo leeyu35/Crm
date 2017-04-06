@@ -253,6 +253,8 @@ class AccountsemController extends CommonController
             $data2['xsid']=account_xs_id($val['appid'],'market');
             $data2['htid']=account_xs_id($val['appid'],'id');
             $data2['avid']=account_xs_id($val['appid'],'advertiser');
+            $data2['xf_fandian']=$val['fandian'];
+            $data2['mt_fandian']=account_xs_id($val['appid'],'mt_fandian');
             if($account_counsumption->add($data2))
             {
 
