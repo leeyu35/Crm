@@ -192,7 +192,10 @@ class RenewController extends  CommonController
                 if($usinfo['groupid']=='2' or $usinfo['groupid']=='15')
                 {
                     $userswe=M("Users")->field('id')->where("groupid=$usinfo[groupid]")->select(false);
-                    $where.=" and a.market in($userswe)";
+                    $adveritiser = M("Customer")->field('id')->where("submituser in($userswe)")->select(false);
+                    $q_where=' a.id!=0';
+                    $where .= " and a.id!='0' and a.advertiser in($adveritiser) ";
+            
                 }
                 $q_where='a.id!=0';
             }
