@@ -22,6 +22,13 @@ function product_line($idstr){
 
 }
 
+//根据产品线id 返回产品线名称
+function product_line_name($id)
+{
+    $product_line=M('ProductLine')->field('name')->find($id);
+    return $product_line['name'];
+}
+
 //根据客户ID 返回客户信息
 function kehu($id){
     $kehu=M("Customer");

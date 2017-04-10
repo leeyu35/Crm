@@ -98,6 +98,9 @@ class RenewController extends  CommonController
             $account=account($val['account']);
             $list[$key]['a_users']=$account['a_users'];
             $list[$key]['a_id']=$account['id'];
+
+            //产品线信息
+            $list[$key]['name']=product_line_name($account['id']);
         }
         $this->list=$list;
         $this->assign('page',$show);// 赋值分页输出
@@ -867,8 +870,9 @@ class RenewController extends  CommonController
             //显示百度币
             $list2[$key]['show_money']=num_format($val['show_money']);
 
-            //产品线
-            $list2[$key]['product_line']=$val['name'];
+        
+            //产品线信息
+            $list[$key]['name']=product_line_name($account['id']);
             //返点
             $list2[$key]['rebates_proportion']=$val['rebates_proportion'];
 
