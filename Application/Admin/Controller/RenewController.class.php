@@ -195,7 +195,7 @@ class RenewController extends  CommonController
                     $adveritiser = M("Customer")->field('id')->where("submituser in($userswe)")->select(false);
                     $q_where=' a.id!=0';
                     $where .= " and a.id!='0' and a.advertiser in($adveritiser) ";
-            
+
                 }
                 $q_where='a.id!=0';
             }
