@@ -22,10 +22,11 @@ function product_line($idstr){
 
 }
 
-//根据产品线id 返回产品线名称
+//根据账户id 返回产品线名称
 function product_line_name($id)
 {
-    $product_line=M('ProductLine')->field('name')->find($id);
+    $account=M("Account")->field('prlin_id')->find($id);
+    $product_line=M('ProductLine')->field('name')->find($account['prlin_id']);
     return $product_line['name'];
 }
 
