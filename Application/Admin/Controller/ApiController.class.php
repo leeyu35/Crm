@@ -1642,7 +1642,7 @@ class ApiController extends RestController{
                 foreach ($val['date_to'] as $k=>$v)
                 {
                     $excel[$key][$v]=0; //默认全部为零
-                    foreach ($val['xiaohao_date'] as $k2=>$v2)
+                    foreach ($val[$dateview] as $k2=>$v2)
                     {
                         if($v==$k2)
                         {

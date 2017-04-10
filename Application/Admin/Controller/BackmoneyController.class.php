@@ -105,7 +105,7 @@ class BackmoneyController extends CommonController
         $agentcompany=M("AgentCompany");
         $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
         $contract=M("Contract");
-        $contract_info=$contract->field('id,market,appname,mht_id')->find(I('get.contract_id'));
+        $contract_info=$contract->field('id,market,appname,mht_id,submituser')->find(I('get.contract_id'));
         $xufeilist=M("RenewHuikuan")->field('a.*,b.a_users')->join(" a left join jd_account b on a.account=b.id")->where('a.xf_contractid='.I('get.contract_id').' and (a.payment_type=1 or a.payment_type=2) and a.xf_qiane>0 and a.audit_1!=2 and a.audit_2!=2 and a.audit_3!=2  and a.audit_4!=2')->select();
 
         //媒体合同信息
@@ -115,7 +115,7 @@ class BackmoneyController extends CommonController
 
 
         $this->xufeilist=$xufeilist;
-
+        //var_dump($contract_info);
         $this->contract_info=$contract_info;
         $this->display();
     }
@@ -128,7 +128,6 @@ class BackmoneyController extends CommonController
 
 
     public function addru(){
-
         $Diankuan=M("RenewHuikuan");
         $postdate=$Diankuan->create();
         $Diankuan->payment_time=strtotime($Diankuan->payment_time);
@@ -142,6 +141,7 @@ class BackmoneyController extends CommonController
             $this->error('此回款的合同没有选择媒介合同，故而提交回款失败。');
             exit;
         }
+
 
 
         //查看合同是否满一年如果满一年就合同状态就改为2（老客户）
@@ -165,7 +165,7 @@ class BackmoneyController extends CommonController
         {
             $this->error('不能输入负数');
             exit;
-        }
+    }
 
         if($insid=$Diankuan->add()){
             //如果回款成功则修改客户和合同回款总额
@@ -241,6 +241,9 @@ class BackmoneyController extends CommonController
 
                 }
             }
+            //回款对应续费）——自动化
+            huikuan_xufei_auto($insid);
+
 
             $this->success("提交成功",U("NewCaiwu/show?id=".$postdate['advertiser']));
 

@@ -381,7 +381,7 @@ class RenewController extends  CommonController
 
 
             //添加已续费回款并且修改续费欠额 和 回款的余额
-            renew_huikuan($insid,$xf_qiane,I('post.xf_contractid'),I('post.rebates_proportion'),I('post.advertiser'),I('post.market'));
+            renew_huikuan($insid);
 
             //dump($_FILES["file"]);
             if($_FILES["file"]['name'][0]!="") {
@@ -582,6 +582,14 @@ class RenewController extends  CommonController
                         //删除已回款续费记录
                         M("Yihuikuanxufei")->delete($val[id]);
                     }
+                    //循环该合同回款并且重新对应有欠额的续费
+                    $contract_list=M("RenewHuikuan")->where("is_huikuan=1 and backmoney_yue>0 and xf_contractid=$xfinfo[xf_contractid]")->select();
+                    foreach ($contract_list as $key => $val)
+                    {
+                        huikuan_xufei_auto($val['id']);
+                    }
+
+
                 }
                 /*
                 if($yid!='')

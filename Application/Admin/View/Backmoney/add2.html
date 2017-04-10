@@ -183,7 +183,7 @@
 
     
   </div>
-    <h4 class="bor-left-bull" >续费欠款列表</h4>
+    <h4 class="bor-left-bull" >该合同续费欠款列表</h4>
     <hr>
     <table class="table">
         <tr>
@@ -194,7 +194,7 @@
             <th>续费返点</th>
             <th>续费展示百度币</th>
             <th>续费欠额</th>
-            <th>分配额度</th>
+            <!--<th>分配额度</th>-->
         </tr>
         <volist id="xufeilist" name="xufeilist">
             <input type="hidden" name="xf_id[]" value="{$xufeilist[id]}">
@@ -208,15 +208,15 @@
                 <td> {$xufeilist[rebates_proportion]}</td>
                 <td> {$xufeilist[show_money]}</td>
                 <td> <span class="qiane_id{$xufeilist[id]}">{$xufeilist[xf_qiane]}</span></td>
-                <td>
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="pmoney[]" class="form-control hpmoney pingk_{$xufeilist[id]}" id="{$xufeilist[id]}"  value="0">
-                        <span class="input-group-btn">
-                            <button class="btn btn-success pingle" type="button" id="{$xufeilist[id]}">平!</button>
-                          </span>
-                    </div>
+                <!--<td>-->
+                    <!--<div class="input-group input-group-sm" style="width: 150px;">-->
+                        <!--<input type="text" name="pmoney[]" class="form-control hpmoney pingk_{$xufeilist[id]}" id="{$xufeilist[id]}"  value="0">-->
+                        <!--<span class="input-group-btn">-->
+                            <!--<button class="btn btn-success pingle" type="button" id="{$xufeilist[id]}">平!</button>-->
+                          <!--</span>-->
+                    <!--</div>-->
 
-                </td>
+                <!--</td>-->
             </tr>
 
         </volist>
