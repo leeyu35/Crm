@@ -70,6 +70,9 @@ $(document).ready(function(e) {
         <th>APP名称或简称</th>
         <th>金额</th>
         <th>返点</th>
+        <if condition="$Think.cookie.u_groupid eq '4'">
+        <th>媒体返点</th>
+        </if>
         <th>账户</th>
         <!--<th>付款金额</th>-->
         <th>产品线</th>
@@ -88,6 +91,9 @@ $(document).ready(function(e) {
             <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$list[appname]}</td>
             <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}" align="right">{$list[money]|num_format}&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$list[rebates_proportion]}%</td>
+            <if condition="$Think.cookie.u_groupid eq '4'">
+            <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$list[mt_fandian]}%</td>
+            </if>
             <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$list[a_users]}</td>
             <!--<td>2016年8月15日</td>-->
             <td class="htshow" id="{:U("show?id=$list[id]&yid=$list[xf_contractid]")}">{$list[name]}</td>

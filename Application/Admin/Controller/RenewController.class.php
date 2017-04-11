@@ -241,6 +241,13 @@ class RenewController extends  CommonController
             $list[$key]['a_id']=$account['id'];
             //产品线信息
             $list[$key]['name']=product_line_name($account['id']);
+            //媒介合同返点
+            $htinfo=M("Contract")->field('mht_id')->find($val['xf_contractid']);
+
+            $meihetonginfo=M("Contract")->field('rebates_proportion')->find("$htinfo[mht_id]");
+
+            $list[$key]['mt_fandian']=$meihetonginfo['rebates_proportion'];
+
         }
         $this->list=$list;
         $this->assign('page',$show);// 赋值分页输出
@@ -873,10 +880,20 @@ class RenewController extends  CommonController
 
 
             //产品线信息
-            $list[$key]['name']=product_line_name($account['id']);
+            $list2[$key]['name']=product_line_name($account['id']);
             //返点
             $list2[$key]['rebates_proportion']=$val['rebates_proportion'];
+            //媒介合同返点
+            $htinfo=M("Contract")->field('mht_id')->find($val['xf_contractid']);
 
+            $meihetonginfo=M("Contract")->field('rebates_proportion')->find("$htinfo[mht_id]");
+
+            $list2[$key]['mt_fandian']=$meihetonginfo['rebates_proportion'];
+
+            if(cookie('u_groupid')!=4)
+            {
+                $list2[$key]['mt_fandian']='Without permission';
+            }
             //提交时间
             $list2[$key]['ctime']=date("Y-m-d H:i:s",$val['ctime']);
             //代理公司
@@ -925,7 +942,7 @@ class RenewController extends  CommonController
         }
 
         $filename="xufei_excel";
-        $headArr=array("公司","合同编号",'APP名称','账户名称','金额','显示百度币','产品线','返点','提交时间','代理公司','合同类型','保证金','付款方式','付款时间','销售','提交人','备注');
+        $headArr=array("公司","合同编号",'APP名称','账户名称','金额','显示百度币','产品线','返点','媒体返点','提交时间','代理公司','合同类型','保证金','付款方式','付款时间','销售','提交人','备注');
 
         if(!getExcel($filename,$headArr,$list2))
         {
