@@ -132,7 +132,6 @@ class RenewController extends  CommonController
                 $users=M('Users');
                 $zsql=$users->field("id")->where(" name like '%".I('get.search_text')."%'")->select(false);
                 $adveritiser=M("Customer")->field('id')->where("submituser in($zsql) or business in ($zsql)")->select(false);
-
                 $where.=" and  a.id!='0' and a.advertiser in($adveritiser) ";
             }
             $this->type=$type;
@@ -670,6 +669,8 @@ class RenewController extends  CommonController
         $info['a_users']=$account['a_users'];
         $info['a_id']=$account['id'];
 
+        //产品线信息
+        $this->name=product_line_name($account['id']);
         $this->info=$info;
         $this->yid=I('get.yid');
         //销售
@@ -696,6 +697,8 @@ class RenewController extends  CommonController
         //原合同
         $yinfo=$hetong->find(I('get.yid'));
         $this->yinfo=$yinfo;
+        //媒介合同信息
+        $this->mhtinfo=$hetong->find($yinfo['mht_id']);
         //销售
         $market=users_info($yinfo[market]);
         $this->market=$market;

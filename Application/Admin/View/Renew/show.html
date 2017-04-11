@@ -50,6 +50,57 @@
                             <li class="pull-left"><a href="javascript:history.go(-1)" style="text-decoration: none;"><span class=" title-xiugai">返回</span></a></li>
                         </ul>
                     </div>
+                    <!--媒介合同信息-->
+                    <div class="box-infor">
+                        <div class="box-infor-information">
+                            <p class="box-infor-title"><i class="iconfont">&#xe63b;</i>&nbsp;媒介合同基本信息</p>
+
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>媒介类型</th>
+                                        <th><b> <switch name="mhtinfo.state">
+                                            <case value="1">直开</case>
+                                            <case value="2">拼框</case>
+                                            <case value="3">套壳</case>
+                                        </switch></b></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>合同名称</td>
+                                        <td>
+                                                <label  class="control-label"><strong>{$mhtinfo[title]}</strong></label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>媒体返点</td>
+                                        <td><b>
+                                            <if condition="$Think.cookie.u_groupid eq '4'">
+                                                {$mhtinfo[rebates_proportion]}%
+                                                <else />
+                                                Without permission
+                                            </if>
+                                        </b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>代理返点</td>
+                                        <td><b>
+
+                                            <if  condition="$Think.cookie.u_groupid eq '4'">
+                                                {$mhtinfo[dl_fandian]}%
+                                                <else />
+                                                Without permission
+                                            </if>
+                                        </b></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                    </div>
+
                     <!-- 列表 -->
                     <div class="box-infor">
                         <div class="box-infor-information">
@@ -98,10 +149,8 @@
                                     <tr>
                                         <td>产品线</td>
                                         <td><b>
-                                            <volist id="product_line_list" name="product_line_list" key="k">
-                                                <label  class="control-label"><strong>{$info[product_line]==$product_line_list[id]?"$product_line_list[name]":""}</strong></label>
-                                            </volist>
 
+                                            <label  class="control-label"><strong> {$name}</strong></label>
                                         </b></td>
                                     </tr>
                                     </tbody>
