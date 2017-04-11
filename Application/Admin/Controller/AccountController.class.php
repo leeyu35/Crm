@@ -244,7 +244,6 @@ class AccountController extends CommonController
 
     }
     public function addru(){
-
         $Refund=M("Account");
 
         $list=$Refund->create();
@@ -316,9 +315,10 @@ class AccountController extends CommonController
                     $yushan_id = $yushan_data->data->appid;
                     if ($yushan_id != '') {
                         $Refund->where('id=' . $insertid)->setField('appid', $yushan_id);
-
                     } else {
-                        die('oh~no！添加账户 与 羽扇平台数据同步失败，请联系CRM技术管理人员！！！');
+                        dump($yushan_data);
+                        die('oh~no！添加账户 与 羽扇平台数据同步失败，请截图此页面并联系CRM技术管理人员！！！');
+
                     }
                 }
             }
@@ -460,7 +460,7 @@ class AccountController extends CommonController
                     }else
                     {
                         dump($yushan_data);
-                        die('oh~no！添加账户 与 羽扇平台数据同步失败，请联系CRM技术管理人员！！！');
+                        die('oh~no！添加账户 与 羽扇平台数据同步失败，请截图此页面并联系CRM技术管理人员！！！');
                     }
 
             }elseif(empty(I('post.state')))
@@ -486,8 +486,8 @@ class AccountController extends CommonController
 
                 if($yushan_id!='ok')
                 {
-
-                    die('oh~no！修改账户 与 羽扇平台数据同步失败，请联系CRM技术管理人员！！！');
+                    dump($yushan_data);
+                    die('oh~no！修改账户 与 羽扇平台数据同步失败，请截图此页面并联系CRM技术管理人员！！！');
                 }
             }
 
