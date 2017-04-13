@@ -883,4 +883,22 @@ class MeijieController extends CommonController
 
 
     }
+
+    //添加媒介合同续费活着打款
+    public function addrenew($id){
+        //续费合同信息
+        $contract=M("Contract")->find($id);
+        $this->contract=$contract;
+        //公司信息
+        $this->kehuinfo=kehu($contract['advertiser']);
+
+        //渠道客户列表
+        $customer_list=M("customer")->field('id,advertiser,appname')->where("customer_type=2")->select();
+        dump($customer_list);
+        //代理公司
+        $agentcompany=M("AgentCompany");
+        $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
+
+        $this->display();
+    }
 }

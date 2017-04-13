@@ -137,7 +137,7 @@ $(document).ready(function(e) {
             <a href="{:U("Contract/add?parent_id=$list[id]")}" data-toggle="tooltip" data-placement="left" title="添加子合同"><span class="glyphicon glyphicon-retweet"></span></a>&nbsp;|
         </if>
 
-        <a href="{:U("Contract/add?parent_id=$list[id]")}" data-toggle="tooltip" data-placement="left" title="添加子合同"><span class="glyphicon glyphicon-retweet"></span></a>&nbsp;|
+        <a href="{:U("Meijie/addrenew?id=$list[id]")}" data-toggle="tooltip" data-placement="left" title="添加续费或者打款"><span>续</span></a>&nbsp;|
         <a href="{:U("updatacontract?id=$list[id]")}"    data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;
         <a href="{:U("delete?id=$list[id]")}" {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         

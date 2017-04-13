@@ -506,8 +506,8 @@
                         <a  href="{:U("Account/index?contract_id=$list[id]")}" data-toggle="tooltip" data-placement="top" title="账户"><i class="iconfont">&#xe6dc;</i></a></a>
                         <a href="{:U("Renew/add?id=$list[id]")}" data-toggle="tooltip" data-placement="top" title="续费"><i class="iconfont">&#xe631;</i></a>
                         <a  href="{:U("history?contract_id=$list[id]")}" data-toggle="tooltip" data-placement="top" title="历史记录"><i class="iconfont">&#xe602;</i></a>
-                        <a  href="{:U("Backmoney/add2?contract_id=$list[id]&adid=$list[aid]")}" data-toggle="tooltip" data-placement="top" title="添加该合同回款"><i class="iconfont">&#xe611;</i></a>
-                        <a  href="{:U("Invoice/add2?contract_id=$list[id]&adid=$list[aid]&ht_on=$list[contract_no]")}" data-toggle="tooltip" data-placement="top" title="添加该合同发票"><i class="iconfont">&#xe622;</i></a>
+                        <!--<a  href="{:U("Backmoney/add2?contract_id=$list[id]&adid=$list[aid]")}" data-toggle="tooltip" data-placement="top" title="添加该合同回款"><i class="iconfont">&#xe611;</i></a>
+                        --><a  href="{:U("Invoice/add2?contract_id=$list[id]&adid=$list[aid]&ht_on=$list[contract_no]")}" data-toggle="tooltip" data-placement="top" title="添加该合同发票"><i class="iconfont">&#xe622;</i></a>
                         <if condition="$list[isguidang] eq 0">
                         <a href="{:U("Contract/guidang?id=$list[id]")}" onClick="if(confirm('确定要将此合同作归档吗？')){return true}else{return false}" data-toggle="tooltip" data-placement="top"  title="归档"><i class="iconfont">&#xe67d;</i></a>
                         </if>

@@ -630,17 +630,9 @@ function money_change($advertisers_id,$contract_id,$type,$value,$accountid='')
         }
     } elseif ($type == '4') {
         //回款
-        $update1=$advertisers->where("id=$advertisers_id")->setInc('huikuan', $value);//更新公司出款值
+        //$update1=$advertisers->where("id=$advertisers_id")->setInc('huikuan', $value);//更新公司出款值
         $update2=$contract->where("id=$contract_id")->setInc('huikuan', $value);//跟新合同补款值
-        if($update1!=1)
-        {
-            die('广告回款总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
-        }else
-        {
-            $str=cookie('u_name').'操作了 公司ID是'.$advertisers_id.'合同ID是'.$contract_id.'的回款操作，该公司总回款加'.$value;
-            crm_record($str);
-            money_record($contract_id,$advertisers_id,$type,$str,$value,1);
-        }
+
         if($update2!=1)
         {
             die('合同回款总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$contract->_sql());
