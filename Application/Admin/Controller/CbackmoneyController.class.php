@@ -298,7 +298,7 @@ class CbackmoneyController extends CommonController
                     //如果回款成功则修改客户未分配余额
                     M("Customer")->where("id=".$postdate['advertiser'])->setInc('undistributed_yu_e',$postdate['b_money']);
 
-                    $update1=("Customer")->where("id=".$postdate['advertiser'])->setInc('huikuan', $postdate['b_money']);//更新公司出款值
+                    $update1=M("Customer")->where("id=".$postdate['advertiser'])->setInc('huikuan', $postdate['b_money']);//更新公司出款值
                     if($update1!=1)
                     {
                         die('广告回款总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
