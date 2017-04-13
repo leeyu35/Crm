@@ -341,7 +341,7 @@ class BackmoneyController extends CommonController
                 if($shenhe==2)
                 {
                     $xfinfo=$table->find($id);
-                    //advertiser,xf_contractid,payment_type,fk_money
+                    //advertiser,xf_contractid,payment_type,fk_money  
                     money_reduce($xfinfo['advertiser'],$xfinfo['xf_contractid'],4,$xfinfo['money']);
                     //已回款续费列表加
                     $yihuikuanxufei=M("Yihuikuanxufei");
