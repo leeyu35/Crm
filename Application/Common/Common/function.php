@@ -39,7 +39,6 @@ function hjd_curl($url){
 function hjd_post_curl($url,$postdate){
     $data_string=json_encode($postdate);
 
-
     //$data_string='{"content":"<p>\u65e0\u60c5\u4e8c\u4e03\u989d<br><\/p>","template":"default","title":"123\u9a71\u868a\u5668\u6587","to":"2885430949@qq.com"}';
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_POST, 1);
@@ -51,6 +50,7 @@ function hjd_post_curl($url,$postdate){
     );
     ob_start();
     $response=curl_exec($ch);
+
     $return_content = ob_get_contents();
     ob_end_clean();
     if ($response  === FALSE) {

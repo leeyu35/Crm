@@ -445,6 +445,7 @@ class RefundMoneyController extends  CommonController
             $coninfo=$contract->field('mht_id')->find($info['xf_contractid']);
 
             $mht_info=$contract->find($coninfo['mht_id']);
+
             if(empty($mht_info)) {
                 die('非常抱歉，没有媒介合同，无法判断您是否有权限审核该退款，请联系CRM系统管理员！');
                 exit();
@@ -452,6 +453,7 @@ class RefundMoneyController extends  CommonController
 
             if($mht_info['state']==2 or $mht_info['state']==3)
             {
+
               if(cookie('u_groupid')!=5)
               {
                   $this->error('sorry,退款到总账户并且是拼框套壳的，只能由媒介操作审核。您未拥有该权限!');

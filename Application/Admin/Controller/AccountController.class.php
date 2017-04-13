@@ -460,6 +460,7 @@ class AccountController extends CommonController
                     }else
                     {
                         dump($yushan_data);
+
                         die('oh~no！添加账户 与 羽扇平台数据同步失败，请截图此页面并联系CRM技术管理人员！！！');
                     }
 

@@ -1,0 +1,248 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+
+<link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+<script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
+<script src="/Public/js/jquery-3.1.0.min.js"></script>
+<script language="javascript">
+	$(document).ready(function(e) {
+				
+		//动态加载公司名称
+		$("#gongsi").keyup(function(){
+			//$("#hjd").html($("#hjd").html()+"1");
+			val=$(this).val();
+			$.post("{:U('keyup_adlist')}",{val:val},function(data){
+					$("#adlist").html(data);
+			})
+			$("#adlist").show();
+		})
+		
+		$("#adlist").on("click","a",function(){
+			
+	
+			
+			$("#advertiser").val($(this).attr("id"));
+			//$("#submituser").val($(this).attr("title"));
+			$("#gongsi").val(($(this).html()));
+			$("#adlist").hide();
+			//$("#gongsi").html(data);
+		})
+        $("#gongsi").on("blur",function(){
+			setTimeout(function () {
+				$("#adlist").hide();
+            }, 300);
+		})
+		
+
+
+				
+		$("#formid").submit(function(){
+
+
+		if($("#money").val()=="")
+		{
+			alert("请填写回款金额");
+			$("#money").select();
+			return false;	
+		}
+        if(!$.isNumeric($('#money').val()))
+        {
+            alert("金额不是数字");
+            return false;
+        }
+		if($("#b_time").val()=="")
+		{
+			alert("请选择回款日期");
+			return false;	
+		}	
+        var ping=0;
+		$(".hpmoney").each(function (i) {
+            ping+=parseFloat($(".hpmoney").eq(i).val());
+        })
+        if($('#money').val()<ping)
+        {
+            alert('回款金额不足以平掉这些续费！/(ㄒoㄒ)/~~');
+            return false;
+        }
+
+				
+	});
+        // pingkuan
+       $(".pingle").click(function(){
+           id=$(this).attr("id");
+           $(".pingk_"+id).val($(".qiane_id"+id).html())
+       })
+
+        $(document).on("keyup",".hpmoney",function(){
+            id=$(this).attr("id");
+
+
+            if(parseFloat($(".qiane_id"+id).html())<parseFloat($(this).val()))
+            {
+                alert('金额回多了,请重新输入!');
+                $(this).select();
+            }
+
+        });
+
+    });
+</script>
+<style type="text/css">
+	#adlist{ margin-left:15px;}
+	#adlist li a{ cursor:pointer;}
+	.bzj{ display:none;}
+</style>
+</head>
+
+<body>
+
+<div class="container" style="width:100%;">
+<h3 class="bor-left-bull" >添加回款<small>Back money</small></h3>
+<br>
+<form action="{:U('addru')}" method="post" class="form-horizontal" enctype="multipart/form-data"  id="formid" >
+<input type="hidden" name="advertiser" id="advertiser" value="{$Think.get.adid}">
+<input type="hidden" name="submituser" id="submituser" value="{$Think.cookie.u_id}">
+<input type="hidden" name="xf_contractid" id="xf_contractid" value="{$Think.get.contract_id}">
+<input type="hidden" name="market" id="isxufei" value="{$contract_info[submituser]}">
+<input type="hidden" name="mt_fandian" id="isxufei" value="{$mt_contract_info[rebates_proportion]}">
+<input type="hidden" name="dl_fandian" id="isxufei" value="{$mt_contract_info[dl_fandian]}">
+<h4 class="bor-left-bull" >回款基本信息</h4>
+<hr>
+
+  <div class="form-group">
+  
+    
+    
+    <!--<label for="inputEmail3" class="col-sm-2 control-label">回款主体</label>
+    <div class="col-sm-3">
+      <select  class="form-control" name="b_company" id="b_company">        
+        <volist id="agentcompany" name="agentcompany" key="k">
+       	<option value="{$agentcompany.id}" title="{$agentcompany.title}">{$agentcompany.companyname}</option>
+       </volist>
+
+      </select>
+    </div>-->
+    
+    
+    
+    
+  </div>
+  
+    
+   
+
+
+  
+  
+  <div class="form-group">
+  	<label for="inputEmail3" class="col-sm-2 control-label">APP名称或简称</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" autocomplete="off" name="appname" id="appname" value="{$info[appname]}" >
+    </div>
+    <label for="inputEmail3" class="col-sm-1 control-label">回款日期</label>
+    <div class="col-sm-2">
+    	<input type="text" name="payment_time" class="Wdate form-control" id="b_time" onClick="WdatePicker()">
+    </div>
+    
+    <label for="contract_money" class="col-sm-1 control-label">回款金额</label>
+    <div class="col-sm-2">
+      	<div class="input-group">
+        <input type="text" class="form-control" name="money" id="money">
+    	<span class="input-group-addon">元</span>
+        </div>
+    </div>
+    
+  
+    
+
+    
+  </div>
+  
+  <div class="form-group">
+      <label for="inputEmail3" class="col-sm-2 control-label">汇款人</label>
+      <div class="col-sm-2">
+          <input type="text" class="form-control" autocomplete="off" name="huikuanren" id="huikuanren" value="{$info[huikuanren]}" >
+      </div>
+
+    
+
+    
+  </div>
+  <h4 class="bor-left-bull" >上传附件</h4>
+  <hr>
+	<div class="form-group">
+  
+    <label for="payment_type" class="col-sm-2 control-label">选择文件</label>
+    <div class="col-sm-3">
+        <input name="file[]" type="file" multiple>
+    </div>
+
+    
+  </div>
+    <h4 class="bor-left-bull" >该合同续费欠款列表</h4>
+    <hr>
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>续费账户</th>
+            <th>续费提交时间</th>
+            <th>续费金额</th>
+            <th>续费返点</th>
+            <th>续费展示百度币</th>
+            <th>续费欠额</th>
+            <!--<th>分配额度</th>-->
+        </tr>
+        <volist id="xufeilist" name="xufeilist">
+            <input type="hidden" name="xf_id[]" value="{$xufeilist[id]}">
+            <input type="hidden" name="xf_fandian[]" value="{$xufeilist[rebates_proportion]}">
+
+            <tr>
+                <td> {$xufeilist[id]}</td>
+                <td> {$xufeilist[a_users]}</td>
+                <td> {$xufeilist[ctime]|date="y-m-d",###}</td>
+                <td> {$xufeilist[money]}</td>
+                <td> {$xufeilist[rebates_proportion]}</td>
+                <td> {$xufeilist[show_money]}</td>
+                <td> <span class="qiane_id{$xufeilist[id]}">{$xufeilist[xf_qiane]}</span></td>
+                <!--<td>-->
+                    <!--<div class="input-group input-group-sm" style="width: 150px;">-->
+                        <!--<input type="text" name="pmoney[]" class="form-control hpmoney pingk_{$xufeilist[id]}" id="{$xufeilist[id]}"  value="0">-->
+                        <!--<span class="input-group-btn">-->
+                            <!--<button class="btn btn-success pingle" type="button" id="{$xufeilist[id]}">平!</button>-->
+                          <!--</span>-->
+                    <!--</div>-->
+
+                <!--</td>-->
+            </tr>
+
+        </volist>
+    </table>
+  <h4 class="bor-left-bull" >回款备注</h4>
+  <hr>
+  <div class="form-group">
+   <div class="col-sm-12">      
+		<textarea class="form-control" name="note" id="note" rows="4"></textarea>
+   </div>
+
+   </div>
+	
+    <div class="form-group">
+    
+       <div class="col-sm-2">
+       <button type="submit" class="btn btn-primary">提交</button>
+       </div>
+    </div>
+
+</form>
+
+</div>
+<br>
+<br>
+<br>
+
+</body>
+</html>

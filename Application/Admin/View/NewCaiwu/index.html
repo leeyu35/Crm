@@ -17,7 +17,6 @@ $(document).ready(function(e) {
 		url=$(this).attr("id");
 		window.location.href=url;
 	})
-
 });
 </script>
 </head>
@@ -73,7 +72,7 @@ $(document).ready(function(e) {
     	<th>总回款金额</th>
         <th>总发票</th>
         <th>总续费金额</th>
-       
+        <th>未分配余额</th>
         <!--<th>联系人</th>
         <th>联系人电话</th>
         <th>城市</th>-->
@@ -96,8 +95,11 @@ $(document).ready(function(e) {
     	<!--<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[contact]}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[tel]}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[city]}</td>-->
+        <td class="htshow" id="{:U("show?id=$list[id]")}">{$list[undistributed_yu_e]|num_format}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]")}">{$list[submituser]}</td>
     	<td>
+        <a href="{:U("Cbackmoney/add?id=$list[id]")}"   data-toggle="tooltip" data-placement="left" title="添加公司回款" ><span style="border: 1px #00a2d4 solid; color: #00a2d4; border-radius: 5px; height: 16px; width: 16px; text-align: center; line-height: 16px; display: inline-block;">款</span></a>
+        <a href="{:U("Cbackmoney/fp_huikuan?id=$list[id]")}"   data-toggle="tooltip" data-placement="left" title="给合同分配回款" ><span style="border: 1px #00a2d4 solid; color: #00a2d4; border-radius: 5px; height: 16px; width: 16px; text-align: center; line-height: 16px; display: inline-block;">分</span></a>
         <a href="{:U("money_record?id=$list[id]")}"  data-toggle="tooltip" data-placement="left" title="金额记录" > <span class="glyphicon glyphicon-list-alt"></span></a>
         <a href="{:U("updata?id=$list[id]")}"  data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<a href="{:U("delete?id=$list[id]")}" {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>
         </td>
