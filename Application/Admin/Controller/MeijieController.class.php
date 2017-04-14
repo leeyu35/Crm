@@ -903,6 +903,65 @@ class MeijieController extends CommonController
     }
 
     public function m_renew_addru(){
-        dump($_POST);
+        $hetong=M("MrenewHuikuan");
+        $postdate=$hetong->create();
+        $hetong->contract_start=strtotime($hetong->contract_start);
+        $hetong->contract_end=strtotime($hetong->contract_end);
+        $hetong->payment_time=strtotime($hetong->payment_time);
+        $hetong->type=1;
+        $hetong->ctime=time();
+        $hetong->users2=cookie('u_id');
+        if($postdate['money']<0)
+        {
+            $this->error('不能输入负数');
+            exit;
+        }
+        //默认续费欠额为全款
+        $hetong->xf_qiane=I('post.money');
+
+        //计算续费成本，从合同id读出该合同所属的媒介合同返点，用续费显示金额 除 媒介返点比例
+
+        $fandian=($postdate['rebates_proportion']+100)/100; //媒体返点
+        $hetong->xf_cost=I('post.show_money')/$fandian; //续费成本
+        $kehuinfo=kehu(I('post.advertiser'));//客户信息
+
+
+        if($insid=$hetong->add()){
+
+            if($insid==1)
+            {
+                $result = $hetong->query("select currval('jd_renew_huikuan_id_seq')");
+                $insid=$result[0][currval];
+            }
+
+            //dump($_FILES["file"]);
+            if($_FILES["file"]['name'][0]!="") {
+                $upload = new \Think\Upload();// 实例化上传类
+                $upload->maxSize = 2097152;// 设置附件上传大小
+                $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+                $upload->rootPath = './Uploads/'; // 设置附件上传根目录
+                $upload->savePath = '/xufei/'; // 设置附件上传（子）目录
+                // 上传文件
+                $info = $upload->upload();
+                if (!$info) {// 上传错误提示错误信息
+                    $this->error($upload->getError());
+                } else {// 上传成功
+                    $dkfile = M("File");//type=2
+                    foreach ($info as $file) {
+                        $datafile['type'] = 41;
+                        $datafile['yid'] = $insid;
+                        $datafile['file'] = C('Upload_path') . $file['savepath'] . $file['savename'];
+                        $dkfile->add($datafile);
+                        //echo $dkfile->_sql();
+                    }
+                }
+            }
+
+            $this->success("添加成功",U("Meijie/meijiexflist?id=".$postdate['advertiser']));
+
+        }else
+        {
+            $this->error("添加失败");
+        }
     }
 }

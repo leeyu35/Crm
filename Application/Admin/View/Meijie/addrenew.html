@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -14,6 +14,7 @@
 
     <script language="javascript">
         $(document).ready(function(e) {
+
             //自动换算百度币
             $("#rebates_proportion,#money").keyup(function(){
                 jr=$("#money").val();
@@ -99,14 +100,7 @@
                 }
 
             })
-            $("#account").change(function(){
-                $.get("{:U("Renew/contract_account_fandian")}",{acid:$(this).val(),htid:{$info[id]}},function(data){
-                    $("#rebates_proportion").val(data);
-                    jr=$("#money").val();
-                    bl=$("#rebates_proportion").val();
-                    $("#show_money").val((jr*(1+(bl/100))).toFixed(2));
-                })
-            })
+
 
 
 
@@ -128,16 +122,16 @@
     <h3 class="bor-left-bull" >{$kehuinfo[advertiser]}<span class=" glyphicon glyphicon-chevron-right"></span>{$contract[title]}<span class="glyphicon glyphicon-chevron-right"></span>新增续费</h3>
     <br>
     <form action="{:U('m_renew_addru')}" method="post" class="form-horizontal" id="formid" enctype="multipart/form-data" >
-        <input type="hidden" name="advertiser" id="advertiser" value="{$info[advertiser]}">
-        <input type="hidden" name="submituser" id="submituser" value="{$info[submituser]}">
-        <input type="hidden" name="agent_company" id="agent_company" value="{$info[agent_company]}">
+        <input type="hidden" name="advertiser" id="advertiser" value="{$contract[advertiser]}">
+        <input type="hidden" name="submituser" id="submituser" value="{$contract[submituser]}">
+        <input type="hidden" name="agent_company" id="agent_company" value="{$contract[agent_company]}">
 
         <input type="hidden" name="type" id="type" value="{$info[type]}">
-        <input type="hidden" name="xf_hetonghao" id="xf_hetonghao" value="{$info[contract_no]}">
-        <input type="hidden" name="xf_contractid" id="xf_contractid" value="{$info[id]}">
-        <input type="hidden" name="htid" id="htid" value="{$info[id]}">
+        <input type="hidden" name="xf_hetonghao" id="xf_hetonghao" value="{$contract[contract_no]}">
+        <input type="hidden" name="xf_contractid" id="xf_contractid" value="{$contract[id]}">
+        <input type="hidden" name="htid" id="htid" value="{$contract[id]}">
         <input type="hidden" name="isxufei" id="isxufei" value="1">
-        <input type="hidden" name="market" id="isxufei" value="{$info[submituser]}">
+        <input type="hidden" name="market" id="isxufei" value="{$contract[submituser]}">
 
         <h4 class="bor-left-bull" >合同基本信息</h4>
         <hr>

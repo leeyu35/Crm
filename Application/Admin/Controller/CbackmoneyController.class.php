@@ -276,6 +276,8 @@ class CbackmoneyController extends CommonController
             }
             if($table->where("id=$id")->setField($type,$shenhe))
             {
+                $table->where("id=$id")->setField('audit_1',$shenhe);
+                $table->where("id=$id")->setField('audit_2',$shenhe);
                 //如果是审核不通过的话则减去客户总额
                 if($shenhe==2)
                 {
@@ -287,11 +289,7 @@ class CbackmoneyController extends CommonController
 
 
 
-                //写入审核人员
-                if($type=='audit_1')
-                {
-                    $table->where("id=$id")->setField('susers1',cookie('u_id'));
-                }
+
                 if($type=='audit_2')
                 {
                     $postdate=$table->find($id);
@@ -308,6 +306,8 @@ class CbackmoneyController extends CommonController
                         crm_record($str);
                         money_record(0,$advertisers_id,$type,$str,$value,1);
                     }
+                    //写入审核人员
+                    $table->where("id=$id")->setField('susers1',cookie('u_id'));
                     $table->where("id=$id")->setField('susers2',cookie('u_id'));
                 }
 
