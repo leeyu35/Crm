@@ -487,7 +487,7 @@ class CbackmoneyController extends CommonController
         $this->kehuinfo=kehu($id);
         $contract=M("Contract");
 
-        $contract_list=$contract->where("advertiser=$id and iszuofei=0")->select();
+        $contract_list=$contract->where("advertiser=$id and iszuofei=0 and isxufei=0")->select();
         foreach ($contract_list as $key=>$value)
         {
             //产品线
