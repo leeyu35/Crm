@@ -138,7 +138,7 @@ class BackmoneyController extends CommonController
         $Diankuan->ctime=time();
         $Diankuan->backmoney_yue=I('post.money');
         $Diankuan->is_huikuan=1;
-        $Diankuan->audit_1=1; 
+        $Diankuan->audit_1=1;
         $Diankuan->audit_2=1;
         $Diankuan->users2=cookie('u_id');
         $contract_mthiid=M("Contract")->field('mht_id')->find(I('post.xf_contractid'));
