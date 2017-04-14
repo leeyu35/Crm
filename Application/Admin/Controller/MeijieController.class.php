@@ -901,4 +901,8 @@ class MeijieController extends CommonController
 
         $this->display();
     }
+
+    public function m_renew_addru(){
+        dump($_POST);
+    }
 }
