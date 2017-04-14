@@ -153,6 +153,13 @@
                                             <label  class="control-label"><strong> {$name}</strong></label>
                                         </b></td>
                                     </tr>
+                                    <tr>
+                                        <td>合同余额</td>
+                                        <td><b>
+
+                                            <label  class="control-label"><strong> {$yinfo[huikuan]-$yinfo[yu_e]}</strong></label>
+                                        </b></td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -325,6 +332,7 @@
                                         </a>
                                     </div>
                                 </li>
+                    <!--
                                 <li class="box-right-sanshen">
                                     <div class="shenhe-title">
                                         <p class="shenhe-text"><b>三审</b></p>
@@ -392,6 +400,7 @@
                                     </a>
                             </div>
                             </li>
+                            -->
                             </ul>
                             <div class="clear"></div>
                         </div>
@@ -428,7 +437,7 @@
             <elseif condition="$info[audit_2] eq 2"/>
             <span class="shno1">二级审核未通过(审核人：{$users_info4?$users_info4:'默认'})</span>
         </if>
-
+        <!--
         <if condition="$info[audit_3] eq 0">
             <span class="shno">三级审核未审核</span>
             <elseif condition="$info[audit_3] eq 1"/>
@@ -444,7 +453,7 @@
             <elseif condition="$info[audit_4] eq 2"/>
             <span class="shno1">四级审核未通过(审核人：{$users_info6?$users_info6:'默认'})</span>
         </if>
-
+        -->
         <if condition="$info[is_accomplish] eq 0">
             <a href="{:U("is_accomplish?id=$info[id]&type=renew")}" class=" btn btn-success btn-sm">点击完成</a>
         <elseif condition="$info[is_accomplish] eq 1"/>
