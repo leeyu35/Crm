@@ -534,7 +534,7 @@ class CbackmoneyController extends CommonController
                 //媒体返点 和 代理返点
                 $data['mt_fandian']=$meijiecontract['rebates_proportion'];
                 $data['dl_fandian']=$meijiecontract['dl_fandian'];
-                $data['payment_time']=time();
+                $data['payment_time']=date("Y-m-d h:i:s");
                 $data['xf_contractid']=I('post.ht_id')[$key];
                 $data['money']=I('post.pmoney')[$key];
                 $data['huikuanren']='';
