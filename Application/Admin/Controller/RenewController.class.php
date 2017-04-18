@@ -311,6 +311,17 @@ class RenewController extends  CommonController
             $this->error('此续费的合同没有选择媒介合同，故而提交续费失败。');
             exit;
         }
+        //客户余额
+        $advertiser=kehu($postdate['advertiser']);
+        $adyue=$advertiser['huikuan']-$advertiser['yu_e'];
+        if($postdate['payment_type']==1)
+        {
+            if($postdate['money']>$adyue)
+            {
+                $this->error("客户余额为$adyue,不足以预付此比续费。请重新提交！");
+
+            }
+        }
 
         $xf_qiane=I('post.money');
 

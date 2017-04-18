@@ -1045,4 +1045,48 @@ class ContractController extends CommonController
         $info=$meijie->field('product_line')->find($id);
         echo $info['product_line'];
     }
+
+    //合同转款
+    public function zhuankuan(){
+        $id=I('get.id');
+        $contract=M("Contract");
+        $info=$contract->find($id);
+        $yue=$info['huikuan']-$info['yu_e'];
+        if($yue<0)
+        {
+            $this->error('该合同的余额不足，不可以进行此操作!');
+        }
+        $this->yue=$yue;
+        $this->display();
+    }
+
+    //转出金额返回
+    public function zhuankuan_run(){
+        $money=I('post.money');
+        $id=I('post.id');
+        $contract=M("Contract");
+        $info=$contract->find($id);
+        $yue=$info['huikuan']-$info['yu_e'];
+        if($money>$yue)
+        {
+            $this->error('转款金额不可大于$yue');
+        }else
+        {
+            //合同回款减少
+            if(!$contract->where("id=$id")->setDec('huikuan',$money))
+            {
+                die('合同回款减少出错');
+            }
+            //公司未分配余额增加
+            if(!M("Customer")->where("id=$info[advertiser]")->setInc('undistributed_yu_e',$money))
+            {
+                die('公司未分配余额增加失败');
+            }
+        }
+
+
+
+
+    }
+
 }

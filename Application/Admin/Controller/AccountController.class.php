@@ -294,7 +294,7 @@ class AccountController extends CommonController
             $qudao=M("Customer")->find(I('post.qudao'));
 
             $url = "http://sem.yushanapp.com/sem/createhu";
-
+           // $url ="http://192.168.199.171:5281/sem/createhu";
             $post_data = array (
                 "name"=>I('post.appname'),
                 "account_type" =>$prlin['yushan_type'],

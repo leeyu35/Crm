@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+
+    <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+    <script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
+    <script src="/Public/js/jquery-3.1.0.min.js"></script>
+    <script language="javascript">
+        $(document).ready(function(e) {
+            $("#formid").submit(function(){
+                if($("#money").val()=="")
+                {
+                    alert("请填写转出金额");
+                    $("#money").select();
+                    return false;
+                }
+                if($("#money").val()>{$yue})
+                {
+                    alert('转出金额不得大于{$yue}！');
+                    $("#money").select();
+                    return false;
+                }
+
+
+            })
+
+        });
+    </script>
+    <style type="text/css">
+        #adlist{ margin-left:15px;}
+        #adlist li a{ cursor:pointer;}
+        .bzj{ display:none;}
+        .diankuan{ display:none;}
+    </style>
+</head>
+
+<body>
+<span id="hjd"></span>
+<div class="container" style="width:100%;">
+    <h3 class="bor-left-bull" >合同余额转到公司未分配余额</h3>
+    <br>
+    <form action="{:U('zhuankuan_run')}" method="post" class="form-horizontal" id="formid" >
+        <input type="hidden" name="id" id="id" value="{$Think.get.id}">
+<hr>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">最多可转出金额</label>
+            <div class="col-sm-1">
+                <label  class="control-label"><strong> {$yue}</strong></label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">转出金额</label>
+            <div class="col-sm-2">
+                <div class="input-group">
+                    <input name="money" type="text" class="form-control" id="money">
+                    <span class="input-group-addon">元</span>
+                </div>
+            </div>
+
+        </div>
+
+<hr>
+        <div class="form-group">
+            <div class="col-sm-2">
+                <button type="submit" class="btn btn-primary">提交合同</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>
