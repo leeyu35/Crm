@@ -818,7 +818,7 @@ class ContractController extends CommonController
         if($time_start!="" and $time_end!="")
         {
             $time_start=strtotime($time_start);
-            
+
             $time_end=strtotime($time_end);
             $time_end=strtotime("+1 days",$time_end);
 

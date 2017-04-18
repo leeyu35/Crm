@@ -67,6 +67,7 @@ $(document).ready(function(e) {
         <th>回款日期</th>
         <th>创建时间</th>
         <th>状态</th>
+        <th>汇款人</th>
         <th>提交人</th>
         <th>操作</th>
     </tr>
@@ -96,6 +97,7 @@ $(document).ready(function(e) {
         	<span data-toggle="tooltip" data-placement="left" title="二级审核未审核"  class="glyphicon glyphicon-hourglass"></span><span class="shno"></span>
         </if>
         </td>
+        <td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[huikuanren]}</td>
     	<td class="htshow" id="{:U("show?id=$list[id]&yid=$info[id]")}">{$list[submituser]}</td>
         <td>
        <!-- <a href="{:U("updata?id=$list[id]&yid=$info[id]")}"  data-toggle="tooltip" data-placement="left" title="修改" ><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;|&nbsp;<a href="{:U("delete?id=$list[id]&yid=$info[id]")}"  {$confirm}  data-toggle="tooltip" data-placement="left"  title="删除"><span class="glyphicon glyphicon-trash"></span></a>-->

@@ -605,7 +605,7 @@ class NewCaiwuController extends CommonController
             {
                 $list2[$key]['audit_2']='未通过';
             }
-
+            /*
             if($value['audit_3']==0)
             {
                 $list2[$key]['audit_3']='未审核';
@@ -627,14 +627,14 @@ class NewCaiwuController extends CommonController
             {
                 $list2[$key]['audit_4']='未通过';
             }
-
+            */
         }
         //客户详细信息
         $customer_info=kehu($ht_on['advertiser']);
         $this->customer_info=$customer_info;
 
         $filename=$customer_info['advertiser']."的历史记录";
-        $headArr=array("时间",'操作',"金额",'说明','提交人','一级审核','二级审核','三级审核','四级审核');
+        $headArr=array("时间",'操作',"金额",'说明','提交人','一级审核','二级审核');
         if(!getExcel($filename,$headArr,$list2))
         {
             $this->error('没有数据可导出');

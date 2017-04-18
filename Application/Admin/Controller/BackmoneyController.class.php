@@ -130,8 +130,6 @@ class BackmoneyController extends CommonController
      *
      */
     public function addru(){
-
-
         $Diankuan=M("RenewHuikuan");
         $postdate=$Diankuan->create();
         $Diankuan->payment_time=strtotime($Diankuan->payment_time);
@@ -147,8 +145,6 @@ class BackmoneyController extends CommonController
             $this->error('此回款的合同没有选择媒介合同，故而提交回款失败。');
             exit;
         }
-
-
 
         //查看合同是否满一年如果满一年就合同状态就改为2（老客户）
         $contract_time=M("Contract")->field('contract_start')->find(I('post.xf_contractid'));
