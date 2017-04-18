@@ -319,7 +319,6 @@ class MeijieController extends CommonController
 
         $coustomer=M('Customer');
 
-
         //只有商务组经理才能执行
         $myusersinfo=users_info(cookie("u_id"));
        // dump($myusersinfo);
@@ -894,7 +893,8 @@ class MeijieController extends CommonController
 
         //渠道客户列表
         $customer_list=M("customer")->field('id,advertiser,appname')->where("customer_type=2")->select();
-        dump($customer_list);
+
+        $this->customer_list=$customer_list;
         //代理公司
         $agentcompany=M("AgentCompany");
         $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
@@ -903,6 +903,7 @@ class MeijieController extends CommonController
     }
 
     public function m_renew_addru(){
+
         $hetong=M("MrenewHuikuan");
         $postdate=$hetong->create();
         $hetong->contract_start=strtotime($hetong->contract_start);
@@ -956,12 +957,352 @@ class MeijieController extends CommonController
                     }
                 }
             }
+            //公司总续费加
+            M("Customer")->where("id=".$postdate['advertiser'])->setInc("yu_e",$postdate['money']);
 
-            $this->success("添加成功",U("Meijie/meijiexflist?id=".$postdate['advertiser']));
+            $this->success("添加成功",U("Meijie/meijiexflist?type=1&id=".$postdate['advertiser']));
 
         }else
         {
             $this->error("添加失败");
         }
+    }
+
+    //媒介续费方法
+    public function meijiexflist(){
+        //检查该合同是否已经通过审核
+        $hetong=M("Contract");
+
+        $renew_type=I('get.type');
+        //搜索条件
+        $type=I('get.searchtype');
+        if($type!='')
+        {
+            if($type=='advertiser')
+            {
+                $coustomer=M('Customer');
+                $zsql=$coustomer->field("id")->where(" advertiser like '%".I('get.search_text')."%'")->select(false);
+                $where.=" and  a.id!='0' and a.advertiser in($zsql)";
+
+            }
+
+            if($type=='appname')
+            {
+                $where.=" and a.id!='0' and a.appname like '%".I('get.search_text')."%'";
+            }
+            if($type=='users')
+            {
+                //销售或商务
+                $users=M('Users');
+                $zsql=$users->field("id")->where(" name like '%".I('get.search_text')."%'")->select(false);
+                $adveritiser=M("Customer")->field('id')->where("submituser in($zsql) or business in ($zsql)")->select(false);
+                $where.=" and  a.id!='0' and a.advertiser in($adveritiser) ";
+            }
+            $this->type=$type;
+            $this->ser_txt=I('get.search_text');
+
+        }
+
+        //时间条件
+        $time_start=I('get.time_start');
+        $time_end=I('get.time_end');
+        if($time_start!="" and $time_end!="")
+        {
+            $time_start=strtotime($time_start);
+
+
+            $time_end=strtotime($time_end);
+
+
+            $where.=" and a.ctime > $time_start and a.ctime < $time_end";
+            $this->time_start=I('get.time_start');
+            $this->time_end=I('get.time_end');
+        }
+        //审核条件
+        $type2=I('get.shenhe');
+        if($type2!='')
+        {
+            if($type2=='k')
+            {
+                $where.=" and a.id!='0' ";
+            }
+            if($type2=='0')
+            {
+                $where.=" and (a.audit_1=0 or a.audit_2=0) and a.audit_1!=2 and a.audit_2!=2 ";
+            }
+            if($type2=='1')
+            {
+                $where.=" and a.audit_1=1 and a.audit_2=1";
+            }
+            if($type2=='2')
+            {
+                $where.="  and (a.audit_1=2 or a.audit_2=2)";
+            }
+            $this->type2=$type2;
+            $this->ser_txt2=I('get.search_text');
+
+        }
+
+
+        //权限条件
+        $q_where=quan_where(__CONTROLLER__,"a");
+        //部门权限sush4 ：1超级管理员 2销售 3商务 4财务 5媒介 6boss 9销售经理  10优化师 11技术部 12 人事 13运营 14会计 15APP销售 16 设计
+        $usinfo=users_info(cookie("u_id"));
+
+        if($usinfo['groupid']=='2'  or $usinfo['groupid']=='3' or $usinfo['groupid']=='15')
+        {
+            if($usinfo['manager']=='1')
+            {
+                $this->type4_show=1;
+
+                if($usinfo['groupid']=='2' or $usinfo['groupid']=='15')
+                {
+                    $userswe=M("Users")->field('id')->where("groupid=$usinfo[groupid]")->select(false);
+                    $adveritiser = M("Customer")->field('id')->where("submituser in($userswe)")->select(false);
+                    $q_where=' a.id!=0';
+                    $where .= " and a.id!='0' and a.advertiser in($adveritiser) ";
+
+                }
+                $q_where='a.id!=0';
+            }
+            if($usinfo['groupid']=='3' and $usinfo['manager']!='1')
+            {
+                $adveritiser = M("Customer")->field('id')->where(" business = $usinfo[id]")->select(false);
+                $where .= " and  a.id!='0' and a.advertiser in($adveritiser) ";
+            }
+            //如果是销售并且不是经理的
+            if(($usinfo['groupid']=='2' or $usinfo['groupid']=='15') and $usinfo['manager']=='0')
+            {
+                $adveritiser = M("Customer")->field('id')->where("submituser = $usinfo[id]")->select(false);
+                $q_where=' a.id!=0';
+                $where .= " and a.id!='0' and a.advertiser in($adveritiser) ";
+            }
+
+        }else
+        {
+            $this->type4_show=1;
+        }
+
+
+        $where.=" and a.type=$renew_type ";
+        $RenewHuikuan=M('MrenewHuikuan');
+        $count      = $RenewHuikuan->field('a.id,a.advertiser,a.product_line,a.ctime,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0  and ".$q_where.$where)->count();// 查询满足要求的总记录数
+
+        $Page       = new \Think\Page($count,cookie('page_sum')?cookie('page_sum'):50);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        $show       = $Page->show();// 分页显示输出
+        $list=$RenewHuikuan->field('a.id,a.advertiser as aid,a.users2,a.xf_contractid,a.xf_qiane,a.gongsi,a.qudao,a.is_accomplish,a.submituser,a.rebates_proportion,a.account,a.appname,a.money,a.product_line,a.ctime,a.audit_1,a.audit_2,a.audit_3,a.audit_4,a.show_money,b.advertiser,c.name')->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->where("a.is_huikuan=0 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("is_accomplish asc,ctime desc")->select();
+
+
+        foreach($list as $key => $val)
+        {
+            //提交人
+            $uindo=users_info($val['users2']);
+            $list[$key]['submituser']=$uindo[name];
+            //账户信息
+            $account=account($val['account']);
+            $list[$key]['a_users']=$account['a_users'];
+            $list[$key]['a_id']=$account['id'];
+            //产品线信息
+            $list[$key]['name']=product_line_name($account['id']);
+            //渠道
+            $qudao=kehu($val['qudao']);
+
+            $list[$key]['qudao']=$qudao['advertiser'];
+
+            $list[$key]['mt_fandian']=$meihetonginfo['rebates_proportion'];
+
+        }
+        $this->list=$list;
+        $this->assign('page',$show);// 赋值分页输出
+        $this->display();
+    }
+
+    public function renewshow(){
+
+            $id=I('get.id');
+            $RenewHuikuan=M("MrenewHuikuan");
+            $hetong=M("contract");
+            $info=$RenewHuikuan->find($id);
+
+            //账户信息
+            $account=account($info['account']);
+            $info['a_users']=$account['a_users'];
+            $info['a_id']=$account['id'];
+
+            //产品线信息
+            $this->name=product_line_name($account['id']);
+            $this->info=$info;
+            $this->yid=I('get.yid');
+            //销售
+            $submitusers=users_info($info[submituser]);
+            $this->users_info=$submitusers['name'];
+            //提交人
+            $submitusers2=users_info($info[users2]);
+            $this->users_info2=$submitusers2['name'];
+            //一级审核人
+            $submitusers3=users_info($info[susers1]);
+            $this->users_info3=$submitusers3['name'];
+            //二级审核人
+            $submitusers4=users_info($info[susers2]);
+            $this->users_info4=$submitusers4['name'];
+            //三级审核人
+            $submitusers5=users_info($info[susers3]);
+            $this->users_info5=$submitusers5['name'];
+            //四级审核人
+            $submitusers6=users_info($info[susers4]);
+            $this->users_info6=$submitusers6['name'];
+            //产品线
+            $product_line=M("ProductLine");
+            $this->product_line_list=$product_line->field("id,name,title")->order("id asc")->select();
+            //原合同
+            $yinfo=$hetong->find(I('get.yid'));
+            $this->yinfo=$yinfo;
+
+            //销售
+            $market=users_info($yinfo[market]);
+            $this->market=$market;
+            //代理公司
+            $agentcompany=M("AgentCompany");
+            $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
+            $gs=kehu($info[advertiser]);
+            $this->gongsi=$gs[advertiser];
+
+            //文件
+            $file=M("File");
+            $filelist=$file->where("type=4 and yid=$id")->select();
+            $this->filelist=$filelist;
+
+            //完成操作人
+            $accomplish_users=users_info($info[accomplish_users]);
+            $this->accomplish_users=$accomplish_users['name'];
+
+
+            //渠道
+            $this->qudao=kehu($info['qudao']);
+            $this->display();
+
+
+    }
+
+    public function addrenew_kuan($id){
+        $mrenew=M("MrenewHuikuan");
+        $info=$mrenew->find($id);
+        $qudao=kehu($info[qudao]);
+        $info['qudao']=$qudao['advertiser'];
+        $this->mrenewinfo=$info;
+        $this->display();
+    }
+
+    //媒介客户控制台
+    public function meijiecustomer(){
+        $coustomer = M('Customer');
+        $myusersinfo = users_info(cookie("u_id"));
+        //搜索条件
+        $type = I('get.searchtype');
+        if ($type != '') {
+            if ($type == 'advertiser') {
+                $where = " and advertiser like '%" . I('get.search_text') . "%'";
+            }
+            if ($type == 'name' or $type == 'tel') {
+                //联系人
+                $contact = M('ContactList');
+                $se_idlist = $contact->where("$type like '%" . I('get.search_text') . "%'")->field("customer_id")->select(false);
+
+                $where = " and id in($se_idlist)";
+            }
+            if($type=='users')
+            {
+                //销售或商务
+                $users=M('Users');
+                $zsql=$users->field("id")->where(" name like '%".I('get.search_text')."%'")->select(false);
+                $where.=" and  id!='0' and (submituser in($zsql) or business in ($zsql))";
+            }
+            $this->type = $type;
+            $this->ser_txt = I('get.search_text');
+
+        }
+        //时间条件
+        $time_start = I('get.time_start');
+        $time_end = I('get.time_end');
+        if ($time_start != "" and $time_end != "") {
+            $time_start = strtotime($time_start);
+            $time_end = strtotime($time_end);
+
+            $where .= " and ctime > $time_start and ctime < $time_end";
+            $this->time_start = I('get.time_start');
+            $this->time_end = I('get.time_end');
+
+        }
+        //商务条件
+        /*
+        if (I("get.business") != "")
+        {
+            $where.=" and business = ".I("get.business");
+            $this->business=I('get.business');
+        }*/
+
+
+
+        //权限条件
+        $q_where=quan_where(__CONTROLLER__);
+        //部门权限sush4 ：1超级管理员 2销售 3商务 4财务 5媒介 6boss 9销售经理  10优化师 11技术部 12 人事 13运营 14会计 15APP销售 16 设计
+
+        $usinfo=users_info(cookie("u_id"));
+
+        if($usinfo['groupid']=='2'  or $usinfo['groupid']=='3' or $usinfo['groupid']=='15')
+        {
+            if($usinfo['manager']=='1')
+            {
+
+                $this->type4_show=1;
+
+                if($usinfo['groupid']=='2' or $usinfo['groupid']=='15')
+                {
+                    $userswe=M("Users")->field('id')->where("groupid=$usinfo[groupid]")->select(false);
+                    $where.=" and submituser in($userswe)";
+                }
+                $q_where='id!=0';
+            }
+            if($usinfo['groupid']=='3' and $usinfo['manager']!='1')
+            {
+                $where.=' and business='.$usinfo[id];
+            }
+
+        }else
+        {
+            $this->type4_show=1;
+        }
+
+        $count      = $coustomer->where("customer_type=3  and ".$q_where.$where)->count();// 查询满足要求的总记录数
+
+        $Page       = new \Think\Page($count,cookie('page_sum')?cookie('page_sum'):50);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        $show       = $Page->show();// 分页显示输出
+        $list=$coustomer->field('id,advertiser,yu_e,huikuan,undistributed_yu_e,industry,website,product_line,ctime,city,appName,submituser,type,customer_type')->where("customer_type=3  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order('ctime desc')->select();
+
+        $contact=M('ContactList');
+        $hetong=M("contract");
+        foreach($list as $key => $val)
+        {
+            //产品线
+            // $lin=product_line($val['product_line']);
+            // $list[$key]['product_lin']=$lin;
+            //取第一位联系人
+            $contact_one=$contact->field('name,tel')->where("customer_id=$val[id]")->find();
+            $list[$key]['contact']=$contact_one['name'];
+            $list[$key]['tel']=$contact_one['tel'];
+            $list[$key]['yue']=$val['huikuan']-$val['yu_e'];
+            //发票
+            $fap=$hetong->field('a.id,a.advertiser as aid,a.audit_1,a.audit_2,a.contract_no,a.market,a.users2,a.isguidang,a.iszuofei,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name,a.yu_e,a.huikuan,a.invoice,a.bukuan,a.type')->where("a.advertiser =$val[id] and isxufei=0")->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->order("a.ctime desc")->select();
+
+            $list[$key]['invoice']=$hetong->field('invoice')->where("advertiser =$val[id] ")->sum("invoice");
+            //提交人
+            $uindo=users_info($val['submituser']);
+            $list[$key]['submituser']=$uindo[name];
+
+        }
+        $this->list=$list;
+        $this->assign('page',$show);// 赋值分页输出
+        $this->display();
+
     }
 }

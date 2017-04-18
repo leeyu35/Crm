@@ -125,7 +125,6 @@
         <input type="hidden" name="advertiser" id="advertiser" value="{$contract[advertiser]}">
         <input type="hidden" name="submituser" id="submituser" value="{$contract[submituser]}">
         <input type="hidden" name="agent_company" id="agent_company" value="{$contract[agent_company]}">
-
         <input type="hidden" name="type" id="type" value="{$info[type]}">
         <input type="hidden" name="xf_hetonghao" id="xf_hetonghao" value="{$contract[contract_no]}">
         <input type="hidden" name="xf_contractid" id="xf_contractid" value="{$contract[id]}">
@@ -199,7 +198,7 @@
 
             <label for="inputEmail3" class="col-sm-2 control-label">广告主名称</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" autocomplete="off" name="appname" id="appname" value="{$info[appname]}" required>
+                <input type="text" class="form-control" autocomplete="off" name="gongsi" id="gongsi" value="{$info[gongsi]}" required>
 
             </div>
 
@@ -237,7 +236,19 @@
 
         </div>
 
+            <div class="form-group">
 
+                <label for="contract_money" class="col-sm-2 control-label">渠道</label>
+                <div class="col-sm-3">
+                    <select  class="form-control" name="qudao" id="contract_no">
+                        <option value="0">自有渠道</option>
+                        <volist id="customer_list" name="customer_list">
+                            <option value="{$customer_list[id]}">{$customer_list['advertiser']}</option>
+                        </volist>
+                    </select>
+                </div>
+
+        </div>
         <!--<div class="form-group">
 
           <label for="inputEmail3" class="col-sm-2 control-label">合同有效期</label>

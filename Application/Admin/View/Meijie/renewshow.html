@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>续费详情</title>
+    <link rel="stylesheet" href="/Public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Public/css/xufei.css">
+    <link rel="stylesheet" href="/Public/fonts/demo.css">
+    <script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
+    <script src="/Public/js/jquery-3.1.0.min.js"></script>
+    <script src="/Public/js/layer/layer.js"></script>
+    <script type="text/javascript">
+        var flag=0;
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+                };
+
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+
+        })(document, window);
+
+    </script>
+    <if condition="$info[type] lt 2">
+        <style type="text/css">.bzj{ display:none;}</style>
+    </if>
+</head>
+
+<body>
+
+<div class="box">
+    <div class="box-title">
+        <p class="title"><span class="line"></span>&nbsp;续费列表 /&nbsp;续费详情</p>
+    </div>
+    <div class="box-list">
+        <div class="container-fluid">
+            <div class="row">
+                <div class=" col-sm-8">
+                    <!-- 开头 -->
+                    <div class="box-list-title">
+                        <p class="pull-left"><span class="line"></span>{$gongsi}</p>
+                        <ul class="pull-right titlt-right">
+                            <li class="pull-left"></li>
+                            <li class="pull-left"><a href="javascript:history.go(-1)" style="text-decoration: none;"><span class=" title-xiugai">返回</span></a></li>
+                        </ul>
+                    </div>
+
+                    <!-- 列表 -->
+                    <div class="box-infor">
+                        <div class="box-infor-information">
+                            <p class="box-infor-title"><i class="iconfont">&#xe63b;</i>&nbsp;合同基本信息</p>
+                            <div class="box-infor-table">
+                                <div class="box-infor-num">
+                                    <div class="pull-left">
+                                        <b>初始合同编号</b>&nbsp;:&nbsp;<b>{$yinfo[contract_no]}</b>
+                                    </div>
+                                    <div class="pull-right ">
+                                        <span>合同类型</span>&nbsp;&nbsp;
+                                        <select class="box-infor-select" disabled>
+                                            <option><a>{$info[type]=='1'?'普通合同':'框架合同'}</a></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>广告主名称</th>
+                                        <th><b>{$gongsi}</b></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>代理公司</td>
+                                        <td>
+                                            <volist id="agentcompany" name="agentcompany" key="k">
+                                                <label  class="control-label"><strong>{$yinfo[agent_company]==$agentcompany[id]?"$agentcompany[companyname]":""}</strong></label>
+                                            </volist>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>协助人</td>
+                                        <td><b>{$users_info}</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>提交人</td>
+                                        <td><b>{$users_info2}</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>销售</td>
+                                        <td><b>{$market[name]}</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>产品线</td>
+                                        <td><b>
+
+                                            <label  class="control-label"><strong> {$name}</strong></label>
+                                        </b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>合同余额</td>
+                                        <td><b>
+
+                                            <label  class="control-label"><strong> {$yinfo[huikuan]-$yinfo[yu_e]}</strong></label>
+                                        </b></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 续费 -->
+                    <div class="box-infor">
+                        <div class="box-infor-information">
+                            <p class="box-infor-title"><i class="iconfont">&#xe63c;</i>&nbsp;续费信息</p>
+
+                            <div class="box-infor-table">
+                                <div class="box-infor-num">
+                                    <div class="pull-left">
+                                        <b>广告主名称</b>&nbsp;:&nbsp;<b>{$info[gongsi]}</b>&nbsp&nbsp<b>渠道：</b><b>{$qudao[advertiser]}</b>
+                                    </div>
+                                </div>
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>App名称</th>
+                                        <th>金额</th>
+                                        <th>账户显示金额</th>
+                                        <th>返点比例</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><b>{$info[appname]}</b></td>
+                                        <td><b>{$info[money]|num_format}元</b></td>
+                                        <td><b>{$info[show_money]}元</b></td>
+                                        <td><b>{$info[rebates_proportion]}%</b></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 付款 -->
+                    <div class="box-infor">
+                        <div class="box-infor-information">
+                            <p class="box-infor-title"><i class="iconfont box-icon-fukuan">&#xe631;</i>&nbsp;付款信息</p>
+                            <div class="box-infor-table">
+                                <table class="table table-bordered table-hover" style="margin-top:0.3rem;">
+                                    <thead>
+                                    <tr>
+                                        <th>预付方式</th>
+                                        <th><b>{$info[payment_type]=='1'?'预付':''}
+                                            {$info[payment_type]=='2'?'垫付':''}
+                                            {$info[payment_type]=='3'?'补款':''}
+                                            {$info[payment_type]=='14'?'退款':''}</b></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>预付时间</td>
+                                        <td><b>{$info[payment_time]!='0'?$info[payment_time]|date='Y-m-d',###:''}</b></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" col-sm-4">
+                    <!-- 附件信息 -->
+                    <div class="box-right-infor" style="margin-top:0.53rem;">
+                        <div class="box-right-information">
+                            <p class="box-right-title"><i class="iconfont">&#xe601;</i>&nbsp;附件信息</p>
+                            <div class="container-fluid">
+                                <div cass="row" style="padding-top:0.3rem;" id="imgshowtime">
+                                    <volist id="filelist" name="filelist">
+
+                                        <div class="col-xs-4" style="text-aline:center;">
+                                            <div class="box-right-bor"><img class="shouim" style="width:100%; height:100%;" layer-src="{$filelist[file]}" src="{$filelist[file]}" width="80" height="80" style="border:1px #ccc solid; "></div>
+                                            <p class="box-right-fujian"><a href="{:U("defile?id=$filelist[id]")}">删除</a></p>
+                                        </div>
+                                    </volist>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-right-infor">
+                        <div class="box-right-information" style="">
+                            <p class="box-right-title"><i class="iconfont">&#xe625;</i>&nbsp;备注信息</p>
+                            <form role="form" style="margin-top:10px;">
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="7" style="width:100%;border-radius: 5px;" ondurationchange="" disabled>{$info[note]}</textarea>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+                    <!-- 审核状态 -->
+                    <div class="box-right-infor">
+                        <div class="box-right-information" style="">
+                            <p class="box-right-title"><i class="iconfont">&#xe625;</i>&nbsp;审核状态</p>
+                            <ul class="box-right-shenhe">
+                                <li class="box-right-yishen">
+                                    <div class="shenhe-title">
+                                        <p class="shenhe-text"><b>一审</b></p>
+                                    </div>
+
+                                    <a href="javascript:;" class="first-shenhe"><div class="shenhe-radio" style="margin-right
+							:15px;">
+
+                                        	<if condition="($info[audit_1] eq 0)">
+                                                <i class="iconfont icon-select icon">&#xe604;</i>
+                                            <elseif condition="($info[audit_1] eq 1)"/>
+                                                    <i class="iconfont icon-select icon  icon-ok">&#xe607;</i>
+                                            <elseif condition="($info[audit_1] eq 2)"/>
+                                                    <i class="iconfont icon-select icon  icon-no">&#xe629;</i>
+                                            </if>
+
+
+                                    </div>
+                                    </a>
+                                    <div class="shenhe-select" {$info[audit_1]!='0'?'style="display:none"':''}>
+                                    <a href="javascript:;" class="zp_cl" id="{:U("shenhe?type=audit_1&id=$info[id]&yid=$yid")}"><div class="shenhe-yes">
+                                            <div class="tg-radio">
+                                                <i class="iconfont icon icon-ok">&#xe607;</i>
+                                            </div>
+                                            <p>通过</p>
+                                        </div>
+                                        </>
+                                    <a href="javascript:;" class="zp_cl" id="{:U("shenhe?type=audit_1&id=$info[id]&ju=1&yid=$yid")}"><div class="shenhe-no">
+                                            <div class="wtg-radio">
+                                                <i class="iconfont icon icon-no">&#xe629;</i>
+                                            </div>
+                                            <p>未通过</p>
+                                        </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="box-right-ershen">
+                                    <div class="shenhe-title">
+                                        <p class="shenhe-text"><b>二审</b></p>
+                                    </div>
+
+                                    <a href="javascript:;" class="er-shenhe"><div class="shenhe-radio" style="margin-right
+							:15px;">
+                                        <if condition="($info[audit_2] eq 0)">
+                                            <i class="iconfont icon-select icon">&#xe604;</i>
+                                            <elseif condition="($info[audit_2] eq 1)"/>
+                                            <i class="iconfont icon-select icon  icon-ok">&#xe607;</i>
+                                            <elseif condition="($info[audit_2] eq 2)"/>
+                                            <i class="iconfont icon-select icon  icon-no">&#xe629;</i>
+                                        </if>
+                                    </div>
+                                    </a>
+                                    <div class="shenhe-select"  {$info[audit_2]!='0'?'style="display:none"':''}>
+                                    <a href="javascript:;" class="zp_cl" id="{:U("shenhe?type=audit_2&id=$info[id]&yid=$yid")}"><div class="shenhe-yes">
+                                            <div class="tg-radio">
+                                                <i class="iconfont icon icon-ok">&#xe607;</i>
+                                            </div>
+                                            <p>通过</p>
+                                        </div>
+                                        </a>
+                                    <a href="javascript:;" class="zp_cl" id="{:U("shenhe?type=audit_2&id=$info[id]&ju=1&yid=$yid")}"><div class="shenhe-no">
+                                            <div class="wtg-radio">
+                                                <i class="iconfont icon icon-no">&#xe629;</i>
+                                            </div>
+                                            <p>未通过</p>
+                                        </div>
+                                        </a>
+                                    </div>
+                                </li>
+                    <!--
+                                <li class="box-right-sanshen">
+                                    <div class="shenhe-title">
+                                        <p class="shenhe-text"><b>三审</b></p>
+                                    </div>
+
+                                    <a href="javascript:;" class="san-shenhe"><div class="shenhe-radio" style="margin-right
+							:15px;">
+                                        <if condition="($info[audit_3] eq 0)">
+                                            <i class="iconfont icon-select icon">&#xe604;</i>
+                                            <elseif condition="($info[audit_3] eq 1)"/>
+                                            <i class="iconfont icon-select icon  icon-ok">&#xe607;</i>
+                                            <elseif condition="($info[audit_3] eq 2)"/>
+                                            <i class="iconfont icon-select icon  icon-no">&#xe629;</i>
+                                        </if>
+                                    </div>
+                                    </a>
+                                    <div class="shenhe-select" {$info[audit_3]!='0'?'style="display:none"':''}>
+                                    <a href="javascript:;"  class="zp_cl" id="{:U("shenhe?type=audit_3&id=$info[id]&yid=$yid")}"><div class="shenhe-yes">
+                                            <div class="tg-radio">
+                                                <i class="iconfont icon icon-ok">&#xe607;</i>
+                                            </div>
+                                            <p>通过</p>
+                                        </div>
+                                        </a>
+                                    <a href="javascript:;"   class="zp_cl" id="{:U("shenhe?type=audit_3&id=$info[id]&ju=1&yid=$yid")}"><div class="shenhe-no">
+                                            <div class="wtg-radio">
+                                                <i class="iconfont icon icon-no">&#xe629;</i>
+                                            </div>
+                                            <p>未通过</p>
+                                        </div>
+                                        </a>
+                                    </div>
+                                </li>
+
+                                <li class="box-right-sanshen">
+                                    <div class="shenhe-title">
+                                        <p class="shenhe-text"><b>四审</b></p>
+                                    </div>
+
+                                    <a href="javascript:;" class="san-shenhe"><div class="shenhe-radio" style="margin-right
+                                            :15px;">
+                                        <if condition="($info[audit_4] eq 0)">
+                                            <i class="iconfont icon-select icon">&#xe604;</i>
+                                            <elseif condition="($info[audit_4] eq 1)"/>
+                                            <i class="iconfont icon-select icon  icon-ok">&#xe607;</i>
+                                            <elseif condition="($info[audit_4] eq 2)"/>
+                                            <i class="iconfont icon-select icon  icon-no">&#xe629;</i>
+                                        </if>
+                                    </div>
+                                    </a>
+                                    <div class="shenhe-select" {$info[audit_4]!='0'?'style="display:none"':''}>
+                                    <a href="javascript:;"  class="zp_cl" id="{:U("shenhe?type=audit_4&id=$info[id]&yid=$yid")}"><div class="shenhe-yes">
+                                        <div class="tg-radio">
+                                            <i class="iconfont icon icon-ok">&#xe607;</i>
+                                        </div>
+                                        <p>通过</p>
+                                    </div>
+                                    </a>
+                                    <a href="javascript:;"   class="zp_cl" id="{:U("shenhe?type=audit_4&id=$info[id]&ju=1&yid=$yid")}"><div class="shenhe-no">
+                                        <div class="wtg-radio">
+                                            <i class="iconfont icon icon-no">&#xe629;</i>
+                                        </div>
+                                        <p>未通过</p>
+                                    </div>
+                                    </a>
+                            </div>
+                            </li>
+                            -->
+                            </ul>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</div>
+
+<div  style="background: #fff; width: 15.4018rem; padding: 10px; margin-left: 0.422rem;" class="shenhe_states">
+
+        <if condition="$info[audit_1] eq 0">
+            <span class="shno">一级审核未审核</span>
+            <elseif condition="$info[audit_1] eq 1"/>
+            <span class="shyes">一级审核已审核(审核人：{$users_info3?$users_info3:'默认'})</span>
+            <elseif condition="$info[audit_1] eq 2"/>
+            <span class="shno1">一级审核未通过(审核人：{$users_info3?$users_info3:'默认'})</span>
+        </if>
+        &nbsp;&nbsp;&nbsp;
+        <if condition="$info[audit_2] eq 0">
+            <span class="shno">二级审核未审核</span>
+            <elseif condition="$info[audit_2] eq 1"/>
+            <span class="shyes">二级审核已审核(审核人：{$users_info4?$users_info4:'默认'})</span>
+            <elseif condition="$info[audit_2] eq 2"/>
+            <span class="shno1">二级审核未通过(审核人：{$users_info4?$users_info4:'默认'})</span>
+        </if>
+        <!--
+        <if condition="$info[audit_3] eq 0">
+            <span class="shno">三级审核未审核</span>
+            <elseif condition="$info[audit_3] eq 1"/>
+            <span class="shyes">三级审核已审核(审核人：{$users_info5?$users_info5:'默认'})</span>
+            <elseif condition="$info[audit_3] eq 2"/>
+            <span class="shno1">三级审核未通过(审核人：{$users_info5?$users_info5:'默认'})</span>
+        </if>
+
+        <if condition="$info[audit_4] eq 0">
+            <span class="shno">四级审核未审核</span>
+            <elseif condition="$info[audit_4] eq 1"/>
+            <span class="shyes">四级审核已审核(审核人：{$users_info6?$users_info6:'默认'})</span>
+            <elseif condition="$info[audit_4] eq 2"/>
+            <span class="shno1">四级审核未通过(审核人：{$users_info6?$users_info6:'默认'})</span>
+        </if>
+        -->
+        <if condition="$info[is_accomplish] eq 0">
+            <a href="{:U("is_accomplish?id=$info[id]&type=renew")}" class=" btn btn-success btn-sm">点击完成</a>
+        <elseif condition="$info[is_accomplish] eq 1"/>
+            <button class="btn btn-info btn-sm">已完成({$accomplish_users})</button>
+        </if>
+</div>
+
+<script type="text/javascript">
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+            };
+
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+
+    })(document, window);
+
+    $(function(){
+        var This = "";
+        var Text = "";
+        var shenhe = "";
+        function fun(ID){
+
+            layer.confirm('您确定要执行此操作吗 (提交后不可更改)', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+
+                //layer.msg('提交成功', {icon: 1});
+                if(flag==0)
+                {
+                    flag=1;
+                    window.location.href=ID;
+                }
+
+
+                $(".shenhe-select").hide();
+            }, function(){
+                $(this).show();
+            });
+        }
+        //点击切换
+        $(".shenhe-select").on("click","a",function(){
+            Text = $(this).find("p").text();
+            shenhe = $(this).parents("li").find(".shenhe-text").text();
+
+            switch($(this).find("p").text()){
+                case "通过":{
+                    // if($(this).parents("li").find(".shenhe-text").text() == "二审") {
+                    // 	fun(shenhe3())
+                    // }else if($(this).parents("li").find(".shenhe-text").text() == "一审"){
+                    // 	fun(shenhe2())
+                    // }
+                    var ID = $(this).parents("li").find(".zp_cl").attr("id");
+                    fun(ID);
+                    This = $(this).parents("li").find(".icon-select");
+                    console.log($(this))
+
+                }
+                    break;
+                case "未通过":{
+                    var ID = $(this).parents("li").find(".zp_cl").eq(1).attr("id");
+                    fun(ID);
+                    This = $(this).parents("li").find(".icon-select");
+                }
+                    break;
+            }
+        })
+
+
+
+
+    })
+</script>
+<script>
+    ;!function(){
+
+//页面一打开就执行，放入ready是为了layer所需配件（css、扩展模块）加载完毕
+        layer.ready(function(){
+            //官网欢迎页
+
+            //使用相册
+            layer.photos({
+                photos: '#imgshowtime'
+            });
+        });
+
+    }();
+</script>
+</body>
+</html>

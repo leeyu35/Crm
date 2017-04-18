@@ -1084,6 +1084,7 @@ class ContractController extends CommonController
             }
         }
 
+        $this->success('转款到未分配余额成功！',U("NewCaiwu/show?id=$info[advertiser]"));
 
 
 
