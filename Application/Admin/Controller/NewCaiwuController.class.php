@@ -165,7 +165,7 @@ class NewCaiwuController extends CommonController
         $backmoney=M("RenewHuikuan");
         $wshhuikuan=$backmoney->field('money')->where("is_huikuan=1 and advertiser=$id and (audit_1=0 or audit_1=1) and audit_2=0")->sum("money");
         //未审核续费
-        $wshxufei=$backmoney->field('money')->where("advertiser=$id  and is_huikuan=0 and (payment_type !=14 and payment_type !=15 and payment_type !=3) and (audit_1=0 or audit_1=1) and (audit_2=0 or audit_2=1) and (audit_3=0 or audit_3=1) and audit_4=0")->sum("money");
+        $wshxufei=$backmoney->field('money')->where("advertiser=$id  and is_huikuan=0 and (payment_type !=14 and payment_type !=15 and payment_type !=3) and (audit_1=0 or audit_1=1) and (audit_2=0 or audit_2=1) ")->sum("money");
 
 
 
