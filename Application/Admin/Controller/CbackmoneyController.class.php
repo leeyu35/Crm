@@ -282,20 +282,14 @@ class CbackmoneyController extends CommonController
                 if($shenhe==2)
                 {
                     $postdate=$table->find($id);
-                    //如果回款成功则修改客户未分配余额
+                    //如果回款bu成功则修改客户未分配余额
                     M("Customer")->where("id=".$postdate['advertiser'])->setDec('undistributed_yu_e',$postdate['b_money']);
-                   
-                }
-
-
-
-
-                if($type=='audit_2')
+                    M("Customer")->where("id=".$postdate['advertiser'])->setDec('huikuan',$postdate['b_money']);
+                }else
                 {
                     $postdate=$table->find($id);
                     //如果回款成功则修改客户未分配余额
                     M("Customer")->where("id=".$postdate['advertiser'])->setInc('undistributed_yu_e',$postdate['b_money']);
-
                     $update1=M("Customer")->where("id=".$postdate['advertiser'])->setInc('huikuan', $postdate['b_money']);//更新公司出款值
                     if($update1!=1)
                     {
@@ -303,9 +297,17 @@ class CbackmoneyController extends CommonController
                     }else
                     {
                         $str=cookie('u_name').'操作了 公司ID是'.$postdate['advertiser'].'的回款操作，该公司总回款加'. $postdate['b_money'];
-                        crm_record($str);
-                        money_record(0,$advertisers_id,$type,$str,$value,1);
+
+                        money_record(0,$postdate['advertiser'],$type,$str,$postdate['b_money'],1);
+
                     }
+                }
+
+
+
+
+                if($type=='audit_2')
+                {
                     //写入审核人员
                     $table->where("id=$id")->setField('susers1',cookie('u_id'));
                     $table->where("id=$id")->setField('susers2',cookie('u_id'));

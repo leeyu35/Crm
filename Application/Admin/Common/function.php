@@ -862,6 +862,7 @@ function money_record($contract_id,$advertisers_id,$type,$str,$cmoney,$jiaorjian
 
     $money_hisory->add($data);
 
+
 }
 
 //获取周的开始时间和结束时间参数1 得到几周数据  参数2 从上周几开始计算，周期  参数3 指定开始时间 没有则默认今天
