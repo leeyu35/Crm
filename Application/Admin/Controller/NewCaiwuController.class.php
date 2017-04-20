@@ -192,7 +192,7 @@ class NewCaiwuController extends CommonController
 
         if($type=='renew')
         {
-            $renewwhere=' and (payment_type !=14 and payment_type !=15)';
+            $renewwhere=' and (payment_type !=14 and payment_type !=15 and (audit_1!=2 or audit_2!=2))';
         }
         //时间条件
         $time_start=I('get.time_start');
