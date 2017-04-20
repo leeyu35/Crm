@@ -281,10 +281,12 @@ class CbackmoneyController extends CommonController
                 //如果是审核不通过的话则减去客户总额
                 if($shenhe==2)
                 {
+                    /*
                     $postdate=$table->find($id);
                     //如果回款bu成功则修改客户未分配余额
                     M("Customer")->where("id=".$postdate['advertiser'])->setDec('undistributed_yu_e',$postdate['b_money']);
                     M("Customer")->where("id=".$postdate['advertiser'])->setDec('huikuan',$postdate['b_money']);
+                    */
                 }else
                 {
                     $postdate=$table->find($id);

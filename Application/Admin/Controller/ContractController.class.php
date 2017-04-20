@@ -1096,6 +1096,10 @@ class ContractController extends CommonController
         $date['is_huikuan']=0;
         $date['market']=$info['submituser'];
         $date['xf_qiane']=0;
+        $date['audit_1']=1;
+        $date['audit_2']=1;
+        $date['audit_3']=1;
+        $date['audit_4']=1;
         $date['ctime']=time();
         M('RenewHuikuan')->add($date);
         echo M('RenewHuikuan')->_sql();
