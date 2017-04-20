@@ -1102,8 +1102,7 @@ class ContractController extends CommonController
         $date['audit_4']=1;
         $date['ctime']=time();
         M('RenewHuikuan')->add($date);
-        echo M('RenewHuikuan')->_sql();
-        exit;
+   
         $this->success('转款到未分配余额成功！',U("NewCaiwu/show?id=$info[advertiser]"));
 
 
