@@ -217,7 +217,7 @@ class NewCaiwuController extends CommonController
         //续费的记录 1预付 2垫付
         $hetong=M("RenewHuikuan");
         $xflist=$hetong->field('id,money,payment_time,payment_type,account,audit_1,audit_2,audit_3,audit_4,type,users2,rebates_proportion,ctime,xf_qiane')->where("xf_contractid=$contract_id and is_huikuan=0 $renewwhere $xf_where")->order("payment_time asc,id desc")->select();
-
+     
         $yue=0;
         $bukuan=0;
         $account=M("Account");
@@ -254,6 +254,11 @@ class NewCaiwuController extends CommonController
             {
                 //续费 转款
                 $history_xf[]=array("id"=>$val[id],"date"=>date("Y-m-d",$val[payment_time]),"ctime"=>date("Y-m-d",$val[ctime]),"mes"=>"退款到总账户".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'退款',"submitusers"=>$val['users2'],"money"=>"+".$val['money']);
+            }
+            elseif($val[payment_type]==16)
+            {
+                //合同 转款
+                $history_xf[]=array("id"=>$val[id],"date"=>date("Y-m-d",$val[payment_time]),"ctime"=>date("Y-m-d",$val[ctime]),"mes"=>"转款到资金池（未分配余额）".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'转款',"submitusers"=>$val['users2'],"money"=>"+".$val['money']);
             }
         }
 

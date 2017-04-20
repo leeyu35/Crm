@@ -228,6 +228,10 @@ label#lblSelect::after {
 .list-tuikuan {
     background: #e5a972;
 }
+
+.list-zhuankuan{
+    background: #00C1B3;
+}
 /*排序
 table.tablesorter thead tr th .tablesorter-header-inner{
     background-image: url(/Public/images/images/jiantou.png);

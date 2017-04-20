@@ -1083,7 +1083,21 @@ class ContractController extends CommonController
                 die('公司未分配余额增加失败');
             }
         }
-
+        //读出合同产品线
+        $contract_lian=M("ContractRelevance")->where("contract_id=$info[id]")->find();
+        $date['advertiser']=$info[advertiser];
+        $date['product_line']=$info['type'];
+        $date['type']=$info['type'];
+        $date['money']=$money;
+        $date['payment_type']=16;
+        $date['payment_time']=time();
+        $date['submituser']=cookie('u_id');
+        $date['xf_contractid']=$info[id];
+        $date['is_huikuan']=0;
+        $date['market']=$info['submituser'];
+        $date['xf_qiane']=0;
+        $date['ctime']=time();
+        M('RenewHuikuan')->add($date);
         $this->success('转款到未分配余额成功！',U("NewCaiwu/show?id=$info[advertiser]"));
 
 
