@@ -1086,7 +1086,7 @@ class ContractController extends CommonController
         //读出合同产品线
         $contract_lian=M("ContractRelevance")->where("contract_id=$info[id]")->find();
         $date['advertiser']=$info[advertiser];
-        $date['product_line']=$info['type'];
+        $date['product_line']=$contract_lian['product_line'];
         $date['type']=$info['type'];
         $date['money']=$money;
         $date['payment_type']=16;
@@ -1098,6 +1098,8 @@ class ContractController extends CommonController
         $date['xf_qiane']=0;
         $date['ctime']=time();
         M('RenewHuikuan')->add($date);
+        echo M('RenewHuikuan')->_sql();
+        exit;
         $this->success('转款到未分配余额成功！',U("NewCaiwu/show?id=$info[advertiser]"));
 
 
