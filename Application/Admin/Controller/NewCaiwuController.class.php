@@ -217,7 +217,7 @@ class NewCaiwuController extends CommonController
         //续费的记录 1预付 2垫付
         $hetong=M("RenewHuikuan");
         $xflist=$hetong->field('id,money,payment_time,payment_type,account,audit_1,audit_2,audit_3,audit_4,type,users2,rebates_proportion,ctime,xf_qiane')->where("xf_contractid=$contract_id and is_huikuan=0 $renewwhere $xf_where")->order("payment_time asc,id desc")->select();
-        echo $hetong->_sql();
+      
         $yue=0;
         $bukuan=0;
         $account=M("Account");
