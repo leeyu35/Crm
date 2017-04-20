@@ -40,9 +40,6 @@ class PublicController extends Controller
                 {
                     $this->success('登录失败',U("/login"));
                 }
-
-
-
             }else
             {
                 $this->error("用户名或密码错误");

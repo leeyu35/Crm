@@ -112,6 +112,7 @@
             color: rgba(225,225,225,0.4);
         }
         .list_right {
+            padding-left: 10px;
             width: 66%;
             height: 1.083rem;
         }
@@ -382,58 +383,74 @@
 </div>
 <div class="container-fluid" style="margin-bottom:30px;">
     <div class="row-fluid">
-        <div class="col-xs-12  col-xs-4 col-zdlg-2-5 col-red-border">
+        <div class="col-xs-12  col-xs-2  col-red-border">
             <div class="list list-1">
-                <div class="pull-left list_left">
+                <!--<div class="pull-left list_left">
                     <i class="iconfont header-icon">&#xe61a;</i>
-                </div>
+                </div>-->
                 <div class="pull-left list_right">
                     <p class="list_name list_name1">总余额&nbsp(&nbsp￥&nbsp)</p>
                     <p class="list_num list_num1">{$zong|num_format}<br>已审核余额：{$zyue|num_format}</p>
                 </div>
             </div>
         </div>
-        <div class="col-xs-12  col-xs-4 col-zdlg-2-5 col-red-border">
+        <div class="col-xs-12  col-xs-2  col-red-border">
             <div class="list list-2">
+                <!--
                 <div class="pull-left list_left">
                     <i class="iconfont header-icon">&#xe631;</i>
-                </div>
+                </div>-->
                 <div class="pull-left list_right">
                     <p class="list_name list_name1">总回款&nbsp(&nbsp￥&nbsp)</p>
                     <p class="list_num list_num1">{$customer_info[huikuan]|num_format}<br>未审核回款：{$wshhuikuan|num_format}</p>
                 </div>
             </div>
         </div>
-        <div class="col-xs-12  col-xs-4 col-zdlg-2-5 col-red-border">
+        <div class="col-xs-12  col-xs-2  col-red-border">
             <div class="list list-3">
+                <!--
                 <div class="pull-left list_left">
                     <i class="iconfont header-icon">&#xe6be;</i>
-                </div>
+                </div>-->
                 <div class="pull-left list_right">
                     <p class="list_name">补款&nbsp(&nbsp￥&nbsp)</p>
                     <p class="list_num">{$customer_info[bukuan]|num_format}</p>
                 </div>
             </div>
         </div>
-        <div class="col-xs-12  col-xs-4 col-zdlg-2-5 col-red-border">
+        <div class="col-xs-12  col-xs-2  col-red-border">
             <div class="list list-4">
+                <!--
                 <div class="pull-left list_left">
                     <i class="iconfont header-icon">&#xe611;</i>
-                </div>
+                </div>-->
                 <div class="pull-left list_right">
                     <p class="list_name list_name1">总续费&nbsp(&nbsp￥&nbsp)</p>
                     <p class="list_num list_num1">{$customer_info[yu_e]|num_format}<br>未审核续费：{$wshxufei|num_format}</p>
                 </div>
             </div>
         </div>
-        <div class="col-xs-12  col-xs-4 col-zdlg-2-5 col-red-border">
+        <div class="col-xs-12  col-xs-2  col-red-border">
             <div class="list list-5">
+                <!--
                 <div class="pull-left list_left">
                     <i class="iconfont header-icon">&#xe622;</i>
-                </div>
+                </div>-->
                 <div class="pull-left list_right">
                     <p class="list_name">总发票&nbsp(&nbsp￥&nbsp)</p>
                     <p class="list_num">{$zongfapiao|num_format}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12  col-xs-2  col-red-border">
+            <div class="list list-5">
+                <!--
+                <div class="pull-left list_left">
+                    <i class="iconfont header-icon">&#xe622;</i>
+                </div>-->
+                <div class="pull-left list_right">
+                    <p class="list_name list_name1">未分配余额&nbsp(&nbsp￥&nbsp)</p>
+                    <p class="list_num">{$customer_info[undistributed_yu_e]}</p>
                 </div>
             </div>
         </div>
