@@ -6,12 +6,24 @@
     <title></title>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="/Public/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="/Public/fonts/demo.css">
     <link rel="stylesheet" href="/Public/css/lishijilu.css">
     <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
     <script src="/Public/js/jquery-3.1.0.min.js"></script>
     <script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
+    <script language="JavaScript">
+        $(document).ready(function(){
+            $(".renewhuikuan_info").click(function(){
+                   id=$(this).attr("id");
 
+                    $.get("{:U("ajax_renewhuikuan_info")}",{"id":id},function (data) {
+                          $(".modal-title").html(data.title);
+                           $(".modal-body").html("<ul>"+data.str+"</ul>");
+                    },'json')
+            })
+        })
+    </script>
 </head>
 <body>
 <div class="container" style="width:100%;" >
@@ -144,14 +156,17 @@
                         <case value="续费">list-xufei</case>
                         <case value="补款">list-bukuan</case>
                         <case value="退款">list-tuikuan</case>
-                        <case value="回款">list-huikuan</case>
+                        <case value="分配款">list-huikuan</case>
                         <case value="发票">list-fapiao</case>
-
                         </switch>
 
                     list-fapiao">{$history[type]}</p></td>
                     <td>{$history[money]}</td>
-                    <td style="width:4.3333rem;">{$history[mes]}</td>
+                    <td style="width:4.3333rem;">{$history[mes]}
+                    <if condition="($history[type] eq '续费') or ($history[type] eq '回款')">
+                        <a class="renewhuikuan_info" id="{$history[id]}" style="cursor: pointer"  data-toggle="modal" data-target="#myModal">查看详情</a>
+                    </if>
+                    </td>
                     <td>{$history[submituser]}</td>
                     <td>
                         <if condition="$history[audit_1] eq 1">
@@ -203,7 +218,29 @@
         </table>
         <div><a href="{:U("excel?contract_id=$contract_id&type=$type&time_start=$time_start&time_end=$time_end")}" style=" margin-top:20px;"  type="button" class="btn btn-primary  btn-sm"><span class="glyphicon glyphicon-save"></span> 导出Excel</a></div>
     </div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        加载中....
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    加载中....
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
 
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
 
     <script type="text/javascript" src="/Public/js/bootstrap.min.js"></script>
 
