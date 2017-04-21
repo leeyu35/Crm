@@ -316,7 +316,7 @@ class RenewController extends  CommonController
         $adyue=$advertiser['huikuan']-$advertiser['yu_e'];
         if($postdate['payment_type']==1)
         {
-            if($postdate['money']>=$adyue)
+            if($postdate['money']>$adyue)
             {
                 $this->error("客户余额为$adyue,不足以预付此比续费。请重新提交！");
 
