@@ -347,10 +347,11 @@ class RenewController extends  CommonController
                 $hetong->xf_qiane=null;
                 $hetong->xf_cost=null;
                 $hetong->backmoney_yue=$postdate['money'];
-            }elseif(I('post.payment_type')=='1' or I('post.payment_type')=='2'){
+            }
+         
                 //如果续费成功则修改客户出款或者补款余额  I('post.payment_type')
                 money_change($postdate['advertiser'],$postdate['xf_contractid'],I('post.payment_type'),$postdate['money'],$postdate['account']);
-            }
+           
             if($insid==1)
             {
                 $result = $hetong->query("select currval('jd_renew_huikuan_id_seq')");
