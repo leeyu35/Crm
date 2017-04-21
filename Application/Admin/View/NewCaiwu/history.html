@@ -141,6 +141,7 @@
                 <th>操作</th>
                 <th>金额</th>
                 <th>说明</th>
+                <th>款余额</th>
                 <th>提交人</th>
                 <th>审核状态</th>
             </tr>
@@ -168,6 +169,7 @@
                         <a class="renewhuikuan_info" id="{$history[id]}" style="cursor: pointer"  data-toggle="modal" data-target="#myModal">查看详情</a>
                     </if>
                     </td>
+                    <td>{$history[kyue]}</td>
                     <td>{$history[submituser]}</td>
                     <td>
                         <if condition="$history[audit_1] eq 1">

@@ -394,7 +394,6 @@ class RenewController extends  CommonController
             }elseif(I('post.payment_type')=='1' or I('post.payment_type')=='2'){
                 //如果续费成功则修改客户出款或者补款余额  I('post.payment_type')
                 money_change($postdate['advertiser'],$postdate['xf_contractid'],I('post.payment_type'),$postdate['money'],$postdate['account']);
-
             }
 
             if($insid==1)

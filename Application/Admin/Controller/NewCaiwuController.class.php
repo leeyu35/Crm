@@ -207,16 +207,13 @@ class NewCaiwuController extends CommonController
 
             $xf_where.=" and payment_time > $time_start and payment_time < $time_end";
             $fp_where.=" and ctime > $time_start and ctime < $time_end";
-
-
-
             $this->time_start=I('get.time_start');
             $this->time_end=I('get.time_end');
         }
 
         //续费的记录 1预付 2垫付
         $hetong=M("RenewHuikuan");
-        $xflist=$hetong->field('id,money,payment_time,payment_type,account,audit_1,audit_2,audit_3,audit_4,type,users2,rebates_proportion,ctime,xf_qiane')->where("xf_contractid=$contract_id and is_huikuan=0 $renewwhere $xf_where")->order("payment_time asc,id desc")->select();
+        $xflist=$hetong->field('id,money,payment_time,payment_type,account,audit_1,audit_2,audit_3,audit_4,type,users2,rebates_proportion,ctime,xf_qiane,backmoney_yue')->where("xf_contractid=$contract_id and is_huikuan=0 $renewwhere $xf_where")->order("payment_time asc,id desc")->select();
 
         $yue=0;
         $bukuan=0;
@@ -226,7 +223,7 @@ class NewCaiwuController extends CommonController
         {
             //账户名称
             $account_name=$account->field('a_users')->find($val['account']);
-            $account_str="<p>账户名称：$account_name[a_users] 返点：$val[rebates_proportion] 续费欠额:$val[xf_qiane]</p> ";
+            $account_str="<p>账户名称：$account_name[a_users] 返点：$val[rebates_proportion]</p> ";
             //审核状态
             if(($val[audit_1]!=2) and ($val[audit_2]!=2) and ($val[audit_3]!=2)and ($val[audit_4]!=2))
             {
@@ -236,29 +233,29 @@ class NewCaiwuController extends CommonController
             if($val[payment_type]==1)
             {
                 //续费预付
-                $history_xf[]=array("id"=>$val[id],"date"=>date("Y-m-d",$val[payment_time]),"ctime"=>date("Y-m-d",$val[ctime]),"mes"=>"续费 付款".num_format($val['money']).$account_str,"yue"=>$yue-=$val['money'],"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'续费',"submitusers"=>$val['users2'],"money"=>"-".$val['money'],"audit_3"=>$val['audit_3'],"audit_4"=>$val['audit_4']);
+                $history_xf[]=array("kyue"=>$val['xf_qiane'],"id"=>$val[id],"date"=>date("Y-m-d",$val[payment_time]),"ctime"=>date("Y-m-d",$val[ctime]),"mes"=>"续费 付款".num_format($val['money']).$account_str,"yue"=>$yue-=$val['money'],"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'续费',"submitusers"=>$val['users2'],"money"=>"-".$val['money'],"audit_3"=>$val['audit_3'],"audit_4"=>$val['audit_4']);
             }elseif($val[payment_type]==2)
             {
                 //续费垫付
-                $history_xf[]=array("id"=>$val[id],"date"=>date("Y-m-d",$val[payment_time]),"ctime"=>date("Y-m-d",$val[ctime]),"mes"=>"续费 垫款".num_format($val['money']).$account_str,"yue"=>$yue-=$val['money'],"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'续费',"submitusers"=>$val['users2'],"money"=>"-".$val['money'],"audit_3"=>$val['audit_3'],"audit_4"=>$val['audit_4']);
+                $history_xf[]=array("kyue"=>$val['xf_qiane'],"id"=>$val[id],"date"=>date("Y-m-d",$val[payment_time]),"ctime"=>date("Y-m-d",$val[ctime]),"mes"=>"续费 垫款".num_format($val['money']).$account_str,"yue"=>$yue-=$val['money'],"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'续费',"submitusers"=>$val['users2'],"money"=>"-".$val['money'],"audit_3"=>$val['audit_3'],"audit_4"=>$val['audit_4']);
             }elseif($val[payment_type]==3)
             {
                 ////续费补款
-                $history_xf[]=array("id"=>$val[id],"date"=>date("Y-m-d",$val[payment_time]),"ctime"=>date("Y-m-d",$val[ctime]),"mes"=>"续费 补款".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=$val['money'],"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'补款',"submitusers"=>$val['users2'],"money"=>$val['money'],"audit_3"=>$val['audit_3'],"audit_4"=>$val['audit_4']);
+                $history_xf[]=array("kyue"=>$val['backmoney_yue'],"id"=>$val[id],"date"=>date("Y-m-d",$val[payment_time]),"ctime"=>date("Y-m-d",$val[ctime]),"mes"=>"续费 补款".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=$val['money'],"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'补款',"submitusers"=>$val['users2'],"money"=>$val['money'],"audit_3"=>$val['audit_3'],"audit_4"=>$val['audit_4']);
 
             }elseif($val[payment_type]==14)
             {
                 //续费 退款
-                $history_xf[]=array("id"=>$val[id],"date"=>date("Y-m-d",$val[payment_time]),"ctime"=>date("Y-m-d",$val[ctime]),"mes"=>"退款到客户".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'退款',"submitusers"=>$val['users2'],"money"=>"-".$val['money']);
+                $history_xf[]=array("kyue"=>$val['xf_qiane'],"id"=>$val[id],"date"=>date("Y-m-d",$val[payment_time]),"ctime"=>date("Y-m-d",$val[ctime]),"mes"=>"退款到客户".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'退款',"submitusers"=>$val['users2'],"money"=>"-".$val['money']);
             }elseif($val[payment_type]==15)
             {
                 //续费 转款
-                $history_xf[]=array("id"=>$val[id],"date"=>date("Y-m-d",$val[payment_time]),"ctime"=>date("Y-m-d",$val[ctime]),"mes"=>"退款到总账户".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'退款',"submitusers"=>$val['users2'],"money"=>"+".$val['money']);
+                $history_xf[]=array("kyue"=>$val['backmoney_yue'],"id"=>$val[id],"date"=>date("Y-m-d",$val[payment_time]),"ctime"=>date("Y-m-d",$val[ctime]),"mes"=>"退款到总账户".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'退款',"submitusers"=>$val['users2'],"money"=>"+".$val['money']);
             }
             elseif($val[payment_type]==16)
             {
                 //合同 转款
-                $history_xf[]=array("id"=>$val[id],"date"=>date("Y-m-d",$val[payment_time]),"ctime"=>date("Y-m-d",$val[ctime]),"mes"=>"转款到资金池（未分配余额）".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'转款',"submitusers"=>$val['users2'],"money"=>"+".$val['money']);
+                $history_xf[]=array("kyue"=>$val['xf_qiane'],"id"=>$val[id],"date"=>date("Y-m-d",$val[payment_time]),"ctime"=>date("Y-m-d",$val[ctime]),"mes"=>"转款到资金池（未分配余额）".num_format($val['money']).$account_str,"yue"=>$yue-=0,"bukuan"=>$bukuan+=0,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'转款',"submitusers"=>$val['users2'],"money"=>"+".$val['money']);
             }
         }
 
@@ -272,7 +269,7 @@ class NewCaiwuController extends CommonController
             {
                 $yue_hk+=$val['money'];
             }
-            $history_hk[]=array("id"=>$val[id],"date"=>date("Y-m-d",$val[payment_time]),"ctime"=>date("Y-m-d",$val[ctime]),"mes"=>"回款".num_format($val['money'])."回款余额".num_format($val['backmoney_yue'])."<p></p>","yue"=>$yue,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'回款',"submitusers"=>$val['users2'],"money"=>"+".$val['money']);
+            $history_hk[]=array("kyue"=>$val['backmoney_yue'],"id"=>$val[id],"date"=>date("Y-m-d",$val[payment_time]),"ctime"=>date("Y-m-d",$val[ctime]),"mes"=>"回款".num_format($val['money'])."<p></p>","yue"=>$yue,"audit_1"=>$val['audit_1'],"audit_2"=>$val['audit_2'],"type"=>'回款',"submitusers"=>$val['users2'],"money"=>"+".$val['money']);
         }
 
         //发票
