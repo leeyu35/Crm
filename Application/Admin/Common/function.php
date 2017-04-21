@@ -1230,6 +1230,7 @@ function renew_huikuan($xf_insid){
     $yixufeihuikuan_date['xsid']=$xufei_info['market'];
     $yixufeihuikuan_date['xf_id']=$xf_insid;
     $yixufeihuikuan_date['xs_tc']=0;
+    $yixufeihuikuan_date['ht_id']=$xufei_info[xf_contractid];
     $xf_fd=(I('post.rebates_proportion')+100)/100;
 
 
@@ -1239,13 +1240,19 @@ function renew_huikuan($xf_insid){
     {
 
         //如果回款金额 大于 续费金额 （余额大于续费金额）停止循环并返回续费欠额为0
-        if($value['backmoney_yue']-$xufei_info['xf_qiane']>0)
-        {
+        if($value['backmoney_yue']-$xufei_info['xf_qiane']>0) {
             //设置回款余额
-            $huikuan->where("id=$value[id]")->setField('backmoney_yue',$value['money']-$xufei_info['xf_qiane']);
+            $huikuan->where("id=$value[id]")->setField('backmoney_yue', $value['money'] - $xufei_info['xf_qiane']);
             //增加已回款续费记录
-            $yixufeihuikuan_date['hk_id']=$value['id'];
-            $yixufeihuikuan_date['time']=$value['payment_time'];
+            $yixufeihuikuan_date['hk_id'] = $value['id'];
+            //谁大取谁
+            if ($value['payment_time'] >= $xufei_info['payment_time']) {
+                $yixufeihuikuan_date['time'] = $value['payment_time'];
+            } else
+            {
+                $yixufeihuikuan_date['time'] = $xufei_info['payment_time'];
+            }
+
             $yixufeihuikuan_date['money']=$xufei_info['xf_qiane'];
             $shifu=($yixufeihuikuan_date['money']*$xf_fd)/(($mjhtinfo['rebates_proportion']+100)/100);
             $yixufeihuikuan_date['shifu_money']=$shifu;
@@ -1266,7 +1273,13 @@ function renew_huikuan($xf_insid){
 
             //增加已回款续费记录
             $yixufeihuikuan_date['hk_id']=$value['id'];
-            $yixufeihuikuan_date['time']=$value['payment_time'];
+            //谁大取谁
+            if ($value['payment_time'] >= $xufei_info['payment_time']) {
+                $yixufeihuikuan_date['time'] = $value['payment_time'];
+            } else
+            {
+                $yixufeihuikuan_date['time'] = $xufei_info['payment_time'];
+            }
             $yixufeihuikuan_date['money']=$value['backmoney_yue'];
             $shifu=($yixufeihuikuan_date['money']*$xf_fd)/(($mjhtinfo['rebates_proportion']+100)/100);
             $yixufeihuikuan_date['shifu_money']=$shifu;
@@ -1317,6 +1330,7 @@ function huikuan_xufei_auto($hk_id){
     $yixufeihuikuan_date['xsid']=$hk_info[market];;
     $yixufeihuikuan_date['hk_id']=$hk_id;
     $yixufeihuikuan_date['xs_tc']=0;
+    $yixufeihuikuan_date['ht_id']=$hk_info['xf_contractid'];
     $xf_fd=(I('post.rebates_proportion')+100)/100;
 
 
@@ -1343,6 +1357,13 @@ function huikuan_xufei_auto($hk_id){
             //增加已回款续费记录
             $yixufeihuikuan_date['xf_fandian']=$value['rebates_proportion'];
             $yixufeihuikuan_date['xf_id']=$value['id'];
+            //谁大取谁
+            if ($value['payment_time'] >= $hk_info['payment_time']) {
+                $yixufeihuikuan_date['time'] = $value['payment_time'];
+            } else
+            {
+                $yixufeihuikuan_date['time'] = $hk_info['payment_time'];
+            }
             $yixufeihuikuan_date['time']=time();
             $yixufeihuikuan_date['money']=$hk_info['backmoney_yue'];
             $shifu=($yixufeihuikuan_date['money']*$xf_fd)/(($mjhtinfo['rebates_proportion']+100)/100);
@@ -1367,7 +1388,13 @@ function huikuan_xufei_auto($hk_id){
             //增加已回款续费记录
             $yixufeihuikuan_date['xf_fandian']=$value['rebates_proportion'];
             $yixufeihuikuan_date['xf_id']=$value['id'];
-            $yixufeihuikuan_date['time']=time();
+            //谁大取谁
+            if ($value['payment_time'] >= $hk_info['payment_time']) {
+                $yixufeihuikuan_date['time'] = $value['payment_time'];
+            } else
+            {
+                $yixufeihuikuan_date['time'] = $hk_info['payment_time'];
+            }
             $yixufeihuikuan_date['money']=$value['xf_qiane'];
             $shifu=($yixufeihuikuan_date['money']*$xf_fd)/(($mjhtinfo['rebates_proportion']+100)/100);
             $yixufeihuikuan_date['shifu_money']=$shifu;
