@@ -316,10 +316,12 @@ class RenewController extends  CommonController
         $adyue=$advertiser['huikuan']-$advertiser['yu_e'];
         if($postdate['payment_type']==1)
         {
-            if($postdate['money']>$adyue)
+            //比较两个高精度的数值
+            $c = bccomp($postdate['money'],$adyue, 2);
+
+            if($c==1)
             {
                 $this->error("客户余额为$adyue,不足以预付此比续费。请重新提交！");
-
             }
         }
 
