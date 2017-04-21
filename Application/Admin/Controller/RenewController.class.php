@@ -316,7 +316,7 @@ class RenewController extends  CommonController
         $adyue=$advertiser['huikuan']-$advertiser['yu_e'];
         if($postdate['payment_type']==1)
         {
-            if($postdate['money']>$adyue)
+            if($postdate['money']>=$adyue)
             {
                 $this->error("客户余额为$adyue,不足以预付此比续费。请重新提交！");
 
@@ -337,71 +337,23 @@ class RenewController extends  CommonController
         $fandian=($mjhtinfo['rebates_proportion']+100)/100; //媒体返点
         $hetong->xf_cost=I('post.show_money')/$fandian; //续费成本
         $kehuinfo=kehu(I('post.advertiser'));//客户信息
-        /*
-        $kehuyue=$yhtinfo['huikuan']-$yhtinfo['yu_e'];//客户合同余额
-        if($kehuyue<0){
-            //客户余额小于0 则 这笔续费的欠额为 填写金额
-            $hetong->xf_qiane=I('post.money');
-        }else{
-            //客户余额大于0 则 这笔续费的欠额为 客户余额-填写金额
-            $hetong->xf_qiane=$kehuyue-I('post.money');
 
-            if($hetong->xf_qiane>0)
-            {
-                $hetong->xf_qiane=0;
-                $yixufeihuikuan_date['money']=I('post.money');
-            }else
-            {
-                $yixufeihuikuan_date['money']=I('post.money')-($hetong->xf_qiane*-1);
-            }
-        }
-        //如果是负数则转成正数。因为是欠款 正负数都为正
-        if($hetong->xf_qiane<0)
-        {
-            $hetong->xf_qiane=-$hetong->xf_qiane;
-        }
-
-
-        $xf_htid=M("RenewHuikuan")->find(I('post.xf_id'));
-
-
-        $yixufeihuikuan_date['mt_fandian']=$mjhtinfo['rebates_proportion'];
-        $yixufeihuikuan_date['dl_fandian']=$mjhtinfo['dl_fandian'];
-        $yixufeihuikuan_date['xf_fandian']=I('post.rebates_proportion');
-        $yixufeihuikuan_date['gr_fandian']=0;
-        $yixufeihuikuan_date['xs_fandian']=$xs_fandian;
-        $yixufeihuikuan_date['avid']=I('post.advertiser');
-        $yixufeihuikuan_date['xsid']=I('post.market');
-
-        $xf_fd=(I('post.rebates_proportion')+100)/100;
-        $shifu=($yixufeihuikuan_date['money']*$xf_fd)/(($mjhtinfo['rebates_proportion']+100)/100);
-        $yixufeihuikuan_date['shifu_money']=$shifu;
-
-
-
-        echo $shifu;
-      // $yixufeihuikuan_date['money']=
-        dump($_POST);
-        dump($yixufeihuikuan_date);
-        */
 
         if($insid=$hetong->add()){
-
             if(I('post.payment_type')=='3')
             {
                 $hetong->xf_qiane=null;
                 $hetong->xf_cost=null;
+                $hetong->backmoney_yue=$postdate['money'];
             }elseif(I('post.payment_type')=='1' or I('post.payment_type')=='2'){
                 //如果续费成功则修改客户出款或者补款余额  I('post.payment_type')
                 money_change($postdate['advertiser'],$postdate['xf_contractid'],I('post.payment_type'),$postdate['money'],$postdate['account']);
             }
-
             if($insid==1)
             {
                 $result = $hetong->query("select currval('jd_renew_huikuan_id_seq')");
                 $insid=$result[0][currval];
             }
-
 
             //添加已续费回款并且修改续费欠额 和 回款的余额
             renew_huikuan($insid);
