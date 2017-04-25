@@ -257,6 +257,15 @@ class RefundMoneyController extends  CommonController
             exit;
         }
 
+        if($postdate['payment_type']==14)
+        {
+            $hetong->xf_qiane=$postdate['money'];
+        }
+        if($postdate['payment_type']==15)
+        {
+            $hetong->backmoney_yue=$postdate['money'];
+        }
+
         if($insid=$hetong->add()){
             //如果续费成功则修改客户出款或者补款余额  I('post.payment_type')
             money_change($postdate['advertiser'],$postdate['xf_contractid'],I('post.payment_type'),$postdate['money']);
@@ -290,7 +299,8 @@ class RefundMoneyController extends  CommonController
                 }
             }
 
-
+            //续费对应回款
+            renew_huikuan();
            
             $this->success("添加成功",U("NewCaiwu/show?id=".$postdate['advertiser']));
         }else

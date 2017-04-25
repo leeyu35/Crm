@@ -9,10 +9,10 @@
 namespace Admin\Controller;
 use Think\Controller;
 
-class BackmoneyController extends CommonController
+class McbackmoneyController extends CommonController
 {
         public function index(){
-            $Diankuan=M("RenewHuikuan");
+            $Diankuan=M("MbackMoney");
             //搜索条件
             $type=I('get.searchtype');
             if($type!='')
@@ -75,11 +75,11 @@ class BackmoneyController extends CommonController
             //权限条件
             $q_where=quan_where(__CONTROLLER__,"a");
 
-            $count      = $Diankuan->field('a.id,a.advertiser,a.money,a.payment_time,a.ctime,b.advertiser,a.audit_1,a.audit_2')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and is_huikuan=1 and ".$q_where.$where)->count();// 查询满足要求的总记录数
+            $count      = $Diankuan->field('a.id,a.advertiser,a.b_money,a.b_time,a.ctime,b.advertiser,a.audit_1,a.audit_2')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and ".$q_where.$where)->count();// 查询满足要求的总记录数
             $Page       = new \Think\Page($count,cookie('page_sum')?cookie('page_sum'):50);// 实例化分页类 传入总记录数和每页显示的记录数(25)
             $show       = $Page->show();// 分页显示输出
-            $list=$Diankuan->field('a.id,a.advertiser as aid,a.appname,a.advertiser,a.money,a.payment_time,a.ctime,a.submituser,b.advertiser,a.audit_1,a.audit_2')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0'  and is_huikuan=1 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
-            $sum = $Diankuan->field('a.id,a.advertiser,a.money,a.payment_time,a.ctime,b.advertiser,a.audit_1,a.audit_2')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and is_huikuan=1 and ".$q_where.$where)->sum("a.money");// 查询满足要求的总记录数
+            $list=$Diankuan->field('a.id,a.advertiser as aid,a.appname,a.advertiser,a.huikuanren,a.b_money,a.b_time,a.ctime,a.submituser,b.advertiser,a.audit_1,a.audit_2')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0'  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
+            $sum = $Diankuan->field('a.id,a.advertiser,a.b_money,a.b_time,a.ctime,b.advertiser,a.audit_1,a.audit_2')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0' and ".$q_where.$where)->sum("a.b_money");// 查询满足要求的总记录数
             $this->sum=$sum;
             foreach($list as $key => $val)
             {
@@ -100,25 +100,6 @@ class BackmoneyController extends CommonController
         $this->display();
     }
 
-    public function add2(){
-        //代理公司
-        $agentcompany=M("AgentCompany");
-        $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
-        $contract=M("Contract");
-        $contract_info=$contract->field('id,market,appname,mht_id,submituser')->find(I('get.contract_id'));
-        $xufeilist=M("RenewHuikuan")->field('a.*,b.a_users')->join(" a left join jd_account b on a.account=b.id")->where('a.xf_contractid='.I('get.contract_id').' and (a.payment_type=1 or a.payment_type=2) and a.xf_qiane>0 and a.audit_1!=2 and a.audit_2!=2 and a.audit_3!=2  and a.audit_4!=2')->select();
-
-        //媒体合同信息
-        $mt_contract_info=$contract->field("id,rebates_proportion,dl_fandian")->find($contract_info['mht_id']);
-        $this->mt_contract_info=$mt_contract_info;
-
-
-
-        $this->xufeilist=$xufeilist;
-        //var_dump($contract_info);
-        $this->contract_info=$contract_info;
-        $this->display();
-    }
 
     public function keyup_adlist(){
         $Blog = R('Contract/keyup_adlist');
@@ -126,36 +107,14 @@ class BackmoneyController extends CommonController
     }
 
 
-    /**
-     *
-     */
+
     public function addru(){
-        $Diankuan=M("RenewHuikuan");
+
+        $Diankuan=M("MbackMoney");
         $postdate=$Diankuan->create();
-        $Diankuan->payment_time=strtotime($Diankuan->payment_time);
+
+        $Diankuan->b_time=strtotime($Diankuan->b_time);
         $Diankuan->ctime=time();
-        $Diankuan->backmoney_yue=I('post.money');
-        $Diankuan->is_huikuan=1;
-        $Diankuan->audit_1=1;
-        $Diankuan->audit_2=1;
-        $Diankuan->users2=cookie('u_id');
-        $contract_mthiid=M("Contract")->field('mht_id')->find(I('post.xf_contractid'));
-        if(empty($contract_mthiid['mht_id']))
-        {
-            $this->error('此回款的合同没有选择媒介合同，故而提交回款失败。');
-            exit;
-        }
-
-        //查看合同是否满一年如果满一年就合同状态就改为2（老客户）
-        $contract_time=M("Contract")->field('contract_start')->find(I('post.xf_contractid'));
-
-
-        $a=date("Y-m-d",$contract_time['contract_start']);//合同开始时间
-        $b=date("Y-m-d");
-        if(strtotime($b)>strtotime($a."+1 year"))
-        {
-            M("Contract")->where('id='.I('post.xf_contractid'))->setField('contract_state','2');
-        }
 
 
         if($Diankuan->advertiser=='')
@@ -163,20 +122,20 @@ class BackmoneyController extends CommonController
             $this->error('提交失败，公司名称不能为空，或您没有按规定操作');
             exit;
         }
-        if($postdate['money']<0)
+        if($postdate['b_money']<0)
         {
             $this->error('不能输入负数');
             exit;
-    }
+         }
 
         if($insid=$Diankuan->add()){
-            //如果回款成功则修改客户和合同回款总额
-            money_change($postdate['advertiser'],$postdate['xf_contractid'],4,$postdate['money']);
+
             if($insid==1)
             {
-                $result = $Diankuan->query("select currval('jd_renew_huikuan_id_seq')");
+                $result = $Diankuan->query("select currval('jd_back_money_id_seq')");
                 $insid=$result[0][currval];
             }
+
 
 
             if($_FILES["file"]['name'][0]!="") {
@@ -184,7 +143,7 @@ class BackmoneyController extends CommonController
                 $upload->maxSize = 2097152;// 设置附件上传大小
                 $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
                 $upload->rootPath = './Uploads/'; // 设置附件上传根目录
-                $upload->savePath = '/diankuan/'; // 设置附件上传（子）目录
+                $upload->savePath = '/gongsihuikuan/'; // 设置附件上传（子）目录
                 // 上传文件
                 $info = $upload->upload();
                 if (!$info) {// 上传错误提示错误信息
@@ -192,7 +151,7 @@ class BackmoneyController extends CommonController
                 } else {// 上传成功
                     $dkfile = M("File");//type=2
                     foreach ($info as $file) {
-                        $datafile['type'] = 3;
+                        $datafile['type'] = 31;
                         $datafile['yid'] = $insid;
                         $datafile['file'] = C('Upload_path') . $file['savepath'] . $file['savename'];
                         $dkfile->add($datafile);
@@ -201,35 +160,14 @@ class BackmoneyController extends CommonController
 
                 }
             }
-            //回款对应续费）——自动化
-            //huikuan_xufei_auto($insid);
 
-            //新-续费对应回款
-            renew_huikuan();
 
-            if(I('post.fphk')==1)
-            {
-                $data['code']=200;
-                $data['msg']='success';
-                $this->ajaxReturn($data,'json');
-                exit;
-            }else
-            {
-                $this->success("提交成功",U("NewCaiwu/show?id=".$postdate['advertiser']));
-            }
+            $this->success("提交成功",U("index"));
 
 
         }else
         {
-            if(I('post.fphk')==1)
-            {
-                $data['code']=500;
-                $data['msg']='error info:'.$Diankuan->_sql();
-                $this->ajaxReturn($data,'json');
-                exit;
-            }else {
-                $this->error("提交失败");
-            }
+            $this->error("提交失败");
         }
 
 
@@ -328,7 +266,7 @@ class BackmoneyController extends CommonController
             $this->error("您没有权限执行审核操作哦");
         }else
         {
-            $table=M("RenewHuikuan");
+            $table=M("MbackMoney");
 
             if(I('get.ju')!=''){
                 $shenhe=2;
@@ -338,34 +276,40 @@ class BackmoneyController extends CommonController
             }
             if($table->where("id=$id")->setField($type,$shenhe))
             {
+                $table->where("id=$id")->setField('audit_1',$shenhe);
+                $table->where("id=$id")->setField('audit_2',$shenhe);
                 //如果是审核不通过的话则减去客户总额
                 if($shenhe==2)
                 {
-                    $xfinfo=$table->find($id);
-                    //advertiser,xf_contractid,payment_type,fk_money
-                    money_reduce($xfinfo['advertiser'],$xfinfo['xf_contractid'],4,$xfinfo['money']);
-                    //已回款续费列表加
-                    $yihuikuanxufei=M("Yihuikuanxufei");
-                    //读取属于这笔回款的已回款续费列表
-                    $yhkxflist=$yihuikuanxufei->where("hk_id=$id")->select();
-                    foreach ($yhkxflist as $key=>$val)
+                    $postdate=$table->find($id);
+                    //如果回款bu成功则修改客户未分配余额
+                    M("Customer")->where("id=".$postdate['advertiser'])->setDec('undistributed_yu_e',$postdate['b_money']);
+                    M("Customer")->where("id=".$postdate['advertiser'])->setDec('huikuan',$postdate['b_money']);
+                }else
+                {
+                    $postdate=$table->find($id);
+                    //如果回款成功则修改客户未分配余额
+                    M("Customer")->where("id=".$postdate['advertiser'])->setInc('undistributed_yu_e',$postdate['b_money']);
+                    $update1=M("Customer")->where("id=".$postdate['advertiser'])->setInc('huikuan', $postdate['b_money']);//更新公司出款值
+                    if($update1!=1)
                     {
-                        //把续费的欠额回滚
-                        M("RenewHuikuan")->where('id='.$val['xf_id'])->setInc('xf_qiane',$val['money']);
-                        //删除已回款续费记录
-                        $yihuikuanxufei->delete($val[id]);
+                        die('媒介打款总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
+                    }else
+                    {
+                        $str=cookie('u_name').'操作了 媒介公司ID是'.$postdate['advertiser'].'的打款操作，该公司总回款加'. $postdate['b_money'];
+
+                        money_record(0,$postdate['advertiser'],$type,$str,$postdate['b_money'],1);
+
                     }
                 }
 
 
 
-                //写入审核人员
-                if($type=='audit_1')
-                {
-                    $table->where("id=$id")->setField('susers1',cookie('u_id'));
-                }
+
                 if($type=='audit_2')
                 {
+                    //写入审核人员
+                    $table->where("id=$id")->setField('susers1',cookie('u_id'));
                     $table->where("id=$id")->setField('susers2',cookie('u_id'));
                 }
 
@@ -380,15 +324,16 @@ class BackmoneyController extends CommonController
     //查看合同
     public function show(){
         $id=I('get.id');
-        $Diankuan=M("RenewHuikuan");
+        $Diankuan=M("BackMoney");
         $info=$Diankuan->find($id);
+
         $this->info=$info;
 
         //回款主体
         $agentcompany=M("AgentCompany");
         $hetong=M('Contract')->field('agent_company')->find($info['xf_contractid']);
 
-        $zhuti=$agentcompany->field("id,companyname,title")->find($hetong['agent_company']);
+        $zhuti=$agentcompany->field("id,companyname,title")->find($info['b_company']);
 
         $this->zhuti=$zhuti[id];
         //销售
@@ -414,7 +359,7 @@ class BackmoneyController extends CommonController
         $this->avinfo=$gs;
         //文件
         $file=M("File");
-        $filelist=$file->where("type=3 and yid=$id")->select();
+        $filelist=$file->where("type=31 and yid=$id")->select();
         $this->filelist=$filelist;
         $this->display();
     }
@@ -537,5 +482,111 @@ class BackmoneyController extends CommonController
         {
             $this->error('没有数据可导出');
         };
+    }
+
+    //分配合同回款
+    public function fp_huikuan($id){
+        $this->kehuinfo=kehu($id);
+        $contract=M("Contract");
+
+        $contract_list=$contract->where("advertiser=$id and iszuofei=0 and isxufei=0")->select();
+        foreach ($contract_list as $key=>$value)
+        {
+            //产品线
+            $product_line=contract_prlin($value['id']);
+            $contract_list[$key]['product_line']=$product_line;
+        }
+
+        $this->contract_list=$contract_list;
+        $this->display();
+        //dump($contract_list);
+        // $xufeilist=M("RenewHuikuan")->field('a.*,b.a_users')->join(" a left join jd_account b on a.account=b.id")->where('a.xf_contractid='.I('get.contract_id').' and (a.payment_type=1 or a.payment_type=2) and a.xf_qiane>0 and a.audit_1!=2 and a.audit_2!=2 and a.audit_3!=2  and a.audit_4!=2')->select();
+
+    }
+
+    public function fpaddru(){
+
+        //客户信息
+        $kehuinfo=M("Customer")->find(I('post.advertiser'));
+        foreach (I('post.pmoney') as $key => $val)
+        {
+            $money+=I('post.pmoney')[$key];
+        }
+        if($money>$kehuinfo['undistributed_yu_e'])
+        {
+            $this->error('可用分配余额不足！');
+
+        }
+
+        $data['submituser']=cookie('u_id');
+        $data['market']=I('post.market');
+        $data['advertiser']=I('post.advertiser');
+        if(I('post.ht_id')){
+            //循环联系人并且记录
+            foreach (I('post.ht_id') as $key => $val)
+            {
+                if (I('post.pmoney')[$key]==0)
+                {
+                    continue;
+                }
+                //合同信息
+                $contractinfo=M("Contract")->find(I('post.ht_id')[$key]);
+                //媒介合同信息
+                $meijiecontract=M("Contract")->find($contractinfo['mht_id']);
+                //媒体返点 和 代理返点
+                $data['mt_fandian']=$meijiecontract['rebates_proportion'];
+                $data['dl_fandian']=$meijiecontract['dl_fandian'];
+                $data['payment_time']=date("Y-m-d h:i:s");
+                $data['xf_contractid']=I('post.ht_id')[$key];
+                $data['money']=I('post.pmoney')[$key];
+                $data['huikuanren']='';
+                $data['note']='系统分配回款,分配人：'.cookie('u_name');
+                $data['fphk']='1';
+               // $a=hjd_post_curl("http://localhost/Admin/Backmoney/addru.html",$data);
+
+                $ch = curl_init();
+
+                curl_setopt($ch, CURLOPT_URL, "http://localhost/Admin/Backmoney/addru.html");
+                curl_setopt($ch, CURLOPT_COOKIE, "u_id=".cookie('u_id').";u_groupid=".cookie('u_groupid').";u_name=".cookie("u_name"));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                // post数据
+                curl_setopt($ch, CURLOPT_POST, 1);
+                // post的变量
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+
+                $output = curl_exec($ch);
+                curl_close($ch);
+                $array=json_decode($output,true);
+                //打印获得的数据
+
+
+                if($array[code]==200)
+                {
+                    $successcount+=1;
+                    //减去客户分配余额
+                    M("Customer")->where("id=$kehuinfo[id]")->setDec('undistributed_yu_e',I('post.pmoney')[$key]);
+                }else
+                {
+                    $errorcount+=1;
+                }
+              }
+              if(!$errorcount){$errorcount=0;}
+                $str="添加合同回款成功：".$successcount." 失败:".$errorcount;
+
+
+            $this->success($str);
+            /*
+            foreach($yhkxf_list as $key=>$val)
+            {
+                if($val['money']!=0) {
+                    //如果平款成功
+                    if ($Yihuikuanxufei->add($yhkxf_list[$key])) {
+                        M("RenewHuikuan")->where('id=' . $val['xf_id'])->setDec('xf_qiane', $val['money']);
+                    }
+                }
+            }*/
+            //$contact->addAll($contact_list);
+        }
+
     }
 }

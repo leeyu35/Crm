@@ -11,9 +11,13 @@
 <script src="/Public/js/hjdfunction.js"></script>
 <script src="/Public/js/jquery.validate.min.js"></script>
 <script src="/Public/js/messages_zh.js"></script>
+    <script src="/Public/js/select2.full.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Public/js/select2.min.css"></link>
 
 <script language="javascript">
 	$(document).ready(function(e) {
+        $("select").select2();
+
 		//自动换算百度币
 		$("#rebates_proportion,#money").keyup(function(){
 			jr=$("#money").val();	
@@ -228,7 +232,7 @@
 
         <label for="inputEmail3" class="col-sm-2 control-label">账户名称</label>
         <div class="col-sm-3">
-            <select  class="form-control" name="account" id="account" >
+            <select  class="form-control js-example-basic-single" name="account" id="account" >
                 <option value="">--请选择账户--</option>
                 <volist id="account" name="account">
                     <option value="{$account[id]}">{$account[a_users]}-{$account[name]}</option>

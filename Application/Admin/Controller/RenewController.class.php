@@ -314,7 +314,7 @@ class RenewController extends  CommonController
         //客户余额
         $advertiser=kehu($postdate['advertiser']);
         $adyue=$advertiser['huikuan']-$advertiser['yu_e'];
-        if($postdate['payment_type']==1)
+        if($postdate['payment_type']==1 && I('post.curl')!=1)
         {
             //比较两个高精度的数值
             $c = bccomp($postdate['money'],$adyue, 2);
@@ -340,14 +340,16 @@ class RenewController extends  CommonController
         $hetong->xf_cost=I('post.show_money')/$fandian; //续费成本
         $kehuinfo=kehu(I('post.advertiser'));//客户信息
 
+        //如果是补款  设置回款余额为金额
+        if(I('post.payment_type')=='3')
+        {
+            $hetong->xf_qiane=null;
+            $hetong->xf_cost=null;
+            $hetong->backmoney_yue=$postdate['money'];
+        }
 
         if($insid=$hetong->add()){
-            if(I('post.payment_type')=='3')
-            {
-                $hetong->xf_qiane=null;
-                $hetong->xf_cost=null;
-                $hetong->backmoney_yue=$postdate['money'];
-            }
+
          
                 //如果续费成功则修改客户出款或者补款余额  I('post.payment_type')
                 money_change($postdate['advertiser'],$postdate['xf_contractid'],I('post.payment_type'),$postdate['money'],$postdate['account']);
@@ -383,12 +385,26 @@ class RenewController extends  CommonController
                     }
                 }
             }
-
-            $this->success("添加成功",U("NewCaiwu/show?id=".$postdate['advertiser']));
-
+            if(I('post.curl')==1)
+            {
+                $data['code']=200;
+                $data['msg']='success';
+                $this->ajaxReturn($data,'json');
+                exit;
+            }else {
+                $this->success("添加成功", U("NewCaiwu/show?id=" . $postdate['advertiser']));
+            }
         }else
         {
-            $this->error("添加失败");
+            if(I('post.curl')==1)
+            {
+                $data['code']=500;
+                $data['msg']='error info:'.$hetong->_sql();
+                $this->ajaxReturn($data,'json');
+                exit;
+            }else {
+                $this->error("添加失败");
+            }
         }
 
     }
@@ -525,6 +541,7 @@ class RenewController extends  CommonController
         $id=I('get.id');
         $yid=I('get.yid');
 
+
         //检查是否有权限执行审核操作
         $ispw=shenhe(__CONTROLLER__,$type);
         if($ispw!='200')
@@ -561,24 +578,58 @@ class RenewController extends  CommonController
                         M("Yihuikuanxufei")->delete($val[id]);
                     }
                     //循环该合同回款并且重新对应有欠额的续费
+                    /*
                     $contract_list=M("RenewHuikuan")->where("is_huikuan=1 and backmoney_yue>0 and xf_contractid=$xfinfo[xf_contractid]")->select();
                     foreach ($contract_list as $key => $val)
                     {
                         huikuan_xufei_auto($val['id']);
                     }
-
+                    */
+                    //续费对应回款
+                    renew_huikuan();
 
                 }
-                /*
-                if($yid!='')
-                {
-                    $this->success('审核成功',U("index?id=$yid"));
-                    //修改审核者
 
-                }else
+                $renew_info=$table->find($id);
+
+                //如果是补款并且审核通过的 则复制一条续费记录
+                if($type=='audit_2' && $shenhe==1)
                 {
-                    $this->success('审核成功',U("index2?shenhe=0"));
-                }*/
+                    $data['advertiser']=$renew_info['advertiser'];
+                    $data['submituser']=$renew_info['submituser'];
+                    $data['type']=$renew_info['type'];
+                    $data['xf_contractid']=$renew_info['xf_contractid'];
+                    $data['market']=$renew_info['market'];
+                    $data['account']=$renew_info['account'];
+                    $data['appname']=$renew_info['appname'];
+                    $data['money']=$renew_info['money'];
+                    $data['rebates_proportion']=$renew_info['rebates_proportion'];
+                    $data['show_money']=$renew_info['show_money'];
+                    $data['payment_type']=1;//预付
+                    $data['payment_time']=$renew_info['payment_time'];
+                    $data['note']='补款审核通过 由系统自动生成的续费记录. 操作人：crm管理员~';
+                    $data['contract_start']=$renew_info['contract_start'];
+                    $data['contract_end']=$renew_info['contract_end'];
+                    $data['ctime']=date("Y-m-d H:i:s");
+                    $data['users2']=$renew_info['users2'];
+                    $data['xf_qiane']=$renew_info['xf_qiane'];
+                    $data['xf_cost']=$renew_info['xf_cost'];
+                    $data['audit_1']=1;//1级默认审核通过
+                    $data['audit_2']=1;//2级默认审核通过
+                    $data['susers1']=16;
+                    $data['susers2']=16;
+                    $data['users2']=16;
+                    $data['curl']=1;
+                    $url="http://localhost/Admin/Renew/addru.html";
+                    $code=post_curl($url,$data);
+                    if($code['code']!=200)
+                    {
+                        dump($code);
+                        die("出现严重错误，补款记录自动生成续费失败。请联系CRM 管理员");
+                    }
+                }
+
+
                 if($type=='audit_1')
                 {
                     $table->where("id=$id")->setField('susers1',cookie('u_id'));
@@ -586,19 +637,21 @@ class RenewController extends  CommonController
                 if($type=='audit_2')
                 {
                     $table->where("id=$id")->setField('susers2',cookie('u_id'));
+                    if($shenhe==1){
+                        M("RenewHuikuan")->where("id=$id")->setField("accomplish_users",cookie("u_id"));
+                        M("RenewHuikuan")->where("id=$id")->setField("is_accomplish",'1');
+                    }
                 }
+                /*
                 if($type=='audit_3')
                 {
                     $table->where("id=$id")->setField('susers3',cookie('u_id'));
                 }
                 if($type=='audit_4')
                 {
-                    $table->where("id=$id")->setField('susers4',cookie('u_id'));
-                    if($shenhe==1){
-                        M("RenewHuikuan")->where("id=$id")->setField("accomplish_users",cookie("u_id"));
-                        M("RenewHuikuan")->where("id=$id")->setField("is_accomplish",'1');
-                    }
+
                 }
+                */
             }else
             {
                 $this->error('审核失败');
@@ -968,6 +1021,9 @@ class RenewController extends  CommonController
         {
             $this->success('操作失败');
         }
+    }
+    public function lo(){
+        renew_huikuan();
     }
 
 }

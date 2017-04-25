@@ -1101,8 +1101,13 @@ class ContractController extends CommonController
         $date['audit_3']=1;
         $date['audit_4']=1;
         $date['ctime']=time();
+        $date['xf_qiane']=$money;
         M('RenewHuikuan')->add($date);
-   
+        //添加已续费回款并且修改续费欠额 和 回款的余额
+
+
+        //续费对应回款
+        renew_huikuan();
         $this->success('转款到未分配余额成功！',U("NewCaiwu/show?id=$info[advertiser]"));
 
 

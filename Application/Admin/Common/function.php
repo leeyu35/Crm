@@ -1192,13 +1192,29 @@ function day_15($start_time){
 }
 
 //续费对回款消耗
-function renew_huikuan($xf_insid){
+function renew_huikuan($xf_insid=0){
+
+    //循环续费欠额大于0的数据 并且对应该续费合同的回款
+    $renew=M("RenewHuikuan");
+    $list=$renew->field('id')->where("(payment_type=1 or payment_type=2 or payment_type=14 or payment_type=16) and xf_qiane>0 and audit_2!=2 and audit_1!=2 ")->select();
+
+    foreach ($list as $key=>$val)
+    {
+        renew_auto_huikuan($val[id]);
+    }
+
+
+}
+
+//续费回款自动对应统一方法（）
+function renew_auto_huikuan($xf_insid)
+{
     $huikuan=M("RenewHuikuan");
     //续费信息
     $xufei_info=$huikuan->find($xf_insid);
 
     //此合同回款列表
-    $backmoney=$huikuan->where("is_huikuan=1 and xf_contractid='$xufei_info[xf_contractid]' and audit_2!=2 and audit_1!=2 and backmoney_yue >0")->order("payment_time asc")->select();
+    $backmoney=$huikuan->where("(is_huikuan=1 or payment_type=3 or payment_type=15)  and xf_contractid='$xufei_info[xf_contractid]' and audit_2!=2 and audit_1!=2 and backmoney_yue >0")->order("payment_time asc")->select();
 
 
     //计算续费成本
@@ -1233,16 +1249,19 @@ function renew_huikuan($xf_insid){
     $yixufeihuikuan_date['ht_id']=$xufei_info[xf_contractid];
     $xf_fd=(I('post.rebates_proportion')+100)/100;
 
-
-
-
     foreach ($backmoney as $key=>$value)
     {
-
+        //续费信息
+        $xufei_info=$huikuan->find($xf_insid);
+        //如果续费欠额为0则跳出本次循环
+        if($xufei_info['xf_qiane']==0)
+        {
+            break ;
+        }
         //如果回款金额 大于 续费金额 （余额大于续费金额）停止循环并返回续费欠额为0
         if($value['backmoney_yue']-$xufei_info['xf_qiane']>0) {
             //设置回款余额
-            $huikuan->where("id=$value[id]")->setField('backmoney_yue', $value['money'] - $xufei_info['xf_qiane']);
+            $huikuan->where("id=$value[id]")->setField('backmoney_yue', $value['backmoney_yue'] - $xufei_info['xf_qiane']);
             //增加已回款续费记录
             $yixufeihuikuan_date['hk_id'] = $value['id'];
             //谁大取谁
@@ -1292,10 +1311,8 @@ function renew_huikuan($xf_insid){
             //$xf_money=$value['money']-$xf_money;
         }
     }
-
-
-
 }
+
 
 
 //回款自动对应续费
@@ -1337,7 +1354,7 @@ function huikuan_xufei_auto($hk_id){
 
 
     //此合同续费列表
-    $xflist=$huikuan->where("is_huikuan=0 and xf_contractid='$hk_info[xf_contractid]' and (payment_type=1 or payment_type=2) and audit_2!=2 and audit_1!=2 and audit_3!=2  and audit_4!=2 and xf_qiane>0")->order("payment_time asc")->select();
+    $xflist=$huikuan->where("is_huikuan=0 and xf_contractid='$hk_info[xf_contractid]' and (payment_type=1 or payment_type=2 or payment_type=14  or payment_type=16) and audit_2!=2 and audit_1!=2 and audit_3!=2  and audit_4!=2 and xf_qiane>0")->order("payment_time asc")->select();
     foreach ($xflist as $key=>$value)
     {
         //回款信息
@@ -1407,4 +1424,21 @@ function huikuan_xufei_auto($hk_id){
         }
     }
 
+}
+
+function post_curl($url,$data){
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_COOKIE, "u_id=".cookie('u_id').";u_groupid=".cookie('u_groupid').";u_name=".cookie("u_name"));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    // post数据
+    curl_setopt($ch, CURLOPT_POST, 1);
+    // post的变量
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+
+    $output = curl_exec($ch);
+    curl_close($ch);
+    $array=json_decode($output,true);
+    return $array;
 }

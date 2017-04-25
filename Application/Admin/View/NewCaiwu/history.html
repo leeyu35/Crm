@@ -165,7 +165,7 @@
                     list-fapiao">{$history[type]}</p></td>
                     <td>{$history[money]}</td>
                     <td style="width:4.3333rem;">{$history[mes]}
-                    <if condition="($history[type] eq '续费') or ($history[type] eq '回款')">
+                    <if condition="($history[type] neq '发票')">
                         <a class="renewhuikuan_info" id="{$history[id]}" style="cursor: pointer"  data-toggle="modal" data-target="#myModal">查看详情</a>
                     </if>
                     </td>

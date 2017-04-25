@@ -218,7 +218,6 @@ class NewCaiwuController extends CommonController
         $yue=0;
         $bukuan=0;
         $account=M("Account");
-
         foreach ($xflist as $key=>$val)
         {
             //账户名称
@@ -274,7 +273,7 @@ class NewCaiwuController extends CommonController
 
         //发票
         $Invoice=M("Invoice");
-        $fplist=$Invoice->field('id,kp_time,money,audit_1,audit_2,ctime,fp_on,users2')->where("contract_no='".$ht_on['contract_no']."' $fp_where")->order("ctime desc")->select();
+        $fplist=$Invoice->field('id,kp_time,money,audit_1,audit_2,ctime,fp_on,users2')->where("contract_id='".$contract_id."' $fp_where")->order("ctime desc")->select();
 
         //echo $Invoice->_sql();
         foreach ($fplist as $key=>$val)
@@ -651,7 +650,7 @@ class NewCaiwuController extends CommonController
         $renewhuikuan=M('RenewHuikuan')->find($id);
         $Yihuikuanxufei=M("Yihuikuanxufei");
 
-        if($renewhuikuan[is_huikuan]==1)
+        if($renewhuikuan[is_huikuan]==1 or $renewhuikuan['payment_type'] ==3  or $renewhuikuan['payment_type'] ==15)
         {
             $zonghjine="回款总金额：".$renewhuikuan[money];
             $list=$Yihuikuanxufei->where('hk_id='.$id)->select();

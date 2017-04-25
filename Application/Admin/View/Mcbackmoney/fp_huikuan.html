@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分配回款</title>
+    <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/Public/css/admin.css">
+    <script src="/Public/js/My97DatePicker/WdatePicker.js"></script>
+    <script src="/Public/js/jquery-3.1.0.min.js"></script>
+    <script language="javascript">
+        $(document).ready(function(e) {
+
+
+
+            $("#formid").submit(function(){
+
+
+
+                var ping=0;
+                $(".hpmoney").each(function (i) {
+                    ping+=parseFloat($(".hpmoney").eq(i).val());
+                })
+                if($('#money').val()<ping)
+                {
+                    alert('回款金额不足以平掉这些续费！/(ㄒoㄒ)/~~');
+                    return false;
+                }
+
+
+            });
+            // pingkuan
+            $(".pingle").click(function(){
+                id=$(this).attr("id");
+                $(".pingk_"+id).val(-$(".qiane_id"+id).html())
+            })
+            /*
+            $(document).on("keyup",".hpmoney",function(){
+                id=$(this).attr("id");
+
+
+                if(parseFloat($(".qiane_id"+id).html())<parseFloat($(this).val()))
+                {
+                    alert('金额回多了,请重新输入!');
+                    $(this).select();
+                }
+
+            });
+            */
+        });
+    </script>
+</head>
+<body>
+<div class="container" style="width:100%;">
+    <h3 class="bor-left-bull" >{$kehuinfo[advertiser]}   分配合同回款 可分配余额{$kehuinfo[undistributed_yu_e]}</h3>
+    <br>
+<h4 class="bor-left-bull" >合同列表</h4>
+<form action="{:U('fpaddru')}" method="post" class="form-horizontal" enctype="multipart/form-data"  id="formid" >
+<input type="hidden" name="advertiser" value="{$kehuinfo[id]}">
+<input type="hidden" name="market" value="{$kehuinfo[submitusers]}">
+<table class="table">
+    <tr>
+        <th>#</th>
+        <th>合同编号</th>
+        <th>合同类型</th>
+        <th>合同金额</th>
+        <th>合同返点</th>
+        <th>合同余额</th>
+        <th>创建时间</th>
+        <th>分配额度</th>
+    </tr>
+    <volist id="contract_list" name="contract_list">
+        <input type="hidden" name="ht_id[]" value="{$contract_list[id]}">
+
+        <tr>
+            <td> {$contract_list[id]}</td>
+            <td> {$contract_list[contract_no]}</td>
+            <td> {$contract_list[product_line][0][name]}</td>
+            <td> {$contract_list[product_line][0][money]}</td>
+            <td>  {$contract_list[product_line][0][fandian]}</td>
+
+            <td> <span class="qiane_id{$contract_list[id]}">{$contract_list[huikuan]-$contract_list[yu_e]}</span></td>
+            <td> {$contract_list[ctime]|date="y-m-d",###}</td>
+            <td>
+            <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" name="pmoney[]" class="form-control hpmoney pingk_{$contract_list[id]}" id="{$contract_list[id]}"  value="0">
+            <span class="input-group-btn">
+            <button class="btn btn-success pingle" type="button" id="{$contract_list[id]}">平!</button>
+            </span>
+            </div>
+
+            </td>
+        </tr>
+
+    </volist>
+</table>
+        <div class="form-group">
+        <hr>
+            <div class="col-sm-2 pull-right">
+                <button type="submit" class="btn btn-primary">提交</button>
+            </div>
+        </div>
+
+        </form>
+    </div>
+
+
+</body>
+</html>
