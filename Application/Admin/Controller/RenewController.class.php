@@ -596,7 +596,7 @@ class RenewController extends  CommonController
                 if($type=='audit_2' && $shenhe==1 && $renew_info[payment_type]==3)
                 {
                     $data['advertiser']=$renew_info['advertiser'];
-                    $data['submituser']=$renew_info['submituser'];
+                    $data['submituser']=16;
                     $data['type']=$renew_info['type'];
                     $data['xf_contractid']=$renew_info['xf_contractid'];
                     $data['market']=$renew_info['market'];
