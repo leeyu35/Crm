@@ -593,7 +593,7 @@ class RenewController extends  CommonController
                 $renew_info=$table->find($id);
 
                 //如果是补款并且审核通过的 则复制一条续费记录
-                if($type=='audit_2' && $shenhe==1)
+                if($type=='audit_2' && $shenhe==1 && $renew_info[payment_type]==3)
                 {
                     $data['advertiser']=$renew_info['advertiser'];
                     $data['submituser']=$renew_info['submituser'];
