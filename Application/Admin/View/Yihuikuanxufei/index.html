@@ -137,9 +137,10 @@ $(document).ready(function(e) {
     </form>
 <table class="table table-hover  table-striped hjdtab">
     <thead>
-	<tr>
+	<tr> 
     	<th>#</th>
     	<th>广告主公司名称</th>
+        <th>APP名称</th>
         <th>产品线</th>
         <th>回款金额<br> （{$sum}）</th>
         <th>返点</th>
@@ -159,7 +160,8 @@ $(document).ready(function(e) {
     <volist id="list" name="list" key="k">
     <tr>
     	<td>{$list[id]}</td>
-    	<td>{$list[advertiser]}</td>
+        <td>{$list[advertiser]}</td>
+    	<td>{$list[appname]}</td>
         <td>{$list[prlin]}</td>
         <td>{$list[money]|num_format}&nbsp;&nbsp;</td>
         <td>媒体返点:{$list[mt_fandian]}<br>续费返点：{$list[xf_fandian]}</td>

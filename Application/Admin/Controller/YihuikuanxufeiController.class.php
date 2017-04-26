@@ -139,7 +139,7 @@ class YihuikuanxufeiController extends CommonController
             $count      = $Diankuan->field('a.*,b.advertiser,xf.payment_type as xf_type,hk.payment_type as hk_type,hk.is_huikuan')->join("a left join __CUSTOMER__ b on a.avid = b.id left join __RENEW_HUIKUAN__ xf on a.xf_id=xf.id left join __RENEW_HUIKUAN__ hk on a.hk_id=hk.id")->where("a.id!='0' and ".$q_where.$where)->count();// 查询满足要求的总记录数
             $Page       = new \Think\Page($count,cookie('page_sum')?cookie('page_sum'):50);// 实例化分页类 传入总记录数和每页显示的记录数(25)
             $show       = $Page->show();// 分页显示输出
-            $list=$Diankuan->field('a.*,b.advertiser,xf.payment_type as xf_type,hk.payment_type as hk_type,hk.is_huikuan')->join("a left join __CUSTOMER__ b on a.avid = b.id left join __RENEW_HUIKUAN__ xf on a.xf_id=xf.id left join __RENEW_HUIKUAN__ hk on a.hk_id=hk.id")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.time desc")->select();
+            $list=$Diankuan->field('a.*,b.advertiser,xf.payment_type as xf_type,hk.payment_type as hk_type,hk.is_huikuan,xf.appname')->join("a left join __CUSTOMER__ b on a.avid = b.id left join __RENEW_HUIKUAN__ xf on a.xf_id=xf.id left join __RENEW_HUIKUAN__ hk on a.hk_id=hk.id")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.time desc")->select();
              //echo $Diankuan->_sql();
             $sum = $Diankuan->field('a.id,a.money,xf.payment_type as xf_type,hk.payment_type as hk_type,hk.is_huikuan')->join("a left join __CUSTOMER__ b on a.avid = b.id left join __RENEW_HUIKUAN__ xf on a.xf_id=xf.id left join __RENEW_HUIKUAN__ hk on a.hk_id=hk.id ")->where("a.id!='0' and ".$q_where.$where)->sum("a.money");// 查询满足要求的总记录数
 
@@ -426,7 +426,7 @@ class YihuikuanxufeiController extends CommonController
         $q_where=quan_where(__CONTROLLER__,"a");
 
         //$list=$Diankuan->field('a.*,b.advertiser')->join("a left join __CUSTOMER__ b on a.avid = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.time desc")->select();
-        $list=$Diankuan->field('a.*,b.advertiser,xf.payment_type as xf_type,hk.payment_type as hk_type,hk.is_huikuan')->join("a left join __CUSTOMER__ b on a.avid = b.id left join __RENEW_HUIKUAN__ xf on a.xf_id=xf.id left join __RENEW_HUIKUAN__ hk on a.hk_id=hk.id")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.time desc")->select();
+        $list=$Diankuan->field('a.*,b.advertiser,xf.payment_type as xf_type,hk.payment_type as hk_type,hk.is_huikuan,xf.appname')->join("a left join __CUSTOMER__ b on a.avid = b.id left join __RENEW_HUIKUAN__ xf on a.xf_id=xf.id left join __RENEW_HUIKUAN__ hk on a.hk_id=hk.id")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.time desc")->select();
 
         //主体公司
         $agentcompany=M("AgentCompany");
@@ -436,6 +436,8 @@ class YihuikuanxufeiController extends CommonController
             $uindo=users_info($val['xsid']);
             //公司
             $list2[$key]['advertiser']=$val['advertiser'];
+            //APP名称
+            $list2[$key]['appname']=$val['appname'];
             //产品线
             $xfinfo=M("RenewHuikuan")->field('account')->find($val['xf_id']);
             $account=M("Account")->field('prlin_id')->find($xfinfo['account']);
@@ -466,7 +468,7 @@ class YihuikuanxufeiController extends CommonController
 
         $filename="huikuan_excel";
        // $headArr=array("公司",'产品线','回款金额',"媒体返点",'续费返点','实付金额','代理返点','个人返点','提成前利润','销售','销售返点','销售提成','时间','毛利润');
-        $headArr=array("公司",'产品线','回款金额',"媒体返点",'续费返点','实付金额','代理返点','个人返点','提成前利润','销售','时间');
+        $headArr=array("公司",'AppName','产品线','回款金额',"媒体返点",'续费返点','实付金额','代理返点','个人返点','提成前利润','销售','时间');
         if(!getExcel($filename,$headArr,$list2))
         {
             $this->error('没有数据可导出');
