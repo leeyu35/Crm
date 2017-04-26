@@ -12,6 +12,7 @@ use Think\Controller;
 class YihuikuanxufeiController extends CommonController
 {
         public function index(){
+            //dump($_SERVER);
             $Diankuan=M("Yihuikuanxufei");
             //搜索条件
             $type=I('get.searchtype');
@@ -68,14 +69,80 @@ class YihuikuanxufeiController extends CommonController
 
             }
 
+            //款type条件
+            $ktype=I('get.ktype');
+            $this->ktypedh=$ktype;
+
+            if($ktype!='')
+            {
+
+                foreach ($ktype as $key=>$val)
+                {
+                    if($key==0)
+                    {
+                        $str.="?ktype[]=".$val;
+                    }else
+                    {
+                        $str.="&ktype[]=".$val;
+                    }
+
+
+
+                    if($val=='1')
+                    {
+                        $in1.=' or xf.payment_type=1';
+                    }
+                    if($val=='2')
+                    {
+                        $in1.=' or xf.payment_type=2';
+                    }
+                    if($val=='14')
+                    {
+                        $in1.=' or xf.payment_type=14';
+                    }
+                    if($val=='16')
+                    {
+                        $in1.=' or xf.payment_type=16';
+                    }
+
+                    if($val=='4')
+                    {
+                        $in2.=' or hk.is_huikuan=1';
+                    }
+                    if($val=='3')
+                    {
+                        $in2.=' or hk.payment_type=3';
+                    }
+                    if($val=='15')
+                    {
+                        $in2.=' or hk.payment_type=15';
+                    }
+
+                }
+                $this->ktype=$str;
+                $in1= substr($in1,3,100);
+                $in2= substr($in2,3,100);
+                if($in1=='')
+                {
+                    $in1=' a.id!=0';
+                }
+                if($in2=='')
+                {
+                    $in2=' a.id!=0';
+                }
+               $where.=" and ($in1) and ($in2) ";
+            };
+
             //权限条件
             $q_where=quan_where(__CONTROLLER__,"a");
 
-            $count      = $Diankuan->field('a.*,b.advertiser')->join("a left join __CUSTOMER__ b on a.avid = b.id ")->where("a.id!='0' and ".$q_where.$where)->count();// 查询满足要求的总记录数
+            $count      = $Diankuan->field('a.*,b.advertiser,xf.payment_type as xf_type,hk.payment_type as hk_type,hk.is_huikuan')->join("a left join __CUSTOMER__ b on a.avid = b.id left join __RENEW_HUIKUAN__ xf on a.xf_id=xf.id left join __RENEW_HUIKUAN__ hk on a.hk_id=hk.id")->where("a.id!='0' and ".$q_where.$where)->count();// 查询满足要求的总记录数
             $Page       = new \Think\Page($count,cookie('page_sum')?cookie('page_sum'):50);// 实例化分页类 传入总记录数和每页显示的记录数(25)
             $show       = $Page->show();// 分页显示输出
-            $list=$Diankuan->field('a.*,b.advertiser')->join("a left join __CUSTOMER__ b on a.avid = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.time desc")->select();
-            $sum = $Diankuan->field('a.id,a.money')->join("a left join __CUSTOMER__ b on a.avid = b.id ")->where("a.id!='0' and ".$q_where.$where)->sum("a.money");// 查询满足要求的总记录数
+            $list=$Diankuan->field('a.*,b.advertiser,xf.payment_type as xf_type,hk.payment_type as hk_type,hk.is_huikuan')->join("a left join __CUSTOMER__ b on a.avid = b.id left join __RENEW_HUIKUAN__ xf on a.xf_id=xf.id left join __RENEW_HUIKUAN__ hk on a.hk_id=hk.id")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.time desc")->select();
+             //echo $Diankuan->_sql();
+            $sum = $Diankuan->field('a.id,a.money,xf.payment_type as xf_type,hk.payment_type as hk_type,hk.is_huikuan')->join("a left join __CUSTOMER__ b on a.avid = b.id left join __RENEW_HUIKUAN__ xf on a.xf_id=xf.id left join __RENEW_HUIKUAN__ hk on a.hk_id=hk.id ")->where("a.id!='0' and ".$q_where.$where)->sum("a.money");// 查询满足要求的总记录数
+
 
             $this->sum=number_format($sum,2);
             foreach($list as $key => $val)
@@ -123,7 +190,6 @@ class YihuikuanxufeiController extends CommonController
         //代理公司
         $agentcompany=M("AgentCompany");
         $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
-
         $this->display();
     }
 
@@ -249,6 +315,7 @@ class YihuikuanxufeiController extends CommonController
 
 
     public function excel(){
+
         $Diankuan=M("Yihuikuanxufei");
         //搜索条件
         $type=I('get.searchtype');
@@ -304,11 +371,62 @@ class YihuikuanxufeiController extends CommonController
             $this->ser_txt2=I('get.search_text');
 
         }
+        //款type条件
+        $ktype=I('get.ktype');
 
+        if($ktype!='')
+        {
+            foreach ($ktype as $key=>$val)
+            {
+                if($val=='1')
+                {
+                    $in1.=' or xf.payment_type=1';
+                }
+                if($val=='2')
+                {
+                    $in1.=' or xf.payment_type=2';
+                }
+                if($val=='14')
+                {
+                    $in1.=' or xf.payment_type=14';
+                }
+                if($val=='16')
+                {
+                    $in1.=' or xf.payment_type=16';
+                }
+
+                if($val=='4')
+                {
+                    $in2.=' or hk.is_huikuan=1';
+                }
+                if($val=='3')
+                {
+                    $in2.=' or hk.payment_type=3';
+                }
+                if($val=='15')
+                {
+                    $in2.=' or hk.payment_type=15';
+                }
+
+            }
+
+            $in1= substr($in1,3,100);
+            $in2= substr($in2,3,100);
+            if($in1=='')
+            {
+                $in1=' a.id!=0';
+            }
+            if($in2=='')
+            {
+                $in2=' a.id!=0';
+            }
+            $where.=" and ($in1) and ($in2) ";
+        };
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
 
-        $list=$Diankuan->field('a.*,b.advertiser')->join("a left join __CUSTOMER__ b on a.avid = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.time desc")->select();
+        //$list=$Diankuan->field('a.*,b.advertiser')->join("a left join __CUSTOMER__ b on a.avid = b.id ")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.time desc")->select();
+        $list=$Diankuan->field('a.*,b.advertiser,xf.payment_type as xf_type,hk.payment_type as hk_type,hk.is_huikuan')->join("a left join __CUSTOMER__ b on a.avid = b.id left join __RENEW_HUIKUAN__ xf on a.xf_id=xf.id left join __RENEW_HUIKUAN__ hk on a.hk_id=hk.id")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.time desc")->select();
 
         //主体公司
         $agentcompany=M("AgentCompany");
@@ -335,19 +453,20 @@ class YihuikuanxufeiController extends CommonController
             $list[$key]['tcq_lirun']=$val['money']-$val['shifu_money']-$grfdxsjr;
             $list2[$key]['tcq_lirun']=number_format($list[$key]['tcq_lirun'],2);
             $list2[$key]['market']=$uindo[name];
-            $list2[$key]['xs_fandian']=$val['xs_fandian'];
+           // $list2[$key]['xs_fandian']=$val['xs_fandian'];
             //销售提成
             $list[$key]['market_tc']=$list[$key]['tcq_lirun']*($val['xs_fandian']/100);
-            $list2[$key]['market_tc']=number_format($list[$key]['market_tc'],2);
+           // $list2[$key]['market_tc']=number_format($list[$key]['market_tc'],2);
             $list2[$key]['time']=date("Y-m-d",$val['time']);
             //毛利润
             $list[$key]['mao_lirun']=$list[$key]['tcq_lirun']-$list[$key]['market_tc'];
-            $list2[$key]['mao_lirun']=number_format($list[$key]['mao_lirun'],2);
+            //$list2[$key]['mao_lirun']=number_format($list[$key]['mao_lirun'],2);
 
         }
 
         $filename="huikuan_excel";
-        $headArr=array("公司",'产品线','回款金额',"媒体返点",'续费返点','实付金额','代理返点','个人返点','提成前利润','销售','销售返点','销售提成','时间','毛利润');
+       // $headArr=array("公司",'产品线','回款金额',"媒体返点",'续费返点','实付金额','代理返点','个人返点','提成前利润','销售','销售返点','销售提成','时间','毛利润');
+        $headArr=array("公司",'产品线','回款金额',"媒体返点",'续费返点','实付金额','代理返点','个人返点','提成前利润','销售','时间');
         if(!getExcel($filename,$headArr,$list2))
         {
             $this->error('没有数据可导出');
