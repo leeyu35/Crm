@@ -1203,7 +1203,6 @@ function renew_huikuan($xf_insid=0){
         renew_auto_huikuan($val[id]);
     }
 
-
 }
 
 //续费回款自动对应统一方法（）
