@@ -1196,7 +1196,7 @@ function renew_huikuan($xf_insid=0){
 
     //循环续费欠额大于0的数据 并且对应该续费合同的回款
     $renew=M("RenewHuikuan");
-    $list=$renew->field('id')->where("(payment_type=1 or payment_type=2 or payment_type=14 or payment_type=16) and xf_qiane>0 and audit_2!=2 and audit_1!=2 ")->select();
+    $list=$renew->field('id')->where("(payment_type=1 or payment_type=2 or payment_type=14 or payment_type=16) and xf_qiane>0 and audit_2!=2 and audit_1!=2 ")->order("payment_time asc")->select();
 
     foreach ($list as $key=>$val)
     {
@@ -1440,4 +1440,10 @@ function post_curl($url,$data){
     curl_close($ch);
     $array=json_decode($output,true);
     return $array;
+}
+
+//媒介合同金额变更方法
+function m_money_updata(){
+
+
 }
