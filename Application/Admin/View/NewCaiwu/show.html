@@ -404,7 +404,7 @@
                     <i class="iconfont header-icon">&#xe631;</i>
                 </div>-->
                 <div class="pull-left list_right">
-                    <p class="list_name list_name1">总回款&nbsp(&nbsp￥&nbsp)</p>
+                    <p class="list_name list_name1">总回款&nbsp(&nbsp￥&nbsp) <a href="{:U("Cbackmoney/add?id=$customer_info[id]")}"   data-toggle="tooltip" data-placement="bottom" title="添加公司回款" ><span style="border: 1px #fff solid; color: #fff; border-radius: 5px; height: 16px; width: 16px; text-align: center; line-height: 16px; display: inline-block;">款</span></a></p>
                     <p class="list_num list_num1">{$customer_info[huikuan]|num_format}<br>未审核回款：{$wshhuikuan|num_format}</p>
                 </div>
             </div>
@@ -452,7 +452,7 @@
                     <i class="iconfont header-icon">&#xe622;</i>
                 </div>-->
                 <div class="pull-left list_right">
-                    <p class="list_name list_name1">未分配余额&nbsp(&nbsp￥&nbsp)</p>
+                    <p class="list_name list_name1">未分配余额&nbsp(&nbsp￥&nbsp) <a href="{:U("Cbackmoney/fp_huikuan?id=$customer_info[id]")}"   data-toggle="tooltip" data-placement="bottom" title="给合同分配回款" ><span style="border: 1px #00a2d4 solid; color: #00a2d4; border-radius: 5px; height: 16px; width: 16px; text-align: center; line-height: 16px; display: inline-block;">分</span></a></p>
                     <p class="list_num">{$customer_info[undistributed_yu_e]}</p>
                     <p class="list_name list_name1" style="font-size: 12px;"><a style="color: #fff;" href="{:U("Cbackmoney/index?searchtype=advertiser&search_text=$customer_info[advertiser]")}">查看公司回款</a></p>
                 </div>
@@ -537,6 +537,7 @@
                         <a href="{:U("Contract/zuofei?id=$list[id]&type=2")}" onClick="if(confirm('确定要将此合同结束吗？')){return true}else{return false}" data-toggle="tooltip" data-placement="top"  title="结束合同"><i class="iconfont">&#xe628;</i></a>
                         <a href="{:U("Contract/add?id=$list[id]&type=copy")}"><span class="glyphicon glyphicon-duplicate" style="color: #fff;"  data-toggle="tooltip" data-placement="top" title="复制合同"></span></a>
                         <a href="{:U("Contract/zhuankuan?id=$list[id]")}"><span  style="color: #fff;"  data-toggle="tooltip" data-placement="top" title="转款到未分配余额"><i class="iconfont">&#xe63c;</i></span></a>
+                        <a href="{:U("Cbackmoney/fp_huikuan?id=$customer_info[id]&contractid=$list[id]")}"><span  style="color: #fff;"  data-toggle="tooltip" data-placement="top" title="给此合同分配款"><i class="iconfont">&#xe63f;</i></span></a>
                         <elseif condition="$list[iszuofei] eq 1"/>
                         <span style="color: #ccc; font-weight: 700; padding-left: 10px;">该合同已作废！</span>
                         <a  href="{:U("history?contract_id=$list[id]")}" data-toggle="tooltip" data-placement="top" title="历史记录"><i class="iconfont">&#xe602;</i></a>

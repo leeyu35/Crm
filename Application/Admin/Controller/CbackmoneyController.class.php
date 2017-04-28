@@ -161,7 +161,7 @@ class CbackmoneyController extends CommonController
             }
 
 
-            $this->success("提交成功",U("index"));
+            $this->success("提交成功",U("NewCaiwu/show?id=".I('post.advertiser')));
 
 
         }else
@@ -488,9 +488,14 @@ class CbackmoneyController extends CommonController
     //分配合同回款
     public function fp_huikuan($id){
         $this->kehuinfo=kehu($id);
-        $contract=M("Contract");
 
-        $contract_list=$contract->where("advertiser=$id and iszuofei=0 and isxufei=0")->select();
+        $contract=M("Contract");
+        $contractid=I('get.contractid');
+        if($contractid!='')
+        {
+            $where=' and id ='.$contractid;
+        }
+        $contract_list=$contract->where("advertiser=$id and iszuofei=0 and isxufei=0 $where")->select();
         foreach ($contract_list as $key=>$value)
         {
             //产品线
@@ -575,7 +580,7 @@ class CbackmoneyController extends CommonController
                 $str="添加合同回款成功：".$successcount." 失败:".$errorcount;
 
 
-            $this->success($str);
+            $this->success($str,U("NewCaiwu/show?id=".I('post.advertiser')));
             /*
             foreach($yhkxf_list as $key=>$val)
             {
