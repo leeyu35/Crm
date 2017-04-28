@@ -331,7 +331,7 @@ class NewCaiwuController extends CommonController
         });
 
 
-        $this->yue=$ht_on['huikuan']-$ht_on['bukuan']-$ht_on['yu_e'];
+        $this->yue=$ht_on['huikuan']+$ht_on['bukuan']-$ht_on['yu_e'];
         $this->bukuan=$ht_on['bukuan'];
         $this->invoice=$ht_on['invoice'];
         $this->contract_id=$ht_on['id'];
