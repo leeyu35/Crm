@@ -174,7 +174,7 @@ class NewCaiwuController extends CommonController
         //客户详细信息
         $customer_info=kehu($id);
         $this->customer_info=$customer_info;
-        $this->zong=$customer_info[huikuan]-$customer_info[yu_e];
+        $this->zong=$customer_info[huikuan]+$customer_info[bukuan]-$customer_info[yu_e];
         $this->zongfapiao=$zongfapiao;
 
         //已审核的余额
