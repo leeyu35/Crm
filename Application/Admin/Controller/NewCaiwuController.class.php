@@ -108,7 +108,7 @@ class NewCaiwuController extends CommonController
 
         $Page       = new \Think\Page($count,cookie('page_sum')?cookie('page_sum'):50);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
-        $list=$coustomer->field('id,advertiser,yu_e,huikuan,undistributed_yu_e,industry,website,product_line,ctime,city,appName,submituser,type,customer_type')->where("id!=0 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order('ctime desc')->select();
+        $list=$coustomer->field('id,advertiser,yu_e,huikuan,bukuan,undistributed_yu_e,industry,website,product_line,ctime,city,appName,submituser,type,customer_type')->where("id!=0 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order('ctime desc')->select();
 
         $contact=M('ContactList');
         $hetong=M("contract");
@@ -121,7 +121,7 @@ class NewCaiwuController extends CommonController
             $contact_one=$contact->field('name,tel')->where("customer_id=$val[id]")->find();
             $list[$key]['contact']=$contact_one['name'];
             $list[$key]['tel']=$contact_one['tel'];
-            $list[$key]['yue']=$val['huikuan']-$val['yu_e'];
+            $list[$key]['yue']=($val['huikuan']+$val['bukuan'])-$val['yu_e'];
             //发票
             $fap=$hetong->field('a.id,a.advertiser as aid,a.audit_1,a.audit_2,a.contract_no,a.market,a.users2,a.isguidang,a.iszuofei,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name,a.yu_e,a.huikuan,a.invoice,a.bukuan,a.type')->where("a.advertiser =$val[id] and isxufei=0")->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->order("a.ctime desc")->select();
 
@@ -146,7 +146,7 @@ class NewCaiwuController extends CommonController
         foreach ($list as $key=>$val)
         {
             //$zong+=$this->yue($val[id]);
-            $list[$key]['yue']=$val['huikuan']-$val['yu_e'];
+            $list[$key]['yue']=($val['huikuan']+$val['bukuan'])-$val['yu_e'];
             //总发票
             $zongfapiao+=$val['invoice'];
             if($val[market]!='')
@@ -166,6 +166,8 @@ class NewCaiwuController extends CommonController
         $wshhuikuan=$backmoney->field('money')->where("is_huikuan=1 and advertiser=$id and (audit_1=0 or audit_1=1) and audit_2=0")->sum("money");
         //未审核续费
         $wshxufei=$backmoney->field('money')->where("advertiser=$id  and is_huikuan=0 and (payment_type !=14 and payment_type !=15 and payment_type !=3) and (audit_1=0 or audit_1=1) and (audit_2=0) ")->sum("money");
+        //未审核补款
+        $wshbukuan=$backmoney->field('money')->where("advertiser=$id  and is_huikuan=0 and (payment_type =3) and (audit_1=0 or audit_1=1) and (audit_2=0) ")->sum("money");
 
 
 
@@ -176,9 +178,10 @@ class NewCaiwuController extends CommonController
         $this->zongfapiao=$zongfapiao;
 
         //已审核的余额
-        $zyue=($customer_info['huikuan']-$wshhuikuan)-($customer_info['yu_e']-$wshxufei);
+        $zyue=($customer_info['huikuan']-$wshhuikuan)+($customer_info['bukuan']-$wshbukuan)-($customer_info['yu_e']-$wshxufei);
         $this->wshhuikuan=$wshhuikuan;
         $this->wshxufei=$wshxufei;
+        $this->wshbukuan=$wshbukuan;
         $this->zyue=$zyue;
         $this->display();
        // dump($list);
