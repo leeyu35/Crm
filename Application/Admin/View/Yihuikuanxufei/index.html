@@ -83,41 +83,49 @@ $(document).ready(function(e) {
     <br>
 <div class="form-group">
     <div class="checkbox">
-    <label class="checkbox-inline">
-        <input type="checkbox" class="ka" name="ktype[]" id="inlineCheckbox1"  value="2"
-        <volist id="k1" name="ktypedh">
-            {$k1==2?'checked':''}
-        </volist>
-        > 续费垫付
-    </label>
-    <label class="checkbox-inline">
-        <input type="checkbox" class="ka" name="ktype[]" id="inlineCheckbox2" value="1"
-        <volist id="k2" name="ktypedh">
-            {$k2==1?'checked':''}
-        </volist>
-        > 续费预付
-    </label>
-    <label class="checkbox-inline">
-        <input type="checkbox" class="ka" name="ktype[]" id="inlineCheckbox3" value="3"
-        <volist id="k3" name="ktypedh">
-            {$k3==3?'checked':''}
-        </volist>
-        > 续费补款
-    </label>
-    <label class="checkbox-inline">
-        <input type="checkbox" class="ka" name="ktype[]" id="inlineCheckbox4" value="4"
-        <volist id="k4" name="ktypedh">
-            {$k4==4?'checked':''}
-        </volist>
-        > 回款
-    </label>
-    <label class="checkbox-inline">
-        <input type="checkbox" class="ka" name="ktype[]" id="inlineCheckbox5" value="15"
-        <volist id="k5" name="ktypedh">
-            {$k5==15?'checked':''}
-        </volist>
-        > 退款到总账户
-    </label>
+     回款选项：
+        <label class="checkbox-inline">
+            <input type="checkbox" class="ka" name="ktype[]" id="inlineCheckbox4" value="4"
+            <volist id="k4" name="ktypedh">
+                {$k4==4?'checked':''}
+            </volist>
+            > 回款
+        </label>
+
+        <label class="checkbox-inline">
+            <input type="checkbox" class="ka" name="ktype[]" id="inlineCheckbox3" value="3"
+            <volist id="k3" name="ktypedh">
+                {$k3==3?'checked':''}
+            </volist>
+            > 续费补款
+        </label>
+
+        <label class="checkbox-inline">
+            <input type="checkbox" class="ka" name="ktype[]" id="inlineCheckbox5" value="15"
+            <volist id="k5" name="ktypedh">
+                {$k5==15?'checked':''}
+            </volist>
+            > 退款到总账户
+        </label>
+
+
+      <br>
+     出款选项：
+
+        <label class="checkbox-inline">
+            <input type="checkbox" class="ka" name="ktype[]" id="inlineCheckbox1"  value="2"
+            <volist id="k1" name="ktypedh">
+                {$k1==2?'checked':''}
+            </volist>
+            > 续费垫付
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" class="ka" name="ktype[]" id="inlineCheckbox2" value="1"
+            <volist id="k2" name="ktypedh">
+                {$k2==1?'checked':''}
+            </volist>
+            > 续费预付
+        </label>
     <label class="checkbox-inline">
         <input type="checkbox"  class="ka" name="ktype[]" id="inlineCheckbox6" value="14"
         <volist id="k6" name="ktypedh">
