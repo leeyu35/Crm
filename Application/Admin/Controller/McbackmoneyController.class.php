@@ -110,12 +110,18 @@ class McbackmoneyController extends CommonController
 
     public function addru(){
 
+        //是否是回款 如果不是则默认为打款 因为打款和续费对应 回款只做显示用处
+        $backmoney=I('post.backmoney');
+
         $Diankuan=M("MbackMoney");
         $postdate=$Diankuan->create();
 
         $Diankuan->b_time=strtotime($Diankuan->b_time);
         $Diankuan->ctime=time();
-
+        if($backmoney==1)
+        {
+            $Diankuan->type=2;
+        }
 
         if($Diankuan->advertiser=='')
         {
@@ -160,7 +166,15 @@ class McbackmoneyController extends CommonController
 
                 }
             }
-            m_money_updata($postdate['advertiser'],0,$postdate['b_money'],4,"Inc");
+            if($backmoney!=1)
+            {
+                //打款
+                m_money_updata($postdate['advertiser'],0,$postdate['b_money'],4,"Inc");
+            }else
+            {
+                //回款
+                m_money_updata($postdate['advertiser'],0,$postdate['b_money'],41,"Inc");
+            }
 
             $this->success("提交成功",U("index"));
 

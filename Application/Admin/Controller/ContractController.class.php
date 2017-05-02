@@ -231,7 +231,7 @@ class ContractController extends CommonController
         $agentcompany=M("AgentCompany");
         $this->agentcompany=$agentcompany->field("id,companyname,title")->order("id asc")->select();
         //所有销售
-        $this->xiaoshou=M('Users')->field('id,name')->where("groupid=2 or groupid=15  or groupid=9")->select();
+        $this->xiaoshou=M('Users')->field('id,name')->where("groupid=3 and is_delete!=1")->select();
 
         //产品线JS字符串
         $jsstr='<select  class="form-control product_line" name="product_line[]" id="product_line"><option>请选择</option>';
@@ -273,6 +273,7 @@ class ContractController extends CommonController
     }
     public function addru()
     {
+
         //检查是否有这个客户
         $Customer = M("Customer");
 
@@ -390,6 +391,12 @@ class ContractController extends CommonController
                      if(M("Account")->where("id=$val")->setField('endtime',time())){}else{die("复制账户修改结束时间出错，请联系CRM管理员");}
                  }
              }
+             //添加成功后修改所属商务
+             if(I('post.business'))
+             {
+                 M("Customer")->where("id=".I('post.advertiser'))->setField('business',I('post.business'));
+             }
+
 
              $this->success("添加成功".$success_str,U("index"));
 

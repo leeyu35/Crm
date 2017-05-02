@@ -1475,13 +1475,16 @@ function m_money_updata($avid,$cid,$money,$payment_type,$type){
     if($payment_type=='1')
     {
         if(!$customer->where("id=".$avid)->$fun("myu_e",$money)){die('增加公司续费失败！');}
-
-
         if(!$mcontract->where("id=".$avid)->$fun("yu_e",$money)){die('增加合同续费失败！');}
 
     }
     if($payment_type=='4')
     {
-        if(!$customer->where("id=".$avid)->$fun("dakuan",$money)){die('增加公司续费失败！');}
+        if(!$customer->where("id=".$avid)->$fun("dakuan",$money)){die('增加公司打款失败！');}
+    }
+
+    if($payment_type=='41')
+    {
+        if(!$customer->where("id=".$avid)->$fun("huikuan",$money)){die('增加公司打款失败！');}
     }
 }

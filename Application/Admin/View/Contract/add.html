@@ -194,9 +194,9 @@
 			return false;	
 		}	
 		
-		if($("#market").val()=="请选择")
+		if($("#business").val()=="请选择")
 		{
-			alert("请选择销售");
+			alert("请选择负责商务");
 			return false;	
 		}
 		if($("#mht_id").val()=="0")
@@ -354,15 +354,15 @@
       <input type="text" class="form-control" autocomplete="off" name="appname" id="appname" value="{$data[appname]}" >
     </div>
 
-        <!--<label for="inputEmail3" class="col-sm-1 control-label">销售</label>-->
-    <!--<div class="col-sm-3">-->
-    	<!--<select  class="form-control" name="market" id="market">-->
-      	<!--<option>请选择</option>-->
-      	<!--<volist id="xiaoshou" name="xiaoshou" key="k">-->
-       	<!--<option value="{$xiaoshou.id}" title="{$xiaoshou.name}">{$xiaoshou.name}</option>-->
-       <!--</volist>-->
-      <!--</select>-->
-    <!--</div>-->
+        <label for="inputEmail3" class="col-sm-1 control-label">负责商务</label>
+    <div class="col-sm-3">
+    	<select  class="form-control" name="business" id="business">
+      	<option>请选择</option>
+      	<volist id="xiaoshou" name="xiaoshou" key="k">
+       	<option value="{$xiaoshou.id}" title="{$xiaoshou.name}">{$xiaoshou.name}</option>
+       </volist>
+      </select>
+    </div>
 
 
     
