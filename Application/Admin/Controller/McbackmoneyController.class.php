@@ -160,7 +160,7 @@ class McbackmoneyController extends CommonController
 
                 }
             }
-
+            m_money_updata($postdate['advertiser'],0,$postdate['b_money'],4,"Inc");
 
             $this->success("提交成功",U("index"));
 
@@ -525,7 +525,8 @@ class McbackmoneyController extends CommonController
             //循环联系人并且记录
             foreach (I('post.ht_id') as $key => $val)
             {
-                if (I('post.pmoney')[$key]==0)
+                if (I('post
+                .pmoney')[$key]==0)
                 {
                     continue;
                 }

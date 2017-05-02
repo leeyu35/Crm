@@ -89,11 +89,7 @@ class MeijieController extends CommonController
     }
     //新增客户返回
     public function addru(){
-        //获取产品线，并把数组组成字符串
-        /*
-        $lin=I('post.product_line');
-        $product_line=implode(",",$lin);
-        */
+
         $Customer=D("Customer");
         if($Customer->create()) {
             //$Customer->product_line=$product_line;
@@ -958,7 +954,8 @@ class MeijieController extends CommonController
                 }
             }
             //公司总续费加
-            M("Customer")->where("id=".$postdate['advertiser'])->setInc("yu_e",$postdate['money']);
+            m_money_updata($postdate['advertiser'],I('post.xf_contractid'),$postdate['money'],1,"Inc");
+           // M("Customer")->where("id=".$postdate['advertiser'])->setInc("yu_e",$postdate['money']);
 
             $this->success("添加成功",U("Meijie/meijiexflist?type=1&id=".$postdate['advertiser']));
 
@@ -1277,7 +1274,7 @@ class MeijieController extends CommonController
 
         $Page       = new \Think\Page($count,cookie('page_sum')?cookie('page_sum'):50);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
-        $list=$coustomer->field('id,advertiser,yu_e,huikuan,undistributed_yu_e,industry,website,product_line,ctime,city,appName,submituser,type,customer_type')->where("customer_type=3  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order('ctime desc')->select();
+        $list=$coustomer->field('id,advertiser,myu_e,dakuan,undistributed_yu_e,industry,website,product_line,ctime,city,appName,submituser,type,customer_type')->where("customer_type=3  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order('ctime desc')->select();
 
         $contact=M('ContactList');
         $hetong=M("contract");
@@ -1290,7 +1287,7 @@ class MeijieController extends CommonController
             $contact_one=$contact->field('name,tel')->where("customer_id=$val[id]")->find();
             $list[$key]['contact']=$contact_one['name'];
             $list[$key]['tel']=$contact_one['tel'];
-            $list[$key]['yue']=$val['huikuan']-$val['yu_e'];
+            $list[$key]['yue']=$val['dakuan']-$val['myu_e'];
             //发票
             $fap=$hetong->field('a.id,a.advertiser as aid,a.audit_1,a.audit_2,a.contract_no,a.market,a.users2,a.isguidang,a.iszuofei,a.appname,a.contract_money,a.product_line,a.ctime,a.rebates_proportion,a.submituser,a.audit_1,a.audit_2,a.show_money,b.advertiser,c.name,a.yu_e,a.huikuan,a.invoice,a.bukuan,a.type')->where("a.advertiser =$val[id] and isxufei=0")->join("a left join __CUSTOMER__ b on a.advertiser = b.id left join jd_product_line c on a.product_line =c.id")->order("a.ctime desc")->select();
 

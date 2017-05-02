@@ -289,17 +289,21 @@ class CbackmoneyController extends CommonController
                 }else
                 {
                     $postdate=$table->find($id);
+
+
+
+
+
                     //如果回款成功则修改客户未分配余额
-                    M("Customer")->where("id=".$postdate['advertiser'])->setInc('undistributed_yu_e',$postdate['b_money']);
-                    $update1=M("Customer")->where("id=".$postdate['advertiser'])->setInc('huikuan', $postdate['b_money']);//更新公司出款值
+                    $update1=M("Customer")->where("id=".$postdate['advertiser'])->setInc('undistributed_yu_e',$postdate['b_money']);
+
                     if($update1!=1)
                     {
                         die('广告回款总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$advertisers->_sql());
                     }else
                     {
-                        $str=cookie('u_name').'操作了 公司ID是'.$postdate['advertiser'].'的回款操作，该公司总回款加'. $postdate['b_money'];
 
-                        money_record(0,$postdate['advertiser'],$type,$str,$postdate['b_money'],1);
+                        money_change($postdate['advertiser'],0,6,$postdate['b_money']);
 
                     }
                 }

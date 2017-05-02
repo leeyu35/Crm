@@ -654,6 +654,19 @@ function money_change($advertisers_id,$contract_id,$type,$value,$accountid='')
             crm_record($str);
             money_record($contract_id,$advertisers_id,$type,$str,$value,1);
         }
+    }elseif ($type == '6') {
+        //公司回款
+        $update1=$advertisers->where("id=$advertisers_id")->setInc('huikuan', $value);//更新公司出款值
+
+        if($update1!=1)
+        {
+            die('公司回款总额变更失败，请尽快联系CRM系统管理员<br>sql:'.$contract->_sql());
+        }else
+        {
+            $str=cookie('u_name').'操作了 公司ID是'.$advertisers_id.'的回款操作，该公司总回款加'.$value;
+            crm_record($str);
+            money_record($contract_id,$advertisers_id,$type,$str,$value,1);
+        }
     }elseif($type=='14')
     {
         //退款到客户  总收款减
@@ -841,7 +854,7 @@ function money_record($contract_id,$advertisers_id,$type,$str,$cmoney,$jiaorjian
     $data['cmoney']=$cmoney;
     $data['date']=date("Y-m-d H:i:s");
     $adinfo=M('Customer')->field('yu_e,huikuan,bukuan')->find($advertisers_id);
-    if($type=='1' or $type=='2' or $type == '4' or $type == '14' or $type == '15')
+    if($type=='1' or $type=='2' or $type == '4' or $type == '14' or $type == '6' or $type == '15')
     {
         //客户总余额
         $data['balance']=$adinfo['huikuan']-$adinfo['yu_e'];
