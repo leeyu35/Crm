@@ -1242,7 +1242,10 @@ function renew_auto_huikuan($xf_insid)
     $yixufeihuikuan_date['gr_fandian']=0;
     $yixufeihuikuan_date['xs_fandian']=$xs_fandian;
     $yixufeihuikuan_date['avid']=$xufei_info['advertiser'];
-    $yixufeihuikuan_date['xsid']=$xufei_info['market'];
+    //销售
+    $kehu=kehu($xufei_info['advertiser']);
+
+    $yixufeihuikuan_date['xsid']=$kehu['submituser'];
     $yixufeihuikuan_date['xf_id']=$xf_insid;
     $yixufeihuikuan_date['xs_tc']=0;
     $yixufeihuikuan_date['ht_id']=$xufei_info[xf_contractid];
@@ -1442,8 +1445,30 @@ function post_curl($url,$data){
     return $array;
 }
 
-//媒介合同金额变更方法
-function m_money_updata(){
+//媒介合同金额变更方法 //参数1公司id  2合同id 3金额 4增加或者减少
+function m_money_updata($avid,$cid,$money,$payment_type,$type){
+    //$payment_type 1=续费  4=打款
+    $customer=M("Customer");
+    $mcontract=M("Contract");
+    if($type=='Inc')
+    {
+        $fun="setInc";
+    }
+    if($type=='Dec')
+    {
+        $fun="setDec";
+    }
+    //更新公司续费值 和 媒介合同续费值
+    if($payment_type=='1')
+    {
+        if(!$customer->where("id=".$avid)->$fun("myu_e",$money)){die('增加公司续费失败！');}
 
 
+        if(!$mcontract->where("id=".$avid)->$fun("yu_e",$money)){die('增加合同续费失败！');}
+
+    }
+    if($payment_type=='4')
+    {
+        if(!$customer->where("id=".$avid)->$fun("dakuan",$money)){die('增加公司续费失败！');}
+    }
 }
