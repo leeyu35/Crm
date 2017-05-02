@@ -107,7 +107,7 @@ class YihuikuanxufeiController extends CommonController
 
                     if($val=='4')
                     {
-                        $in2.=' or hk.is_huikuan=1';
+                        $in2.=' or hk.is_huikuan=1 ';
                     }
                     if($val=='3')
                     {
@@ -130,7 +130,8 @@ class YihuikuanxufeiController extends CommonController
                 {
                     $in2=' a.id!=0';
                 }
-               $where.=" and ($in1) and ($in2) ";
+                echo $in1;
+               $where.=" and ($in1) and ($in2) and xf.payment_type!=16 and hk.payment_type!=16";
             };
 
             //权限条件
@@ -140,7 +141,7 @@ class YihuikuanxufeiController extends CommonController
             $Page       = new \Think\Page($count,cookie('page_sum')?cookie('page_sum'):50);// 实例化分页类 传入总记录数和每页显示的记录数(25)
             $show       = $Page->show();// 分页显示输出
             $list=$Diankuan->field('a.*,b.advertiser,xf.payment_type as xf_type,hk.payment_type as hk_type,hk.is_huikuan,xf.appname')->join("a left join __CUSTOMER__ b on a.avid = b.id left join __RENEW_HUIKUAN__ xf on a.xf_id=xf.id left join __RENEW_HUIKUAN__ hk on a.hk_id=hk.id")->where("a.id!='0' and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.time desc")->select();
-             //echo $Diankuan->_sql();
+
             $sum = $Diankuan->field('a.id,a.money,xf.payment_type as xf_type,hk.payment_type as hk_type,hk.is_huikuan')->join("a left join __CUSTOMER__ b on a.avid = b.id left join __RENEW_HUIKUAN__ xf on a.xf_id=xf.id left join __RENEW_HUIKUAN__ hk on a.hk_id=hk.id ")->where("a.id!='0' and ".$q_where.$where)->sum("a.money");// 查询满足要求的总记录数
 
 
@@ -420,7 +421,7 @@ class YihuikuanxufeiController extends CommonController
             {
                 $in2=' a.id!=0';
             }
-            $where.=" and ($in1) and ($in2) ";
+            $where.=" and ($in1) and ($in2) and xf.payment_type!=16 and hk.payment_type!=16";
         };
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
