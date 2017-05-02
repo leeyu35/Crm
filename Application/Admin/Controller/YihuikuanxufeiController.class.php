@@ -130,8 +130,8 @@ class YihuikuanxufeiController extends CommonController
                 {
                     $in2=' a.id!=0';
                 }
-                echo $in1;
-               $where.=" and ($in1) and ($in2) and xf.payment_type!=16 and hk.payment_type!=16";
+
+               $where.=" and ($in1) and ($in2)";
             };
 
             //权限条件
@@ -421,7 +421,7 @@ class YihuikuanxufeiController extends CommonController
             {
                 $in2=' a.id!=0';
             }
-            $where.=" and ($in1) and ($in2) and xf.payment_type!=16 and hk.payment_type!=16";
+            $where.=" and ($in1) and ($in2) ";
         };
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
