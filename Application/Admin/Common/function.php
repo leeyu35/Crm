@@ -1262,7 +1262,7 @@ function renew_auto_huikuan($xf_insid)
     $yixufeihuikuan_date['xf_id']=$xf_insid;
     $yixufeihuikuan_date['xs_tc']=0;
     $yixufeihuikuan_date['ht_id']=$xufei_info[xf_contractid];
-    $xf_fd=(I('post.rebates_proportion')+100)/100;
+    $xf_fd=($xufei_info[rebates_proportion]+100)/100;
 
     foreach ($backmoney as $key=>$value)
     {
