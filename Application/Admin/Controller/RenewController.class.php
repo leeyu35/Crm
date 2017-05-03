@@ -1023,17 +1023,8 @@ class RenewController extends  CommonController
         }
     }
     public function lo(){
-       $renewn=M("RenewHuikuan");
-       $list=$renewn->where("id>=100 and id <130")->select();
-       foreach ($list as $key=>$value)
-       {
-           $guanlian=M("ContractRelevance")->where("contract_id=$value[xf_contractid]")->find();
-           $data['rebates_proportion']=$guanlian[fandian];
-           $data['product_line']=$guanlian[product_line];
-           $renewn->where("id=$value[id]")->save($data);
-       }
 
-        // renew_huikuan();
+        renew_huikuan();
     }
 
 }
