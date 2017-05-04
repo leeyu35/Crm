@@ -386,7 +386,7 @@ class CbackmoneyController extends CommonController
     }
 
     public function excel(){
-        $Diankuan=M("RenewHuikuan");
+        $Diankuan=M("BackMoney");
         //搜索条件
         $type=I('get.searchtype');
         if($type!='')
@@ -448,10 +448,12 @@ class CbackmoneyController extends CommonController
             $this->ser_txt2=I('get.search_text');
 
         }
-
         //权限条件
         $q_where=quan_where(__CONTROLLER__,"a");
-        $list=$Diankuan->field('a.id,a.advertiser as aid,a.appname,a.advertiser,a.money,a.payment_time,a.ctime,a.submituser,b.advertiser,a.xf_contractid')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.is_huikuan=1 and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
+        $list=$Diankuan->field('a.id,a.advertiser as aid,a.appname,a.advertiser,a.huikuanren,a.b_money,a.b_time,a.ctime,a.submituser,b.advertiser,a.audit_1,a.audit_2')->join("a left join __CUSTOMER__ b on a.advertiser = b.id ")->where("a.id!='0'  and ".$q_where.$where)->limit($Page->firstRow.','.$Page->listRows)->order("a.ctime desc")->select();
+
+
+
 
         //主体公司
         $agentcompany=M("AgentCompany");
@@ -467,11 +469,11 @@ class CbackmoneyController extends CommonController
 
 
             //回款金额
-            $list2[$key]['b_money']=num_format($val['money']);
+            $list2[$key]['b_money']=num_format($val['b_money']);
             //appname
             $list2[$key]['appname']=$val['appname'];
             //回款日期
-            $list2[$key]['b_time']=date("Y-m-d",$val['payment_time']);
+            $list2[$key]['b_time']=date("Y-m-d",$val['b_time']);
             //提交时间
             $list2[$key]['ctime']=date("Y-m-d H:i:s",$val['ctime']);
 
